@@ -22,69 +22,67 @@
     <meta name="theme-color" content="#10b981"> 
     <script src="https://cdn.tailwindcss.com"></script> 
     <script defer data-domain="aicitationscan.com" src="https://plausible.io/js/script.js"></script>  
-    <style>
-    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap');
-    :root {
-        --tw-color-emerald-500: #10b981;
-        --tw-color-violet-600: #7c3aed;
-    }
-    * {
-        box-sizing: border-box;
-    }
-    html, body {
-        max-width: 100%;
-        overflow-x: hidden;
-    }
-    body {
-        font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-    }
-    .heading-font {
-        font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-        font-weight: 700;
-    }
-    .page-container {
-        max-width: 1280px;
-        margin-left: auto;
-        margin-right: auto;
-        padding-left: 1.5rem;
-        padding-right: 1.5rem;
-    }
-    /* Marquee animation */
-    .marquee {
-        animation: marquee 35s linear infinite;
-    }
-    @keyframes marquee {
-        from { transform: translateX(0); }
-        to { transform: translateX(-50%); }
-    }
-    /* Score gauge placeholder style */
-    .gauge {
-        background: conic-gradient(#10b981 0% 75%, #334155 75% 100%);
-    }
-    /* Accordion */
-    details summary::-webkit-details-marker {
-        display: none;
-    }
-    /* McKinsey clean shadows & borders */
-    .card-hover {
-        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    }
-    .card-hover:hover {
-        transform: translateY(-4px); box-shadow: 25px 25px 0 -10px rgb(16 185 129);
-    }
-    /* ONE-SCROLL MOBILE FIX – progressive disclosure */
-    @media (max-width: 768px) {
-        #testimonial-carousel,
-        #faq {
-            display: none;
-        }
-        .show-on-mobile {
-            display: block !important;
-        }
-    }
+    <style> 
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&amp;display=swap'); 
+    :root { 
+        --tw-color-emerald-500: #10b981; 
+        --tw-color-violet-600: #7c3aed; 
+    } 
+    body { 
+        font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; 
+    } 
+    .heading-font { 
+        font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; 
+        font-weight: 700; 
+    } 
+    .page-container { 
+        max-width: 1280px; 
+        margin-left: auto; 
+        margin-right: auto; 
+        padding-left: 1.5rem; padding-right: 1.5rem; 
+    } 
+    /* Marquee animation */ 
+    .marquee { 
+        animation: marquee 35s linear infinite; 
+    } 
+    @keyframes marquee { 
+        from { transform: translateX(0); } 
+        to { transform: translateX(-50%); } 
+    } 
+    /* Score gauge placeholder style */ 
+    .gauge { 
+        background: conic-gradient(#10b981 0% 75%, #334155 75% 100%); 
+    } 
+    /* Accordion */ 
+    details summary::-webkit-details-marker { 
+        display: none; 
+    } 
+    /* McKinsey clean shadows &amp; borders */ 
+    .card-hover { 
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); 
+    } 
+    .card-hover:hover { 
+        transform: translateY(-4px); box-shadow: 25px 25px 0 -10px rgb(16 185 129); 
+    }        
+    /* ONE-SCROLL MOBILE FIX – progressive disclosure */        
+    @media (max-width: 768px) {             
+        #testimonial-carousel,             
+        #faq {                 
+            display: none; 
+        }             
+        .show-on-mobile {                 
+            display: block !important; 
+        }         
+    }     
 </style>
 </head> 
 <body class="bg-slate-950 text-slate-100">
+    <script>
+        // Proper Tailwind CDN config for custom colors
+        document.documentElement.setAttribute('data-tailwind-config', JSON.stringify({
+            theme: { extend: { colors: { emerald: {500:'#10b981'}, violet:{600:'#7c3aed'} } } }
+        }));
+    </script>
     <header id="site-header" class="border-b border-slate-800 bg-slate-900 shadow-sm sticky top-0 z-50"> 
         <div class="page-container flex items-center justify-between py-5"> 
             <div class="flex items-center gap-x-3"> 
