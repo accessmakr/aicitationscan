@@ -42,54 +42,61 @@
         padding-left: 1.5rem; padding-right: 1.5rem; 
     } 
 
-    /* FIXED MARQUEE - no horizontal scrollbar on desktop or mobile */
-    html, body {
-        overflow-x: hidden;
-    }
+    /* FIXED MARQUEE - PERFECT on mobile + desktop (2026 version) */
+html, body {
+    overflow-x: hidden;           /* This removes the side scrollbar on ALL devices */
+}
 
-    .marquee-wrapper {
-        overflow: hidden;
-        width: 100%;
-    }
+.marquee-wrapper {
+    overflow: hidden;
+    width: 100%;
+    position: relative;           /* Helps mobile browsers render cleanly */
+    border-radius: 1.5rem;        /* Matches your rounded-3xl look */
+}
 
+.marquee {
+    display: flex !important;
+    align-items: center;
+    width: max-content;
+    min-width: 100%;
+    gap: 3rem;
+    padding-left: 1.5rem;         /* Prevents text hugging the left edge */
+    padding-right: 1.5rem;        /* Prevents text being cut off on the right */
+    animation: marquee 40s linear infinite;
+}
+
+@keyframes marquee {
+    from { transform: translateX(0); }
+    to   { transform: translateX(-50%); }
+}
+
+.marquee:hover {
+    animation-play-state: paused;
+}
+
+@media (prefers-reduced-motion: reduce) {
     .marquee {
-        display: flex !important;
-        align-items: center;
-        width: max-content;
-        min-width: 100%;
-        gap: 3rem;
-        animation: marquee 35s linear infinite;
-    }
-
-    @keyframes marquee {
-        from { transform: translateX(0); }
-        to { transform: translateX(-50%); }
-    }
-
-    .marquee:hover {
         animation-play-state: paused;
     }
+}
 
-    @media (prefers-reduced-motion: reduce) {
-        .marquee {
-            animation-play-state: paused;
-        }
+/* MOBILE OPTIMIZATIONS – no cutoff, smooth scroll */
+@media (max-width: 768px) {             
+    #testimonial-carousel,             
+    #faq {                 
+        display: none; 
+    }             
+    .show-on-mobile {                 
+        display: block !important; 
+    }        
+    .marquee {
+        font-size: 13px;
+        gap: 1.25rem;                    /* Tighter spacing on small screens */
+        padding-left: 0.75rem;
+        padding-right: 0.75rem;
+        animation-duration: 28s;         /* Faster but still readable on mobile */
     }
-
-    /* Mobile-only tweaks */
-    @media (max-width: 768px) {             
-        #testimonial-carousel,             
-        #faq {                 
-            display: none; 
-        }             
-        .show-on-mobile {                 
-            display: block !important; 
-        }        
-        .marquee {
-            font-size: 13px;
-            gap: 1.5rem;
-        }
-    }     
+}     
 
     /* Your original styles (unchanged) */
     .gauge { 
