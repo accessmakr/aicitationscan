@@ -41,30 +41,42 @@
         margin-right: auto; 
         padding-left: 1.5rem; padding-right: 1.5rem; 
     } 
-    /* Marquee animation */ 
-    .marquee { 
-        animation: marquee 35s linear infinite; 
-    } 
-    @keyframes marquee { 
-        from { transform: translateX(0); } 
-        to { transform: translateX(-50%); } 
-    } 
-    /* Score gauge placeholder style */ 
-    .gauge { 
-        background: conic-gradient(#10b981 0% 75%, #334155 75% 100%); 
-    } 
-    /* Accordion */ 
-    details summary::-webkit-details-marker { 
-        display: none; 
-    } 
-    /* McKinsey clean shadows &amp; borders */ 
-    .card-hover { 
-        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); 
-    } 
-    .card-hover:hover { 
-        transform: translateY(-4px); box-shadow: 25px 25px 0 -10px rgb(16 185 129); 
-    }        
-    /* ONE-SCROLL MOBILE FIX – progressive disclosure */        
+
+    /* FIXED MARQUEE - no horizontal scrollbar on desktop or mobile */
+    html, body {
+        overflow-x: hidden;
+    }
+
+    .marquee-wrapper {
+        overflow: hidden;
+        width: 100%;
+    }
+
+    .marquee {
+        display: flex !important;
+        align-items: center;
+        width: max-content;
+        min-width: 100%;
+        gap: 3rem;
+        animation: marquee 35s linear infinite;
+    }
+
+    @keyframes marquee {
+        from { transform: translateX(0); }
+        to { transform: translateX(-50%); }
+    }
+
+    .marquee:hover {
+        animation-play-state: paused;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+        .marquee {
+            animation-play-state: paused;
+        }
+    }
+
+    /* Mobile-only tweaks */
     @media (max-width: 768px) {             
         #testimonial-carousel,             
         #faq {                 
@@ -73,18 +85,25 @@
         .show-on-mobile {                 
             display: block !important; 
         }        
-        /* Safety: never allow horizontal scroll */
-html, body {
-    overflow-x: hidden;
-}
-        /* Better marquee on mobile */
-@media (max-width: 768px) {
-    .marquee {
-        font-size: 13px;
-        gap-x: 8px; /* slightly tighter */
-    }
-}
+        .marquee {
+            font-size: 13px;
+            gap: 1.5rem;
+        }
     }     
+
+    /* Your original styles (unchanged) */
+    .gauge { 
+        background: conic-gradient(#10b981 0% 75%, #334155 75% 100%); 
+    } 
+    details summary::-webkit-details-marker { 
+        display: none; 
+    } 
+    .card-hover { 
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); 
+    } 
+    .card-hover:hover { 
+        transform: translateY(-4px); box-shadow: 25px 25px 0 -10px rgb(16 185 129); 
+    }        
 </style>
 </head> 
 <body class="bg-slate-950 text-slate-100">
@@ -149,12 +168,12 @@ We Give Clinical report with step-by-step roadmap.. </p>
                 </div> 
                 <div class="mb-12">
     <p class="uppercase text-xs tracking-[1px] text-slate-400 mb-3">Trusted on websites from every industry</p>
-    <div class="w-full overflow-hidden border border-slate-700 rounded-3xl py-3 bg-slate-900">
-        <div class="flex whitespace-nowrap marquee text-slate-300 text-sm font-medium gap-x-12">
-            NexusForge&nbsp;•&nbsp;QuantumLedger&nbsp;•&nbsp;VitalPath&nbsp;•&nbsp;EchoMart&nbsp;•&nbsp;ApexLearn&nbsp;•&nbsp;HorizonDynamics&nbsp;•&nbsp;PulseInnovate&nbsp;•&nbsp;SummitVentures&nbsp;•&nbsp;CrystalWave&nbsp;•&nbsp;ForgeLink&nbsp;•&nbsp;VertexCore&nbsp;•&nbsp;LunaSphere&nbsp;•&nbsp;TitanForge&nbsp;•&nbsp;NovaStream&nbsp;•&nbsp;EliteHarvest&nbsp;•&nbsp;PrecisionEdge&nbsp;•&nbsp;GlobalPivot&nbsp;•&nbsp;SynergyBloom&nbsp;•&nbsp;CatalystPeak&nbsp;•&nbsp;InfinityGrid 
-            &nbsp;•&nbsp;NexusForge&nbsp;•&nbsp;QuantumLedger&nbsp;•&nbsp;VitalPath&nbsp;•&nbsp;EchoMart&nbsp;•&nbsp;ApexLearn&nbsp;•&nbsp;HorizonDynamics&nbsp;•&nbsp;PulseInnovate&nbsp;•&nbsp;SummitVentures&nbsp;•&nbsp;CrystalWave&nbsp;•&nbsp;ForgeLink&nbsp;•&nbsp;VertexCore&nbsp;•&nbsp;LunaSphere&nbsp;•&nbsp;TitanForge&nbsp;•&nbsp;NovaStream&nbsp;•&nbsp;EliteHarvest&nbsp;•&nbsp;PrecisionEdge&nbsp;•&nbsp;GlobalPivot&nbsp;•&nbsp;SynergyBloom&nbsp;•&nbsp;CatalystPeak&nbsp;•&nbsp;InfinityGrid 
-        </div>
+    <div class="marquee-wrapper w-full border border-slate-700 rounded-3xl py-3 bg-slate-900">
+    <div class="flex whitespace-nowrap marquee text-slate-300 text-sm font-medium">
+        NexusForge&nbsp;•&nbsp;QuantumLedger&nbsp;•&nbsp;VitalPath&nbsp;•&nbsp;EchoMart&nbsp;•&nbsp;ApexLearn&nbsp;•&nbsp;HorizonDynamics&nbsp;•&nbsp;PulseInnovate&nbsp;•&nbsp;SummitVentures&nbsp;•&nbsp;CrystalWave&nbsp;•&nbsp;ForgeLink&nbsp;•&nbsp;VertexCore&nbsp;•&nbsp;LunaSphere&nbsp;•&nbsp;TitanForge&nbsp;•&nbsp;NovaStream&nbsp;•&nbsp;EliteHarvest&nbsp;•&nbsp;PrecisionEdge&nbsp;•&nbsp;GlobalPivot&nbsp;•&nbsp;SynergyBloom&nbsp;•&nbsp;CatalystPeak&nbsp;•&nbsp;InfinityGrid 
+        &nbsp;•&nbsp;NexusForge&nbsp;•&nbsp;QuantumLedger&nbsp;•&nbsp;VitalPath&nbsp;•&nbsp;EchoMart&nbsp;•&nbsp;ApexLearn&nbsp;•&nbsp;HorizonDynamics&nbsp;•&nbsp;PulseInnovate&nbsp;•&nbsp;SummitVentures&nbsp;•&nbsp;CrystalWave&nbsp;•&nbsp;ForgeLink&nbsp;•&nbsp;VertexCore&nbsp;•&nbsp;LunaSphere&nbsp;•&nbsp;TitanForge&nbsp;•&nbsp;NovaStream&nbsp;•&nbsp;EliteHarvest&nbsp;•&nbsp;PrecisionEdge&nbsp;•&nbsp;GlobalPivot&nbsp;•&nbsp;SynergyBloom&nbsp;•&nbsp;CatalystPeak&nbsp;•&nbsp;InfinityGrid 
     </div>
+</div>
 </div>
                 <a href="#scan-section" class="inline-flex items-center gap-x-3 bg-emerald-400 hover:bg-emerald-500 text-slate-950 font-semibold text-lg px-8 h-14 rounded-3xl transition-all"> Start your scan now <span class="text-2xl">📡</span> </a> 
             </div> 
