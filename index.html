@@ -72,7 +72,18 @@
         }             
         .show-on-mobile {                 
             display: block !important; 
-        }         
+        }        
+        /* Safety: never allow horizontal scroll */
+html, body {
+    overflow-x: hidden;
+}
+        /* Better marquee on mobile */
+@media (max-width: 768px) {
+    .marquee {
+        font-size: 13px;
+        gap-x: 8px; /* slightly tighter */
+    }
+}
     }     
 </style>
 </head> 
