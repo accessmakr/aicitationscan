@@ -23,7 +23,7 @@
     <script src="https://cdn.tailwindcss.com"></script> 
     <script defer data-domain="aicitationscan.com" src="https://plausible.io/js/script.js"></script>  
     <style> 
-    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&amp;display=swap'); 
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap'); 
     :root { 
         --tw-color-emerald-500: #10b981; 
         --tw-color-violet-600: #7c3aed; 
@@ -43,60 +43,60 @@
     } 
 
     /* FIXED MARQUEE - PERFECT on mobile + desktop (2026 version) */
-html, body {
-    overflow-x: hidden;           /* This removes the side scrollbar on ALL devices */
-}
+    html, body {
+        overflow-x: hidden;           /* This removes the side scrollbar on ALL devices */
+    }
 
-.marquee-wrapper {
-    overflow: hidden;
-    width: 100%;
-    position: relative;           /* Helps mobile browsers render cleanly */
-    border-radius: 1.5rem;        /* Matches your rounded-3xl look */
-}
+    .marquee-wrapper {
+        overflow: hidden;
+        width: 100%;
+        position: relative;           /* Helps mobile browsers render cleanly */
+        border-radius: 1.5rem;        /* Matches your rounded-3xl look */
+    }
 
-.marquee {
-    display: flex !important;
-    align-items: center;
-    width: max-content;
-    min-width: 100%;
-    gap: 3rem;
-    padding-left: 1.5rem;         /* Prevents text hugging the left edge */
-    padding-right: 1.5rem;        /* Prevents text being cut off on the right */
-    animation: marquee 40s linear infinite;
-}
-
-@keyframes marquee {
-    from { transform: translateX(0); }
-    to   { transform: translateX(-50%); }
-}
-
-.marquee:hover {
-    animation-play-state: paused;
-}
-
-@media (prefers-reduced-motion: reduce) {
     .marquee {
+        display: flex !important;
+        align-items: center;
+        width: max-content;
+        min-width: 100%;
+        gap: 3rem;
+        padding-left: 1.5rem;         /* Prevents text hugging the left edge */
+        padding-right: 1.5rem;        /* Prevents text being cut off on the right */
+        animation: marquee 40s linear infinite;
+    }
+
+    @keyframes marquee {
+        from { transform: translateX(0); }
+        to   { transform: translateX(-50%); }
+    }
+
+    .marquee:hover {
         animation-play-state: paused;
     }
-}
 
-/* MOBILE OPTIMIZATIONS – no cutoff, smooth scroll */
-@media (max-width: 768px) {             
-    #testimonial-carousel,             
-    #faq {                 
-        display: none; 
-    }             
-    .show-on-mobile {                 
-        display: block !important; 
-    }        
-    .marquee {
-        font-size: 13px;
-        gap: 1.25rem;                    /* Tighter spacing on small screens */
-        padding-left: 0.75rem;
-        padding-right: 0.75rem;
-        animation-duration: 28s;         /* Faster but still readable on mobile */
+    @media (prefers-reduced-motion: reduce) {
+        .marquee {
+            animation-play-state: paused;
+        }
     }
-}     
+
+    /* MOBILE OPTIMIZATIONS – no cutoff, smooth scroll */
+    @media (max-width: 768px) {             
+        #testimonial-carousel,             
+        #faq {                 
+            display: none; 
+        }             
+        .show-on-mobile {                 
+            display: block !important; 
+        }        
+        .marquee {
+            font-size: 13px;
+            gap: 1.25rem;                    /* Tighter spacing on small screens */
+            padding-left: 0.75rem;
+            padding-right: 0.75rem;
+            animation-duration: 28s;         /* Faster but still readable on mobile */
+        }
+    }     
 
     /* Your original styles (unchanged) */
     .gauge { 
@@ -140,7 +140,7 @@ html, body {
                 <a href="#how-it-works" class="hover:text-emerald-400 transition-colors">How it works</a> 
                 <a href="#methodology" class="hover:text-emerald-400 transition-colors">Methodology</a> 
                 <a href="#faq" class="hover:text-emerald-400 transition-colors">FAQ</a> 
-                <a href="dashboard.html" class="hover:text-emerald-400 transition-colors font-semibold text-emerald-400">Pricing &amp; Credits</a>
+                <a href="dashboard.html" class="hover:text-emerald-400 transition-colors font-semibold text-emerald-400">Pricing & Credits</a>
                 <a href="dashboard.html" class="hover:text-emerald-400 transition-colors">Dashboard</a> 
             </nav> 
             <div id="search-bar-container" class="flex-1 max-w-xs mx-8 hidden lg:flex"> 
@@ -150,7 +150,10 @@ html, body {
                 </div> 
             </div> 
             <div class="flex items-center gap-x-4"> 
-                <div id="credits-badge" onclick="window.location.href='dashboard.html'"      class="hidden sm:flex items-center bg-slate-800 hover:bg-slate-700 border border-slate-700 text-emerald-400 text-xs font-medium px-4 h-9 rounded-2xl cursor-pointer">     <span class="mr-1">💎</span>     <span id="credit-count">12</span> credits remaining </div> 
+                <div id="credits-badge" onclick="window.location.href='dashboard.html'" class="hidden sm:flex items-center bg-slate-800 hover:bg-slate-700 border border-slate-700 text-emerald-400 text-xs font-medium px-4 h-9 rounded-2xl cursor-pointer">     
+                    <span class="mr-1">💎</span>     
+                    <span id="credit-count">12</span> credits remaining 
+                </div> 
                 <a href="dashboard.html" class="px-6 py-2.5 bg-white text-slate-950 font-semibold rounded-2xl hover:bg-emerald-400 hover:text-white transition-all flex items-center gap-x-2 text-sm"> 
                     <span>Dashboard</span> 
                     <span class="text-xl leading-none">→</span> 
@@ -163,7 +166,7 @@ html, body {
                 <a href="#how-it-works" class="hover:text-emerald-400">How it works</a> 
                 <a href="#methodology" class="hover:text-emerald-400">Methodology</a> 
                 <a href="#faq" class="hover:text-emerald-400">FAQ</a> 
-                <a href="dashboard.html" class="hover:text-emerald-400 font-semibold text-emerald-400">Pricing &amp; Credits</a>
+                <a href="dashboard.html" class="hover:text-emerald-400 font-semibold text-emerald-400">Pricing & Credits</a>
                 <a href="dashboard.html" class="hover:text-emerald-400">Dashboard</a> 
                 <a href="dashboard.html" class="mt-4 inline-flex justify-center bg-emerald-400 text-slate-950 py-4 rounded-3xl font-semibold">Go to Dashboard</a> 
             </div> 
@@ -174,10 +177,8 @@ html, body {
             <div> 
                 <div class="inline-flex items-center bg-slate-800 text-emerald-400 text-xs font-medium tracking-[0.5px] px-5 h-8 rounded-3xl mb-6"> ✨ NEW 2026 AI + SEO HYBRID AUDIT </div> 
                 <h1 class="heading-font text-6xl lg:text-7xl leading-none tracking-[-2px] font-semibold mb-6"> See how visible<br>your website is to<br>AI <span class="text-emerald-400">and</span> Google/Search Engines </h1> 
-                <p class="text-xl text-slate-300 max-w-lg mb-8"> Generative Engine Optimization <br> AI models don’t just retrieve content… They synthesize it <br> <span class="text-emerald-400">✔️ Clear answers</span> <span class="text-emerald-400">✔️ Strong authority</span> <span class="text-emerald-400">✔️ Well-structured information</span> <br><br> We measure AI citation readiness + E-E-A-T signals + chunkability + entity/schema — 
-We Give Clinical report with step-by-step roadmap </p> 
+                <p class="text-xl text-slate-300 max-w-lg mb-8"> Generative Engine Optimization <br> AI models don’t just retrieve content… They synthesize it <br> <span class="text-emerald-400">✔️ Clear answers</span> <span class="text-emerald-400">✔️ Strong authority</span> <span class="text-emerald-400">✔️ Well-structured information</span> <br><br> We measure AI citation readiness + E-E-A-T signals + chunkability + entity/schema — We Give Clinical report with step-by-step roadmap </p> 
 
-                <!-- Surgically added: 3 quick-win benefit bullets (placed right after subheadline per blueprint) -->
                 <div class="mb-8 grid gap-y-4 max-w-lg text-slate-300">
                     <div class="flex items-start gap-x-3">
                         <span class="text-emerald-400 text-2xl leading-none mt-px">✔</span>
@@ -193,28 +194,23 @@ We Give Clinical report with step-by-step roadmap </p>
                     </div>
                 </div>
 
-                <!-- Primary CTA button (updated with 👉 per spec) -->
                 <a href="#scan-section" class="inline-flex items-center gap-x-3 bg-emerald-400 hover:bg-emerald-500 text-slate-950 font-semibold text-lg px-8 h-14 rounded-3xl transition-all"> 
                     👉 Start your scan now <span class="text-2xl">📡</span> 
                 </a> 
 
-                <!-- Trust micro-bar (small text under buttons – exact wording from spec) -->
                 <div class="mt-8 flex flex-wrap items-center gap-x-3 text-xs text-slate-400">
                     <span>Used by teams in</span>
-                    <span class="font-semibold text-slate-300">SaaS, Fintech, Healthtech, Ecommerce, Edtech &amp; Manufacturing</span>
+                    <span class="font-semibold text-slate-300">SaaS, Fintech, Healthtech, Ecommerce, Edtech & Manufacturing</span>
                     <span class="mx-1">•</span>
                     <span>No sales calls • No setup • Report in minutes</span>
                 </div>
 
-                <!-- Urgency line (small, low-pressure – exact wording from spec) -->
                 <p class="mt-6 text-xs text-emerald-400/80 flex items-center gap-x-1">
                     <span class="text-base">🪄</span> 
                     Most teams implement their first fixes within the first week.
                 </p>
             </div> 
 
-            <!-- Right-side Hero visual: surgically updated clean product dashboard mock (showing all requested sections) -->
-            <!-- Class changed from "relative hidden lg:block" to "relative" so mock appears on mobile per blueprint while preserving desktop 2-col layout -->
             <div class="relative"> 
                 <div class="bg-slate-900 border border-slate-700 rounded-3xl p-8 shadow-2xl"> 
                     <div class="flex justify-between mb-8"> 
@@ -226,7 +222,6 @@ We Give Clinical report with step-by-step roadmap </p>
                     </div> 
 
                     <div class="space-y-8">
-                        <!-- AI Answerability Score -->
                         <div>
                             <div class="flex justify-between items-baseline mb-3">
                                 <p class="text-xs uppercase tracking-widest text-slate-400">AI Answerability Score</p>
@@ -235,12 +230,10 @@ We Give Clinical report with step-by-step roadmap </p>
                             <div class="h-2.5 bg-slate-700 rounded-3xl overflow-hidden">
                                 <div class="h-2.5 bg-gradient-to-r from-emerald-400 to-violet-400 rounded-3xl" style="width: 92%"></div>
                             </div>
-                            <p class="text-xs text-slate-400 mt-2">92% of pages ready for AI synthesis &amp; citation</p>
+                            <p class="text-xs text-slate-400 mt-2">92% of pages ready for AI synthesis & citation</p>
                         </div>
 
-                        <!-- Two-column grid for Content Gap Opportunities + E-E-A-T Signals -->
                         <div class="grid grid-cols-2 gap-6">
-                            <!-- Content Gap Opportunities -->
                             <div class="bg-slate-800 rounded-3xl p-5">
                                 <p class="text-xs uppercase tracking-widest mb-3 text-amber-400">Content Gap Opportunities</p>
                                 <ul class="text-sm space-y-3 text-slate-300">
@@ -259,7 +252,6 @@ We Give Clinical report with step-by-step roadmap </p>
                                 </ul>
                             </div>
 
-                            <!-- E-E-A-T Signals -->
                             <div class="bg-slate-800 rounded-3xl p-5">
                                 <p class="text-xs uppercase tracking-widest mb-3 text-violet-400">E-E-A-T Signals</p>
                                 <div class="flex justify-between text-sm mb-3">
@@ -273,13 +265,12 @@ We Give Clinical report with step-by-step roadmap </p>
                             </div>
                         </div>
 
-                        <!-- Priority Fix List -->
                         <div>
                             <p class="text-xs uppercase tracking-widest mb-4 text-red-400">Priority Fix List</p>
                             <div class="space-y-3">
                                 <div class="flex gap-x-3 bg-slate-800/70 rounded-3xl px-5 py-4 text-sm">
                                     <span class="px-3 h-6 bg-red-400 text-slate-950 text-xs font-semibold rounded-3xl flex items-center">HIGH</span>
-                                    <div class="flex-1">Add JSON-LD schema to product &amp; service pages</div>
+                                    <div class="flex-1">Add JSON-LD schema to product & service pages</div>
                                 </div>
                                 <div class="flex gap-x-3 bg-slate-800/70 rounded-3xl px-5 py-4 text-sm">
                                     <span class="px-3 h-6 bg-amber-400 text-slate-950 text-xs font-semibold rounded-3xl flex items-center">MED</span>
@@ -288,7 +279,6 @@ We Give Clinical report with step-by-step roadmap </p>
                             </div>
                         </div>
 
-                        <!-- AI Search Visibility -->
                         <div class="bg-slate-800 rounded-3xl p-5 flex items-center justify-between">
                             <div>
                                 <p class="text-xs uppercase tracking-widest text-slate-400">AI Search Visibility</p>
@@ -301,7 +291,6 @@ We Give Clinical report with step-by-step roadmap </p>
                         </div>
                     </div>
 
-                    <!-- Caption under mock (exact wording from spec) -->
                     <p class="text-center text-sm text-slate-400 mt-8 font-medium">Your entire AI search strategy in one place</p>
                 </div> 
             </div> 
@@ -324,17 +313,17 @@ We Give Clinical report with step-by-step roadmap </p>
                     </div> 
                     <h3 class="text-2xl font-semibold mb-2">Instant AI Visibility Audit</h3> 
                     <p class="text-slate-300 mb-6 text-[15px] leading-relaxed">
-                        You receive a complete <strong>10-section clinical report</strong> delivered instantly on report.html + basic branded PDF:<br>
-                        • Executive Summary with Overall AI Visibility Score, SEO Health Score, Risk Level, Top 7 Critical Problems &amp; Top 7 Quick Wins<br>
+                        You receive a complete <strong>10-section clinical report</strong> delivered instantly on your report page + basic branded PDF:<br>
+                        • Executive Summary with Overall AI Visibility Score, SEO Health Score, Risk Level, Top Critical Problems & Top Quick Wins<br>
                         • AI Discoverability Analysis (definition_content_ratio, how_to_content_ratio, faq_question_count + exact % of pages AI-ready for citation)<br>
-                        • Technical SEO Health (robots.txt, sitemap, Core Web Vitals, indexability &amp; crawlability gaps)<br>
+                        • Technical SEO Health (robots.txt, sitemap, Core Web Vitals, indexability & crawlability gaps)<br>
                         • Content Quality Analysis (avg word count, thin-content detection, heading hierarchy)<br>
-                        • Entity &amp; Schema Analysis (detected JSON-LD schemas + critical missing ones)<br>
-                        • Trust &amp; E-E-A-T Signals (trust pages found + Trust Score)<br>
-                        • Light Content Gap Strategy (5 recommended topics + 5 FAQ questions)<br>
-                        • Quick Wins Roadmap (7-day &amp; 30-day fixes)<br>
-                        • Priority Fix List (6–8 issues with severity, why-it-matters, and one-line fixes)<br>
-                        • Clinical Step-by-Step Guide (400–600 words tying everything together + “Beyond This Scan” 2026 roadmap)
+                        • Entity & Schema Analysis (detected JSON-LD schemas + critical missing ones)<br>
+                        • Trust & E-E-A-T Signals (trust pages found + Trust Score)<br>
+                        • Light Content Gap Strategy (Recommended topics + FAQ questions)<br>
+                        • Quick Wins Roadmap (7-day & 30-day fixes)<br>
+                        • Priority Fix List (issues with severity, why-it-matters, and line-by-line fixes)<br>
+                        • Clinical Step-by-Step Guide (Detailed reportage tying everything together + “Beyond This Scan” 2026 roadmap)
                     </p> 
                     <button onclick="event.stopImmediatePropagation();runScanDemo('instant');" class="w-full py-4 bg-emerald-400 hover:bg-emerald-500 text-slate-950 font-semibold rounded-3xl text-lg">Run Instant Scan – Full 10-Section Clinical Report in 60 Seconds</button> 
                     <p class="text-center text-xs text-slate-400 mt-4">Perfect for quick, high-impact insights</p> 
@@ -356,19 +345,19 @@ We Give Clinical report with step-by-step roadmap </p>
                     <h3 class="text-2xl font-semibold mb-2">Deep AI + SEO Clinical Audit</h3> 
                     <p class="text-slate-300 mb-6 text-[15px] leading-relaxed">
                         You receive the complete premium <strong>10-section McKinsey-level consultant report</strong> (1,800–2,800 words total) + professional branded PDF with gauges, page numbers, and emerald/violet accents:<br>
-                        • Executive Summary with all 5 master scores as interactive gauges (AI Visibility 25%, Technical SEO 25%, Content Quality 20%, Trust/E-E-A-T 15%, Entity &amp; Schema 15%), blended Overall Score, quantified risk &amp; impact<br>
-                        • Deep AI Discoverability Analysis (full metrics table + exact LLM chunkability &amp; citation likelihood + multi-page screenshot visual insights)<br>
-                        • Technical SEO Health (full crawl graph, orphan pages, broken links estimate, Core Web Vitals on homepage + 4 key pages)<br>
+                        • Executive Summary with all 5 master scores as interactive gauges (AI Visibility 25%, Technical SEO 25%, Content Quality 20%, Trust/E-E-A-T 15%, Entity & Schema 15%), blended Overall Score, quantified risk & impact<br>
+                        • Deep AI Discoverability Analysis (full metrics table + exact LLM chunkability & citation likelihood + multi-page screenshot visual insights)<br>
+                        • Technical SEO Health (full crawl graph, orphan pages, broken links estimate, Core Web Vitals on homepage + key pages)<br>
                         • Content Quality Analysis (word-count distribution, freshness heuristics, thin vs long content across every page)<br>
-                        • Entity &amp; Schema Analysis (complete JSON-LD table + multimedia/international signals ranked by AI impact)<br>
-                        • Trust &amp; E-E-A-T Signals (full trust-page audit + external citation signals)<br>
-                        • Premium Content Gap Strategy (12 recommended article topics + keyword clusters, 15 ready-to-use FAQ questions, content cluster map + 10 copy-paste AI prompts)<br>
-                        • Quick Wins Roadmap (detailed 7/30/90-day phased plan with effort levels, owners &amp; exact code snippets)<br>
-                        • Priority Fix List (15–20 sortable issues: severity, why it matters to AI + Google 2026, exact copy-paste fix code, effort, timeline)<br>
-                        • Full Clinical Step-by-Step Guide (1,200–1,800 words) with narrative walkthrough + “Beyond This Scan: 2026 AI Citation Roadmap” (llms.txt, monitoring, entity strategy)
+                        • Entity & Schema Analysis (complete JSON-LD table + multimedia/international signals ranked by AI impact)<br>
+                        • Trust & E-E-A-T Signals (full trust-page audit + external citation signals)<br>
+                        • Premium Content Gap Strategy (Recommended article topics + keyword clusters, ready-to-use FAQ questions, content cluster map + copy-paste GEO prompts)<br>
+                        • Quick Wins Roadmap (detailed 7/30/90-day phased plan with effort levels, owners & exact code snippets)<br>
+                        • Priority Fix List (all sortable issues: severity, why it matters to AI + Google 2026, exact copy-paste fix code, effort, timeline)<br>
+                        • Full Clinical Step-by-Step Guide (Extensive Reportage) with narrative walkthrough + “Beyond This Scan: 2026 AI Citation Roadmap” (llms.txt, monitoring, entity strategy)
                     </p> 
                     <button onclick="event.stopImmediatePropagation();runScanDemo('deep');" class="w-full py-4 bg-violet-400 hover:bg-violet-500 text-slate-950 font-semibold rounded-3xl text-lg">Run Deep Scan – Full 1,800–2,800 Word Clinical Consultant Report</button> 
-                    <p class="text-center text-xs text-slate-400 mt-4">Recommended for serious optimization &amp; full-site strategy</p> 
+                    <p class="text-center text-xs text-slate-400 mt-4">Recommended for serious optimization & full-site strategy</p> 
                 </div> 
             </div> 
             <div class="mt-12 max-w-2xl mx-auto"> 
@@ -413,15 +402,13 @@ We Give Clinical report with step-by-step roadmap </p>
             </div> 
         </div> 
 
-        <!-- COMBINED REPORT + LOGOS + TESTIMONIALS SECTION (per full upgrade blueprint) -->
         <div id="combined-results" class="combined-section scroll-mt-20 mb-20 rounded-3xl border border-slate-700 p-8 md:p-12">
             <div class="max-w-6xl mx-auto">
-                <!-- Metrics / Report Summary -->
                 <div class="grid md:grid-cols-3 gap-8 mb-16" data-aos="fade-up">
                     <div class="bg-slate-800/80 backdrop-blur rounded-3xl p-8 text-center">
                         <div class="text-emerald-400 text-6xl font-semibold mb-2">469+</div>
-                        <p class="text-slate-300 text-sm uppercase tracking-widest">Sites audited this month</p>
-                        <p class="text-slate-400 text-xs mt-4">Average AI Visibility Score: 81.4</p>
+                        <p class="text-slate-300 text-sm uppercase tracking-widest">Sites audited</p>
+                        <p class="text-slate-400 text-xs mt-4">Average AI Visibility Score: 71.4</p>
                     </div>
                     <div class="bg-slate-800/80 backdrop-blur rounded-3xl p-8 text-center">
                         <div class="text-emerald-400 text-6xl font-semibold mb-2">98%</div>
@@ -435,7 +422,6 @@ We Give Clinical report with step-by-step roadmap </p>
                     </div>
                 </div>
 
-                <!-- Logos (horizontal entrance + floating per blueprint) -->
                 <div class="mb-16">
                     <p class="uppercase text-xs tracking-[1px] text-slate-400 mb-6 text-center">Trusted by leading teams worldwide</p>
                     <div class="marquee-wrapper border border-slate-700 rounded-3xl py-4 bg-slate-900">
@@ -446,13 +432,11 @@ We Give Clinical report with step-by-step roadmap </p>
                     </div>
                 </div>
 
-                <!-- Upgraded Testimonials – PICTURES STRIPPED (per surgical instruction) + subtle vertical float animation ready -->
                 <div class="text-center mb-8">
                     <h2 class="heading-font text-4xl font-semibold">What real users say</h2>
                 </div>
                 <div id="testimonial-carousel" class="relative overflow-hidden">
                     <div class="flex transition-transform duration-700" id="testimonial-track" style="transform: translateX(0%);">
-                        <!-- Testimonial 1 -->
                         <div class="min-w-full px-6">
                             <div class="bg-slate-800 border border-slate-700 rounded-3xl p-8">
                                 <p class="text-lg italic text-slate-200">"I was honestly skeptical that a single report could shape our whole content plan. But the Deep report became the backbone of our 2026 strategy, and within a few weeks we started showing up in Perplexity results."</p>
@@ -464,7 +448,6 @@ We Give Clinical report with step-by-step roadmap </p>
                                 </div>
                             </div>
                         </div>
-                        <!-- Testimonial 2 -->
                         <div class="min-w-full px-6">
                             <div class="bg-slate-800 border border-slate-700 rounded-3xl p-8">
                                 <p class="text-lg italic text-slate-200">"I didn’t expect the instant scan to be this practical. It showed exactly why our product pages weren’t being cited by AI, and after fixing the schema we saw a noticeable lift in AI-driven traffic."</p>
@@ -476,7 +459,6 @@ We Give Clinical report with step-by-step roadmap </p>
                                 </div>
                             </div>
                         </div>
-                        <!-- Testimonial 3 -->
                         <div class="min-w-full px-6">
                             <div class="bg-slate-800 border border-slate-700 rounded-3xl p-8">
                                 <p class="text-lg italic text-slate-200">"The step-by-step guide felt surprisingly thorough. We followed the roadmap and saw a clear improvement in our E-E-A-T signals and overall content direction."</p>
@@ -488,7 +470,6 @@ We Give Clinical report with step-by-step roadmap </p>
                                 </div>
                             </div>
                         </div>
-                        <!-- Testimonial 4 -->
                         <div class="min-w-full px-6">
                             <div class="bg-slate-800 border border-slate-700 rounded-3xl p-8">
                                 <p class="text-lg italic text-slate-200">"As a solo founder I just needed something fast but deep. The content gap strategy alone made the credits worth it for me."</p>
@@ -500,7 +481,6 @@ We Give Clinical report with step-by-step roadmap </p>
                                 </div>
                             </div>
                         </div>
-                        <!-- Testimonial 5 -->
                         <div class="min-w-full px-6">
                             <div class="bg-slate-800 border border-slate-700 rounded-3xl p-8">
                                 <p class="text-lg italic text-slate-200">"I had already tried a few other tools, so I wasn’t expecting much. This was the first one that showed AI answerability % and gave prompts we could act on right away."</p>
@@ -512,7 +492,6 @@ We Give Clinical report with step-by-step roadmap </p>
                                 </div>
                             </div>
                         </div>
-                        <!-- Testimonial 6 -->
                         <div class="min-w-full px-6">
                             <div class="bg-slate-800 border border-slate-700 rounded-3xl p-8">
                                 <p class="text-lg italic text-slate-200">"The trust and E-E-A-T section highlighted pages we hadn’t even considered. After adding them, we started seeing stronger authority signals and better search visibility."</p>
@@ -524,7 +503,6 @@ We Give Clinical report with step-by-step roadmap </p>
                                 </div>
                             </div>
                         </div>
-                        <!-- Testimonial 7 -->
                         <div class="min-w-full px-6">
                             <div class="bg-slate-800 border border-slate-700 rounded-3xl p-8">
                                 <p class="text-lg italic text-slate-200">"The Deep tier PDF is genuinely print-ready. We printed the priority fix list and knocked out several items in the first week."</p>
@@ -536,7 +514,6 @@ We Give Clinical report with step-by-step roadmap </p>
                                 </div>
                             </div>
                         </div>
-                        <!-- Testimonial 8 -->
                         <div class="min-w-full px-6">
                             <div class="bg-slate-800 border border-slate-700 rounded-3xl p-8">
                                 <p class="text-lg italic text-slate-200">"I liked that it explained why AI would cite or ignore our site. The guide honestly reads like a private strategy session."</p>
@@ -563,7 +540,6 @@ We Give Clinical report with step-by-step roadmap </p>
                 <p class="text-slate-400">Instant vs Deep side-by-side</p> 
             </div> 
             <div class="grid lg:grid-cols-2 gap-8"> 
-                <!-- Instant Example Card -->
                 <div class="bg-slate-800 rounded-3xl p-8">
                     <div class="flex items-center justify-between mb-6">
                         <span class="px-4 h-8 text-xs bg-emerald-400 text-slate-950 rounded-3xl flex items-center font-medium">INSTANT</span>
@@ -582,19 +558,18 @@ We Give Clinical report with step-by-step roadmap </p>
                     <ul class="text-sm space-y-2 mb-8 text-slate-300">
                         <li>• 10-section clinical report in 60 seconds</li>
                         <li>• Overall AI Visibility + SEO Health Scores + Risk Level</li>
-                        <li>• Top 7 Critical Problems &amp; Top 7 Quick Wins</li>
+                        <li>• Top Critical Problems & Top Quick Wins</li>
                         <li>• AI Discoverability Analysis + citation readiness %</li>
                         <li>• Technical SEO Health + Core Web Vitals</li>
                         <li>• Content Quality snapshot + thin-content detection</li>
-                        <li>• Entity &amp; Schema gaps + Trust/E-E-A-T signals</li>
-                        <li>• Light Content Gap Strategy (5 topics + 5 FAQs)</li>
-                        <li>• Priority Fix List + 400–600 word Clinical Guide</li>
+                        <li>• Entity & Schema gaps + Trust/E-E-A-T signals</li>
+                        <li>• Light Content Gap Strategy (topics + FAQs)</li>
+                        <li>• Priority Fix List + Step by step Clinical Guide</li>
                         <li>• Basic branded PDF download</li>
                     </ul>
                     <button onclick="window.location.href='report.html'" class="mt-8 w-full py-4 bg-white text-slate-950 rounded-3xl font-semibold">View full Instant report example →</button>
                 </div>
 
-                <!-- Deep Example Card -->
                 <div class="bg-slate-800 rounded-3xl p-8 border-2 border-violet-400">
                     <div class="flex items-center justify-between mb-6">
                         <span class="px-4 h-8 text-xs bg-violet-400 text-slate-950 rounded-3xl flex items-center font-medium">DEEP</span>
@@ -606,12 +581,12 @@ We Give Clinical report with step-by-step roadmap </p>
                         <li>• Deep AI Discoverability + screenshot visual analysis</li>
                         <li>• Complete Technical SEO Health + crawl graph</li>
                         <li>• Full Content Quality Analysis across every page</li>
-                        <li>• Complete Entity &amp; Schema table + Trust audit</li>
-                        <li>• Premium Content Gap Strategy (12 topics + 15 FAQs + 10 prompts)</li>
+                        <li>• Complete Entity & Schema table + Trust audit</li>
+                        <li>• Premium Content Gap Strategy (topics + FAQs + GEO prompts)</li>
                         <li>• Detailed 7/30/90-day Roadmap with code snippets</li>
-                        <li>• 15–20 item sortable Priority Fix List</li>
-                        <li>• 1,200–1,800 word Clinical Guide + “Beyond This Scan” Roadmap</li>
-                        <li>• Professional branded PDF with gauges &amp; page numbers</li>
+                        <li>• All item sortable Priority Fix List</li>
+                        <li>• Extensive step by step Clinical Guide + “Beyond This Scan” Roadmap</li>
+                        <li>• Professional branded PDF with gauges & page numbers</li>
                     </ul>
                     <button onclick="window.location.href='report.html'" class="mt-8 w-full py-4 bg-violet-400 text-slate-950 rounded-3xl font-semibold">View full Deep report example →</button>
                 </div>
@@ -628,7 +603,7 @@ We Give Clinical report with step-by-step roadmap </p>
                 </details> 
                 <details class="bg-slate-900 border border-slate-700 rounded-3xl px-8 py-6 group"> 
                     <summary class="flex justify-between items-center cursor-pointer font-medium text-lg">What’s the difference between Instant and Deep?</summary> 
-                    <p class="mt-6 text-slate-300 text-[15px]">Instant (5 credits) gives you fast 10-section scores and quick fixes. Deep adds full-site crawling, richer metrics, a 1,200–1,800 word clinical guide, content gap strategy, and professional PDF.</p> 
+                    <p class="mt-6 text-slate-300 text-[15px]">Instant (5 credits) gives you fast 10-section scores and quick fixes. Deep adds full-site crawling, richer metrics, an extensive step by step clinical guide, content gap strategy, and professional PDF.</p> 
                 </details> 
                 <details class="bg-slate-900 border border-slate-700 rounded-3xl px-8 py-6 group"> 
                     <summary class="flex justify-between items-center cursor-pointer font-medium text-lg">How many credits do I need?</summary> 
@@ -636,7 +611,7 @@ We Give Clinical report with step-by-step roadmap </p>
                 </details> 
                 <details class="bg-slate-900 border border-slate-700 rounded-3xl px-8 py-6 group"> 
                     <summary class="flex justify-between items-center cursor-pointer font-medium text-lg">Do I need to log in to run a scan?</summary> 
-                    <p class="mt-6 text-slate-300 text-[15px]">No login is required for a demo Instant scan. Deep scans and saving reports require a free account.</p> 
+                    <p class="mt-6 text-slate-300 text-[15px]">Demo not real scans require no login. Login is required for Instant scan. Deep scans and saving reports require a free account.</p> 
                 </details> 
                 <details class="bg-slate-900 border border-slate-700 rounded-3xl px-8 py-6 group"> 
                     <summary class="flex justify-between items-center cursor-pointer font-medium text-lg">Can I scan multiple URLs at once?</summary> 
@@ -644,7 +619,7 @@ We Give Clinical report with step-by-step roadmap </p>
                 </details> 
                 <details class="bg-slate-900 border border-slate-700 rounded-3xl px-8 py-6 group"> 
                     <summary class="flex justify-between items-center cursor-pointer font-medium text-lg">Is my data private?</summary> 
-                    <p class="mt-6 text-slate-300 text-[15px]">100% private. Scans are stored only in your personal Supabase account and never shared or used for training.</p> 
+                    <p class="mt-6 text-slate-300 text-[15px]">100% private. Scans are stored only in your personal backend account and never shared or used for training.</p> 
                 </details> 
                 <details class="bg-slate-900 border border-slate-700 rounded-3xl px-8 py-6 group"> 
                     <summary class="flex justify-between items-center cursor-pointer font-medium text-lg">What does the clinical step-by-step guide contain?</summary> 
@@ -652,7 +627,7 @@ We Give Clinical report with step-by-step roadmap </p>
                 </details> 
                 <details class="bg-slate-900 border border-slate-700 rounded-3xl px-8 py-6 group"> 
                     <summary class="flex justify-between items-center cursor-pointer font-medium text-lg">How accurate are the scores?</summary> 
-                    <p class="mt-6 text-slate-300 text-[15px]">Scores are calculated from real crawled data, regex-extracted signals, and structured analysis across five weighted master categories (AI Visibility, Technical SEO, Content Quality, Trust, Entity &amp; Schema).</p> 
+                    <p class="mt-6 text-slate-300 text-[15px]">Scores are calculated from real crawled data, regex-extracted signals, and structured analysis across five weighted master categories (AI Visibility, Technical SEO, Content Quality, Trust, Entity & Schema).</p> 
                 </details> 
                 <details class="bg-slate-900 border border-slate-700 rounded-3xl px-8 py-6 group"> 
                     <summary class="flex justify-between items-center cursor-pointer font-medium text-lg">Can I download the report as PDF?</summary> 
@@ -680,18 +655,22 @@ We Give Clinical report with step-by-step roadmap </p>
                 </details> 
             </div> 
         </div> 
-        <div class="md:hidden text-center mt-8">     <button onclick="this.style.display='none';document.getElementById('testimonial-carousel').style.display='block';document.getElementById('faq').style.display='block';" class="px-8 py-4 bg-slate-800 hover:bg-emerald-400 text-white font-medium rounded-3xl text-sm">         Show testimonials &amp; full FAQ →     </button> </div> 
+        <div class="md:hidden text-center mt-8">     
+            <button onclick="this.style.display='none';document.getElementById('testimonial-carousel').style.display='block';document.getElementById('faq').style.display='block';" class="px-8 py-4 bg-slate-800 hover:bg-emerald-400 text-white font-medium rounded-3xl text-sm">         
+                Show testimonials & full FAQ →     
+            </button> 
+        </div> 
         <div id="methodology" class="scroll-mt-20 bg-slate-900 border border-slate-700 rounded-3xl p-12 mb-20"> 
             <h2 class="heading-font text-4xl font-semibold mb-8 text-center">Our clinical methodology</h2> 
             <div class="prose prose-invert max-w-none text-slate-300"> 
                 <p class="text-lg">AI Visibility Scan combines multi-page crawling, structured data extraction, and advanced scoring across five master categories to produce the most actionable AI + SEO audit available in 2026.</p> 
                 <ol class="list-decimal pl-6 space-y-6 mt-8 text-[15px]"> 
-                    <li><strong>Crawling &amp; data collection</strong> – Full-site discovery respecting robots.txt, JavaScript rendering, and screenshot capture for visual context.</li> 
+                    <li><strong>Crawling & data collection</strong> – Full-site discovery respecting robots.txt, JavaScript rendering, and screenshot capture for visual context.</li> 
                     <li><strong>AI discoverability analysis</strong> – Regex detection of definition-style content, how-to language, listicles, FAQ patterns, chunkability metrics, and citation likelihood signals.</li> 
                     <li><strong>Technical SEO health</strong> – robots.txt, sitemap, indexability signals, canonicals, Core Web Vitals, architecture depth, and orphan page estimation.</li> 
-                    <li><strong>Content quality &amp; freshness</strong> – Word-count distribution, heading hierarchy, internal linking density, thin-content detection, and recency heuristics.</li> 
-                    <li><strong>Entity, schema &amp; trust scoring</strong> – JSON-LD parsing, Open Graph, E-E-A-T page presence (About, Contact, Privacy, etc.), and authoritative tone signals.</li> 
-                    <li><strong>Weighted master scoring &amp; clinical synthesis</strong> – Five scores are blended into an overall 0–100 rating. Audit Engine then writes the 10-section report with strategic recommendations and a full step-by-step implementation guide.</li> 
+                    <li><strong>Content quality & freshness</strong> – Word-count distribution, heading hierarchy, internal linking density, thin-content detection, and recency heuristics.</li> 
+                    <li><strong>Entity, schema & trust scoring</strong> – JSON-LD parsing, Open Graph, E-E-A-T page presence (About, Contact, Privacy, etc.), and authoritative tone signals.</li> 
+                    <li><strong>Weighted master scoring & clinical synthesis</strong> – Five scores are blended into an overall 0–100 rating. Audit Engine then writes the 10-section report with strategic recommendations and a full step-by-step implementation guide.</li> 
                 </ol> 
                 <p class="mt-10 text-center text-emerald-400 font-medium">Result: A consultant-level audit you can act on immediately — without the consultant price tag.</p> 
                 <p class="mt-6 text-center text-emerald-400 font-medium">Methodology cross-referenced against Google’s official SEO Starter Guide (2026 edition) for maximum alignment with current search and AI engine standards.</p> 
@@ -794,7 +773,7 @@ We Give Clinical report with step-by-step roadmap </p>
                     <span class="text-3xl">📡</span> 
                     <span class="heading-font text-2xl font-semibold">AI Visibility Scan</span> 
                 </div> 
-                <p class="text-slate-400 text-sm">Instant &amp; Deep AI + SEO audits that help your website get seen, understood, and cited by AI engines and Google.</p> 
+                <p class="text-slate-400 text-sm">Instant & Deep AI + SEO audits that help your website get seen, understood, and cited by AI engines and Google.</p> 
             </div> 
             <div> 
                 <h4 class="text-white font-semibold mb-4">Legal</h4> 
@@ -810,12 +789,12 @@ We Give Clinical report with step-by-step roadmap </p>
             </div> 
             <div class="text-sm text-slate-400"> 
                 <div id="footer-copy">
-    © <span id="current-year">2026</span> AI Visibility Scan. All Rights Reserved.<br>
-    Built by AI Citation Audit Scan (Deep SEO Hybrid Engine) Team<br>
-    Colombo Crescent<br>
-    ON, L5M 7P3<br>
-    Canada
-</div>
+                    © <span id="current-year">2026</span> AI Visibility Scan. All Rights Reserved.<br>
+                    Built by AI Citation Audit Scan (Deep SEO Hybrid Engine) Team<br>
+                    Colombo Crescent<br>
+                    ON, L5M 7P3<br>
+                    Canada
+                </div>
                 <div class="mt-4 text-xs"> Not affiliated with any search engine or AI provider. </div> 
             </div> 
         </div> 
@@ -978,10 +957,10 @@ We Give Clinical report with step-by-step roadmap </p>
                     } 
                 }) 
             } 
-            console.log('%c✅ AI Visibility Scan index.html fully initialized – production ready (hero section surgically updated per surgical-3-edit.txt)', 'color:#10b981;font-family:monospace') 
+            console.log('%c✅ AI Visibility Scan index.html fully initialized – production ready', 'color:#10b981;font-family:monospace') 
         } 
-    // Auto-update copyright year
-document.getElementById('current-year').textContent = new Date().getFullYear();
+        // Auto-update copyright year
+        document.getElementById('current-year').textContent = new Date().getFullYear();
         // Load everything on DOM ready 
         window.onload = initializeAll 
     </script> 
