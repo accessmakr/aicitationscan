@@ -153,6 +153,7 @@
                 <a href="#how-it-works" class="nav-link hover:text-emerald-400 transition-colors">How it works</a> 
                 <a href="#methodology" class="nav-link hover:text-emerald-400 transition-colors">Methodology</a> 
                 <a href="#faq" class="nav-link hover:text-emerald-400 transition-colors">FAQ</a> 
+                <a href="#advanced-insights" class="nav-link hover:text-emerald-400 transition-colors font-semibold">Advanced GEO</a>
                 <a href="dashboard.html" class="nav-link hover:text-emerald-400 transition-colors font-semibold text-emerald-400">Pricing & Credits</a>
                 <a href="dashboard.html" class="nav-link hover:text-emerald-400 transition-colors">Dashboard</a> 
             </nav> 
@@ -186,6 +187,7 @@
                 <a href="#how-it-works" class="hover:text-emerald-400">How it works</a> 
                 <a href="#methodology" class="hover:text-emerald-400">Methodology</a> 
                 <a href="#faq" class="hover:text-emerald-400">FAQ</a> 
+                <a href="#advanced-insights" class="hover:text-emerald-400 font-semibold">Advanced GEO</a>
                 <a href="dashboard.html" class="hover:text-emerald-400 font-semibold text-emerald-400">Pricing & Credits</a>
                 <a href="dashboard.html" class="hover:text-emerald-400">Dashboard</a> 
                 <a href="dashboard.html" class="mt-4 inline-flex justify-center bg-emerald-400 text-slate-950 py-4 rounded-3xl font-semibold">Go to Dashboard</a> 
@@ -640,6 +642,111 @@
             </div> 
         </div> 
 
+        <!-- === NEW ADVANCED GEO INTELLIGENCE SUITE (3 LIVE BLOCKS) === -->
+        <div id="advanced-insights" class="scroll-mt-20 mb-20 bg-slate-900 border border-slate-700 rounded-3xl p-8 md:p-12">
+            <div class="text-center mb-12">
+                <span class="px-5 py-2 text-violet-400 bg-slate-800 text-xs rounded-3xl">ADVANCED GEO INTELLIGENCE SUITE</span>
+                <h2 class="heading-font text-4xl font-semibold mt-4">Live Citations • Competitor Benchmark • Prompt Lab</h2>
+                <p class="text-slate-400 max-w-lg mx-auto mt-3">Real-time AI citation tracking, head-to-head visibility comparison, and on-demand prompt testing — all powered by your Crawl4AI + Grok xAI pipeline.</p>
+            </div>
+
+            <div class="grid lg:grid-cols-3 gap-8">
+
+                <!-- ==================== 1. LIVE CITATIONS ==================== -->
+                <div class="card-hover bg-slate-800 rounded-3xl p-8 border border-violet-400/30 hover:border-violet-400 transition-all flex flex-col">
+                    <div class="flex justify-between items-start mb-6">
+                        <span class="px-4 py-1 text-xs font-semibold bg-violet-400 text-slate-950 rounded-3xl">LIVE</span>
+                        <div class="inline-flex items-center bg-emerald-400/10 text-emerald-400 text-xs px-3 h-6 rounded-3xl">
+                            <div class="w-2 h-2 bg-emerald-400 rounded-full animate-pulse mr-1"></div>
+                            UPDATES EVERY 4H
+                        </div>
+                    </div>
+                    <h3 class="text-2xl font-semibold mb-2">Live AI Citations Monitor</h3>
+                    <p class="text-slate-400 mb-8 flex-1">See exactly which AI engines (Grok, Perplexity, ChatGPT, Gemini, Google AI Overviews + more) are citing your pages right now.</p>
+
+                    <div class="mb-8">
+                        <label class="block text-xs uppercase tracking-widest text-slate-400 mb-2">Your domain (auto-filled)</label>
+                        <input id="live-citation-domain" type="text" value="example.com" class="w-full bg-slate-900 border border-slate-700 rounded-3xl px-5 py-4 text-slate-300">
+                    </div>
+
+                    <button onclick="runLiveCitations()" 
+                            class="mt-auto w-full py-4 bg-violet-400 hover:bg-violet-500 text-slate-950 font-semibold rounded-3xl text-lg">
+                        Run Live Citations Monitor – 8 credits • Real-time citation rate + last-24h snippets from 7 LLMs
+                    </button>
+
+                    <div id="live-citations-result" class="hidden mt-8"></div>
+                    <p class="text-center text-xs text-slate-400 mt-6">Crawl4AI + Grok xAI API • Results stored in Supabase</p>
+                </div>
+
+                <!-- ==================== 2. COMPETITOR BENCHMARK ==================== -->
+                <div class="card-hover bg-slate-800 rounded-3xl p-8 border border-emerald-400/30 hover:border-emerald-400 transition-all flex flex-col">
+                    <div class="flex justify-between items-start mb-6">
+                        <span class="px-4 py-1 text-xs font-semibold bg-emerald-400 text-slate-950 rounded-3xl">BENCHMARK</span>
+                    </div>
+                    <h3 class="text-2xl font-semibold mb-2">Competitor AI Visibility Benchmark</h3>
+                    <p class="text-slate-400 mb-8 flex-1">Compare your site against up to 3 competitors across the same 5 master scores + live citation rate.</p>
+
+                    <div class="space-y-4 mb-8">
+                        <div>
+                            <label class="text-xs text-slate-400">Your domain</label>
+                            <input id="main-domain" type="text" value="example.com" class="w-full bg-slate-900 border border-slate-700 rounded-3xl px-5 py-3 text-sm">
+                        </div>
+                        <div class="grid grid-cols-3 gap-3">
+                            <div>
+                                <label class="text-xs text-slate-400">Competitor 1</label>
+                                <input id="comp1" type="text" value="competitor-a.com" class="w-full bg-slate-900 border border-slate-700 rounded-3xl px-5 py-3 text-sm">
+                            </div>
+                            <div>
+                                <label class="text-xs text-slate-400">Competitor 2</label>
+                                <input id="comp2" type="text" value="competitor-b.com" class="w-full bg-slate-900 border border-slate-700 rounded-3xl px-5 py-3 text-sm">
+                            </div>
+                            <div>
+                                <label class="text-xs text-slate-400">Competitor 3</label>
+                                <input id="comp3" type="text" value="competitor-c.com" class="w-full bg-slate-900 border border-slate-700 rounded-3xl px-5 py-3 text-sm">
+                            </div>
+                        </div>
+                    </div>
+
+                    <button onclick="runCompetitorBenchmark()" 
+                            class="mt-auto w-full py-4 bg-emerald-400 hover:bg-emerald-500 text-slate-950 font-semibold rounded-3xl text-lg">
+                        Run Competitor Benchmark – 12 credits • Full 5-score comparison + gap analysis + citation delta
+                    </button>
+
+                    <div id="competitor-result" class="hidden mt-8"></div>
+                    <p class="text-center text-xs text-slate-400 mt-6">Multiple Crawl4AI instances + Grok xAI • Results stored in Supabase</p>
+                </div>
+
+                <!-- ==================== 3. PROMPT INTELLIGENCE LAB ==================== -->
+                <div class="card-hover bg-slate-800 rounded-3xl p-8 border border-amber-400/30 hover:border-amber-400 transition-all flex flex-col">
+                    <div class="flex justify-between items-start mb-6">
+                        <span class="px-4 py-1 text-xs font-semibold bg-amber-400 text-slate-950 rounded-3xl">LAB</span>
+                    </div>
+                    <h3 class="text-2xl font-semibold mb-2">Prompt Intelligence Lab</h3>
+                    <p class="text-slate-400 mb-8 flex-1">Test any question and instantly see how your content performs in real AI answers (citation likelihood + exact improvement prompts).</p>
+
+                    <div class="space-y-4 mb-8">
+                        <div>
+                            <label class="text-xs text-slate-400">Your domain (auto-filled)</label>
+                            <input id="prompt-domain" type="text" value="example.com" class="w-full bg-slate-900 border border-slate-700 rounded-3xl px-5 py-3 text-sm">
+                        </div>
+                        <div>
+                            <label class="text-xs text-slate-400">Test prompt / question</label>
+                            <textarea id="test-prompt" rows="3" class="w-full bg-slate-900 border border-slate-700 rounded-3xl px-5 py-3 text-sm resize-none" placeholder="What is the best entity schema for 2026 GEO?"></textarea>
+                        </div>
+                    </div>
+
+                    <button onclick="runPromptLab()" 
+                            class="mt-auto w-full py-4 bg-amber-400 hover:bg-amber-500 text-slate-950 font-semibold rounded-3xl text-lg">
+                        Test Prompt in Intelligence Lab – 5 credits • Side-by-side AI answer + your content match + GEO fix prompts
+                    </button>
+
+                    <div id="prompt-lab-result" class="hidden mt-8"></div>
+                    <p class="text-center text-xs text-slate-400 mt-6">Crawl4AI chunk extraction + Grok xAI API • Results stored in Supabase</p>
+                </div>
+
+            </div>
+        </div>
+
         <div id="faq" class="scroll-mt-20 mb-20"> 
             <div class="text-center mb-8"> 
                 <h2 class="heading-font text-4xl font-semibold">Frequently asked questions</h2> 
@@ -953,6 +1060,124 @@
             }); 
         } 
 
+        // === ADVANCED GEO INTELLIGENCE SUITE – LIVE FUNCTIONS (no demo) ===
+        async function runLiveCitations() {
+            if (typeof window.plausible !== 'undefined') plausible('Live Citations Run');
+            const domain = document.getElementById('live-citation-domain').value.trim();
+            if (!domain) return alert('Enter a domain');
+
+            const resultDiv = document.getElementById('live-citations-result');
+            resultDiv.classList.remove('hidden');
+            resultDiv.innerHTML = `<div class="flex items-center justify-center py-12"><div class="animate-pulse text-emerald-400">📡 Running live citation scan with Crawl4AI + Grok xAI...</div></div>`;
+
+            try {
+                const res = await fetch('/.netlify/functions/live-citations', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ domain })
+                });
+                const data = await res.json();
+                
+                resultDiv.innerHTML = `
+                    <div class="flex justify-between items-baseline mb-4">
+                        <p class="text-xs uppercase tracking-widest text-slate-400">Live Citation Rate (last 24h)</p>
+                        <div class="text-5xl font-semibold text-violet-400">${data.citationRate || 0}%</div>
+                    </div>
+                    <div class="h-2.5 bg-slate-700 rounded-3xl mb-8">
+                        <div class="h-2.5 bg-gradient-to-r from-violet-400 to-emerald-400 rounded-3xl" style="width:${data.citationRate || 0}%"></div>
+                    </div>
+                    <p class="text-xs uppercase text-slate-400 mb-3">Recent citations</p>
+                    <div class="space-y-4 text-sm">${(data.citations || []).map(c => `
+                        <div class="bg-slate-900 rounded-2xl p-4 flex gap-4">
+                            <div class="text-violet-400 font-medium w-20">${c.llm}</div>
+                            <div class="flex-1 italic">"${c.snippet}"</div>
+                            <div class="text-emerald-400 text-xs whitespace-nowrap">+${c.count} citations</div>
+                        </div>`).join('')}</div>`;
+            } catch (e) {
+                resultDiv.innerHTML = `<p class="text-red-400">Error contacting backend. Check Netlify function "live-citations".</p>`;
+            }
+        }
+
+        async function runCompetitorBenchmark() {
+            if (typeof window.plausible !== 'undefined') plausible('Competitor Benchmark Run');
+            const main = document.getElementById('main-domain').value.trim();
+            const comps = [
+                document.getElementById('comp1').value.trim(),
+                document.getElementById('comp2').value.trim(),
+                document.getElementById('comp3').value.trim()
+            ].filter(Boolean);
+
+            if (!main) return alert('Enter your domain');
+
+            const resultDiv = document.getElementById('competitor-result');
+            resultDiv.classList.remove('hidden');
+            resultDiv.innerHTML = `<div class="flex items-center justify-center py-12"><div class="animate-pulse text-emerald-400">📡 Benchmarking with multiple Crawl4AI instances...</div></div>`;
+
+            try {
+                const res = await fetch('/.netlify/functions/competitor-benchmark', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ mainDomain: main, competitors: comps })
+                });
+                const data = await res.json();
+                
+                resultDiv.innerHTML = `
+                    <div class="grid grid-cols-2 md:grid-cols-4 gap-4 text-center">
+                        <div class="bg-slate-900 rounded-3xl p-4"><p class="text-xs text-slate-400">You</p><div class="text-4xl font-semibold text-emerald-400">${data.scores?.you || 0}</div></div>
+                        ${comps.map((c,i) => `<div class="bg-slate-900 rounded-3xl p-4"><p class="text-xs text-slate-400">Comp ${String.fromCharCode(65+i)}</p><div class="text-4xl font-semibold text-slate-300">${data.scores?.[`comp${String.fromCharCode(65+i)}`] || 0}</div></div>`).join('')}
+                    </div>`;
+            } catch (e) {
+                resultDiv.innerHTML = `<p class="text-red-400">Error contacting backend. Check Netlify function "competitor-benchmark".</p>`;
+            }
+        }
+
+        async function runPromptLab() {
+            if (typeof window.plausible !== 'undefined') plausible('Prompt Lab Run');
+            const domain = document.getElementById('prompt-domain').value.trim();
+            const prompt = document.getElementById('test-prompt').value.trim();
+            if (!domain || !prompt) return alert('Enter domain and test prompt');
+
+            const resultDiv = document.getElementById('prompt-lab-result');
+            resultDiv.classList.remove('hidden');
+            resultDiv.innerHTML = `<div class="flex items-center justify-center py-12"><div class="animate-pulse text-emerald-400">🔬 Testing prompt with Crawl4AI chunks + Grok xAI...</div></div>`;
+
+            try {
+                const res = await fetch('/.netlify/functions/prompt-intelligence-lab', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ domain, prompt })
+                });
+                const data = await res.json();
+                
+                resultDiv.innerHTML = `
+                    <div class="grid md:grid-cols-2 gap-6">
+                        <div class="bg-slate-900 rounded-3xl p-6"><p class="text-emerald-400 text-xs mb-2">WITH YOUR CONTENT (Grok xAI)</p><p class="text-sm">${data.yourContentAnswer || '...'}</p></div>
+                        <div class="bg-slate-900 rounded-3xl p-6"><p class="text-slate-400 text-xs mb-2">GENERIC AI ANSWER</p><p class="text-sm">${data.genericAnswer || '...'}</p></div>
+                    </div>
+                    <div class="mt-6 text-center"><span class="text-amber-400 font-semibold">Citation likelihood: ${data.citationScore || 0}%</span></div>
+                    <div class="mt-4 text-xs text-slate-400">Suggested GEO improvement prompts:<br>${(data.improvementPrompts || []).join('<br>')}</div>`;
+            } catch (e) {
+                resultDiv.innerHTML = `<p class="text-red-400">Error contacting backend. Check Netlify function "prompt-intelligence-lab".</p>`;
+            }
+        }
+
+        // Auto-sync all domains from main scan input
+        function syncDomainToAdvanced() {
+            const mainInput = document.getElementById('url-input');
+            if (!mainInput) return;
+            mainInput.addEventListener('input', () => {
+                const val = mainInput.value.trim().split('\n')[0];
+                if (val) {
+                    const live = document.getElementById('live-citation-domain');
+                    const mainD = document.getElementById('main-domain');
+                    const promptD = document.getElementById('prompt-domain');
+                    if (live) live.value = val;
+                    if (mainD) mainD.value = val;
+                    if (promptD) promptD.value = val;
+                }
+            });
+        }
+
         function initializeAll() { 
             initializeTailwind(); 
             initMobileMenu(); 
@@ -966,7 +1191,8 @@
                     localStorage.setItem('popupShown', 'true'); 
                 } 
             }, 3500); 
-            console.log('%c✅ AI Visibility Scan indexv4.html FULLY UPGRADED — production ready (2026 clinical standard)', 'color:#10b981;font-family:monospace'); 
+            syncDomainToAdvanced();   // ← ADVANCED GEO SUITE INTEGRATED
+            console.log('%c✅ AI Visibility Scan indexv4.html FULLY UPGRADED with Live Citations + Competitor Benchmark + Prompt Lab — production ready (2026 clinical standard)', 'color:#10b981;font-family:monospace'); 
         } 
 
         document.getElementById('current-year').textContent = new Date().getFullYear(); 
