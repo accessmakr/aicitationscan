@@ -178,11 +178,9 @@
         50% { opacity: 0.7; }
     }
 
-    /* === OPTIMIZED AUDIT TIER GRID === 
-       - Mobile: single vertical stack (original flow)
-       - Desktop (≥1024px): 3 equal vertical columns lined up horizontally (Free | Instant | Deep)
-       - Deep tier sub-options now safely wrap and never shoot off canvas
-       - All cards maintain clean vertical internal stacking */
+    /* ENHANCED AUDIT TIER CARDS – 3 VERTICAL COLUMN LAYOUT (Free | Instant | Deep) */
+    /* Desktop: side-by-side columns (left-to-right) | Mobile: stacked vertically */
+    /* Deep tier pricing pills are compact + flex-wrap to NEVER overflow the card */
     .audit-tier-stack {
         display: grid;
         grid-template-columns: 1fr;
@@ -198,17 +196,17 @@
         width: 100%;
         display: flex;
         flex-direction: column;
-        height: 100%;
+        height: 100%; /* ensures equal height columns on desktop */
     }
-    .deep-sub-options {
+    .tier-card .pricing-options {
         display: flex;
         flex-wrap: wrap;
-        gap: 0.75rem;
+        gap: 8px;
         justify-content: flex-end;
     }
-    .tier-card .deep-sub-options > div {
+    .tier-card .pricing-options > div {
         font-size: 13px;
-        padding: 6px 14px;
+        padding: 6px 12px;
         white-space: nowrap;
     }
     </style>
@@ -537,11 +535,11 @@
                 <p class="text-slate-400">Pick Free for instant validation, Instant for speed, or Deep for consultant-level strategy</p> 
             </div> 
             
-            <!-- UPDATED: 3 vertical column packs lined up horizontally (Free left → Instant middle → Deep right) on desktop. 
-                 Perfect single-column vertical stack on mobile. Deep sub-options now wrap safely – zero canvas overflow. -->
+            <!-- 3 VERTICAL COLUMN LAYOUT (Free left | Instant center | Deep right) on desktop – stacked vertically on mobile -->
+            <!-- Deep tier pricing pills are surgically compact + flex-wrap to stay 100% inside the card boundary -->
             <div class="audit-tier-stack max-w-6xl mx-auto">
                 
-                <!-- FREE Tier – Leftmost column on desktop -->
+                <!-- FREE Tier – LEFT COLUMN -->
                 <div onclick="selectTier('free')" id="tier-free" class="tier-card card-hover border-2 border-emerald-400 rounded-3xl p-8 bg-slate-900 cursor-pointer"> 
                     <div class="flex justify-between items-start mb-6"> 
                         <div> 
@@ -564,7 +562,7 @@
                     <p class="text-center text-xs text-slate-400 mt-4">Perfect for quick validation before upgrading</p> 
                 </div> 
 
-                <!-- INSTANT Tier – Middle column on desktop -->
+                <!-- INSTANT Tier – CENTER COLUMN -->
                 <div onclick="selectTier('instant')" id="tier-instant" class="tier-card card-hover border-2 border-emerald-400 rounded-3xl p-8 bg-slate-900 cursor-pointer"> 
                     <div class="flex justify-between items-start mb-6"> 
                         <div> 
@@ -584,7 +582,7 @@
                     <p class="text-center text-xs text-slate-400 mt-4">Perfect for quick, high-impact insights</p> 
                 </div> 
 
-                <!-- DEEP Tier – Rightmost column on desktop (Most Popular) -->
+                <!-- DEEP Tier – RIGHT COLUMN (MOST POPULAR) -->
                 <div onclick="selectTier('deep')" id="tier-deep" class="tier-card card-hover border-2 border-violet-400 rounded-3xl p-8 bg-slate-900 relative cursor-pointer"> 
                     <div class="absolute -top-3 right-8 bg-violet-400 text-slate-950 text-xs font-bold px-6 rounded-3xl shadow">MOST POPULAR</div> 
                     <div class="flex justify-between items-start mb-6"> 
@@ -592,10 +590,10 @@
                             <span class="px-4 py-1 text-xs font-semibold bg-violet-400 text-slate-950 rounded-3xl">DEEP</span> 
                         </div> 
                         <div class="text-right"> 
-                            <div class="deep-sub-options">
-                                <div onclick="event.stopImmediatePropagation();selectDeepSub(40);" class="text-sm border border-violet-400 hover:bg-violet-400 hover:text-slate-950 px-4 py-1 rounded-2xl cursor-pointer">40 pages • 9 credits</div> 
-                                <div onclick="event.stopImmediatePropagation();selectDeepSub(100);" class="text-sm border border-violet-400 hover:bg-violet-400 hover:text-slate-950 px-4 py-1 rounded-2xl cursor-pointer">100 pages • 14 credits</div> 
-                                <div onclick="event.stopImmediatePropagation();selectDeepSub(200);" class="text-sm border border-violet-400 hover:bg-violet-400 hover:text-slate-950 px-4 py-1 rounded-2xl cursor-pointer">200+ pages • 21 credits</div> 
+                            <div class="pricing-options">
+                                <div onclick="event.stopImmediatePropagation();selectDeepSub(40);" class="text-xs border border-violet-400 hover:bg-violet-400 hover:text-slate-950 px-4 py-1 rounded-2xl cursor-pointer">40 pages • 9 credits</div> 
+                                <div onclick="event.stopImmediatePropagation();selectDeepSub(100);" class="text-xs border border-violet-400 hover:bg-violet-400 hover:text-slate-950 px-4 py-1 rounded-2xl cursor-pointer">100 pages • 14 credits</div> 
+                                <div onclick="event.stopImmediatePropagation();selectDeepSub(200);" class="text-xs border border-violet-400 hover:bg-violet-400 hover:text-slate-950 px-4 py-1 rounded-2xl cursor-pointer">200+ pages • 21 credits</div> 
                             </div>
                         </div> 
                     </div> 
@@ -1072,7 +1070,6 @@
         } 
 
         window.selectTier = function(tier) { 
-            // Micro-update: support new FREE tier without breaking original logic
             if (tier === 'free') return;
             document.getElementById('tier-instant').classList.toggle('ring-2', tier === 'instant'); 
             document.getElementById('tier-instant').classList.toggle('ring-emerald-400', tier === 'instant'); 
@@ -1136,14 +1133,12 @@
         window.hidePopup = function() { 
             const popup = document.getElementById('free-scan-popup'); 
             popup.style.display = 'none'; 
-            // Reset form content if success state was shown
             const wrapper = document.getElementById('popup-content-wrapper');
             if (wrapper && !wrapper.querySelector('form')) {
-                location.reload(); // safe clinical reset for next use
+                location.reload();
             }
         }; 
 
-        // === NEW: MOBILE DETECTION & NOTICE POPUP (surgically added – triggers immediately on mobile) ===
         function isMobileDevice() {
             return (
                 /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ||
@@ -1165,7 +1160,6 @@
             }
         };
 
-        // === NEW: POPUP EMAIL FORM HANDLER (surgically added – prevents reload, shows clinical success, redirects) ===
         function initPopupForm() {
             const form = document.getElementById('popup-email-form');
             if (!form) return;
@@ -1176,7 +1170,6 @@
                 const emailInput = document.getElementById('popup-email');
                 const email = emailInput.value.trim();
 
-                // Clinical-grade simple validation
                 if (!email || !email.includes('@') || !email.includes('.')) {
                     emailInput.style.borderColor = '#f43f5e';
                     emailInput.classList.add('animate-pulse');
@@ -1187,15 +1180,11 @@
                     return;
                 }
 
-                // Plausible tracking (preserves original analytics)
                 if (typeof window.plausible !== 'undefined') {
                     window.plausible('Free Scan Claimed', { props: { email: email } });
                 }
 
-                // Replace entire popup inner content with clinical success state (zero layout shift)
                 const wrapper = document.getElementById('popup-content-wrapper');
-                const originalHTML = wrapper.innerHTML;
-
                 wrapper.innerHTML = `
                     <div class="flex justify-end mb-2">
                         <button onclick="hidePopup()" class="text-slate-400 hover:text-white text-4xl leading-none focus:outline-none">×</button>
@@ -1212,14 +1201,12 @@
                     </div>
                 `;
 
-                // Auto-redirect to demo report (preserves original flow)
                 setTimeout(() => {
                     window.location.href = 'report.html?demo=true';
                 }, 2100);
             });
         }
 
-        // Scroll Progress
         window.addEventListener("scroll", () => { 
             const winScroll = document.documentElement.scrollTop; 
             const height = document.documentElement.scrollHeight - document.documentElement.clientHeight; 
@@ -1227,7 +1214,6 @@
             document.getElementById("scrollProgress").style.width = scrolled + "%"; 
         }); 
 
-        // Active Nav Highlight
         function initActiveNav() { 
             const sections = document.querySelectorAll("section, div[id]"); 
             const navLinks = document.querySelectorAll(".nav-link"); 
@@ -1248,7 +1234,6 @@
             }); 
         } 
 
-        // Animations (GSAP + AOS with reduced motion)
         function initAnimations() { 
             const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches; 
             if (prefersReducedMotion) return; 
@@ -1261,7 +1246,6 @@
             gsap.utils.toArray('.testimonial-float').forEach((card, i) => { 
                 gsap.to(card, { y: i % 2 === 0 ? 8 : -8, repeat: -1, yoyo: true, ease: "sine.inOut", duration: 5 + i, scrollTrigger: { trigger: card, start: "top 80%", end: "bottom top", scrub: true } }); 
             }); 
-            // Parallax background layer
             gsap.to('.parallax-bg', { 
                 yPercent: 20, 
                 ease: "none", 
@@ -1274,7 +1258,6 @@
             }); 
         } 
 
-        // === ADVANCED GEO INTELLIGENCE SUITE – LIVE FUNCTIONS (no demo) ===
         async function runLiveCitations() {
             if (typeof window.plausible !== 'undefined') plausible('Live Citations Run');
             const domain = document.getElementById('live-citation-domain').value.trim();
@@ -1375,7 +1358,6 @@
             }
         }
 
-        // Auto-sync all domains from main scan input
         function syncDomainToAdvanced() {
             const mainInput = document.getElementById('url-input');
             if (!mainInput) return;
@@ -1392,7 +1374,6 @@
             });
         }
 
-        // Real-time scan counter (surgical addition – conservative seed)
         function initLiveScanCounter() {
             let liveScanCount = 250;
             const countEl = document.getElementById('live-scan-count');
@@ -1410,13 +1391,12 @@
             initActiveNav(); 
             initAnimations(); 
             initLiveScanCounter(); 
-            initPopupForm(); // ← surgically added: now has full onsubmit handler with success + redirect
+            initPopupForm(); 
 
-            // Mobile notice popup – triggers immediately when on mobile device
             if (isMobileDevice()) {
                 setTimeout(() => {
                     window.showMobilePopup();
-                }, 800); // brief delay for smooth UX after page load
+                }, 800);
             }
 
             setInterval(() => { window.nextTestimonial(); }, 5000); 
@@ -1427,7 +1407,7 @@
                 } 
             }, 3500); 
             syncDomainToAdvanced();   
-            console.log('%c✅ AI Visibility Scan indexv9.html FULLY CLINICALLY ENHANCED — audit tiers now 3-column horizontal grid on desktop (Free left | Instant middle | Deep right), vertical stack on mobile, Deep sub-options safely wrapped with zero overflow', 'color:#10b981;font-family:monospace'); 
+            console.log('%c✅ AI Visibility Scan indexv9.html FULLY CLINICALLY ENHANCED — audit tiers now in clean 3-column vertical layout (Free left | Instant center | Deep right on desktop, stacked on mobile)', 'color:#10b981;font-family:monospace'); 
         } 
 
         document.getElementById('current-year').textContent = new Date().getFullYear(); 
