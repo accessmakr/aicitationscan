@@ -178,7 +178,11 @@
         50% { opacity: 0.7; }
     }
 
-    /* Enhanced Audit Tier Cards – Full-width horizontal packs stacked vertically for perfect mobile + desktop flow */
+    /* === OPTIMIZED AUDIT TIER GRID === 
+       - Mobile: single vertical stack (original flow)
+       - Desktop (≥1024px): 3 equal vertical columns lined up horizontally (Free | Instant | Deep)
+       - Deep tier sub-options now safely wrap and never shoot off canvas
+       - All cards maintain clean vertical internal stacking */
     .audit-tier-stack {
         display: grid;
         grid-template-columns: 1fr;
@@ -186,11 +190,26 @@
     }
     @media (min-width: 1024px) {
         .audit-tier-stack {
-            gap: 2.5rem;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
         }
     }
     .tier-card {
         width: 100%;
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+    }
+    .deep-sub-options {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.75rem;
+        justify-content: flex-end;
+    }
+    .tier-card .deep-sub-options > div {
+        font-size: 13px;
+        padding: 6px 14px;
+        white-space: nowrap;
     }
     </style>
 </head> 
@@ -518,11 +537,11 @@
                 <p class="text-slate-400">Pick Free for instant validation, Instant for speed, or Deep for consultant-level strategy</p> 
             </div> 
             
-            <!-- REARRANGED: 3 full-width horizontal packs stacked vertically (top-to-bottom) – Free first, then Instant, then Deep -->
-            <!-- Optimized for both mobile (perfect single-column flow) and desktop (spacious, readable cards with breathing room) -->
+            <!-- UPDATED: 3 vertical column packs lined up horizontally (Free left → Instant middle → Deep right) on desktop. 
+                 Perfect single-column vertical stack on mobile. Deep sub-options now wrap safely – zero canvas overflow. -->
             <div class="audit-tier-stack max-w-6xl mx-auto">
                 
-                <!-- FREE Tier – Topmost horizontal pack -->
+                <!-- FREE Tier – Leftmost column on desktop -->
                 <div onclick="selectTier('free')" id="tier-free" class="tier-card card-hover border-2 border-emerald-400 rounded-3xl p-8 bg-slate-900 cursor-pointer"> 
                     <div class="flex justify-between items-start mb-6"> 
                         <div> 
@@ -534,18 +553,18 @@
                         </div> 
                     </div> 
                     <h3 class="text-2xl font-semibold mb-2">Free Clinical Audit</h3> 
-                    <p class="text-slate-300 mb-6 text-[15px] leading-relaxed">
+                    <p class="text-slate-300 mb-6 text-[15px] leading-relaxed flex-1">
                         Executive Summary with Overall AI Visibility Score, SEO Health Score, Risk Level, Top Critical Problems &amp; Top Quick Wins<br>
                         • AI Citation Readiness % + exact content gaps<br>
                         • Technical SEO Health + Core Web Vitals snapshot<br>
                         • Priority Fix List (high/medium) + 7-day quick wins<br>
                         • Basic branded PDF download
                     </p> 
-                    <button onclick="event.stopImmediatePropagation();showPopup();" class="w-full py-4 bg-emerald-400 hover:bg-emerald-500 text-slate-950 font-semibold rounded-3xl text-lg">Start Free Scan — 60 Seconds (No card required)</button> 
+                    <button onclick="event.stopImmediatePropagation();showPopup();" class="w-full py-4 bg-emerald-400 hover:bg-emerald-500 text-slate-950 font-semibold rounded-3xl text-lg mt-auto">Start Free Scan — 60 Seconds (No card required)</button> 
                     <p class="text-center text-xs text-slate-400 mt-4">Perfect for quick validation before upgrading</p> 
                 </div> 
 
-                <!-- INSTANT Tier – Middle horizontal pack -->
+                <!-- INSTANT Tier – Middle column on desktop -->
                 <div onclick="selectTier('instant')" id="tier-instant" class="tier-card card-hover border-2 border-emerald-400 rounded-3xl p-8 bg-slate-900 cursor-pointer"> 
                     <div class="flex justify-between items-start mb-6"> 
                         <div> 
@@ -557,15 +576,15 @@
                         </div> 
                     </div> 
                     <h3 class="text-2xl font-semibold mb-2">Instant Clinical Audit — 60 seconds</h3> 
-                    <p class="text-slate-300 mb-6 text-[15px] leading-relaxed">
+                    <p class="text-slate-300 mb-6 text-[15px] leading-relaxed flex-1">
                         Complete 10-section clinical report delivered instantly + basic branded PDF.<br>
                         Perfect for founders and teams who need fast, high-impact insights without waiting.
                     </p> 
-                    <button onclick="event.stopImmediatePropagation();runScanDemo('instant');" class="w-full py-4 bg-emerald-400 hover:bg-emerald-500 text-slate-950 font-semibold rounded-3xl text-lg">Run Instant Scan – Full 10-Section Clinical Report in 60 Seconds</button> 
+                    <button onclick="event.stopImmediatePropagation();runScanDemo('instant');" class="w-full py-4 bg-emerald-400 hover:bg-emerald-500 text-slate-950 font-semibold rounded-3xl text-lg mt-auto">Run Instant Scan – Full 10-Section Clinical Report in 60 Seconds</button> 
                     <p class="text-center text-xs text-slate-400 mt-4">Perfect for quick, high-impact insights</p> 
                 </div> 
 
-                <!-- DEEP Tier – Bottom horizontal pack (Most Popular) -->
+                <!-- DEEP Tier – Rightmost column on desktop (Most Popular) -->
                 <div onclick="selectTier('deep')" id="tier-deep" class="tier-card card-hover border-2 border-violet-400 rounded-3xl p-8 bg-slate-900 relative cursor-pointer"> 
                     <div class="absolute -top-3 right-8 bg-violet-400 text-slate-950 text-xs font-bold px-6 rounded-3xl shadow">MOST POPULAR</div> 
                     <div class="flex justify-between items-start mb-6"> 
@@ -573,19 +592,19 @@
                             <span class="px-4 py-1 text-xs font-semibold bg-violet-400 text-slate-950 rounded-3xl">DEEP</span> 
                         </div> 
                         <div class="text-right"> 
-                            <div class="flex gap-x-2 justify-end"> 
+                            <div class="deep-sub-options">
                                 <div onclick="event.stopImmediatePropagation();selectDeepSub(40);" class="text-sm border border-violet-400 hover:bg-violet-400 hover:text-slate-950 px-4 py-1 rounded-2xl cursor-pointer">40 pages • 9 credits</div> 
                                 <div onclick="event.stopImmediatePropagation();selectDeepSub(100);" class="text-sm border border-violet-400 hover:bg-violet-400 hover:text-slate-950 px-4 py-1 rounded-2xl cursor-pointer">100 pages • 14 credits</div> 
                                 <div onclick="event.stopImmediatePropagation();selectDeepSub(200);" class="text-sm border border-violet-400 hover:bg-violet-400 hover:text-slate-950 px-4 py-1 rounded-2xl cursor-pointer">200+ pages • 21 credits</div> 
-                            </div> 
+                            </div>
                         </div> 
                     </div> 
                     <h3 class="text-2xl font-semibold mb-2">Deep Clinical Strategy Report — Consultant-Level Depth</h3> 
-                    <p class="text-slate-300 mb-6 text-[15px] leading-relaxed">
+                    <p class="text-slate-300 mb-6 text-[15px] leading-relaxed flex-1">
                         Premium 1,800–2,800 word consultant report + professional branded PDF with interactive gauges.<br>
                         Recommended for serious optimization and full-site GEO strategy.
                     </p> 
-                    <button onclick="event.stopImmediatePropagation();runScanDemo('deep');" class="w-full py-4 bg-violet-400 hover:bg-violet-500 text-slate-950 font-semibold rounded-3xl text-lg">Run Deep Scan – Full 1,800–2,800 Word Clinical Consultant Report</button> 
+                    <button onclick="event.stopImmediatePropagation();runScanDemo('deep');" class="w-full py-4 bg-violet-400 hover:bg-violet-500 text-slate-950 font-semibold rounded-3xl text-lg mt-auto">Run Deep Scan – Full 1,800–2,800 Word Clinical Consultant Report</button> 
                     <p class="text-center text-xs text-slate-400 mt-4">Recommended for serious optimization &amp; full-site strategy</p> 
                 </div> 
 
@@ -1408,7 +1427,7 @@
                 } 
             }, 3500); 
             syncDomainToAdvanced();   
-            console.log('%c✅ AI Visibility Scan indexv8cleaned.html FULLY CLINICALLY ENHANCED — audit tiers now rearranged as 3 full-width horizontal packs stacked top-to-bottom (Free on top), methodology Google link added, mobile/desktop optimized', 'color:#10b981;font-family:monospace'); 
+            console.log('%c✅ AI Visibility Scan indexv9.html FULLY CLINICALLY ENHANCED — audit tiers now 3-column horizontal grid on desktop (Free left | Instant middle | Deep right), vertical stack on mobile, Deep sub-options safely wrapped with zero overflow', 'color:#10b981;font-family:monospace'); 
         } 
 
         document.getElementById('current-year').textContent = new Date().getFullYear(); 
