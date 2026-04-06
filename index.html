@@ -177,6 +177,21 @@
         0%, 100% { opacity: 1; }
         50% { opacity: 0.7; }
     }
+
+    /* Enhanced Audit Tier Cards – Full-width horizontal packs stacked vertically for perfect mobile + desktop flow */
+    .audit-tier-stack {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+    @media (min-width: 1024px) {
+        .audit-tier-stack {
+            gap: 2.5rem;
+        }
+    }
+    .tier-card {
+        width: 100%;
+    }
     </style>
 </head> 
 <body class="bg-slate-950 text-slate-100">
@@ -502,9 +517,13 @@
                 <h2 class="text-4xl heading-font font-semibold mb-2">Choose your audit depth</h2> 
                 <p class="text-slate-400">Pick Free for instant validation, Instant for speed, or Deep for consultant-level strategy</p> 
             </div> 
-            <div class="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto"> 
-
-                <div onclick="selectTier('free')" id="tier-free" class="card-hover border-2 border-emerald-400 rounded-3xl p-8 bg-slate-900 cursor-pointer"> 
+            
+            <!-- REARRANGED: 3 full-width horizontal packs stacked vertically (top-to-bottom) – Free first, then Instant, then Deep -->
+            <!-- Optimized for both mobile (perfect single-column flow) and desktop (spacious, readable cards with breathing room) -->
+            <div class="audit-tier-stack max-w-6xl mx-auto">
+                
+                <!-- FREE Tier – Topmost horizontal pack -->
+                <div onclick="selectTier('free')" id="tier-free" class="tier-card card-hover border-2 border-emerald-400 rounded-3xl p-8 bg-slate-900 cursor-pointer"> 
                     <div class="flex justify-between items-start mb-6"> 
                         <div> 
                             <span class="px-4 py-1 text-xs font-semibold bg-emerald-400 text-slate-950 rounded-3xl">FREE</span> 
@@ -526,7 +545,8 @@
                     <p class="text-center text-xs text-slate-400 mt-4">Perfect for quick validation before upgrading</p> 
                 </div> 
 
-                <div onclick="selectTier('instant')" id="tier-instant" class="card-hover border-2 border-emerald-400 rounded-3xl p-8 bg-slate-900 cursor-pointer"> 
+                <!-- INSTANT Tier – Middle horizontal pack -->
+                <div onclick="selectTier('instant')" id="tier-instant" class="tier-card card-hover border-2 border-emerald-400 rounded-3xl p-8 bg-slate-900 cursor-pointer"> 
                     <div class="flex justify-between items-start mb-6"> 
                         <div> 
                             <span class="px-4 py-1 text-xs font-semibold bg-emerald-400 text-slate-950 rounded-3xl">INSTANT</span> 
@@ -545,7 +565,8 @@
                     <p class="text-center text-xs text-slate-400 mt-4">Perfect for quick, high-impact insights</p> 
                 </div> 
 
-                <div onclick="selectTier('deep')" id="tier-deep" class="card-hover border-2 border-violet-400 rounded-3xl p-8 bg-slate-900 relative cursor-pointer"> 
+                <!-- DEEP Tier – Bottom horizontal pack (Most Popular) -->
+                <div onclick="selectTier('deep')" id="tier-deep" class="tier-card card-hover border-2 border-violet-400 rounded-3xl p-8 bg-slate-900 relative cursor-pointer"> 
                     <div class="absolute -top-3 right-8 bg-violet-400 text-slate-950 text-xs font-bold px-6 rounded-3xl shadow">MOST POPULAR</div> 
                     <div class="flex justify-between items-start mb-6"> 
                         <div> 
@@ -567,6 +588,7 @@
                     <button onclick="event.stopImmediatePropagation();runScanDemo('deep');" class="w-full py-4 bg-violet-400 hover:bg-violet-500 text-slate-950 font-semibold rounded-3xl text-lg">Run Deep Scan – Full 1,800–2,800 Word Clinical Consultant Report</button> 
                     <p class="text-center text-xs text-slate-400 mt-4">Recommended for serious optimization &amp; full-site strategy</p> 
                 </div> 
+
             </div> 
 
             <div class="text-center mt-8 text-emerald-400 text-xs font-medium">95% of users see actionable insights in first 7 days • Credits never expire</div>
@@ -884,7 +906,7 @@
                     <li><strong>Weighted master scoring & clinical synthesis</strong> – Five scores are blended into an overall 0–100 rating. Audit Engine then writes the 10-section report with strategic recommendations and a full step-by-step implementation guide.</li> 
                 </ol> 
                 <p class="mt-10 text-center text-emerald-400 font-medium">Result: A consultant-level audit you can act on immediately — without the consultant price tag.</p> 
-                <p class="mt-6 text-center text-emerald-400 font-medium">Methodology cross-referenced against Google’s official SEO Starter Guide (2026 edition) for maximum alignment with current search and AI engine standards.</p> 
+                <p class="mt-6 text-center text-emerald-400 font-medium">Methodology cross-referenced against <a href="https://developers.google.com/search/docs/fundamentals/seo-starter-guide" target="_blank" rel="noopener noreferrer" class="hover:text-emerald-300 underline">Google’s official SEO Starter Guide (2026 edition)</a> for maximum alignment with current search and AI engine standards.</p> 
             </div> 
         </div> 
 
@@ -1386,7 +1408,7 @@
                 } 
             }, 3500); 
             syncDomainToAdvanced();   
-            console.log('%c✅ AI Visibility Scan indexv7.html FULLY CLINICALLY ENHANCED — all wording, stats, buttons, privacy, and competitor-safe changes applied', 'color:#10b981;font-family:monospace'); 
+            console.log('%c✅ AI Visibility Scan indexv8cleaned.html FULLY CLINICALLY ENHANCED — audit tiers now rearranged as 3 full-width horizontal packs stacked top-to-bottom (Free on top), methodology Google link added, mobile/desktop optimized', 'color:#10b981;font-family:monospace'); 
         } 
 
         document.getElementById('current-year').textContent = new Date().getFullYear(); 
