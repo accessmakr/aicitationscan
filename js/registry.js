@@ -39,6 +39,11 @@ export const SiteRegistry = {
         "title": "Your Website Is Invisible to AI.Get Your Full AI Visibility Report in 60 Seconds",
         "desc": "Instant &amp; Deep AI + SEO audits. See exactly how visible your website is to AI search engines and Google. Get a 10-section clinical report with scores, fixes, and step-by-step roadmap in minutes."
     },
+    "terms-of-use.html": {
+        "url": "/terms-of-use",
+        "title": "Terms of Use",
+        "desc": "Terms of Use for AI Citation Scan. Governance for GEO auditing, LLM simulation tools, and technical visibility benchmarks."
+    },
     "meta-description-generator.html": {
         "url": "/seo-tools/meta-description-generator",
         "title": "Meta Description Generator: Maximize Organic CTR | AI Citation Scan",
