@@ -1,96 +1,106 @@
-/**
- * MENU-SYSTEM.JS
- * Automatically generates a multi-level navigation dock based on the SiteRegistry.
- * Features: Automatic Folder Grouping, Dynamic Page Discovery, and Active State Tracking.
- */
-
 import { SiteRegistry } from './registry.js';
 
 class MenuSystem {
     constructor() {
         this.navDock = document.getElementById('master-nav-dock');
         this.registry = SiteRegistry;
+        this.isOpen = false;
         this.init();
     }
 
     init() {
-        if (!this.navDock) {
-            console.warn('Navigation Dock target (#master-nav-dock) not found.');
-            return;
-        }
+        if (!this.navDock) return;
+        
+        // 1. Create the Desktop & Mobile structure dynamically
+        this.setupStructure();
+        // 2. Render the actual links from Registry
         this.render();
+        // 3. Attach toggle events
+        this.attachEvents();
     }
 
-    // Grouping logic: identifies folder structure from registry keys
-    getFolderMap() {
-        const folders = {
-            "Home": [{ name: "index.html", data: this.registry["index.html"] }]
-        };
+    setupStructure() {
+        // Clear current dock and prepare for dual-mode
+        this.navDock.className = "flex items-center justify-between w-full";
+        
+        this.navDock.innerHTML = `
+            <div id="nav-desktop" class="hidden md:flex items-center gap-6"></div>
 
-        Object.entries(this.registry).forEach(([fileName, details]) => {
-            if (fileName === "index.html") return;
+            <button id="nav-hamburger" class="md:hidden text-slate-400 hover:text-white p-2 transition-colors">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path id="ham-icon" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                </svg>
+            </button>
 
-            // Determine folder name (e.g., "seo-tools/tool.html" -> "seo-tools")
-            // Pages in root are grouped under "Pages"
-            const parts = fileName.split('/');
-            const folderName = parts.length > 1 ? parts[0] : "Pages";
-
-            if (!folders[folderName]) folders[folderName] = [];
-            folders[folderName].push({ name: fileName, data: details });
-        });
-
-        return folders;
+            <div id="nav-mobile-drawer" class="fixed inset-0 top-16 bg-slate-950/fb backdrop-blur-xl translate-x-full transition-transform duration-300 md:hidden z-[60] p-6 border-t border-slate-800">
+                <div id="nav-mobile-content" class="flex flex-col gap-6"></div>
+            </div>
+        `;
     }
 
     render() {
+        const desktopContainer = document.getElementById('nav-desktop');
+        const mobileContainer = document.getElementById('nav-mobile-content');
+        
         const folderMap = this.getFolderMap();
-        const navContainer = document.createElement('ul');
-        navContainer.className = "flex items-center gap-6 text-sm font-medium";
 
-        // Generate Menu Items
         Object.keys(folderMap).forEach(folder => {
-            const isHome = folder === "Home";
-            const li = document.createElement('li');
-            li.className = "relative group";
+            const folderLabel = folder.toUpperCase();
+            const pages = folderMap[folder];
 
-            if (isHome) {
-                // Specialized Home Button
-                li.innerHTML = `
-                    <a href="/" class="text-slate-400 hover:text-emerald-400 transition-colors flex items-center gap-1">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
-                        </svg>
-                        Home
-                    </a>`;
-            } else {
-                // Folder Dropdowns
-                const folderLabel = folder.replace('-', ' ').toUpperCase();
-                li.innerHTML = `
-                    <button class="text-slate-400 group-hover:text-white transition-colors flex items-center gap-1 py-4">
-                        ${folderLabel}
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3 opacity-50 group-hover:rotate-180 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
-                        </svg>
-                    </button>
-                    <div class="absolute left-0 top-full hidden group-hover:block w-64 bg-slate-900 border border-slate-800 rounded-xl shadow-2xl p-2 z-[100]">
-                        <div class="grid gap-1">
-                            ${folderMap[folder].map(page => `
-                                <a href="${page.data.url}" class="block p-3 rounded-lg hover:bg-slate-800 transition-all group/item">
-                                    <div class="text-white text-xs font-bold group-hover/item:text-emerald-400">${page.data.title}</div>
-                                    <div class="text-[10px] text-slate-500 line-clamp-1">${page.data.desc}</div>
-                                </a>
-                            `).join('')}
-                        </div>
-                    </div>
-                `;
-            }
-            navContainer.appendChild(li);
+            // Append to Desktop (Dropdowns)
+            desktopContainer.innerHTML += this.createDesktopDropdown(folderLabel, pages);
+
+            // Append to Mobile (Accordions/Lists)
+            mobileContainer.innerHTML += this.createMobileSection(folderLabel, pages);
         });
+    }
 
-        this.navDock.innerHTML = '';
-        this.navDock.appendChild(navContainer);
+    getFolderMap() {
+        const folders = {};
+        Object.entries(this.registry).forEach(([file, data]) => {
+            const folder = file.includes('/') ? file.split('/')[0] : 'core';
+            if (!folders[folder]) folders[folder] = [];
+            folders[folder].push(data);
+        });
+        return folders;
+    }
+
+    createDesktopDropdown(label, pages) {
+        return `
+            <div class="relative group py-4">
+                <button class="text-slate-400 group-hover:text-white text-sm font-bold flex items-center gap-1">
+                    ${label} <span>▾</span>
+                </button>
+                <div class="absolute top-full left-0 hidden group-hover:block w-48 bg-slate-900 border border-slate-800 rounded-lg p-2 shadow-2xl">
+                    ${pages.map(p => `<a href="${p.url}" class="block p-2 text-xs text-slate-400 hover:text-emerald-400 hover:bg-slate-800 rounded">${p.title}</a>`).join('')}
+                </div>
+            </div>`;
+    }
+
+    createMobileSection(label, pages) {
+        return `
+            <div>
+                <div class="text-[10px] font-black text-slate-600 tracking-widest mb-2">${label}</div>
+                <div class="flex flex-col gap-3">
+                    ${pages.map(p => `<a href="${p.url}" class="text-lg font-bold text-white hover:text-emerald-400">${p.title}</a>`).join('')}
+                </div>
+            </div>`;
+    }
+
+    attachEvents() {
+        const btn = document.getElementById('nav-hamburger');
+        const drawer = document.getElementById('nav-mobile-drawer');
+        const icon = document.getElementById('ham-icon');
+
+        btn.addEventListener('click', () => {
+            this.isOpen = !this.isOpen;
+            drawer.classList.toggle('translate-x-full', !this.isOpen);
+            drawer.classList.toggle('translate-x-0', this.isOpen);
+            // Switch icon to 'X'
+            icon.setAttribute('d', this.isOpen ? 'M6 18L18 6M6 6l12 12' : 'M4 6h16M4 12h16M4 18h16');
+        });
     }
 }
 
-// Auto-initialize when DOM is ready
-document.addEventListener('DOMContentLoaded', () => new MenuSystem());
+new MenuSystem();
