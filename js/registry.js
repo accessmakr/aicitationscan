@@ -1,3 +1,59 @@
+// AUTO-GENERATED
+window.siteRegistry = [
+    {
+        "folderName": "General",
+        "folderPath": "//",
+        "pages": [
+            {
+                "name": "About",
+                "url": "/about"
+            },
+            {
+                "name": "Accessibility",
+                "url": "/accessibility"
+            },
+            {
+                "name": "Contact",
+                "url": "/contact"
+            },
+            {
+                "name": "Cookies Policy",
+                "url": "/cookies-policy"
+            },
+            {
+                "name": "Disclaimer",
+                "url": "/disclaimer"
+            },
+            {
+                "name": "Dmca",
+                "url": "/dmca"
+            },
+            {
+                "name": "Do Not Sell My Data",
+                "url": "/do-not-sell-my-data"
+            },
+            {
+                "name": "Terms Of Use",
+                "url": "/terms-of-use"
+            }
+        ]
+    },
+    {
+        "folderName": "Seo Tools",
+        "folderPath": "/seo-tools/",
+        "pages": [
+            {
+                "name": "Meta Description Generator",
+                "url": "/seo-tools/meta-description-generator"
+            },
+            {
+                "name": "Serp Preview Tool",
+                "url": "/seo-tools/serp-preview-tool"
+            }
+        ]
+    }
+];
+
 export const SiteRegistry = {
     "about.html": {
         "url": "/about",
@@ -33,11 +89,6 @@ export const SiteRegistry = {
         "url": "/do-not-sell-my-data",
         "title": "Your Privacy Rights (CCPA)",
         "desc": ""
-    },
-    "index.html": {
-        "url": "/",
-        "title": "Your Website Is Invisible to AI.Get Your Full AI Visibility Report in 60 Seconds",
-        "desc": "Instant &amp; Deep AI + SEO audits. See exactly how visible your website is to AI search engines and Google. Get a 10-section clinical report with scores, fixes, and step-by-step roadmap in minutes."
     },
     "terms-of-use.html": {
         "url": "/terms-of-use",

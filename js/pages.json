@@ -42,12 +42,6 @@
     "k": "page"
   },
   {
-    "t": "AI Visibility Scan — Instant &amp; Deep AI + SEO Audits",
-    "d": "Instant &amp; Deep AI + SEO audits. See exactly how visible your website is to AI search engines and Google. Get a 10-section clinical report with scores, fixes, and step-by-step roadmap in minutes.",
-    "u": "/",
-    "k": "page"
-  },
-  {
     "t": "Terms of Use | AI Citation Scan",
     "d": "Terms of Use for AI Citation Scan. Governance for GEO auditing, LLM simulation tools, and technical visibility benchmarks.",
     "u": "/terms-of-use",
@@ -57,12 +51,12 @@
     "t": "Meta Description Generator: Maximize Organic CTR | AI Citation Scan",
     "d": "Create structured, readable, and click-focused meta descriptions. Use our AI-assisted Meta Description Generator to improve snippet quality and CTR.",
     "u": "/seo-tools/meta-description-generator",
-    "k": "tool"
+    "k": "seo-tools"
   },
   {
     "t": "SERP Preview Tool: Live Google Snippet & CTR Simulator | AI Citation Scan",
     "d": "Optimize your organic click-through rates. Test SEO titles, URL slugs, and meta descriptions with our live Google SERP preview simulator.",
     "u": "/seo-tools/serp-preview-tool",
-    "k": "tool"
+    "k": "seo-tools"
   }
 ]
