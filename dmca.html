@@ -1,28 +1,251 @@
 <!DOCTYPE html>
-<html lang="en" class="dark">
+<html lang="en" class="dark scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DMCA Policy | AI Citation Scan</title>
+    <meta name="description" content="Official DMCA Takedown Policy for AI Citation Scan. Learn how to report intellectual property infringements and our procedure for content removal.">
+    <meta name="keywords" content="DMCA policy, copyright infringement, content removal, takedown notice, intellectual property, AI Citation Scan DMCA">
+    <meta name="author" content="AI Citation Scan Editorial Team">
+    <meta name="robots" content="index, follow">
+    
+    <title>DMCA Policy: Intellectual Property Protection | AI Citation Scan</title>
+    
+    <link rel="canonical" href="https://aicitationscan.com/dmca.html">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://unpkg.com" crossorigin>
+    
+    <meta property="og:title" content="DMCA Policy: Intellectual Property Protection">
+    <meta property="og:description" content="Official DMCA Takedown Policy for AI Citation Scan. Report intellectual property infringements clinical and fast.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://aicitationscan.com/dmca.html">
+    <meta property="og:image" content="https://aicitationscan.com/images/og-dmca.jpg">
+    <meta name="twitter:card" content="summary_large_image">
+    
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
     <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        emerald: { 400: '#34d399', 500: '#10b981', 600: '#059669' },
+                        violet: { 400: '#a78bfa', 500: '#8b5cf6', 600: '#7c3aed' }
+                    },
+                    fontFamily: { sans: ['Inter', 'sans-serif'] }
+                }
+            }
+        }
+    </script>
+    
+    <style>
+        body { background-color: #020617; color: #f1f5f9; }
+        .glass-card { background: rgba(15, 23, 42, 0.6); backdrop-filter: blur(12px); border: 1px solid rgba(51, 65, 85, 0.5); }
+        .legal-gradient-text { background: linear-gradient(to right, #34d399, #a78bfa); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        #scroll-progress { position: fixed; top: 0; left: 0; height: 3px; background: #10b981; z-index: 100; transition: width 0.1s; }
+    </style>
+</head>
+<body class="antialiased overflow-x-hidden">
+    <div id="scroll-progress" class="w-0"></div>
+
+    <header class="fixed top-0 w-full z-50 glass-card border-b border-slate-800">
+        <div class="max-w-7xl mx-auto px-4 h-20 flex justify-between items-center">
+            <a href="index.html" class="flex items-center gap-2 group">
+                <span class="text-2xl group-hover:scale-110 transition-transform">📡</span>
+                <span class="font-bold text-xl tracking-tight text-white uppercase">AI Citation Scan</span>
+            </a>
+            
+            <div class="flex items-center gap-6">
+                <button type="button" class="trigger-search flex items-center text-gray-400 hover:text-emerald-400 transition-colors duration-200 focus:outline-none" aria-label="Open Search">
+                    <span class="mr-2 text-sm font-medium hidden sm:inline">Search</span>
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+                    </svg>
+                </button>
+                <div id="master-nav-dock" class="flex items-center justify-between"></div>
+            </div>
+        </div>
+    </header>
+
+    <main class="pt-32 pb-20 px-4">
+        <div class="max-w-4xl mx-auto">
+            <div class="mb-8 flex flex-wrap items-center gap-4 text-xs font-medium uppercase tracking-widest text-emerald-400" data-aos="fade-down">
+                <span class="px-3 py-1 rounded-full border border-emerald-500/30 bg-emerald-500/10">
+                    🛡️ <span id="freshness-badge">Updated Loading...</span>
+                </span>
+                <span id="seasonal-greeting" class="text-slate-500 italic"></span>
+            </div>
+
+            <h1 class="text-4xl md:text-6xl font-extrabold mb-6 leading-tight" data-aos="fade-up">
+                DMCA <span class="legal-gradient-text">Takedown Policy</span>
+            </h1>
+            
+            <div class="flex items-center gap-6 mb-12 text-slate-400 text-sm border-b border-slate-800 pb-6" data-aos="fade-up" data-aos-delay="100">
+                <div class="flex items-center gap-2">
+                    <span>⏱️ Reading time:</span>
+                    <span id="reading-time" class="text-white font-semibold">--</span>
+                </div>
+                <div class="flex items-center gap-2">
+                    <span>📅 Version:</span>
+                    <span class="text-white font-semibold" id="current-year-meta">2026</span>
+                </div>
+            </div>
+
+            <article class="prose prose-invert prose-emerald max-w-none space-y-8 text-slate-300 leading-relaxed">
+                <section data-aos="fade-up">
+                    <h2 class="text-2xl font-bold text-white mb-4">1. Digital Millennium Copyright Act (DMCA)</h2>
+                    <p>AI Citation Scan respects the intellectual property rights of others and expects its users to do the same. In accordance with the Digital Millennium Copyright Act of 1998, we respond expeditiously to claims of copyright infringement committed using the AI Citation Scan website.</p>
+                </section>
+
+                <section data-aos="fade-up" class="glass-card p-8 rounded-2xl">
+                    <h2 class="text-xl font-bold text-emerald-400 mb-4 uppercase tracking-wider">2. Takedown Request Procedure</h2>
+                    <p class="mb-4">If you are a copyright owner or an agent thereof and believe that any content hosted on our platform infringes upon your copyrights, you may submit a notification pursuant to the DMCA by providing our Designated Copyright Agent with the following information in writing:</p>
+                    <ul class="list-disc pl-6 space-y-3">
+                        <li>A physical or electronic signature of a person authorized to act on behalf of the owner of an exclusive right that is allegedly infringed.</li>
+                        <li>Identification of the copyrighted work claimed to have been infringed.</li>
+                        <li>Identification of the material that is claimed to be infringing or to be the subject of infringing activity and that is to be removed.</li>
+                        <li>Information reasonably sufficient to permit us to contact you, such as an address, telephone number, and an electronic mail address.</li>
+                        <li>A statement that you have a good faith belief that use of the material in the manner complained of is not authorized by the copyright owner.</li>
+                        <li>A statement that the information in the notification is accurate, and under penalty of perjury, that you are authorized to act on behalf of the owner.</li>
+                    </ul>
+                </section>
+
+                <section data-aos="fade-up">
+                    <h2 class="text-2xl font-bold text-white mb-4">3. Designated Agent Contact</h2>
+                    <p>All DMCA notices must be sent to our legal intake desk:</p>
+                    <div class="mt-4 p-6 border-l-4 border-violet-500 bg-slate-900/50 rounded-r-xl">
+                        <p class="font-mono text-emerald-400">Email: accessmakr@gmail.com</p>
+                        <p class="text-sm mt-2">Subject Line: DMCA TAKEDOWN REQUEST - [YOUR ENTITY NAME]</p>
+                    </div>
+                </section>
+
+                <section data-aos="fade-up">
+                    <h2 class="text-2xl font-bold text-white mb-4">4. Counter-Notification</h2>
+                    <p>If you believe that your content that was removed is not infringing, or that you have the authorization from the copyright owner, you may send a counter-notice containing the requisite legal elements to our Designated Agent.</p>
+                </section>
+
+                <div class="pt-10 border-t border-slate-800 grid md:grid-cols-2 gap-8 text-xs italic text-slate-500">
+                    <div>
+                        <p><strong>Logic:</strong> This document serves as a safe harbor shield for the platform while providing a transparent clinical pathway for copyright enforcement.</p>
+                    </div>
+                    <div>
+                        <p><strong>Methodology:</strong> Policy drafted based on Section 512(c) of the DMCA, optimized for directory-style content hosting.</p>
+                    </div>
+                </div>
+                
+                <div class="text-xs text-slate-600 mt-4">
+                    <strong>Citations:</strong> <a href="https://www.copyright.gov/dmca/" class="underline hover:text-emerald-400">U.S. Copyright Office DMCA Summary</a> | <a href="https://www.eff.org/" class="underline hover:text-emerald-400">Electronic Frontier Foundation Legal Guides</a>
+                </div>
+            </article>
+
+            <div id="dynamic-internal-links" class="mt-20"></div>
+        </div>
+    </main>
+
+    <footer class="bg-slate-950 border-t border-slate-900 pt-16 pb-8">
+        <div class="max-w-7xl mx-auto px-4 grid grid-cols-1 md:grid-cols-3 gap-12 mb-12">
+            <div>
+                <span class="text-xl font-bold text-white">📡 AI Citation Scan</span>
+                <p class="mt-4 text-slate-400 text-sm leading-relaxed">The clinical standard for SEO directory audits and AI citation performance. Enterprise tools for the modern web.</p>
+            </div>
+            <div>
+                <h4 class="text-emerald-400 font-bold uppercase text-xs tracking-widest mb-6">Legal Framework</h4>
+                <ul class="text-slate-400 text-sm space-y-3">
+                    <li><a href="privacy-policy.html" class="hover:text-white transition-colors">Privacy Policy</a></li>
+                    <li><a href="cookies-policy.html" class="hover:text-white transition-colors">Cookies Policy</a></li>
+                    <li><a href="terms-of-use.html" class="hover:text-white transition-colors">Terms of Use</a></li>
+                    <li><a href="disclaimer.html" class="hover:text-white transition-colors">Disclaimer</a></li>
+                    <li><a href="dmca.html" class="hover:text-white transition-colors">DMCA</a></li>
+                    <li><a href="accessibility.html" class="hover:text-white transition-colors">Accessibility</a></li>
+                    <li><a href="do-not-sell-my-data.html" class="hover:text-white transition-colors">Do Not Sell My Data</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="text-violet-400 font-bold uppercase text-xs tracking-widest mb-6">Connect</h4>
+                <div class="flex flex-col gap-3 text-sm text-slate-400">
+                    <a href="https://twitter.com" class="hover:text-white">Twitter</a>
+                    <a href="https://linkedin.com" class="hover:text-white">LinkedIn</a>
+                    <a href="https://github.com" class="hover:text-white">GitHub</a>
+                </div>
+            </div>
+        </div>
+        <div class="max-w-7xl mx-auto px-4 pt-8 border-t border-slate-900 flex flex-col md:flex-row justify-between items-center gap-4">
+            <p class="text-xs text-slate-500 italic">© <span id="current-year-footer">2026</span> AI Citation Scan. Clinically Developed.</p>
+            <div class="flex gap-6">
+                <a href="about.html" class="text-xs text-slate-500 hover:text-emerald-400">About</a>
+                <a href="contact.html" class="text-xs text-slate-500 hover:text-emerald-400">Contact</a>
+            </div>
+        </div>
+    </footer>
+
+    <div id="toast-container"></div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    
     <script defer src="../js/registry.js"></script>
     <script defer src="../js/root-config.js"></script>
     <script defer src="../js/menu-system.js"></script>
-</head>
-<body class="bg-[#020617] text-slate-300 p-12">
-    <div class="max-w-2xl mx-auto">
-        <h1 class="text-3xl font-bold text-white mb-8 border-l-4 border-emerald-500 pl-4">DMCA Compliance</h1>
-        <div class="space-y-6 text-slate-400">
-            <p>AI Citation Scan respects intellectual property rights. If you believe your copyrighted material has been indexed or utilized in a way that constitutes infringement within our audit tools, please submit a formal notice to our agent.</p>
-            
-            <div class="bg-slate-950 border border-slate-800 p-6 rounded-lg font-mono text-sm">
-                <p class="mb-2 text-white">Designated Agent Contact:</p>
-                <p class="text-emerald-500">accessmakr@gmail.com</p>
-                <p class="mt-4 text-slate-500">Subject: DMCA Takedown Request</p>
-            </div>
+    <script defer src="../js/search-system.js"></script>
+    <script defer src="../js/schema.js"></script>
+    <script defer src="../js/internal-links.js"></script>
+    <script defer src="../js/legal-engine.js"></script>
 
-            <p>Your request must include: (1) Identification of the work; (2) The specific URL on our platform; (3) Your contact details; and (4) A statement of good faith belief under penalty of perjury.</p>
-        </div>
-    </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            AOS.init({ duration: 800, once: true });
+            
+            // Dynamic Dates
+            const now = new Date();
+            const year = now.getFullYear();
+            document.getElementById('current-year-meta').textContent = year;
+            document.getElementById('current-year-footer').textContent = year;
+            
+            // Freshness Badge
+            const dateStr = now.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
+            document.getElementById('freshness-badge').textContent = `Updated ${dateStr}`;
+            
+            // Seasonal Greeting
+            const months = ["Winter", "Winter", "Spring", "Spring", "Spring", "Summer", "Summer", "Summer", "Fall", "Fall", "Fall", "Winter"];
+            document.getElementById('seasonal-greeting').textContent = `${months[now.getMonth()]} ${year} Edition`;
+
+            // Reading Time
+            const text = document.querySelector('article').innerText;
+            const wordsPerMinute = 200;
+            const minutes = Math.ceil(text.split(' ').length / wordsPerMinute);
+            document.getElementById('reading-time').textContent = `${minutes} min read`;
+
+            // Scroll Progress
+            window.onscroll = () => {
+                const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+                const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+                document.getElementById("scroll-progress").style.width = (winScroll / height) * 100 + "%";
+            };
+
+            // Schema.org logic
+            const day = now.getDay();
+            const diff = now.getDate() - day + (day === 0 ? -6 : 1);
+            const lastMonday = new Date(now.setDate(diff)).toISOString().split('T')[0];
+            
+            const schemaData = {
+                "@context": "https://schema.org",
+                "@type": "WebPage",
+                "name": "DMCA Policy - AI Citation Scan",
+                "description": "Official DMCA Takedown Procedure for intellectual property protection.",
+                "dateModified": lastMonday,
+                "publisher": { "@type": "Organization", "name": "AI Citation Scan" }
+            };
+            const script = document.createElement('script');
+            script.type = 'application/ld+json';
+            script.text = JSON.stringify(schemaData);
+            document.head.appendChild(script);
+        });
+    </script>
 </body>
 </html>
