@@ -94,8 +94,8 @@ window.seoRegistry = {
     },
     "dmca.html": {
         "url": "/dmca",
-        "title": "DMCA Policy: Intellectual Property Protection | AI Citation Scan",
-        "desc": "Official DMCA Takedown Policy for AI Citation Scan. Learn how to report intellectual property infringements and our procedure for content removal."
+        "title": "DMCA Policy",
+        "desc": "AI Citation Scan DMCA Policy. Learn about our copyright infringement reporting process, takedown notice form, and intellectual property guidelines."
     },
     "do-not-sell-my-data.html": {
         "url": "/do-not-sell-my-data",
