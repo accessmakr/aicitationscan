@@ -1,4 +1,9 @@
 export const SiteRegistry = {
+    "accessibility.html": {
+        "url": "/accessibility",
+        "title": "Accessibility Statement",
+        "desc": ""
+    },
     "contact.html": {
         "url": "/contact",
         "title": "Get in Touch",
