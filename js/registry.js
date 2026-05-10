@@ -14,6 +14,11 @@ export const SiteRegistry = {
         "title": "Cookies & Data Policy",
         "desc": "Cookies and Privacy Policy for AI Citation Scan. Clinical, privacy-first technical standards with zero marketing tracking."
     },
+    "dmca.html": {
+        "url": "/dmca",
+        "title": "DMCA Compliance",
+        "desc": ""
+    },
     "do-not-sell-my-data.html": {
         "url": "/do-not-sell-my-data",
         "title": "Your Privacy Rights (CCPA)",
