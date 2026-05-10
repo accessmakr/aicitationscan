@@ -3,13 +3,15 @@ const path = require('path');
 
 const DOMAIN = 'https://aicitationscan.com';
 const ROOT_DIR = path.join(__dirname, '..');
-const SEO_TOOLS_DIR = path.join(ROOT_DIR, 'seo-tools');
 const JS_DIR = path.join(ROOT_DIR, 'js');
 
-// Configuration for Clean URLs
+// Configuration
 const USE_CLEAN_URLS = true;
+// Directories to ignore when scanning for folders
+const IGNORE_DIRS = ['.git', '.github', 'node_modules', 'js', 'css', 'assets', 'scripts'];
 
 function getMetadata(filePath) {
+    if (!fs.existsSync(filePath)) return null;
     const content = fs.readFileSync(filePath, 'utf8');
     const titleMatch = content.match(/<title>(.*?)<\/title>/);
     const descMatch = content.match(/<meta name="description" content="(.*?)"/i);
@@ -22,66 +24,86 @@ function getMetadata(filePath) {
     };
 }
 
+function formatName(filename) {
+    // Converts "meta-description-generator" to "Meta Description Generator"
+    return filename
+        .replace('.html', '')
+        .split('-')
+        .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+        .join(' ');
+}
+
 function generate() {
-    // ENSURE JS DIRECTORY EXISTS
-    if (!fs.existsSync(JS_DIR)) {
-        fs.mkdirSync(JS_DIR, { recursive: true });
-        console.log('📁 Created missing js/ directory');
-    }
+    if (!fs.existsSync(JS_DIR)) fs.mkdirSync(JS_DIR, { recursive: true });
 
-    const files = [];
-    
-    // Scan Root
-    fs.readdirSync(ROOT_DIR).forEach(file => {
-        if (file.endsWith('.html')) files.push({ name: file, path: '' });
-    });
-
-    // Scan SEO Tools
-    if (fs.existsSync(SEO_TOOLS_DIR)) {
-        fs.readdirSync(SEO_TOOLS_DIR).forEach(file => {
-            if (file.endsWith('.html')) files.push({ name: file, path: 'seo-tools/' });
-        });
-    }
-
-    const registry = {};
+    const registry = []; // For the Menu System
+    const seoRegistry = {}; // For your original registry logic
     const pagesJson = [];
     let sitemap = `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n`;
 
-    files.forEach(file => {
-        const fullPath = path.join(ROOT_DIR, file.path, file.name);
-        const meta = getMetadata(fullPath);
-        
-        let urlPath = file.path + file.name;
-        if (USE_CLEAN_URLS) {
-            urlPath = urlPath.replace('.html', '');
-            if (urlPath === 'index') urlPath = '';
-        }
-
-        const fullUrl = `${DOMAIN}/${urlPath}`;
-
-        registry[file.name] = {
-            url: `/${urlPath}`,
-            title: meta.h1 || meta.title,
-            desc: meta.description
-        };
-
-        pagesJson.push({
-            t: meta.title,
-            d: meta.description,
-            u: `/${urlPath}`,
-            k: file.path.includes('seo-tools') ? 'tool' : 'page'
-        });
-
-        sitemap += `  <url>\n    <loc>${fullUrl}</loc>\n    <lastmod>${new Date().toISOString().split('T')[0]}</lastmod>\n    <changefreq>weekly</changefreq>\n    <priority>${file.name === 'index.html' ? '1.0' : '0.8'}</priority>\n  </url>\n`;
+    // 1. Identify all folders in the root
+    const folders = fs.readdirSync(ROOT_DIR).filter(file => {
+        const fullPath = path.join(ROOT_DIR, file);
+        return fs.lstatSync(fullPath).isDirectory() && !IGNORE_DIRS.includes(file);
     });
 
-    sitemap += `</urlset>`;
+    // Add "Root" as a virtual folder for home/index
+    const allCategories = [''].concat(folders);
 
+    allCategories.forEach(folder => {
+        const folderPath = folder === '' ? ROOT_DIR : path.join(ROOT_DIR, folder);
+        const folderFiles = fs.readdirSync(folderPath).filter(f => f.endsWith('.html') && f !== 'index.html');
+
+        if (folderFiles.length === 0 && folder !== '') return;
+
+        const folderData = {
+            folderName: folder === '' ? "General" : formatName(folder),
+            folderPath: `/${folder}/`,
+            pages: []
+        };
+
+        folderFiles.forEach(file => {
+            const fullPath = path.join(folderPath, file);
+            const meta = getMetadata(fullPath);
+            
+            let webPath = folder === '' ? file : `${folder}/${file}`;
+            if (USE_CLEAN_URLS) webPath = webPath.replace('.html', '');
+            
+            const url = `/${webPath}`;
+            const cleanTitle = meta.h1 || meta.title;
+
+            // Add to Folder Data for Menu
+            folderData.pages.push({
+                name: formatName(file),
+                url: url
+            });
+
+            // Add to Original Registry Object (Compatibility)
+            seoRegistry[file] = { url, title: cleanTitle, desc: meta.description };
+
+            // Add to pages.json
+            pagesJson.push({ t: meta.title, d: meta.description, u: url, k: folder || 'page' });
+
+            // Add to Sitemap
+            sitemap += `  <url>\n    <loc>${DOMAIN}${url}</loc>\n    <lastmod>${new Date().toISOString().split('T')[0]}</lastmod>\n    <changefreq>weekly</changefreq>\n    <priority>0.8</priority>\n  </url>\n`;
+        });
+
+        if (folderData.pages.length > 0) {
+            registry.push(folderData);
+        }
+    });
+
+    // Write Files
+    sitemap += `</urlset>`;
     fs.writeFileSync(path.join(ROOT_DIR, 'sitemap.xml'), sitemap);
-    fs.writeFileSync(path.join(JS_DIR, 'registry.js'), `export const SiteRegistry = ${JSON.stringify(registry, null, 4)};`);
+    
+    // EXPORT FOR MENU SYSTEM (window global)
+    const registryContent = `// AUTO-GENERATED\nwindow.siteRegistry = ${JSON.stringify(registry, null, 4)};\n\nexport const SiteRegistry = ${JSON.stringify(seoRegistry, null, 4)};`;
+    fs.writeFileSync(path.join(JS_DIR, 'registry.js'), registryContent);
+    
     fs.writeFileSync(path.join(JS_DIR, 'pages.json'), JSON.stringify(pagesJson, null, 2));
 
-    console.log('✅ SEO Assets Generated successfully.');
+    console.log('✅ SEO Assets & Menu Registry Generated.');
 }
 
 generate();
