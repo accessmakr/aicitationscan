@@ -7,6 +7,10 @@ window.siteRegistry = [
         "priority": 10,
         "pages": [
             {
+                "name": "Aicitation Scan",
+                "url": "/seo-tools/aicitation-scan"
+            },
+            {
                 "name": "Meta Description Generator",
                 "url": "/seo-tools/meta-description-generator"
             },
@@ -98,6 +102,11 @@ export const SiteRegistry = {
         "url": "/terms-of-use",
         "title": "Terms of Use",
         "desc": "Terms of Use for AI Citation Scan. Governance for GEO auditing, LLM simulation tools, and technical visibility benchmarks."
+    },
+    "aicitation-scan.html": {
+        "url": "/seo-tools/aicitation-scan",
+        "title": "AI Citation Scan",
+        "desc": ""
     },
     "meta-description-generator.html": {
         "url": "/seo-tools/meta-description-generator",
