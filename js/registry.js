@@ -1,8 +1,26 @@
 // AUTO-GENERATED
 window.siteRegistry = [
     {
+        "folderName": "SEO Tools",
+        "folderPath": "/seo-tools/",
+        "icon": "🔍",
+        "priority": 10,
+        "pages": [
+            {
+                "name": "Meta Description Generator",
+                "url": "/seo-tools/meta-description-generator"
+            },
+            {
+                "name": "Serp Preview Tool",
+                "url": "/seo-tools/serp-preview-tool"
+            }
+        ]
+    },
+    {
         "folderName": "General",
-        "folderPath": "//",
+        "folderPath": "/",
+        "icon": "📁",
+        "priority": 0,
         "pages": [
             {
                 "name": "About",
@@ -35,20 +53,6 @@ window.siteRegistry = [
             {
                 "name": "Terms Of Use",
                 "url": "/terms-of-use"
-            }
-        ]
-    },
-    {
-        "folderName": "Seo Tools",
-        "folderPath": "/seo-tools/",
-        "pages": [
-            {
-                "name": "Meta Description Generator",
-                "url": "/seo-tools/meta-description-generator"
-            },
-            {
-                "name": "Serp Preview Tool",
-                "url": "/seo-tools/serp-preview-tool"
             }
         ]
     }
