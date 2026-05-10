@@ -2,162 +2,251 @@
 <html lang="en" class="dark scroll-smooth">
 <head>
     <meta charset="UTF-8">
-    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="AI Citation Scan Accessibility Statement. We are committed to WCAG 2.1 AA compliance to ensure digital equity for all users.">
-    <meta name="keywords" content="accessibility statement, WCAG 2.1 AA, digital accessibility, inclusive design, AI Citation Scan accessibility">
-    <meta name="author" content="AI Citation Scan Editorial Team">
-    <meta name="robots" content="index, follow">
+    <meta name="description" content="AI Citation Scan Accessibility Statement. Learn about our commitment to WCAG 2.1 AA compliance and ensuring our tools are usable by everyone.">
+    <meta name="keywords" content="Accessibility statement, WCAG 2.1 AA, ADA compliance, inclusive web design, AI Citation Scan accessibility">
+    <meta name="author" content="AI Citation Scan Legal Team">
+    <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
     
     <title>Accessibility Statement | AI Citation Scan</title>
     
     <link rel="canonical" href="https://aicitationscan.com/accessibility.html">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="sitemap" type="application/xml" href="/sitemap.xml">
     
     <meta property="og:title" content="Accessibility Statement">
-    <meta property="og:description" content="Our commitment to WCAG 2.1 AA standards for an inclusive SEO tool experience.">
+    <meta property="og:description" content="Learn about our commitment to WCAG 2.1 AA compliance and ensuring our tools are usable by everyone.">
     <meta property="og:type" content="website">
+    <meta property="og:url" content="https://aicitationscan.com/accessibility.html">
+    <meta property="og:image" content="https://aicitationscan.com/images/og-legal.jpg">
+    <meta property="og:site_name" content="AI Citation Scan">
     
-    <link rel="icon" href="/favicon.svg" type="image/svg+xml">
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Accessibility Statement">
+    <meta name="twitter:description" content="Learn about our commitment to WCAG 2.1 AA compliance.">
+    <meta name="twitter:image" content="https://aicitationscan.com/images/og-legal.jpg">
 
+    <meta name="theme-color" content="#10b981">
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" media="print" onload="this.media='all'" />
+
+    <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
             darkMode: 'class',
             theme: {
                 extend: {
-                    colors: { emerald: { 500: '#10b981' }, violet: { 500: '#8b5cf6' } },
-                    fontFamily: { sans: ['Inter', 'sans-serif'] }
+                    fontFamily: { sans: ['Inter', 'system-ui', 'sans-serif'] },
+                    colors: {
+                        emerald: { 400: '#34d399', 500: '#10b981', 600: '#059669' },
+                        violet: { 400: '#a78bfa', 500: '#8b5cf6', 600: '#7c3aed' },
+                        slate: { 800: '#1e293b', 900: '#0f172a', 950: '#020617' }
+                    }
                 }
             }
         }
     </script>
-    
+
+    <script defer data-domain="aicitationscan.com" src="https://plausible.io/js/script.js"></script>
+
     <style>
-        body { background-color: #020617; color: #f1f5f9; }
-        .legal-gradient-text { background: linear-gradient(to right, #10b981, #8b5cf6); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-        .glass-panel { background: rgba(30, 41, 59, 0.4); border: 1px solid rgba(51, 65, 85, 0.5); backdrop-filter: blur(8px); }
+        :root { --emerald: #10b981; --violet: #8b5cf6; }
+        body { background-color: #020617; color: #f1f5f9; font-family: 'Inter', sans-serif; overflow-x: hidden; }
+        #scrollProgress { position: fixed; top: 0; left: 0; height: 4px; width: 0%; background: linear-gradient(90deg, var(--emerald), var(--violet)); z-index: 10000; transition: width 0.1s ease-out; }
+        header { background: rgba(15, 23, 42, 0.85); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(51, 65, 85, 0.5); }
+        .editorial-content h2 { font-size: 1.875rem; font-weight: 700; margin-top: 3.5rem; margin-bottom: 1.5rem; color: #f8fafc; letter-spacing: -0.025em; scroll-margin-top: 100px; }
+        .editorial-content h3 { font-size: 1.25rem; font-weight: 600; margin-top: 2.5rem; margin-bottom: 1rem; color: #cbd5e1; }
+        .editorial-content p { font-size: 1.0625rem; line-height: 1.75; color: #94a3b8; margin-bottom: 1.5rem; }
+        .editorial-content ul { list-style-type: disc; padding-left: 1.5rem; color: #94a3b8; margin-bottom: 1.5rem; }
+        .editorial-content li { margin-bottom: 0.5rem; line-height: 1.6; }
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #020617; }
+        ::-webkit-scrollbar-thumb { background: #334155; border-radius: 4px; }
     </style>
 </head>
-<body class="antialiased">
-    <header class="fixed top-0 w-full z-50 glass-panel border-b border-slate-800">
-        <div class="max-w-7xl mx-auto px-4 h-20 flex justify-between items-center">
-            <a href="index.html" class="flex items-center gap-2">
-                <span class="text-2xl">📡</span>
-                <span class="font-bold text-xl text-white uppercase">AI Citation Scan</span>
-            </a>
-            <div class="flex items-center gap-4">
-                <button type="button" class="trigger-search text-gray-400 hover:text-emerald-400"><svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg></button>
-                <div id="master-nav-dock" class="flex items-center justify-between"></div>
+<body class="antialiased selection:bg-emerald-500/30 selection:text-emerald-200">
+
+    <div id="scrollProgress"></div>
+
+    <header class="fixed top-0 w-full z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <a href="/" class="flex items-center gap-2 group">
+                    <span class="text-2xl transition-transform group-hover:scale-110">📡</span>
+                    <span class="font-bold text-lg tracking-tight text-slate-100">AI Citation Scan</span>
+                </a>
+                <div class="flex items-center gap-4">
+                    <button type="button" class="trigger-search flex items-center text-slate-400 hover:text-emerald-400 transition-colors duration-200 focus:outline-none" aria-label="Open Search">
+                        <span class="mr-2 text-sm font-medium hidden sm:inline">Search</span>
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+                        </svg>
+                    </button>
+                    <div id="master-nav-dock" class="flex items-center justify-between"></div>
+                </div>
             </div>
         </div>
     </header>
 
-    <main class="pt-32 pb-20 px-4">
-        <div class="max-w-4xl mx-auto">
-            <div class="mb-6 text-xs text-emerald-400 font-bold uppercase tracking-widest" data-aos="fade-up">
-                <span id="freshness-badge">Updated...</span>
+    <main class="pt-24 pb-16">
+        <section class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 mb-12 text-center" data-aos="fade-up">
+            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-xs font-semibold tracking-wide uppercase mb-6">
+                <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+                <span id="freshness-date">Updated Recently</span>
             </div>
-            
-            <h1 class="text-5xl font-extrabold mb-8" data-aos="fade-up">Accessibility <span class="legal-gradient-text">Commitment</span></h1>
-            
-            <div class="mb-12 glass-panel p-8 rounded-3xl" data-aos="fade-up" data-aos-delay="100">
-                <p class="text-lg text-slate-300 mb-6">AI Citation Scan is committed to ensuring digital accessibility for people with disabilities. We are continually improving the user experience for everyone and applying the relevant accessibility standards to our directory and toolset.</p>
+            <h1 class="text-4xl md:text-5xl font-bold tracking-tight text-white mb-6">Accessibility Statement</h1>
+            <p class="text-lg text-slate-400 mb-4">Our commitment to an inclusive and usable digital experience.</p>
+            <div class="flex items-center justify-center gap-4 text-sm text-slate-500">
+                <span id="reading-time">⏱️ 3 min read</span>
+                <span>•</span>
+                <span id="seasonal-banner" class="text-violet-400"></span>
+            </div>
+        </section>
+
+        <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+            <article class="bg-slate-900 border border-slate-800 rounded-3xl p-8 lg:p-12 shadow-2xl editorial-content" data-aos="fade-up" data-aos-delay="100">
                 
-                <div class="grid md:grid-cols-3 gap-6">
-                    <div class="p-4 bg-slate-900/50 rounded-xl border border-slate-800">
-                        <span class="text-2xl block mb-2">⌨️</span>
-                        <h3 class="font-bold text-white">Full Keyboard Access</h3>
-                    </div>
-                    <div class="p-4 bg-slate-900/50 rounded-xl border border-slate-800">
-                        <span class="text-2xl block mb-2">👁️</span>
-                        <h3 class="font-bold text-white">High Contrast UI</h3>
-                    </div>
-                    <div class="p-4 bg-slate-900/50 rounded-xl border border-slate-800">
-                        <span class="text-2xl block mb-2">🔊</span>
-                        <h3 class="font-bold text-white">Screen Reader Ready</h3>
-                    </div>
-                </div>
-            </div>
+                <h2 id="commitment">1. Our Commitment</h2>
+                <p>AI Citation Scan is committed to ensuring digital accessibility for people with disabilities. We are continually improving the user experience for everyone and applying the relevant accessibility standards to guarantee our platform serves as an inclusive environment for developers, SEO professionals, and content creators.</p>
 
-            <article class="space-y-10 text-slate-400 leading-relaxed">
-                <section>
-                    <h2 class="text-2xl font-bold text-white mb-4">Conformance Status</h2>
-                    <p>The Web Content Accessibility Guidelines (WCAG) defines requirements for designers and developers to improve accessibility for people with disabilities. AI Citation Scan is partially conformant with WCAG 2.1 level AA. Partially conformant means that some parts of the content do not fully conform to the accessibility standard (e.g., third-party directory links).</p>
-                </section>
+                <h2 id="conformance-status">2. Conformance Status</h2>
+                <p>The Web Content Accessibility Guidelines (WCAG) defines requirements for designers and developers to improve accessibility for people with disabilities. It defines three levels of conformance: Level A, Level AA, and Level AAA. AI Citation Scan is partially conformant with <strong>WCAG 2.1 level AA</strong>.</p>
+                <p>Partially conformant means that some parts of the content may not fully conform to the accessibility standard. However, we consistently audit our core UI components to ensure:</p>
+                <ul>
+                    <li>Color contrast ratios meet or exceed the 4.5:1 standard for regular text.</li>
+                    <li>Full keyboard navigability for interactive elements and form inputs.</li>
+                    <li>Proper semantic HTML structuring, including ARIA labels where necessary, for screen reader compatibility.</li>
+                </ul>
 
-                <section>
-                    <h2 class="text-2xl font-bold text-white mb-4">Technical Specifications</h2>
-                    <p>Accessibility of AI Citation Scan relies on the following technologies to work with the particular combination of web browser and any assistive technologies or plugins installed on your computer:</p>
-                    <ul class="list-disc pl-6 mt-4 space-y-2">
-                        <li>HTML / ARIA Landmarks</li>
-                        <li>WAI-ARIA (Web Accessibility Initiative - Accessible Rich Internet Applications)</li>
-                        <li>CSS Flexbox/Grid for Logical Reading Order</li>
-                        <li>JavaScript for Focus Management</li>
-                    </ul>
-                </section>
+                <h2 id="technologies">3. Assistive Technologies</h2>
+                <p>Accessibility of AI Citation Scan relies on the following technologies to work with the particular combination of web browser and any assistive technologies or plugins installed on your computer:</p>
+                <ul>
+                    <li>HTML</li>
+                    <li>WAI-ARIA</li>
+                    <li>CSS</li>
+                    <li>JavaScript</li>
+                </ul>
 
-                <section>
-                    <h2 class="text-2xl font-bold text-white mb-4">Feedback</h2>
-                    <p>We welcome your feedback on the accessibility of our tools. Please let us know if you encounter accessibility barriers on AI Citation Scan:</p>
-                    <p class="mt-4 font-bold text-emerald-400">E-mail: accessmakr@gmail.com</p>
-                </section>
+                <h2 id="feedback">4. Feedback & Continuous Improvement</h2>
+                <p>We welcome your feedback on the accessibility of our site. If you encounter accessibility barriers, please reach out to us. We try to respond to feedback within 5 business days.</p>
+                <p>Please contact us at: <strong>accessmakr@gmail.com</strong>.</p>
 
-                <div class="pt-10 border-t border-slate-800 flex flex-col gap-4 text-xs italic">
-                    <p><strong>Logic:</strong> We believe SEO optimization should be an inclusive discipline; accessibility is a core pillar of our technical infrastructure.</p>
-                    <p><strong>Methodology:</strong> Testing performed using automated (Lighthouse/axe) and manual screen reader (NVDA/VoiceOver) audits.</p>
-                    <p><strong>Citations:</strong> <a href="https://www.w3.org/WAI/standards-guidelines/wcag/" class="underline">W3C WCAG 2.1 Standards</a></p>
-                </div>
+                <hr class="border-slate-800 my-8">
+                
+                <h3 class="text-sm uppercase tracking-widest text-slate-500 mb-4">Methodology & Curation Logic</h3>
+                <p class="text-sm text-slate-400 mb-2"><strong class="text-slate-300">Logic:</strong> Semantic HTML and strictly enforced ARIA patterns allow assistive devices to interpret data clusters natively.</p>
+                <p class="text-sm text-slate-400 mb-2"><strong class="text-slate-300">Methodology:</strong> Automated Lighthouse audits and manual keyboard navigability testing are executed before deploying any master UI changes.</p>
+                <p class="text-sm text-slate-400"><strong class="text-slate-300">Citations:</strong> Guidelines adopted from <a href="https://www.w3.org/WAI/standards-guidelines/wcag/" target="_blank" rel="nofollow" class="text-emerald-400 hover:underline">W3C Web Accessibility Initiative (WAI)</a>.</p>
             </article>
-
-            <div id="dynamic-internal-links" class="mt-20"></div>
         </div>
+        
+        <div id="dynamic-internal-links" class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 mt-12"></div>
     </main>
 
-    <footer class="bg-slate-950 border-t border-slate-900 pt-16 pb-8">
-        <div class="max-w-7xl mx-auto px-4 grid grid-cols-1 md:grid-cols-3 gap-12 mb-12">
-            <div>
-                <span class="text-xl font-bold text-white">📡 AI Citation Scan</span>
-            </div>
-            <div>
-                <h4 class="text-emerald-400 font-bold uppercase text-xs tracking-widest mb-6">Legal</h4>
-                <ul class="text-slate-400 text-sm space-y-2">
-                    <li><a href="privacy-policy.html">Privacy Policy</a></li>
-                    <li><a href="cookies-policy.html">Cookies Policy</a></li>
-                    <li><a href="terms-of-use.html">Terms of Use</a></li>
-                    <li><a href="accessibility.html" class="text-white">Accessibility</a></li>
-                    <li><a href="do-not-sell-my-data.html">Do Not Sell My Data</a></li>
-                </ul>
-            </div>
-            <div>
-                <h4 class="text-violet-400 font-bold uppercase text-xs tracking-widest mb-6">Social</h4>
-                <div class="flex flex-col gap-2 text-sm text-slate-400">
-                    <a href="https://twitter.com">Twitter</a>
-                    <a href="https://linkedin.com">LinkedIn</a>
+    <footer class="bg-slate-950 border-t border-slate-800 pt-16 pb-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
+                <div class="col-span-1 md:col-span-2">
+                    <div class="flex items-center gap-2 mb-4">
+                        <span class="text-2xl">📡</span>
+                        <span class="font-bold text-lg text-slate-100">AI Citation Scan</span>
+                    </div>
+                    <p class="text-sm text-slate-400 max-w-sm mb-6">
+                        Enterprise-grade SEO tools and clinical audits to maximize your search engine visibility and AI citation readiness.
+                    </p>
+                </div>
+                <div>
+                    <h4 class="text-white font-semibold mb-4 text-sm uppercase tracking-widest">Legal</h4>
+                    <ul class="space-y-3 text-sm text-slate-400">
+                        <li><a href="/privacy-policy.html" class="hover:text-emerald-400 transition-colors">Privacy Policy</a></li>
+                        <li><a href="/cookies-policy.html" class="hover:text-emerald-400 transition-colors">Cookies Policy</a></li>
+                        <li><a href="/terms-of-use.html" class="hover:text-emerald-400 transition-colors">Terms of Use</a></li>
+                        <li><a href="/disclaimer.html" class="hover:text-emerald-400 transition-colors">Disclaimer</a></li>
+                        <li><a href="/dmca.html" class="hover:text-emerald-400 transition-colors">DMCA</a></li>
+                        <li><a href="/accessibility.html" class="hover:text-emerald-400 transition-colors">Accessibility</a></li>
+                        <li><a href="/do-not-sell-my-data.html" class="hover:text-emerald-400 transition-colors">Do Not Sell My Data</a></li>
+                        <li><a href="/contact.html" class="hover:text-emerald-400 transition-colors">Contact</a></li>
+                        <li><a href="/about.html" class="hover:text-emerald-400 transition-colors">About</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-white font-semibold mb-4 text-sm uppercase tracking-widest">Social</h4>
+                    <ul class="space-y-3 text-sm text-slate-400">
+                        <li><a href="https://twitter.com" target="_blank" rel="noopener noreferrer" class="hover:text-emerald-400 transition-colors">Twitter</a></li>
+                        <li><a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" class="hover:text-emerald-400 transition-colors">LinkedIn</a></li>
+                        <li><a href="https://reddit.com" target="_blank" rel="noopener noreferrer" class="hover:text-emerald-400 transition-colors">Reddit</a></li>
+                        <li><a href="https://facebook.com" target="_blank" rel="noopener noreferrer" class="hover:text-emerald-400 transition-colors">Facebook</a></li>
+                        <li><a href="https://github.com" target="_blank" rel="noopener noreferrer" class="hover:text-emerald-400 transition-colors">GitHub</a></li>
+                    </ul>
                 </div>
             </div>
-        </div>
-        <div class="max-w-7xl mx-auto px-4 pt-8 border-t border-slate-900 flex justify-between">
-            <p class="text-xs text-slate-500">© <span id="current-year-footer">2026</span> AI Citation Scan.</p>
+            <div class="border-t border-slate-800/50 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
+                <p class="text-xs text-slate-500">
+                    &copy; <span id="current-year-footer">2026</span> AI Citation Scan. All Rights Reserved.
+                </p>
+            </div>
         </div>
     </footer>
 
+    <div id="toast-container" class="fixed bottom-4 right-4 flex flex-col gap-2 z-50"></div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
-    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-    <script defer src="../js/registry.js"></script>
-    <script defer src="../js/search-system.js"></script>
-    <script defer src="../js/internal-links.js"></script>
     
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            AOS.init({ once: true });
-            const now = new Date();
-            document.getElementById('current-year-footer').textContent = now.getFullYear();
-            document.getElementById('freshness-badge').textContent = `Clinical Audit: ${now.toLocaleDateString()}`;
+            AOS.init({ once: true, duration: 800 });
+            
+            const today = new Date();
+            document.getElementById('current-year-footer').textContent = today.getFullYear();
+            const options = { year: 'numeric', month: 'short', day: 'numeric' };
+            document.getElementById('freshness-date').textContent = `Updated ${today.toLocaleDateString('en-US', options)}`;
+            
+            const month = today.getMonth();
+            const seasons = ['Winter', 'Winter', 'Spring', 'Spring', 'Spring', 'Summer', 'Summer', 'Summer', 'Fall', 'Fall', 'Fall', 'Winter'];
+            document.getElementById('seasonal-banner').textContent = `${seasons[month]} ${today.getFullYear()} Edition`;
+
+            const contentText = document.querySelector('.editorial-content').innerText;
+            const wordCount = contentText.split(/\s+/).length;
+            const readingTime = Math.ceil(wordCount / 200);
+            document.getElementById('reading-time').textContent = `⏱️ ${readingTime} min read`;
+
+            window.addEventListener("scroll", () => {
+                const winScroll = document.documentElement.scrollTop;
+                const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+                document.getElementById("scrollProgress").style.width = (winScroll / height) * 100 + "%";
+            }, { passive: true });
+
+            const d = new Date(today);
+            const day = d.getDay();
+            const diff = d.getDate() - day + (day === 0 ? -6 : 1);
+            const lastMonday = new Date(d.setDate(diff)).toISOString().split('T')[0];
+            
+            const schemaData = {
+                "@context": "https://schema.org",
+                "@type": "WebPage",
+                "name": "Accessibility Statement",
+                "url": "https://aicitationscan.com/accessibility.html",
+                "dateModified": lastMonday
+            };
+            const script = document.createElement('script');
+            script.type = 'application/ld+json';
+            script.text = JSON.stringify(schemaData);
+            document.head.appendChild(script);
         });
     </script>
+    
+    <script defer src="../js/registry.js"></script>
+    <script defer src="../js/root-config.js"></script>
+    <script defer src="../js/menu-system.js"></script>
+    <script defer src="../js/search-system.js"></script>
+    <script defer src="../js/schema.js"></script>
+    <script defer src="../js/internal-links.js"></script>
+    <script defer src="../js/legal-engine.js"></script>
 </body>
 </html>
