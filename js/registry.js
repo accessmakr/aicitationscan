@@ -79,8 +79,8 @@ window.seoRegistry = {
     },
     "contact.html": {
         "url": "/contact",
-        "title": "Get in Touch",
-        "desc": "Contact the AI Citation Scan editorial and technical team for GEO audit inquiries."
+        "title": "Contact Us",
+        "desc": "Contact the AI Citation Scan team. Get support, submit feedback, or inquire about our enterprise-grade SEO tools and directory services."
     },
     "cookies-policy.html": {
         "url": "/cookies-policy",
