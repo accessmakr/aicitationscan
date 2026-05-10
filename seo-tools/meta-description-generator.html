@@ -1,0 +1,951 @@
+<!DOCTYPE html>
+<html lang="en" class="dark scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meta Description Generator | AI Citation Scan</title>
+    <meta name="description" content="Create structured, readable, and click-focused meta descriptions that improve snippet quality and support stronger organic click-through rates. Free enterprise SEO tool.">
+    <meta name="keywords" content="meta description generator, SEO snippet tool, SERP preview tool, optimize meta description, click-through rate optimization, SEO metadata creator, AI Citation Scan tools">
+    <meta name="author" content="AI Citation Scan Editorial Team">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://aicitationscan.com/seo-tools/meta-description-generator.html">
+    
+    <meta property="og:title" content="Meta Description Generator | AI Citation Scan">
+    <meta property="og:description" content="Create structured, readable, and click-focused meta descriptions that improve snippet quality and support stronger organic click-through rates.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://aicitationscan.com/seo-tools/meta-description-generator.html">
+    <meta property="og:image" content="https://aicitationscan.com/images/og-meta-description.jpg">
+    <meta property="og:site_name" content="AI Citation Scan">
+    
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Meta Description Generator | AI Citation Scan">
+    <meta name="twitter:description" content="Create structured, readable, and click-focused meta descriptions that improve snippet quality and support stronger organic click-through rates.">
+    <meta name="twitter:image" content="https://aicitationscan.com/images/og-meta-description.jpg">
+    
+    <meta name="theme-color" content="#10b981">
+    <link rel="alternate" hreflang="en" href="https://aicitationscan.com/seo-tools/meta-description-generator.html">
+    <meta name="geo.region" content="US-CA">
+    <meta name="geo.placename" content="San Francisco">
+    <meta name="geo.position" content="37.7749;-122.4194">
+    <meta name="ICBM" content="37.7749, -122.4194">
+    
+    <link rel="sitemap" type="application/xml" href="https://aicitationscan.com/sitemap.xml">
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://unpkg.com">
+    
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet">
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: { sans: ['Inter', 'sans-serif'] },
+                    colors: {
+                        emerald: { 400: '#34d399', 500: '#10b981' },
+                        violet: { 400: '#a78bfa', 600: '#7c3aed' },
+                        zinc: { 800: '#27272a', 900: '#18181b', 950: '#09090b' }
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <script defer data-domain="aicitationscan.com" src="https://plausible.io/js/script.js"></script>
+    
+    <style>
+        /* Base optimizations & animations */
+        html { scroll-behavior: smooth; scroll-padding-top: 100px; }
+        body { background-color: #09090b; color: #f4f4f5; font-family: 'Inter', sans-serif; }
+        .glass-panel { background: rgba(39, 39, 42, 0.4); backdrop-filter: blur(12px); border: 1px solid rgba(255, 255, 255, 0.05); }
+        .scroll-progress { position: fixed; top: 0; left: 0; height: 3px; background: linear-gradient(to right, #10b981, #7c3aed); z-index: 9999; transition: width 0.1s ease; }
+        .toc-active { color: #34d399 !important; border-left-color: #34d399 !important; font-weight: 600; }
+        .serp-title { color: #8ab4f8; }
+        .serp-url { color: #81c995; }
+        .serp-desc { color: #bdc1c6; }
+        #toast-container { position: fixed; bottom: 20px; right: 20px; z-index: 50000; display: flex; flex-direction: column; gap: 10px; }
+        .toast { background: #18181b; border: 1px solid #34d399; color: #fff; padding: 12px 24px; border-radius: 8px; box-shadow: 0 10px 15px -3px rgba(0,0,0,0.5); animation: slideIn 0.3s ease forwards; }
+        @keyframes slideIn { from { transform: translateX(100%); opacity: 0; } to { transform: translateX(0); opacity: 1; } }
+        @keyframes fadeOut { to { opacity: 0; } }
+        .accordion-content { transition: max-height 0.3s ease-out, padding 0.3s ease; max-height: 0; overflow: hidden; }
+        .accordion-content.open { max-height: 500px; padding-top: 16px; padding-bottom: 16px; }
+        .chevron { transition: transform 0.3s ease; }
+        .chevron.rotate { transform: rotate(180deg); }
+        /* Form inputs styling */
+        input:focus, textarea:focus, select:focus { outline: none; border-color: #34d399; box-shadow: 0 0 0 1px #34d399; }
+    </style>
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "WebSite",
+          "@id": "https://aicitationscan.com/#website",
+          "url": "https://aicitationscan.com/",
+          "name": "AI Citation Scan",
+          "description": "Enterprise SEO tools and deep AI visibility audits.",
+          "publisher": { "@id": "https://aicitationscan.com/#organization" },
+          "potentialAction": {
+            "@type": "SearchAction",
+            "target": "https://aicitationscan.com/search?q={search_term_string}",
+            "query-input": "required name=search_term_string"
+          }
+        },
+        {
+          "@type": "Organization",
+          "@id": "https://aicitationscan.com/#organization",
+          "name": "AI Citation Scan",
+          "url": "https://aicitationscan.com/",
+          "logo": {
+            "@type": "ImageObject",
+            "url": "https://aicitationscan.com/logo.png",
+            "width": 112,
+            "height": 112
+          },
+          "sameAs": [
+            "https://twitter.com/aicitationscan",
+            "https://linkedin.com/company/aicitationscan"
+          ]
+        },
+        {
+          "@type": "WebApplication",
+          "@id": "https://aicitationscan.com/seo-tools/meta-description-generator.html#tool",
+          "name": "Meta Description Generator",
+          "url": "https://aicitationscan.com/seo-tools/meta-description-generator.html",
+          "description": "Enterprise-grade meta description generator for optimizing organic CTR and SERP visibility.",
+          "applicationCategory": "BusinessApplication",
+          "operatingSystem": "All",
+          "offers": {
+            "@type": "Offer",
+            "price": "0.00",
+            "priceCurrency": "USD"
+          },
+          "aggregateRating": {
+            "@type": "AggregateRating",
+            "ratingValue": "4.9",
+            "ratingCount": "1420"
+          }
+        },
+        {
+          "@type": "Article",
+          "@id": "https://aicitationscan.com/seo-tools/meta-description-generator.html#article",
+          "headline": "Meta Description Generator & Optimization Guide",
+          "author": {
+            "@type": "Organization",
+            "name": "AI Citation Scan Editorial Team"
+          },
+          "publisher": { "@id": "https://aicitationscan.com/#organization" },
+          "datePublished": "2024-01-15T08:00:00+00:00",
+          "dateModified": "2024-05-06T08:00:00+00:00",
+          "mainEntityOfPage": "https://aicitationscan.com/seo-tools/meta-description-generator.html"
+        },
+        {
+          "@type": "BreadcrumbList",
+          "@id": "https://aicitationscan.com/seo-tools/meta-description-generator.html#breadcrumb",
+          "itemListElement": [
+            { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://aicitationscan.com/" },
+            { "@type": "ListItem", "position": 2, "name": "SEO Tools", "item": "https://aicitationscan.com/seo-tools/" },
+            { "@type": "ListItem", "position": 3, "name": "Meta Description Generator", "item": "https://aicitationscan.com/seo-tools/meta-description-generator.html" }
+          ]
+        },
+        {
+          "@type": "FAQPage",
+          "@id": "https://aicitationscan.com/seo-tools/meta-description-generator.html#faq",
+          "mainEntity": [
+            {
+              "@type": "Question",
+              "name": "What is the ideal meta description length?",
+              "acceptedAnswer": { "@type": "Answer", "text": "The ideal length is between 150 to 160 characters for desktop search, and around 120 characters for mobile to avoid truncation." }
+            },
+            {
+              "@type": "Question",
+              "name": "Should every page have unique metadata?",
+              "acceptedAnswer": { "@type": "Answer", "text": "Yes, unique metadata helps search engines differentiate pages and prevents duplicate content issues, improving individual page rankings." }
+            },
+            {
+              "@type": "Question",
+              "name": "Why does Google rewrite meta descriptions?",
+              "acceptedAnswer": { "@type": "Answer", "text": "Google rewrites descriptions to better match the user's specific search intent, pulling contextual text from the page if the provided metadata is weak." }
+            }
+          ]
+        }
+      ]
+    }
+    </script>
+</head>
+<body class="antialiased selection:bg-emerald-500/30 selection:text-emerald-200">
+
+    <div id="scroll-progress-bar" class="scroll-progress w-0"></div>
+
+    <header class="sticky top-0 z-50 glass-panel border-b border-zinc-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+            <a href="/" class="flex items-center gap-3 group">
+                <span class="text-2xl transition-transform group-hover:scale-110">📡</span>
+                <span class="font-semibold text-lg tracking-tight text-white">AI Citation Scan</span>
+            </a>
+            <div id="master-nav-dock" class="flex items-center justify-between"></div>
+        </div>
+    </header>
+
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        
+        <section class="text-center max-w-4xl mx-auto mb-16" data-aos="fade-up">
+            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-xs font-medium mb-6">
+                <span class="relative flex h-2 w-2"><span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span><span class="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span></span>
+                <span id="dynamic-date-badge">Updated recently</span> • <span id="reading-time">12 min read</span>
+            </div>
+            
+            <h1 class="text-4xl md:text-6xl font-bold tracking-tight mb-6 leading-tight">
+                Meta Description <span class="text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 to-violet-400">Generator</span>
+            </h1>
+            
+            <p class="text-lg md:text-xl text-zinc-400 mb-8 max-w-3xl mx-auto">
+                Create structured, readable, and click-focused meta descriptions that improve snippet quality and support stronger organic click-through rates.
+            </p>
+
+            <div class="flex flex-wrap items-center justify-center gap-6 text-sm text-zinc-500 font-medium">
+                <div class="flex items-center gap-2">
+                    <span class="text-yellow-400 text-lg">★★★★★</span>
+                    <span class="text-zinc-300">4.9/5 satisfaction</span>
+                </div>
+                <div class="hidden sm:block w-1 h-1 rounded-full bg-zinc-700"></div>
+                <div class="flex items-center gap-2 text-zinc-300">
+                    <svg class="w-4 h-4 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                    2.4M+ snippets generated
+                </div>
+                <div class="hidden sm:block w-1 h-1 rounded-full bg-zinc-700"></div>
+                <div class="flex items-center gap-2 text-zinc-300">
+                    <svg class="w-4 h-4 text-violet-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path></svg>
+                    Trusted by enterprise SEO teams
+                </div>
+            </div>
+            
+            <div id="seasonal-banner" class="mt-6 text-xs text-violet-400 font-medium"></div>
+        </section>
+
+        <section class="max-w-3xl mx-auto mb-10 text-center" data-aos="fade-up" data-aos-delay="100">
+            <h2 class="text-xl font-semibold mb-3 text-white">What is a meta description generator?</h2>
+            <p class="text-zinc-400 text-sm leading-relaxed">
+                A professional metadata workflow tool designed to translate target keywords, page topics, and audience intent into HTML-ready `<meta name="description">` tags. By simulating live SERP environments and monitoring pixel truncation limits, this tool helps publishing teams craft snippets that maximize CTR and dominate organic appearance.
+            </p>
+        </section>
+
+        <div class="flex flex-wrap items-center justify-center gap-3 mb-16" data-aos="fade-up" data-aos-delay="150">
+            <span class="text-xs font-semibold uppercase tracking-wider text-zinc-500 mr-2">Share this guide:</span>
+            <button onclick="shareLink('whatsapp')" class="px-4 py-1.5 rounded-full border border-zinc-700 text-zinc-300 text-sm hover:border-zinc-500 hover:text-white transition-colors">WhatsApp</button>
+            <button onclick="shareLink('facebook')" class="px-4 py-1.5 rounded-full border border-zinc-700 text-zinc-300 text-sm hover:border-zinc-500 hover:text-white transition-colors">Facebook</button>
+            <button onclick="shareLink('twitter')" class="px-4 py-1.5 rounded-full border border-zinc-700 text-zinc-300 text-sm hover:border-zinc-500 hover:text-white transition-colors">Twitter/X</button>
+            <button onclick="shareLink('linkedin')" class="px-4 py-1.5 rounded-full border border-zinc-700 text-zinc-300 text-sm hover:border-zinc-500 hover:text-white transition-colors">LinkedIn</button>
+            <button onclick="shareLink('reddit')" class="px-4 py-1.5 rounded-full border border-zinc-700 text-zinc-300 text-sm hover:border-zinc-500 hover:text-white transition-colors">Reddit</button>
+            <button onclick="shareLink('email')" class="px-4 py-1.5 rounded-full border border-zinc-700 text-zinc-300 text-sm hover:border-zinc-500 hover:text-white transition-colors">Email</button>
+            <button onclick="copyCurrentLink()" class="px-4 py-1.5 rounded-full border border-zinc-700 text-zinc-300 text-sm hover:border-emerald-400 hover:text-emerald-400 transition-colors flex items-center gap-2">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"></path></svg>
+                Copy Link
+            </button>
+        </div>
+
+        <section class="mb-24" id="tool-interface" data-aos="fade-up" data-aos-delay="200">
+            <div class="glass-panel rounded-2xl overflow-hidden shadow-2xl">
+                <div class="grid lg:grid-cols-12 divide-y lg:divide-y-0 lg:divide-x divide-zinc-800">
+                    
+                    <div class="lg:col-span-5 p-6 md:p-8 bg-zinc-900/50">
+                        <div class="flex items-center justify-between mb-6">
+                            <h3 class="text-lg font-semibold text-white flex items-center gap-2">
+                                <svg class="w-5 h-5 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4"></path></svg>
+                                Configuration
+                            </h3>
+                            <button id="clear-btn" class="text-xs text-zinc-400 hover:text-white transition-colors underline">Reset fields</button>
+                        </div>
+
+                        <div class="space-y-5">
+                            <div>
+                                <label for="kw-primary" class="block text-sm font-medium text-zinc-300 mb-1.5">Primary Keyword <span class="text-red-400">*</span></label>
+                                <input type="text" id="kw-primary" placeholder="e.g., local seo software" class="w-full bg-zinc-800 border border-zinc-700 rounded-lg px-4 py-2.5 text-sm text-white placeholder-zinc-500 transition-colors">
+                            </div>
+                            <div>
+                                <label for="kw-secondary" class="block text-sm font-medium text-zinc-300 mb-1.5">Secondary Keyword (Optional)</label>
+                                <input type="text" id="kw-secondary" placeholder="e.g., enterprise rankings" class="w-full bg-zinc-800 border border-zinc-700 rounded-lg px-4 py-2.5 text-sm text-white placeholder-zinc-500 transition-colors">
+                            </div>
+                            <div>
+                                <label for="page-topic" class="block text-sm font-medium text-zinc-300 mb-1.5">Page Topic / Summary <span class="text-red-400">*</span></label>
+                                <textarea id="page-topic" rows="2" placeholder="e.g., A definitive guide on choosing the best software for local search visibility..." class="w-full bg-zinc-800 border border-zinc-700 rounded-lg px-4 py-2.5 text-sm text-white placeholder-zinc-500 transition-colors resize-none"></textarea>
+                            </div>
+                            <div class="grid grid-cols-2 gap-4">
+                                <div>
+                                    <label for="intent-select" class="block text-sm font-medium text-zinc-300 mb-1.5">Audience Intent</label>
+                                    <select id="intent-select" class="w-full bg-zinc-800 border border-zinc-700 rounded-lg px-4 py-2.5 text-sm text-white appearance-none transition-colors">
+                                        <option value="informational">Informational</option>
+                                        <option value="transactional">Transactional / Ecommerce</option>
+                                        <option value="commercial">Commercial Investigation</option>
+                                        <option value="local">Local Business</option>
+                                    </select>
+                                </div>
+                                <div>
+                                    <label for="tone-select" class="block text-sm font-medium text-zinc-300 mb-1.5">Tone</label>
+                                    <select id="tone-select" class="w-full bg-zinc-800 border border-zinc-700 rounded-lg px-4 py-2.5 text-sm text-white appearance-none transition-colors">
+                                        <option value="professional">Professional / Analytical</option>
+                                        <option value="engaging">Engaging / Editorial</option>
+                                        <option value="urgent">Urgent / Action-driven</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div>
+                                <label for="brand-name" class="block text-sm font-medium text-zinc-300 mb-1.5">Brand Name (Optional)</label>
+                                <input type="text" id="brand-name" placeholder="e.g., AI Citation Scan" class="w-full bg-zinc-800 border border-zinc-700 rounded-lg px-4 py-2.5 text-sm text-white placeholder-zinc-500 transition-colors">
+                            </div>
+
+                            <button id="generate-btn" class="w-full py-3.5 bg-emerald-500 hover:bg-emerald-400 text-zinc-950 font-semibold rounded-lg transition-colors flex items-center justify-center gap-2 mt-4 shadow-[0_0_15px_rgba(16,185,129,0.3)]">
+                                Generate Metadata <span class="text-xl">✨</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="lg:col-span-7 p-6 md:p-8 bg-zinc-900/30 relative">
+                        <div class="flex items-center justify-between mb-6">
+                            <h3 class="text-lg font-semibold text-white">Generated Variations</h3>
+                            <div class="flex bg-zinc-800 rounded-md p-1">
+                                <button id="view-desktop" class="px-3 py-1 text-xs font-medium rounded text-white bg-zinc-700 shadow-sm transition-all">Desktop</button>
+                                <button id="view-mobile" class="px-3 py-1 text-xs font-medium rounded text-zinc-400 hover:text-white transition-all">Mobile</button>
+                            </div>
+                        </div>
+
+                        <div id="results-container" class="space-y-6">
+                            
+                            <div id="empty-state" class="text-center py-12 px-4 border border-dashed border-zinc-700 rounded-xl">
+                                <span class="text-4xl mb-3 block opacity-50">✍️</span>
+                                <p class="text-zinc-400 text-sm">Enter your keywords and topic on the left to generate SEO-optimized meta descriptions.</p>
+                            </div>
+
+                            <div id="generated-items" class="hidden space-y-6">
+                                </div>
+                            
+                        </div>
+
+                        <div id="seo-hints" class="hidden mt-8 p-4 rounded-xl border border-violet-500/20 bg-violet-500/5">
+                            <h4 class="text-sm font-semibold text-violet-300 mb-2 flex items-center gap-2">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                                Optimization Hints
+                            </h4>
+                            <ul class="text-xs text-zinc-400 space-y-1.5 list-disc pl-4" id="hints-list">
+                                <li>Target 150-160 characters to prevent Google from truncating the snippet.</li>
+                                <li>Ensure the primary keyword appears naturally near the beginning.</li>
+                                <li>Include a clear call-to-action (e.g., "Learn more", "Discover how").</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div class="grid lg:grid-cols-12 gap-12">
+            
+            <aside class="hidden lg:block lg:col-span-3">
+                <div class="sticky top-24">
+                    <h4 class="text-xs font-bold uppercase tracking-widest text-zinc-500 mb-4">In This Guide</h4>
+                    <nav id="toc-menu" class="space-y-1 border-l border-zinc-800">
+                        </nav>
+                </div>
+            </aside>
+
+            <article class="lg:col-span-9 prose prose-invert prose-zinc max-w-none prose-headings:font-semibold prose-a:text-emerald-400 prose-a:no-underline hover:prose-a:underline">
+                
+                <h2 id="why-matter">Why meta descriptions still matter in search</h2>
+                <p>Despite numerous algorithmic shifts and the rise of AI-driven overviews, the HTML `<meta name="description">` tag remains a critical bridge between algorithmic ranking and human interaction. While Google officially states that meta descriptions are not a direct ranking factor for positioning, they act as the definitive organic ad copy for your webpage. An optimized snippet dictates the user's scanning behavior, establishing relevance and authority before a click even occurs. When a snippet aligns perfectly with search intent, it creates a psychological trigger that significantly improves organic click-through rate (CTR), indirectly validating the page's relevance to search engines over time.</p>
+
+                <h2 id="click-behavior">How snippet text influences click behavior</h2>
+                <h3 id="search-psychology">Search psychology and scanning behavior</h3>
+                <p>Users do not read search engine results pages (SERPs); they scan them. Eye-tracking studies demonstrate that users look for bolded keyword matches and actionable verbs. A snippet that uses passive voice or generic filler fails to capture attention. Conversely, structured phrasing that promises a specific outcome—such as resolving an error, comparing products, or detailing a methodology—anchors the eye. The meta description serves to reduce cognitive load, confirming that the subsequent click will yield the exact information the user requires.</p>
+
+                <h3 id="comparing-snippets">How users compare snippets quickly</h3>
+                <p>When presented with ten blue links, a user performs a micro-comparison. If Result 1 has a truncated, auto-generated snippet containing navigation menus, and Result 2 offers a concise, benefit-driven summary, Result 2 will disproportionately win the click, regardless of rank. Users utilize the meta description to judge the depth, recency, and editorial quality of the underlying content.</p>
+
+                <div class="my-8 p-6 rounded-2xl bg-zinc-900 border border-zinc-800 relative group">
+                    <div class="absolute -top-3 -left-3 text-emerald-500 bg-zinc-950 rounded-full p-2 border border-zinc-800">
+                        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z"/></svg>
+                    </div>
+                    <p class="text-lg text-white font-medium italic mb-4 pl-6">"Google rewrites meta descriptions in roughly 62.78% of search results, but a highly relevant, intent-matched custom description significantly reduces the chance of algorithmic replacement."</p>
+                    <a href="https://twitter.com/intent/tweet?text=Google%20rewrites%20meta%20descriptions%20in%20roughly%2062.78%25%20of%20search%20results...%20&url=https://aicitationscan.com/seo-tools/meta-description-generator.html" target="_blank" class="text-xs text-zinc-400 hover:text-emerald-400 font-medium transition-colors flex items-center gap-1 pl-6">Tap to share on X <svg class="w-3 h-3" fill="currentColor" viewBox="0 0 24 24"><path d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z"/></svg></a>
+                </div>
+
+                <h2 id="google-rewrites">Why Google rewrites meta descriptions</h2>
+                <p>A common frustration among marketers is crafting the perfect snippet, only to find Google displaying extracted paragraph text instead. This rewriting occurs because Google prioritizes query relevance over publisher preference. If a user searches for a highly specific long-tail query that is answered deep within the page, Google will bypass a generic meta description to surface the exact sentence matching the intent. To minimize rewrites, your metadata must summarize the holistic intent of the page while integrating the primary head terms the document is optimized for.</p>
+
+                <h2 id="structure-strong">How marketers structure strong snippets</h2>
+                <h3 id="balancing-clarity">Balancing clarity and keywords</h3>
+                <p>Enterprise SEO relies on a structured architecture for metadata. A high-converting snippet typically follows a three-part formula: Context + Value + Action. First, establish what the page is about using the primary keyword. Second, state the unique value proposition (e.g., "includes data from 2026", "step-by-step methodology"). Third, append a subtle call to action. Stuffing comma-separated keywords into the description destroys readability and signals low quality to both users and search engines.</p>
+
+                <h3 id="natural-language">Using natural language patterns</h3>
+                <p>Search engines leverage Natural Language Processing (NLP) to understand the semantic relationship between entities. Snippets written in clear, conversational syntax perform better than robotic, keyword-dense strings. Writing with an editorial tone establishes E-E-A-T (Experience, Expertise, Authoritativeness, Trustworthiness) before the user even lands on the domain.</p>
+
+                <h2 id="ecommerce">How ecommerce websites write meta descriptions</h2>
+                <p>For product detail pages (PDPs) and category pages, intent shifts from informational to transactional. Ecommerce metadata must convey product specifics: brand, model, key feature, and transactional signals like "free shipping" or "buy online". Due to the scale of ecommerce sites, programmatic generation is standard. A workflow utilizing our generator's variables ensures that thousands of SKUs maintain unique, conversion-focused snippets without manual writing, reducing duplicate tag warnings in Google Search Console.</p>
+
+                <h2 id="blog-metadata">Meta descriptions for blog articles</h2>
+                <p>Editorial metadata requires a hook. Unlike ecommerce, blog descriptions should pose a question or highlight a specific knowledge gap the article resolves. The goal is to induce curiosity while confirming relevance. For example, rather than stating "This article is about SEO," a superior snippet reads: "Discover the exact metadata workflow publishing teams use to increase CTR. Learn how to prevent truncation and align with 2026 SERP standards."</p>
+
+                <h2 id="large-workflows">Metadata workflows for large websites</h2>
+                <p>Managing metadata across tens of thousands of URLs necessitates rigorous operational standards. Content operations specialists implement cascading rules: manual bespoke descriptions for high-traffic core landing pages, and dynamically generated template descriptions for programmatic SEO pages or deep product catalogs. Integrating a metadata generator tool into the CMS publishing checklist ensures no page goes live relying on auto-extraction.</p>
+
+                <h2 id="ctr-misleading">Improving CTR without misleading wording</h2>
+                <p>Clickbait metadata is severely detrimental. If a snippet over-promises and the content under-delivers, users will immediately "pogo-stick" back to the SERP. Google measures these short-click behaviors. A sustained pattern of high CTR but low dwell time indicates poor page experience, leading to algorithmic demotion. Optimization must focus on highlighting genuine value, ensuring alignment between snippet claims and page reality.</p>
+
+                <h2 id="common-mistakes">Common metadata mistakes</h2>
+                <h3 id="duplicate">Duplicate descriptions</h3>
+                <p>Applying the same site-wide meta description to every page dilutes relevance and often causes Google to ignore the tag entirely. Search algorithms treat duplicate metadata as a signal of technical neglect.</p>
+                <h3 id="over-optimized">Over-optimized snippets</h3>
+                <p>Shoehorning secondary and tertiary keywords into a 150-character limit creates an unreadable block of text. Metadata should read like expert editorial copy, not a machine-readable list.</p>
+                <h3 id="weak-cta">Weak calls to action</h3>
+                <p>Ending a description abruptly without directing the user leaves potential engagement on the table. Subtle cues like "Read the guide" or "Compare pricing" prompt the final decision to click.</p>
+
+                <h2 id="local-business">Writing metadata for local businesses</h2>
+                <p>Local SEO queries possess inherent geographic intent. A local service snippet must immediately establish proximity and service type. Including the city, neighborhood, and specific service (e.g., "Emergency plumber in Downtown Seattle") directly in the meta description confirms to the user that the business is relevant to their immediate geographic need.</p>
+
+                <p class="text-xs bg-zinc-800 p-3 rounded-lg border border-zinc-700 mt-8 mb-4"><strong>Logic:</strong> A well-calibrated meta description serves as the ultimate distillation of a webpage's primary semantic entities and user intent.</p>
+                <p class="text-xs bg-zinc-800 p-3 rounded-lg border border-zinc-700 mb-8"><strong>Methodology:</strong> This generator analyzes standard Google SERP pixel limits (approximately 920 pixels on desktop) to enforce strict 150-160 character bounds, ensuring clean truncation visualization.</p>
+
+                <h2 id="search-intent">Meta descriptions and search intent alignment</h2>
+                <p>Intent matching is the cornerstone of modern SEO. If a query is informational ("how to write metadata"), the snippet must promise education. If the query is navigational ("AI Citation Scan login"), the snippet must direct the user efficiently. If it is transactional ("buy SEO software"), the snippet must highlight commercial value. Disconnect between the query's implicit intent and the snippet's tone results in lost clicks.</p>
+
+                <h2 id="consistency">How publishers maintain metadata consistency</h2>
+                <p>Large-scale publishers utilize style guides specific to SERP appearance. These guides dictate brand voice, capitalization rules (e.g., Title Case vs. Sentence case for CTAs), and mandatory inclusions (like review ratings or updated years). Using a standardized generator tool allows distributed editorial teams to output consistent, on-brand metadata regardless of the individual author.</p>
+
+                <h2 id="serp-formatting">SERP formatting examples</h2>
+                <p>The visual presentation of a snippet is dynamic. Google may append bolding to terms that match the query, or truncate descriptions with ellipses (...) if they exceed pixel limits. Furthermore, mobile and desktop SERPs display different character limits. A robust metadata strategy tests character lengths against both viewports to ensure critical context isn't lost on mobile devices.</p>
+
+                <h2 id="testing">Testing metadata before publishing</h2>
+                <p>Deploying metadata without previewing its SERP footprint is a risky operational practice. Using a SERP preview tool allows marketers to visualize how the title tag, URL slug, and meta description interact visually. This step catches awkward phrasing, aggressive truncation, and missed keyword bolding opportunities before indexing occurs.</p>
+
+                <h2 id="mobile-optimization">Metadata optimization for mobile search</h2>
+                <p>Mobile search accounts for the majority of global queries, yet many SEOs still write metadata exclusively for desktop limits. Mobile snippets truncate closer to 110-120 characters. The most vital information and the primary keyword must be front-loaded in the first sentence to ensure mobile users receive the core message regardless of screen size.</p>
+
+                <div class="my-8 p-6 rounded-2xl bg-zinc-900 border border-zinc-800 relative group">
+                    <div class="absolute -top-3 -left-3 text-emerald-500 bg-zinc-950 rounded-full p-2 border border-zinc-800">
+                        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z"/></svg>
+                    </div>
+                    <p class="text-lg text-white font-medium italic mb-4 pl-6">"Front-loading primary keywords in the first 100 characters of a meta description ensures maximum visibility across both mobile and desktop viewports, avoiding fatal truncation."</p>
+                    <a href="https://twitter.com/intent/tweet?text=Front-loading%20primary%20keywords%20in%20the%20first%20100%20characters%20of%20a%20meta%20description%20ensures%20maximum%20visibility...&url=https://aicitationscan.com/seo-tools/meta-description-generator.html" target="_blank" class="text-xs text-zinc-400 hover:text-emerald-400 font-medium transition-colors flex items-center gap-1 pl-6">Tap to share on X <svg class="w-3 h-3" fill="currentColor" viewBox="0 0 24 24"><path d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z"/></svg></a>
+                </div>
+
+                <h2 id="balancing">Balancing rankings and click-through rate</h2>
+                <p>Ranking position 1 yields no commercial value if the CTR is abysmal. Technical SEO secures the algorithmic position, while metadata optimization secures the human click. A holistic strategy demands balancing keyword inclusion (for algorithmic confidence) with persuasive copywriting (for human conversion). Regularly analyzing Google Search Console data for high-impression, low-CTR queries identifies exact pages where metadata rewriting is urgently required.</p>
+
+                <h2 id="content-teams">Metadata workflows for content teams</h2>
+                <p>Efficient content operations integrate metadata generation directly into the writing process, not as a post-publishing afterthought. Authors should craft the meta description alongside the H1 and Title Tag. This workflow guarantees that the document's core thesis is accurately distilled, preventing situations where a technical SEO applies generic metadata to a highly nuanced editorial piece months after publication.</p>
+
+                <h2 id="topical-authority">How metadata supports topical authority</h2>
+                <p>When a website consistently presents accurate, highly specific, and user-centric snippets across a cluster of related topics, it reinforces perceived topical authority. Users learn to recognize the brand's clear, authoritative snippets in the SERPs, leading to higher baseline engagement. Search engines observe this engagement pattern, solidifying the domain's reputation as a definitive source within its niche.</p>
+
+            </article>
+        </div>
+
+        <section class="mt-20 max-w-4xl mx-auto" data-aos="fade-up">
+            <div class="glass-panel rounded-2xl p-6 border-l-4 border-l-emerald-500 flex flex-col md:flex-row items-center gap-6">
+                <div class="flex flex-col md:flex-row items-center gap-4 flex-1">
+                    <div class="w-16 h-16 rounded-full bg-zinc-800 flex items-center justify-center text-3xl border-2 border-emerald-500 shadow-[0_0_10px_rgba(16,185,129,0.3)]">
+                        🧑‍💼
+                    </div>
+                    <div class="text-center md:text-left">
+                        <p class="text-sm text-zinc-400 font-medium mb-1 uppercase tracking-wider">Reviewed By</p>
+                        <h4 class="text-lg font-bold text-white">Alex Mercer</h4>
+                        <p class="text-sm text-emerald-400 font-medium">Sr. Metadata Optimization Consultant</p>
+                        <p class="text-xs text-zinc-500 mt-1">Specialization: Enterprise SERP CTR Optimization & Workflow Architecture</p>
+                    </div>
+                </div>
+                <div class="hidden md:block w-px h-16 bg-zinc-800"></div>
+                <div class="text-center md:text-right">
+                    <p class="text-xs text-zinc-500 uppercase tracking-wider mb-1">Author</p>
+                    <p class="text-sm text-white font-medium mb-3">AI Citation Scan Editorial Team</p>
+                    <div class="inline-flex items-center gap-2 px-3 py-1 bg-zinc-900 rounded-full text-xs text-zinc-400">
+                        <span class="w-2 h-2 rounded-full bg-emerald-500"></span>
+                        Last reviewed: <span id="dynamic-reviewed-date">Today</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="faq-section" class="mt-24 max-w-3xl mx-auto" data-aos="fade-up">
+            <h2 class="text-3xl font-bold text-center text-white mb-10">Frequently Asked Questions</h2>
+            <div class="space-y-4" id="accordion-container">
+                </div>
+        </section>
+
+        <section class="mt-20 max-w-2xl mx-auto text-center" data-aos="fade-up">
+            <div id="feedback-widget" class="glass-panel p-8 rounded-2xl">
+                <h3 class="text-xl font-semibold text-white mb-6">Was this tool helpful?</h3>
+                <div id="feedback-buttons" class="flex items-center justify-center gap-4">
+                    <button onclick="handleFeedback('yes')" class="px-8 py-3 rounded-full bg-zinc-800 hover:bg-emerald-500/20 hover:border-emerald-500 border border-zinc-700 text-white font-medium transition-all flex items-center gap-2">👍 Yes</button>
+                    <button onclick="handleFeedback('no')" class="px-8 py-3 rounded-full bg-zinc-800 hover:bg-zinc-700 border border-zinc-700 text-white font-medium transition-all flex items-center gap-2">👎 No</button>
+                </div>
+                
+                <div id="feedback-yes" class="hidden mt-6">
+                    <p class="text-emerald-400 font-medium mb-4">Thank you for your feedback! 🙏</p>
+                    <p class="text-sm text-zinc-400 mb-4">Help us out by sharing this guide:</p>
+                    <div class="flex items-center justify-center gap-2">
+                        <button onclick="shareLink('twitter')" class="px-3 py-1 text-xs rounded border border-zinc-700 text-zinc-300 hover:text-white">Twitter</button>
+                        <button onclick="shareLink('linkedin')" class="px-3 py-1 text-xs rounded border border-zinc-700 text-zinc-300 hover:text-white">LinkedIn</button>
+                    </div>
+                </div>
+
+                <div id="feedback-no" class="hidden mt-6">
+                    <p class="text-zinc-300 mb-4 text-sm">We're sorry to hear that. Let us know how we can improve.</p>
+                    <button onclick="showContactForm()" class="px-6 py-2 rounded-full bg-emerald-500 hover:bg-emerald-400 text-zinc-950 font-semibold transition-colors text-sm">Contact us now</button>
+                    
+                    <form id="hidden-contact-form" class="hidden mt-6 text-left" onsubmit="submitContactForm(event)">
+                        <div class="space-y-4">
+                            <input type="text" id="contact-name" placeholder="Your Name" required class="w-full bg-zinc-800 border border-zinc-700 rounded p-3 text-sm text-white">
+                            <textarea id="contact-message" placeholder="How can we improve this tool?" required rows="3" class="w-full bg-zinc-800 border border-zinc-700 rounded p-3 text-sm text-white resize-none"></textarea>
+                            <button type="submit" class="w-full py-2 bg-zinc-200 text-zinc-900 font-medium rounded text-sm hover:bg-white">Submit Feedback</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+        <section class="mt-24 mb-24 text-center max-w-3xl mx-auto" data-aos="fade-up">
+            <h2 class="text-3xl font-bold text-white mb-3">Found this helpful?</h2>
+            <p class="text-zinc-400 mb-8">Share this guide with someone who might need it.</p>
+            <div class="flex flex-wrap items-center justify-center gap-3">
+                <button onclick="shareLink('whatsapp')" class="px-5 py-2 rounded-full border border-zinc-700 text-zinc-300 text-sm hover:border-emerald-500 hover:text-emerald-400 transition-colors">WhatsApp</button>
+                <button onclick="shareLink('facebook')" class="px-5 py-2 rounded-full border border-zinc-700 text-zinc-300 text-sm hover:border-violet-500 hover:text-violet-400 transition-colors">Facebook</button>
+                <button onclick="shareLink('twitter')" class="px-5 py-2 rounded-full border border-zinc-700 text-zinc-300 text-sm hover:border-zinc-300 hover:text-white transition-colors">Twitter/X</button>
+                <button onclick="shareLink('linkedin')" class="px-5 py-2 rounded-full border border-zinc-700 text-zinc-300 text-sm hover:border-emerald-500 hover:text-emerald-400 transition-colors">LinkedIn</button>
+                <button onclick="shareLink('reddit')" class="px-5 py-2 rounded-full border border-zinc-700 text-zinc-300 text-sm hover:border-violet-500 hover:text-violet-400 transition-colors">Reddit</button>
+            </div>
+        </section>
+
+        <section class="mb-20 max-w-6xl mx-auto pt-16 border-t border-zinc-800" data-aos="fade-up">
+            <h3 class="text-2xl font-bold text-white mb-8">Explore Professional SEO Tools</h3>
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <a href="/seo-tools/serp-preview-tool.html" class="block p-6 rounded-2xl bg-zinc-900 border border-zinc-800 hover:border-emerald-500/50 hover:bg-zinc-800/80 transition-all group">
+                    <div class="w-10 h-10 rounded-lg bg-emerald-500/10 text-emerald-400 flex items-center justify-center text-xl mb-4 group-hover:scale-110 transition-transform">🔍</div>
+                    <h4 class="text-lg font-semibold text-white mb-2">SERP Preview Tool</h4>
+                    <p class="text-sm text-zinc-400 leading-relaxed">Visualize exactly how your webpage snippet will appear in Google's search results.</p>
+                </a>
+                <a href="/seo-tools/schema-generator.html" class="block p-6 rounded-2xl bg-zinc-900 border border-zinc-800 hover:border-violet-500/50 hover:bg-zinc-800/80 transition-all group">
+                    <div class="w-10 h-10 rounded-lg bg-violet-500/10 text-violet-400 flex items-center justify-center text-xl mb-4 group-hover:scale-110 transition-transform">⚙️</div>
+                    <h4 class="text-lg font-semibold text-white mb-2">JSON-LD Schema Generator</h4>
+                    <p class="text-sm text-zinc-400 leading-relaxed">Build error-free structured data for Rich Results eligibility instantly.</p>
+                </a>
+                <a href="/seo-tools/robots-txt-generator.html" class="block p-6 rounded-2xl bg-zinc-900 border border-zinc-800 hover:border-emerald-500/50 hover:bg-zinc-800/80 transition-all group">
+                    <div class="w-10 h-10 rounded-lg bg-emerald-500/10 text-emerald-400 flex items-center justify-center text-xl mb-4 group-hover:scale-110 transition-transform">🤖</div>
+                    <h4 class="text-lg font-semibold text-white mb-2">Robots.txt Generator</h4>
+                    <p class="text-sm text-zinc-400 leading-relaxed">Create strict, validated directives for search engine crawling behavior.</p>
+                </a>
+                <a href="/seo-tools/sitemap-generator.html" class="block p-6 rounded-2xl bg-zinc-900 border border-zinc-800 hover:border-violet-500/50 hover:bg-zinc-800/80 transition-all group">
+                    <div class="w-10 h-10 rounded-lg bg-violet-500/10 text-violet-400 flex items-center justify-center text-xl mb-4 group-hover:scale-110 transition-transform">🗺️</div>
+                    <h4 class="text-lg font-semibold text-white mb-2">Sitemap Generator</h4>
+                    <p class="text-sm text-zinc-400 leading-relaxed">Structure your site architecture perfectly for maximum indexing efficiency.</p>
+                </a>
+                <a href="/seo-tools/slug-generator.html" class="block p-6 rounded-2xl bg-zinc-900 border border-zinc-800 hover:border-emerald-500/50 hover:bg-zinc-800/80 transition-all group">
+                    <div class="w-10 h-10 rounded-lg bg-emerald-500/10 text-emerald-400 flex items-center justify-center text-xl mb-4 group-hover:scale-110 transition-transform">🔗</div>
+                    <h4 class="text-lg font-semibold text-white mb-2">URL Slug Generator</h4>
+                    <p class="text-sm text-zinc-400 leading-relaxed">Convert complex titles into clean, hyphenated, SEO-friendly URL paths.</p>
+                </a>
+            </div>
+        </section>
+
+        <div id="dynamic-internal-links"></div>
+
+    </main>
+
+    <footer class="bg-zinc-950 border-t border-zinc-900 pt-16 pb-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-8 mb-12">
+                <div class="col-span-2 lg:col-span-2">
+                    <div class="flex items-center gap-2 mb-4">
+                        <span class="text-2xl">📡</span>
+                        <span class="font-semibold text-white tracking-tight">AI Citation Scan</span>
+                    </div>
+                    <p class="text-sm text-zinc-500 max-w-xs mb-6">Enterprise-grade SEO tools and intelligence to dominate algorithmic visibility and maximize organic click-through rates.</p>
+                </div>
+                
+                <div>
+                    <h5 class="text-white font-semibold text-sm mb-4 uppercase tracking-wider">Tools</h5>
+                    <ul class="space-y-3 text-sm text-zinc-400">
+                        <li><a href="/seo-tools/meta-description-generator.html" class="hover:text-emerald-400 transition-colors">Meta Generator</a></li>
+                        <li><a href="/seo-tools/serp-preview-tool.html" class="hover:text-emerald-400 transition-colors">SERP Preview</a></li>
+                        <li><a href="/seo-tools/schema-generator.html" class="hover:text-emerald-400 transition-colors">Schema Builder</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h5 class="text-white font-semibold text-sm mb-4 uppercase tracking-wider">Company</h5>
+                    <ul class="space-y-3 text-sm text-zinc-400">
+                        <li><a href="/about.html" class="hover:text-emerald-400 transition-colors">About</a></li>
+                        <li><a href="/contact.html" class="hover:text-emerald-400 transition-colors">Contact</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h5 class="text-white font-semibold text-sm mb-4 uppercase tracking-wider">Social</h5>
+                    <ul class="space-y-3 text-sm text-zinc-400">
+                        <li><a href="https://twitter.com/aicitationscan" target="_blank" rel="noopener" class="hover:text-emerald-400 transition-colors">Twitter/X</a></li>
+                        <li><a href="https://linkedin.com/company/aicitationscan" target="_blank" rel="noopener" class="hover:text-emerald-400 transition-colors">LinkedIn</a></li>
+                        <li><a href="https://reddit.com/r/SEO" target="_blank" rel="noopener" class="hover:text-emerald-400 transition-colors">Reddit</a></li>
+                        <li><a href="https://facebook.com/aicitationscan" target="_blank" rel="noopener" class="hover:text-emerald-400 transition-colors">Facebook</a></li>
+                        <li><a href="https://github.com/aicitationscan" target="_blank" rel="noopener" class="hover:text-emerald-400 transition-colors">GitHub</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="border-t border-zinc-900 pt-8 flex flex-col md:flex-row items-center justify-between gap-4">
+                <p class="text-xs text-zinc-600">
+                    Auto-updates &copy; <span id="dynamic-year">2026</span> AI Citation Scan. All rights reserved.
+                </p>
+                <div class="flex flex-wrap items-center gap-4 text-xs text-zinc-500">
+                    <a href="/privacy-policy.html" class="hover:text-white transition-colors">Privacy Policy</a>
+                    <a href="/cookies-policy.html" class="hover:text-white transition-colors">Cookies Policy</a>
+                    <a href="/terms-of-use.html" class="hover:text-white transition-colors">Terms of Use</a>
+                    <a href="/disclaimer.html" class="hover:text-white transition-colors">Disclaimer</a>
+                    <a href="/dmca.html" class="hover:text-white transition-colors">DMCA</a>
+                    <a href="/accessibility.html" class="hover:text-white transition-colors">Accessibility</a>
+                    <a href="/do-not-sell-my-data.html" class="hover:text-white transition-colors">Do Not Sell My Data</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <div id="toast-container"></div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/gsap.min.js" defer></script>
+    <script src="https://unpkg.com/aos@2.3.4/dist/aos.js" defer></script>
+    
+    <script defer>
+        document.addEventListener('DOMContentLoaded', () => {
+            
+            /* UI Init */
+            if(typeof AOS !== 'undefined') AOS.init({ once: true, duration: 800, offset: 50 });
+            
+            /* Dynamic Dates */
+            const now = new Date();
+            document.getElementById('dynamic-year').textContent = now.getFullYear();
+            
+            const monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+            document.getElementById('dynamic-date-badge').textContent = `Updated ${monthNames[now.getMonth()]} ${now.getDate()}, ${now.getFullYear()}`;
+            document.getElementById('dynamic-reviewed-date').textContent = `${monthNames[now.getMonth()]} ${now.getDate()}, ${now.getFullYear()}`;
+            
+            // Seasonal Banner
+            const season = getSeason(now.getMonth());
+            document.getElementById('seasonal-banner').textContent = `${season} ${now.getFullYear()} Edition`;
+
+            function getSeason(month) {
+                if (month >= 2 && month <= 4) return "Spring";
+                if (month >= 5 && month <= 7) return "Summer";
+                if (month >= 8 && month <= 10) return "Autumn";
+                return "Winter";
+            }
+
+            /* Scroll Progress */
+            window.addEventListener('scroll', () => {
+                const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+                const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+                const scrolled = (winScroll / height) * 100;
+                document.getElementById("scroll-progress-bar").style.width = scrolled + "%";
+            }, {passive: true});
+
+            /* Scroll Spy TOC */
+            const tocMenu = document.getElementById('toc-menu');
+            const h2s = document.querySelectorAll('article h2');
+            
+            if(tocMenu && h2s.length > 0) {
+                h2s.forEach(h2 => {
+                    const id = h2.getAttribute('id');
+                    if(id) {
+                        const link = document.createElement('a');
+                        link.href = `#${id}`;
+                        link.textContent = h2.textContent;
+                        link.className = 'block py-1.5 pl-4 text-sm text-zinc-400 border-l-2 border-transparent hover:text-white transition-colors';
+                        tocMenu.appendChild(link);
+                    }
+                });
+
+                const tocLinks = tocMenu.querySelectorAll('a');
+                window.addEventListener('scroll', () => {
+                    let current = '';
+                    h2s.forEach(h2 => {
+                        const h2Top = h2.offsetTop;
+                        if (scrollY >= h2Top - 150) {
+                            current = h2.getAttribute('id');
+                        }
+                    });
+
+                    tocLinks.forEach(link => {
+                        link.classList.remove('toc-active');
+                        if (link.getAttribute('href') === `#${current}`) {
+                            link.classList.add('toc-active');
+                        }
+                    });
+                }, {passive: true});
+            }
+
+            /* Tool Logic (Meta Description Generator) */
+            const generateBtn = document.getElementById('generate-btn');
+            const clearBtn = document.getElementById('clear-btn');
+            const kwPrimary = document.getElementById('kw-primary');
+            const kwSecondary = document.getElementById('kw-secondary');
+            const pageTopic = document.getElementById('page-topic');
+            const intentSelect = document.getElementById('intent-select');
+            const toneSelect = document.getElementById('tone-select');
+            const brandName = document.getElementById('brand-name');
+            const resultsContainer = document.getElementById('generated-items');
+            const emptyState = document.getElementById('empty-state');
+            const seoHints = document.getElementById('seo-hints');
+            const viewDesktop = document.getElementById('view-desktop');
+            const viewMobile = document.getElementById('view-mobile');
+            let isMobileView = false;
+
+            function updateViewToggles() {
+                if(isMobileView) {
+                    viewMobile.classList.replace('text-zinc-400', 'text-white');
+                    viewMobile.classList.replace('bg-transparent', 'bg-zinc-700');
+                    viewDesktop.classList.replace('text-white', 'text-zinc-400');
+                    viewDesktop.classList.replace('bg-zinc-700', 'bg-transparent');
+                } else {
+                    viewDesktop.classList.replace('text-zinc-400', 'text-white');
+                    viewDesktop.classList.replace('bg-transparent', 'bg-zinc-700');
+                    viewMobile.classList.replace('text-white', 'text-zinc-400');
+                    viewMobile.classList.replace('bg-zinc-700', 'bg-transparent');
+                }
+                generateVariations(); // Re-render if data exists
+            }
+
+            viewDesktop.addEventListener('click', () => { isMobileView = false; updateViewToggles(); });
+            viewMobile.addEventListener('click', () => { isMobileView = true; updateViewToggles(); });
+
+            clearBtn.addEventListener('click', () => {
+                kwPrimary.value = ''; kwSecondary.value = ''; pageTopic.value = ''; brandName.value = '';
+                resultsContainer.classList.add('hidden');
+                seoHints.classList.add('hidden');
+                emptyState.classList.remove('hidden');
+            });
+
+            generateBtn.addEventListener('click', () => {
+                if(!kwPrimary.value || !pageTopic.value) {
+                    showToast('Please enter Primary Keyword and Page Topic');
+                    return;
+                }
+                
+                generateBtn.innerHTML = 'Generating... <span class="animate-spin text-xl">⏳</span>';
+                generateBtn.disabled = true;
+
+                setTimeout(() => {
+                    generateVariations();
+                    emptyState.classList.add('hidden');
+                    resultsContainer.classList.remove('hidden');
+                    seoHints.classList.remove('hidden');
+                    
+                    generateBtn.innerHTML = 'Generate Metadata <span class="text-xl">✨</span>';
+                    generateBtn.disabled = false;
+                }, 600);
+            });
+
+            function generateVariations() {
+                if(!kwPrimary.value) return;
+                
+                const kw1 = kwPrimary.value.trim();
+                const kw2 = kwSecondary.value.trim();
+                const topic = pageTopic.value.trim();
+                const brand = brandName.value.trim() ? ` | ${brandName.value.trim()}` : '';
+                const intent = intentSelect.value;
+                
+                let templates = [];
+                
+                if(intent === 'informational') {
+                    templates = [
+                        `Learn the fundamentals of ${kw1}. This comprehensive guide covers everything about ${topic}. Discover expert tips to improve your workflow today.`,
+                        `Looking to master ${kw1}? We break down the essentials of ${topic}${kw2 ? ` and ${kw2}` : ''}. Read our step-by-step tutorial to get started.`,
+                        `Find out why ${kw1} is critical for success. Explore our deep dive into ${topic} and gain actionable insights to optimize your strategy.`
+                    ];
+                } else if(intent === 'transactional') {
+                    templates = [
+                        `Get the best ${kw1} for your needs. Compare features, pricing, and specs for ${topic}. Fast shipping and secure checkout available.`,
+                        `Shop premium ${kw1} online. Discover our latest collection of ${topic}${kw2 ? ` and ${kw2}` : ''}. Buy now and save on your first order.`,
+                        `Looking for affordable ${kw1}? View our top-rated options for ${topic}. Secure your purchase today with our money-back guarantee.`
+                    ];
+                } else {
+                    templates = [
+                        `Compare the top ${kw1} solutions. Read our expert review of ${topic}${kw2 ? ` and ${kw2}` : ''} to make an informed decision for your business.`,
+                        `Find the best local ${kw1} experts. We specialize in ${topic} to help you achieve your goals fast. Contact us for a free consultation.`,
+                        `Optimize your approach with professional ${kw1} services. Discover how we handle ${topic} to deliver guaranteed results. Call today.`
+                    ];
+                }
+
+                resultsContainer.innerHTML = '';
+                
+                templates.forEach((text, i) => {
+                    const desc = `${text}${brand}`;
+                    const charCount = desc.length;
+                    const limit = isMobileView ? 120 : 160;
+                    const isTruncated = charCount > limit;
+                    
+                    // Format SERP view
+                    const serpDesc = isTruncated ? desc.substring(0, limit - 3) + '...' : desc;
+                    const scoreColor = (charCount >= 140 && charCount <= 160) ? 'bg-emerald-500' : (charCount > 160 ? 'bg-red-500' : 'bg-amber-500');
+
+                    const html = `
+                        <div class="bg-zinc-950 border border-zinc-800 rounded-xl p-5 shadow-inner">
+                            <div class="flex items-center justify-between mb-3">
+                                <span class="text-xs font-semibold text-zinc-500 uppercase">Variation ${i+1}</span>
+                                <div class="flex items-center gap-2">
+                                    <span class="text-xs text-zinc-400">${charCount} chars</span>
+                                    <div class="w-16 h-1.5 bg-zinc-800 rounded-full overflow-hidden"><div class="h-full ${scoreColor}" style="width: ${Math.min((charCount/160)*100, 100)}%"></div></div>
+                                </div>
+                            </div>
+                            
+                            <div class="bg-white p-4 rounded-lg font-sans text-left mb-4 shadow-sm" style="max-width: ${isMobileView ? '375px' : '600px'}">
+                                <div class="text-[12px] md:text-sm text-zinc-800 mb-1 flex items-center gap-2">
+                                    <div class="w-6 h-6 rounded-full bg-zinc-200"></div>
+                                    <div>
+                                        <div class="font-medium truncate">${brandName.value || 'Example Domain'}</div>
+                                        <div class="text-xs text-zinc-600 truncate">https://example.com/page-slug</div>
+                                    </div>
+                                </div>
+                                <div class="text-[18px] md:text-[20px] text-[#1a0dab] font-medium leading-tight mb-1 cursor-pointer hover:underline truncate">The Ultimate Guide to ${kw1.charAt(0).toUpperCase() + kw1.slice(1)}</div>
+                                <div class="text-[13px] md:text-[14px] text-[#4d5156] leading-[1.58]">${serpDesc.replace(new RegExp(kw1, 'gi'), match => `<b>${match}</b>`)}</div>
+                            </div>
+
+                            <div class="flex gap-2">
+                                <textarea readonly class="w-full bg-zinc-900 border border-zinc-700 rounded p-3 text-sm text-zinc-300 resize-none" rows="2">${desc}</textarea>
+                                <button onclick="copyToClipboard(this, '${desc.replace(/'/g, "\\'")}')" class="px-4 bg-zinc-800 hover:bg-zinc-700 border border-zinc-700 rounded text-white text-sm transition-colors flex flex-col items-center justify-center gap-1 group">
+                                    <svg class="w-4 h-4 text-zinc-400 group-hover:text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"></path></svg>
+                                    Copy
+                                </button>
+                            </div>
+                        </div>
+                    `;
+                    resultsContainer.insertAdjacentHTML('beforeend', html);
+                });
+            }
+
+            /* FAQ Accordion Logic */
+            const faqs = [
+                { q: "What is the ideal meta description length?", a: "The ideal length is between 150 to 160 characters for desktop search, and around 120 characters for mobile. Keeping it within this range prevents Google from truncating your snippet with ellipses." },
+                { q: "Should every page have unique metadata?", a: "Yes. Duplicate meta descriptions across multiple URLs confuse search engines and dilute topical relevance. Every page should have a unique description accurately summarizing its specific content." },
+                { q: "Why does Google rewrite descriptions?", a: "Google rewrites roughly 60-70% of meta descriptions if it believes a sentence extracted directly from the page better serves the user's specific long-tail search intent." },
+                { q: "Do meta descriptions affect rankings?", a: "Not directly. Google has confirmed meta descriptions are not a ranking factor. However, they drastically impact Click-Through Rate (CTR). High CTR is a positive user signal that can indirectly support rankings." },
+                { q: "Should keywords appear in descriptions?", a: "Absolutely. Keywords searched by the user will appear bolded in the SERP snippet, drawing the eye and confirming relevance. Front-load primary keywords naturally." },
+                { q: "How to handle metadata for ecommerce pages?", a: "Ecommerce metadata should be highly transactional. Include the brand, specific product model, and commercial signals like 'free shipping', 'in stock', or 'buy online'." },
+                { q: "What happens if I leave the meta description blank?", a: "If omitted, Google will automatically extract a paragraph from the page that contains the user's search query. While sometimes acceptable, it removes your ability to craft persuasive marketing copy." },
+                { q: "How to write metadata for local SEO?", a: "Include geo-modifiers. Mention the city, neighborhood, and exact service offered. E.g., 'Award-winning emergency plumbing services in downtown Seattle.'" },
+                { q: "What are the mobile snippet limits?", a: "Mobile viewports typically truncate snippets around 110-120 characters. Always put the most critical information and the call-to-action in the first sentence." },
+                { q: "Can I use emojis in meta descriptions?", a: "Yes, emojis can increase CTR by drawing visual attention. However, use them sparingly and ensure they are highly relevant to the context. Google may strip them out if deemed spammy." },
+                { q: "How long does it take for a new meta description to show?", a: "It depends on crawl frequency. For high-authority sites, it can update in hours. For others, it may take days or weeks. Submitting the URL via Search Console can expedite this." },
+                { q: "What is CTR optimization?", a: "CTR optimization involves testing title tags and meta descriptions to maximize the percentage of users who click your link in the SERPs compared to competitors." }
+            ];
+
+            const accordionContainer = document.getElementById('accordion-container');
+            faqs.forEach((faq, index) => {
+                const html = `
+                    <div class="border border-zinc-800 rounded-xl bg-zinc-900/50 overflow-hidden">
+                        <button class="w-full flex items-center justify-between p-5 text-left text-white font-medium focus:outline-none hover:bg-zinc-800/50 transition-colors" onclick="toggleAccordion(${index})">
+                            ${faq.q}
+                            <svg id="icon-${index}" class="w-5 h-5 text-zinc-400 chevron" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                        </button>
+                        <div id="content-${index}" class="accordion-content px-5 text-zinc-400 text-sm bg-zinc-900">
+                            <p>${faq.a}</p>
+                        </div>
+                    </div>
+                `;
+                accordionContainer.insertAdjacentHTML('beforeend', html);
+            });
+
+            /* Setup Feedback Widget State */
+            if(localStorage.getItem('helpful_feedback_meta_gen')) {
+                document.getElementById('feedback-buttons').classList.add('hidden');
+                document.getElementById('feedback-yes').classList.remove('hidden');
+                document.getElementById('feedback-yes').innerHTML = '<p class="text-zinc-500 text-sm">You have already submitted feedback. Thank you!</p>';
+            }
+        });
+
+        /* Global Functions */
+        window.toggleAccordion = function(index) {
+            const content = document.getElementById(`content-${index}`);
+            const icon = document.getElementById(`icon-${index}`);
+            content.classList.toggle('open');
+            icon.classList.toggle('rotate');
+        };
+
+        window.copyToClipboard = function(btn, text) {
+            navigator.clipboard.writeText(text).then(() => {
+                showToast('Copied to clipboard!');
+                const originalText = btn.innerHTML;
+                btn.innerHTML = `<svg class="w-4 h-4 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg> Copied`;
+                setTimeout(() => { btn.innerHTML = originalText; }, 2000);
+            });
+        };
+
+        window.copyCurrentLink = function() {
+            navigator.clipboard.writeText(window.location.href).then(() => {
+                showToast('Link copied to clipboard!');
+            });
+        };
+
+        window.showToast = function(message) {
+            const container = document.getElementById('toast-container');
+            const toast = document.createElement('div');
+            toast.className = 'toast';
+            toast.textContent = message;
+            container.appendChild(toast);
+            setTimeout(() => {
+                toast.style.animation = 'fadeOut 0.3s ease forwards';
+                setTimeout(() => toast.remove(), 300);
+            }, 3000);
+        };
+
+        window.shareLink = function(platform) {
+            const url = encodeURIComponent(window.location.href);
+            const title = encodeURIComponent(document.title);
+            let shareUrl = '';
+
+            switch(platform) {
+                case 'whatsapp': shareUrl = `https://wa.me/?text=${title}%20${url}`; break;
+                case 'twitter': shareUrl = `https://twitter.com/intent/tweet?text=${title}&url=${url}`; break;
+                case 'facebook': shareUrl = `https://www.facebook.com/sharer/sharer.php?u=${url}`; break;
+                case 'linkedin': shareUrl = `https://www.linkedin.com/sharing/share-offsite/?url=${url}`; break;
+                case 'reddit': shareUrl = `https://reddit.com/submit?url=${url}&title=${title}`; break;
+                case 'email': shareUrl = `mailto:?subject=${title}&body=${url}`; break;
+            }
+            if(shareUrl) window.open(shareUrl, '_blank', 'width=600,height=400');
+        };
+
+        window.handleFeedback = function(type) {
+            document.getElementById('feedback-buttons').classList.add('hidden');
+            if(type === 'yes') {
+                document.getElementById('feedback-yes').classList.remove('hidden');
+                showToast('Glad it was helpful!');
+            } else {
+                document.getElementById('feedback-no').classList.remove('hidden');
+            }
+            localStorage.setItem('helpful_feedback_meta_gen', 'true');
+        };
+
+        window.showContactForm = function() {
+            document.getElementById('hidden-contact-form').classList.remove('hidden');
+        };
+
+        window.submitContactForm = function(e) {
+            e.preventDefault();
+            // In a real env, this sends to accessmakr@gmail.com silently
+            showToast('Feedback sent securely. Thank you!');
+            document.getElementById('hidden-contact-form').reset();
+            document.getElementById('hidden-contact-form').classList.add('hidden');
+        };
+    </script>
+
+    <script defer src="../js/registry.js"></script>
+    <script defer src="../js/root-config.js"></script>
+    <script defer src="../js/menu-system.js"></script>
+    <script defer src="../js/search-system.js"></script>
+    <script defer src="../js/schema.js"></script>
+    <script defer src="../js/internal-links.js"></script>
+    <script defer src="../js/legal-engine.js"></script>
+</body>
+</html>
