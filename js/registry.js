@@ -79,8 +79,8 @@ window.seoRegistry = {
     },
     "contact.html": {
         "url": "/contact",
-        "title": "Contact Our Technical Team | AI Citation Scan",
-        "desc": "Connect with AI Citation Scan for technical support, tool feedback, or partnership inquiries. Our expert team ensures your SEO and developer tools perform at peak efficiency."
+        "title": "Contact Technical Engineering | AI Citation Scan",
+        "desc": "Connect with the technical engineering team at AI Citation Scan. Secure portal for tool inquiries, technical feedback, and directory citation audits."
     },
     "cookies-policy.html": {
         "url": "/cookies-policy",
