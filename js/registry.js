@@ -89,8 +89,8 @@ window.seoRegistry = {
     },
     "disclaimer.html": {
         "url": "/disclaimer",
-        "title": "Disclaimer",
-        "desc": "AI Citation Scan Legal Disclaimer. We provide SEO tools and directory services for informational purposes only, without professional or technical liability."
+        "title": "Technical Disclaimer",
+        "desc": "Official technical disclaimer for AI Citation Scan. Understand the data sourcing, accuracy limitations, and professional usage terms of our directory tools."
     },
     "dmca.html": {
         "url": "/dmca",
