@@ -74,8 +74,8 @@ window.seoRegistry = {
     },
     "accessibility.html": {
         "url": "/accessibility",
-        "title": "Accessibility Commitment",
-        "desc": "AI Citation Scan Accessibility Statement. We are committed to WCAG 2.1 AA compliance to ensure digital equity for all users."
+        "title": "Accessibility Statement",
+        "desc": "AI Citation Scan Accessibility Statement. Learn about our commitment to WCAG 2.1 AA compliance and ensuring our tools are usable by everyone."
     },
     "contact.html": {
         "url": "/contact",
