@@ -1,4 +1,9 @@
 export const SiteRegistry = {
+    "about.html": {
+        "url": "/about",
+        "title": "The Mission",
+        "desc": "Mission and methodology of AI Citation Scan. Helping brands bridge the gap between traditional SEO and AI search visibility."
+    },
     "accessibility.html": {
         "url": "/accessibility",
         "title": "Accessibility Statement",
