@@ -4,7 +4,6 @@ const path = require('path');
 const DOMAIN = 'https://aicitationscan.com';
 const ROOT_DIR = path.join(__dirname, '..');
 const JS_DIR = path.join(ROOT_DIR, 'js');
-
 const USE_CLEAN_URLS = true;
 const IGNORE_DIRS = ['.git', '.github', 'node_modules', 'js', 'css', 'assets', 'scripts'];
 
@@ -76,7 +75,6 @@ function generate() {
             
             let webPath = folder === '' ? file : `${folder}/${file}`;
             if (USE_CLEAN_URLS) webPath = webPath.replace('.html', '');
-            
             const url = `/${webPath}`;
             const cleanTitle = meta.h1 || meta.title;
 
@@ -96,7 +94,8 @@ function generate() {
     fs.writeFileSync(path.join(ROOT_DIR, 'sitemap.xml'), sitemap);
     
     // Final Export
-    const registryContent = `// AUTO-GENERATED\nwindow.siteRegistry = ${JSON.stringify(menuRegistry, null, 4)};\n\nexport const SiteRegistry = ${JSON.stringify(seoRegistry, null, 4)};`;
+    // FIXED: Replaced "export const SiteRegistry" with "window.seoRegistry"
+    const registryContent = `// AUTO-GENERATED\nwindow.siteRegistry = ${JSON.stringify(menuRegistry, null, 4)};\n\nwindow.seoRegistry = ${JSON.stringify(seoRegistry, null, 4)};`;
     fs.writeFileSync(path.join(JS_DIR, 'registry.js'), registryContent);
     fs.writeFileSync(path.join(JS_DIR, 'pages.json'), JSON.stringify(pagesJson, null, 2));
 
