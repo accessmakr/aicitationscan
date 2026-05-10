@@ -9,6 +9,11 @@ export const SiteRegistry = {
         "title": "Cookies & Data Policy",
         "desc": "Cookies and Privacy Policy for AI Citation Scan. Clinical, privacy-first technical standards with zero marketing tracking."
     },
+    "do-not-sell-my-data.html": {
+        "url": "/do-not-sell-my-data",
+        "title": "Your Privacy Rights (CCPA)",
+        "desc": ""
+    },
     "index.html": {
         "url": "/",
         "title": "Your Website Is Invisible to AI.Get Your Full AI Visibility Report in 60 Seconds",
