@@ -110,7 +110,7 @@ window.seoRegistry = {
     "terms-of-use.html": {
         "url": "/terms-of-use",
         "title": "Terms of Use",
-        "desc": "Terms of Use for AI Citation Scan. Governance for GEO auditing, LLM simulation tools, and technical visibility benchmarks."
+        "desc": "Read the AI Citation Scan Terms of Use. Understand your rights, our tool license, and our directory disclaimer for enterprise-grade SEO tool usage."
     },
     "meta-description-generator.html": {
         "url": "/seo-tools/meta-description-generator",
