@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en" class="dark scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Privacy Policy for AI Citation Scan. Clinical, transparent standards regarding data processing and LLM simulation privacy.">
+    <title>Privacy Policy | AI Citation Scan</title>
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        slate: { 950: '#020617' }
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <script src="/js/registry.js" defer></script>
+    <script src="/js/menu-system.js" defer></script>
+
+    <style>
+        .custom-scrollbar::-webkit-scrollbar { width: 4px; }
+        .custom-scrollbar::-webkit-scrollbar-track { background: transparent; }
+        .custom-scrollbar::-webkit-scrollbar-thumb { background: #334155; border-radius: 10px; }
+        .prose h2 { color: #f1f5f9; font-weight: 700; margin-top: 2rem; margin-bottom: 1rem; font-size: 1.25rem; border-left: 4px solid #10b981; padding-left: 1rem; }
+        .prose p { margin-bottom: 1.25rem; line-height: 1.75; }
+    </style>
+</head>
+<body class="bg-slate-950 text-slate-400 font-sans antialiased">
+
+    <header class="fixed top-0 left-0 right-0 z-[50] bg-slate-950/80 backdrop-blur-md border-b border-slate-800/50">
+        <div class="max-w-7xl mx-auto px-4 h-16 flex items-center justify-between">
+            <div class="flex items-center gap-4">
+                <a href="/" class="flex items-center gap-2 group">
+                    <div class="w-9 h-9 bg-emerald-500/10 rounded-lg flex items-center justify-center group-hover:bg-emerald-500/20 transition-colors">
+                        <span class="text-emerald-500 font-bold">AI</span>
+                    </div>
+                    <span class="text-slate-100 font-bold text-lg tracking-tight">Citation Scan</span>
+                </a>
+            </div>
+            
+            <div class="flex items-center gap-2">
+                <div id="master-nav-dock" class="flex items-center">
+                    <nav class="hidden md:flex items-center gap-6 mr-6 border-r border-slate-800 pr-6">
+                        <a href="/seo-tools/" class="text-sm font-medium hover:text-emerald-400 transition-colors">SEO Tools</a>
+                        <a href="/about" class="text-sm font-medium hover:text-emerald-400 transition-colors">Methodology</a>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="pt-32 pb-20 px-4">
+        <div class="max-w-3xl mx-auto">
+            <div class="mb-12">
+                <span class="text-emerald-500 text-xs font-bold uppercase tracking-[0.2em] mb-4 block">Legal Framework</span>
+                <h1 class="text-4xl md:text-5xl font-bold text-slate-100 mb-6 tracking-tight">Privacy Policy</h1>
+                <p class="text-lg text-slate-400 leading-relaxed">
+                    Last Modified: <span id="last-mod">May 2024</span>. 
+                    AI Citation Scan operates on a "Privacy-by-Design" infrastructure. We prioritize mathematical transparency over data collection.
+                </p>
+            </div>
+
+            <div class="prose prose-invert max-w-none">
+                <h2>1. Data Minimization Principle</h2>
+                <p>
+                    AI Citation Scan does not require user accounts, email registration, or persistent identity tracking to use our simulation tools. Our technical audits (including GEO simulations and SERP previews) are processed as stateless transactions. 
+                </p>
+
+                <h2>2. Information Collection</h2>
+                <p>
+                    We collect only the essential technical data required to maintain service integrity:
+                </p>
+                <ul class="list-disc pl-6 space-y-2 mb-6">
+                    <li><strong>Simulation Inputs:</strong> Content strings entered into tools (e.g., meta descriptions) are processed in real-time and are not stored in our permanent databases.</li>
+                    <li><strong>Technical Logs:</strong> Standard server logs (IP address, browser type) are kept briefly to mitigate DDoS attacks and are automatically purged.</li>
+                </ul>
+
+                <h2>3. LLM and API Interfacing</h2>
+                <p>
+                    When using tools that involve AI citations or LLM visibility audits, your queries may be processed via encrypted APIs. We do not pass personally identifiable information (PII) to these third-party processors.
+                </p>
+
+                <h2>4. Third-Party Analytics</h2>
+                <p>
+                    We avoid invasive marketing trackers. Any analytics utilized are configured for <strong>anonymous telemetry</strong> only, ensuring that your individual browsing behavior remains private and unlinked to a specific identity.
+                </p>
+
+                <h2>5. Cookies and Local Storage</h2>
+                <p>
+                    We use minimal functional cookies to remember your interface preferences (such as Dark Mode). For a detailed breakdown, please refer to our <a href="/cookies-policy" class="text-emerald-400 hover:underline">Cookies Policy</a>.
+                </p>
+
+                <h2>6. Your Rights (GDPR/CCPA)</h2>
+                <p>
+                    Regardless of your location, we honor the principles of data portability and the right to be forgotten. Since we do not store personal profiles, there is typically no data to "delete," but you may contact us at any time regarding technical data concerns.
+                </p>
+            </div>
+            
+            <div class="mt-16 p-8 rounded-2xl bg-slate-900 border border-slate-800">
+                <h3 class="text-slate-100 font-bold mb-2">Governance Inquiries</h3>
+                <p class="text-sm mb-4">Questions regarding our clinical data standards can be directed to our technical team.</p>
+                <a href="/contact" class="inline-flex items-center px-5 py-2.5 bg-emerald-500/10 hover:bg-emerald-500/20 text-emerald-500 rounded-lg font-semibold text-sm transition-all border border-emerald-500/20">
+                    Contact Data Protection Officer
+                </a>
+            </div>
+        </div>
+    </main>
+
+    <footer class="border-t border-slate-900 py-12 px-4 bg-slate-950">
+        <div class="max-w-7xl mx-auto text-center">
+            <p class="text-sm text-slate-600">&copy; 2024 AI Citation Scan. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Update date to current month/year
+        const now = new Date();
+        document.getElementById('last-mod').innerText = now.toLocaleString('default', { month: 'long' }) + ' ' + now.getFullYear();
+    </script>
+</body>
+</html>
