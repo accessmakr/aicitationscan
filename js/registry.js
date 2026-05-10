@@ -89,8 +89,8 @@ window.seoRegistry = {
     },
     "disclaimer.html": {
         "url": "/disclaimer",
-        "title": "Legal Disclaimer",
-        "desc": "Legal disclaimer for AI Citation Scan simulations, GEO audits, and LLM visibility projections."
+        "title": "Disclaimer",
+        "desc": "AI Citation Scan Legal Disclaimer. We provide SEO tools and directory services for informational purposes only, without professional or technical liability."
     },
     "dmca.html": {
         "url": "/dmca",
