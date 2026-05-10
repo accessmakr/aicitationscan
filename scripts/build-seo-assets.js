@@ -5,10 +5,20 @@ const DOMAIN = 'https://aicitationscan.com';
 const ROOT_DIR = path.join(__dirname, '..');
 const JS_DIR = path.join(ROOT_DIR, 'js');
 
-// Configuration
 const USE_CLEAN_URLS = true;
-// Directories to ignore when scanning for folders
 const IGNORE_DIRS = ['.git', '.github', 'node_modules', 'js', 'css', 'assets', 'scripts'];
+
+// Mapping icons and priority from your blueprint
+const clusterConfig = {
+    "seo-tools": { icon: "🔍", priority: 10, name: "SEO Tools" },
+    "text-tools": { icon: "📝", priority: 10, name: "Text Tools" },
+    "developer-tools": { icon: "💻", priority: 9, name: "Developer Tools" },
+    "calculators": { icon: "🧮", priority: 8, name: "Calculators" },
+    "image-tools": { icon: "🖼️", priority: 7, name: "Image Tools" },
+    "pdf-tools": { icon: "📄", priority: 7, name: "PDF Tools" },
+    "design-tools": { icon: "🎨", priority: 6, name: "Design Tools" },
+    "fun-tools": { icon: "🎲", priority: 5, name: "Viral & Fun Tools" }
+};
 
 function getMetadata(filePath) {
     if (!fs.existsSync(filePath)) return null;
@@ -24,30 +34,23 @@ function getMetadata(filePath) {
     };
 }
 
-function formatName(filename) {
-    // Converts "meta-description-generator" to "Meta Description Generator"
-    return filename
-        .replace('.html', '')
-        .split('-')
-        .map(word => word.charAt(0).toUpperCase() + word.slice(1))
-        .join(' ');
+function formatName(name) {
+    return name.replace('.html', '').split('-').map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(' ');
 }
 
 function generate() {
     if (!fs.existsSync(JS_DIR)) fs.mkdirSync(JS_DIR, { recursive: true });
 
-    const registry = []; // For the Menu System
-    const seoRegistry = {}; // For your original registry logic
+    const menuRegistry = [];
+    const seoRegistry = {};
     const pagesJson = [];
     let sitemap = `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n`;
 
-    // 1. Identify all folders in the root
     const folders = fs.readdirSync(ROOT_DIR).filter(file => {
         const fullPath = path.join(ROOT_DIR, file);
         return fs.lstatSync(fullPath).isDirectory() && !IGNORE_DIRS.includes(file);
     });
 
-    // Add "Root" as a virtual folder for home/index
     const allCategories = [''].concat(folders);
 
     allCategories.forEach(folder => {
@@ -56,9 +59,14 @@ function generate() {
 
         if (folderFiles.length === 0 && folder !== '') return;
 
+        // Get config or defaults
+        const config = clusterConfig[folder] || { icon: "📁", priority: 0, name: folder === '' ? "General" : formatName(folder) };
+
         const folderData = {
-            folderName: folder === '' ? "General" : formatName(folder),
-            folderPath: `/${folder}/`,
+            folderName: config.name,
+            folderPath: folder === '' ? "/" : `/${folder}/`, // FIXED: No more double slash //
+            icon: config.icon,
+            priority: config.priority,
             pages: []
         };
 
@@ -72,38 +80,27 @@ function generate() {
             const url = `/${webPath}`;
             const cleanTitle = meta.h1 || meta.title;
 
-            // Add to Folder Data for Menu
-            folderData.pages.push({
-                name: formatName(file),
-                url: url
-            });
-
-            // Add to Original Registry Object (Compatibility)
+            folderData.pages.push({ name: formatName(file), url: url });
             seoRegistry[file] = { url, title: cleanTitle, desc: meta.description };
-
-            // Add to pages.json
             pagesJson.push({ t: meta.title, d: meta.description, u: url, k: folder || 'page' });
-
-            // Add to Sitemap
-            sitemap += `  <url>\n    <loc>${DOMAIN}${url}</loc>\n    <lastmod>${new Date().toISOString().split('T')[0]}</lastmod>\n    <changefreq>weekly</changefreq>\n    <priority>0.8</priority>\n  </url>\n`;
+            sitemap += `  <url>\n    <loc>${DOMAIN}${url}</loc>\n    <lastmod>${new Date().toISOString().split('T')[0]}</lastmod>\n    <priority>0.8</priority>\n  </url>\n`;
         });
 
-        if (folderData.pages.length > 0) {
-            registry.push(folderData);
-        }
+        if (folderData.pages.length > 0) menuRegistry.push(folderData);
     });
 
-    // Write Files
+    // Sort folders by priority (High to Low)
+    menuRegistry.sort((a, b) => b.priority - a.priority);
+
     sitemap += `</urlset>`;
     fs.writeFileSync(path.join(ROOT_DIR, 'sitemap.xml'), sitemap);
     
-    // EXPORT FOR MENU SYSTEM (window global)
-    const registryContent = `// AUTO-GENERATED\nwindow.siteRegistry = ${JSON.stringify(registry, null, 4)};\n\nexport const SiteRegistry = ${JSON.stringify(seoRegistry, null, 4)};`;
+    // Final Export
+    const registryContent = `// AUTO-GENERATED\nwindow.siteRegistry = ${JSON.stringify(menuRegistry, null, 4)};\n\nexport const SiteRegistry = ${JSON.stringify(seoRegistry, null, 4)};`;
     fs.writeFileSync(path.join(JS_DIR, 'registry.js'), registryContent);
-    
     fs.writeFileSync(path.join(JS_DIR, 'pages.json'), JSON.stringify(pagesJson, null, 2));
 
-    console.log('✅ SEO Assets & Menu Registry Generated.');
+    console.log('✅ Registry Updated with Icons and Fixed Paths.');
 }
 
 generate();
