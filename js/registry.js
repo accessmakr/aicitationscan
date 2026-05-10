@@ -69,8 +69,8 @@ window.siteRegistry = [
 window.seoRegistry = {
     "about.html": {
         "url": "/about",
-        "title": "The Mission",
-        "desc": "Mission and methodology of AI Citation Scan. Helping brands bridge the gap between traditional SEO and AI search visibility."
+        "title": "About Us",
+        "desc": "Learn about AI Citation Scan's mission, directory methodology, and curation logic. We build enterprise-grade SEO tools for modern developers and marketers."
     },
     "accessibility.html": {
         "url": "/accessibility",
