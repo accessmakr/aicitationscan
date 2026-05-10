@@ -84,8 +84,8 @@ window.seoRegistry = {
     },
     "cookies-policy.html": {
         "url": "/cookies-policy",
-        "title": "Cookies & Data Policy",
-        "desc": "Cookies and Privacy Policy for AI Citation Scan. Clinical, privacy-first technical standards with zero marketing tracking."
+        "title": "Cookies Policy",
+        "desc": "AI Citation Scan Cookies Policy. We strictly prohibit marketing cookies, utilizing lightweight, privacy-centric Plausible analytics for complete transparency."
     },
     "disclaimer.html": {
         "url": "/disclaimer",
