@@ -55,6 +55,10 @@ window.siteRegistry = [
                 "url": "/do-not-sell-my-data"
             },
             {
+                "name": "Privacy Policy",
+                "url": "/privacy-policy"
+            },
+            {
                 "name": "Terms Of Use",
                 "url": "/terms-of-use"
             }
@@ -97,6 +101,11 @@ export const SiteRegistry = {
         "url": "/do-not-sell-my-data",
         "title": "Your Privacy Rights (CCPA)",
         "desc": ""
+    },
+    "privacy-policy.html": {
+        "url": "/privacy-policy",
+        "title": "Privacy Policy",
+        "desc": "Privacy Policy for AI Citation Scan. Clinical, transparent standards regarding data processing and LLM simulation privacy."
     },
     "terms-of-use.html": {
         "url": "/terms-of-use",
