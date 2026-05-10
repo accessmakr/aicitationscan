@@ -105,7 +105,7 @@ window.seoRegistry = {
     "privacy-policy.html": {
         "url": "/privacy-policy",
         "title": "Privacy Policy",
-        "desc": "Privacy Policy for AI Citation Scan. Clinical, transparent standards regarding data processing and LLM simulation privacy."
+        "desc": "Read the AI Citation Scan Privacy Policy to understand how we collect, use, and protect your data. We prioritize your privacy, data security, and compliance."
     },
     "terms-of-use.html": {
         "url": "/terms-of-use",
