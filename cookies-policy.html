@@ -3,62 +3,296 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Cookies and Privacy Policy for AI Citation Scan. Clinical, privacy-first technical standards with zero marketing tracking.">
-    <title>Cookies Policy | AI Citation Scan</title>
-    <link rel="canonical" href="https://aicitationscan.com/cookies-policy">
+    <meta name="description" content="AI Citation Scan Cookies Policy. We strictly prohibit marketing cookies, utilizing lightweight, privacy-centric Plausible analytics for complete transparency.">
+    <meta name="keywords" content="cookies policy, cookieless analytics, Plausible analytics, no tracking cookies, web privacy, AI Citation Scan cookies">
+    <meta name="author" content="AI Citation Scan Editorial Team">
+    <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
+    
+    <title>Cookies Policy: A Tracker-Free Environment | AI Citation Scan</title>
+    
+    <link rel="canonical" href="https://aicitationscan.com/cookies-policy.html">
+    <link rel="sitemap" type="application/xml" href="/sitemap.xml">
+    
+    <meta property="og:title" content="Cookies Policy: A Tracker-Free Environment">
+    <meta property="og:description" content="AI Citation Scan Cookies Policy. We strictly prohibit marketing cookies, utilizing privacy-centric Plausible analytics for transparency.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://aicitationscan.com/cookies-policy.html">
+    <meta property="og:image" content="https://aicitationscan.com/images/og-legal.jpg">
+    <meta property="og:site_name" content="AI Citation Scan">
+    
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Cookies Policy: A Tracker-Free Environment">
+    <meta name="twitter:description" content="AI Citation Scan Cookies Policy. We strictly prohibit marketing cookies, utilizing privacy-centric Plausible analytics for transparency.">
+    <meta name="twitter:image" content="https://aicitationscan.com/images/og-legal.jpg">
+
+    <meta name="theme-color" content="#10b981">
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+
+    <link rel="alternate" hreflang="en" href="https://aicitationscan.com/cookies-policy.html">
+    <link rel="alternate" hreflang="x-default" href="https://aicitationscan.com/cookies-policy.html">
+    <meta name="geo.region" content="US">
+    <meta name="geo.position" content="37.7749;-122.4194">
+    <meta name="ICBM" content="37.7749, -122.4194">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://unpkg.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+    
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" media="print" onload="this.media='all'">
+
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
             darkMode: 'class',
-            theme: { extend: { colors: { emerald: { 500: '#10b981' }, slate: { 900: '#0f172a', 950: '#020617' } } } }
+            theme: {
+                extend: {
+                    fontFamily: { sans: ['Inter', 'system-ui', 'sans-serif'] },
+                    colors: {
+                        emerald: { 400: '#34d399', 500: '#10b981', 600: '#059669' },
+                        violet: { 400: '#a78bfa', 500: '#8b5cf6', 600: '#7c3aed' },
+                        slate: { 800: '#1e293b', 900: '#0f172a', 950: '#020617' }
+                    }
+                }
+            }
         }
     </script>
+
+    <script defer data-domain="aicitationscan.com" src="https://plausible.io/js/script.js"></script>
+
     <style>
-        body { background-color: #020617; color: #f1f5f9; font-family: system-ui, -apple-system, sans-serif; }
-        .legal-content h2 { font-size: 1.5rem; font-weight: 700; color: #fff; margin-top: 2.5rem; margin-bottom: 1rem; border-left: 4px solid #10b981; padding-left: 1rem; }
-        .legal-content p { color: #94a3b8; line-height: 1.7; margin-bottom: 1.25rem; }
+        :root { --emerald: #10b981; --violet: #8b5cf6; }
+        body { background-color: #020617; color: #f1f5f9; font-family: 'Inter', sans-serif; overflow-x: hidden; }
+        
+        #scrollProgress { position: fixed; top: 0; left: 0; height: 3px; width: 0%; background: linear-gradient(90deg, var(--emerald), var(--violet)); z-index: 10000; transition: width 0.1s ease-out; }
+        
+        header { background: rgba(15, 23, 42, 0.85); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(51, 65, 85, 0.5); }
+        
+        .editorial-content h2 { font-size: 1.5rem; font-weight: 600; margin-top: 3rem; margin-bottom: 1rem; color: #f8fafc; letter-spacing: -0.025em; scroll-margin-top: 100px; }
+        .editorial-content p { font-size: 1.0625rem; line-height: 1.75; color: #94a3b8; margin-bottom: 1.5rem; }
+        .editorial-content ul { list-style-type: disc; padding-left: 1.5rem; color: #94a3b8; margin-bottom: 1.5rem; }
+        .editorial-content li { margin-bottom: 0.5rem; line-height: 1.6; }
+        .editorial-content strong { color: #e2e8f0; font-weight: 600; }
+        .editorial-content a { color: var(--emerald); text-decoration: none; transition: color 0.2s; }
+        .editorial-content a:hover { color: #34d399; text-decoration: underline; }
+
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #020617; }
+        ::-webkit-scrollbar-thumb { background: #334155; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #475569; }
     </style>
 </head>
-<body class="antialiased">
+<body class="antialiased selection:bg-emerald-500/30 selection:text-emerald-200">
 
-    <header class="fixed top-0 w-full z-50 bg-slate-900/80 backdrop-blur-md border-b border-slate-800">
-        <div class="max-w-7xl mx-auto px-4 h-16 flex items-center justify-between">
-            <a href="/" class="flex items-center gap-2 font-bold text-lg text-white"><span>📡</span> AI Citation Scan</a>
-            <nav id="master-nav-dock"></nav>
+    <div id="scrollProgress"></div>
+
+    <header class="fixed top-0 w-full z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <a href="/" class="flex items-center gap-2 group">
+                    <span class="text-2xl transition-transform group-hover:scale-110">📡</span>
+                    <span class="font-bold text-lg tracking-tight text-slate-100">AI Citation Scan</span>
+                </a>
+                <div class="flex items-center gap-4">
+                    <button type="button" class="trigger-search flex items-center text-slate-400 hover:text-emerald-400 transition-colors duration-200 focus:outline-none" aria-label="Open Search">
+                        <span class="mr-2 text-sm font-medium hidden sm:inline">Search</span>
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+                        </svg>
+                    </button>
+                    <div id="master-nav-dock" class="flex items-center justify-between"></div>
+                </div>
+            </div>
         </div>
     </header>
 
-    <main class="pt-32 pb-20 px-4">
-        <article class="max-w-3xl mx-auto">
-            <h1 class="text-4xl font-bold text-white mb-4">Cookies & Data Policy</h1>
-            <p class="text-slate-400 mb-8 border-b border-slate-800 pb-6 text-sm italic">Surgical Privacy Standards — Last Updated: May 2026</p>
-
-            <div class="legal-content">
-                <p>At <strong>AI Citation Scan</strong>, we believe that data integrity is the foundation of AI visibility. Our platform is engineered to audit Generative Engine performance without compromising user privacy. We do not use intrusive tracking mechanisms because technical excellence does not require surveillance.</p>
-
-                <h2>1. The Zero-Tracking Protocol</h2>
-                <p>We do not use advertising cookies, third-party tracking pixels, or behavioral profiling scripts. This site is built to be "Lighthouse-Safe" and "Privacy-Clean," ensuring no data is leaked to third-party ad networks (e.g., Meta, Google Ads).</p>
-
-                <div class="bg-emerald-500/5 border border-emerald-500/20 p-6 rounded-2xl mb-8">
-                    <h3 class="text-emerald-400 font-bold mb-2">Plausible Analytics (Cookieless)</h3>
-                    <p class="text-sm m-0">We use <strong>Plausible Analytics</strong> to measure site performance. This tool is 100% privacy-friendly and does not use cookies. It collects aggregate data only—no personal identifiers are stored, and no "fingerprinting" is performed.</p>
+    <main class="pt-32 pb-16">
+        <section class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 mb-12" data-aos="fade-up" data-aos-duration="800">
+            <div class="text-center">
+                <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-xs font-semibold tracking-wide uppercase mb-6">
+                    <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+                    <span id="freshness-date">Updated Recently</span>
                 </div>
-
-                <h2>2. Audit Data & Ephemerality</h2>
-                <p>When you use our GEO Audit tools or SERP Simulators, the URLs and metadata you input are processed in real-time to generate your report. We do not "sell" your audit history or the technical weak points discovered during your scan to third-party competitors.</p>
-
-                <h2>3. Local Storage</h2>
-                <p>We may use your browser's <code>localStorage</code> to remember your UI preferences (such as Dark Mode) and temporary tool inputs. This data remains on your machine and is never transmitted to our servers for marketing purposes.</p>
-
-                <div class="mt-12 pt-8 border-t border-slate-800">
-                    <p class="text-xs text-slate-500">Inquiries regarding our privacy-first architecture can be directed to: <strong>accessmakr@gmail.com</strong>.</p>
+                
+                <h1 class="text-4xl md:text-5xl font-bold tracking-tight text-white mb-6">Cookies Policy</h1>
+                
+                <div class="flex flex-wrap items-center justify-center gap-6 text-sm text-slate-500 mb-8 border-y border-slate-800/50 py-4">
+                    <div class="flex items-center gap-2">
+                        <span class="text-violet-400">⏱️</span>
+                        <span id="reading-time">Calculating read time...</span>
+                    </div>
+                    <div class="hidden sm:block w-1 h-1 rounded-full bg-slate-700"></div>
+                    <div class="flex items-center gap-2">
+                        <span class="text-emerald-400">🛡️</span>
+                        <span>100% Cookieless Tracking</span>
+                    </div>
+                    <div class="hidden sm:block w-1 h-1 rounded-full bg-slate-700"></div>
+                    <div class="flex items-center gap-2">
+                        <span id="seasonal-banner" class="text-slate-300">Edition</span>
+                    </div>
                 </div>
             </div>
-        </article>
+
+            <article class="editorial-content bg-slate-900 border border-slate-800 rounded-3xl p-8 md:p-12 shadow-2xl mt-8 relative overflow-hidden" data-aos="fade-up" data-aos-delay="100">
+                <div class="absolute top-0 left-0 w-1 h-full bg-gradient-to-b from-emerald-400 to-violet-500"></div>
+                
+                <p>Welcome to a tracker-free environment. Unlike the vast majority of digital properties, AI Citation Scan operates under a strict "No Marketing Cookies" mandate. This policy details how we handle local storage and why your browser remains uncluttered when you visit our platform.</p>
+
+                <h2 id="what-we-dont-use">1. What We Do Not Use</h2>
+                <p>We believe your digital footprint is yours to own. To support this, we have systematically removed conventional tracking mechanisms from our infrastructure:</p>
+                <ul>
+                    <li><strong>No Marketing Cookies:</strong> We do not deploy retargeting pixels, advertising tags, or demographic profilers.</li>
+                    <li><strong>No Third-Party Trackers:</strong> We block data syndicates and advertising networks from monitoring your interactions on our domain.</li>
+                    <li><strong>No Intrusive Consent Banners:</strong> Because we do not use invasive cookies, we do not require you to navigate complex, deceptive cookie consent banners.</li>
+                </ul>
+
+                <h2 id="plausible-analytics">2. How We Measure Traffic (Plausible)</h2>
+                <p>To maintain our platform and understand which tools are delivering value, we require basic site analytics. We exclusively use <strong>Plausible Analytics</strong>. This is a privacy-first analytics tool designed to comply with global privacy regulations inherently.</p>
+                <p>Plausible works by counting aggregate trends without generating personal profiles. It does not use cookies, and it does not store persistent identifiers in your browser. All metrics are localized and fully anonymized upon collection.</p>
+
+                <h2 id="functional-storage">3. Essential Functional Storage</h2>
+                <p>While we avoid cookies, certain web tools may utilize your browser's native `localStorage` strictly to save your UI preferences (such as dark mode toggles or recent tool settings). This data never leaves your device, is never transmitted to our servers, and is used entirely to enhance your local usability.</p>
+
+                <h2 id="managing-preferences">4. Managing Your Preferences</h2>
+                <p>Because any stored data is purely functional and kept entirely on your device, you have complete control over it. You can clear your browser's cache or `localStorage` at any time without impacting your core ability to use our toolset.</p>
+
+                <div class="mt-12 pt-6 border-t border-slate-800">
+                    <p class="text-sm text-slate-500 mb-2"><strong class="text-slate-400">Logic:</strong> Implementing a cookieless architecture removes the technical friction of consent banners while providing superior page speed and user trust.</p>
+                    <p class="text-sm text-slate-500 mb-2"><strong class="text-slate-400">Methodology:</strong> We execute our analytics tracking exclusively through the Plausible JS script, ensuring no unique identifiers or payload data violates user privacy.</p>
+                    <p class="text-sm text-slate-500"><strong class="text-slate-400">Citations:</strong> See the <a href="https://plausible.io/data-policy" target="_blank" rel="noopener noreferrer">Plausible Analytics Data Policy</a> for technical confirmation of cookieless operations.</p>
+                </div>
+            </article>
+        </section>
+
+        <div id="dynamic-internal-links" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-12" data-aos="fade-in"></div>
+
     </main>
+
+    <footer class="bg-slate-950 border-t border-slate-800 pt-16 pb-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
+                <div class="col-span-1 md:col-span-2">
+                    <div class="flex items-center gap-2 mb-4">
+                        <span class="text-2xl">📡</span>
+                        <span class="font-bold text-lg text-slate-100">AI Citation Scan</span>
+                    </div>
+                    <p class="text-sm text-slate-400 max-w-sm mb-6">
+                        Enterprise-grade SEO tools and clinical audits to maximize your search engine visibility and AI citation readiness.
+                    </p>
+                </div>
+
+                <div>
+                    <h4 class="text-white font-semibold mb-4 text-sm uppercase tracking-widest">Legal</h4>
+                    <ul class="space-y-3 text-sm text-slate-400">
+                        <li><a href="/privacy-policy.html" class="hover:text-emerald-400 transition-colors">Privacy Policy</a></li>
+                        <li><a href="/cookies-policy.html" class="hover:text-emerald-400 transition-colors">Cookies Policy</a></li>
+                        <li><a href="/terms-of-use.html" class="hover:text-emerald-400 transition-colors">Terms of Use</a></li>
+                        <li><a href="/disclaimer.html" class="hover:text-emerald-400 transition-colors">Disclaimer</a></li>
+                        <li><a href="/dmca.html" class="hover:text-emerald-400 transition-colors">DMCA</a></li>
+                        <li><a href="/accessibility.html" class="hover:text-emerald-400 transition-colors">Accessibility</a></li>
+                        <li><a href="/do-not-sell-my-data.html" class="hover:text-emerald-400 transition-colors">Do Not Sell My Data</a></li>
+                        <li><a href="/about.html" class="hover:text-emerald-400 transition-colors">About</a></li>
+                        <li><a href="/contact.html" class="hover:text-emerald-400 transition-colors">Contact</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="text-white font-semibold mb-4 text-sm uppercase tracking-widest">Social</h4>
+                    <ul class="space-y-3 text-sm text-slate-400">
+                        <li><a href="https://twitter.com" target="_blank" rel="noopener noreferrer" class="hover:text-emerald-400 transition-colors">Twitter</a></li>
+                        <li><a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" class="hover:text-emerald-400 transition-colors">LinkedIn</a></li>
+                        <li><a href="https://reddit.com" target="_blank" rel="noopener noreferrer" class="hover:text-emerald-400 transition-colors">Reddit</a></li>
+                        <li><a href="https://facebook.com" target="_blank" rel="noopener noreferrer" class="hover:text-emerald-400 transition-colors">Facebook</a></li>
+                        <li><a href="https://github.com" target="_blank" rel="noopener noreferrer" class="hover:text-emerald-400 transition-colors">GitHub</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="border-t border-slate-800/50 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
+                <p class="text-xs text-slate-500">
+                    &copy; <span id="current-year-footer">2026</span> AI Citation Scan. All Rights Reserved.
+                </p>
+                <p class="text-xs text-slate-500">
+                    Not affiliated with Google. Zero Marketing Cookies.
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <div id="toast-container" class="fixed bottom-4 right-4 flex flex-col gap-2 z-50"></div>
+
+    <script defer src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script defer src="https://unpkg.com/aos@2.3.1/dist/aos.js" onload="AOS.init({once: true})"></script>
 
     <script defer src="../js/registry.js"></script>
     <script defer src="../js/root-config.js"></script>
     <script defer src="../js/menu-system.js"></script>
+    <script defer src="../js/search-system.js"></script>
+    <script defer src="../js/schema.js"></script>
+    <script defer src="../js/internal-links.js"></script>
+    <script defer src="../js/legal-engine.js"></script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Dynamic Dates
+            const today = new Date();
+            document.getElementById('current-year-footer').textContent = today.getFullYear();
+            
+            const options = { year: 'numeric', month: 'short', day: 'numeric' };
+            const formattedDate = today.toLocaleDateString('en-US', options);
+            document.getElementById('freshness-date').textContent = `Updated ${formattedDate}`;
+
+            // Seasonal Banner
+            const month = today.getMonth();
+            const seasons = ['Winter', 'Winter', 'Spring', 'Spring', 'Spring', 'Summer', 'Summer', 'Summer', 'Fall', 'Fall', 'Fall', 'Winter'];
+            document.getElementById('seasonal-banner').textContent = `${seasons[month]} ${today.getFullYear()} Edition`;
+
+            // Reading Time Calculation
+            const article = document.querySelector('.editorial-content');
+            if(article) {
+                const text = article.innerText;
+                const wpm = 225;
+                const words = text.trim().split(/\s+/).length;
+                const time = Math.max(1, Math.ceil(words / wpm));
+                document.getElementById('reading-time').textContent = `${time} min read`;
+            }
+
+            // Scroll Progress
+            window.addEventListener("scroll", () => {
+                const winScroll = document.documentElement.scrollTop;
+                const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+                const scrolled = (winScroll / height) * 100;
+                document.getElementById("scrollProgress").style.width = scrolled + "%";
+            }, { passive: true });
+
+            // Dynamic Schema Injection
+            const d = new Date(today);
+            const day = d.getDay();
+            const diff = d.getDate() - day + (day === 0 ? -6 : 1);
+            const lastMonday = new Date(d.setDate(diff)).toISOString().split('T')[0];
+
+            const schemaData = {
+                "@context": "https://schema.org",
+                "@type": "WebPage",
+                "name": "Cookies Policy",
+                "url": "https://aicitationscan.com/cookies-policy.html",
+                "description": "Read the AI Citation Scan Cookies Policy detailing our tracker-free environment.",
+                "datePublished": "2024-01-01",
+                "dateModified": lastMonday,
+                "publisher": {
+                    "@type": "Organization",
+                    "name": "AI Citation Scan",
+                    "logo": { "@type": "ImageObject", "url": "https://aicitationscan.com/favicon.svg" }
+                }
+            };
+
+            const script = document.createElement('script');
+            script.type = 'application/ld+json';
+            script.text = JSON.stringify(schemaData);
+            document.head.appendChild(script);
+        });
+    </script>
 </body>
 </html>
