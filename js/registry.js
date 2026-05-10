@@ -7,12 +7,12 @@ window.siteRegistry = [
         "priority": 10,
         "pages": [
             {
-                "name": "Aicitation Scan",
-                "url": "/seo-tools/aicitation-scan"
-            },
-            {
                 "name": "Meta Description Generator",
                 "url": "/seo-tools/meta-description-generator"
+            },
+            {
+                "name": "Schema Generator",
+                "url": "/seo-tools/schema-generator"
             },
             {
                 "name": "Serp Preview Tool",
@@ -66,7 +66,7 @@ window.siteRegistry = [
     }
 ];
 
-export const SiteRegistry = {
+window.seoRegistry = {
     "about.html": {
         "url": "/about",
         "title": "The Mission",
@@ -112,15 +112,15 @@ export const SiteRegistry = {
         "title": "Terms of Use",
         "desc": "Terms of Use for AI Citation Scan. Governance for GEO auditing, LLM simulation tools, and technical visibility benchmarks."
     },
-    "aicitation-scan.html": {
-        "url": "/seo-tools/aicitation-scan",
-        "title": "AI Citation Scan",
-        "desc": ""
-    },
     "meta-description-generator.html": {
         "url": "/seo-tools/meta-description-generator",
         "title": "Meta Description Generator: Maximize Organic CTR | AI Citation Scan",
         "desc": "Create structured, readable, and click-focused meta descriptions. Use our AI-assisted Meta Description Generator to improve snippet quality and CTR."
+    },
+    "schema-generator.html": {
+        "url": "/seo-tools/schema-generator",
+        "title": "AI Citation Scan",
+        "desc": ""
     },
     "serp-preview-tool.html": {
         "url": "/seo-tools/serp-preview-tool",
