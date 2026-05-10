@@ -99,8 +99,8 @@ window.seoRegistry = {
     },
     "do-not-sell-my-data.html": {
         "url": "/do-not-sell-my-data",
-        "title": "Your Privacy Rights (CCPA)",
-        "desc": ""
+        "title": "Do Not Sell My Data",
+        "desc": "AI Citation Scan CCPA/CPRA rights declaration. We do not sell your personal data. Learn more about our privacy practices and lightweight tracking."
     },
     "privacy-policy.html": {
         "url": "/privacy-policy",
