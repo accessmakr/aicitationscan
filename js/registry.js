@@ -130,8 +130,8 @@ window.seoRegistry = {
     },
     "website-word-count-checker.html": {
         "url": "/programmatic/website-word-count-checker",
-        "title": "Welcome",
-        "desc": "Analyze the exact word count, character count, and reading time of any webpage text. Use our Website Word Count Checker to evaluate content depth and SEO visibility."
+        "title": "Website Word Count Checker & Content Depth Analyzer | AI Citation Scan",
+        "desc": "Analyze webpage content depth, word count, readability, paragraph structure, and estimated reading time with our live editorial content analysis workflow."
     },
     "meta-description-generator.html": {
         "url": "/seo-tools/meta-description-generator",
