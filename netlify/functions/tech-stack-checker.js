@@ -1,4 +1,4 @@
-statusimport axios from "axios";
+import axios from "axios";
 import cheerio from "cheerio";
 import fs from "fs";
 import path from "path";
@@ -60,7 +60,8 @@ export async function handler(event) {
     const analytics = detectTechnologies(html, analyticsSignatures);
     const hosting = detectTechnologies(html, hostingSignatures);
 
-    return {Code: 200,
+    return {
+      statusCode: 200,
       body: JSON.stringify({
         success: true,
         title,
