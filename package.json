@@ -3,9 +3,8 @@
   "version": "1.0.0",
   "type": "module",
   "dependencies": {
+    "@netlify/blobs": "^8.1.0",
     "axios": "^1.8.4",
-    "cheerio": "^1.0.0",
-    "wappalyzer": "^6.10.74",
-    "@netlify/blobs": "^8.1.0"
+    "cheerio": "^1.0.0"
   }
 }
