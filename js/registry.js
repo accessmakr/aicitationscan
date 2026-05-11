@@ -69,6 +69,18 @@ window.siteRegistry = [
         ]
     },
     {
+        "folderName": "Ai Tools",
+        "folderPath": "/ai-tools/",
+        "icon": "📁",
+        "priority": 0,
+        "pages": [
+            {
+                "name": "Ai Citation Checker",
+                "url": "/ai-tools/ai-citation-checker"
+            }
+        ]
+    },
+    {
         "folderName": "Programmatic",
         "folderPath": "/programmatic/",
         "icon": "📁",
@@ -127,6 +139,11 @@ window.seoRegistry = {
         "url": "/terms-of-use",
         "title": "Terms of Use",
         "desc": "Read the AI Citation Scan Terms of Use. Understand your rights, our tool license, and our directory disclaimer for enterprise-grade SEO tool usage."
+    },
+    "ai-citation-checker.html": {
+        "url": "/ai-tools/ai-citation-checker",
+        "title": "AI Citation Checker — Analyze Reference Quality & Source Attribution | AI Citation Scan",
+        "desc": "Analyze AI-generated citations, review reference consistency, detect incomplete sources, and evaluate attribution structure — free citation checker tool by AI Citation Scan."
     },
     "website-word-count-checker.html": {
         "url": "/programmatic/website-word-count-checker",
