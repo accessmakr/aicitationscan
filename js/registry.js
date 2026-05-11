@@ -11,6 +11,10 @@ window.siteRegistry = [
                 "url": "/seo-tools/meta-description-generator"
             },
             {
+                "name": "Robots Txt Generator",
+                "url": "/seo-tools/robots-txt-generator"
+            },
+            {
                 "name": "Schema Generator",
                 "url": "/seo-tools/schema-generator"
             },
@@ -116,6 +120,11 @@ window.seoRegistry = {
         "url": "/seo-tools/meta-description-generator",
         "title": "Meta Description Generator: Maximize Organic CTR | AI Citation Scan",
         "desc": "Create structured, readable, and click-focused meta descriptions. Use our AI-assisted Meta Description Generator to improve snippet quality and CTR."
+    },
+    "robots-txt-generator.html": {
+        "url": "/seo-tools/robots-txt-generator",
+        "title": "Robots.txt Generator: Advanced Crawler Control | AI Citation Scan",
+        "desc": "Generate properly structured robots.txt files. Control search engine crawlers, manage crawl budgets, and optimize technical SEO with our enterprise robots.txt generator."
     },
     "schema-generator.html": {
         "url": "/seo-tools/schema-generator",
