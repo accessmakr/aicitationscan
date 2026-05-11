@@ -7,35 +7,41 @@
         "pattern": "wp-content",
         "weight": 4,
         "reliability": 0.95,
-        "exclusive": true
+        "uniqueness": 0.98
       },
       {
         "type": "html",
         "pattern": "wp-includes",
         "weight": 4,
         "reliability": 0.95,
-        "exclusive": true
+        "uniqueness": 0.98
       },
       {
         "type": "url",
         "pattern": "wp-json",
         "weight": 3,
         "reliability": 0.8,
-        "exclusive": false
+        "uniqueness": 0.7
       },
       {
         "type": "url",
         "pattern": "xmlrpc.php",
         "weight": 5,
         "reliability": 0.98,
-        "exclusive": true
+        "uniqueness": 1.0
+      }
+    ],
+
+    "negativeSignals": [
+      {
+        "type": "html",
+        "pattern": "data-reactroot",
+        "weightPenalty": 2
       },
       {
         "type": "html",
-        "pattern": "wordpress",
-        "weight": 1,
-        "reliability": 0.4,
-        "exclusive": false
+        "pattern": "__NEXT_DATA__",
+        "weightPenalty": 3
       }
     ]
   },
@@ -48,170 +54,22 @@
         "pattern": "cdn.shopify.com",
         "weight": 5,
         "reliability": 0.99,
-        "exclusive": true
+        "uniqueness": 1.0
       },
       {
         "type": "html",
         "pattern": "Shopify.theme",
         "weight": 4,
         "reliability": 0.95,
-        "exclusive": true
-      },
-      {
-        "type": "script",
-        "pattern": "ShopifyAnalytics",
-        "weight": 4,
-        "reliability": 0.9,
-        "exclusive": true
-      },
-      {
-        "type": "html",
-        "pattern": "myshopify.com",
-        "weight": 5,
-        "reliability": 0.99,
-        "exclusive": true
-      },
-      {
-        "type": "html",
-        "pattern": "shopify-section",
-        "weight": 3,
-        "reliability": 0.85,
-        "exclusive": true
+        "uniqueness": 1.0
       }
-    ]
-  },
+    ],
 
-  "webflow": {
-    "baseConfidence": 0.9,
-    "signals": [
-      {
-        "type": "script",
-        "pattern": "webflow.js",
-        "weight": 4,
-        "reliability": 0.95,
-        "exclusive": true
-      },
+    "negativeSignals": [
       {
         "type": "html",
-        "pattern": "data-wf-page",
-        "weight": 5,
-        "reliability": 0.98,
-        "exclusive": true
-      },
-      {
-        "type": "html",
-        "pattern": "data-wf-site",
-        "weight": 5,
-        "reliability": 0.98,
-        "exclusive": true
-      }
-    ]
-  },
-
-  "wix": {
-    "baseConfidence": 0.88,
-    "signals": [
-      {
-        "type": "url",
-        "pattern": "wixstatic.com",
-        "weight": 5,
-        "reliability": 0.99,
-        "exclusive": true
-      },
-      {
-        "type": "header",
-        "pattern": "x-wix-request-id",
-        "weight": 5,
-        "reliability": 0.99,
-        "exclusive": true
-      },
-      {
-        "type": "html",
-        "pattern": "wix.com",
-        "weight": 2,
-        "reliability": 0.6,
-        "exclusive": false
-      }
-    ]
-  },
-
-  "squarespace": {
-    "baseConfidence": 0.85,
-    "signals": [
-      {
-        "type": "url",
-        "pattern": "squarespace.com",
-        "weight": 4,
-        "reliability": 0.95,
-        "exclusive": true
-      },
-      {
-        "type": "html",
-        "pattern": "static.squarespace",
-        "weight": 4,
-        "reliability": 0.95,
-        "exclusive": true
-      },
-      {
-        "type": "html",
-        "pattern": "sqs-block",
-        "weight": 3,
-        "reliability": 0.9,
-        "exclusive": true
-      }
-    ]
-  },
-
-  "ghost": {
-    "baseConfidence": 0.8,
-    "signals": [
-      {
-        "type": "url",
-        "pattern": "ghost.org",
-        "weight": 4,
-        "reliability": 0.95,
-        "exclusive": true
-      },
-      {
-        "type": "script",
-        "pattern": "ghost.min.js",
-        "weight": 4,
-        "reliability": 0.95,
-        "exclusive": true
-      },
-      {
-        "type": "html",
-        "pattern": "content-api",
-        "weight": 2,
-        "reliability": 0.7,
-        "exclusive": false
-      }
-    ]
-  },
-
-  "drupal": {
-    "baseConfidence": 0.85,
-    "signals": [
-      {
-        "type": "html",
-        "pattern": "drupal.settings",
-        "weight": 5,
-        "reliability": 0.98,
-        "exclusive": true
-      },
-      {
-        "type": "url",
-        "pattern": "sites/default",
-        "weight": 4,
-        "reliability": 0.95,
-        "exclusive": true
-      },
-      {
-        "type": "script",
-        "pattern": "drupal.js",
-        "weight": 3,
-        "reliability": 0.9,
-        "exclusive": true
+        "pattern": "_next/static",
+        "weightPenalty": 3
       }
     ]
   }
