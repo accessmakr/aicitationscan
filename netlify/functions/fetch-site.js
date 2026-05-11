@@ -15,18 +15,49 @@ export default async (req) => {
       ? urlParam
       : `https://${urlParam}`;
 
-    const response = await axios.get(url, {
-      timeout: 15000,
-      headers: {
-        "User-Agent": "Mozilla/5.0 Tech Stack Intelligence Bot"
-      }
-    });
+    let response;
 
-    const html = response.data;
+    try {
+      response = await axios.get(url, {
+        timeout: 15000,
+        headers: {
+          "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 Chrome/120 Safari/537.36",
+          "Accept": "text/html,application/xhtml+xml",
+          "Accept-Language": "en-US,en;q=0.9"
+        }
+      });
+    } catch (err) {
+      // HANDLE BLOCKED / 403 / BOT PROTECTION GRACEFULLY
+      return new Response(JSON.stringify({
+        success: false,
+        error: "blocked_by_target",
+        statusCode: err.response?.status || 0,
+        url,
+        note: "Target site blocked server-side request. Returning partial metadata only.",
+        headers: err.response?.headers || {},
+        partial: true
+      }), {
+        status: 200,
+        headers: {
+          "Content-Type": "application/json"
+        }
+      });
+    }
 
-    // lightweight script extraction only (no DOM parser)
+    const html = response.data || "";
+
+    // Lightweight script extraction (no DOM parser)
     const scripts = [...html.matchAll(/<script[^>]+src=["']([^"']+)["']/g)]
       .map(m => m[1]);
+
+    // Basic metadata extraction (lightweight, safe)
+    const titleMatch = html.match(/<title>(.*?)<\/title>/i);
+    const title = titleMatch ? titleMatch[1] : "";
+
+    const metaDescriptionMatch = html.match(
+      /<meta[^>]*name=["']description["'][^>]*content=["']([^"']+)["']/i
+    );
+    const metaDescription = metaDescriptionMatch ? metaDescriptionMatch[1] : "";
 
     return new Response(JSON.stringify({
       success: true,
@@ -34,8 +65,11 @@ export default async (req) => {
         url,
         status: response.status,
         headers: response.headers,
-        html: html.slice(0, 100000),
-        scripts
+        title,
+        metaDescription,
+        html: html.slice(0, 100000), // prevent payload explosion
+        scripts,
+        scriptCount: scripts.length
       }
     }), {
       headers: {
@@ -43,10 +77,16 @@ export default async (req) => {
       }
     });
 
-  } catch (err) {
+  } catch (error) {
     return new Response(JSON.stringify({
       success: false,
-      error: err.message
-    }), { status: 500 });
+      error: "internal_error",
+      message: error.message
+    }), {
+      status: 500,
+      headers: {
+        "Content-Type": "application/json"
+      }
+    });
   }
 };
