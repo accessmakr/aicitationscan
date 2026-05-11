@@ -67,6 +67,18 @@ window.siteRegistry = [
                 "url": "/terms-of-use"
             }
         ]
+    },
+    {
+        "folderName": "Programmatic",
+        "folderPath": "/programmatic/",
+        "icon": "📁",
+        "priority": 0,
+        "pages": [
+            {
+                "name": "Website Word Count Checker",
+                "url": "/programmatic/website-word-count-checker"
+            }
+        ]
     }
 ];
 
@@ -115,6 +127,11 @@ window.seoRegistry = {
         "url": "/terms-of-use",
         "title": "Terms of Use",
         "desc": "Read the AI Citation Scan Terms of Use. Understand your rights, our tool license, and our directory disclaimer for enterprise-grade SEO tool usage."
+    },
+    "website-word-count-checker.html": {
+        "url": "/programmatic/website-word-count-checker",
+        "title": "Welcome",
+        "desc": "Analyze the exact word count, character count, and reading time of any webpage text. Use our Website Word Count Checker to evaluate content depth and SEO visibility."
     },
     "meta-description-generator.html": {
         "url": "/seo-tools/meta-description-generator",
