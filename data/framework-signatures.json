@@ -1,0 +1,35 @@
+[
+  {
+    "name": "React",
+    "patterns": [
+      "react",
+      "_reactRootContainer"
+    ]
+  },
+  {
+    "name": "Vue.js",
+    "patterns": [
+      "vue",
+      "__vue__"
+    ]
+  },
+  {
+    "name": "Next.js",
+    "patterns": [
+      "_next",
+      "nextjs"
+    ]
+  },
+  {
+    "name": "Nuxt",
+    "patterns": [
+      "__nuxt"
+    ]
+  },
+  {
+    "name": "Angular",
+    "patterns": [
+      "ng-version"
+    ]
+  }
+]
