@@ -1,0 +1,26 @@
+[
+  {
+    "name": "Cloudflare",
+    "patterns": [
+      "cloudflare"
+    ]
+  },
+  {
+    "name": "Netlify",
+    "patterns": [
+      "netlify"
+    ]
+  },
+  {
+    "name": "Vercel",
+    "patterns": [
+      "vercel"
+    ]
+  },
+  {
+    "name": "Amazon AWS",
+    "patterns": [
+      "amazonaws"
+    ]
+  }
+]
