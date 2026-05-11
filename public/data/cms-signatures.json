@@ -1,0 +1,63 @@
+{
+  "wordpress": {
+    "patterns": [
+      "wp-content",
+      "wp-includes",
+      "wp-json",
+      "wordpress",
+      "wp-emoji",
+      "xmlrpc.php"
+    ]
+  },
+
+  "shopify": {
+    "patterns": [
+      "cdn.shopify.com",
+      "Shopify.theme",
+      "ShopifyAnalytics",
+      "shopify-section",
+      "myshopify.com"
+    ]
+  },
+
+  "webflow": {
+    "patterns": [
+      "webflow.js",
+      "data-wf-page",
+      "data-wf-site",
+      "webflow.com"
+    ]
+  },
+
+  "wix": {
+    "patterns": [
+      "wixstatic.com",
+      "wix.com",
+      "X-Wix-Request-Id"
+    ]
+  },
+
+  "squarespace": {
+    "patterns": [
+      "squarespace.com",
+      "static.squarespace",
+      "sqs-block"
+    ]
+  },
+
+  "ghost": {
+    "patterns": [
+      "ghost.org",
+      "ghost.min.js",
+      "content-api"
+    ]
+  },
+
+  "drupal": {
+    "patterns": [
+      "Drupal.settings",
+      "sites/default",
+      "drupal.js"
+    ]
+  }
+}
