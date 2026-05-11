@@ -1,0 +1,62 @@
+{
+  "vercel": {
+    "patterns": [
+      "vercel.app",
+      "x-vercel-id",
+      "Vercel"
+    ]
+  },
+
+  "netlify": {
+    "patterns": [
+      "netlify.app",
+      "x-nf-request-id",
+      "X-NF-Request-ID"
+    ]
+  },
+
+  "cloudflare": {
+    "patterns": [
+      "cf-ray",
+      "cloudflare",
+      "server: cloudflare"
+    ]
+  },
+
+  "aws": {
+    "patterns": [
+      "x-amz-cf-id",
+      "amazonaws.com",
+      "AWS"
+    ]
+  },
+
+  "fastly": {
+    "patterns": [
+      "fastly",
+      "x-served-by"
+    ]
+  },
+
+  "firebase": {
+    "patterns": [
+      "firebaseapp.com",
+      "firebase",
+      "x-firebase"
+    ]
+  },
+
+  "github_pages": {
+    "patterns": [
+      "github.io",
+      "pages.github.com"
+    ]
+  },
+
+  "render": {
+    "patterns": [
+      "render.com",
+      "x-render"
+    ]
+  }
+}
