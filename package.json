@@ -1,5 +1,10 @@
 {
   "name": "aicitationscan",
   "version": "1.0.0",
-  "type": "module"
+  "type": "module",
+  "dependencies": {
+    "axios": "^1.7.2",
+    "cheerio": "^1.0.0",
+    "tldts": "^6.1.71"
+  }
 }
