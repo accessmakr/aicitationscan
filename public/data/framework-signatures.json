@@ -1,0 +1,62 @@
+{
+  "nextjs": {
+    "patterns": [
+      "_next/static",
+      "__NEXT_DATA__",
+      "next-route-announcer"
+    ]
+  },
+
+  "react": {
+    "patterns": [
+      "reactRoot",
+      "data-reactroot",
+      "__REACT_DEVTOOLS_GLOBAL_HOOK__"
+    ]
+  },
+
+  "vue": {
+    "patterns": [
+      "__vue__",
+      "data-v-",
+      "vue.runtime",
+      "Vue.config"
+    ]
+  },
+
+  "nuxt": {
+    "patterns": [
+      "_nuxt/",
+      "__NUXT__"
+    ]
+  },
+
+  "angular": {
+    "patterns": [
+      "ng-version",
+      "angular",
+      "_ngcontent"
+    ]
+  },
+
+  "svelte": {
+    "patterns": [
+      "svelte-",
+      "__svelte"
+    ]
+  },
+
+  "gatsby": {
+    "patterns": [
+      "gatsby",
+      "___gatsby"
+    ]
+  },
+
+  "jquery": {
+    "patterns": [
+      "jquery",
+      "$("
+    ]
+  }
+}
