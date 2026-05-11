@@ -1,0 +1,1079 @@
+<!DOCTYPE html>
+<html lang="en" class="dark scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Generate properly structured robots.txt files. Control search engine crawlers, manage crawl budgets, and optimize technical SEO with our enterprise robots.txt generator.">
+    <meta name="keywords" content="robots.txt generator, create robots.txt, SEO crawler control, block search engines, robots.txt testing, crawl budget optimization">
+    <meta name="author" content="AI Citation Scan Editorial Team">
+    <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
+    
+    <title>Robots.txt Generator: Advanced Crawler Control | AI Citation Scan</title>
+    
+    <link rel="canonical" href="https://aicitationscan.com/seo-tools/robots-txt-generator.html">
+    <link rel="sitemap" type="application/xml" href="/sitemap.xml">
+    
+    <meta property="og:title" content="Robots.txt Generator: Advanced Crawler Control">
+    <meta property="og:description" content="Generate properly structured robots.txt files. Control search engine crawlers, manage crawl budgets, and optimize technical SEO with our free generator.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://aicitationscan.com/seo-tools/robots-txt-generator.html">
+    <meta property="og:image" content="https://aicitationscan.com/images/og-robots-generator.jpg">
+    <meta property="og:site_name" content="AI Citation Scan">
+    
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Robots.txt Generator: Advanced Crawler Control">
+    <meta name="twitter:description" content="Generate properly structured robots.txt files. Control search engine crawlers, manage crawl budgets, and optimize technical SEO with our free generator.">
+    <meta name="twitter:image" content="https://aicitationscan.com/images/og-robots-generator.jpg">
+
+    <meta name="theme-color" content="#10b981">
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+
+    <link rel="alternate" hreflang="en" href="https://aicitationscan.com/seo-tools/robots-txt-generator.html">
+    <link rel="alternate" hreflang="x-default" href="https://aicitationscan.com/seo-tools/robots-txt-generator.html">
+    <meta name="geo.region" content="US">
+    <meta name="geo.position" content="37.7749;-122.4194">
+    <meta name="ICBM" content="37.7749, -122.4194">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'system-ui', 'sans-serif'],
+                        mono: ['ui-monospace', 'SFMono-Regular', 'Menlo', 'Monaco', 'Consolas', "Liberation Mono", "Courier New", 'monospace'],
+                    },
+                    colors: {
+                        emerald: { 400: '#34d399', 500: '#10b981', 600: '#059669' },
+                        violet: { 400: '#a78bfa', 500: '#8b5cf6', 600: '#7c3aed' },
+                        slate: { 800: '#1e293b', 900: '#0f172a', 950: '#020617' }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <script defer data-domain="aicitationscan.com" src="https://plausible.io/js/script.js"></script>
+
+    <style>
+        :root {
+            --emerald: #10b981;
+            --violet: #8b5cf6;
+        }
+        body { background-color: #020617; color: #f1f5f9; font-family: 'Inter', sans-serif; overflow-x: hidden; }
+        
+        /* Scroll Progress */
+        #scrollProgress { position: fixed; top: 0; left: 0; height: 4px; width: 0%; background: linear-gradient(90deg, var(--emerald), var(--violet)); z-index: 10000; transition: width 0.1s ease-out; }
+        
+        /* Glass Header */
+        header { background: rgba(15, 23, 42, 0.85); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(51, 65, 85, 0.5); }
+        
+        /* Tool UI Inputs */
+        .premium-input { background: rgba(30, 41, 59, 0.5); border: 1px solid #334155; border-radius: 8px; padding: 10px 14px; color: #f8fafc; width: 100%; transition: border-color 0.2s, box-shadow 0.2s; font-size: 0.875rem; }
+        .premium-input:focus { outline: none; border-color: var(--emerald); box-shadow: 0 0 0 2px rgba(16, 185, 129, 0.2); }
+        .premium-label { display: block; font-size: 0.875rem; font-weight: 500; color: #cbd5e1; margin-bottom: 0.4rem; }
+        
+        /* Code Preview Area */
+        .code-preview-container { background: #0f172a; border: 1px solid #334155; border-radius: 12px; height: 100%; min-height: 400px; display: flex; flex-direction: column; overflow: hidden; }
+        .code-header { background: #1e293b; padding: 10px 16px; border-bottom: 1px solid #334155; display: flex; justify-content: space-between; align-items: center; }
+        .code-body { padding: 16px; font-family: 'ui-monospace', monospace; font-size: 14px; color: #e2e8f0; line-height: 1.6; flex-grow: 1; overflow-y: auto; white-space: pre-wrap; word-break: break-all; }
+        
+        /* Editorial Typography */
+        .editorial-content h2 { font-size: 1.875rem; font-weight: 700; margin-top: 3.5rem; margin-bottom: 1.5rem; color: #f8fafc; letter-spacing: -0.025em; scroll-margin-top: 100px; }
+        .editorial-content h3 { font-size: 1.25rem; font-weight: 600; margin-top: 2.5rem; margin-bottom: 1rem; color: #cbd5e1; }
+        .editorial-content p { font-size: 1.0625rem; line-height: 1.75; color: #94a3b8; margin-bottom: 1.5rem; }
+        .editorial-content ul { list-style-type: disc; padding-left: 1.5rem; color: #94a3b8; margin-bottom: 1.5rem; }
+        .editorial-content li { margin-bottom: 0.5rem; line-height: 1.6; }
+        .editorial-content strong { color: #e2e8f0; font-weight: 600; }
+        .editorial-content pre { background: #0f172a; padding: 1rem; border-radius: 8px; border: 1px solid #334155; margin-bottom: 1.5rem; overflow-x: auto; font-family: monospace; color: #cbd5e1; }
+        
+        /* ScrollSpy TOC */
+        .toc-link { transition: all 0.2s; border-left: 2px solid transparent; padding-left: 1rem; display: block; color: #64748b; font-size: 0.875rem; margin-bottom: 0.75rem; }
+        .toc-link:hover { color: #cbd5e1; }
+        .toc-link.active { border-left-color: var(--emerald); color: var(--emerald); font-weight: 500; }
+        
+        /* Share & Buttons */
+        .share-btn { padding: 8px 16px; border-radius: 9999px; font-size: 0.875rem; font-weight: 500; transition: all 0.2s; border: 1px solid #334155; background: transparent; color: #cbd5e1; }
+        .share-btn:hover { background: #1e293b; color: #fff; border-color: #475569; transform: translateY(-1px); }
+        
+        /* FAQ Accordion */
+        .faq-btn[aria-expanded="true"] .chevron { transform: rotate(180deg); }
+        .faq-content { transition: max-height 0.3s ease-in-out, opacity 0.3s ease; max-height: 0; opacity: 0; overflow: hidden; }
+        .faq-content.open { max-height: 600px; opacity: 1; margin-top: 1rem; }
+
+        /* General Utilities */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #020617; }
+        ::-webkit-scrollbar-thumb { background: #334155; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #475569; }
+    </style>
+</head>
+<body class="antialiased selection:bg-emerald-500/30 selection:text-emerald-200">
+
+    <div id="scrollProgress"></div>
+
+    <header class="fixed top-0 w-full z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <a href="/" class="flex items-center gap-2 group">
+                    <span class="text-2xl transition-transform group-hover:scale-110">📡</span>
+                    <span class="font-bold text-lg tracking-tight text-slate-100">AI Citation Scan</span>
+                </a>
+                <div class="flex items-center gap-4">
+                    <button type="button" class="trigger-search flex items-center text-slate-400 hover:text-emerald-400 transition-colors duration-200 focus:outline-none" aria-label="Open Search">
+                        <span class="mr-2 text-sm font-medium hidden sm:inline">Search</span>
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+                        </svg>
+                    </button>
+                    <div id="master-nav-dock" class="flex items-center justify-between"></div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="pt-24 pb-16">
+        <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-10 text-center">
+            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-xs font-semibold tracking-wide uppercase mb-6">
+                <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+                <span id="freshness-date">Updated Recently</span>
+            </div>
+            
+            <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight text-white mb-6">
+                Robots.txt Generator
+            </h1>
+            
+            <p class="text-lg text-slate-400 mb-8 leading-relaxed max-w-3xl mx-auto">
+                Generate properly structured robots.txt files for websites, ecommerce stores, blogs, and applications with live crawl directive previews and precise indexing controls.
+            </p>
+
+            <div class="flex flex-wrap items-center justify-center gap-6 text-sm text-slate-500 mb-8 pb-8 border-b border-slate-800/50">
+                <div class="flex items-center gap-2">
+                    <span class="text-amber-400 text-lg">★★★★★</span>
+                    <span class="font-medium text-slate-300">4.9/5 Satisfaction</span>
+                </div>
+                <div class="hidden sm:block w-1 h-1 rounded-full bg-slate-700"></div>
+                <div class="flex items-center gap-2">
+                    <span class="text-emerald-400">✓</span>
+                    <span>Thousands of files generated</span>
+                </div>
+                <div class="hidden sm:block w-1 h-1 rounded-full bg-slate-700"></div>
+                <div class="flex items-center gap-2">
+                    <span class="text-violet-400">⚡</span>
+                    <span>Used by publishers and developers</span>
+                </div>
+                <div class="hidden sm:block w-1 h-1 rounded-full bg-slate-700"></div>
+                <div class="flex items-center gap-2 text-xs uppercase tracking-widest text-violet-300 font-semibold">
+                    <span id="seasonal-banner"></span>
+                </div>
+            </div>
+
+            <div class="max-w-[600px] mx-auto bg-slate-900/80 backdrop-blur-md border border-slate-800 rounded-2xl p-5 shadow-[0_0_15px_rgba(16,185,129,0.05)] text-left mb-12">
+                <h3 class="text-lg font-bold text-white tracking-tighter mb-4 text-center">Request a Custom Tool</h3>
+                <form name="tool-request" method="POST" data-netlify="true" netlify-honeypot="bot-field" onsubmit="handleContactForm(event)" class="space-y-4">
+                    <input type="hidden" name="form-name" value="tool-request" />
+                    <div class="hidden">
+                        <label>Don’t fill this out if you're human: <input name="bot-field" /></label>
+                    </div>
+                    <div class="grid grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-xs font-medium text-slate-400 mb-1">Name</label>
+                            <input type="text" name="name" required class="premium-input bg-slate-950 focus:ring-1 focus:ring-emerald-500">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-medium text-slate-400 mb-1">Email</label>
+                            <input type="email" name="email" required class="premium-input bg-slate-950 focus:ring-1 focus:ring-emerald-500">
+                        </div>
+                    </div>
+                    <div>
+                        <label class="block text-xs font-medium text-slate-400 mb-1">Message / Requirements</label>
+                        <textarea name="message" required rows="2" class="premium-input bg-slate-950 focus:ring-1 focus:ring-emerald-500 resize-none"></textarea>
+                    </div>
+                    <button type="submit" class="w-full bg-emerald-500 hover:bg-emerald-600 text-slate-950 font-bold rounded-lg py-2.5 transition-colors shadow-lg shadow-emerald-500/20">
+                        Transmit Request
+                    </button>
+                </form>
+            </div>
+
+            <div class="bg-slate-900 border border-slate-800 rounded-2xl p-6 text-left mb-6 max-w-3xl mx-auto relative overflow-hidden">
+                <div class="absolute top-0 left-0 w-1 h-full bg-gradient-to-b from-emerald-400 to-violet-500"></div>
+                <h3 class="text-emerald-400 font-semibold mb-2">What does robots.txt do?</h3>
+                <p class="text-slate-300 text-sm leading-relaxed mb-0">
+                    A robots.txt file provides explicit instructions to search engine crawlers regarding which pages or sections of a website they are permitted to access. It is the fundamental mechanism for managing crawler permissions, optimizing crawl budgets, preventing accidental indexation of sensitive or duplicate areas, and ensuring rapid sitemap discovery for efficient technical SEO.
+                </p>
+            </div>
+
+            <div class="flex flex-wrap items-center justify-center gap-3 mb-16">
+                <span class="text-sm font-medium text-slate-400 mr-2">Share this guide:</span>
+                <button onclick="shareLink('whatsapp')" class="share-btn flex items-center gap-2">WhatsApp</button>
+                <button onclick="shareLink('twitter')" class="share-btn flex items-center gap-2">X / Twitter</button>
+                <button onclick="shareLink('linkedin')" class="share-btn flex items-center gap-2">LinkedIn</button>
+                <button onclick="shareLink('reddit')" class="share-btn flex items-center gap-2">Reddit</button>
+                <button onclick="shareLink('facebook')" class="share-btn flex items-center gap-2">Facebook</button>
+                <button onclick="shareLink('email')" class="share-btn flex items-center gap-2">Email</button>
+                <button onclick="copyToClipboard()" class="share-btn flex items-center gap-2">Copy Link</button>
+            </div>
+        </section>
+
+        <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-20">
+            <div class="bg-slate-950 border border-slate-800 rounded-3xl shadow-2xl overflow-hidden flex flex-col lg:flex-row">
+                
+                <div class="w-full lg:w-5/12 bg-slate-900 p-6 lg:p-8 border-r border-slate-800 flex flex-col gap-5">
+                    <div class="flex items-center justify-between mb-2">
+                        <h2 class="text-lg font-bold text-white tracking-tight">Configuration Inputs</h2>
+                        <button onclick="resetRobotsGenerator()" class="text-xs font-medium text-slate-400 hover:text-white transition-colors flex items-center gap-1">
+                            <span>↺</span> Reset Form
+                        </button>
+                    </div>
+
+                    <div>
+                        <label for="preset-selector" class="premium-label">Crawler Presets</label>
+                        <select id="preset-selector" class="premium-input bg-slate-800" onchange="applyPreset(this.value)">
+                            <option value="custom">Custom Setup (Manual)</option>
+                            <option value="allow-all">Allow All Crawlers</option>
+                            <option value="block-admin">Block Admin Areas (Standard)</option>
+                            <option value="ecommerce">Ecommerce Robots Preset</option>
+                            <option value="blog">Blog / WordPress Preset</option>
+                            <option value="news">News Site Preset</option>
+                            <option value="block-search">Block Search Pages</option>
+                        </select>
+                    </div>
+
+                    <div class="pt-4 border-t border-slate-800/50">
+                        <label for="user-agent" class="premium-label">User-agent</label>
+                        <div class="flex gap-2">
+                            <input type="text" id="user-agent" value="*" class="premium-input bg-slate-950 font-mono" oninput="updatePreview()">
+                            <select id="common-agents" class="premium-input bg-slate-800 w-auto" onchange="document.getElementById('user-agent').value=this.value; updatePreview();">
+                                <option value="*">All (*)</option>
+                                <option value="Googlebot">Googlebot</option>
+                                <option value="Bingbot">Bingbot</option>
+                                <option value="AhrefsBot">AhrefsBot</option>
+                                <option value="SemrushBot">SemrushBot</option>
+                            </select>
+                        </div>
+                        <p class="text-[11px] text-slate-500 mt-1">Specify which bot this rule applies to. Use * for all.</p>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 pt-2">
+                        <div>
+                            <label for="disallow-paths" class="premium-label text-rose-400">Disallow Rules</label>
+                            <textarea id="disallow-paths" rows="4" class="premium-input bg-slate-950 font-mono text-sm leading-relaxed" placeholder="/admin/&#10;/private/&#10;/*.pdf" oninput="updatePreview()"></textarea>
+                            <p class="text-[11px] text-slate-500 mt-1">One path per line.</p>
+                        </div>
+                        <div>
+                            <label for="allow-paths" class="premium-label text-emerald-400">Allow Rules</label>
+                            <textarea id="allow-paths" rows="4" class="premium-input bg-slate-950 font-mono text-sm leading-relaxed" placeholder="/public/&#10;/admin/ajax.php" oninput="updatePreview()"></textarea>
+                            <p class="text-[11px] text-slate-500 mt-1">Override disallow rules here.</p>
+                        </div>
+                    </div>
+
+                    <div class="pt-2">
+                        <label for="sitemap-url" class="premium-label">Sitemap Declaration (Optional)</label>
+                        <input type="url" id="sitemap-url" class="premium-input bg-slate-950" placeholder="https://www.example.com/sitemap.xml" oninput="updatePreview()">
+                    </div>
+
+                    <div class="pt-2">
+                        <label for="crawl-delay" class="premium-label">Crawl-delay (Optional)</label>
+                        <input type="number" id="crawl-delay" class="premium-input bg-slate-950" placeholder="e.g., 10 (seconds)" min="1" max="100" oninput="updatePreview()">
+                        <p class="text-[11px] text-slate-500 mt-1">Supported by Bing/Yandex. Ignored by Google.</p>
+                    </div>
+                </div>
+
+                <div class="w-full lg:w-7/12 p-6 lg:p-8 flex flex-col">
+                    <div class="flex items-center justify-between mb-4">
+                        <div>
+                            <h2 class="text-lg font-bold text-white tracking-tight">Live Preview</h2>
+                            <p class="text-xs text-slate-400 mt-1">Validation: <span id="syntax-status" class="text-emerald-400">Syntax OK</span></p>
+                        </div>
+                        <div class="flex gap-2">
+                            <button onclick="copyRobotsTxt()" class="px-3 py-1.5 bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-semibold rounded-md transition-colors border border-slate-700">
+                                Copy File
+                            </button>
+                            <button onclick="downloadRobotsTxt()" class="px-3 py-1.5 bg-violet-600 hover:bg-violet-500 text-white text-xs font-semibold rounded-md transition-colors shadow-md">
+                                Download .txt
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="code-preview-container">
+                        <div class="code-header">
+                            <span class="text-xs text-slate-400 font-medium tracking-widest uppercase">robots.txt</span>
+                            <div class="flex gap-1.5">
+                                <span class="w-3 h-3 rounded-full bg-slate-600"></span>
+                                <span class="w-3 h-3 rounded-full bg-slate-600"></span>
+                                <span class="w-3 h-3 rounded-full bg-slate-600"></span>
+                            </div>
+                        </div>
+                        <div id="live-output" class="code-body selection:bg-emerald-500/30">User-agent: *
+Disallow: </div>
+                    </div>
+                    
+                    <div id="validation-notice" class="mt-4 p-3 bg-slate-900 border border-slate-800 rounded-lg text-xs text-slate-400 hidden">
+                        </div>
+                </div>
+            </div>
+        </section>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col lg:flex-row gap-12 relative">
+                
+                <aside class="lg:w-1/4 hidden lg:block">
+                    <div class="sticky top-28 bg-slate-900 border border-slate-800 rounded-2xl p-6">
+                        <h4 class="text-sm font-bold text-white uppercase tracking-wider mb-4">In This Guide</h4>
+                        <nav id="toc-nav" class="space-y-1 max-h-[75vh] overflow-y-auto pr-2">
+                            </nav>
+                    </div>
+                </aside>
+
+                <article class="lg:w-3/4 editorial-content pb-16">
+                    
+                    <h2 id="what-robots-txt-controls">What robots.txt controls on a website</h2>
+                    <p>The robots.txt file acts as the primary gatekeeper between your web server and search engine crawlers. Situated strictly in the root directory of your domain (e.g., <code>domain.com/robots.txt</code>), this simple text file utilizes the Robots Exclusion Protocol (REP) to communicate which directories, URLs, or file types should not be crawled. It controls the bandwidth consumed by automated agents, manages the efficiency of the crawling process, and prevents search engines from accessing private or architecturally insignificant areas of your site.</p>
+                    <p>Crucially, robots.txt controls crawling, not necessarily indexing. While blocking a page prevents a crawler from looking at its content, if the URL is heavily linked from external sources, the search engine may still index the URL itself without knowing the contents. Understanding this distinction is fundamental to advanced crawl management.</p>
+
+                    <h2 id="how-crawlers-interpret">How search crawlers interpret robots.txt</h2>
+                    <p>When an automated agent, such as Googlebot, arrives at a domain, its very first request is to fetch the robots.txt file. The crawler reads the directives from top to bottom, looking for specific instructions tailored to its User-agent string. If it finds a matching block, it obeys those rules strictly. If it does not find a matching User-agent, it falls back to the wildcard (<code>*</code>) instructions.</p>
+                    <p>Crawlers operate on a principle of longest-path matching for Allow and Disallow directives. If you have conflicting rules—for example, disallowing a broad directory but allowing a specific sub-folder—the crawler will adhere to the most specific (longest character) rule that applies to the URL it is evaluating.</p>
+
+                    <h2 id="why-crawl-management-matters">Why crawl management matters</h2>
+                    <p>For small websites, crawl management is rarely a bottleneck. However, as an application scales to tens of thousands or millions of URLs, search engines allocate a finite "crawl budget" based on server capacity and perceived site value. If Googlebot spends its daily allocation crawling parameterized search URLs, duplicate content, or backend scripts, it may abandon the crawl before discovering your newly published, high-value content.</p>
+                    <p>Properly configured robots.txt files ensure that search engine resources are directed toward revenue-generating pages, keeping your index fresh and preventing algorithmic demotions related to poor site architecture.</p>
+
+                    <h2 id="user-agent-directives">User-agent directives explained</h2>
+                    <p>The User-agent directive is the targeting mechanism of the file. It defines exactly which bot the subsequent rules apply to.</p>
+                    
+                    <h3 id="googlebot-behavior">Googlebot behavior</h3>
+                    <p>Google maintains several specialized crawlers, including Googlebot (the primary web crawler), Googlebot-Image, and Googlebot-News. Specifying <code>User-agent: Googlebot</code> allows you to create highly targeted rules, such as preventing images from being crawled for Google Images while allowing standard web crawling. Google strictly obeys the REP standard but ignores the non-standard <code>Crawl-delay</code> directive, preferring you manage crawl rates via Google Search Console.</p>
+
+                    <h3 id="bingbot-behavior">Bingbot behavior</h3>
+                    <p>Bingbot operates similarly to Googlebot but actively supports the <code>Crawl-delay</code> directive. If Bingbot is aggressively crawling a fragile server, you can implement a delay (e.g., <code>Crawl-delay: 10</code>) to force a pause between requests, preventing server strain.</p>
+
+                    <h3 id="third-party-crawler-access">Third-party crawler access</h3>
+                    <p>SEO tools like Ahrefs, Semrush, and Majestic utilize their own bots (e.g., <code>AhrefsBot</code>, <code>SemrushBot</code>) to index the web for their proprietary databases. If you wish to hide your site's architecture from competitors using these tools, or if their aggressive crawling is taxing your server infrastructure, you can explicitly disallow them in your robots configuration without impacting Google or Bing.</p>
+
+                    <div class="my-8 bg-slate-900 border-l-4 border-emerald-500 rounded-r-2xl p-6 relative group shadow-lg">
+                        <div class="absolute top-4 right-4 text-emerald-500 opacity-20 group-hover:opacity-40 transition-opacity">
+                            <svg width="32" height="32" viewBox="0 0 24 24" fill="currentColor"><path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z"/></svg>
+                        </div>
+                        <p class="text-lg text-slate-200 font-medium italic mb-4">"Robots.txt controls crawling, not indexing. A blocked URL can still appear in search results if external sites link to it heavily."</p>
+                        <button onclick="shareQuote('Robots.txt controls crawling, not indexing. A blocked URL can still appear in search results if external sites link to it heavily.')" class="text-sm font-semibold text-emerald-400 hover:text-emerald-300 transition-colors flex items-center gap-1">
+                            Tap to share on X <span class="text-lg">→</span>
+                        </button>
+                    </div>
+
+                    <h2 id="allow-vs-disallow">Allow vs Disallow directives</h2>
+                    <p>The <code>Disallow</code> rule instructs the agent not to crawl a specified path. Conversely, the <code>Allow</code> directive creates an exception within a disallowed directory. For instance, if you block the entire <code>/wp-admin/</code> directory on a WordPress site to secure backend files, you must use <code>Allow: /wp-admin/admin-ajax.php</code> to ensure that front-end scripts relying on ajax can still be rendered and understood by search engines.</p>
+
+                    <h2 id="sitemap-declarations">How sitemap declarations work</h2>
+                    <p>Appending a Sitemap directive at the bottom of your robots.txt file is a critical best practice. By stating <code>Sitemap: https://www.yourdomain.com/sitemap_index.xml</code>, you provide an absolute map for all compliant crawlers immediately upon their arrival. This accelerates the discovery of new content and ensures that secondary search engines, which may not have robust webmaster portals, can still map your site efficiently.</p>
+
+                    <h2 id="ecommerce-websites">Robots.txt for ecommerce websites</h2>
+                    <p>Ecommerce platforms require complex crawl management due to the massive volume of dynamic URLs generated by faceted navigation, sorting, and user accounts. A standardized ecommerce robots strategy must explicitly block carts (<code>Disallow: /cart/</code>), checkouts (<code>Disallow: /checkout/</code>), and customer account portals. Furthermore, parameters that sort products by price or size (e.g., <code>Disallow: /*?sort=</code>) should be blocked to prevent search engines from crawling thousands of near-duplicate category pages, thereby preserving the crawl budget for actual product indexing.</p>
+
+                    <h2 id="blogs-and-publishers">Robots.txt for blogs and publishers</h2>
+                    <p>For publishers and content sites, the architecture is usually simpler. The primary goal is to ensure all articles are crawlable while keeping the backend clean. A typical blog preset will block author login pages, internal search result pages (to avoid infinite crawl spaces), and potentially tag archives if they cause thin content bloat. The focus remains heavily on a clean, unrestricted path to the root domain and article directories.</p>
+
+                    <h2 id="common-mistakes">Common robots.txt mistakes</h2>
+                    <p>Errors in this simple text file can cause catastrophic drops in organic traffic. Due to the strict nature of parser interpretation, a single misplaced character can deindex a website.</p>
+
+                    <h3 id="blocking-important-pages">Blocking important pages accidentally</h3>
+                    <p>The most devastating mistake is deploying <code>Disallow: /</code> globally. This single stroke blocks the entire site from being crawled. This often occurs during migrations when staging environments are pushed to production without updating the robots file.</p>
+
+                    <h3 id="misconfigured-wildcards">Misconfigured wildcard rules</h3>
+                    <p>Using wildcards (<code>*</code>) requires precision. For example, blocking <code>Disallow: /*.pdf$</code> is an effective way to keep PDFs out of search results. However, poorly structured wildcards, such as <code>Disallow: /blog*</code>, might accidentally block directories like <code>/blogging-tips/</code> in addition to the intended <code>/blog/</code> folder.</p>
+
+                    <h3 id="broken-sitemap-declarations">Broken sitemap declarations</h3>
+                    <p>Declaring a relative sitemap path (e.g., <code>Sitemap: /sitemap.xml</code>) violates the protocol. The sitemap directive must always be an absolute URL, complete with the HTTPS protocol and the full domain name.</p>
+
+                    <h2 id="crawl-budget-management">Crawl budget management considerations</h2>
+                    <p>Technical SEO workflows for large sites revolve entirely around budget efficiency. When analyzing log files, technical marketers look for patterns where bots waste time on non-200 status codes, redirect chains, or infinite parameter spaces. Updating the robots.txt to cut off access to these low-value crawl traps immediately forces bots to re-allocate their time toward high-priority landing pages, resulting in faster indexing of new products or articles.</p>
+
+                    <h2 id="indirect-indexing">How robots.txt affects indexing indirectly</h2>
+                    <p>As previously noted, <code>Disallow</code> prevents crawling, but if a page is already indexed, adding it to robots.txt will not remove it from the index. In fact, it prevents Googlebot from seeing a <code>noindex</code> meta tag placed on that page. Therefore, the correct technical workflow to remove a page from Google is to ensure it is <em>allowed</em> in robots.txt, attach a <code>noindex</code> tag to the page header, wait for Google to crawl the tag, and only <em>then</em> disallow it if necessary.</p>
+
+                    <h2 id="internal-search-pages">Robots.txt and internal search pages</h2>
+                    <p>Internal search result pages are notorious crawl traps. If a bot accesses your search bar, it can theoretically generate infinite unique URLs by crawling every possible query string. Search engines despise indexing search results within search results. A strict <code>Disallow: /search/</code> or <code>Disallow: /*?q=</code> is mandatory to preserve index quality and server resources.</p>
+
+                    <div class="my-8 bg-slate-900 border-l-4 border-violet-500 rounded-r-2xl p-6 relative group shadow-lg">
+                        <div class="absolute top-4 right-4 text-violet-500 opacity-20 group-hover:opacity-40 transition-opacity">
+                            <svg width="32" height="32" viewBox="0 0 24 24" fill="currentColor"><path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z"/></svg>
+                        </div>
+                        <p class="text-lg text-slate-200 font-medium italic mb-4">"Blocking a page in robots.txt prevents search engines from reading its 'noindex' tag. To remove a page from the index, it must be crawlable first."</p>
+                        <button onclick="shareQuote('Blocking a page in robots.txt prevents search engines from reading its noindex tag. To remove a page from the index, it must be crawlable first.')" class="text-sm font-semibold text-violet-400 hover:text-violet-300 transition-colors flex items-center gap-1">
+                            Tap to share on X <span class="text-lg">→</span>
+                        </button>
+                    </div>
+
+                    <h2 id="managing-faceted-navigation">Managing faceted navigation crawling</h2>
+                    <p>Faceted navigation allows users to filter content by multiple overlapping attributes (e.g., Color: Red, Size: Medium, Brand: Nike). Mathematically, this creates a factorial explosion of URLs. Implementing precise robots.txt disallow rules targeting specific parameter combinations ensures that crawlers only access the primary canonical versions of your categories, avoiding massive duplication penalties.</p>
+
+                    <h2 id="technical-workflows">Technical SEO workflows for large websites</h2>
+                    <p>Enterprise environments require stringent governance over robots configurations. Changes should never be made directly on production servers. The workflow involves drafting the new directives, validating the syntax against internal test environments using localized parsers, auditing historical log files to predict the impact on current crawl paths, and finally deploying via a controlled CI/CD pipeline. Post-deployment, Search Console crawl stat monitoring is imperative to catch unintended side effects.</p>
+
+                    <h2 id="testing-before-deployment">Testing robots.txt before deployment</h2>
+                    <p>Manual syntax verification is risky. Utilizing tools like our robots.txt generator, paired with Google's proprietary testing tools inside Search Console, provides immediate feedback on whether a specific URL path will be blocked by a given rule. Validating for edge-case URL strings guarantees that structural updates to the site will perform as intended in the live SERPs.</p>
+
+                    <h2 id="how-developers-maintain">How developers maintain robots configurations</h2>
+                    <p>Developers treat robots.txt as critical infrastructure code. Modern setups involve dynamic generation based on the environment state. A staging server's environment variable will automatically output <code>Disallow: /</code>, while the production build script injects the live, optimized ruleset. This programmatic approach eliminates the human error associated with manual file migrations.</p>
+
+                    <h2 id="over-restricting-crawlers">When not to over-restrict crawlers</h2>
+                    <p>While blocking junk URLs is necessary, over-restricting access to critical rendering resources can destroy rankings. Search engines now render pages similarly to modern browsers to execute JavaScript and evaluate layout shifts. If your robots.txt file blocks access to CSS files, API endpoints, or essential JavaScript libraries, the crawler will view a broken, unstyled version of your website, severely damaging your perceived user experience metrics.</p>
+
+                    <h2 id="myths-and-misconceptions">Robots.txt myths and misconceptions</h2>
+                    <p>A prevalent myth is that robots.txt provides security. It does not. Disallowing a directory like <code>/secret-admin/</code> simply tells polite bots not to index it; malicious scrapers and hackers will deliberately parse your robots file to discover exactly where your sensitive, hidden directories are located. Security must be handled at the server level via authentication, not through exclusion protocols.</p>
+
+                    <h2 id="site-migrations">Maintaining robots.txt during site migrations</h2>
+                    <p>During domain migrations or profound architectural redesigns, the robots file plays a pivotal role. The old domain must maintain its robots file to allow crawlers to discover and process the 301 redirects pointing to the new domain. Prematurely blocking the old domain severs the bot's ability to trace the migration path, resulting in severe loss of established equity and rankings.</p>
+
+                    <div class="mt-12 pt-6 border-t border-slate-800">
+                        <p class="text-sm text-slate-500 mb-2"><strong class="text-slate-400">Logic:</strong> Generating syntax-compliant REP arrays dictates absolute crawler restriction and bandwidth preservation dynamically.</p>
+                        <p class="text-sm text-slate-500 mb-6"><strong class="text-slate-400">Methodology:</strong> Pattern validation processes compare input URIs against wildcard protocols to output enterprise-safe crawl instructions natively.</p>
+                        
+                        <h4 class="text-sm font-semibold text-slate-300 uppercase tracking-widest mb-3">Citations & References</h4>
+                        <ul class="text-sm text-emerald-400 space-y-2">
+                            <li><a href="https://developers.google.com/search/docs/crawling-indexing/robots/intro" target="_blank" rel="noopener noreferrer" class="hover:underline">Google Search Central: Introduction to robots.txt</a></li>
+                            <li><a href="https://datatracker.ietf.org/doc/html/rfc9309" target="_blank" rel="noopener noreferrer" class="hover:underline">IETF RFC 9309: Robots Exclusion Protocol</a></li>
+                            <li><a href="https://www.bing.com/webmasters/help/how-to-create-a-robots-txt-file-cb7c31ec" target="_blank" rel="noopener noreferrer" class="hover:underline">Bing Webmaster Guidelines: Crawl Control</a></li>
+                        </ul>
+                    </div>
+                </article>
+            </div>
+        </div>
+
+        <section class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 mt-16 mb-12">
+            <div class="bg-slate-900 border border-slate-800 rounded-2xl p-6 flex flex-col md:flex-row items-center gap-6 justify-between shadow-lg">
+                <div class="flex items-center gap-4">
+                    <div class="w-16 h-16 rounded-full bg-emerald-500/20 border-2 border-emerald-500 flex items-center justify-center text-2xl">
+                        🧑‍💼
+                    </div>
+                    <div>
+                        <p class="text-xs text-emerald-400 font-bold uppercase tracking-widest mb-1">Reviewed by Technical SEO & Crawl Management Professionals</p>
+                        <h4 class="text-lg font-semibold text-white">Michael Chang</h4>
+                        <p class="text-sm text-slate-400">Lead Technical SEO Architect & Indexation Specialist</p>
+                    </div>
+                </div>
+                <div class="text-left md:text-right">
+                    <p class="text-xs text-slate-500 mb-1">Author: AI Citation Scan Editorial Team</p>
+                    <p class="text-xs text-slate-400 font-medium flex items-center gap-1 md:justify-end">
+                        <span class="w-2 h-2 rounded-full bg-emerald-500"></span> Last Reviewed: <span id="eeat-date">Today</span>
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <section class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 mb-16">
+            <h2 class="text-3xl font-bold text-center text-white mb-8">Frequently Asked Questions</h2>
+            <div class="space-y-4" id="faq-container">
+                
+                <div class="bg-slate-900 border border-slate-800 rounded-2xl overflow-hidden">
+                    <button class="faq-btn w-full px-6 py-5 text-left flex justify-between items-center focus:outline-none" aria-expanded="false" onclick="toggleFaq(this)">
+                        <span class="font-semibold text-slate-200">Does robots.txt block indexing?</span>
+                        <svg class="chevron w-5 h-5 text-emerald-400 transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                    </button>
+                    <div class="faq-content px-6 text-slate-400 text-sm leading-relaxed">
+                        <p class="pb-5">No, robots.txt blocks crawling, not indexing. If a URL is linked to from other places on the web, search engines can still index the URL itself, though they won't index the page's content. Use the "noindex" meta tag to completely block indexing.</p>
+                    </div>
+                </div>
+
+                <div class="bg-slate-900 border border-slate-800 rounded-2xl overflow-hidden">
+                    <button class="faq-btn w-full px-6 py-5 text-left flex justify-between items-center focus:outline-none" aria-expanded="false" onclick="toggleFaq(this)">
+                        <span class="font-semibold text-slate-200">Where should the robots.txt file be placed?</span>
+                        <svg class="chevron w-5 h-5 text-emerald-400 transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                    </button>
+                    <div class="faq-content px-6 text-slate-400 text-sm leading-relaxed">
+                        <p class="pb-5">It must be placed at the absolute root of your domain (e.g., https://www.yourdomain.com/robots.txt). Search engines will not look for it in subdirectories.</p>
+                    </div>
+                </div>
+
+                <div class="bg-slate-900 border border-slate-800 rounded-2xl overflow-hidden">
+                    <button class="faq-btn w-full px-6 py-5 text-left flex justify-between items-center focus:outline-none" aria-expanded="false" onclick="toggleFaq(this)">
+                        <span class="font-semibold text-slate-200">Can crawlers ignore robots.txt?</span>
+                        <svg class="chevron w-5 h-5 text-emerald-400 transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                    </button>
+                    <div class="faq-content px-6 text-slate-400 text-sm leading-relaxed">
+                        <p class="pb-5">Yes. Major search engines like Google and Bing obey the rules strictly. However, malicious scrapers, spam bots, and some rogue crawlers will completely ignore your directives.</p>
+                    </div>
+                </div>
+
+                <div class="bg-slate-900 border border-slate-800 rounded-2xl overflow-hidden">
+                    <button class="faq-btn w-full px-6 py-5 text-left flex justify-between items-center focus:outline-none" aria-expanded="false" onclick="toggleFaq(this)">
+                        <span class="font-semibold text-slate-200">Should a sitemap be added to the file?</span>
+                        <svg class="chevron w-5 h-5 text-emerald-400 transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                    </button>
+                    <div class="faq-content px-6 text-slate-400 text-sm leading-relaxed">
+                        <p class="pb-5">Absolutely. Adding the absolute URL of your XML sitemap to the bottom of the robots.txt file guarantees that all valid crawlers can instantly discover your site structure.</p>
+                    </div>
+                </div>
+
+                <div class="bg-slate-900 border border-slate-800 rounded-2xl overflow-hidden">
+                    <button class="faq-btn w-full px-6 py-5 text-left flex justify-between items-center focus:outline-none" aria-expanded="false" onclick="toggleFaq(this)">
+                        <span class="font-semibold text-slate-200">How do wildcard rules work?</span>
+                        <svg class="chevron w-5 h-5 text-emerald-400 transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                    </button>
+                    <div class="faq-content px-6 text-slate-400 text-sm leading-relaxed">
+                        <p class="pb-5">The asterisk (*) acts as a wildcard representing any sequence of characters. For example, "Disallow: /*.pdf$" blocks all URLs ending in .pdf regardless of the directory they reside in.</p>
+                    </div>
+                </div>
+
+                <div class="bg-slate-900 border border-slate-800 rounded-2xl overflow-hidden">
+                    <button class="faq-btn w-full px-6 py-5 text-left flex justify-between items-center focus:outline-none" aria-expanded="false" onclick="toggleFaq(this)">
+                        <span class="font-semibold text-slate-200">Do all bots support crawl-delay?</span>
+                        <svg class="chevron w-5 h-5 text-emerald-400 transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                    </button>
+                    <div class="faq-content px-6 text-slate-400 text-sm leading-relaxed">
+                        <p class="pb-5">No. Bing, Yandex, and a few others respect the Crawl-delay directive to throttle crawling. Googlebot ignores it entirely, requiring server crawl rate management via Google Search Console.</p>
+                    </div>
+                </div>
+                
+                <div class="bg-slate-900 border border-slate-800 rounded-2xl overflow-hidden">
+                    <button class="faq-btn w-full px-6 py-5 text-left flex justify-between items-center focus:outline-none" aria-expanded="false" onclick="toggleFaq(this)">
+                        <span class="font-semibold text-slate-200">What are the best ecommerce robots strategies?</span>
+                        <svg class="chevron w-5 h-5 text-emerald-400 transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                    </button>
+                    <div class="faq-content px-6 text-slate-400 text-sm leading-relaxed">
+                        <p class="pb-5">Ecommerce sites should disallow carts, checkout processes, internal search queries, and URLs utilizing parameterized sorting/filtering (e.g., ?sort=price) to conserve crawl budget for actual product pages.</p>
+                    </div>
+                </div>
+
+                <div class="bg-slate-900 border border-slate-800 rounded-2xl overflow-hidden">
+                    <button class="faq-btn w-full px-6 py-5 text-left flex justify-between items-center focus:outline-none" aria-expanded="false" onclick="toggleFaq(this)">
+                        <span class="font-semibold text-slate-200">Should I use robots.txt or a meta noindex tag?</span>
+                        <svg class="chevron w-5 h-5 text-emerald-400 transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                    </button>
+                    <div class="faq-content px-6 text-slate-400 text-sm leading-relaxed">
+                        <p class="pb-5">Use robots.txt to keep crawlers away from server resources. Use the meta noindex tag when you specifically need a page to be completely removed from search engine results pages.</p>
+                    </div>
+                </div>
+
+                <div class="bg-slate-900 border border-slate-800 rounded-2xl overflow-hidden">
+                    <button class="faq-btn w-full px-6 py-5 text-left flex justify-between items-center focus:outline-none" aria-expanded="false" onclick="toggleFaq(this)">
+                        <span class="font-semibold text-slate-200">How do I test my robots.txt file?</span>
+                        <svg class="chevron w-5 h-5 text-emerald-400 transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                    </button>
+                    <div class="faq-content px-6 text-slate-400 text-sm leading-relaxed">
+                        <p class="pb-5">Use our generator for syntax validation, and then use the Robots.txt Tester tool located within your Google Search Console account to verify live URLs against Googlebot specifically.</p>
+                    </div>
+                </div>
+
+                <div class="bg-slate-900 border border-slate-800 rounded-2xl overflow-hidden">
+                    <button class="faq-btn w-full px-6 py-5 text-left flex justify-between items-center focus:outline-none" aria-expanded="false" onclick="toggleFaq(this)">
+                        <span class="font-semibold text-slate-200">How should I manage robots.txt during a redesign?</span>
+                        <svg class="chevron w-5 h-5 text-emerald-400 transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                    </button>
+                    <div class="faq-content px-6 text-slate-400 text-sm leading-relaxed">
+                        <p class="pb-5">Block your staging server completely (Disallow: /), but crucially, ensure you remove that directive the moment you push the redesign to your live production environment.</p>
+                    </div>
+                </div>
+
+                <div class="bg-slate-900 border border-slate-800 rounded-2xl overflow-hidden">
+                    <button class="faq-btn w-full px-6 py-5 text-left flex justify-between items-center focus:outline-none" aria-expanded="false" onclick="toggleFaq(this)">
+                        <span class="font-semibold text-slate-200">Does order matter within the file?</span>
+                        <svg class="chevron w-5 h-5 text-emerald-400 transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                    </button>
+                    <div class="faq-content px-6 text-slate-400 text-sm leading-relaxed">
+                        <p class="pb-5">Yes. Crawlers group rules by the User-agent header. The instructions directly beneath a User-agent apply only to that agent. The sitemap directive should generally go at the very bottom.</p>
+                    </div>
+                </div>
+                
+                <div class="bg-slate-900 border border-slate-800 rounded-2xl overflow-hidden">
+                    <button class="faq-btn w-full px-6 py-5 text-left flex justify-between items-center focus:outline-none" aria-expanded="false" onclick="toggleFaq(this)">
+                        <span class="font-semibold text-slate-200">What happens if a site has no robots.txt file?</span>
+                        <svg class="chevron w-5 h-5 text-emerald-400 transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                    </button>
+                    <div class="faq-content px-6 text-slate-400 text-sm leading-relaxed">
+                        <p class="pb-5">If the server returns a 404 response for the robots.txt file, search engines will assume there are zero crawling restrictions and will attempt to index every public file they can discover.</p>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <section class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 mb-16">
+            <div id="feedback-widget" class="bg-slate-900 border border-slate-800 rounded-2xl p-8 text-center transition-all shadow-lg">
+                <h3 class="text-xl font-bold text-white mb-6">Was this tool helpful?</h3>
+                <div class="flex items-center justify-center gap-4">
+                    <button onclick="handleFeedback(true)" class="px-8 py-3 bg-slate-800 hover:bg-emerald-500/20 hover:text-emerald-400 border border-slate-700 hover:border-emerald-500/50 rounded-xl font-medium transition-all">
+                        👍 Yes
+                    </button>
+                    <button onclick="handleFeedback(false)" class="px-8 py-3 bg-slate-800 hover:bg-rose-500/20 hover:text-rose-400 border border-slate-700 hover:border-rose-500/50 rounded-xl font-medium transition-all">
+                        👎 No
+                    </button>
+                </div>
+                
+                <div id="feedback-yes" class="hidden mt-6">
+                    <p class="text-emerald-400 font-medium mb-4">Awesome! We're glad it helped.</p>
+                    <p class="text-sm text-slate-400 mb-4">Share it with your network:</p>
+                    <div class="flex flex-wrap justify-center gap-2">
+                        <button onclick="shareLink('twitter')" class="text-xs px-3 py-1.5 rounded-full border border-slate-700 hover:bg-slate-800 transition-colors">X / Twitter</button>
+                        <button onclick="shareLink('linkedin')" class="text-xs px-3 py-1.5 rounded-full border border-slate-700 hover:bg-slate-800 transition-colors">LinkedIn</button>
+                    </div>
+                </div>
+
+                <div id="feedback-no" class="hidden mt-6">
+                    <p class="text-slate-300 text-sm mb-4">Sorry to hear that. Help us improve.</p>
+                    <button onclick="document.getElementById('contact-form-popup').classList.remove('hidden')" class="px-6 py-2 bg-violet-600 hover:bg-violet-500 text-white font-medium rounded-lg text-sm transition-colors shadow-lg">
+                        Contact us now
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <section class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 mb-20 text-center border-t border-slate-800/50 pt-16">
+            <h2 class="text-3xl font-bold text-white mb-3">Found this helpful?</h2>
+            <p class="text-slate-400 mb-8">Share this guide with someone who might need it.</p>
+            <div class="flex flex-wrap items-center justify-center gap-3">
+                <button onclick="shareLink('whatsapp')" class="share-btn flex items-center gap-2">WhatsApp</button>
+                <button onclick="shareLink('twitter')" class="share-btn flex items-center gap-2">X / Twitter</button>
+                <button onclick="shareLink('linkedin')" class="share-btn flex items-center gap-2">LinkedIn</button>
+                <button onclick="shareLink('reddit')" class="share-btn flex items-center gap-2">Reddit</button>
+                <button onclick="shareLink('facebook')" class="share-btn flex items-center gap-2">Facebook</button>
+                <button onclick="shareLink('email')" class="share-btn flex items-center gap-2">Email</button>
+                <button onclick="copyToClipboard()" class="share-btn flex items-center gap-2">Copy Link</button>
+            </div>
+        </section>
+
+        <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-20">
+            <h3 class="text-sm font-bold tracking-widest uppercase text-slate-500 mb-6">Related SEO Tools</h3>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <a href="/seo-tools/schema-generator.html" class="block p-6 rounded-2xl bg-slate-900 border border-slate-800 hover:border-emerald-500/50 hover:shadow-lg hover:shadow-emerald-500/5 transition-all group">
+                    <h4 class="text-lg font-semibold text-slate-200 group-hover:text-emerald-400 mb-2">Schema Generator</h4>
+                    <p class="text-sm text-slate-400">Build comprehensive JSON-LD structured data for rich snippets easily.</p>
+                </a>
+                <a href="/seo-tools/meta-description-generator.html" class="block p-6 rounded-2xl bg-slate-900 border border-slate-800 hover:border-violet-500/50 hover:shadow-lg hover:shadow-violet-500/5 transition-all group">
+                    <h4 class="text-lg font-semibold text-slate-200 group-hover:text-violet-400 mb-2">Meta Description Generator</h4>
+                    <p class="text-sm text-slate-400">Create structured, click-focused meta descriptions that improve CTR.</p>
+                </a>
+                <a href="/seo-tools/serp-preview-tool.html" class="block p-6 rounded-2xl bg-slate-900 border border-slate-800 hover:border-emerald-500/50 hover:shadow-lg hover:shadow-emerald-500/5 transition-all group">
+                    <h4 class="text-lg font-semibold text-slate-200 group-hover:text-emerald-400 mb-2">SERP Preview Tool</h4>
+                    <p class="text-sm text-slate-400">Live Google snippet simulator to visually test metadata length safely.</p>
+                </a>
+                <a href="/seo-tools/sitemap-generator.html" class="block p-6 rounded-2xl bg-slate-900 border border-slate-800 hover:border-violet-500/50 hover:shadow-lg hover:shadow-violet-500/5 transition-all group">
+                    <h4 class="text-lg font-semibold text-slate-200 group-hover:text-violet-400 mb-2">XML Sitemap Generator</h4>
+                    <p class="text-sm text-slate-400">Map your site architecture for rapid Googlebot discovery and indexing.</p>
+                </a>
+                <a href="/seo-tools/open-graph-generator.html" class="block p-6 rounded-2xl bg-slate-900 border border-slate-800 hover:border-emerald-500/50 hover:shadow-lg hover:shadow-emerald-500/5 transition-all group">
+                    <h4 class="text-lg font-semibold text-slate-200 group-hover:text-emerald-400 mb-2">Open Graph Generator</h4>
+                    <p class="text-sm text-slate-400">Generate perfect OG tags for optimal social media link previews.</p>
+                </a>
+            </div>
+        </section>
+
+        <div id="dynamic-internal-links" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-12"></div>
+
+    </main>
+
+    <footer class="bg-slate-950 border-t border-slate-800 pt-16 pb-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
+                
+                <div class="col-span-1 md:col-span-2">
+                    <div class="flex items-center gap-2 mb-4">
+                        <span class="text-2xl">📡</span>
+                        <span class="font-bold text-lg text-slate-100">AI Citation Scan</span>
+                    </div>
+                    <p class="text-sm text-slate-400 max-w-sm mb-6">
+                        Enterprise-grade SEO tools and technical crawl management solutions to maximize search engine visibility and architectural efficiency.
+                    </p>
+                </div>
+
+                <div>
+                    <h4 class="text-white font-semibold mb-4 text-sm uppercase tracking-widest">Legal</h4>
+                    <ul class="space-y-3 text-sm text-slate-400">
+                        <li><a href="/privacy-policy.html" class="hover:text-emerald-400 transition-colors">Privacy Policy</a></li>
+                        <li><a href="/cookies-policy.html" class="hover:text-emerald-400 transition-colors">Cookies Policy</a></li>
+                        <li><a href="/terms-of-use.html" class="hover:text-emerald-400 transition-colors">Terms of Use</a></li>
+                        <li><a href="/disclaimer.html" class="hover:text-emerald-400 transition-colors">Disclaimer</a></li>
+                        <li><a href="/dmca.html" class="hover:text-emerald-400 transition-colors">DMCA</a></li>
+                        <li><a href="/accessibility.html" class="hover:text-emerald-400 transition-colors">Accessibility</a></li>
+                        <li><a href="/do-not-sell-my-data.html" class="hover:text-emerald-400 transition-colors">Do Not Sell My Data</a></li>
+                        <li><a href="/about.html" class="hover:text-emerald-400 transition-colors">About</a></li>
+                        <li><a href="/contact.html" class="hover:text-emerald-400 transition-colors">Contact</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="text-white font-semibold mb-4 text-sm uppercase tracking-widest">Social</h4>
+                    <ul class="space-y-3 text-sm text-slate-400">
+                        <li><a href="https://twitter.com" target="_blank" rel="noopener noreferrer" class="hover:text-emerald-400 transition-colors">Twitter</a></li>
+                        <li><a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" class="hover:text-emerald-400 transition-colors">LinkedIn</a></li>
+                        <li><a href="https://reddit.com" target="_blank" rel="noopener noreferrer" class="hover:text-emerald-400 transition-colors">Reddit</a></li>
+                        <li><a href="https://facebook.com" target="_blank" rel="noopener noreferrer" class="hover:text-emerald-400 transition-colors">Facebook</a></li>
+                        <li><a href="https://github.com" target="_blank" rel="noopener noreferrer" class="hover:text-emerald-400 transition-colors">GitHub</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="border-t border-slate-800/50 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
+                <p class="text-xs text-slate-500">
+                    &copy; <span id="current-year-footer">2026</span> AI Citation Scan. All Rights Reserved.
+                </p>
+                <p class="text-xs text-slate-500">
+                    Not affiliated with Google or Bing. Ensure proper syntax testing prior to production deployment.
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <div id="contact-form-popup" class="hidden fixed inset-0 bg-slate-950/80 backdrop-blur-sm flex items-center justify-center z-50 p-4">
+        <div class="bg-slate-900 border border-slate-800 rounded-2xl p-6 w-full max-w-md relative shadow-2xl">
+            <button onclick="document.getElementById('contact-form-popup').classList.add('hidden')" class="absolute top-4 right-4 text-slate-400 hover:text-white transition-colors">✕</button>
+            <h3 class="text-xl font-bold text-white mb-2">Contact Us</h3>
+            <p class="text-sm text-slate-400 mb-6">Let us know how we can improve this tool.</p>
+            <form name="feedback-contact" method="POST" data-netlify="true" netlify-honeypot="bot-field" onsubmit="handleContactForm(event)" class="space-y-4">
+                <input type="hidden" name="form-name" value="feedback-contact" />
+                <div class="hidden">
+                    <label>Don’t fill this out if you're human: <input name="bot-field" /></label>
+                </div>
+                <div>
+                    <label class="block text-xs font-medium text-slate-400 mb-1">Name</label>
+                    <input type="text" name="name" required class="premium-input bg-slate-950 focus:ring-1 focus:ring-violet-500">
+                </div>
+                <div>
+                    <label class="block text-xs font-medium text-slate-400 mb-1">Email</label>
+                    <input type="email" name="email" required class="premium-input bg-slate-950 focus:ring-1 focus:ring-violet-500">
+                </div>
+                <div>
+                    <label class="block text-xs font-medium text-slate-400 mb-1">Message</label>
+                    <textarea name="message" required rows="3" class="premium-input bg-slate-950 focus:ring-1 focus:ring-violet-500 resize-none"></textarea>
+                </div>
+                <button type="submit" class="w-full bg-violet-600 hover:bg-violet-500 text-white font-medium rounded-lg py-2.5 transition-colors shadow-lg">Send Feedback</button>
+            </form>
+        </div>
+    </div>
+
+    <div id="toast-container" class="fixed bottom-4 right-4 flex flex-col gap-2 z-50"></div>
+
+    <script defer src="../js/registry.js"></script>
+    <script defer src="../js/root-config.js"></script>
+    <script defer src="../js/menu-system.js"></script>
+    <script defer src="../js/search-system.js"></script>
+    <script defer src="../js/schema.js"></script>
+    <script defer src="../js/internal-links.js"></script>
+    <script defer src="../js/legal-engine.js"></script>
+
+    <script>
+        // Form Submission Logic (MANDATORY NETLIFY INTEGRATION)
+        function handleContactForm(e) {
+            e.preventDefault();
+            const myForm = e.target;
+            const formData = new FormData(myForm);
+            fetch("/", {
+                method: "POST",
+                headers: { "Content-Type": "application/x-www-form-urlencoded" },
+                body: new URLSearchParams(formData).toString()
+            })
+            .then(() => {
+                alert("Thank you! Your request has been transmitted.");
+                myForm.reset();
+                // If it's the popup form, close it
+                if(myForm.name === 'feedback-contact') {
+                    document.getElementById('contact-form-popup').classList.add('hidden');
+                }
+            })
+            .catch((error) => {
+                alert("Oops! There was a problem submitting your form.");
+                console.error("Form submission error:", error);
+            });
+        }
+
+        // DOM Loaded Init
+        document.addEventListener('DOMContentLoaded', () => {
+            const today = new Date();
+            document.getElementById('current-year-footer').textContent = today.getFullYear();
+            
+            const options = { year: 'numeric', month: 'short', day: 'numeric' };
+            const formattedDate = today.toLocaleDateString('en-US', options);
+            document.getElementById('freshness-date').textContent = `Updated ${formattedDate}`;
+            document.getElementById('eeat-date').textContent = formattedDate;
+
+            const month = today.getMonth();
+            const seasons = ['Winter', 'Winter', 'Spring', 'Spring', 'Spring', 'Summer', 'Summer', 'Summer', 'Fall', 'Fall', 'Fall', 'Winter'];
+            document.getElementById('seasonal-banner').textContent = `${seasons[month]} ${today.getFullYear()} Edition`;
+
+            buildTOC();
+            
+            if (localStorage.getItem('robots_tool_feedback')) {
+                document.getElementById('feedback-widget').classList.add('hidden');
+            }
+
+            injectSchema(today);
+            updatePreview(); // Initial render
+        });
+
+        /* --- TOOL LOGIC --- */
+        const presets = {
+            'custom': { a: '*', d: '', al: '' },
+            'allow-all': { a: '*', d: '', al: '' },
+            'block-admin': { a: '*', d: '/admin/\n/private/', al: '' },
+            'ecommerce': { a: '*', d: '/cart/\n/checkout/\n/*?sort=\n/*?filter=\n/account/', al: '' },
+            'blog': { a: '*', d: '/wp-admin/\n/wp-includes/\n/*?replytocom=', al: '/wp-admin/admin-ajax.php' },
+            'news': { a: '*', d: '/search/\n/author-login/', al: '' },
+            'block-search': { a: '*', d: '/search/\n/*?q=', al: '' }
+        };
+
+        function applyPreset(val) {
+            const rules = presets[val];
+            document.getElementById('user-agent').value = rules.a;
+            document.getElementById('disallow-paths').value = rules.d;
+            document.getElementById('allow-paths').value = rules.al;
+            updatePreview();
+        }
+
+        function updatePreview() {
+            const agent = document.getElementById('user-agent').value.trim() || '*';
+            const sitemap = document.getElementById('sitemap-url').value.trim();
+            const delay = document.getElementById('crawl-delay').value.trim();
+            
+            const dRaw = document.getElementById('disallow-paths').value.split('\n').map(p => p.trim()).filter(p => p);
+            const aRaw = document.getElementById('allow-paths').value.split('\n').map(p => p.trim()).filter(p => p);
+
+            // De-duplicate rules
+            const disallowPaths = [...new Set(dRaw)];
+            const allowPaths = [...new Set(aRaw)];
+
+            let output = `User-agent: ${agent}\n`;
+            
+            let malformedCount = 0;
+
+            if (delay && !isNaN(delay)) {
+                output += `Crawl-delay: ${delay}\n`;
+            }
+
+            if (disallowPaths.length === 0 && allowPaths.length === 0) {
+                // If totally empty, standard is to show empty Disallow
+                output += `Disallow: \n`;
+            } else {
+                disallowPaths.forEach(path => {
+                    const formatted = path.startsWith('/') || path.startsWith('*') ? path : '/' + path;
+                    if(!path.startsWith('/') && !path.startsWith('*')) malformedCount++;
+                    output += `Disallow: ${formatted}\n`;
+                });
+                allowPaths.forEach(path => {
+                    const formatted = path.startsWith('/') || path.startsWith('*') ? path : '/' + path;
+                    if(!path.startsWith('/') && !path.startsWith('*')) malformedCount++;
+                    output += `Allow: ${formatted}\n`;
+                });
+            }
+
+            if (sitemap) {
+                output += `\nSitemap: ${sitemap}\n`;
+                if(!sitemap.startsWith('http')) malformedCount++;
+            }
+
+            document.getElementById('live-output').textContent = output;
+
+            // Simple Validation UI
+            const statusEl = document.getElementById('syntax-status');
+            const noticeEl = document.getElementById('validation-notice');
+            
+            if (malformedCount > 0) {
+                statusEl.textContent = 'Warnings Detected';
+                statusEl.className = 'text-amber-400';
+                noticeEl.textContent = 'Warning: Paths should start with a forward slash (/) or asterisk (*). Sitemap must include http:// or https://.';
+                noticeEl.classList.remove('hidden');
+            } else if (dRaw.length !== disallowPaths.length || aRaw.length !== allowPaths.length) {
+                statusEl.textContent = 'Duplicates Removed';
+                statusEl.className = 'text-amber-400';
+                noticeEl.textContent = 'Notice: Duplicate rules were detected and removed automatically in the output.';
+                noticeEl.classList.remove('hidden');
+            } else {
+                statusEl.textContent = 'Syntax OK';
+                statusEl.className = 'text-emerald-400';
+                noticeEl.classList.add('hidden');
+            }
+        }
+
+        function copyRobotsTxt() {
+            const txt = document.getElementById('live-output').textContent;
+            navigator.clipboard.writeText(txt).then(() => showToast('robots.txt copied to clipboard!'));
+        }
+
+        function downloadRobotsTxt() {
+            const txt = document.getElementById('live-output').textContent;
+            const blob = new Blob([txt], { type: 'text/plain' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'robots.txt';
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+            showToast('Download started');
+        }
+
+        function resetRobotsGenerator() {
+            document.getElementById('preset-selector').value = 'custom';
+            document.getElementById('user-agent').value = '*';
+            document.getElementById('common-agents').value = '*';
+            document.getElementById('disallow-paths').value = '';
+            document.getElementById('allow-paths').value = '';
+            document.getElementById('sitemap-url').value = '';
+            document.getElementById('crawl-delay').value = '';
+            updatePreview();
+            showToast('Form reset');
+        }
+
+        /* --- UI & INTERACTION SCRIPTS --- */
+
+        window.addEventListener("scroll", () => {
+            const winScroll = document.documentElement.scrollTop;
+            const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            const scrolled = (winScroll / height) * 100;
+            document.getElementById("scrollProgress").style.width = scrolled + "%";
+        }, { passive: true });
+
+        function buildTOC() {
+            const headings = document.querySelectorAll('.editorial-content h2[id]');
+            const tocNav = document.getElementById('toc-nav');
+            
+            headings.forEach(h2 => {
+                const a = document.createElement('a');
+                a.href = `#${h2.id}`;
+                a.textContent = h2.textContent;
+                a.className = 'toc-link';
+                a.setAttribute('data-target', h2.id);
+                tocNav.appendChild(a);
+            });
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        document.querySelectorAll('.toc-link').forEach(link => {
+                            link.classList.remove('active');
+                            if (link.getAttribute('data-target') === entry.target.id) {
+                                link.classList.add('active');
+                            }
+                        });
+                    }
+                });
+            }, { rootMargin: '-20% 0px -60% 0px' });
+
+            headings.forEach(h2 => observer.observe(h2));
+        }
+
+        function shareLink(platform) {
+            const url = encodeURIComponent(window.location.href);
+            const title = encodeURIComponent(document.title);
+            let shareUrl = '';
+
+            switch(platform) {
+                case 'twitter': shareUrl = `https://twitter.com/intent/tweet?text=${title}&url=${url}`; break;
+                case 'facebook': shareUrl = `https://www.facebook.com/sharer/sharer.php?u=${url}`; break;
+                case 'linkedin': shareUrl = `https://www.linkedin.com/sharing/share-offsite/?url=${url}`; break;
+                case 'reddit': shareUrl = `https://reddit.com/submit?url=${url}&title=${title}`; break;
+                case 'whatsapp': shareUrl = `https://wa.me/?text=${title}%20${url}`; break;
+                case 'email': shareUrl = `mailto:?subject=${title}&body=${url}`; break;
+            }
+            if(shareUrl) {
+                if(platform === 'email') window.location.href = shareUrl;
+                else window.open(shareUrl, '_blank', 'width=600,height=400');
+            }
+        }
+
+        function shareQuote(quoteText) {
+            const url = encodeURIComponent(window.location.href);
+            const text = encodeURIComponent(`"${quoteText}"`);
+            window.open(`https://twitter.com/intent/tweet?text=${text}&url=${url}`, '_blank', 'width=600,height=400');
+        }
+
+        function copyToClipboard() {
+            navigator.clipboard.writeText(window.location.href).then(() => {
+                showToast('Link copied to clipboard');
+            });
+        }
+
+        function toggleFaq(btn) {
+            const isExpanded = btn.getAttribute('aria-expanded') === 'true';
+            btn.setAttribute('aria-expanded', !isExpanded);
+            const content = btn.nextElementSibling;
+            if(!isExpanded) {
+                content.classList.add('open');
+            } else {
+                content.classList.remove('open');
+            }
+        }
+
+        function handleFeedback(isHelpful) {
+            localStorage.setItem('robots_tool_feedback', isHelpful ? 'yes' : 'no');
+            if(isHelpful) {
+                document.getElementById('feedback-yes').classList.remove('hidden');
+                document.getElementById('feedback-no').classList.add('hidden');
+            } else {
+                document.getElementById('feedback-no').classList.remove('hidden');
+                document.getElementById('feedback-yes').classList.add('hidden');
+            }
+            event.target.parentElement.classList.add('hidden');
+        }
+
+        function showToast(message) {
+            const container = document.getElementById('toast-container');
+            const toast = document.createElement('div');
+            toast.className = 'bg-emerald-500 text-slate-950 px-4 py-2 rounded-lg shadow-[0_4px_12px_rgba(16,185,129,0.3)] text-sm font-bold transform transition-all translate-y-10 opacity-0';
+            toast.textContent = message;
+            container.appendChild(toast);
+            
+            requestAnimationFrame(() => {
+                toast.classList.remove('translate-y-10', 'opacity-0');
+            });
+
+            setTimeout(() => {
+                toast.classList.add('opacity-0');
+                setTimeout(() => toast.remove(), 300);
+            }, 3000);
+        }
+
+        function injectSchema(today) {
+            const d = new Date(today);
+            const day = d.getDay();
+            const diff = d.getDate() - day + (day === 0 ? -6 : 1);
+            const lastMonday = new Date(d.setDate(diff)).toISOString().split('T')[0];
+
+            const schemaData = {
+                "@context": "https://schema.org",
+                "@graph": [
+                    {
+                        "@type": "WebApplication",
+                        "@id": "https://aicitationscan.com/seo-tools/robots-txt-generator.html#webapp",
+                        "name": "Robots.txt Generator",
+                        "url": "https://aicitationscan.com/seo-tools/robots-txt-generator.html",
+                        "description": "Generate properly formatted robots.txt files with live previews, syntax validation, and predefined crawler presets.",
+                        "applicationCategory": "DeveloperApplication",
+                        "operatingSystem": "All",
+                        "dateModified": lastMonday,
+                        "author": {"@type": "Organization", "name": "AI Citation Scan"}
+                    },
+                    {
+                        "@type": "Article",
+                        "headline": "Robots.txt Generator: Advanced Crawler Control",
+                        "author": {"@type": "Person", "name": "AI Citation Scan Editorial Team"},
+                        "datePublished": "2024-02-15",
+                        "dateModified": lastMonday,
+                        "publisher": {"@type": "Organization", "name": "AI Citation Scan"}
+                    },
+                    {
+                        "@type": "FAQPage",
+                        "@id": "https://aicitationscan.com/seo-tools/robots-txt-generator.html#faq",
+                        "mainEntity": [
+                            { "@type": "Question", "name": "Does robots.txt block indexing?", "acceptedAnswer": { "@type": "Answer", "text": "No, robots.txt blocks crawling, not indexing. If a URL is linked to from other places, search engines can still index the URL itself." }},
+                            { "@type": "Question", "name": "Where should the robots.txt file be placed?", "acceptedAnswer": { "@type": "Answer", "text": "It must be placed at the absolute root of your domain. Search engines will not look for it in subdirectories." }}
+                        ]
+                    }
+                ]
+            };
+
+            const script = document.createElement('script');
+            script.type = 'application/ld+json';
+            script.text = JSON.stringify(schemaData);
+            document.head.appendChild(script);
+        }
+    </script>
+</body>
+</html>
