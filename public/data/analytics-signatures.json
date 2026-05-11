@@ -1,0 +1,63 @@
+{
+  "google_analytics": {
+    "patterns": [
+      "gtag(",
+      "googletagmanager",
+      "google-analytics"
+    ]
+  },
+
+  "google_tag_manager": {
+    "patterns": [
+      "googletagmanager.com/gtm.js",
+      "GTM-"
+    ]
+  },
+
+  "hotjar": {
+    "patterns": [
+      "hotjar",
+      "hjsettings"
+    ]
+  },
+
+  "mixpanel": {
+    "patterns": [
+      "mixpanel"
+    ]
+  },
+
+  "segment": {
+    "patterns": [
+      "segment.com",
+      "analytics.js"
+    ]
+  },
+
+  "clarity": {
+    "patterns": [
+      "clarity.ms",
+      "Microsoft Clarity"
+    ]
+  },
+
+  "facebook_pixel": {
+    "patterns": [
+      "connect.facebook.net",
+      "fbq("
+    ]
+  },
+
+  "tiktok_pixel": {
+    "patterns": [
+      "tiktok",
+      "analytics.tiktok"
+    ]
+  },
+
+  "hotmart": {
+    "patterns": [
+      "hotmart"
+    ]
+  }
+}
