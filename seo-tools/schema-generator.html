@@ -862,11 +862,33 @@
             document.getElementById('contact-form-popup').classList.add('hidden');
         }
 
-        function handleContactForm(e) {
-            e.preventDefault();
-            alert("Thank you! Your request has been transmitted.");
-            e.target.reset();
-        }
+        // Function to handle the "Request a Custom Tool" form submission
+function handleContactForm(e) {
+    // 1. Prevent the default browser page reload
+    e.preventDefault();
+    
+    // 2. Get the form element and its data
+    const myForm = e.target;
+    const formData = new FormData(myForm);
+
+    // 3. Send the form data to the server (Netlify) in the background
+    fetch("/", {
+        method: "POST",
+        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+        // Convert the FormData into a URL-encoded string required by Netlify
+        body: new URLSearchParams(formData).toString()
+    })
+    .then(() => {
+        // 4. If the submission is successful, show the alert and clear the form
+        alert("Thank you! Your request has been transmitted.");
+        myForm.reset();
+    })
+    .catch((error) => {
+        // 5. If there is an error, alert the user and log it to the console
+        alert("Oops! There was a problem submitting your form.");
+        console.error("Form submission error:", error);
+    });
+}
 
         function showToast(message) {
             const container = document.getElementById('toast-container');
