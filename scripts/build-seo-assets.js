@@ -1,5 +1,10 @@
-const fs = require('fs');
-const path = require('path');
+import fs from 'fs';
+import path from 'path';
+import { fileURLToPath } from 'url';
+
+// Recreate __dirname for ES Modules
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 const DOMAIN = 'https://aicitationscan.com';
 const ROOT_DIR = path.join(__dirname, '..');
@@ -8,15 +13,36 @@ const USE_CLEAN_URLS = true;
 const IGNORE_DIRS = ['.git', '.github', 'node_modules', 'js', 'css', 'assets', 'scripts'];
 
 // Mapping icons and priority from your blueprint
+// Priorities determine the order they appear in your site registry (Higher number = higher up)
 const clusterConfig = {
-    "seo-tools": { icon: "🔍", priority: 10, name: "SEO Tools" },
-    "text-tools": { icon: "📝", priority: 10, name: "Text Tools" },
-    "developer-tools": { icon: "💻", priority: 9, name: "Developer Tools" },
-    "calculators": { icon: "🧮", priority: 8, name: "Calculators" },
-    "image-tools": { icon: "🖼️", priority: 7, name: "Image Tools" },
-    "pdf-tools": { icon: "📄", priority: 7, name: "PDF Tools" },
-    "design-tools": { icon: "🎨", priority: 6, name: "Design Tools" },
-    "fun-tools": { icon: "🎲", priority: 5, name: "Viral & Fun Tools" }
+    // Top Priority SEO & AI
+    "seo-tools": { icon: "🔍", priority: 15, name: "SEO Tools" },
+    "ai-tools": { icon: "🤖", priority: 15, name: "AI Tools" },
+    "programmatic": { icon: "⚡", priority: 14, name: "Programmatic Tools" },
+    "local-seo-tools": { icon: "📍", priority: 14, name: "Local SEO Tools" },
+    "schema-tools": { icon: "📋", priority: 13, name: "Schema Tools" },
+    "geo-tools": { icon: "🌍", priority: 13, name: "Geo Tools" },
+    "citation-tools": { icon: "📜", priority: 13, name: "Citation Tools" },
+
+    // Developer & Business
+    "developer-tools": { icon: "💻", priority: 12, name: "Developer Tools" },
+    "business-tools": { icon: "💼", priority: 11, name: "Business Tools" },
+    "ecommerce-tools": { icon: "🛒", priority: 10, name: "Ecommerce Tools" },
+
+    // Content Creation
+    "creator-tools": { icon: "🎥", priority: 9, name: "Creator Tools" },
+    "writing-tools": { icon: "✍️", priority: 8, name: "Writing Tools" },
+    "marketing-tools": { icon: "📈", priority: 8, name: "Marketing Tools" },
+
+    // Utilities & Calculators
+    "calculators": { icon: "🧮", priority: 7, name: "Calculators" },
+    "file-tools": { icon: "📁", priority: 6, name: "File Tools" },
+    "browser-tools": { icon: "🌐", priority: 5, name: "Browser Tools" },
+    "utilities": { icon: "🛠️", priority: 4, name: "Utilities" },
+    
+    // Education & Productivity
+    "education-tools": { icon: "🎓", priority: 3, name: "Education Tools" },
+    "productivity-tools": { icon: "⏱️", priority: 2, name: "Productivity Tools" }
 };
 
 function getMetadata(filePath) {
@@ -63,7 +89,7 @@ function generate() {
 
         const folderData = {
             folderName: config.name,
-            folderPath: folder === '' ? "/" : `/${folder}/`, // FIXED: No more double slash //
+            folderPath: folder === '' ? "/" : `/${folder}/`, 
             icon: config.icon,
             priority: config.priority,
             pages: []
@@ -94,7 +120,6 @@ function generate() {
     fs.writeFileSync(path.join(ROOT_DIR, 'sitemap.xml'), sitemap);
     
     // Final Export
-    // FIXED: Replaced "export const SiteRegistry" with "window.seoRegistry"
     const registryContent = `// AUTO-GENERATED\nwindow.siteRegistry = ${JSON.stringify(menuRegistry, null, 4)};\n\nwindow.seoRegistry = ${JSON.stringify(seoRegistry, null, 4)};`;
     fs.writeFileSync(path.join(JS_DIR, 'registry.js'), registryContent);
     fs.writeFileSync(path.join(JS_DIR, 'pages.json'), JSON.stringify(pagesJson, null, 2));
