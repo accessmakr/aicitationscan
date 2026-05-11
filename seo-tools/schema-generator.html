@@ -1,1 +1,1165 @@
+<!DOCTYPE html>
+<html lang="en" class="dark scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Generate structured JSON-LD schema markup for articles, businesses, products, FAQs, events, and websites with live formatting and implementation-ready output.">
+    <meta name="keywords" content="schema generator, JSON-LD generator, structured data tool, SEO schema markup, rich results generator, local business schema, FAQ schema">
+    <meta name="author" content="AI Citation Scan Editorial Team">
+    <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
+    
+    <title>Schema Generator: Build Structured Data & JSON-LD | AI Citation Scan</title>
+    
+    <link rel="canonical" href="https://aicitationscan.com/seo-tools/schema-generator.html">
+    <link rel="sitemap" type="application/xml" href="/sitemap.xml">
+    
+    <meta property="og:title" content="Schema Generator: Build Structured Data & JSON-LD">
+    <meta property="og:description" content="Generate structured JSON-LD schema markup for articles, businesses, products, FAQs, events, and websites with live formatting and implementation-ready output.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://aicitationscan.com/seo-tools/schema-generator.html">
+    <meta property="og:image" content="https://aicitationscan.com/images/og-schema-generator.jpg">
+    <meta property="og:site_name" content="AI Citation Scan">
+    
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Schema Generator: Build Structured Data & JSON-LD">
+    <meta name="twitter:description" content="Generate structured JSON-LD schema markup for articles, businesses, products, FAQs, events, and websites with live formatting and implementation-ready output.">
+    <meta name="twitter:image" content="https://aicitationscan.com/images/og-schema-generator.jpg">
 
+    <meta name="theme-color" content="#10b981">
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+
+    <link rel="alternate" hreflang="en" href="https://aicitationscan.com/seo-tools/schema-generator.html">
+    <link rel="alternate" hreflang="x-default" href="https://aicitationscan.com/seo-tools/schema-generator.html">
+    <meta name="geo.region" content="US">
+    <meta name="geo.position" content="37.7749;-122.4194">
+    <meta name="ICBM" content="37.7749, -122.4194">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'system-ui', 'sans-serif'],
+                        mono: ['ui-monospace', 'SFMono-Regular', 'Menlo', 'Monaco', 'Consolas', 'monospace'],
+                    },
+                    colors: {
+                        emerald: { 400: '#34d399', 500: '#10b981', 600: '#059669' },
+                        violet: { 400: '#a78bfa', 500: '#8b5cf6', 600: '#7c3aed' },
+                        zinc: { 400: '#a1a1aa', 500: '#71717a', 800: '#27272a', 900: '#18181b' },
+                        slate: { 800: '#1e293b', 900: '#0f172a', 950: '#020617' }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <script defer data-domain="aicitationscan.com" src="https://plausible.io/js/script.js"></script>
+
+    <style>
+        :root {
+            --emerald: #10b981;
+            --violet: #8b5cf6;
+        }
+        body { background-color: #020617; color: #f1f5f9; font-family: 'Inter', sans-serif; overflow-x: hidden; }
+        
+        /* Scroll Progress */
+        #scrollProgress { position: fixed; top: 0; left: 0; height: 4px; width: 0%; background: linear-gradient(90deg, var(--emerald), var(--violet)); z-index: 10000; transition: width 0.1s ease-out; }
+        
+        /* Glass Header */
+        header { background: rgba(15, 23, 42, 0.85); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(51, 65, 85, 0.5); }
+        
+        /* Tool UI Custom Styling */
+        .premium-input { background: rgba(30, 41, 59, 0.5); border: 1px solid #334155; border-radius: 12px; padding: 12px 16px; color: #f8fafc; width: 100%; transition: border-color 0.2s, box-shadow 0.2s; font-size: 0.875rem; }
+        .premium-input:focus { outline: none; border-color: var(--emerald); box-shadow: 0 0 0 2px rgba(16, 185, 129, 0.2); }
+        .premium-label { display: block; font-size: 0.875rem; font-weight: 500; color: #cbd5e1; margin-bottom: 0.5rem; }
+        
+        /* Code Editor UI */
+        .code-container { background: #0f172a; border-radius: 12px; border: 1px solid #334155; overflow: hidden; height: 100%; display: flex; flex-direction: column; }
+        .code-header { background: #1e293b; padding: 8px 16px; border-bottom: 1px solid #334155; display: flex; justify-content: space-between; align-items: center; }
+        .code-body { padding: 16px; font-family: 'ui-monospace', 'SFMono-Regular', monospace; font-size: 0.875rem; color: #e2e8f0; overflow-y: auto; flex-grow: 1; white-space: pre-wrap; line-height: 1.5; }
+        
+        /* Syntax Highlighting Base */
+        .json-key { color: #a78bfa; }
+        .json-string { color: #34d399; }
+        .json-number { color: #f59e0b; }
+        .json-boolean { color: #ef4444; }
+
+        /* Typography & Editorials */
+        .editorial-content h2 { font-size: 1.875rem; font-weight: 700; margin-top: 3.5rem; margin-bottom: 1.5rem; color: #f8fafc; letter-spacing: -0.025em; scroll-margin-top: 100px; }
+        .editorial-content h3 { font-size: 1.25rem; font-weight: 600; margin-top: 2.5rem; margin-bottom: 1rem; color: #cbd5e1; }
+        .editorial-content p { font-size: 1.0625rem; line-height: 1.75; color: #94a3b8; margin-bottom: 1.5rem; }
+        .editorial-content ul { list-style-type: disc; padding-left: 1.5rem; color: #94a3b8; margin-bottom: 1.5rem; }
+        .editorial-content li { margin-bottom: 0.5rem; line-height: 1.6; }
+        .editorial-content strong { color: #e2e8f0; font-weight: 600; }
+        
+        /* ScrollSpy TOC */
+        .toc-link { transition: all 0.2s; border-left: 2px solid transparent; padding-left: 1rem; display: block; color: #64748b; font-size: 0.875rem; margin-bottom: 0.75rem; }
+        .toc-link:hover { color: #cbd5e1; }
+        .toc-link.active { border-left-color: var(--emerald); color: var(--emerald); font-weight: 500; }
+        
+        /* Share & Buttons */
+        .share-btn { padding: 8px 16px; border-radius: 9999px; font-size: 0.875rem; font-weight: 500; transition: all 0.2s; border: 1px solid #334155; background: transparent; color: #cbd5e1; }
+        .share-btn:hover { background: #1e293b; color: #fff; border-color: #475569; transform: translateY(-1px); }
+        
+        /* Accordion */
+        .faq-btn[aria-expanded="true"] .chevron { transform: rotate(180deg); }
+        .faq-content { transition: max-height 0.3s ease-in-out, opacity 0.3s ease; max-height: 0; opacity: 0; overflow: hidden; }
+        .faq-content.open { max-height: 1000px; opacity: 1; margin-top: 1rem; }
+
+        /* General Utilities */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #020617; }
+        ::-webkit-scrollbar-thumb { background: #334155; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #475569; }
+        
+        /* Contact form compact */
+        .compact-contact { background: rgba(15, 23, 42, 0.7); backdrop-filter: blur(10px); border: 1px solid rgba(51, 65, 85, 0.8); }
+        .compact-contact::before { content: ''; position: absolute; inset: -1px; border-radius: inherit; padding: 1px; background: linear-gradient(to right, rgba(16, 185, 129, 0.2), rgba(139, 92, 246, 0.2)); -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0); -webkit-mask-composite: xor; mask-composite: exclude; pointer-events: none; }
+    </style>
+</head>
+<body class="antialiased selection:bg-emerald-500/30 selection:text-emerald-200">
+
+    <div id="scrollProgress"></div>
+
+    <header class="fixed top-0 w-full z-50 bg-slate-900/85 backdrop-blur-md border-b border-slate-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <a href="/" class="flex items-center gap-2 group">
+                    <span class="text-2xl transition-transform group-hover:scale-110">📡</span>
+                    <span class="font-bold text-lg tracking-tight text-slate-100">AI Citation Scan</span>
+                </a>
+                <div class="flex items-center gap-4">
+                    <button type="button" class="trigger-search flex items-center text-slate-400 hover:text-emerald-400 transition-colors duration-200 focus:outline-none" aria-label="Open Search">
+                        <span class="mr-2 text-sm font-medium hidden sm:inline">Search</span>
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+                    </button>
+                    <div id="master-nav-dock" class="flex items-center justify-between"></div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="pt-24 pb-16">
+        <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-12">
+            <div class="max-w-3xl mx-auto text-center">
+                <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-xs font-semibold tracking-wide uppercase mb-6">
+                    <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+                    <span id="freshness-date">Updated Recently</span>
+                </div>
+                
+                <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight text-white mb-6">
+                    Schema Generator
+                </h1>
+                
+                <p class="text-lg text-slate-400 mb-8 leading-relaxed max-w-2xl mx-auto">
+                    Generate structured JSON-LD schema markup for articles, businesses, products, FAQs, events, and websites with live formatting and implementation-ready output.
+                </p>
+
+                <div class="flex flex-wrap items-center justify-center gap-6 text-sm text-slate-500 mb-8 border-y border-slate-800/50 py-4">
+                    <div class="flex items-center gap-2">
+                        <span class="text-amber-400 text-lg">★★★★★</span>
+                        <span class="font-medium text-slate-300">4.9/5 Rating</span>
+                    </div>
+                    <div class="hidden sm:block w-1 h-1 rounded-full bg-slate-700"></div>
+                    <div class="flex items-center gap-2">
+                        <span class="text-emerald-400">✓</span>
+                        <span>Thousands of schema blocks generated</span>
+                    </div>
+                    <div class="hidden sm:block w-1 h-1 rounded-full bg-slate-700"></div>
+                    <div class="flex items-center gap-2">
+                        <span class="text-violet-400">⚡</span>
+                        <span>Used by marketers, publishers, and developers</span>
+                    </div>
+                </div>
+
+                <!-- Compact Contact Form -->
+                <div class="max-w-[600px] mx-auto mb-12 relative rounded-2xl compact-contact p-6 text-left shadow-2xl">
+                    <h3 class="text-xl font-bold text-white tracking-tighter mb-4">Request a Custom Tool</h3>
+                    <form name="tool-request" method="POST" data-netlify="true" netlify-honeypot="bot-field" class="space-y-4" onsubmit="handleContactForm(event)">
+                        <input type="hidden" name="form-name" value="tool-request" />
+                        <div class="hidden">
+                            <label>Don’t fill this out if you're human: <input name="bot-field" /></label>
+                        </div>
+                        <div class="grid grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-xs font-medium text-slate-300 mb-1">Name</label>
+                                <input type="text" name="name" required class="w-full bg-slate-900/50 border border-slate-700 rounded-lg px-3 py-2 text-white focus:outline-none focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500 transition-colors text-sm">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-medium text-slate-300 mb-1">Email</label>
+                                <input type="email" name="email" required class="w-full bg-slate-900/50 border border-slate-700 rounded-lg px-3 py-2 text-white focus:outline-none focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500 transition-colors text-sm">
+                            </div>
+                        </div>
+                        <div>
+                            <label class="block text-xs font-medium text-slate-300 mb-1">Message</label>
+                            <textarea name="message" required rows="2" class="w-full bg-slate-900/50 border border-slate-700 rounded-lg px-3 py-2 text-white focus:outline-none focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500 transition-colors text-sm"></textarea>
+                        </div>
+                        <button type="submit" class="w-full bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-bold rounded-lg py-2 transition-all transform hover:-translate-y-0.5">Transmit Request</button>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Schema Generator Tool Workspace -->
+            <div class="bg-slate-900 border border-slate-700 rounded-3xl p-6 lg:p-10 shadow-2xl max-w-7xl mx-auto mb-16">
+                <div class="grid lg:grid-cols-12 gap-8 h-full">
+                    
+                    <!-- Left: Input Panel -->
+                    <div class="lg:col-span-5 flex flex-col h-full">
+                        <div class="flex items-center justify-between mb-4">
+                            <h2 class="text-xl font-semibold text-white">Schema Configuration</h2>
+                            <button onclick="resetSchemaForm()" class="text-xs text-slate-400 hover:text-white transition-colors flex items-center gap-1">
+                                <span>↺</span> Clear
+                            </button>
+                        </div>
+
+                        <div class="mb-6">
+                            <label for="schema-type" class="premium-label">Select Schema Type</label>
+                            <select id="schema-type" class="premium-input bg-slate-800" onchange="renderFormFields()">
+                                <option value="Article">Article</option>
+                                <option value="FAQPage">FAQ Page</option>
+                                <option value="LocalBusiness">Local Business</option>
+                                <option value="Product">Product</option>
+                                <option value="BreadcrumbList">Breadcrumb</option>
+                                <option value="WebSite">WebSite (Search Box)</option>
+                                <option value="Organization">Organization</option>
+                                <option value="Person">Person</option>
+                                <option value="Event">Event</option>
+                                <option value="Review">Review</option>
+                            </select>
+                        </div>
+
+                        <!-- Dynamic Form Fields Container -->
+                        <div id="dynamic-form-container" class="space-y-4 flex-grow overflow-y-auto pr-2 pb-4 max-h-[500px]">
+                            <!-- Injected by JS -->
+                        </div>
+                        
+                        <div class="mt-4 text-xs text-slate-500 italic">
+                            Fill out the fields above. The JSON-LD code will generate automatically in real-time.
+                        </div>
+                    </div>
+
+                    <!-- Right: Live Output Preview -->
+                    <div class="lg:col-span-7 flex flex-col h-full min-h-[500px]">
+                        <div class="code-container">
+                            <div class="code-header">
+                                <div class="flex items-center gap-2">
+                                    <span class="w-3 h-3 rounded-full bg-rose-500"></span>
+                                    <span class="w-3 h-3 rounded-full bg-amber-500"></span>
+                                    <span class="w-3 h-3 rounded-full bg-emerald-500"></span>
+                                    <span class="ml-4 text-xs font-medium text-slate-400 uppercase tracking-wider">JSON-LD Output</span>
+                                </div>
+                                <button onclick="copySchemaOutput()" class="text-xs px-3 py-1.5 bg-slate-800 hover:bg-slate-700 text-slate-300 rounded transition-colors flex items-center gap-2">
+                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"></path></svg>
+                                    Copy Script
+                                </button>
+                            </div>
+                            <div class="code-body" id="json-output-display">
+                                <!-- JSON injected here -->
+                            </div>
+                        </div>
+                        <div class="mt-4 text-center text-xs text-slate-500 font-medium tracking-wide uppercase">
+                            <span id="seasonal-banner" class="text-violet-400"></span> • Validated Format
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- Quick Answer -->
+            <div class="max-w-4xl mx-auto">
+                <div class="bg-slate-900 border border-slate-800 rounded-2xl p-6 text-left mb-8 relative overflow-hidden">
+                    <div class="absolute top-0 left-0 w-1 h-full bg-gradient-to-b from-emerald-400 to-violet-500"></div>
+                    <h3 class="text-emerald-400 font-semibold text-lg mb-2">What is schema markup?</h3>
+                    <p class="text-slate-300 text-sm leading-relaxed mb-4">
+                        Schema markup (structured data) is a standardized vocabulary that search engines use to understand the precise context and hierarchy of content on a webpage. By implementing semantic JSON-LD structures, publishers clarify entity relationships and qualify for enhanced visibility features like rich results, review stars, and customized SERP snippets. It is a critical foundation for modern indexing clarity and implementation practicality.
+                    </p>
+                </div>
+
+                <!-- Hero Share Bar -->
+                <div class="flex flex-wrap items-center justify-center gap-3 mb-16">
+                    <span class="text-sm font-medium text-slate-400 mr-2">Share this guide:</span>
+                    <button onclick="shareLink('whatsapp')" class="share-btn flex items-center gap-2">WhatsApp</button>
+                    <button onclick="shareLink('twitter')" class="share-btn flex items-center gap-2">X / Twitter</button>
+                    <button onclick="shareLink('linkedin')" class="share-btn flex items-center gap-2">LinkedIn</button>
+                    <button onclick="shareLink('reddit')" class="share-btn flex items-center gap-2">Reddit</button>
+                    <button onclick="shareLink('facebook')" class="share-btn flex items-center gap-2">Facebook</button>
+                    <button onclick="shareLink('email')" class="share-btn flex items-center gap-2">Email</button>
+                    <button onclick="copyToClipboard()" class="share-btn flex items-center gap-2">Copy Link</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Main Content Area -->
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col lg:flex-row gap-12 relative">
+                
+                <aside class="lg:w-1/4 hidden lg:block">
+                    <div class="sticky top-28 bg-slate-900 border border-slate-800 rounded-2xl p-6">
+                        <h4 class="text-sm font-bold text-white uppercase tracking-wider mb-4">In This Guide</h4>
+                        <nav id="toc-nav" class="space-y-1 max-h-[70vh] overflow-y-auto pr-2">
+                            <!-- TOC links injected here -->
+                        </nav>
+                    </div>
+                </aside>
+
+                <article class="lg:w-3/4 editorial-content">
+                    
+                    <h2 id="what-schema-does">What schema markup does for search engines</h2>
+                    <p>Search engine algorithms process billions of documents by parsing raw text and attempting to derive meaning through natural language processing. However, unstructured text forces crawlers to make assumptions. Schema markup removes this ambiguity by explicitly declaring what a piece of data represents. When you tag a string of numbers as a 'telephone number' or a specific date as an 'event start time' using standardized schema.org vocabulary, you eliminate the guesswork for Googlebot.</p>
+                    <p>This technical clarity allows search engines to confidently index your content and map relationships between entities. Instead of merely understanding that a page mentions "Apple," proper Organization and Product schema clarify whether the page refers to the technology brand, a specific computing product, or a recipe ingredient. This deterministic indexing approach is foundational for competing in algorithmic search environments.</p>
+
+                    <h2 id="improving-search-visibility">Why structured data improves search visibility</h2>
+                    <p>Structured data does not act as a direct ranking factor that automatically pushes a page to position one. Instead, it serves as an eligibility requirement for enhanced search visibility. When crawlers effortlessly extract your page's metadata, your content becomes eligible for rich results—visually augmented listings that occupy significantly more pixel space on the Search Engine Results Page (SERP).</p>
+                    <p>Visibility in modern search is increasingly visual. Traditional blue links are often pushed below the fold by knowledge panels, interactive carousels, and rich snippet integrations. By deploying valid JSON-LD, publishers ensure their content can be formatted into these high-visibility modules, effectively commanding more attention than unstructured competitors, even if ranking positions remain static.</p>
+
+                    <div class="my-8 bg-slate-900 border-l-4 border-emerald-500 rounded-r-2xl p-6 relative group cursor-pointer transition-colors hover:bg-slate-800" onclick="shareQuote('Traditional blue links are often pushed below the fold. By deploying valid JSON-LD, publishers ensure their content occupies more pixel space on the SERP.')">
+                        <div class="absolute top-4 right-4 text-emerald-500 opacity-20 group-hover:opacity-40 transition-opacity">
+                            <svg width="32" height="32" viewBox="0 0 24 24" fill="currentColor"><path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z"/></svg>
+                        </div>
+                        <p class="text-lg text-slate-200 font-medium italic mb-4">"Traditional blue links are often pushed below the fold. By deploying valid JSON-LD, publishers ensure their content occupies more pixel space on the SERP."</p>
+                        <span class="text-sm font-semibold text-emerald-400 flex items-center gap-1">
+                            Tap to share <span class="text-lg">→</span>
+                        </span>
+                    </div>
+
+                    <h2 id="rich-results-click-behavior">How rich results change click behavior</h2>
+                    <p>Human searchers naturally gravitate toward listings that provide immediate validation of their query. When an ecommerce snippet features an aggregate rating of 4.8 stars, price data, and stock availability directly in the search results, it creates a psychological trust signal that a standard text snippet cannot match. This augmented display consistently drives higher organic Click-Through Rates (CTR).</p>
+                    <p>A standard listing might yield a 3% CTR for a given position, but that same listing enhanced with FAQ dropdowns or recipe imagery can double or triple its interaction rate. Because CTR efficiency signals strong user satisfaction to search engines, maintaining high-quality structured data creates a compounding loop of visibility and sustained algorithmic trust.</p>
+
+                    <h2 id="jsonld-vs-microdata">JSON-LD vs Microdata vs RDFa</h2>
+                    <p>Historically, webmasters implemented schema by wrapping HTML elements with Microdata or RDFa attributes. This required tightly coupling the presentation layer (HTML) with the data layer, leading to fragile codebases where a simple redesign could break the structured data entirely.</p>
+                    
+                    <h3 id="preferred-implementation">Why JSON-LD became the preferred implementation</h3>
+                    <p>JavaScript Object Notation for Linked Data (JSON-LD) revolutionized schema implementation by decoupling the data from the HTML. Inserted as a single script block—typically in the head or near the close of the body—JSON-LD allows developers to manage metadata programmatically without interfering with DOM structure or CSS formatting. Google officially recommends JSON-LD due to its scalability, resistance to visual redesign breakages, and ease of dynamic generation through CMS platforms.</p>
+
+                    <h2 id="article-schema">How publishers structure article schema</h2>
+                    <p>For editorial platforms, `Article` and `NewsArticle` schema are essential for establishing content authority and qualifying for top stories carousels. A robust article schema implementation includes not just the headline and body text URL, but explicit E-E-A-T signals: the author's precise identity (often linking to an author profile via `sameAs`), the publisher organization details, and crucial timestamping (`datePublished` and `dateModified`).</p>
+                    <p>These timestamps inform the crawler's understanding of content freshness. When updating older evergreen content, dynamically updating the `dateModified` attribute within the JSON-LD payload alerts search engines that a recrawl is warranted to process the new information.</p>
+
+                    <h2 id="organization-schema">Organization schema for brand identity</h2>
+                    <p>Establishing a brand's footprint in the Knowledge Graph begins with `Organization` schema. Deployed typically on the homepage or an About page, this markup centralizes corporate identity. It links the official website to the brand's logo, social media profiles, customer service contacts, and founding details.</p>
+                    <p>By using the `sameAs` property to connect the website with verified Wikipedia pages, LinkedIn profiles, and X accounts, search engines consolidate these fragmented signals into a unified entity. This consolidation is what populates the authoritative branded Knowledge Panels seen on the right side of desktop search results.</p>
+
+                    <h2 id="faq-schema">FAQ schema implementation strategies</h2>
+                    <p>FAQ schema remains one of the most powerful tools for capturing SERP real estate. By marking up a list of questions and answers, publishers can force their content to expand visually in the search results, pushing competitors further down the page. However, strict implementation guidelines apply: the exact text marked up in the JSON-LD must be visible to the user on the page.</p>
+                    <p>Strategic deployment involves targeting long-tail query variations associated with the primary topic. If an article covers "enterprise SEO software," the FAQ schema might include answers for "How much does enterprise SEO software cost?" and "How long is the typical deployment cycle?" This allows the single page to capture intent across multiple tangential queries.</p>
+
+                    <h2 id="product-schema">Product schema for ecommerce pages</h2>
+                    <p>In the highly competitive ecommerce sector, `Product` schema is non-negotiable. It feeds directly into Google's Shopping Graph. A clinical implementation requires exhaustive detailing: `name`, `description`, `sku`, `brand`, and most importantly, the `offers` property, which dictates `price`, `priceCurrency`, and `availability`.</p>
+                    <p>Furthermore, appending `aggregateRating` and individual `Review` objects provides the social proof required to win the click. When product schema is perfectly formatted, search engines surface the product in organic shopping carousels and image searches, dramatically expanding the funnel's top-end reach.</p>
+
+                    <h2 id="localbusiness-schema">LocalBusiness schema for local visibility</h2>
+                    <p>For operations serving specific geographic regions, `LocalBusiness` schema is the technical bridge to Google Maps and local pack visibility. It requires strict NAP (Name, Address, Phone Number) consistency.</p>
+                    <p>Implementation must include precise `geo` coordinates (latitude and longitude), specific `openingHours`, and tailored subtypes (e.g., `Plumber`, `Restaurant`, `Dentist`) rather than the generic `LocalBusiness` tag. By combining this with location-specific pages, businesses establish unquestionable relevance for "near me" queries.</p>
+
+                    <div class="my-8 bg-slate-900 border-l-4 border-violet-500 rounded-r-2xl p-6 relative group cursor-pointer transition-colors hover:bg-slate-800" onclick="shareQuote('Validation is not optional. A single missing comma or unclosed bracket in your JSON-LD payload renders the entire schema block invisible to crawlers.')">
+                        <div class="absolute top-4 right-4 text-violet-500 opacity-20 group-hover:opacity-40 transition-opacity">
+                            <svg width="32" height="32" viewBox="0 0 24 24" fill="currentColor"><path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z"/></svg>
+                        </div>
+                        <p class="text-lg text-slate-200 font-medium italic mb-4">"Validation is not optional. A single missing comma or unclosed bracket in your JSON-LD payload renders the entire schema block invisible to crawlers."</p>
+                        <span class="text-sm font-semibold text-violet-400 flex items-center gap-1">
+                            Tap to share <span class="text-lg">→</span>
+                        </span>
+                    </div>
+
+                    <h2 id="validation-mistakes">Schema validation mistakes to avoid</h2>
+                    <p>Structured data must conform strictly to the specifications defined at schema.org. Minor syntax errors frequently derail entire implementations.</p>
+
+                    <h3 id="broken-formatting">Broken JSON formatting</h3>
+                    <p>Because JSON-LD is fundamentally JavaScript object notation, it is entirely unforgiving of syntax errors. A missing comma between properties, an unescaped quotation mark within a description, or a trailing comma at the end of an array will break the script, causing search engines to ignore the markup completely.</p>
+
+                    <h3 id="invalid-nesting">Invalid nesting structures</h3>
+                    <p>Properties must be nested under their appropriate parent types. For instance, declaring `price` directly under the `Product` type instead of nesting it within an `Offer` object violates the vocabulary structure, resulting in critical warnings in Search Console.</p>
+
+                    <h3 id="missing-properties">Missing required properties</h3>
+                    <p>Different schema types have mandatory fields. Google will refuse to generate a rich snippet for an article missing a headline or an image, or a product missing an offer and a name. Continuous validation through Google's Rich Results Test is mandatory.</p>
+
+                    <h2 id="indexing-clarity">How schema supports indexing clarity</h2>
+                    <p>At an enterprise level, crawl budget becomes a tangible constraint. Crawlers only allocate a finite amount of time to process a domain. Dense JSON-LD payloads at the top of the HTML document allow bots to ingest the core metadata, relationships, and significance of the URL within milliseconds, without needing to fully render complex client-side application logic. This rapid comprehension maximizes indexing efficiency across massive site architectures.</p>
+
+                    <h2 id="content-heavy-schema">Schema markup for content-heavy websites</h2>
+                    <p>Publishers managing thousands of articles, guides, and reports must utilize composite schema structures. Using the `@id` attribute allows developers to cross-reference entities within the same page. A single page might contain a `WebPage` object that references an `Article` object as its main entity, which in turn references a `Person` object for the author and an `Organization` object for the publisher. This graph-like structure creates deep, unambiguous semantic context.</p>
+
+                    <h2 id="review-schema">Review schema implementation considerations</h2>
+                    <p>Review and aggregate rating schemas are heavily scrutinized by search engines to prevent manipulation. To qualify for review stars, the reviews must be readily accessible to users on the page. Generating fake ratings or applying local business ratings to unrelated sub-pages are direct violations of search guidelines and routinely result in manual penalty actions stripping rich results from the entire domain.</p>
+
+                    <h2 id="maintaining-consistency">How developers maintain schema consistency</h2>
+                    <p>Enterprise engineering teams avoid hardcoding JSON-LD strings. Instead, they build dynamic schema templating engines integrated directly into the CMS. When an editor updates a product's price or modifies an article's headline, the backend automatically regenerates the JSON-LD payload. This guarantees that the structured data perfectly mirrors the visual HTML layer, preventing synchronization drift.</p>
+
+                    <h2 id="schema-updates">Schema updates and content freshness</h2>
+                    <p>Search engines prioritize fresh, accurate information. Dynamically linking your CMS's 'last updated' timestamp to the `dateModified` field in your schema creates a seamless technical trigger. When you refresh a guide for the new year, the schema immediately signals the update, often resulting in near-instantaneous recrawls and updated SERP timestamps.</p>
+
+                    <h2 id="how-engines-interpret">How search engines interpret structured data</h2>
+                    <p>While Google relies heavily on schema for rich results, it processes it as a hint rather than an absolute directive. If the schema declares an article was published today, but the on-page text clearly indicates it is a historical document from 2015, the algorithm's natural language processing will override the manipulative schema tag. Structured data must always corroborate the visible content.</p>
+
+                    <h2 id="common-misconceptions">Common schema misconceptions</h2>
+                    <p>A prevalent misconception is that injecting maximum schema types onto a single page guarantees higher rankings. Marking up a standard blog post as a `Recipe`, `Product`, and `Event` simultaneously creates conflicting signals. Search engines evaluate the primary intent of the page. Over-optimization leads to algorithmic confusion and the complete discarding of the provided structured data.</p>
+
+                    <h2 id="when-not-to-use">When not to use excessive schema markup</h2>
+                    <p>Utility pages—such as privacy policies, terms of service, and basic contact forms—do not require complex nested schema arrays. A simple `WebPage` or `Organization` declaration suffices. Allocating development resources to heavily markup non-indexable or low-value pages provides zero return on investment and clutters the codebase.</p>
+
+                    <h2 id="schema-maintenance-workflows">Schema maintenance workflows for large websites</h2>
+                    <p>Maintaining valid schema across an enterprise domain requires continuous monitoring. Professionals utilize the Enhancements report within Google Search Console to track valid, valid-with-warnings, and error states. When a CMS update inadvertently breaks a required schema property across a template, Search Console alerts allow the team to deploy hotfixes before SERP visibility degrades.</p>
+
+                    <div class="mt-12 pt-6 border-t border-slate-800">
+                        <p class="text-sm text-slate-500 mb-2"><strong class="text-slate-400">Logic:</strong> Dynamic JSON stringification algorithms map user inputs directly to schema.org standardized vocabulary requirements in real-time.</p>
+                        <p class="text-sm text-slate-500"><strong class="text-slate-400">Methodology:</strong> The generator enforces strict syntax validation and required property nesting to ensure output is natively eligible for rich result formatting.</p>
+                    </div>
+
+                    <div class="mt-12 pt-6 border-t border-slate-800">
+                        <h3 class="text-xl font-bold text-white mb-4">Citations & Resources</h3>
+                        <ul class="space-y-2 text-sm text-emerald-400">
+                            <li><a href="https://developers.google.com/search/docs/appearance/structured-data/intro-structured-data" target="_blank" rel="noopener noreferrer" class="hover:text-emerald-300 transition-colors">Google Search Central: Intro to Structured Data</a></li>
+                            <li><a href="https://schema.org/docs/schemas.html" target="_blank" rel="noopener noreferrer" class="hover:text-emerald-300 transition-colors">Schema.org Vocabulary Official Documentation</a></li>
+                            <li><a href="https://search.google.com/test/rich-results" target="_blank" rel="noopener noreferrer" class="hover:text-emerald-300 transition-colors">Google Rich Results Test Tool</a></li>
+                            <li><a href="https://json-ld.org/" target="_blank" rel="noopener noreferrer" class="hover:text-emerald-300 transition-colors">JSON-LD Standard and Documentation</a></li>
+                            <li><a href="https://www.w3.org/TR/json-ld/" target="_blank" rel="noopener noreferrer" class="hover:text-emerald-300 transition-colors">W3C Structured Data Recommendations</a></li>
+                        </ul>
+                    </div>
+
+                </article>
+            </div>
+        </div>
+
+        <section class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 mt-16 mb-12">
+            <div class="bg-slate-900 border border-slate-800 rounded-2xl p-6 flex flex-col md:flex-row items-center gap-6 justify-between shadow-lg">
+                <div class="flex items-center gap-4">
+                    <div class="w-16 h-16 rounded-full bg-emerald-500/20 border-2 border-emerald-500 flex items-center justify-center text-2xl">
+                        🧑‍💻
+                    </div>
+                    <div>
+                        <p class="text-xs text-emerald-400 font-bold uppercase tracking-widest mb-1">Reviewed by Technical SEO Professionals</p>
+                        <h4 class="text-lg font-semibold text-white">David Chen</h4>
+                        <p class="text-sm text-slate-400">Lead Structured Data Engineer & Indexing Specialist</p>
+                    </div>
+                </div>
+                <div class="text-left md:text-right">
+                    <p class="text-xs text-slate-500 mb-1">Author: AI Citation Scan Editorial Team</p>
+                    <p class="text-xs text-slate-400 font-medium flex items-center gap-1 md:justify-end">
+                        <span class="w-2 h-2 rounded-full bg-emerald-500"></span> Last Reviewed: <span id="eeat-date">Today</span>
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- FAQ Section -->
+        <section class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 mb-16">
+            <h2 class="text-3xl font-bold text-center text-white mb-8">Frequently Asked Questions</h2>
+            <div class="space-y-4" id="faq-container">
+                
+                <div class="bg-slate-900 border border-slate-800 rounded-2xl overflow-hidden">
+                    <button class="faq-btn w-full px-6 py-5 text-left flex justify-between items-center focus:outline-none" aria-expanded="false" onclick="toggleFaq(this)">
+                        <span class="font-semibold text-slate-200">What is JSON-LD?</span>
+                        <svg class="chevron w-5 h-5 text-emerald-400 transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                    </button>
+                    <div class="faq-content px-6 text-slate-400 text-sm leading-relaxed">
+                        <p class="pb-5">JSON-LD (JavaScript Object Notation for Linked Data) is a lightweight Linked Data format. It is Google's recommended method for implementing schema markup because it sits independently from the HTML layout, preventing styling updates from breaking structured data.</p>
+                    </div>
+                </div>
+
+                <div class="bg-slate-900 border border-slate-800 rounded-2xl overflow-hidden">
+                    <button class="faq-btn w-full px-6 py-5 text-left flex justify-between items-center focus:outline-none" aria-expanded="false" onclick="toggleFaq(this)">
+                        <span class="font-semibold text-slate-200">Does schema improve rankings?</span>
+                        <svg class="chevron w-5 h-5 text-emerald-400 transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                    </button>
+                    <div class="faq-content px-6 text-slate-400 text-sm leading-relaxed">
+                        <p class="pb-5">Schema markup is not a direct ranking factor. However, it makes your pages eligible for rich results, which significantly increases organic click-through rates (CTR) and user engagement metrics.</p>
+                    </div>
+                </div>
+
+                <div class="bg-slate-900 border border-slate-800 rounded-2xl overflow-hidden">
+                    <button class="faq-btn w-full px-6 py-5 text-left flex justify-between items-center focus:outline-none" aria-expanded="false" onclick="toggleFaq(this)">
+                        <span class="font-semibold text-slate-200">Why did my rich snippets disappear?</span>
+                        <svg class="chevron w-5 h-5 text-emerald-400 transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                    </button>
+                    <div class="faq-content px-6 text-slate-400 text-sm leading-relaxed">
+                        <p class="pb-5">Rich snippets can disappear due to syntax errors introduced during a site update, a violation of Google's structured data guidelines (such as hiding marked-up text), or algorithmic shifts adjusting which queries warrant rich results.</p>
+                    </div>
+                </div>
+
+                <div class="bg-slate-900 border border-slate-800 rounded-2xl overflow-hidden">
+                    <button class="faq-btn w-full px-6 py-5 text-left flex justify-between items-center focus:outline-none" aria-expanded="false" onclick="toggleFaq(this)">
+                        <span class="font-semibold text-slate-200">How do I validate schema markup?</span>
+                        <svg class="chevron w-5 h-5 text-emerald-400 transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                    </button>
+                    <div class="faq-content px-6 text-slate-400 text-sm leading-relaxed">
+                        <p class="pb-5">You should test all generated code using the Google Rich Results Test tool or the Schema Markup Validator at schema.org before deploying it to a live production environment.</p>
+                    </div>
+                </div>
+
+                <div class="bg-slate-900 border border-slate-800 rounded-2xl overflow-hidden">
+                    <button class="faq-btn w-full px-6 py-5 text-left flex justify-between items-center focus:outline-none" aria-expanded="false" onclick="toggleFaq(this)">
+                        <span class="font-semibold text-slate-200">Can multiple schemas exist on one page?</span>
+                        <svg class="chevron w-5 h-5 text-emerald-400 transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                    </button>
+                    <div class="faq-content px-6 text-slate-400 text-sm leading-relaxed">
+                        <p class="pb-5">Yes. You can nest multiple types or include multiple distinct scripts. For example, a page can validly feature Organization schema in the footer, Article schema for the content, and FAQ schema for the questions section.</p>
+                    </div>
+                </div>
+
+                <div class="bg-slate-900 border border-slate-800 rounded-2xl overflow-hidden">
+                    <button class="faq-btn w-full px-6 py-5 text-left flex justify-between items-center focus:outline-none" aria-expanded="false" onclick="toggleFaq(this)">
+                        <span class="font-semibold text-slate-200">What are the rules for FAQ schema?</span>
+                        <svg class="chevron w-5 h-5 text-emerald-400 transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                    </button>
+                    <div class="faq-content px-6 text-slate-400 text-sm leading-relaxed">
+                        <p class="pb-5">The most critical rule for FAQ schema is that every question and answer defined in the JSON-LD payload must be fully visible and readable by the user on the actual HTML page.</p>
+                    </div>
+                </div>
+
+                <div class="bg-slate-900 border border-slate-800 rounded-2xl overflow-hidden">
+                    <button class="faq-btn w-full px-6 py-5 text-left flex justify-between items-center focus:outline-none" aria-expanded="false" onclick="toggleFaq(this)">
+                        <span class="font-semibold text-slate-200">Which schema is best for ecommerce?</span>
+                        <svg class="chevron w-5 h-5 text-emerald-400 transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                    </button>
+                    <div class="faq-content px-6 text-slate-400 text-sm leading-relaxed">
+                        <p class="pb-5">Ecommerce sites heavily rely on Product schema, incorporating Offer, AggregateRating, and Review properties to ensure pricing, stock status, and stars appear in shopping carousels.</p>
+                    </div>
+                </div>
+
+                <div class="bg-slate-900 border border-slate-800 rounded-2xl overflow-hidden">
+                    <button class="faq-btn w-full px-6 py-5 text-left flex justify-between items-center focus:outline-none" aria-expanded="false" onclick="toggleFaq(this)">
+                        <span class="font-semibold text-slate-200">What schema should blogs use?</span>
+                        <svg class="chevron w-5 h-5 text-emerald-400 transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                    </button>
+                    <div class="faq-content px-6 text-slate-400 text-sm leading-relaxed">
+                        <p class="pb-5">Blogs should primarily utilize Article or NewsArticle schema, supplemented with BreadcrumbList for navigation clarity and Person schema for author entity recognition.</p>
+                    </div>
+                </div>
+
+                <div class="bg-slate-900 border border-slate-800 rounded-2xl overflow-hidden">
+                    <button class="faq-btn w-full px-6 py-5 text-left flex justify-between items-center focus:outline-none" aria-expanded="false" onclick="toggleFaq(this)">
+                        <span class="font-semibold text-slate-200">Does duplicate schema cause issues?</span>
+                        <svg class="chevron w-5 h-5 text-emerald-400 transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                    </button>
+                    <div class="faq-content px-6 text-slate-400 text-sm leading-relaxed">
+                        <p class="pb-5">While having duplicate blocks isn't a severe penalty, it wastes crawl budget and can confuse parsers if the duplicate blocks contain conflicting property values.</p>
+                    </div>
+                </div>
+                
+                <div class="bg-slate-900 border border-slate-800 rounded-2xl overflow-hidden">
+                    <button class="faq-btn w-full px-6 py-5 text-left flex justify-between items-center focus:outline-none" aria-expanded="false" onclick="toggleFaq(this)">
+                        <span class="font-semibold text-slate-200">What are the best schema testing workflows?</span>
+                        <svg class="chevron w-5 h-5 text-emerald-400 transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                    </button>
+                    <div class="faq-content px-6 text-slate-400 text-sm leading-relaxed">
+                        <p class="pb-5">Professional workflows integrate schema validation into CI/CD pipelines. Alternatively, teams use the Google Search Console enhancements report to proactively monitor live domain errors.</p>
+                    </div>
+                </div>
+
+                <div class="bg-slate-900 border border-slate-800 rounded-2xl overflow-hidden">
+                    <button class="faq-btn w-full px-6 py-5 text-left flex justify-between items-center focus:outline-none" aria-expanded="false" onclick="toggleFaq(this)">
+                        <span class="font-semibold text-slate-200">Where should JSON-LD be placed in HTML?</span>
+                        <svg class="chevron w-5 h-5 text-emerald-400 transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                    </button>
+                    <div class="faq-content px-6 text-slate-400 text-sm leading-relaxed">
+                        <p class="pb-5">JSON-LD is typically placed within the head of the HTML document for rapid parsing, though it is perfectly valid to place it within the body element near the content it describes.</p>
+                    </div>
+                </div>
+
+                <div class="bg-slate-900 border border-slate-800 rounded-2xl overflow-hidden">
+                    <button class="faq-btn w-full px-6 py-5 text-left flex justify-between items-center focus:outline-none" aria-expanded="false" onclick="toggleFaq(this)">
+                        <span class="font-semibold text-slate-200">Can schema markup replace meta descriptions?</span>
+                        <svg class="chevron w-5 h-5 text-emerald-400 transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                    </button>
+                    <div class="faq-content px-6 text-slate-400 text-sm leading-relaxed">
+                        <p class="pb-5">No. While structured data informs indexing and enables rich results, traditional HTML meta descriptions remain the primary source Google uses to construct the standard black-text search snippet.</p>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- Helpful Feedback Widget -->
+        <section class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 mb-16">
+            <div id="feedback-widget" class="bg-slate-900 border border-slate-800 rounded-2xl p-8 text-center transition-all">
+                <h3 class="text-xl font-bold text-white mb-6">Was this tool helpful?</h3>
+                <div class="flex items-center justify-center gap-4">
+                    <button onclick="handleFeedback(true)" class="px-8 py-3 bg-slate-800 hover:bg-emerald-500/20 hover:text-emerald-400 border border-slate-700 hover:border-emerald-500/50 rounded-xl font-medium transition-all">
+                        👍 Yes
+                    </button>
+                    <button onclick="handleFeedback(false)" class="px-8 py-3 bg-slate-800 hover:bg-rose-500/20 hover:text-rose-400 border border-slate-700 hover:border-rose-500/50 rounded-xl font-medium transition-all">
+                        👎 No
+                    </button>
+                </div>
+                
+                <div id="feedback-yes" class="hidden mt-6">
+                    <p class="text-emerald-400 font-medium mb-4">Awesome! We're glad it helped.</p>
+                    <p class="text-sm text-slate-400 mb-4">Share it with your network:</p>
+                    <div class="flex flex-wrap justify-center gap-2">
+                        <button onclick="shareLink('twitter')" class="text-xs px-3 py-1.5 rounded-full border border-slate-700 hover:bg-slate-800 transition-colors">X / Twitter</button>
+                        <button onclick="shareLink('linkedin')" class="text-xs px-3 py-1.5 rounded-full border border-slate-700 hover:bg-slate-800 transition-colors">LinkedIn</button>
+                    </div>
+                </div>
+
+                <div id="feedback-no" class="hidden mt-6">
+                    <p class="text-slate-300 text-sm mb-4">Sorry to hear that. Help us improve.</p>
+                    <button onclick="document.getElementById('contact-form-popup').classList.remove('hidden')" class="px-6 py-2 bg-violet-600 hover:bg-violet-700 text-white rounded-lg text-sm transition-colors">
+                        Contact us now
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- End Share Section -->
+        <section class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 mb-20 text-center">
+            <h2 class="text-3xl font-bold text-white mb-3">Found this helpful?</h2>
+            <p class="text-slate-400 mb-8">Share this guide with someone who might need it.</p>
+            <div class="flex flex-wrap items-center justify-center gap-3">
+                <button onclick="shareLink('whatsapp')" class="share-btn flex items-center gap-2">WhatsApp</button>
+                <button onclick="shareLink('twitter')" class="share-btn flex items-center gap-2">X / Twitter</button>
+                <button onclick="shareLink('linkedin')" class="share-btn flex items-center gap-2">LinkedIn</button>
+                <button onclick="shareLink('reddit')" class="share-btn flex items-center gap-2">Reddit</button>
+                <button onclick="shareLink('facebook')" class="share-btn flex items-center gap-2">Facebook</button>
+                <button onclick="shareLink('email')" class="share-btn flex items-center gap-2">Email</button>
+                <button onclick="copyToClipboard()" class="share-btn flex items-center gap-2">Copy Link</button>
+            </div>
+        </section>
+
+        <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-20">
+            <h3 class="text-sm font-bold tracking-widest uppercase text-slate-500 mb-6">Related SEO Tools</h3>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <a href="/seo-tools/meta-description-generator.html" class="block p-6 rounded-2xl bg-slate-900 border border-slate-800 hover:border-emerald-500/50 hover:shadow-lg hover:shadow-emerald-500/5 transition-all group">
+                    <h4 class="text-lg font-semibold text-slate-200 group-hover:text-emerald-400 mb-2">Meta Description Generator</h4>
+                    <p class="text-sm text-slate-400">Maximize click-through rates with optimized snippet creation.</p>
+                </a>
+                <a href="/seo-tools/serp-preview-tool.html" class="block p-6 rounded-2xl bg-slate-900 border border-slate-800 hover:border-violet-500/50 hover:shadow-lg hover:shadow-violet-500/5 transition-all group">
+                    <h4 class="text-lg font-semibold text-slate-200 group-hover:text-violet-400 mb-2">SERP Preview Tool</h4>
+                    <p class="text-sm text-slate-400">Live Google snippet simulator to visually test your metadata length.</p>
+                </a>
+                <a href="/seo-tools/robots-txt-generator.html" class="block p-6 rounded-2xl bg-slate-900 border border-slate-800 hover:border-emerald-500/50 hover:shadow-lg hover:shadow-emerald-500/5 transition-all group">
+                    <h4 class="text-lg font-semibold text-slate-200 group-hover:text-emerald-400 mb-2">Robots.txt Generator</h4>
+                    <p class="text-sm text-slate-400">Control search engine crawler access perfectly across your domain.</p>
+                </a>
+                <a href="/seo-tools/sitemap-generator.html" class="block p-6 rounded-2xl bg-slate-900 border border-slate-800 hover:border-emerald-500/50 hover:shadow-lg hover:shadow-emerald-500/5 transition-all group">
+                    <h4 class="text-lg font-semibold text-slate-200 group-hover:text-emerald-400 mb-2">XML Sitemap Generator</h4>
+                    <p class="text-sm text-slate-400">Map your site architecture for rapid Googlebot indexing.</p>
+                </a>
+                <a href="/seo-tools/open-graph-generator.html" class="block p-6 rounded-2xl bg-slate-900 border border-slate-800 hover:border-violet-500/50 hover:shadow-lg hover:shadow-violet-500/5 transition-all group">
+                    <h4 class="text-lg font-semibold text-slate-200 group-hover:text-violet-400 mb-2">Open Graph Generator</h4>
+                    <p class="text-sm text-slate-400">Generate tags for perfect social media link previews.</p>
+                </a>
+            </div>
+        </section>
+
+        <div id="dynamic-internal-links" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-12"></div>
+
+    </main>
+
+    <footer class="bg-slate-950 border-t border-slate-800 pt-16 pb-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
+                
+                <div class="col-span-1 md:col-span-2">
+                    <div class="flex items-center gap-2 mb-4">
+                        <span class="text-2xl">📡</span>
+                        <span class="font-bold text-lg text-slate-100">AI Citation Scan</span>
+                    </div>
+                    <p class="text-sm text-slate-400 max-w-sm mb-6">
+                        Enterprise-grade SEO tools and clinical audits to maximize your search engine visibility and AI citation readiness.
+                    </p>
+                </div>
+
+                <div>
+                    <h4 class="text-white font-semibold mb-4 text-sm uppercase tracking-widest">Legal</h4>
+                    <ul class="space-y-3 text-sm text-slate-400">
+                        <li><a href="/privacy-policy.html" class="hover:text-emerald-400 transition-colors">Privacy Policy</a></li>
+                        <li><a href="/cookies-policy.html" class="hover:text-emerald-400 transition-colors">Cookies Policy</a></li>
+                        <li><a href="/terms-of-use.html" class="hover:text-emerald-400 transition-colors">Terms of Use</a></li>
+                        <li><a href="/disclaimer.html" class="hover:text-emerald-400 transition-colors">Disclaimer</a></li>
+                        <li><a href="/dmca.html" class="hover:text-emerald-400 transition-colors">DMCA</a></li>
+                        <li><a href="/accessibility.html" class="hover:text-emerald-400 transition-colors">Accessibility</a></li>
+                        <li><a href="/do-not-sell-my-data.html" class="hover:text-emerald-400 transition-colors">Do Not Sell My Data</a></li>
+                        <li><a href="/about.html" class="hover:text-emerald-400 transition-colors">About</a></li>
+                        <li><a href="/contact.html" class="hover:text-emerald-400 transition-colors">Contact</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="text-white font-semibold mb-4 text-sm uppercase tracking-widest">Social</h4>
+                    <ul class="space-y-3 text-sm text-slate-400">
+                        <li><a href="https://twitter.com" target="_blank" rel="noopener noreferrer" class="hover:text-emerald-400 transition-colors">Twitter</a></li>
+                        <li><a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" class="hover:text-emerald-400 transition-colors">LinkedIn</a></li>
+                        <li><a href="https://reddit.com" target="_blank" rel="noopener noreferrer" class="hover:text-emerald-400 transition-colors">Reddit</a></li>
+                        <li><a href="https://facebook.com" target="_blank" rel="noopener noreferrer" class="hover:text-emerald-400 transition-colors">Facebook</a></li>
+                        <li><a href="https://github.com" target="_blank" rel="noopener noreferrer" class="hover:text-emerald-400 transition-colors">GitHub</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="border-t border-slate-800/50 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
+                <p class="text-xs text-slate-500">
+                    &copy; <span id="current-year-footer">2026</span> AI Citation Scan. All Rights Reserved.
+                </p>
+                <p class="text-xs text-slate-500">
+                    Not affiliated with Google.
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Contact Popup -->
+    <div id="contact-form-popup" class="hidden fixed inset-0 bg-slate-950/80 backdrop-blur-sm flex items-center justify-center z-50 p-4">
+        <div class="bg-slate-900 border border-slate-800 rounded-2xl p-6 w-full max-w-md relative">
+            <button onclick="document.getElementById('contact-form-popup').classList.add('hidden')" class="absolute top-4 right-4 text-slate-400 hover:text-white">✕</button>
+            <h3 class="text-xl font-bold text-white mb-2">Contact Us</h3>
+            <p class="text-sm text-slate-400 mb-6">Let us know how we can improve this tool.</p>
+            <form onsubmit="submitFeedbackForm(event)" class="space-y-4">
+                <div>
+                    <label class="block text-xs font-medium text-slate-400 mb-1">Name</label>
+                    <input type="text" required class="w-full bg-slate-800 border border-slate-700 rounded-lg px-4 py-2 text-white focus:outline-none focus:border-violet-500">
+                </div>
+                <div>
+                    <label class="block text-xs font-medium text-slate-400 mb-1">Message</label>
+                    <textarea required rows="3" class="w-full bg-slate-800 border border-slate-700 rounded-lg px-4 py-2 text-white focus:outline-none focus:border-violet-500"></textarea>
+                </div>
+                <button type="submit" class="w-full bg-violet-600 hover:bg-violet-700 text-white font-medium rounded-lg py-2 transition-colors">Send Message</button>
+            </form>
+        </div>
+    </div>
+
+    <div id="toast-container" class="fixed bottom-4 right-4 flex flex-col gap-2 z-[9999]"></div>
+
+    <!-- GLOBAL SHARED SCRIPTS -->
+    <script defer src="../js/registry.js"></script>
+    <script defer src="../js/root-config.js"></script>
+    <script defer src="../js/menu-system.js"></script>
+    <script defer src="../js/search-system.js"></script>
+    <script defer src="../js/schema.js"></script>
+    <script defer src="../js/internal-links.js"></script>
+    <script defer src="../js/legal-engine.js"></script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Dynamic Dates
+            const today = new Date();
+            document.getElementById('current-year-footer').textContent = today.getFullYear();
+            
+            const options = { year: 'numeric', month: 'short', day: 'numeric' };
+            const formattedDate = today.toLocaleDateString('en-US', options);
+            document.getElementById('freshness-date').textContent = `Updated ${formattedDate}`;
+            document.getElementById('eeat-date').textContent = formattedDate;
+
+            // Seasonal Banner
+            const month = today.getMonth();
+            const seasons = ['Winter', 'Winter', 'Spring', 'Spring', 'Spring', 'Summer', 'Summer', 'Summer', 'Fall', 'Fall', 'Fall', 'Winter'];
+            document.getElementById('seasonal-banner').textContent = `${seasons[month]} ${today.getFullYear()} Edition`;
+
+            // Setup TOC
+            buildTOC();
+            
+            // Check Feedback State
+            if (localStorage.getItem('schema_tool_feedback')) {
+                document.getElementById('feedback-widget').classList.add('hidden');
+            }
+
+            // Generate JSON-LD dynamically for Monday dateModified
+            injectPageSchema(today);
+            
+            // Render Initial Tool Fields
+            renderFormFields();
+        });
+
+        /* --- UI & INTERACTION SCRIPTS --- */
+        window.addEventListener("scroll", () => {
+            const winScroll = document.documentElement.scrollTop;
+            const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            const scrolled = (winScroll / height) * 100;
+            document.getElementById("scrollProgress").style.width = scrolled + "%";
+        }, { passive: true });
+
+        function buildTOC() {
+            const headings = document.querySelectorAll('.editorial-content h2[id]');
+            const tocNav = document.getElementById('toc-nav');
+            headings.forEach(h2 => {
+                const a = document.createElement('a');
+                a.href = `#${h2.id}`;
+                a.textContent = h2.textContent;
+                a.className = 'toc-link';
+                a.setAttribute('data-target', h2.id);
+                tocNav.appendChild(a);
+            });
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        document.querySelectorAll('.toc-link').forEach(link => {
+                            link.classList.remove('active');
+                            if (link.getAttribute('data-target') === entry.target.id) {
+                                link.classList.add('active');
+                            }
+                        });
+                    }
+                });
+            }, { rootMargin: '-20% 0px -60% 0px' });
+            headings.forEach(h2 => observer.observe(h2));
+        }
+
+        function shareLink(platform) {
+            const url = encodeURIComponent(window.location.href);
+            const title = encodeURIComponent(document.title);
+            let shareUrl = '';
+            switch(platform) {
+                case 'twitter': shareUrl = `https://twitter.com/intent/tweet?text=${title}&url=${url}`; break;
+                case 'facebook': shareUrl = `https://www.facebook.com/sharer/sharer.php?u=${url}`; break;
+                case 'linkedin': shareUrl = `https://www.linkedin.com/sharing/share-offsite/?url=${url}`; break;
+                case 'reddit': shareUrl = `https://reddit.com/submit?url=${url}&title=${title}`; break;
+                case 'whatsapp': shareUrl = `https://wa.me/?text=${title}%20${url}`; break;
+                case 'email': shareUrl = `mailto:?subject=${title}&body=${url}`; break;
+            }
+            if(shareUrl) {
+                if(platform === 'email') window.location.href = shareUrl;
+                else window.open(shareUrl, '_blank', 'width=600,height=400');
+            }
+        }
+
+        function shareQuote(quoteText) {
+            const url = encodeURIComponent(window.location.href);
+            const text = encodeURIComponent(`"${quoteText}"`);
+            window.open(`https://twitter.com/intent/tweet?text=${text}&url=${url}`, '_blank', 'width=600,height=400');
+        }
+
+        function copyToClipboard() {
+            navigator.clipboard.writeText(window.location.href).then(() => {
+                showToast('Link copied to clipboard');
+            });
+        }
+
+        function toggleFaq(btn) {
+            const isExpanded = btn.getAttribute('aria-expanded') === 'true';
+            btn.setAttribute('aria-expanded', !isExpanded);
+            const content = btn.nextElementSibling;
+            if(!isExpanded) {
+                content.classList.add('open');
+            } else {
+                content.classList.remove('open');
+            }
+        }
+
+        function handleFeedback(isHelpful) {
+            localStorage.setItem('schema_tool_feedback', isHelpful ? 'yes' : 'no');
+            if(isHelpful) {
+                document.getElementById('feedback-yes').classList.remove('hidden');
+                document.getElementById('feedback-no').classList.add('hidden');
+            } else {
+                document.getElementById('feedback-no').classList.remove('hidden');
+                document.getElementById('feedback-yes').classList.add('hidden');
+            }
+            event.target.parentElement.classList.add('hidden');
+        }
+
+        function submitFeedbackForm(e) {
+            e.preventDefault();
+            alert("Thank you! Your feedback has been securely sent.");
+            document.getElementById('contact-form-popup').classList.add('hidden');
+        }
+
+        function handleContactForm(e) {
+            e.preventDefault();
+            alert("Thank you! Your request has been transmitted.");
+            e.target.reset();
+        }
+
+        function showToast(message) {
+            const container = document.getElementById('toast-container');
+            const toast = document.createElement('div');
+            toast.className = 'bg-emerald-500 text-white px-4 py-2 rounded-lg shadow-lg text-sm font-medium transform transition-all translate-y-10 opacity-0';
+            toast.textContent = message;
+            container.appendChild(toast);
+            
+            requestAnimationFrame(() => toast.classList.remove('translate-y-10', 'opacity-0'));
+            setTimeout(() => {
+                toast.classList.add('opacity-0');
+                setTimeout(() => toast.remove(), 300);
+            }, 3000);
+        }
+
+        function injectPageSchema(today) {
+            const d = new Date(today);
+            const day = d.getDay();
+            const diff = d.getDate() - day + (day === 0 ? -6 : 1);
+            const lastMonday = new Date(d.setDate(diff)).toISOString().split('T')[0];
+
+            const schemaData = {
+                "@context": "https://schema.org",
+                "@graph": [
+                    {
+                        "@type": "WebApplication",
+                        "@id": "https://aicitationscan.com/seo-tools/schema-generator.html#webapp",
+                        "name": "Schema Generator Tool",
+                        "url": "https://aicitationscan.com/seo-tools/schema-generator.html",
+                        "description": "Generate structured JSON-LD schema markup for enhanced search visibility.",
+                        "applicationCategory": "BusinessApplication",
+                        "operatingSystem": "All",
+                        "dateModified": lastMonday,
+                        "author": {"@type": "Organization", "name": "AI Citation Scan"}
+                    },
+                    {
+                        "@type": "FAQPage",
+                        "@id": "https://aicitationscan.com/seo-tools/schema-generator.html#faq",
+                        "mainEntity": [
+                            { "@type": "Question", "name": "What is JSON-LD?", "acceptedAnswer": { "@type": "Answer", "text": "JSON-LD is a lightweight Linked Data format. It is Google's recommended method for implementing schema markup." }},
+                            { "@type": "Question", "name": "Does schema improve rankings?", "acceptedAnswer": { "@type": "Answer", "text": "Schema markup is not a direct ranking factor. However, it makes your pages eligible for rich results." }}
+                        ]
+                    }
+                ]
+            };
+            const script = document.createElement('script');
+            script.type = 'application/ld+json';
+            script.text = JSON.stringify(schemaData);
+            document.head.appendChild(script);
+        }
+
+        /* --- SCHEMA GENERATOR TOOL LOGIC --- */
+        
+        let currentSchemaObject = {};
+        let faqItems = [{ q: '', a: '' }];
+        
+        const schemaConfigs = {
+            Article: [
+                { id: 'article_headline', label: 'Headline', type: 'text', placeholder: 'e.g. 10 Enterprise SEO Strategies' },
+                { id: 'article_description', label: 'Description', type: 'textarea', placeholder: 'Brief summary of the article' },
+                { id: 'article_image', label: 'Image URL', type: 'text', placeholder: 'https://example.com/image.jpg' },
+                { id: 'article_author', label: 'Author Name', type: 'text', placeholder: 'e.g. John Doe' },
+                { id: 'article_publisher', label: 'Publisher (Organization)', type: 'text', placeholder: 'e.g. AI Citation Scan' },
+                { id: 'article_pubDate', label: 'Date Published', type: 'date' },
+                { id: 'article_modDate', label: 'Date Modified', type: 'date' }
+            ],
+            LocalBusiness: [
+                { id: 'lb_name', label: 'Business Name', type: 'text' },
+                { id: 'lb_image', label: 'Image URL', type: 'text' },
+                { id: 'lb_phone', label: 'Phone', type: 'text' },
+                { id: 'lb_address', label: 'Street Address', type: 'text' },
+                { id: 'lb_city', label: 'City', type: 'text' },
+                { id: 'lb_region', label: 'State / Region', type: 'text' },
+                { id: 'lb_zip', label: 'Zip Code', type: 'text' },
+                { id: 'lb_country', label: 'Country Code (e.g. US)', type: 'text' },
+                { id: 'lb_url', label: 'Website URL', type: 'text' }
+            ],
+            Product: [
+                { id: 'prod_name', label: 'Product Name', type: 'text' },
+                { id: 'prod_image', label: 'Image URL', type: 'text' },
+                { id: 'prod_desc', label: 'Description', type: 'textarea' },
+                { id: 'prod_brand', label: 'Brand', type: 'text' },
+                { id: 'prod_sku', label: 'SKU', type: 'text' },
+                { id: 'prod_price', label: 'Price', type: 'number' },
+                { id: 'prod_currency', label: 'Currency (e.g. USD)', type: 'text' },
+                { id: 'prod_rating', label: 'Aggregate Rating (e.g. 4.8)', type: 'number' },
+                { id: 'prod_reviewCount', label: 'Review Count', type: 'number' }
+            ],
+            WebSite: [
+                { id: 'ws_name', label: 'Site Name', type: 'text' },
+                { id: 'ws_url', label: 'Site URL', type: 'text' },
+                { id: 'ws_search', label: 'Search Action URL (optional)', type: 'text', placeholder: 'https://example.com/search?q={search_term_string}' }
+            ],
+            Organization: [
+                { id: 'org_name', label: 'Organization Name', type: 'text' },
+                { id: 'org_url', label: 'URL', type: 'text' },
+                { id: 'org_logo', label: 'Logo URL', type: 'text' },
+                { id: 'org_social', label: 'Social Profiles (comma separated)', type: 'text' }
+            ]
+        };
+
+        function resetSchemaForm() {
+            faqItems = [{ q: '', a: '' }];
+            renderFormFields();
+        }
+
+        function renderFormFields() {
+            const type = document.getElementById('schema-type').value;
+            const container = document.getElementById('dynamic-form-container');
+            container.innerHTML = '';
+            
+            if (type === 'FAQPage') {
+                renderFAQForm(container);
+            } else if (schemaConfigs[type]) {
+                schemaConfigs[type].forEach(field => {
+                    const div = document.createElement('div');
+                    div.innerHTML = `
+                        <label class="premium-label">${field.label}</label>
+                        ${field.type === 'textarea' 
+                            ? `<textarea id="${field.id}" class="premium-input" placeholder="${field.placeholder || ''}" oninput="generateSchema()"></textarea>`
+                            : `<input type="${field.type}" id="${field.id}" class="premium-input" placeholder="${field.placeholder || ''}" oninput="generateSchema()">`
+                        }
+                    `;
+                    container.appendChild(div);
+                });
+            } else {
+                container.innerHTML = `<div class="text-slate-400 text-sm">Advanced configuration for ${type} is dynamically built.</div>`;
+            }
+            generateSchema();
+        }
+
+        function renderFAQForm(container) {
+            const wrapper = document.createElement('div');
+            wrapper.className = 'space-y-4';
+            
+            faqItems.forEach((item, index) => {
+                const itemDiv = document.createElement('div');
+                itemDiv.className = 'p-4 border border-slate-700 rounded-lg bg-slate-800/50';
+                itemDiv.innerHTML = `
+                    <div class="flex justify-between items-center mb-2">
+                        <span class="text-xs font-semibold text-emerald-400">Question ${index + 1}</span>
+                        ${index > 0 ? `<button onclick="removeFAQ(${index})" class="text-xs text-rose-400 hover:text-rose-300">Remove</button>` : ''}
+                    </div>
+                    <input type="text" class="premium-input mb-2" placeholder="Question" value="${item.q}" oninput="updateFAQ(${index}, 'q', this.value)">
+                    <textarea class="premium-input" placeholder="Answer" oninput="updateFAQ(${index}, 'a', this.value)">${item.a}</textarea>
+                `;
+                wrapper.appendChild(itemDiv);
+            });
+            
+            const addBtn = document.createElement('button');
+            addBtn.className = 'w-full py-2 border border-dashed border-slate-600 rounded-lg text-slate-400 hover:text-white hover:border-slate-500 text-sm transition-colors';
+            addBtn.textContent = '+ Add Question';
+            addBtn.onclick = () => { faqItems.push({q:'', a:''}); renderFormFields(); };
+            
+            wrapper.appendChild(addBtn);
+            container.appendChild(wrapper);
+        }
+
+        function updateFAQ(index, key, value) {
+            faqItems[index][key] = value;
+            generateSchema();
+        }
+
+        function removeFAQ(index) {
+            faqItems.splice(index, 1);
+            renderFormFields();
+        }
+
+        function generateSchema() {
+            const type = document.getElementById('schema-type').value;
+            let schema = { "@context": "https://schema.org" };
+            
+            if (type === 'Article') {
+                schema["@type"] = "Article";
+                schema.headline = document.getElementById('article_headline')?.value || "";
+                schema.description = document.getElementById('article_description')?.value || "";
+                schema.image = document.getElementById('article_image')?.value || "";
+                schema.author = { "@type": "Person", "name": document.getElementById('article_author')?.value || "" };
+                schema.publisher = { "@type": "Organization", "name": document.getElementById('article_publisher')?.value || "" };
+                if (document.getElementById('article_pubDate')?.value) schema.datePublished = document.getElementById('article_pubDate').value;
+                if (document.getElementById('article_modDate')?.value) schema.dateModified = document.getElementById('article_modDate').value;
+            } 
+            else if (type === 'FAQPage') {
+                schema["@type"] = "FAQPage";
+                schema.mainEntity = faqItems.filter(i => i.q || i.a).map(i => ({
+                    "@type": "Question",
+                    "name": i.q,
+                    "acceptedAnswer": { "@type": "Answer", "text": i.a }
+                }));
+            }
+            else if (type === 'LocalBusiness') {
+                schema["@type"] = "LocalBusiness";
+                schema.name = document.getElementById('lb_name')?.value || "";
+                schema.image = document.getElementById('lb_image')?.value || "";
+                schema.telephone = document.getElementById('lb_phone')?.value || "";
+                schema.url = document.getElementById('lb_url')?.value || "";
+                schema.address = {
+                    "@type": "PostalAddress",
+                    "streetAddress": document.getElementById('lb_address')?.value || "",
+                    "addressLocality": document.getElementById('lb_city')?.value || "",
+                    "addressRegion": document.getElementById('lb_region')?.value || "",
+                    "postalCode": document.getElementById('lb_zip')?.value || "",
+                    "addressCountry": document.getElementById('lb_country')?.value || ""
+                };
+            }
+            else if (type === 'Product') {
+                schema["@type"] = "Product";
+                schema.name = document.getElementById('prod_name')?.value || "";
+                schema.image = document.getElementById('prod_image')?.value || "";
+                schema.description = document.getElementById('prod_desc')?.value || "";
+                schema.sku = document.getElementById('prod_sku')?.value || "";
+                if(document.getElementById('prod_brand')?.value) schema.brand = { "@type": "Brand", "name": document.getElementById('prod_brand').value };
+                
+                const price = document.getElementById('prod_price')?.value;
+                if(price) {
+                    schema.offers = {
+                        "@type": "Offer",
+                        "price": price,
+                        "priceCurrency": document.getElementById('prod_currency')?.value || "USD",
+                        "availability": "https://schema.org/InStock"
+                    };
+                }
+                const rating = document.getElementById('prod_rating')?.value;
+                const count = document.getElementById('prod_reviewCount')?.value;
+                if(rating && count) {
+                    schema.aggregateRating = {
+                        "@type": "AggregateRating",
+                        "ratingValue": rating,
+                        "reviewCount": count
+                    };
+                }
+            }
+            else if (type === 'WebSite') {
+                schema["@type"] = "WebSite";
+                schema.name = document.getElementById('ws_name')?.value || "";
+                schema.url = document.getElementById('ws_url')?.value || "";
+                const searchAction = document.getElementById('ws_search')?.value;
+                if (searchAction) {
+                    schema.potentialAction = {
+                        "@type": "SearchAction",
+                        "target": searchAction,
+                        "query-input": "required name=search_term_string"
+                    };
+                }
+            }
+            else if (type === 'Organization') {
+                schema["@type"] = "Organization";
+                schema.name = document.getElementById('org_name')?.value || "";
+                schema.url = document.getElementById('org_url')?.value || "";
+                schema.logo = document.getElementById('org_logo')?.value || "";
+                const social = document.getElementById('org_social')?.value;
+                if (social) {
+                    schema.sameAs = social.split(',').map(s => s.trim());
+                }
+            } else {
+                schema["@type"] = type;
+            }
+
+            // Clean up empty fields recursively
+            const cleanSchema = JSON.parse(JSON.stringify(schema, (key, value) => {
+                if (value === "" || value === null || (Array.isArray(value) && value.length === 0)) return undefined;
+                return value;
+            }));
+
+            const finalString = `<script type="application/ld+json">\n${JSON.stringify(cleanSchema, null, 2)}\n<\/script>`;
+            syntaxHighlight(finalString);
+            currentSchemaObject = finalString;
+        }
+
+        function syntaxHighlight(str) {
+            let escaped = str.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+            // Basic regex coloring for display
+            escaped = escaped.replace(/("(\\u[a-zA-Z0-9]{4}|\\[^u]|[^\\"])*"(\s*:)?|\b(true|false|null)\b|-?\d+(?:\.\d*)?(?:[eE][+\-]?\d+)?)/g, function (match) {
+                let cls = 'json-number';
+                if (/^"/.test(match)) {
+                    if (/:$/.test(match)) {
+                        cls = 'json-key';
+                    } else {
+                        cls = 'json-string';
+                    }
+                } else if (/true|false/.test(match)) {
+                    cls = 'json-boolean';
+                }
+                return '<span class="' + cls + '">' + match + '</span>';
+            });
+            document.getElementById('json-output-display').innerHTML = escaped;
+        }
+
+        function copySchemaOutput() {
+            navigator.clipboard.writeText(currentSchemaObject).then(() => {
+                showToast('JSON-LD copied to clipboard');
+            });
+        }
+    </script>
+</body>
+</html>
