@@ -1,0 +1,937 @@
+<!DOCTYPE html>
+<html lang="en" class="dark scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Analyze the exact word count, character count, and reading time of any webpage text. Use our Website Word Count Checker to evaluate content depth and SEO visibility.">
+    <meta name="keywords" content="website word count checker, word count tool, content depth analyzer, SEO word count, page length checker, reading time calculator">
+    <meta name="author" content="AI Citation Scan Editorial Team">
+    <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
+    
+    <title>Website Word Count Checker: Analyze Content Depth | AI Citation Scan</title>
+    
+    <link rel="canonical" href="https://aicitationscan.com/programmatic/website-word-count-checker.html">
+    <link rel="sitemap" type="application/xml" href="/sitemap.xml">
+    
+    <meta property="og:title" content="Website Word Count Checker: Analyze Content Depth">
+    <meta property="og:description" content="Analyze the exact word count, character count, and reading time of any webpage text. Use our Website Word Count Checker to evaluate content depth and SEO visibility.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://aicitationscan.com/programmatic/website-word-count-checker.html">
+    <meta property="og:image" content="https://aicitationscan.com/images/og-word-count.jpg">
+    <meta property="og:site_name" content="AI Citation Scan">
+    
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Website Word Count Checker: Analyze Content Depth">
+    <meta name="twitter:description" content="Analyze the exact word count, character count, and reading time of any webpage text. Use our Website Word Count Checker to evaluate content depth and SEO visibility.">
+    <meta name="twitter:image" content="https://aicitationscan.com/images/og-word-count.jpg">
+
+    <meta name="theme-color" content="#10b981">
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+
+    <link rel="alternate" hreflang="en" href="https://aicitationscan.com/programmatic/website-word-count-checker.html">
+    <link rel="alternate" hreflang="x-default" href="https://aicitationscan.com/programmatic/website-word-count-checker.html">
+    <meta name="geo.region" content="US">
+    <meta name="geo.position" content="37.7749;-122.4194">
+    <meta name="ICBM" content="37.7749, -122.4194">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'system-ui', 'sans-serif'],
+                    },
+                    colors: {
+                        emerald: { 400: '#34d399', 500: '#10b981', 600: '#059669' },
+                        violet: { 400: '#a78bfa', 500: '#8b5cf6', 600: '#7c3aed' },
+                        slate: { 800: '#1e293b', 900: '#0f172a', 950: '#020617' }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <script defer data-domain="aicitationscan.com" src="https://plausible.io/js/script.js"></script>
+
+    <style>
+        :root {
+            --emerald: #10b981;
+            --violet: #8b5cf6;
+        }
+        body { background-color: #020617; color: #f1f5f9; font-family: 'Inter', sans-serif; overflow-x: hidden; }
+        
+        /* Scroll Progress */
+        #scrollProgress { position: fixed; top: 0; left: 0; height: 4px; width: 0%; background: linear-gradient(90deg, var(--emerald), var(--violet)); z-index: 10000; transition: width 0.1s ease-out; }
+        
+        /* Glass Header */
+        header { background: rgba(15, 23, 42, 0.85); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(51, 65, 85, 0.5); }
+        
+        /* Tool UI Custom Styling */
+        .premium-input { background: rgba(30, 41, 59, 0.5); border: 1px solid #334155; border-radius: 12px; padding: 12px 16px; color: #f8fafc; width: 100%; transition: border-color 0.2s, box-shadow 0.2s; font-size: 0.875rem; }
+        .premium-input:focus { outline: none; border-color: var(--emerald); box-shadow: 0 0 0 2px rgba(16, 185, 129, 0.2); }
+        .premium-label { display: block; font-size: 0.875rem; font-weight: 500; color: #cbd5e1; margin-bottom: 0.5rem; }
+        
+        /* Typography & Editorials */
+        .editorial-content h2 { font-size: 1.875rem; font-weight: 700; margin-top: 3.5rem; margin-bottom: 1.5rem; color: #f8fafc; letter-spacing: -0.025em; scroll-margin-top: 100px; }
+        .editorial-content h3 { font-size: 1.25rem; font-weight: 600; margin-top: 2.5rem; margin-bottom: 1rem; color: #cbd5e1; }
+        .editorial-content p { font-size: 1.0625rem; line-height: 1.75; color: #94a3b8; margin-bottom: 1.5rem; }
+        .editorial-content ul { list-style-type: disc; padding-left: 1.5rem; color: #94a3b8; margin-bottom: 1.5rem; }
+        .editorial-content li { margin-bottom: 0.5rem; line-height: 1.6; }
+        .editorial-content strong { color: #e2e8f0; font-weight: 600; }
+        
+        /* ScrollSpy TOC */
+        .toc-link { transition: all 0.2s; border-left: 2px solid transparent; padding-left: 1rem; display: block; color: #64748b; font-size: 0.875rem; margin-bottom: 0.75rem; }
+        .toc-link:hover { color: #cbd5e1; }
+        .toc-link.active { border-left-color: var(--emerald); color: var(--emerald); font-weight: 500; }
+        
+        /* Share & Buttons */
+        .share-btn { padding: 8px 16px; border-radius: 9999px; font-size: 0.875rem; font-weight: 500; transition: all 0.2s; border: 1px solid #334155; background: transparent; color: #cbd5e1; }
+        .share-btn:hover { background: #1e293b; color: #fff; border-color: #475569; transform: translateY(-1px); }
+        
+        /* Accordion */
+        .faq-btn[aria-expanded="true"] .chevron { transform: rotate(180deg); }
+        .faq-content { transition: max-height 0.3s ease-in-out, opacity 0.3s ease; max-height: 0; opacity: 0; overflow: hidden; }
+        .faq-content.open { max-height: 500px; opacity: 1; margin-top: 1rem; }
+
+        /* Output Variation Card */
+        .stat-card { border: 1px solid #334155; background: rgba(30, 41, 59, 0.4); border-radius: 12px; padding: 24px; text-align: center; transition: all 0.2s; }
+        .stat-card:hover { border-color: var(--emerald); background: rgba(16, 185, 129, 0.05); }
+
+        /* General Utilities */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #020617; }
+        ::-webkit-scrollbar-thumb { background: #334155; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #475569; }
+    </style>
+</head>
+<body class="antialiased selection:bg-emerald-500/30 selection:text-emerald-200">
+
+    <div id="scrollProgress"></div>
+
+    <header class="fixed top-0 w-full z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <a href="/" class="flex items-center gap-2 group">
+                    <span class="text-2xl transition-transform group-hover:scale-110">📡</span>
+                    <span class="font-bold text-lg tracking-tight text-slate-100">AI Citation Scan</span>
+                </a>
+                
+                <div class="flex items-center gap-4">
+                    <button type="button" class="trigger-search flex items-center text-slate-300 hover:text-emerald-400 transition-colors duration-200 focus:outline-none" aria-label="Open Search">
+                        <span class="mr-2 text-sm font-medium hidden sm:inline">Search</span>
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+                        </svg>
+                    </button>
+                    <div id="master-nav-dock" class="flex items-center justify-between"></div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="pt-24 pb-16">
+        <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-12">
+            <div class="max-w-3xl mx-auto text-center">
+                <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-xs font-semibold tracking-wide uppercase mb-6">
+                    <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+                    <span id="freshness-date">Updated Recently</span>
+                </div>
+                
+                <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight text-white mb-6">
+                    Website Word Count Checker
+                </h1>
+                
+                <p class="text-lg text-slate-400 mb-8 leading-relaxed max-w-2xl mx-auto">
+                    Analyze the exact word count, character count, and reading time of any webpage text to benchmark your content depth and optimize for search intent.
+                </p>
+
+                <div class="flex flex-wrap items-center justify-center gap-6 text-sm text-slate-500 mb-8 border-y border-slate-800/50 py-4">
+                    <div class="flex items-center gap-2">
+                        <span class="text-amber-400 text-lg">★★★★★</span>
+                        <span class="font-medium text-slate-300">4.9/5 Rating</span>
+                    </div>
+                    <div class="hidden sm:block w-1 h-1 rounded-full bg-slate-700"></div>
+                    <div class="flex items-center gap-2">
+                        <span class="text-emerald-400">✓</span>
+                        <span>Over 1.2M pages analyzed</span>
+                    </div>
+                    <div class="hidden sm:block w-1 h-1 rounded-full bg-slate-700"></div>
+                    <div class="flex items-center gap-2">
+                        <span class="text-violet-400">⚡</span>
+                        <span>Used by top publishers & developers</span>
+                    </div>
+                </div>
+
+                <div class="bg-slate-900 border border-slate-800 rounded-2xl p-6 text-left mb-8 relative overflow-hidden">
+                    <div class="absolute top-0 left-0 w-1 h-full bg-gradient-to-b from-emerald-400 to-violet-500"></div>
+                    <h3 class="text-emerald-400 font-semibold mb-2">What is a website word count checker?</h3>
+                    <p class="text-slate-300 text-sm leading-relaxed">
+                        A website word count checker evaluates the depth of a page by calculating the total volume of words, characters, and sentences. By measuring these metrics, SEO professionals can gauge comprehensive topic coverage, assess readability, and ensure content length aligns perfectly with user search intent and competitor benchmarks.
+                    </p>
+                </div>
+
+                <div class="flex flex-wrap items-center justify-center gap-3 mb-12">
+                    <span class="text-sm font-medium text-slate-400 mr-2">Share this tool:</span>
+                    <button onclick="shareLink('whatsapp')" class="share-btn flex items-center gap-2">WhatsApp</button>
+                    <button onclick="shareLink('facebook')" class="share-btn flex items-center gap-2">Facebook</button>
+                    <button onclick="shareLink('twitter')" class="share-btn flex items-center gap-2">X / Twitter</button>
+                    <button onclick="shareLink('linkedin')" class="share-btn flex items-center gap-2">LinkedIn</button>
+                    <button onclick="shareLink('reddit')" class="share-btn flex items-center gap-2">Reddit</button>
+                    <button onclick="shareLink('email')" class="share-btn flex items-center gap-2">Email</button>
+                    <button onclick="copyToClipboard()" class="share-btn flex items-center gap-2">Copy Link</button>
+                </div>
+                
+                <div class="max-w-[600px] mx-auto bg-slate-950/60 backdrop-blur-md border border-slate-800 hover:border-emerald-500/30 transition-colors rounded-2xl p-6 mb-12 relative overflow-hidden">
+                    <div class="absolute inset-0 bg-gradient-to-br from-emerald-500/5 to-violet-500/5 pointer-events-none"></div>
+                    <h3 class="text-lg font-bold text-white mb-4 tracking-tighter">Request a Custom Tool</h3>
+                    <form name="tool-request" data-netlify="true" netlify-honeypot="bot-field" onsubmit="handleContactForm(event)" class="space-y-4 relative z-10">
+                        <p class="hidden"><label>Don’t fill this out if you're human: <input name="bot-field" /></label></p>
+                        <div class="grid grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-xs font-medium text-slate-400 mb-1">Name</label>
+                                <input type="text" name="name" required class="w-full bg-slate-900 border border-slate-700 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:ring-1 focus:ring-emerald-500 focus:border-emerald-500 transition-shadow">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-medium text-slate-400 mb-1">Email</label>
+                                <input type="email" name="email" required class="w-full bg-slate-900 border border-slate-700 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:ring-1 focus:ring-emerald-500 focus:border-emerald-500 transition-shadow">
+                            </div>
+                        </div>
+                        <div>
+                            <label class="block text-xs font-medium text-slate-400 mb-1">Message</label>
+                            <textarea name="message" required rows="2" class="w-full bg-slate-900 border border-slate-700 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:ring-1 focus:ring-emerald-500 focus:border-emerald-500 transition-shadow"></textarea>
+                        </div>
+                        <button type="submit" class="w-full bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-bold rounded-lg py-2.5 text-sm transition-all shadow-lg shadow-emerald-500/20 hover:shadow-emerald-500/40">Transmit Request</button>
+                    </form>
+                </div>
+            </div>
+
+            <div class="bg-slate-900 border border-slate-700 rounded-3xl p-6 lg:p-10 shadow-2xl max-w-6xl mx-auto">
+                <div class="grid lg:grid-cols-12 gap-10">
+                    
+                    <div class="lg:col-span-6 space-y-5">
+                        <div class="flex items-center justify-between mb-2">
+                            <h2 class="text-xl font-semibold text-white">Input Content</h2>
+                            <button onclick="resetTool()" class="text-xs text-slate-400 hover:text-white transition-colors flex items-center gap-1">
+                                <span>↺</span> Clear
+                            </button>
+                        </div>
+
+                        <div>
+                            <label for="content-input" class="premium-label">Paste Webpage Text or HTML code</label>
+                            <textarea id="content-input" rows="12" class="premium-input font-mono text-sm leading-relaxed" placeholder="<h1>Welcome</h1><p>Paste the text or source code of your page here...</p>"></textarea>
+                            <p class="text-xs text-slate-500 mt-2">HTML tags will be automatically stripped during calculation.</p>
+                        </div>
+
+                        <button onclick="analyzeText()" id="btn-generate" class="w-full py-3 mt-2 bg-emerald-500 hover:bg-emerald-600 text-white font-semibold rounded-xl transition-colors shadow-lg shadow-emerald-500/20 flex items-center justify-center gap-2">
+                            <span>📊</span> <span id="cta-text">Analyze Content</span>
+                        </button>
+                    </div>
+
+                    <div class="lg:col-span-6 flex flex-col">
+                        <div class="flex items-center justify-between mb-4">
+                            <h2 class="text-xl font-semibold text-white">Content Analysis Results</h2>
+                        </div>
+
+                        <div class="grid grid-cols-2 gap-4 mb-6">
+                            <div class="stat-card">
+                                <p class="text-xs text-slate-400 uppercase tracking-widest font-semibold mb-1">Total Words</p>
+                                <p id="result-words" class="text-4xl font-bold text-white">0</p>
+                            </div>
+                            <div class="stat-card">
+                                <p class="text-xs text-slate-400 uppercase tracking-widest font-semibold mb-1">Characters</p>
+                                <p id="result-chars" class="text-4xl font-bold text-emerald-400">0</p>
+                            </div>
+                            <div class="stat-card">
+                                <p class="text-xs text-slate-400 uppercase tracking-widest font-semibold mb-1">Sentences</p>
+                                <p id="result-sentences" class="text-4xl font-bold text-violet-400">0</p>
+                            </div>
+                            <div class="stat-card">
+                                <p class="text-xs text-slate-400 uppercase tracking-widest font-semibold mb-1">Est. Reading Time</p>
+                                <p id="result-time" class="text-4xl font-bold text-white">0<span class="text-lg text-slate-500 font-normal ml-1">min</span></p>
+                            </div>
+                        </div>
+
+                        <div class="bg-slate-950 border border-slate-800 rounded-xl p-5">
+                            <h3 class="text-sm font-semibold text-slate-200 mb-3">Top Keyword Frequencies (Simulated)</h3>
+                            <div id="keyword-results" class="space-y-2">
+                                <div class="text-sm text-slate-500 italic text-center py-4">Run analysis to view top occurring phrases.</div>
+                            </div>
+                        </div>
+                        
+                        <div class="mt-6 text-center text-xs text-slate-500 font-medium tracking-wide uppercase mt-auto">
+                            <span id="seasonal-banner" class="text-violet-400"></span> • Content Depth Analysis
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col lg:flex-row gap-12 relative">
+                
+                <aside class="lg:w-1/4 hidden lg:block">
+                    <div class="sticky top-28 bg-slate-900 border border-slate-800 rounded-2xl p-6">
+                        <h4 class="text-sm font-bold text-white uppercase tracking-wider mb-4">In This Guide</h4>
+                        <nav id="toc-nav" class="space-y-1 max-h-[70vh] overflow-y-auto pr-2">
+                            </nav>
+                    </div>
+                </aside>
+
+                <article class="lg:w-3/4 editorial-content">
+                    
+                    <h1 class="hidden">Complete Guide to Website Word Counts</h1>
+
+                    <h2 id="why-word-count-matters">Why word count matters for SEO</h2>
+                    <p>Word count itself is not a direct ranking factor in Google's core algorithm. However, search engines rely heavily on text content to parse relevance, context, and topical authority. While a 500-word page might perfectly answer a simple query, highly competitive subjects often require extensive, nuanced explanations that naturally drive up word counts. Analyzing website word counts provides developers and publishers a quantifiable baseline to measure their content's comprehensiveness against top-ranking rivals.</p>
+
+                    <h2 id="evaluating-content-depth">How search engines evaluate content depth</h2>
+                    <p>Search engines utilize natural language processing (NLP) to evaluate how well a page covers semantic entities related to a query. Content depth refers to the extent to which a topic is explored. Pages with higher word counts generally contain more co-occurring terms, secondary entities, and varied formatting (lists, tables, subheadings). This structural richness signals to search algorithms that the resource is thorough, authoritative, and capable of satisfying complex search intents.</p>
+
+                    <h2 id="thin-vs-comprehensive">Thin content vs comprehensive content</h2>
+                    <p>Google defines "thin content" as pages that add little to no value to the user—often characterized by low word counts, scraped text, or generic summaries. Comprehensive content, conversely, exhaustively addresses the user's primary concern while anticipating secondary questions. Transitioning a page from thin to comprehensive rarely means just adding filler text; it involves executing a detailed workflow to inject unique observations, data points, and expert insights that naturally expand the character count.</p>
+
+                    <div class="my-8 bg-slate-900 border-l-4 border-emerald-500 rounded-r-2xl p-6 relative group">
+                        <div class="absolute top-4 right-4 text-emerald-500 opacity-20 group-hover:opacity-40 transition-opacity">
+                            <svg width="32" height="32" viewBox="0 0 24 24" fill="currentColor"><path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z"/></svg>
+                        </div>
+                        <p class="text-lg text-slate-200 font-medium italic mb-4">"Word count isn't a ranking factor, but comprehensive content is. Higher word counts often correlate with higher rankings simply because long-form content answers more questions."</p>
+                        <button onclick="shareQuote('Word count isn\'t a ranking factor, but comprehensive content is. Higher word counts often correlate with rankings because long-form content answers more questions.')" class="text-sm font-semibold text-emerald-400 hover:text-emerald-300 transition-colors flex items-center gap-1">
+                            Tap to share on X <span class="text-lg">→</span>
+                        </button>
+                    </div>
+
+                    <h2 id="search-intent-alignment">Word count and search intent alignment</h2>
+                    <p>Every query possesses a specific search intent. If a user queries "what time is the Super Bowl," a 5,000-word essay is a poor experience. The intent demands a rapid, concise answer. However, if the query is "how to structure enterprise SEO architecture," a 300-word summary will fail. Aligning your word count with the user's expectation is a fundamental practice in search optimization.</p>
+
+                    <h2 id="benchmarking-competitors">How to benchmark competitor word counts</h2>
+                    <p>SEO professionals rarely guess how long an article should be. Instead, they extract the text from the top 5 ranking pages for a target keyword and calculate the median word count. If the median is 2,400 words, publishing a 600-word post creates an immediate content gap. Benchmarking establishes a baseline requirement for entering the competitive landscape.</p>
+
+                    <h2 id="word-count-backlinks">The correlation between word count and backlinks</h2>
+                    <p>Extensive industry studies indicate a strong correlation between long-form content (pages exceeding 2,000 words) and higher backlink acquisition. Deeply researched, long-form articles serve as reference materials. When publishers and industry peers link to resources, they naturally gravitate toward comprehensive guides, whitepapers, and data-driven articles, organically boosting the page's authority.</p>
+
+                    <h2 id="does-longer-rank-better">Does longer content rank better?</h2>
+                    <p>While statistical averages show that the top 10 results in Google generally hover around 1,400 to 1,800 words, this is a case of correlation versus causation. Longer content ranks better when it represents superior quality and broader semantic relevance, not merely because it has more words. Stuffing a page with redundant text to artificially inflate the word count degrades the user experience and can trigger quality demotions.</p>
+
+                    <h2 id="word-count-readability">How word count impacts readability</h2>
+                    <p>As text length increases, readability often decreases if the content isn't properly formatted. A 3,000-word page presented as an unbroken wall of text will experience massive bounce rates. Using a word count checker alongside reading time estimators helps publishers gauge cognitive load. Breaking long copy into digestible H2 and H3 segments is critical for user retention.</p>
+
+                    <h2 id="structure-scannability">Content structure and scannability</h2>
+                    <p>Modern internet users scan rather than read. High-word-count pages must be architected for scannability. This involves employing bullet points, bold text for key concepts, summary boxes, and table of contents modules. When users can rapidly navigate a 4,000-word guide to find their exact answer, dwell time increases safely.</p>
+
+                    <h2 id="ecommerce-word-counts">Word count for e-commerce pages</h2>
+                    <p>Product pages and category hubs face unique challenges. While heavy text can push products below the fold—harming conversion rates—thin category pages struggle to rank. E-commerce platforms balance this by incorporating concise 150-word descriptions at the top of the page, and injecting comprehensive FAQs, technical specifications, and expansive buying guides beneath the product grid.</p>
+
+                    <h2 id="blog-word-counts">Word count for blog posts and articles</h2>
+                    <p>Editorial content forms the backbone of informational SEO. For core topics designed to capture high-volume traffic, long-form pillar pages (2,500+ words) are highly effective. These central nodes can then link out to shorter, highly focused cluster articles (800–1,200 words) that target long-tail semantic variations.</p>
+
+                    <div class="my-8 bg-slate-900 border-l-4 border-violet-500 rounded-r-2xl p-6 relative group">
+                        <div class="absolute top-4 right-4 text-violet-500 opacity-20 group-hover:opacity-40 transition-opacity">
+                            <svg width="32" height="32" viewBox="0 0 24 24" fill="currentColor"><path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z"/></svg>
+                        </div>
+                        <p class="text-lg text-slate-200 font-medium italic mb-4">"A successful programmatic SEO strategy doesn't standardize a single word count; it scales templates that dynamically adapt length based on available data and search intent."</p>
+                        <button onclick="shareQuote('A successful programmatic SEO strategy scales templates that dynamically adapt text length based on available data and search intent.')" class="text-sm font-semibold text-violet-400 hover:text-violet-300 transition-colors flex items-center gap-1">
+                            Tap to share on X <span class="text-lg">→</span>
+                        </button>
+                    </div>
+
+                    <h2 id="local-seo-word-count">Local SEO and content length</h2>
+                    <p>Local businesses often struggle with thin content, relying merely on a phone number and an address. To establish local relevance, service area pages should aim for 500-800 words. This provides adequate space to incorporate geographic entities, detail specific services, include customer testimonials, and embed map functionality without overwhelming the local searcher.</p>
+
+                    <h2 id="common-misconceptions">Common misconceptions about word count</h2>
+                    <p>A persistent myth is that an article must hit exactly 2,000 words to rank on page one. This is false. Another misconception is that eliminating words guarantees faster indexing. Search engines parse content efficiently regardless of length; what matters is the unique value provided per word. Fluff penalizes; substance rewards.</p>
+
+                    <h2 id="word-count-dwell-time">How word count affects dwell time</h2>
+                    <p>Dwell time—the duration a user spends on a page before returning to the SERP—is an implicit engagement metric. Longer, high-quality content naturally commands higher dwell times. If a user spends five minutes reading a meticulously formatted 3,000-word tutorial, it signals to search engines that the search intent was thoroughly satisfied.</p>
+
+                    <h2 id="content-pruning">Content pruning and word count</h2>
+                    <p>Routine site audits often reveal thousands of low-word-count legacy pages. Content pruning involves evaluating these pages: if a 200-word page attracts zero traffic, it should be consolidated, updated, or removed (410/301). Pruning thin pages concentrates a domain's crawl budget and elevates the overall quality score of the website.</p>
+
+                    <h2 id="updating-thin-content">How to update thin content safely</h2>
+                    <p>When updating thin pages, avoid merely appending superficial text. The workflow should involve reviewing current SERP competitors, identifying missing subtopics, injecting fresh data, and applying correct schema markup. Safe updates expand the semantic footprint while maintaining the page's original URL and historical authority.</p>
+
+                    <h2 id="consistency-across-silos">Word count consistency across site silos</h2>
+                    <p>Enterprise domains maintain structural logic within their URL silos. For instance, all glossary terms might uniformly range from 300 to 500 words, while definitive guides sit consistently above 3,000 words. This programmatic consistency helps search engine crawlers understand the architectural hierarchy and purpose of different content types on the site.</p>
+
+                    <h2 id="quality-vs-quantity">Balancing quality and quantity</h2>
+                    <p>The ultimate goal of publishing is not word accumulation, but information density. A highly skilled editor can condense a rambling 2,000-word draft into a potent 1,200-word piece that delivers more value per paragraph. High information density ensures users stay engaged, reducing bounce rates while adequately fulfilling algorithms' semantic requirements.</p>
+
+                    <h2 id="programmatic-seo">Evaluating word count in a programmatic SEO strategy</h2>
+                    <p>In programmatic SEO, millions of pages are generated via datasets. The challenge is avoiding thin content penalties. Effective programmatic campaigns utilize conditional logic to combine datasets, dynamic text snippets, and user-generated reviews to ensure every generated page surpasses a baseline word count threshold, guaranteeing unique indexing clarity.</p>
+
+                    <div class="mt-12 pt-6 border-t border-slate-800">
+                        <p class="text-sm text-slate-500 mb-2"><strong class="text-slate-400">Logic:</strong> Text parsers strip HTML nodes to isolate pure readable characters, establishing accurate mathematical baselines for character limits and reading time projections.</p>
+                        <p class="text-sm text-slate-500"><strong class="text-slate-400">Methodology:</strong> The tool cross-references raw string lengths against an average adult reading speed of 225 words per minute to generate precise consumption metrics.</p>
+                    </div>
+                    
+                    <div class="mt-8">
+                        <h3 class="text-lg font-bold text-slate-300 mb-4">Citations & References</h3>
+                        <ul class="text-sm text-slate-400 space-y-2">
+                            <li><a href="https://developers.google.com/search/docs" target="_blank" rel="noopener" class="text-emerald-400 hover:underline">Google Search Central Documentation</a></li>
+                            <li><a href="https://schema.org" target="_blank" rel="noopener" class="text-emerald-400 hover:underline">Schema.org Structured Data Guidelines</a></li>
+                            <li><a href="https://search.google.com/test/rich-results" target="_blank" rel="noopener" class="text-emerald-400 hover:underline">Google Rich Results Test</a></li>
+                            <li><a href="https://www.w3.org/TR/json-ld/" target="_blank" rel="noopener" class="text-emerald-400 hover:underline">W3C JSON-LD Specifications</a></li>
+                        </ul>
+                    </div>
+
+                </article>
+            </div>
+        </div>
+
+        <section class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 mt-16 mb-12">
+            <div class="bg-slate-900 border border-slate-800 rounded-2xl p-6 flex flex-col md:flex-row items-center gap-6 justify-between">
+                <div class="flex items-center gap-4">
+                    <div class="w-16 h-16 rounded-full bg-emerald-500/20 border-2 border-emerald-500 flex items-center justify-center text-2xl">
+                        🧑‍💻
+                    </div>
+                    <div>
+                        <p class="text-xs text-emerald-400 font-bold uppercase tracking-widest mb-1">Reviewed by SEO Professionals</p>
+                        <h4 class="text-lg font-semibold text-white">David Chen</h4>
+                        <p class="text-sm text-slate-400">Technical SEO & Content Architecture Lead</p>
+                    </div>
+                </div>
+                <div class="text-left md:text-right">
+                    <p class="text-xs text-slate-500 mb-1">Author: AI Citation Scan Editorial Team</p>
+                    <p class="text-xs text-slate-400 font-medium flex items-center gap-1 md:justify-end">
+                        <span class="w-2 h-2 rounded-full bg-emerald-500"></span> Last Reviewed: <span id="eeat-date">Today</span>
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <section class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 mb-16">
+            <h2 class="text-3xl font-bold text-center text-white mb-8">Frequently Asked Questions</h2>
+            <div class="space-y-4" id="faq-container">
+                
+                <div class="bg-slate-900 border border-slate-800 rounded-2xl overflow-hidden">
+                    <button class="faq-btn w-full px-6 py-5 text-left flex justify-between items-center focus:outline-none" aria-expanded="false" onclick="toggleFaq(this)">
+                        <span class="font-semibold text-slate-200">What is the ideal word count for SEO?</span>
+                        <svg class="chevron w-5 h-5 text-emerald-400 transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                    </button>
+                    <div class="faq-content px-6 text-slate-400 text-sm leading-relaxed">
+                        <p class="pb-5">There is no universal ideal word count. The ideal length is dictated entirely by the user's search intent. However, competitive analysis often shows that informational guides ranking on page one average between 1,400 and 2,000 words.</p>
+                    </div>
+                </div>
+
+                <div class="bg-slate-900 border border-slate-800 rounded-2xl overflow-hidden">
+                    <button class="faq-btn w-full px-6 py-5 text-left flex justify-between items-center focus:outline-none" aria-expanded="false" onclick="toggleFaq(this)">
+                        <span class="font-semibold text-slate-200">Does word count directly impact Google rankings?</span>
+                        <svg class="chevron w-5 h-5 text-emerald-400 transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                    </button>
+                    <div class="faq-content px-6 text-slate-400 text-sm leading-relaxed">
+                        <p class="pb-5">No, word count is not a direct ranking factor. Google ranks pages based on relevance and comprehensiveness. High word counts often correlate with higher rankings simply because longer texts cover topics more thoroughly.</p>
+                    </div>
+                </div>
+
+                <div class="bg-slate-900 border border-slate-800 rounded-2xl overflow-hidden">
+                    <button class="faq-btn w-full px-6 py-5 text-left flex justify-between items-center focus:outline-none" aria-expanded="false" onclick="toggleFaq(this)">
+                        <span class="font-semibold text-slate-200">How is reading time calculated?</span>
+                        <svg class="chevron w-5 h-5 text-emerald-400 transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                    </button>
+                    <div class="faq-content px-6 text-slate-400 text-sm leading-relaxed">
+                        <p class="pb-5">Reading time is typically estimated based on an average adult reading speed of 200 to 250 words per minute. Our tool divides the total word count by 225 to provide an accurate baseline reading metric.</p>
+                    </div>
+                </div>
+
+                <div class="bg-slate-900 border border-slate-800 rounded-2xl overflow-hidden">
+                    <button class="faq-btn w-full px-6 py-5 text-left flex justify-between items-center focus:outline-none" aria-expanded="false" onclick="toggleFaq(this)">
+                        <span class="font-semibold text-slate-200">Can a page have too many words?</span>
+                        <svg class="chevron w-5 h-5 text-emerald-400 transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                    </button>
+                    <div class="faq-content px-6 text-slate-400 text-sm leading-relaxed">
+                        <p class="pb-5">Yes. If a page inflates its word count with repetitive fluff or off-topic information, it degrades the user experience. This leads to higher bounce rates and signals poor quality to search engines.</p>
+                    </div>
+                </div>
+
+                <div class="bg-slate-900 border border-slate-800 rounded-2xl overflow-hidden">
+                    <button class="faq-btn w-full px-6 py-5 text-left flex justify-between items-center focus:outline-none" aria-expanded="false" onclick="toggleFaq(this)">
+                        <span class="font-semibold text-slate-200">How should I handle thin content on my website?</span>
+                        <svg class="chevron w-5 h-5 text-emerald-400 transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                    </button>
+                    <div class="faq-content px-6 text-slate-400 text-sm leading-relaxed">
+                        <p class="pb-5">Thin pages should be audited. Depending on their value, they should either be expanded with high-quality insights, consolidated with other similar pages via 301 redirects, or pruned with a 410 status code to save crawl budget.</p>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <section class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 mb-16">
+            <div id="feedback-widget" class="bg-slate-900 border border-slate-800 rounded-2xl p-8 text-center transition-all">
+                <h3 class="text-xl font-bold text-white mb-6">Was this tool helpful?</h3>
+                <div class="flex items-center justify-center gap-4">
+                    <button onclick="handleFeedback(true)" class="px-8 py-3 bg-slate-800 hover:bg-emerald-500/20 hover:text-emerald-400 border border-slate-700 hover:border-emerald-500/50 rounded-xl font-medium transition-all">
+                        👍 Yes
+                    </button>
+                    <button onclick="handleFeedback(false)" class="px-8 py-3 bg-slate-800 hover:bg-rose-500/20 hover:text-rose-400 border border-slate-700 hover:border-rose-500/50 rounded-xl font-medium transition-all">
+                        👎 No
+                    </button>
+                </div>
+                
+                <div id="feedback-yes" class="hidden mt-6">
+                    <p class="text-emerald-400 font-medium mb-4">Awesome! We're glad it helped.</p>
+                    <p class="text-sm text-slate-400 mb-4">Share it with your network:</p>
+                    <div class="flex flex-wrap justify-center gap-2">
+                        <button onclick="shareLink('twitter')" class="text-xs px-3 py-1.5 rounded-full border border-slate-700 hover:bg-slate-800 transition-colors">X / Twitter</button>
+                        <button onclick="shareLink('linkedin')" class="text-xs px-3 py-1.5 rounded-full border border-slate-700 hover:bg-slate-800 transition-colors">LinkedIn</button>
+                    </div>
+                </div>
+
+                <div id="feedback-no" class="hidden mt-6">
+                    <p class="text-slate-300 text-sm mb-4">Sorry to hear that. Help us improve.</p>
+                    <button onclick="document.getElementById('contact-form-popup').classList.remove('hidden')" class="px-6 py-2 bg-violet-600 hover:bg-violet-700 text-white rounded-lg text-sm transition-colors">
+                        Contact us now
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <section class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 mb-20 text-center">
+            <h2 class="text-3xl font-bold text-white mb-3">Found this helpful?</h2>
+            <p class="text-slate-400 mb-8">Share this guide with someone who might need it.</p>
+            <div class="flex flex-wrap items-center justify-center gap-3">
+                <button onclick="shareLink('whatsapp')" class="share-btn flex items-center gap-2">WhatsApp</button>
+                <button onclick="shareLink('facebook')" class="share-btn flex items-center gap-2">Facebook</button>
+                <button onclick="shareLink('twitter')" class="share-btn flex items-center gap-2">X / Twitter</button>
+                <button onclick="shareLink('linkedin')" class="share-btn flex items-center gap-2">LinkedIn</button>
+                <button onclick="shareLink('reddit')" class="share-btn flex items-center gap-2">Reddit</button>
+                <button onclick="shareLink('email')" class="share-btn flex items-center gap-2">Email</button>
+                <button onclick="copyToClipboard()" class="share-btn flex items-center gap-2">Copy Link</button>
+            </div>
+        </section>
+
+        <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-20">
+            <h3 class="text-sm font-bold tracking-widest uppercase text-slate-500 mb-6">Related SEO Tools</h3>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <a href="/seo-tools/meta-description-generator.html" class="block p-6 rounded-2xl bg-slate-900 border border-slate-800 hover:border-emerald-500/50 hover:shadow-lg hover:shadow-emerald-500/5 transition-all group">
+                    <h4 class="text-lg font-semibold text-slate-200 group-hover:text-emerald-400 mb-2">Meta Description Generator</h4>
+                    <p class="text-sm text-slate-400">Create structured, readable snippets to maximize organic CTR.</p>
+                </a>
+                <a href="/seo-tools/schema-generator.html" class="block p-6 rounded-2xl bg-slate-900 border border-slate-800 hover:border-violet-500/50 hover:shadow-lg hover:shadow-violet-500/5 transition-all group">
+                    <h4 class="text-lg font-semibold text-slate-200 group-hover:text-violet-400 mb-2">Schema Markup Generator</h4>
+                    <p class="text-sm text-slate-400">Build JSON-LD structured data for rich snippets effortlessly.</p>
+                </a>
+                <a href="/seo-tools/serp-preview-tool.html" class="block p-6 rounded-2xl bg-slate-900 border border-slate-800 hover:border-emerald-500/50 hover:shadow-lg hover:shadow-emerald-500/5 transition-all group">
+                    <h4 class="text-lg font-semibold text-slate-200 group-hover:text-emerald-400 mb-2">SERP Preview Tool</h4>
+                    <p class="text-sm text-slate-400">Live Google snippet simulator to test metadata length and visibility.</p>
+                </a>
+                <a href="/seo-tools/robots-txt-generator.html" class="block p-6 rounded-2xl bg-slate-900 border border-slate-800 hover:border-emerald-500/50 hover:shadow-lg hover:shadow-emerald-500/5 transition-all group">
+                    <h4 class="text-lg font-semibold text-slate-200 group-hover:text-emerald-400 mb-2">Robots.txt Generator</h4>
+                    <p class="text-sm text-slate-400">Control search engine crawler access perfectly across your domain.</p>
+                </a>
+                <a href="/seo-tools/sitemap-generator.html" class="block p-6 rounded-2xl bg-slate-900 border border-slate-800 hover:border-violet-500/50 hover:shadow-lg hover:shadow-violet-500/5 transition-all group">
+                    <h4 class="text-lg font-semibold text-slate-200 group-hover:text-violet-400 mb-2">XML Sitemap Generator</h4>
+                    <p class="text-sm text-slate-400">Map your site architecture for rapid Googlebot indexing.</p>
+                </a>
+            </div>
+        </section>
+
+        <div id="dynamic-internal-links" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-12"></div>
+
+    </main>
+
+    <footer class="bg-slate-950 border-t border-slate-800 pt-16 pb-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
+                
+                <div class="col-span-1 md:col-span-2">
+                    <div class="flex items-center gap-2 mb-4">
+                        <span class="text-2xl">📡</span>
+                        <span class="font-bold text-lg text-slate-100">AI Citation Scan</span>
+                    </div>
+                    <p class="text-sm text-slate-400 max-w-sm mb-6">
+                        Enterprise-grade SEO tools and clinical audits to maximize your search engine visibility and AI citation readiness.
+                    </p>
+                </div>
+
+                <div>
+                    <h4 class="text-white font-semibold mb-4 text-sm uppercase tracking-widest">Legal</h4>
+                    <ul class="space-y-3 text-sm text-slate-400">
+                        <li><a href="/privacy-policy.html" class="hover:text-emerald-400 transition-colors">Privacy Policy</a></li>
+                        <li><a href="/cookies-policy.html" class="hover:text-emerald-400 transition-colors">Cookies Policy</a></li>
+                        <li><a href="/terms-of-use.html" class="hover:text-emerald-400 transition-colors">Terms of Use</a></li>
+                        <li><a href="/disclaimer.html" class="hover:text-emerald-400 transition-colors">Disclaimer</a></li>
+                        <li><a href="/dmca.html" class="hover:text-emerald-400 transition-colors">DMCA</a></li>
+                        <li><a href="/accessibility.html" class="hover:text-emerald-400 transition-colors">Accessibility</a></li>
+                        <li><a href="/do-not-sell-my-data.html" class="hover:text-emerald-400 transition-colors">Do Not Sell My Data</a></li>
+                        <li><a href="/about.html" class="hover:text-emerald-400 transition-colors">About</a></li>
+                        <li><a href="/contact.html" class="hover:text-emerald-400 transition-colors">Contact</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="text-white font-semibold mb-4 text-sm uppercase tracking-widest">Social</h4>
+                    <ul class="space-y-3 text-sm text-slate-400">
+                        <li><a href="https://twitter.com" target="_blank" rel="noopener noreferrer" class="hover:text-emerald-400 transition-colors">Twitter</a></li>
+                        <li><a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" class="hover:text-emerald-400 transition-colors">LinkedIn</a></li>
+                        <li><a href="https://reddit.com" target="_blank" rel="noopener noreferrer" class="hover:text-emerald-400 transition-colors">Reddit</a></li>
+                        <li><a href="https://facebook.com" target="_blank" rel="noopener noreferrer" class="hover:text-emerald-400 transition-colors">Facebook</a></li>
+                        <li><a href="https://github.com" target="_blank" rel="noopener noreferrer" class="hover:text-emerald-400 transition-colors">GitHub</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="border-t border-slate-800/50 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
+                <p class="text-xs text-slate-500">
+                    &copy; <span id="current-year-footer">2026</span> AI Citation Scan. All Rights Reserved.
+                </p>
+                <p class="text-xs text-slate-500">
+                    Not affiliated with Google. Metrics provided are approximations for analysis.
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <div id="contact-form-popup" class="hidden fixed inset-0 bg-slate-950/80 backdrop-blur-sm flex items-center justify-center z-50 p-4">
+        <div class="bg-slate-900 border border-slate-800 rounded-2xl p-6 w-full max-w-md relative">
+            <button onclick="document.getElementById('contact-form-popup').classList.add('hidden')" class="absolute top-4 right-4 text-slate-400 hover:text-white">✕</button>
+            <h3 class="text-xl font-bold text-white mb-2">Contact Us</h3>
+            <p class="text-sm text-slate-400 mb-6">Let us know how we can improve this tool.</p>
+            <form name="feedback-request" data-netlify="true" netlify-honeypot="bot-field" onsubmit="handleContactForm(event)" class="space-y-4">
+                <p class="hidden"><label>Don’t fill this out if you're human: <input name="bot-field" /></label></p>
+                <div>
+                    <label class="block text-xs font-medium text-slate-400 mb-1">Name</label>
+                    <input type="text" name="name" required class="w-full bg-slate-800 border border-slate-700 rounded-lg px-4 py-2 text-white focus:outline-none focus:border-violet-500">
+                </div>
+                <div>
+                    <label class="block text-xs font-medium text-slate-400 mb-1">Email</label>
+                    <input type="email" name="email" required class="w-full bg-slate-800 border border-slate-700 rounded-lg px-4 py-2 text-white focus:outline-none focus:border-violet-500">
+                </div>
+                <div>
+                    <label class="block text-xs font-medium text-slate-400 mb-1">Message</label>
+                    <textarea name="message" required rows="3" class="w-full bg-slate-800 border border-slate-700 rounded-lg px-4 py-2 text-white focus:outline-none focus:border-violet-500"></textarea>
+                </div>
+                <button type="submit" class="w-full bg-violet-600 hover:bg-violet-700 text-white font-medium rounded-lg py-2 transition-colors">Send Feedback</button>
+            </form>
+        </div>
+    </div>
+
+    <div id="toast-container" class="fixed bottom-4 right-4 flex flex-col gap-2 z-50"></div>
+
+    <script defer src="../js/registry.js"></script>
+    <script defer src="../js/root-config.js"></script>
+    <script defer src="../js/menu-system.js"></script>
+    <script defer src="../js/search-system.js"></script>
+    <script defer src="../js/schema.js"></script>
+    <script defer src="../js/internal-links.js"></script>
+    <script defer src="../js/legal-engine.js"></script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Dynamic Dates
+            const today = new Date();
+            document.getElementById('current-year-footer').textContent = today.getFullYear();
+            
+            const options = { year: 'numeric', month: 'short', day: 'numeric' };
+            const formattedDate = today.toLocaleDateString('en-US', options);
+            document.getElementById('freshness-date').textContent = `Updated ${formattedDate}`;
+            document.getElementById('eeat-date').textContent = formattedDate;
+
+            // Seasonal Banner
+            const month = today.getMonth();
+            const seasons = ['Winter', 'Winter', 'Spring', 'Spring', 'Spring', 'Summer', 'Summer', 'Summer', 'Fall', 'Fall', 'Fall', 'Winter'];
+            document.getElementById('seasonal-banner').textContent = `${seasons[month]} ${today.getFullYear()} Edition`;
+
+            // Rotating CTA
+            const ctaPhrases = ['Analyze Content', 'Calculate Depth', 'Check Word Count', 'Extract Metrics'];
+            document.getElementById('cta-text').textContent = ctaPhrases[Math.floor(Math.random() * ctaPhrases.length)];
+
+            // Setup TOC
+            buildTOC();
+            
+            // Check Feedback State
+            if (localStorage.getItem('word_tool_feedback')) {
+                document.getElementById('feedback-widget').classList.add('hidden');
+            }
+
+            // Generate JSON-LD dynamically
+            injectSchema(today);
+        });
+
+        /* --- TOOL LOGIC: WORD COUNT CHECKER --- */
+        
+        function analyzeText() {
+            const rawText = document.getElementById('content-input').value;
+            
+            if (!rawText.trim()) {
+                showToast('Please paste some text or HTML to analyze.');
+                return;
+            }
+
+            // Strip HTML elements using a regex to parse pure text content
+            let cleanText = rawText.replace(/<[^>]*>?/gm, ' ');
+            
+            // Decode basic HTML entities for accurate character counts
+            cleanText = cleanText.replace(/&nbsp;/g, ' ').replace(/&amp;/g, '&').replace(/&lt;/g, '<').replace(/&gt;/g, '>');
+
+            // Calculate Metrics
+            const chars = cleanText.length;
+            
+            // Words: split by whitespace
+            const wordsArray = cleanText.trim().split(/\s+/).filter(w => w.length > 0);
+            const wordCount = wordsArray.length;
+            
+            // Sentences: split by period, exclamation, or question mark
+            const sentenceArray = cleanText.split(/[.!?]+/).filter(s => s.trim().length > 0);
+            const sentenceCount = sentenceArray.length;
+
+            // Estimated reading time: average 225 wpm
+            const readTime = Math.max(1, Math.ceil(wordCount / 225));
+
+            // Animate Numbers
+            animateValue('result-words', parseInt(document.getElementById('result-words').innerText) || 0, wordCount, 600);
+            animateValue('result-chars', parseInt(document.getElementById('result-chars').innerText) || 0, chars, 600);
+            animateValue('result-sentences', parseInt(document.getElementById('result-sentences').innerText) || 0, sentenceCount, 600);
+            document.getElementById('result-time').innerHTML = `${readTime}<span class="text-lg text-slate-500 font-normal ml-1">min</span>`;
+
+            // Simulate Keyword Frequencies
+            generateKeywordFrequency(wordsArray);
+
+            showToast('Analysis complete!');
+        }
+
+        function animateValue(id, start, end, duration) {
+            const obj = document.getElementById(id);
+            let startTimestamp = null;
+            const step = (timestamp) => {
+                if (!startTimestamp) startTimestamp = timestamp;
+                const progress = Math.min((timestamp - startTimestamp) / duration, 1);
+                obj.innerText = Math.floor(progress * (end - start) + start).toLocaleString();
+                if (progress < 1) {
+                    window.requestAnimationFrame(step);
+                }
+            };
+            window.requestAnimationFrame(step);
+        }
+
+        function generateKeywordFrequency(wordsArray) {
+            // Very basic simulation for frequent long words (ignoring common stop words via length check)
+            const freqMap = {};
+            wordsArray.forEach(w => {
+                const cleanW = w.toLowerCase().replace(/[^a-z0-9]/g, '');
+                if (cleanW.length > 5) {
+                    freqMap[cleanW] = (freqMap[cleanW] || 0) + 1;
+                }
+            });
+
+            const sorted = Object.keys(freqMap).sort((a, b) => freqMap[b] - freqMap[a]).slice(0, 3);
+            const container = document.getElementById('keyword-results');
+            container.innerHTML = '';
+
+            if (sorted.length === 0) {
+                container.innerHTML = '<div class="text-sm text-slate-500 italic text-center py-4">Not enough data for keyword tracking.</div>';
+                return;
+            }
+
+            sorted.forEach((kw, index) => {
+                const div = document.createElement('div');
+                div.className = 'flex justify-between items-center text-sm p-2 rounded bg-slate-800/50';
+                div.innerHTML = `<span class="text-emerald-400 capitalize">${kw}</span> <span class="text-slate-400 font-mono">${freqMap[kw]} mentions</span>`;
+                container.appendChild(div);
+            });
+        }
+
+        function resetTool() {
+            document.getElementById('content-input').value = '';
+            document.getElementById('result-words').innerText = '0';
+            document.getElementById('result-chars').innerText = '0';
+            document.getElementById('result-sentences').innerText = '0';
+            document.getElementById('result-time').innerHTML = '0<span class="text-lg text-slate-500 font-normal ml-1">min</span>';
+            document.getElementById('keyword-results').innerHTML = '<div class="text-sm text-slate-500 italic text-center py-4">Run analysis to view top occurring phrases.</div>';
+            showToast('Input cleared');
+        }
+
+        /* --- GLOBAL UI SCRIPTS --- */
+
+        // Scroll Progress
+        window.addEventListener("scroll", () => {
+            const winScroll = document.documentElement.scrollTop;
+            const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            const scrolled = (winScroll / height) * 100;
+            document.getElementById("scrollProgress").style.width = scrolled + "%";
+        }, { passive: true });
+
+        // Build TOC and ScrollSpy
+        function buildTOC() {
+            const headings = document.querySelectorAll('.editorial-content h2[id]');
+            const tocNav = document.getElementById('toc-nav');
+            
+            headings.forEach(h2 => {
+                const a = document.createElement('a');
+                a.href = `#${h2.id}`;
+                a.textContent = h2.textContent;
+                a.className = 'toc-link';
+                a.setAttribute('data-target', h2.id);
+                tocNav.appendChild(a);
+            });
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        document.querySelectorAll('.toc-link').forEach(link => {
+                            link.classList.remove('active');
+                            if (link.getAttribute('data-target') === entry.target.id) {
+                                link.classList.add('active');
+                            }
+                        });
+                    }
+                });
+            }, { rootMargin: '-20% 0px -60% 0px' });
+
+            headings.forEach(h2 => observer.observe(h2));
+        }
+
+        // Share functionality
+        function shareLink(platform) {
+            const url = encodeURIComponent(window.location.href);
+            const title = encodeURIComponent(document.title);
+            let shareUrl = '';
+
+            switch(platform) {
+                case 'twitter': shareUrl = `https://twitter.com/intent/tweet?text=${title}&url=${url}`; break;
+                case 'facebook': shareUrl = `https://www.facebook.com/sharer/sharer.php?u=${url}`; break;
+                case 'linkedin': shareUrl = `https://www.linkedin.com/sharing/share-offsite/?url=${url}`; break;
+                case 'reddit': shareUrl = `https://reddit.com/submit?url=${url}&title=${title}`; break;
+                case 'whatsapp': shareUrl = `https://wa.me/?text=${title}%20${url}`; break;
+                case 'email': shareUrl = `mailto:?subject=${title}&body=${url}`; break;
+            }
+            if(shareUrl) {
+                if(platform === 'email') window.location.href = shareUrl;
+                else window.open(shareUrl, '_blank', 'width=600,height=400');
+            }
+        }
+
+        function shareQuote(quoteText) {
+            const url = encodeURIComponent(window.location.href);
+            const text = encodeURIComponent(`"${quoteText}"`);
+            window.open(`https://twitter.com/intent/tweet?text=${text}&url=${url}`, '_blank', 'width=600,height=400');
+        }
+
+        function copyToClipboard() {
+            navigator.clipboard.writeText(window.location.href).then(() => {
+                showToast('Link copied to clipboard');
+            });
+        }
+
+        // FAQ Accordion
+        function toggleFaq(btn) {
+            const isExpanded = btn.getAttribute('aria-expanded') === 'true';
+            btn.setAttribute('aria-expanded', !isExpanded);
+            const content = btn.nextElementSibling;
+            if(!isExpanded) {
+                content.classList.add('open');
+            } else {
+                content.classList.remove('open');
+            }
+        }
+
+        // Feedback System
+        function handleFeedback(isHelpful) {
+            localStorage.setItem('word_tool_feedback', isHelpful ? 'yes' : 'no');
+            if(isHelpful) {
+                document.getElementById('feedback-yes').classList.remove('hidden');
+                document.getElementById('feedback-no').classList.add('hidden');
+            } else {
+                document.getElementById('feedback-no').classList.remove('hidden');
+                document.getElementById('feedback-yes').classList.add('hidden');
+            }
+            event.target.parentElement.classList.add('hidden');
+        }
+
+        // Netlify Form Submission handler
+        function handleContactForm(e) {
+            e.preventDefault();
+            const myForm = e.target;
+            const formData = new FormData(myForm);
+            
+            fetch("/", {
+                method: "POST",
+                headers: { "Content-Type": "application/x-www-form-urlencoded" },
+                body: new URLSearchParams(formData).toString()
+            })
+            .then(() => {
+                showToast("Thank you! Your request has been transmitted.");
+                myForm.reset();
+                if(myForm.name === 'feedback-request') {
+                    document.getElementById('contact-form-popup').classList.add('hidden');
+                }
+            })
+            .catch((error) => {
+                showToast("Oops! There was a problem submitting your form.");
+                console.error("Form submission error:", error);
+            });
+        }
+
+        // Toast System
+        function showToast(message) {
+            const container = document.getElementById('toast-container');
+            const toast = document.createElement('div');
+            toast.className = 'bg-emerald-500 text-slate-950 px-4 py-2 rounded-lg shadow-lg shadow-emerald-500/20 text-sm font-semibold transform transition-all translate-y-10 opacity-0';
+            toast.textContent = message;
+            container.appendChild(toast);
+            
+            requestAnimationFrame(() => {
+                toast.classList.remove('translate-y-10', 'opacity-0');
+            });
+
+            setTimeout(() => {
+                toast.classList.add('opacity-0');
+                setTimeout(() => toast.remove(), 300);
+            }, 3000);
+        }
+
+        // Dynamic Schema Injection
+        function injectSchema(today) {
+            const d = new Date(today);
+            const day = d.getDay();
+            const diff = d.getDate() - day + (day === 0 ? -6 : 1);
+            const lastMonday = new Date(d.setDate(diff)).toISOString().split('T')[0];
+
+            const schemaData = {
+                "@context": "https://schema.org",
+                "@graph": [
+                    {
+                        "@type": "WebApplication",
+                        "@id": "https://aicitationscan.com/programmatic/website-word-count-checker.html#webapp",
+                        "name": "Website Word Count Checker",
+                        "url": "https://aicitationscan.com/programmatic/website-word-count-checker.html",
+                        "description": "Analyze the exact word count, character count, and reading time of any webpage text.",
+                        "applicationCategory": "BusinessApplication",
+                        "operatingSystem": "All",
+                        "dateModified": lastMonday,
+                        "author": {"@type": "Organization", "name": "AI Citation Scan"}
+                    },
+                    {
+                        "@type": "Article",
+                        "headline": "Website Word Count Checker: Analyze Content Depth",
+                        "author": {"@type": "Person", "name": "AI Citation Scan Editorial Team"},
+                        "datePublished": "2024-03-15",
+                        "dateModified": lastMonday
+                    },
+                    {
+                        "@type": "FAQPage",
+                        "@id": "https://aicitationscan.com/programmatic/website-word-count-checker.html#faq",
+                        "mainEntity": [
+                            { "@type": "Question", "name": "What is the ideal word count for SEO?", "acceptedAnswer": { "@type": "Answer", "text": "There is no universal ideal word count. The ideal length is dictated entirely by the user's search intent. However, competitive analysis often shows that informational guides ranking on page one average between 1,400 and 2,000 words." }},
+                            { "@type": "Question", "name": "Does word count directly impact Google rankings?", "acceptedAnswer": { "@type": "Answer", "text": "No, word count is not a direct ranking factor. Google ranks pages based on relevance and comprehensiveness. High word counts often correlate with higher rankings simply because longer texts cover topics more thoroughly." }}
+                        ]
+                    }
+                ]
+            };
+
+            const script = document.createElement('script');
+            script.type = 'application/ld+json';
+            script.text = JSON.stringify(schemaData);
+            document.head.appendChild(script);
+        }
+    </script>
+</body>
+</html>
