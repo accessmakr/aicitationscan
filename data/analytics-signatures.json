@@ -1,0 +1,34 @@
+[
+  {
+    "name": "Google Analytics",
+    "patterns": [
+      "googletagmanager.com/gtag",
+      "google-analytics.com"
+    ]
+  },
+  {
+    "name": "Google Tag Manager",
+    "patterns": [
+      "googletagmanager.com"
+    ]
+  },
+  {
+    "name": "Meta Pixel",
+    "patterns": [
+      "connect.facebook.net",
+      "fbq"
+    ]
+  },
+  {
+    "name": "Hotjar",
+    "patterns": [
+      "hotjar"
+    ]
+  },
+  {
+    "name": "Plausible",
+    "patterns": [
+      "plausible.io"
+    ]
+  }
+]
