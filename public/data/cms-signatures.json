@@ -1,63 +1,168 @@
 {
   "wordpress": {
-    "patterns": [
-      "wp-content",
-      "wp-includes",
-      "wp-json",
-      "wordpress",
-      "wp-emoji",
-      "xmlrpc.php"
+    "confidence": 0.95,
+    "signals": [
+      {
+        "type": "html",
+        "pattern": "wp-content",
+        "weight": 3
+      },
+      {
+        "type": "html",
+        "pattern": "wp-includes",
+        "weight": 3
+      },
+      {
+        "type": "url",
+        "pattern": "wp-json",
+        "weight": 2
+      },
+      {
+        "type": "url",
+        "pattern": "xmlrpc.php",
+        "weight": 3
+      },
+      {
+        "type": "html",
+        "pattern": "wordpress",
+        "weight": 1
+      }
     ]
   },
 
   "shopify": {
-    "patterns": [
-      "cdn.shopify.com",
-      "Shopify.theme",
-      "ShopifyAnalytics",
-      "shopify-section",
-      "myshopify.com"
+    "confidence": 0.95,
+    "signals": [
+      {
+        "type": "url",
+        "pattern": "cdn.shopify.com",
+        "weight": 3
+      },
+      {
+        "type": "html",
+        "pattern": "Shopify.theme",
+        "weight": 3
+      },
+      {
+        "type": "script",
+        "pattern": "ShopifyAnalytics",
+        "weight": 3
+      },
+      {
+        "type": "html",
+        "pattern": "myshopify.com",
+        "weight": 3
+      },
+      {
+        "type": "html",
+        "pattern": "shopify-section",
+        "weight": 2
+      }
     ]
   },
 
   "webflow": {
-    "patterns": [
-      "webflow.js",
-      "data-wf-page",
-      "data-wf-site",
-      "webflow.com"
+    "confidence": 0.9,
+    "signals": [
+      {
+        "type": "script",
+        "pattern": "webflow.js",
+        "weight": 3
+      },
+      {
+        "type": "html",
+        "pattern": "data-wf-page",
+        "weight": 3
+      },
+      {
+        "type": "html",
+        "pattern": "data-wf-site",
+        "weight": 3
+      }
     ]
   },
 
   "wix": {
-    "patterns": [
-      "wixstatic.com",
-      "wix.com",
-      "X-Wix-Request-Id"
+    "confidence": 0.9,
+    "signals": [
+      {
+        "type": "url",
+        "pattern": "wixstatic.com",
+        "weight": 3
+      },
+      {
+        "type": "header",
+        "pattern": "X-Wix-Request-Id",
+        "weight": 3
+      },
+      {
+        "type": "html",
+        "pattern": "wix.com",
+        "weight": 2
+      }
     ]
   },
 
   "squarespace": {
-    "patterns": [
-      "squarespace.com",
-      "static.squarespace",
-      "sqs-block"
+    "confidence": 0.85,
+    "signals": [
+      {
+        "type": "url",
+        "pattern": "squarespace.com",
+        "weight": 3
+      },
+      {
+        "type": "html",
+        "pattern": "static.squarespace",
+        "weight": 3
+      },
+      {
+        "type": "html",
+        "pattern": "sqs-block",
+        "weight": 2
+      }
     ]
   },
 
   "ghost": {
-    "patterns": [
-      "ghost.org",
-      "ghost.min.js",
-      "content-api"
+    "confidence": 0.8,
+    "signals": [
+      {
+        "type": "url",
+        "pattern": "ghost.org",
+        "weight": 3
+      },
+      {
+        "type": "script",
+        "pattern": "ghost.min.js",
+        "weight": 3
+      },
+      {
+        "type": "html",
+        "pattern": "content-api",
+        "weight": 2
+      }
     ]
   },
 
   "drupal": {
-    "patterns": [
-      "Drupal.settings",
-      "sites/default",
-      "drupal.js"
+    "confidence": 0.85,
+    "signals": [
+      {
+        "type": "html",
+        "pattern": "Drupal.settings",
+        "weight": 3
+      },
+      {
+        "type": "url",
+        "pattern": "sites/default",
+        "weight": 3
+      },
+      {
+        "type": "script",
+        "pattern": "drupal.js",
+        "weight": 2
+      }
     ]
   }
 }
