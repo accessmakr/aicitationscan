@@ -1,10 +1,22 @@
 // AUTO-GENERATED
 window.siteRegistry = [
     {
+        "folderName": "AI Tools",
+        "folderPath": "/ai-tools/",
+        "icon": "🤖",
+        "priority": 15,
+        "pages": [
+            {
+                "name": "Ai Citation Checker",
+                "url": "/ai-tools/ai-citation-checker"
+            }
+        ]
+    },
+    {
         "folderName": "SEO Tools",
         "folderPath": "/seo-tools/",
         "icon": "🔍",
-        "priority": 10,
+        "priority": 15,
         "pages": [
             {
                 "name": "Meta Description Generator",
@@ -21,6 +33,18 @@ window.siteRegistry = [
             {
                 "name": "Serp Preview Tool",
                 "url": "/seo-tools/serp-preview-tool"
+            }
+        ]
+    },
+    {
+        "folderName": "Programmatic Tools",
+        "folderPath": "/programmatic/",
+        "icon": "⚡",
+        "priority": 14,
+        "pages": [
+            {
+                "name": "Website Word Count Checker",
+                "url": "/programmatic/website-word-count-checker"
             }
         ]
     },
@@ -65,30 +89,6 @@ window.siteRegistry = [
             {
                 "name": "Terms Of Use",
                 "url": "/terms-of-use"
-            }
-        ]
-    },
-    {
-        "folderName": "Ai Tools",
-        "folderPath": "/ai-tools/",
-        "icon": "📁",
-        "priority": 0,
-        "pages": [
-            {
-                "name": "Ai Citation Checker",
-                "url": "/ai-tools/ai-citation-checker"
-            }
-        ]
-    },
-    {
-        "folderName": "Programmatic",
-        "folderPath": "/programmatic/",
-        "icon": "📁",
-        "priority": 0,
-        "pages": [
-            {
-                "name": "Website Word Count Checker",
-                "url": "/programmatic/website-word-count-checker"
             }
         ]
     }
