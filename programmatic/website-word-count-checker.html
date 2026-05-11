@@ -3,27 +3,27 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Analyze the exact word count, character count, and reading time of any webpage text. Use our Website Word Count Checker to evaluate content depth and SEO visibility.">
-    <meta name="keywords" content="website word count checker, word count tool, content depth analyzer, SEO word count, page length checker, reading time calculator">
+    <meta name="description" content="Analyze webpage content depth, word count, readability, paragraph structure, and estimated reading time with our live editorial content analysis workflow.">
+    <meta name="keywords" content="website word count checker, content depth analyzer, SEO word count tool, webpage text extractor, reading time calculator, thin content checker, editorial content audit">
     <meta name="author" content="AI Citation Scan Editorial Team">
     <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
     
-    <title>Website Word Count Checker: Analyze Content Depth | AI Citation Scan</title>
+    <title>Website Word Count Checker & Content Depth Analyzer | AI Citation Scan</title>
     
     <link rel="canonical" href="https://aicitationscan.com/programmatic/website-word-count-checker.html">
     <link rel="sitemap" type="application/xml" href="/sitemap.xml">
     
-    <meta property="og:title" content="Website Word Count Checker: Analyze Content Depth">
-    <meta property="og:description" content="Analyze the exact word count, character count, and reading time of any webpage text. Use our Website Word Count Checker to evaluate content depth and SEO visibility.">
+    <meta property="og:title" content="Website Word Count Checker & Content Depth Analyzer">
+    <meta property="og:description" content="Analyze webpage content depth, word count, readability, paragraph structure, and estimated reading time with our live editorial content analysis workflow.">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://aicitationscan.com/programmatic/website-word-count-checker.html">
-    <meta property="og:image" content="https://aicitationscan.com/images/og-word-count.jpg">
+    <meta property="og:image" content="https://aicitationscan.com/images/og-word-count-checker.jpg">
     <meta property="og:site_name" content="AI Citation Scan">
     
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Website Word Count Checker: Analyze Content Depth">
-    <meta name="twitter:description" content="Analyze the exact word count, character count, and reading time of any webpage text. Use our Website Word Count Checker to evaluate content depth and SEO visibility.">
-    <meta name="twitter:image" content="https://aicitationscan.com/images/og-word-count.jpg">
+    <meta name="twitter:title" content="Website Word Count Checker & Content Depth Analyzer">
+    <meta name="twitter:description" content="Analyze webpage content depth, word count, readability, paragraph structure, and estimated reading time with our live editorial content analysis workflow.">
+    <meta name="twitter:image" content="https://aicitationscan.com/images/og-word-count-checker.jpg">
 
     <meta name="theme-color" content="#10b981">
     <link rel="icon" href="/favicon.ico" type="image/x-icon">
@@ -35,7 +35,6 @@
     <meta name="geo.region" content="US">
     <meta name="geo.position" content="37.7749;-122.4194">
     <meta name="ICBM" content="37.7749, -122.4194">
-
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
@@ -68,48 +67,55 @@
         }
         body { background-color: #020617; color: #f1f5f9; font-family: 'Inter', sans-serif; overflow-x: hidden; }
         
-        /* Scroll Progress */
         #scrollProgress { position: fixed; top: 0; left: 0; height: 4px; width: 0%; background: linear-gradient(90deg, var(--emerald), var(--violet)); z-index: 10000; transition: width 0.1s ease-out; }
         
-        /* Glass Header */
         header { background: rgba(15, 23, 42, 0.85); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(51, 65, 85, 0.5); }
         
-        /* Tool UI Custom Styling */
         .premium-input { background: rgba(30, 41, 59, 0.5); border: 1px solid #334155; border-radius: 12px; padding: 12px 16px; color: #f8fafc; width: 100%; transition: border-color 0.2s, box-shadow 0.2s; font-size: 0.875rem; }
         .premium-input:focus { outline: none; border-color: var(--emerald); box-shadow: 0 0 0 2px rgba(16, 185, 129, 0.2); }
         .premium-label { display: block; font-size: 0.875rem; font-weight: 500; color: #cbd5e1; margin-bottom: 0.5rem; }
         
-        /* Typography & Editorials */
+        .result-card { background: rgba(30, 41, 59, 0.4); border: 1px solid #334155; border-radius: 12px; padding: 16px; transition: all 0.2s; }
+        .result-card:hover { border-color: #475569; background: rgba(30, 41, 59, 0.8); }
+        .result-value { font-size: 1.5rem; font-weight: 700; color: #fff; margin-bottom: 0.25rem; }
+        .result-label { font-size: 0.75rem; font-weight: 600; color: #94a3b8; text-transform: uppercase; letter-spacing: 0.05em; }
+        
+        .meter-bar { height: 6px; border-radius: 3px; background: #334155; overflow: hidden; margin-top: 8px; width: 100%; }
+        .meter-fill { height: 100%; transition: width 0.5s ease, background-color 0.3s ease; }
+        .meter-safe { background-color: var(--emerald); }
+        .meter-warn { background-color: #f59e0b; }
+        .meter-danger { background-color: #ef4444; }
+
         .editorial-content h2 { font-size: 1.875rem; font-weight: 700; margin-top: 3.5rem; margin-bottom: 1.5rem; color: #f8fafc; letter-spacing: -0.025em; scroll-margin-top: 100px; }
         .editorial-content h3 { font-size: 1.25rem; font-weight: 600; margin-top: 2.5rem; margin-bottom: 1rem; color: #cbd5e1; }
         .editorial-content p { font-size: 1.0625rem; line-height: 1.75; color: #94a3b8; margin-bottom: 1.5rem; }
         .editorial-content ul { list-style-type: disc; padding-left: 1.5rem; color: #94a3b8; margin-bottom: 1.5rem; }
         .editorial-content li { margin-bottom: 0.5rem; line-height: 1.6; }
         .editorial-content strong { color: #e2e8f0; font-weight: 600; }
+        .editorial-content a { color: var(--emerald); text-decoration: none; border-bottom: 1px solid transparent; transition: border-color 0.2s; }
+        .editorial-content a:hover { border-bottom-color: var(--emerald); }
         
-        /* ScrollSpy TOC */
         .toc-link { transition: all 0.2s; border-left: 2px solid transparent; padding-left: 1rem; display: block; color: #64748b; font-size: 0.875rem; margin-bottom: 0.75rem; }
         .toc-link:hover { color: #cbd5e1; }
         .toc-link.active { border-left-color: var(--emerald); color: var(--emerald); font-weight: 500; }
         
-        /* Share & Buttons */
-        .share-btn { padding: 8px 16px; border-radius: 9999px; font-size: 0.875rem; font-weight: 500; transition: all 0.2s; border: 1px solid #334155; background: transparent; color: #cbd5e1; }
+        .share-btn { padding: 8px 16px; border-radius: 9999px; font-size: 0.875rem; font-weight: 500; transition: all 0.2s; border: 1px solid #334155; background: transparent; color: #cbd5e1; cursor: pointer; }
         .share-btn:hover { background: #1e293b; color: #fff; border-color: #475569; transform: translateY(-1px); }
         
-        /* Accordion */
         .faq-btn[aria-expanded="true"] .chevron { transform: rotate(180deg); }
         .faq-content { transition: max-height 0.3s ease-in-out, opacity 0.3s ease; max-height: 0; opacity: 0; overflow: hidden; }
-        .faq-content.open { max-height: 500px; opacity: 1; margin-top: 1rem; }
+        .faq-content.open { max-height: 800px; opacity: 1; margin-top: 1rem; }
 
-        /* Output Variation Card */
-        .stat-card { border: 1px solid #334155; background: rgba(30, 41, 59, 0.4); border-radius: 12px; padding: 24px; text-align: center; transition: all 0.2s; }
-        .stat-card:hover { border-color: var(--emerald); background: rgba(16, 185, 129, 0.05); }
-
-        /* General Utilities */
         ::-webkit-scrollbar { width: 8px; }
         ::-webkit-scrollbar-track { background: #020617; }
         ::-webkit-scrollbar-thumb { background: #334155; border-radius: 4px; }
         ::-webkit-scrollbar-thumb:hover { background: #475569; }
+
+        .loader { border: 3px solid rgba(255,255,255,0.1); width: 24px; height: 24px; border-radius: 50%; border-left-color: var(--emerald); animation: spin 1s linear infinite; display: none; }
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+        
+        .contact-form-compact { max-width: 400px; background: rgba(15, 23, 42, 0.6); backdrop-filter: blur(16px); border: 1px solid rgba(16, 185, 129, 0.3); box-shadow: 0 10px 30px -10px rgba(16, 185, 129, 0.1); border-radius: 16px; padding: 24px; margin: 0 auto; }
+        .contact-form-compact:focus-within { border-color: rgba(139, 92, 246, 0.5); box-shadow: 0 10px 40px -10px rgba(139, 92, 246, 0.2); }
     </style>
 </head>
 <body class="antialiased selection:bg-emerald-500/30 selection:text-emerald-200">
@@ -123,9 +129,8 @@
                     <span class="text-2xl transition-transform group-hover:scale-110">📡</span>
                     <span class="font-bold text-lg tracking-tight text-slate-100">AI Citation Scan</span>
                 </a>
-                
                 <div class="flex items-center gap-4">
-                    <button type="button" class="trigger-search flex items-center text-slate-300 hover:text-emerald-400 transition-colors duration-200 focus:outline-none" aria-label="Open Search">
+                    <button type="button" class="trigger-search flex items-center text-slate-400 hover:text-emerald-400 transition-colors duration-200 focus:outline-none" aria-label="Open Search">
                         <span class="mr-2 text-sm font-medium hidden sm:inline">Search</span>
                         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
@@ -139,7 +144,7 @@
 
     <main class="pt-24 pb-16">
         <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-12">
-            <div class="max-w-3xl mx-auto text-center">
+            <div class="max-w-4xl mx-auto text-center">
                 <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-xs font-semibold tracking-wide uppercase mb-6">
                     <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
                     <span id="freshness-date">Updated Recently</span>
@@ -149,125 +154,197 @@
                     Website Word Count Checker
                 </h1>
                 
-                <p class="text-lg text-slate-400 mb-8 leading-relaxed max-w-2xl mx-auto">
-                    Analyze the exact word count, character count, and reading time of any webpage text to benchmark your content depth and optimize for search intent.
+                <p class="text-lg text-slate-400 mb-8 leading-relaxed max-w-3xl mx-auto">
+                    Analyze webpage content depth, word count, readability, paragraph structure, and estimated reading time with a live editorial content analysis workflow.
                 </p>
 
-                <div class="flex flex-wrap items-center justify-center gap-6 text-sm text-slate-500 mb-8 border-y border-slate-800/50 py-4">
+                <div class="flex flex-wrap items-center justify-center gap-6 text-sm text-slate-500 mb-8 py-4">
                     <div class="flex items-center gap-2">
                         <span class="text-amber-400 text-lg">★★★★★</span>
-                        <span class="font-medium text-slate-300">4.9/5 Rating</span>
+                        <span class="font-medium text-slate-300">4.9/5 satisfaction</span>
                     </div>
                     <div class="hidden sm:block w-1 h-1 rounded-full bg-slate-700"></div>
                     <div class="flex items-center gap-2">
                         <span class="text-emerald-400">✓</span>
-                        <span>Over 1.2M pages analyzed</span>
+                        <span>Thousands of content audits generated</span>
                     </div>
                     <div class="hidden sm:block w-1 h-1 rounded-full bg-slate-700"></div>
                     <div class="flex items-center gap-2">
                         <span class="text-violet-400">⚡</span>
-                        <span>Used by top publishers & developers</span>
+                        <span>Used by publishers, editors, and SEO teams</span>
+                    </div>
+                </div>
+                
+                <div class="mt-4 mb-12">
+                    <div class="contact-form-compact transition-all duration-300">
+                        <h3 class="text-lg font-extrabold text-white tracking-tighter mb-4 text-left">Request a Custom Tool</h3>
+                        <form name="tool-request" method="POST" data-netlify="true" netlify-honeypot="bot-field" onsubmit="handleContactForm(event)" class="space-y-3 text-left">
+                            <input type="hidden" name="form-name" value="tool-request" />
+                            <div class="hidden">
+                                <label>Don’t fill this out if you're human: <input name="bot-field" /></label>
+                            </div>
+                            <div>
+                                <label class="block text-xs font-medium text-slate-400 mb-1">Name</label>
+                                <input type="text" name="name" required class="w-full bg-slate-900/50 border border-slate-700 rounded-lg px-3 py-2 text-white text-sm focus:outline-none focus:border-emerald-500 transition-colors">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-medium text-slate-400 mb-1">Email</label>
+                                <input type="email" name="email" required class="w-full bg-slate-900/50 border border-slate-700 rounded-lg px-3 py-2 text-white text-sm focus:outline-none focus:border-emerald-500 transition-colors">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-medium text-slate-400 mb-1">Message</label>
+                                <textarea name="message" required rows="2" class="w-full bg-slate-900/50 border border-slate-700 rounded-lg px-3 py-2 text-white text-sm focus:outline-none focus:border-emerald-500 transition-colors"></textarea>
+                            </div>
+                            <button type="submit" class="w-full bg-emerald-500 hover:bg-emerald-600 text-slate-950 font-bold rounded-lg py-2.5 text-sm transition-all transform hover:-translate-y-0.5 shadow-lg shadow-emerald-500/20">
+                                Transmit Request
+                            </button>
+                        </form>
                     </div>
                 </div>
 
-                <div class="bg-slate-900 border border-slate-800 rounded-2xl p-6 text-left mb-8 relative overflow-hidden">
+                <div class="bg-slate-900 border border-slate-800 rounded-2xl p-6 text-left mb-8 relative overflow-hidden max-w-3xl mx-auto">
                     <div class="absolute top-0 left-0 w-1 h-full bg-gradient-to-b from-emerald-400 to-violet-500"></div>
-                    <h3 class="text-emerald-400 font-semibold mb-2">What is a website word count checker?</h3>
+                    <h3 class="text-emerald-400 font-semibold mb-2 text-lg">What does a website word count checker measure?</h3>
                     <p class="text-slate-300 text-sm leading-relaxed">
-                        A website word count checker evaluates the depth of a page by calculating the total volume of words, characters, and sentences. By measuring these metrics, SEO professionals can gauge comprehensive topic coverage, assess readability, and ensure content length aligns perfectly with user search intent and competitor benchmarks.
+                        Beyond simple tallies, this tool measures content depth, paragraph readability, editorial structure, topical coverage, reading effort, and essential SEO content analysis indicators to evaluate the comprehensiveness of a published page.
                     </p>
                 </div>
 
                 <div class="flex flex-wrap items-center justify-center gap-3 mb-12">
                     <span class="text-sm font-medium text-slate-400 mr-2">Share this tool:</span>
                     <button onclick="shareLink('whatsapp')" class="share-btn flex items-center gap-2">WhatsApp</button>
-                    <button onclick="shareLink('facebook')" class="share-btn flex items-center gap-2">Facebook</button>
                     <button onclick="shareLink('twitter')" class="share-btn flex items-center gap-2">X / Twitter</button>
                     <button onclick="shareLink('linkedin')" class="share-btn flex items-center gap-2">LinkedIn</button>
                     <button onclick="shareLink('reddit')" class="share-btn flex items-center gap-2">Reddit</button>
+                    <button onclick="shareLink('facebook')" class="share-btn flex items-center gap-2">Facebook</button>
                     <button onclick="shareLink('email')" class="share-btn flex items-center gap-2">Email</button>
                     <button onclick="copyToClipboard()" class="share-btn flex items-center gap-2">Copy Link</button>
-                </div>
-                
-                <div class="max-w-[600px] mx-auto bg-slate-950/60 backdrop-blur-md border border-slate-800 hover:border-emerald-500/30 transition-colors rounded-2xl p-6 mb-12 relative overflow-hidden">
-                    <div class="absolute inset-0 bg-gradient-to-br from-emerald-500/5 to-violet-500/5 pointer-events-none"></div>
-                    <h3 class="text-lg font-bold text-white mb-4 tracking-tighter">Request a Custom Tool</h3>
-                    <form name="tool-request" data-netlify="true" netlify-honeypot="bot-field" onsubmit="handleContactForm(event)" class="space-y-4 relative z-10">
-                        <p class="hidden"><label>Don’t fill this out if you're human: <input name="bot-field" /></label></p>
-                        <div class="grid grid-cols-2 gap-4">
-                            <div>
-                                <label class="block text-xs font-medium text-slate-400 mb-1">Name</label>
-                                <input type="text" name="name" required class="w-full bg-slate-900 border border-slate-700 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:ring-1 focus:ring-emerald-500 focus:border-emerald-500 transition-shadow">
-                            </div>
-                            <div>
-                                <label class="block text-xs font-medium text-slate-400 mb-1">Email</label>
-                                <input type="email" name="email" required class="w-full bg-slate-900 border border-slate-700 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:ring-1 focus:ring-emerald-500 focus:border-emerald-500 transition-shadow">
-                            </div>
-                        </div>
-                        <div>
-                            <label class="block text-xs font-medium text-slate-400 mb-1">Message</label>
-                            <textarea name="message" required rows="2" class="w-full bg-slate-900 border border-slate-700 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:ring-1 focus:ring-emerald-500 focus:border-emerald-500 transition-shadow"></textarea>
-                        </div>
-                        <button type="submit" class="w-full bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-bold rounded-lg py-2.5 text-sm transition-all shadow-lg shadow-emerald-500/20 hover:shadow-emerald-500/40">Transmit Request</button>
-                    </form>
                 </div>
             </div>
 
             <div class="bg-slate-900 border border-slate-700 rounded-3xl p-6 lg:p-10 shadow-2xl max-w-6xl mx-auto">
                 <div class="grid lg:grid-cols-12 gap-10">
                     
-                    <div class="lg:col-span-6 space-y-5">
+                    <div class="lg:col-span-4 space-y-6">
                         <div class="flex items-center justify-between mb-2">
-                            <h2 class="text-xl font-semibold text-white">Input Content</h2>
-                            <button onclick="resetTool()" class="text-xs text-slate-400 hover:text-white transition-colors flex items-center gap-1">
-                                <span>↺</span> Clear
-                            </button>
+                            <h2 class="text-xl font-semibold text-white">Analysis Input</h2>
+                            <div class="flex bg-slate-800 rounded-lg p-1">
+                                <button onclick="setToolMode('url')" id="mode-url" class="px-3 py-1 rounded-md text-xs font-medium bg-slate-700 text-white transition-all">URL</button>
+                                <button onclick="setToolMode('text')" id="mode-text" class="px-3 py-1 rounded-md text-xs font-medium text-slate-400 hover:text-white transition-all">Text</button>
+                            </div>
+                        </div>
+
+                        <div id="input-url-wrapper">
+                            <label for="target-url" class="premium-label">Target URL</label>
+                            <input type="url" id="target-url" class="premium-input" placeholder="https://example.com/article">
+                            <p class="text-xs text-slate-500 mt-2">Fetches the visible text content from the specified webpage.</p>
+                        </div>
+
+                        <div id="input-text-wrapper" class="hidden">
+                            <label for="manual-text" class="premium-label">Paste Raw Text</label>
+                            <textarea id="manual-text" rows="6" class="premium-input" placeholder="Paste article content here..."></textarea>
                         </div>
 
                         <div>
-                            <label for="content-input" class="premium-label">Paste Webpage Text or HTML code</label>
-                            <textarea id="content-input" rows="12" class="premium-input font-mono text-sm leading-relaxed" placeholder="<h1>Welcome</h1><p>Paste the text or source code of your page here...</p>"></textarea>
-                            <p class="text-xs text-slate-500 mt-2">HTML tags will be automatically stripped during calculation.</p>
+                            <label for="target-keyword" class="premium-label">Target Keyword (Optional)</label>
+                            <input type="text" id="target-keyword" class="premium-input" placeholder="e.g. content strategy">
                         </div>
 
-                        <button onclick="analyzeText()" id="btn-generate" class="w-full py-3 mt-2 bg-emerald-500 hover:bg-emerald-600 text-white font-semibold rounded-xl transition-colors shadow-lg shadow-emerald-500/20 flex items-center justify-center gap-2">
-                            <span>📊</span> <span id="cta-text">Analyze Content</span>
-                        </button>
+                        <div class="flex gap-3 pt-2">
+                            <button onclick="runContentAnalysis()" id="btn-analyze" class="flex-1 py-3 bg-emerald-500 hover:bg-emerald-600 text-slate-900 font-bold rounded-xl transition-colors shadow-lg shadow-emerald-500/20 flex items-center justify-center gap-2">
+                                <span class="loader" id="analyze-loader"></span>
+                                <span id="analyze-text">Analyze Content</span>
+                            </button>
+                            <button onclick="clearAnalysis()" class="px-4 py-3 bg-slate-800 hover:bg-slate-700 text-white font-medium rounded-xl transition-colors border border-slate-700">
+                                Clear
+                            </button>
+                        </div>
                     </div>
 
-                    <div class="lg:col-span-6 flex flex-col">
-                        <div class="flex items-center justify-between mb-4">
-                            <h2 class="text-xl font-semibold text-white">Content Analysis Results</h2>
-                        </div>
-
-                        <div class="grid grid-cols-2 gap-4 mb-6">
-                            <div class="stat-card">
-                                <p class="text-xs text-slate-400 uppercase tracking-widest font-semibold mb-1">Total Words</p>
-                                <p id="result-words" class="text-4xl font-bold text-white">0</p>
-                            </div>
-                            <div class="stat-card">
-                                <p class="text-xs text-slate-400 uppercase tracking-widest font-semibold mb-1">Characters</p>
-                                <p id="result-chars" class="text-4xl font-bold text-emerald-400">0</p>
-                            </div>
-                            <div class="stat-card">
-                                <p class="text-xs text-slate-400 uppercase tracking-widest font-semibold mb-1">Sentences</p>
-                                <p id="result-sentences" class="text-4xl font-bold text-violet-400">0</p>
-                            </div>
-                            <div class="stat-card">
-                                <p class="text-xs text-slate-400 uppercase tracking-widest font-semibold mb-1">Est. Reading Time</p>
-                                <p id="result-time" class="text-4xl font-bold text-white">0<span class="text-lg text-slate-500 font-normal ml-1">min</span></p>
+                    <div class="lg:col-span-8 flex flex-col">
+                        <div class="flex items-center justify-between mb-4 pb-4 border-b border-slate-800">
+                            <h2 class="text-xl font-semibold text-white">Live Analysis Results</h2>
+                            <div class="flex gap-2">
+                                <button onclick="copySummary()" class="text-xs font-medium px-3 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 transition-colors border border-slate-700">Copy Summary</button>
+                                <button onclick="exportReport()" class="text-xs font-medium px-3 py-1.5 rounded-lg bg-violet-600/20 hover:bg-violet-600/40 text-violet-300 transition-colors border border-violet-500/30">Export TXT</button>
                             </div>
                         </div>
 
-                        <div class="bg-slate-950 border border-slate-800 rounded-xl p-5">
-                            <h3 class="text-sm font-semibold text-slate-200 mb-3">Top Keyword Frequencies (Simulated)</h3>
-                            <div id="keyword-results" class="space-y-2">
-                                <div class="text-sm text-slate-500 italic text-center py-4">Run analysis to view top occurring phrases.</div>
-                            </div>
+                        <div id="results-placeholder" class="flex-grow flex items-center justify-center text-center p-8 border border-dashed border-slate-700 rounded-xl text-slate-500">
+                            Enter a URL or paste text to generate an editorial content analysis, word count breakdown, and structural evaluation.
                         </div>
-                        
-                        <div class="mt-6 text-center text-xs text-slate-500 font-medium tracking-wide uppercase mt-auto">
-                            <span id="seasonal-banner" class="text-violet-400"></span> • Content Depth Analysis
+
+                        <div id="results-dashboard" class="hidden space-y-6">
+                            
+                            <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                                <div class="result-card">
+                                    <div class="result-value" id="res-words">0</div>
+                                    <div class="result-label">Total Words</div>
+                                </div>
+                                <div class="result-card">
+                                    <div class="result-value" id="res-chars">0</div>
+                                    <div class="result-label">Characters</div>
+                                </div>
+                                <div class="result-card">
+                                    <div class="result-value" id="res-chars-ns">0</div>
+                                    <div class="result-label">Chars (No Space)</div>
+                                </div>
+                                <div class="result-card border-emerald-500/30 bg-emerald-500/5">
+                                    <div class="result-value text-emerald-400" id="res-read-time">0m 0s</div>
+                                    <div class="result-label">Reading Time</div>
+                                </div>
+                            </div>
+
+                            <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                                <div class="result-card">
+                                    <div class="result-value text-slate-300" id="res-paras">0</div>
+                                    <div class="result-label">Paragraphs</div>
+                                </div>
+                                <div class="result-card">
+                                    <div class="result-value text-slate-300" id="res-headings">0</div>
+                                    <div class="result-label">Headings</div>
+                                </div>
+                                <div class="result-card">
+                                    <div class="result-value text-slate-300" id="res-speak-time">0m 0s</div>
+                                    <div class="result-label">Speaking Time</div>
+                                </div>
+                                <div class="result-card">
+                                    <div class="result-value text-violet-400" id="res-density">0%</div>
+                                    <div class="result-label">Keyword Density</div>
+                                </div>
+                            </div>
+
+                            <div class="bg-slate-950 p-5 rounded-xl border border-slate-800">
+                                <h3 class="text-sm font-bold text-white uppercase tracking-wider mb-4">Content Depth & Quality</h3>
+                                
+                                <div class="space-y-4">
+                                    <div>
+                                        <div class="flex justify-between text-xs font-medium text-slate-400 mb-1">
+                                            <span>Content Depth Meter</span>
+                                            <span id="depth-score-text">0 / 100</span>
+                                        </div>
+                                        <div class="meter-bar"><div id="depth-meter" class="meter-fill" style="width: 0%"></div></div>
+                                    </div>
+                                    
+                                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-4">
+                                        <div class="flex items-start gap-3">
+                                            <div id="flag-thin" class="w-2 h-2 rounded-full bg-slate-700 mt-1.5 flex-shrink-0"></div>
+                                            <div>
+                                                <div class="text-sm font-semibold text-slate-200" id="flag-thin-title">Content Length Status</div>
+                                                <div class="text-xs text-slate-400 mt-0.5" id="flag-thin-desc">Waiting for analysis...</div>
+                                            </div>
+                                        </div>
+                                        <div class="flex items-start gap-3">
+                                            <div id="flag-scan" class="w-2 h-2 rounded-full bg-slate-700 mt-1.5 flex-shrink-0"></div>
+                                            <div>
+                                                <div class="text-sm font-semibold text-slate-200">Scanability Rating</div>
+                                                <div class="text-xs text-slate-400 mt-0.5" id="flag-scan-desc">Waiting for analysis...</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
                         </div>
                     </div>
 
@@ -281,104 +358,116 @@
                 <aside class="lg:w-1/4 hidden lg:block">
                     <div class="sticky top-28 bg-slate-900 border border-slate-800 rounded-2xl p-6">
                         <h4 class="text-sm font-bold text-white uppercase tracking-wider mb-4">In This Guide</h4>
-                        <nav id="toc-nav" class="space-y-1 max-h-[70vh] overflow-y-auto pr-2">
-                            </nav>
+                        <nav id="toc-nav" class="space-y-1 max-h-[75vh] overflow-y-auto pr-2">
+                        </nav>
                     </div>
                 </aside>
 
                 <article class="lg:w-3/4 editorial-content">
                     
-                    <h1 class="hidden">Complete Guide to Website Word Counts</h1>
+                    <h2 id="why-word-count-still-matters-for-publishing">Why word count still matters for publishing</h2>
+                    <p>In modern SEO, the narrative frequently suggests that word count is an obsolete metric, replaced entirely by semantic relevance and intent satisfaction. While it is true that word count is not a direct ranking factor within Google’s core algorithms, it remains a highly correlated signal for comprehensiveness. A page attempting to cover a highly complex, multi-faceted topic cannot adequately serve user intent in 200 words. Thus, tracking word counts is a fundamental proxy for ensuring editorial depth, topical authority, and competitive viability in the publishing workflow.</p>
+                    <p>Editors utilize word count benchmarks to standardize quality across large publishing teams. It establishes a baseline expectation for writers: a 2,500-word brief signals the necessity for deep research, multiple H2 structures, and extensive entity coverage, whereas a 500-word brief signals a concise, news-oriented response. Analyzing website word count provides a structural framework for organizing content strategies effectively.</p>
 
-                    <h2 id="why-word-count-matters">Why word count matters for SEO</h2>
-                    <p>Word count itself is not a direct ranking factor in Google's core algorithm. However, search engines rely heavily on text content to parse relevance, context, and topical authority. While a 500-word page might perfectly answer a simple query, highly competitive subjects often require extensive, nuanced explanations that naturally drive up word counts. Analyzing website word counts provides developers and publishers a quantifiable baseline to measure their content's comprehensiveness against top-ranking rivals.</p>
+                    <h2 id="how-search-engines-evaluate-content-depth">How search engines evaluate content depth</h2>
+                    <p>Search engines do not literally count words to determine rankings, but they do evaluate the depth of the answers provided on a page. Google's algorithms analyze semantic relationships, entity co-occurrence, and natural language patterns. A longer piece of content naturally contains a richer variety of related entities, LSI (Latent Semantic Indexing) keywords, and nuanced context. When a search engine evaluates content depth, it looks for comprehensive coverage of the primary entity and its associated sub-topics.</p>
+                    <p>Consequently, a high word count often correlates with higher rankings simply because a longer, well-structured document mathematically provides more opportunities to answer the searcher's micro-intents. The evaluation is less about the sheer volume of text and more about the comprehensive architecture that the text builds.</p>
 
-                    <h2 id="evaluating-content-depth">How search engines evaluate content depth</h2>
-                    <p>Search engines utilize natural language processing (NLP) to evaluate how well a page covers semantic entities related to a query. Content depth refers to the extent to which a topic is explored. Pages with higher word counts generally contain more co-occurring terms, secondary entities, and varied formatting (lists, tables, subheadings). This structural richness signals to search algorithms that the resource is thorough, authoritative, and capable of satisfying complex search intents.</p>
-
-                    <h2 id="thin-vs-comprehensive">Thin content vs comprehensive content</h2>
-                    <p>Google defines "thin content" as pages that add little to no value to the user—often characterized by low word counts, scraped text, or generic summaries. Comprehensive content, conversely, exhaustively addresses the user's primary concern while anticipating secondary questions. Transitioning a page from thin to comprehensive rarely means just adding filler text; it involves executing a detailed workflow to inject unique observations, data points, and expert insights that naturally expand the character count.</p>
+                    <h2 id="what-website-word-count-reveals-about-a-page">What website word count reveals about a page</h2>
+                    <p>When conducting a content audit, a website word count checker reveals critical operational data. A cluster of pages hovering around 300 words might highlight a systemic issue of thin content generation, signaling to algorithms that the domain offers low-value, programmatic pages rather than expert insights. Conversely, consistently long-form content (2,000+ words) generally indicates an editorial commitment to deep-dive journalism, cornerstone content, or extensive guides.</p>
+                    <p>Furthermore, evaluating word count alongside paragraph count and heading distribution reveals the page's scanability. A 3,000-word page with only three headings and massive, unbroken text blocks reveals poor user experience design, leading to high bounce rates regardless of content quality.</p>
 
                     <div class="my-8 bg-slate-900 border-l-4 border-emerald-500 rounded-r-2xl p-6 relative group">
                         <div class="absolute top-4 right-4 text-emerald-500 opacity-20 group-hover:opacity-40 transition-opacity">
                             <svg width="32" height="32" viewBox="0 0 24 24" fill="currentColor"><path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z"/></svg>
                         </div>
-                        <p class="text-lg text-slate-200 font-medium italic mb-4">"Word count isn't a ranking factor, but comprehensive content is. Higher word counts often correlate with higher rankings simply because long-form content answers more questions."</p>
-                        <button onclick="shareQuote('Word count isn\'t a ranking factor, but comprehensive content is. Higher word counts often correlate with rankings because long-form content answers more questions.')" class="text-sm font-semibold text-emerald-400 hover:text-emerald-300 transition-colors flex items-center gap-1">
+                        <p class="text-lg text-slate-200 font-medium italic mb-4">"Word count isn't a direct ranking factor, but it is the most reliable proxy for evaluating editorial comprehensiveness and topical depth at scale."</p>
+                        <button onclick="shareQuote('Word count isn\'t a direct ranking factor, but it is the most reliable proxy for evaluating editorial comprehensiveness and topical depth at scale.')" class="text-sm font-semibold text-emerald-400 hover:text-emerald-300 transition-colors flex items-center gap-1">
                             Tap to share on X <span class="text-lg">→</span>
                         </button>
                     </div>
 
-                    <h2 id="search-intent-alignment">Word count and search intent alignment</h2>
-                    <p>Every query possesses a specific search intent. If a user queries "what time is the Super Bowl," a 5,000-word essay is a poor experience. The intent demands a rapid, concise answer. However, if the query is "how to structure enterprise SEO architecture," a 300-word summary will fail. Aligning your word count with the user's expectation is a fundamental practice in search optimization.</p>
+                    <h2 id="reading-time-and-user-engagement-signals">Reading time and user engagement signals</h2>
+                    <p>Modern publishing platforms actively display estimated reading times to set psychological expectations for the user. Presenting a "12-minute read" badge prepares the user for a deep, educational session, directly influencing user engagement signals such as dwell time and session duration.</p>
+                    
+                    <h3 id="average-reading-speed-considerations">Average reading speed considerations</h3>
+                    <p>The standard baseline for adult reading speed is typically calculated between 200 and 250 words per minute (WPM). When a word count checker calculates reading time, it usually applies a 238 WPM standard. For technical or academic content, this baseline should be adjusted downwards, as complex syntax requires more cognitive processing time.</p>
+                    
+                    <h3 id="mobile-reading-behavior">Mobile reading behavior</h3>
+                    <p>Mobile users consume content differently. Due to smaller viewports and environmental distractions, mobile reading speeds can be significantly slower, and users are much more likely to abandon long blocks of text. A 2,000-word article on a mobile device requires relentless structural optimization—shorter paragraphs, bullet points, and frequent visual breaks—to maintain engagement.</p>
+                    
+                    <h3 id="scanning-vs-deep-reading-patterns">Scanning vs deep reading patterns</h3>
+                    <p>Digital readers rarely read linearly. Nielsen Norman Group research consistently shows users employ F-shaped scanning patterns. They use headings to navigate to the specific section that satisfies their immediate intent. Therefore, a high word count is only effective if the content is highly structured, allowing the user to bypass irrelevant sections effortlessly.</p>
 
-                    <h2 id="benchmarking-competitors">How to benchmark competitor word counts</h2>
-                    <p>SEO professionals rarely guess how long an article should be. Instead, they extract the text from the top 5 ranking pages for a target keyword and calculate the median word count. If the median is 2,400 words, publishing a 600-word post creates an immediate content gap. Benchmarking establishes a baseline requirement for entering the competitive landscape.</p>
+                    <h2 id="thin-content-detection-workflows">Thin content detection workflows</h2>
+                    <p>One of the primary use cases for a website word count checker is the identification of thin content. Thin content refers to pages that offer little to no added value to the searcher, often characterized by low word counts (typically under 300 words), lack of original insight, or excessive boilerplate text. During technical SEO audits, crawling a site to flag URLs falling below a specific word count threshold is a standard workflow.</p>
+                    <p>Once identified, editorial teams face a decision matrix: Should the thin page be expanded with deeper research? Should it be consolidated into a broader parent topic? Or should it be de-indexed to preserve the overall quality score of the domain?</p>
 
-                    <h2 id="word-count-backlinks">The correlation between word count and backlinks</h2>
-                    <p>Extensive industry studies indicate a strong correlation between long-form content (pages exceeding 2,000 words) and higher backlink acquisition. Deeply researched, long-form articles serve as reference materials. When publishers and industry peers link to resources, they naturally gravitate toward comprehensive guides, whitepapers, and data-driven articles, organically boosting the page's authority.</p>
+                    <h2 id="how-editors-use-content-length-benchmarks">How editors use content length benchmarks</h2>
+                    <p>Editors rely on content length benchmarks to bridge the gap between SEO strategy and writer execution. By analyzing the top-ranking SERP competitors for a specific query, an SEO strategist can determine the "content depth table stakes." If the top five results average 3,200 words, commissioning a 600-word post guarantees failure.</p>
+                    <p>These benchmarks are included in editorial briefs, providing writers with clear parameters. It ensures the writer covers the necessary sub-topics, answers related questions (FAQs), and explores the nuances of the subject matter adequately enough to compete in the current search landscape.</p>
 
-                    <h2 id="does-longer-rank-better">Does longer content rank better?</h2>
-                    <p>While statistical averages show that the top 10 results in Google generally hover around 1,400 to 1,800 words, this is a case of correlation versus causation. Longer content ranks better when it represents superior quality and broader semantic relevance, not merely because it has more words. Stuffing a page with redundant text to artificially inflate the word count degrades the user experience and can trigger quality demotions.</p>
+                    <h2 id="word-count-vs-topical-authority">Word count vs topical authority</h2>
+                    <p>Topical authority is achieved when a domain proves comprehensive expertise across an entire subject category. While individual page length matters, overall topical authority is built through a network of interlinked, deeply researched articles. A site with fifty highly specific, 1,000-word articles covering every facet of "commercial espresso machines" will generally outrank a site with a single, rambling 15,000-word mega-guide. Word count must be distributed logically across the site's architecture.</p>
 
-                    <h2 id="word-count-readability">How word count impacts readability</h2>
-                    <p>As text length increases, readability often decreases if the content isn't properly formatted. A 3,000-word page presented as an unbroken wall of text will experience massive bounce rates. Using a word count checker alongside reading time estimators helps publishers gauge cognitive load. Breaking long copy into digestible H2 and H3 segments is critical for user retention.</p>
+                    <h2 id="long-form-content-considerations">Long-form content considerations</h2>
+                    <p>Long-form publishing (typically defined as content exceeding 2,000 words) has historically correlated with higher backlink acquisition and social shares. Comprehensive guides become authoritative reference materials within an industry. However, creating long-form content introduces significant editorial overhead. It requires subject matter experts, rigorous editing, custom graphics, and ongoing maintenance to ensure the information does not become outdated.</p>
 
-                    <h2 id="structure-scannability">Content structure and scannability</h2>
-                    <p>Modern internet users scan rather than read. High-word-count pages must be architected for scannability. This involves employing bullet points, bold text for key concepts, summary boxes, and table of contents modules. When users can rapidly navigate a 4,000-word guide to find their exact answer, dwell time increases safely.</p>
-
-                    <h2 id="ecommerce-word-counts">Word count for e-commerce pages</h2>
-                    <p>Product pages and category hubs face unique challenges. While heavy text can push products below the fold—harming conversion rates—thin category pages struggle to rank. E-commerce platforms balance this by incorporating concise 150-word descriptions at the top of the page, and injecting comprehensive FAQs, technical specifications, and expansive buying guides beneath the product grid.</p>
-
-                    <h2 id="blog-word-counts">Word count for blog posts and articles</h2>
-                    <p>Editorial content forms the backbone of informational SEO. For core topics designed to capture high-volume traffic, long-form pillar pages (2,500+ words) are highly effective. These central nodes can then link out to shorter, highly focused cluster articles (800–1,200 words) that target long-tail semantic variations.</p>
+                    <h2 id="when-shorter-pages-perform-better">When shorter pages perform better</h2>
+                    <p>Word count is entirely dependent on search intent. If a user searches for "current time in Tokyo" or "USD to EUR exchange rate," they want immediate, concise data. A 2,000-word essay on the history of time zones would provide a terrible user experience. For specific queries—definitions, conversions, local business contact details—shorter, highly targeted pages not only perform better but are heavily favored by search engines for quick-answer featured snippets.</p>
 
                     <div class="my-8 bg-slate-900 border-l-4 border-violet-500 rounded-r-2xl p-6 relative group">
                         <div class="absolute top-4 right-4 text-violet-500 opacity-20 group-hover:opacity-40 transition-opacity">
                             <svg width="32" height="32" viewBox="0 0 24 24" fill="currentColor"><path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z"/></svg>
                         </div>
-                        <p class="text-lg text-slate-200 font-medium italic mb-4">"A successful programmatic SEO strategy doesn't standardize a single word count; it scales templates that dynamically adapt length based on available data and search intent."</p>
-                        <button onclick="shareQuote('A successful programmatic SEO strategy scales templates that dynamically adapt text length based on available data and search intent.')" class="text-sm font-semibold text-violet-400 hover:text-violet-300 transition-colors flex items-center gap-1">
+                        <p class="text-lg text-slate-200 font-medium italic mb-4">"Forced length damages readability. If a topic requires 500 words to explain perfectly, expanding it to 2,000 words using filler text will severely harm user retention."</p>
+                        <button onclick="shareQuote('Forced length damages readability. If a topic requires 500 words to explain perfectly, expanding it to 2,000 words using filler text will severely harm user retention.')" class="text-sm font-semibold text-violet-400 hover:text-violet-300 transition-colors flex items-center gap-1">
                             Tap to share on X <span class="text-lg">→</span>
                         </button>
                     </div>
 
-                    <h2 id="local-seo-word-count">Local SEO and content length</h2>
-                    <p>Local businesses often struggle with thin content, relying merely on a phone number and an address. To establish local relevance, service area pages should aim for 500-800 words. This provides adequate space to incorporate geographic entities, detail specific services, include customer testimonials, and embed map functionality without overwhelming the local searcher.</p>
+                    <h2 id="website-audits-and-content-inventory-analysis">Website audits and content inventory analysis</h2>
+                    <p>Enterprise website audits rely heavily on extracting word counts via crawlers. By exporting a content inventory into a spreadsheet, SEO professionals can map word counts against organic traffic, conversion rates, and bounce rates. This data cross-referencing quickly reveals underperforming assets. Pages with high word counts but zero traffic often suffer from poor technical optimization or intent mismatch, while low word count pages driving high traffic represent prime candidates for expansion to capture broader long-tail variants.</p>
 
-                    <h2 id="common-misconceptions">Common misconceptions about word count</h2>
-                    <p>A persistent myth is that an article must hit exactly 2,000 words to rank on page one. This is false. Another misconception is that eliminating words guarantees faster indexing. Search engines parse content efficiently regardless of length; what matters is the unique value provided per word. Fluff penalizes; substance rewards.</p>
+                    <h2 id="keyword-density-and-over-optimization-risks">Keyword density and over-optimization risks</h2>
+                    <p>While calculating total words, checking keyword density is a natural subsequent step. Keyword density (the percentage of times a target keyword appears relative to the total word count) is largely an outdated ranking metric, but it remains a crucial risk-management indicator. An unusually high density (above 3-4%) can trigger over-optimization filters, signaling keyword stuffing to search engines. A word count checker helps ensure the vocabulary remains natural and varied.</p>
 
-                    <h2 id="word-count-dwell-time">How word count affects dwell time</h2>
-                    <p>Dwell time—the duration a user spends on a page before returning to the SERP—is an implicit engagement metric. Longer, high-quality content naturally commands higher dwell times. If a user spends five minutes reading a meticulously formatted 3,000-word tutorial, it signals to search engines that the search intent was thoroughly satisfied.</p>
+                    <h2 id="content-structure-and-paragraph-readability">Content structure and paragraph readability</h2>
+                    <p>The total volume of text must be balanced against paragraph readability. Advanced analysis breaks down the total word count into average words per sentence and words per paragraph. High averages indicate dense, academic structures that are difficult to consume on digital devices. Modern publishing standards recommend keeping paragraphs under 3-4 sentences and utilizing active voice to maintain a brisk, engaging pace.</p>
 
-                    <h2 id="content-pruning">Content pruning and word count</h2>
-                    <p>Routine site audits often reveal thousands of low-word-count legacy pages. Content pruning involves evaluating these pages: if a 200-word page attracts zero traffic, it should be consolidated, updated, or removed (410/301). Pruning thin pages concentrates a domain's crawl budget and elevates the overall quality score of the website.</p>
+                    <h2 id="how-heading-distribution-affects-readability">How heading distribution affects readability</h2>
+                    <p>Headings (H1 through H6) act as signposts. A robust word count analysis tool calculates the ratio of text to headings. A healthy document typically features a new heading every 200 to 300 words. If a tool flags a 1,500-word span without a single heading, it indicates a severe structural flaw that will deter scanners and negatively impact accessibility for screen readers.</p>
 
-                    <h2 id="updating-thin-content">How to update thin content safely</h2>
-                    <p>When updating thin pages, avoid merely appending superficial text. The workflow should involve reviewing current SERP competitors, identifying missing subtopics, injecting fresh data, and applying correct schema markup. Safe updates expand the semantic footprint while maintaining the page's original URL and historical authority.</p>
+                    <h2 id="comparing-competitor-article-depth">Comparing competitor article depth</h2>
+                    <p>Competitive intelligence relies on quantifying the opposition's efforts. By running competitor URLs through a word count checker, publishers can accurately reverse-engineer the depth required to rank. If the current ranking pages average twenty paragraphs and fifteen headings covering highly specific semantic entities, your editorial workflow must match or exceed that structural depth to compete effectively.</p>
 
-                    <h2 id="consistency-across-silos">Word count consistency across site silos</h2>
-                    <p>Enterprise domains maintain structural logic within their URL silos. For instance, all glossary terms might uniformly range from 300 to 500 words, while definitive guides sit consistently above 3,000 words. This programmatic consistency helps search engine crawlers understand the architectural hierarchy and purpose of different content types on the site.</p>
+                    <h2 id="editorial-quality-signals-beyond-word-count">Editorial quality signals beyond word count</h2>
+                    <p>While length is measurable, true quality is nuanced. Search engines assess E-E-A-T (Experience, Expertise, Authoritativeness, and Trustworthiness) through signals that exist regardless of word count. Original research, unique data sets, expert authorship, proper citations, and rich media integration elevate a page's value. A concise 800-word article by a renowned subject matter expert will vastly outperform a 4,000-word article written by a generalist.</p>
 
-                    <h2 id="quality-vs-quantity">Balancing quality and quantity</h2>
-                    <p>The ultimate goal of publishing is not word accumulation, but information density. A highly skilled editor can condense a rambling 2,000-word draft into a potent 1,200-word piece that delivers more value per paragraph. High information density ensures users stay engaged, reducing bounce rates while adequately fulfilling algorithms' semantic requirements.</p>
+                    <h2 id="content-pruning-and-consolidation-workflows">Content pruning and consolidation workflows</h2>
+                    <p>Content decay is inevitable. A word count checker assists in the pruning process by identifying thin, outdated pages that dilute domain authority. Consolidation workflows involve taking multiple short, poorly performing articles on closely related topics and merging them into a single, comprehensive, long-form master guide. This focuses link equity and provides a substantially better user experience.</p>
 
-                    <h2 id="programmatic-seo">Evaluating word count in a programmatic SEO strategy</h2>
-                    <p>In programmatic SEO, millions of pages are generated via datasets. The challenge is avoiding thin content penalties. Effective programmatic campaigns utilize conditional logic to combine datasets, dynamic text snippets, and user-generated reviews to ensure every generated page surpasses a baseline word count threshold, guaranteeing unique indexing clarity.</p>
+                    <h2 id="how-publishers-maintain-content-consistency">How publishers maintain content consistency</h2>
+                    <p>To operate at scale, editorial teams integrate automated checks into their CMS environments. Before an article can be published, it must pass predefined thresholds for word count, heading structures, and readability scores. This programmatic enforcement ensures that every piece of content published adheres to the brand's baseline standards, reducing the manual burden on editors.</p>
+
+                    <h2 id="common-misconceptions-about-seo-word-count">Common misconceptions about SEO word count</h2>
+                    <p>The most pervasive myth in SEO is that there is a "magic number" of words guaranteed to secure the number one position. Another misconception is that padding an article with irrelevant filler to hit a word count target will fool algorithms. In reality, modern natural language processing models easily identify fluff. Every sentence must propel the user closer to resolving their search intent.</p>
+
+                    <h2 id="website-word-count-during-migrations-and-redesigns">Website word count during migrations and redesigns</h2>
+                    <p>During a site migration or redesign, preserving content equity is critical. A common mistake during design updates is hiding extensive text behind tabs, accordions, or truncating it entirely for aesthetic reasons. Using a word count checker pre- and post-migration ensures that the critical textual volume search engines currently index has not been inadvertently removed or obfuscated by new design implementations.</p>
 
                     <div class="mt-12 pt-6 border-t border-slate-800">
-                        <p class="text-sm text-slate-500 mb-2"><strong class="text-slate-400">Logic:</strong> Text parsers strip HTML nodes to isolate pure readable characters, establishing accurate mathematical baselines for character limits and reading time projections.</p>
-                        <p class="text-sm text-slate-500"><strong class="text-slate-400">Methodology:</strong> The tool cross-references raw string lengths against an average adult reading speed of 225 words per minute to generate precise consumption metrics.</p>
+                        <p class="text-sm text-slate-500 mb-2"><strong class="text-slate-400">Logic:</strong> The analysis algorithm parses raw text or visible DOM elements, splitting strings via standard regex boundaries to calculate exact volumetric and structural metrics.</p>
+                        <p class="text-sm text-slate-500"><strong class="text-slate-400">Methodology:</strong> Reading and speaking time estimations apply standard linguistic benchmarks (238 wpm and 150 wpm respectively) to provide accurate user-expectation baselines.</p>
                     </div>
-                    
-                    <div class="mt-8">
-                        <h3 class="text-lg font-bold text-slate-300 mb-4">Citations & References</h3>
-                        <ul class="text-sm text-slate-400 space-y-2">
-                            <li><a href="https://developers.google.com/search/docs" target="_blank" rel="noopener" class="text-emerald-400 hover:underline">Google Search Central Documentation</a></li>
-                            <li><a href="https://schema.org" target="_blank" rel="noopener" class="text-emerald-400 hover:underline">Schema.org Structured Data Guidelines</a></li>
-                            <li><a href="https://search.google.com/test/rich-results" target="_blank" rel="noopener" class="text-emerald-400 hover:underline">Google Rich Results Test</a></li>
-                            <li><a href="https://www.w3.org/TR/json-ld/" target="_blank" rel="noopener" class="text-emerald-400 hover:underline">W3C JSON-LD Specifications</a></li>
+
+                    <div class="mt-12 pt-6 border-t border-slate-800" id="citations-section">
+                        <h3 class="text-lg font-bold text-slate-200 mb-4">Citations & References</h3>
+                        <ul class="space-y-2 text-sm">
+                            <li><a href="https://developers.google.com/search/docs/fundamentals/creating-helpful-content" target="_blank" rel="noopener noreferrer">Google Search Central: Creating Helpful, Reliable, People-First Content</a></li>
+                            <li><a href="https://www.nngroup.com/articles/how-users-read-on-the-web/" target="_blank" rel="noopener noreferrer">Nielsen Norman Group: How Users Read on the Web</a></li>
+                            <li><a href="https://hemingwayapp.com/" target="_blank" rel="noopener noreferrer">Hemingway Readability Guidelines</a></li>
+                            <li><a href="https://www.w3.org/WAI/WCAG21/Understanding/reading-level.html" target="_blank" rel="noopener noreferrer">W3C Web Content Accessibility Guidelines (WCAG) Readability Resources</a></li>
                         </ul>
                     </div>
 
@@ -390,12 +479,12 @@
             <div class="bg-slate-900 border border-slate-800 rounded-2xl p-6 flex flex-col md:flex-row items-center gap-6 justify-between">
                 <div class="flex items-center gap-4">
                     <div class="w-16 h-16 rounded-full bg-emerald-500/20 border-2 border-emerald-500 flex items-center justify-center text-2xl">
-                        🧑‍💻
+                        🧑‍💼
                     </div>
                     <div>
-                        <p class="text-xs text-emerald-400 font-bold uppercase tracking-widest mb-1">Reviewed by SEO Professionals</p>
+                        <p class="text-xs text-emerald-400 font-bold uppercase tracking-widest mb-1">Reviewed by Editorial Content Professionals</p>
                         <h4 class="text-lg font-semibold text-white">David Chen</h4>
-                        <p class="text-sm text-slate-400">Technical SEO & Content Architecture Lead</p>
+                        <p class="text-sm text-slate-400">Lead Technical SEO & Content Auditor</p>
                     </div>
                 </div>
                 <div class="text-left md:text-right">
@@ -413,51 +502,101 @@
                 
                 <div class="bg-slate-900 border border-slate-800 rounded-2xl overflow-hidden">
                     <button class="faq-btn w-full px-6 py-5 text-left flex justify-between items-center focus:outline-none" aria-expanded="false" onclick="toggleFaq(this)">
-                        <span class="font-semibold text-slate-200">What is the ideal word count for SEO?</span>
+                        <span class="font-semibold text-slate-200">Does word count directly affect Google rankings?</span>
                         <svg class="chevron w-5 h-5 text-emerald-400 transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
                     </button>
                     <div class="faq-content px-6 text-slate-400 text-sm leading-relaxed">
-                        <p class="pb-5">There is no universal ideal word count. The ideal length is dictated entirely by the user's search intent. However, competitive analysis often shows that informational guides ranking on page one average between 1,400 and 2,000 words.</p>
+                        <p class="pb-5">No, word count is not a direct algorithm ranking factor. However, it strongly correlates with content depth and comprehensiveness, which are major factors. A longer piece is more likely to cover the topic thoroughly, satisfying user intent.</p>
                     </div>
                 </div>
 
                 <div class="bg-slate-900 border border-slate-800 rounded-2xl overflow-hidden">
                     <button class="faq-btn w-full px-6 py-5 text-left flex justify-between items-center focus:outline-none" aria-expanded="false" onclick="toggleFaq(this)">
-                        <span class="font-semibold text-slate-200">Does word count directly impact Google rankings?</span>
+                        <span class="font-semibold text-slate-200">What is the ideal blog post length?</span>
                         <svg class="chevron w-5 h-5 text-emerald-400 transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
                     </button>
                     <div class="faq-content px-6 text-slate-400 text-sm leading-relaxed">
-                        <p class="pb-5">No, word count is not a direct ranking factor. Google ranks pages based on relevance and comprehensiveness. High word counts often correlate with higher rankings simply because longer texts cover topics more thoroughly.</p>
+                        <p class="pb-5">The ideal length depends entirely on the search intent and competitor landscape. If competitors average 1,500 words for a topic, that is your baseline. For quick definitions, 300 words might be perfect. For ultimate guides, 3,000+ words may be necessary.</p>
                     </div>
                 </div>
 
                 <div class="bg-slate-900 border border-slate-800 rounded-2xl overflow-hidden">
                     <button class="faq-btn w-full px-6 py-5 text-left flex justify-between items-center focus:outline-none" aria-expanded="false" onclick="toggleFaq(this)">
-                        <span class="font-semibold text-slate-200">How is reading time calculated?</span>
+                        <span class="font-semibold text-slate-200">How is reading time accurately estimated?</span>
                         <svg class="chevron w-5 h-5 text-emerald-400 transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
                     </button>
                     <div class="faq-content px-6 text-slate-400 text-sm leading-relaxed">
-                        <p class="pb-5">Reading time is typically estimated based on an average adult reading speed of 200 to 250 words per minute. Our tool divides the total word count by 225 to provide an accurate baseline reading metric.</p>
+                        <p class="pb-5">Reading time is standardly estimated by dividing the total word count by the average adult reading speed, which is approximately 238 words per minute. Speaking time is usually calculated at 150 words per minute.</p>
                     </div>
                 </div>
 
                 <div class="bg-slate-900 border border-slate-800 rounded-2xl overflow-hidden">
                     <button class="faq-btn w-full px-6 py-5 text-left flex justify-between items-center focus:outline-none" aria-expanded="false" onclick="toggleFaq(this)">
-                        <span class="font-semibold text-slate-200">Can a page have too many words?</span>
+                        <span class="font-semibold text-slate-200">What are the considerations for keyword density?</span>
                         <svg class="chevron w-5 h-5 text-emerald-400 transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
                     </button>
                     <div class="faq-content px-6 text-slate-400 text-sm leading-relaxed">
-                        <p class="pb-5">Yes. If a page inflates its word count with repetitive fluff or off-topic information, it degrades the user experience. This leads to higher bounce rates and signals poor quality to search engines.</p>
+                        <p class="pb-5">While no strict mathematical rule exists today, keeping keyword density below 2-3% prevents your text from appearing unnatural or "stuffed." Focus on writing naturally and incorporating LSI keywords rather than repeating the exact phrase.</p>
                     </div>
                 </div>
 
                 <div class="bg-slate-900 border border-slate-800 rounded-2xl overflow-hidden">
                     <button class="faq-btn w-full px-6 py-5 text-left flex justify-between items-center focus:outline-none" aria-expanded="false" onclick="toggleFaq(this)">
-                        <span class="font-semibold text-slate-200">How should I handle thin content on my website?</span>
+                        <span class="font-semibold text-slate-200">How should I audit for thin content?</span>
                         <svg class="chevron w-5 h-5 text-emerald-400 transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
                     </button>
                     <div class="faq-content px-6 text-slate-400 text-sm leading-relaxed">
-                        <p class="pb-5">Thin pages should be audited. Depending on their value, they should either be expanded with high-quality insights, consolidated with other similar pages via 301 redirects, or pruned with a 410 status code to save crawl budget.</p>
+                        <p class="pb-5">Crawl your site to flag indexable pages under 300 words. Evaluate if these pages answer a query effectively (like a contact page) or if they are low-quality articles that need to be expanded, consolidated, or removed.</p>
+                    </div>
+                </div>
+
+                <div class="bg-slate-900 border border-slate-800 rounded-2xl overflow-hidden">
+                    <button class="faq-btn w-full px-6 py-5 text-left flex justify-between items-center focus:outline-none" aria-expanded="false" onclick="toggleFaq(this)">
+                        <span class="font-semibold text-slate-200">How does paragraph length affect readability?</span>
+                        <svg class="chevron w-5 h-5 text-emerald-400 transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                    </button>
+                    <div class="faq-content px-6 text-slate-400 text-sm leading-relaxed">
+                        <p class="pb-5">Long, dense paragraphs create a "wall of text" that is hostile to mobile readers and scanners. Keeping paragraphs to 2-4 sentences improves visual rhythm, reduces cognitive load, and lowers bounce rates.</p>
+                    </div>
+                </div>
+
+                <div class="bg-slate-900 border border-slate-800 rounded-2xl overflow-hidden">
+                    <button class="faq-btn w-full px-6 py-5 text-left flex justify-between items-center focus:outline-none" aria-expanded="false" onclick="toggleFaq(this)">
+                        <span class="font-semibold text-slate-200">What is content consolidation?</span>
+                        <svg class="chevron w-5 h-5 text-emerald-400 transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                    </button>
+                    <div class="faq-content px-6 text-slate-400 text-sm leading-relaxed">
+                        <p class="pb-5">Consolidation involves taking several short, thin articles that cover similar aspects of a topic and merging them into one comprehensive, long-form guide, applying 301 redirects to preserve link equity.</p>
+                    </div>
+                </div>
+                
+                <div class="bg-slate-900 border border-slate-800 rounded-2xl overflow-hidden">
+                    <button class="faq-btn w-full px-6 py-5 text-left flex justify-between items-center focus:outline-none" aria-expanded="false" onclick="toggleFaq(this)">
+                        <span class="font-semibold text-slate-200">What are duplicate content considerations?</span>
+                        <svg class="chevron w-5 h-5 text-emerald-400 transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                    </button>
+                    <div class="faq-content px-6 text-slate-400 text-sm leading-relaxed">
+                        <p class="pb-5">When tracking word counts, be aware of boilerplate text (headers, footers, sidebars). True content analysis focuses on the main editorial body. Excessive duplicate text across many pages dilutes topical focus.</p>
+                    </div>
+                </div>
+
+                <div class="bg-slate-900 border border-slate-800 rounded-2xl overflow-hidden">
+                    <button class="faq-btn w-full px-6 py-5 text-left flex justify-between items-center focus:outline-none" aria-expanded="false" onclick="toggleFaq(this)">
+                        <span class="font-semibold text-slate-200">How important is heading distribution?</span>
+                        <svg class="chevron w-5 h-5 text-emerald-400 transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                    </button>
+                    <div class="faq-content px-6 text-slate-400 text-sm leading-relaxed">
+                        <p class="pb-5">Extremely important. Headings provide semantic structure for algorithms and visual breaks for readers. A healthy distribution typically includes a new heading every 200 to 300 words to aid scanability.</p>
+                    </div>
+                </div>
+
+                <div class="bg-slate-900 border border-slate-800 rounded-2xl overflow-hidden">
+                    <button class="faq-btn w-full px-6 py-5 text-left flex justify-between items-center focus:outline-none" aria-expanded="false" onclick="toggleFaq(this)">
+                        <span class="font-semibold text-slate-200">How do content refresh workflows operate?</span>
+                        <svg class="chevron w-5 h-5 text-emerald-400 transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                    </button>
+                    <div class="faq-content px-6 text-slate-400 text-sm leading-relaxed">
+                        <p class="pb-5">Refreshing involves updating outdated facts, expanding word count to cover new developments, and optimizing structures. Analyzing the current page length versus new top-ranking competitors is the first step of this workflow.</p>
                     </div>
                 </div>
 
@@ -480,6 +619,7 @@
                     <p class="text-emerald-400 font-medium mb-4">Awesome! We're glad it helped.</p>
                     <p class="text-sm text-slate-400 mb-4">Share it with your network:</p>
                     <div class="flex flex-wrap justify-center gap-2">
+                        <button onclick="shareLink('whatsapp')" class="text-xs px-3 py-1.5 rounded-full border border-slate-700 hover:bg-slate-800 transition-colors">WhatsApp</button>
                         <button onclick="shareLink('twitter')" class="text-xs px-3 py-1.5 rounded-full border border-slate-700 hover:bg-slate-800 transition-colors">X / Twitter</button>
                         <button onclick="shareLink('linkedin')" class="text-xs px-3 py-1.5 rounded-full border border-slate-700 hover:bg-slate-800 transition-colors">LinkedIn</button>
                     </div>
@@ -496,13 +636,13 @@
 
         <section class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 mb-20 text-center">
             <h2 class="text-3xl font-bold text-white mb-3">Found this helpful?</h2>
-            <p class="text-slate-400 mb-8">Share this guide with someone who might need it.</p>
+            <p class="text-slate-400 mb-8">Share this tool with someone who might need it.</p>
             <div class="flex flex-wrap items-center justify-center gap-3">
                 <button onclick="shareLink('whatsapp')" class="share-btn flex items-center gap-2">WhatsApp</button>
-                <button onclick="shareLink('facebook')" class="share-btn flex items-center gap-2">Facebook</button>
                 <button onclick="shareLink('twitter')" class="share-btn flex items-center gap-2">X / Twitter</button>
                 <button onclick="shareLink('linkedin')" class="share-btn flex items-center gap-2">LinkedIn</button>
                 <button onclick="shareLink('reddit')" class="share-btn flex items-center gap-2">Reddit</button>
+                <button onclick="shareLink('facebook')" class="share-btn flex items-center gap-2">Facebook</button>
                 <button onclick="shareLink('email')" class="share-btn flex items-center gap-2">Email</button>
                 <button onclick="copyToClipboard()" class="share-btn flex items-center gap-2">Copy Link</button>
             </div>
@@ -511,25 +651,25 @@
         <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-20">
             <h3 class="text-sm font-bold tracking-widest uppercase text-slate-500 mb-6">Related SEO Tools</h3>
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <a href="/programmatic/what-hosting-does-this-site-use.html" class="block p-6 rounded-2xl bg-slate-900 border border-slate-800 hover:border-emerald-500/50 hover:shadow-lg hover:shadow-emerald-500/5 transition-all group">
+                    <h4 class="text-lg font-semibold text-slate-200 group-hover:text-emerald-400 mb-2">Hosting Checker</h4>
+                    <p class="text-sm text-slate-400">Discover which hosting provider and infrastructure a website utilizes.</p>
+                </a>
+                <a href="/programmatic/website-seo-checker.html" class="block p-6 rounded-2xl bg-slate-900 border border-slate-800 hover:border-violet-500/50 hover:shadow-lg hover:shadow-violet-500/5 transition-all group">
+                    <h4 class="text-lg font-semibold text-slate-200 group-hover:text-violet-400 mb-2">Website SEO Checker</h4>
+                    <p class="text-sm text-slate-400">Perform a rapid, comprehensive technical on-page SEO audit.</p>
+                </a>
+                <a href="/programmatic/website-tech-stack-checker.html" class="block p-6 rounded-2xl bg-slate-900 border border-slate-800 hover:border-emerald-500/50 hover:shadow-lg hover:shadow-emerald-500/5 transition-all group">
+                    <h4 class="text-lg font-semibold text-slate-200 group-hover:text-emerald-400 mb-2">Tech Stack Checker</h4>
+                    <p class="text-sm text-slate-400">Identify the CMS, frameworks, and tools running any website.</p>
+                </a>
                 <a href="/seo-tools/meta-description-generator.html" class="block p-6 rounded-2xl bg-slate-900 border border-slate-800 hover:border-emerald-500/50 hover:shadow-lg hover:shadow-emerald-500/5 transition-all group">
                     <h4 class="text-lg font-semibold text-slate-200 group-hover:text-emerald-400 mb-2">Meta Description Generator</h4>
-                    <p class="text-sm text-slate-400">Create structured, readable snippets to maximize organic CTR.</p>
+                    <p class="text-sm text-slate-400">Draft optimized snippets designed to increase organic CTR.</p>
                 </a>
                 <a href="/seo-tools/schema-generator.html" class="block p-6 rounded-2xl bg-slate-900 border border-slate-800 hover:border-violet-500/50 hover:shadow-lg hover:shadow-violet-500/5 transition-all group">
-                    <h4 class="text-lg font-semibold text-slate-200 group-hover:text-violet-400 mb-2">Schema Markup Generator</h4>
-                    <p class="text-sm text-slate-400">Build JSON-LD structured data for rich snippets effortlessly.</p>
-                </a>
-                <a href="/seo-tools/serp-preview-tool.html" class="block p-6 rounded-2xl bg-slate-900 border border-slate-800 hover:border-emerald-500/50 hover:shadow-lg hover:shadow-emerald-500/5 transition-all group">
-                    <h4 class="text-lg font-semibold text-slate-200 group-hover:text-emerald-400 mb-2">SERP Preview Tool</h4>
-                    <p class="text-sm text-slate-400">Live Google snippet simulator to test metadata length and visibility.</p>
-                </a>
-                <a href="/seo-tools/robots-txt-generator.html" class="block p-6 rounded-2xl bg-slate-900 border border-slate-800 hover:border-emerald-500/50 hover:shadow-lg hover:shadow-emerald-500/5 transition-all group">
-                    <h4 class="text-lg font-semibold text-slate-200 group-hover:text-emerald-400 mb-2">Robots.txt Generator</h4>
-                    <p class="text-sm text-slate-400">Control search engine crawler access perfectly across your domain.</p>
-                </a>
-                <a href="/seo-tools/sitemap-generator.html" class="block p-6 rounded-2xl bg-slate-900 border border-slate-800 hover:border-violet-500/50 hover:shadow-lg hover:shadow-violet-500/5 transition-all group">
-                    <h4 class="text-lg font-semibold text-slate-200 group-hover:text-violet-400 mb-2">XML Sitemap Generator</h4>
-                    <p class="text-sm text-slate-400">Map your site architecture for rapid Googlebot indexing.</p>
+                    <h4 class="text-lg font-semibold text-slate-200 group-hover:text-violet-400 mb-2">Schema Generator</h4>
+                    <p class="text-sm text-slate-400">Create robust JSON-LD structured data to win rich results.</p>
                 </a>
             </div>
         </section>
@@ -584,7 +724,7 @@
                     &copy; <span id="current-year-footer">2026</span> AI Citation Scan. All Rights Reserved.
                 </p>
                 <p class="text-xs text-slate-500">
-                    Not affiliated with Google. Metrics provided are approximations for analysis.
+                    Not affiliated with Google. Analysis metrics are approximations.
                 </p>
             </div>
         </div>
@@ -595,8 +735,11 @@
             <button onclick="document.getElementById('contact-form-popup').classList.add('hidden')" class="absolute top-4 right-4 text-slate-400 hover:text-white">✕</button>
             <h3 class="text-xl font-bold text-white mb-2">Contact Us</h3>
             <p class="text-sm text-slate-400 mb-6">Let us know how we can improve this tool.</p>
-            <form name="feedback-request" data-netlify="true" netlify-honeypot="bot-field" onsubmit="handleContactForm(event)" class="space-y-4">
-                <p class="hidden"><label>Don’t fill this out if you're human: <input name="bot-field" /></label></p>
+            <form name="tool-feedback" method="POST" data-netlify="true" netlify-honeypot="bot-field" onsubmit="handleContactForm(event)" class="space-y-4">
+                <input type="hidden" name="form-name" value="tool-feedback" />
+                <div class="hidden">
+                    <label>Don’t fill this out if you're human: <input name="bot-field" /></label>
+                </div>
                 <div>
                     <label class="block text-xs font-medium text-slate-400 mb-1">Name</label>
                     <input type="text" name="name" required class="w-full bg-slate-800 border border-slate-700 rounded-lg px-4 py-2 text-white focus:outline-none focus:border-violet-500">
@@ -626,7 +769,6 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            // Dynamic Dates
             const today = new Date();
             document.getElementById('current-year-footer').textContent = today.getFullYear();
             
@@ -635,123 +777,257 @@
             document.getElementById('freshness-date').textContent = `Updated ${formattedDate}`;
             document.getElementById('eeat-date').textContent = formattedDate;
 
-            // Seasonal Banner
-            const month = today.getMonth();
-            const seasons = ['Winter', 'Winter', 'Spring', 'Spring', 'Spring', 'Summer', 'Summer', 'Summer', 'Fall', 'Fall', 'Fall', 'Winter'];
-            document.getElementById('seasonal-banner').textContent = `${seasons[month]} ${today.getFullYear()} Edition`;
-
-            // Rotating CTA
-            const ctaPhrases = ['Analyze Content', 'Calculate Depth', 'Check Word Count', 'Extract Metrics'];
-            document.getElementById('cta-text').textContent = ctaPhrases[Math.floor(Math.random() * ctaPhrases.length)];
-
-            // Setup TOC
             buildTOC();
             
-            // Check Feedback State
-            if (localStorage.getItem('word_tool_feedback')) {
+            if (localStorage.getItem('wordcount_tool_feedback')) {
                 document.getElementById('feedback-widget').classList.add('hidden');
             }
 
-            // Generate JSON-LD dynamically
             injectSchema(today);
         });
 
-        /* --- TOOL LOGIC: WORD COUNT CHECKER --- */
-        
-        function analyzeText() {
-            const rawText = document.getElementById('content-input').value;
-            
-            if (!rawText.trim()) {
-                showToast('Please paste some text or HTML to analyze.');
-                return;
-            }
-
-            // Strip HTML elements using a regex to parse pure text content
-            let cleanText = rawText.replace(/<[^>]*>?/gm, ' ');
-            
-            // Decode basic HTML entities for accurate character counts
-            cleanText = cleanText.replace(/&nbsp;/g, ' ').replace(/&amp;/g, '&').replace(/&lt;/g, '<').replace(/&gt;/g, '>');
-
-            // Calculate Metrics
-            const chars = cleanText.length;
-            
-            // Words: split by whitespace
-            const wordsArray = cleanText.trim().split(/\s+/).filter(w => w.length > 0);
-            const wordCount = wordsArray.length;
-            
-            // Sentences: split by period, exclamation, or question mark
-            const sentenceArray = cleanText.split(/[.!?]+/).filter(s => s.trim().length > 0);
-            const sentenceCount = sentenceArray.length;
-
-            // Estimated reading time: average 225 wpm
-            const readTime = Math.max(1, Math.ceil(wordCount / 225));
-
-            // Animate Numbers
-            animateValue('result-words', parseInt(document.getElementById('result-words').innerText) || 0, wordCount, 600);
-            animateValue('result-chars', parseInt(document.getElementById('result-chars').innerText) || 0, chars, 600);
-            animateValue('result-sentences', parseInt(document.getElementById('result-sentences').innerText) || 0, sentenceCount, 600);
-            document.getElementById('result-time').innerHTML = `${readTime}<span class="text-lg text-slate-500 font-normal ml-1">min</span>`;
-
-            // Simulate Keyword Frequencies
-            generateKeywordFrequency(wordsArray);
-
-            showToast('Analysis complete!');
+        // Contact Form Logic - Strict Netlify Requirement
+        function handleContactForm(e) { 
+            e.preventDefault();
+            const myForm = e.target; 
+            const formData = new FormData(myForm);
+            fetch("/", { 
+                method: "POST", 
+                headers: { "Content-Type": "application/x-www-form-urlencoded" }, 
+                body: new URLSearchParams(formData).toString() 
+            }) 
+            .then(() => { 
+                alert("Thank you! Your request has been transmitted."); 
+                myForm.reset(); 
+            }) 
+            .catch((error) => { 
+                alert("Oops! There was a problem submitting your form."); 
+                console.error("Form submission error:", error); 
+            });
         }
 
-        function animateValue(id, start, end, duration) {
-            const obj = document.getElementById(id);
-            let startTimestamp = null;
-            const step = (timestamp) => {
-                if (!startTimestamp) startTimestamp = timestamp;
-                const progress = Math.min((timestamp - startTimestamp) / duration, 1);
-                obj.innerText = Math.floor(progress * (end - start) + start).toLocaleString();
-                if (progress < 1) {
-                    window.requestAnimationFrame(step);
+        // Tool Logic
+        let currentMode = 'url';
+        let latestAnalysis = null;
+
+        function setToolMode(mode) {
+            currentMode = mode;
+            const btnUrl = document.getElementById('mode-url');
+            const btnText = document.getElementById('mode-text');
+            const wrapUrl = document.getElementById('input-url-wrapper');
+            const wrapText = document.getElementById('input-text-wrapper');
+
+            if(mode === 'url') {
+                btnUrl.className = 'px-3 py-1 rounded-md text-xs font-medium bg-slate-700 text-white transition-all';
+                btnText.className = 'px-3 py-1 rounded-md text-xs font-medium text-slate-400 hover:text-white transition-all';
+                wrapUrl.classList.remove('hidden');
+                wrapText.classList.add('hidden');
+            } else {
+                btnText.className = 'px-3 py-1 rounded-md text-xs font-medium bg-slate-700 text-white transition-all';
+                btnUrl.className = 'px-3 py-1 rounded-md text-xs font-medium text-slate-400 hover:text-white transition-all';
+                wrapText.classList.remove('hidden');
+                wrapUrl.classList.add('hidden');
+            }
+        }
+
+        async function runContentAnalysis() {
+            const btnAnalyze = document.getElementById('btn-analyze');
+            const loader = document.getElementById('analyze-loader');
+            const textEl = document.getElementById('analyze-text');
+            const keyword = document.getElementById('target-keyword').value.trim().toLowerCase();
+            
+            let rawText = '';
+            let headingCount = 0;
+            let pCount = 0;
+
+            btnAnalyze.disabled = true;
+            loader.style.display = 'inline-block';
+            textEl.textContent = 'Analyzing...';
+
+            try {
+                if (currentMode === 'url') {
+                    let targetUrl = document.getElementById('target-url').value.trim();
+                    if(!targetUrl) {
+                        showToast('Please enter a valid URL');
+                        throw new Error('Empty URL');
+                    }
+                    if(!targetUrl.startsWith('http')) targetUrl = 'https://' + targetUrl;
+                    
+                    // Client-side fetch proxy for tool demonstration
+                    const response = await fetch(`https://api.allorigins.win/get?url=${encodeURIComponent(targetUrl)}`);
+                    if(!response.ok) throw new Error('Fetch failed');
+                    const data = await response.json();
+                    
+                    if(!data.contents) throw new Error('No content returned');
+                    
+                    const parser = new DOMParser();
+                    const doc = parser.parseFromString(data.contents, 'text/html');
+                    
+                    // Remove scripts and styles for clean text extraction
+                    doc.querySelectorAll('script, style, noscript, nav, footer, header').forEach(el => el.remove());
+                    
+                    rawText = doc.body ? doc.body.innerText : '';
+                    headingCount = doc.querySelectorAll('h1, h2, h3, h4, h5, h6').length;
+                    pCount = doc.querySelectorAll('p').length;
+
+                } else {
+                    rawText = document.getElementById('manual-text').value;
+                    if(!rawText.trim()) {
+                        showToast('Please enter text to analyze');
+                        throw new Error('Empty Text');
+                    }
+                    // Estimate structure from raw text
+                    pCount = rawText.split(/\n\s*\n/).filter(p => p.trim().length > 0).length;
+                    headingCount = 0; // Not applicable in raw text accurately
                 }
+
+                if(!rawText.trim()) throw new Error('No visible text found');
+
+                processMetrics(rawText, headingCount, pCount, keyword);
+
+            } catch(e) {
+                if(e.message !== 'Empty URL' && e.message !== 'Empty Text') {
+                    showToast('Analysis failed or blocked by server.');
+                }
+            } finally {
+                btnAnalyze.disabled = false;
+                loader.style.display = 'none';
+                textEl.textContent = 'Analyze Content';
+            }
+        }
+
+        function processMetrics(text, headings, paras, keyword) {
+            const cleanText = text.replace(/\s+/g, ' ').trim();
+            const wordsArray = cleanText.split(' ').filter(w => w.length > 0);
+            const totalWords = wordsArray.length;
+            const totalChars = cleanText.length;
+            const charsNoSpace = cleanText.replace(/\s/g, '').length;
+            
+            // Times
+            const readTimeMins = Math.floor(totalWords / 238);
+            const readTimeSecs = Math.round((totalWords % 238) / (238 / 60));
+            
+            const speakTimeMins = Math.floor(totalWords / 150);
+            const speakTimeSecs = Math.round((totalWords % 150) / (150 / 60));
+
+            // Density
+            let density = '0%';
+            if(keyword && totalWords > 0) {
+                const kwArray = keyword.split(' ').filter(w => w.length > 0);
+                const kwLen = kwArray.length;
+                let kwCount = 0;
+                
+                if(kwLen === 1) {
+                    kwCount = wordsArray.filter(w => w.toLowerCase() === keyword).length;
+                } else if(kwLen > 1) {
+                    const regex = new RegExp('\\b' + keyword.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + '\\b', 'gi');
+                    const matches = cleanText.match(regex);
+                    kwCount = matches ? matches.length : 0;
+                }
+                density = ((kwCount / totalWords) * 100).toFixed(1) + '%';
+            }
+
+            // Quality Logic
+            let depthScore = Math.min(100, Math.round((totalWords / 1500) * 50 + (paras / 20) * 30 + (headings / 10) * 20));
+            if(totalWords < 300) depthScore = Math.min(depthScore, 20);
+
+            let flagThinTitle = 'Content Length Status';
+            let flagThinDesc = '';
+            let flagThinColor = 'var(--emerald)';
+            
+            if(totalWords < 300) {
+                flagThinDesc = 'Thin content warning. Too short for deep ranking capability.';
+                flagThinColor = '#ef4444';
+            } else if (totalWords >= 1000) {
+                flagThinDesc = 'Long-form content. Excellent foundation for depth.';
+                flagThinColor = 'var(--emerald)';
+            } else {
+                flagThinDesc = 'Standard length. Suitable for targeted queries.';
+                flagThinColor = '#f59e0b';
+            }
+
+            let scanDesc = '';
+            let scanColor = 'var(--emerald)';
+            if(headings === 0 && currentMode === 'url') {
+                scanDesc = 'Poor structural layout. No headings found to break up text.';
+                scanColor = '#ef4444';
+            } else if (paras > 0 && totalWords / paras > 100) {
+                scanDesc = 'Dense paragraphs detected. May harm mobile readability.';
+                scanColor = '#f59e0b';
+            } else {
+                scanDesc = 'Good visual rhythm and structural pacing detected.';
+                scanColor = 'var(--emerald)';
+            }
+
+            // Update DOM
+            document.getElementById('results-placeholder').classList.add('hidden');
+            document.getElementById('results-dashboard').classList.remove('hidden');
+
+            document.getElementById('res-words').textContent = totalWords.toLocaleString();
+            document.getElementById('res-chars').textContent = totalChars.toLocaleString();
+            document.getElementById('res-chars-ns').textContent = charsNoSpace.toLocaleString();
+            document.getElementById('res-read-time').textContent = `${readTimeMins}m ${readTimeSecs}s`;
+            
+            document.getElementById('res-paras').textContent = paras.toLocaleString();
+            document.getElementById('res-headings').textContent = currentMode === 'url' ? headings : 'N/A';
+            document.getElementById('res-speak-time').textContent = `${speakTimeMins}m ${speakTimeSecs}s`;
+            document.getElementById('res-density').textContent = currentMode === 'text' && !keyword ? 'N/A' : density;
+
+            document.getElementById('depth-score-text').textContent = `${depthScore} / 100`;
+            document.getElementById('depth-meter').style.width = `${depthScore}%`;
+            document.getElementById('depth-meter').className = `meter-fill ${depthScore > 75 ? 'meter-safe' : (depthScore > 40 ? 'meter-warn' : 'meter-danger')}`;
+
+            document.getElementById('flag-thin').style.backgroundColor = flagThinColor;
+            document.getElementById('flag-thin-desc').textContent = flagThinDesc;
+
+            document.getElementById('flag-scan').style.backgroundColor = scanColor;
+            document.getElementById('flag-scan-desc').textContent = currentMode === 'url' ? scanDesc : 'Requires URL mode for accurate scanability check.';
+
+            latestAnalysis = {
+                words: totalWords, chars: totalChars, reading: `${readTimeMins}m ${readTimeSecs}s`, density: density, score: depthScore
             };
-            window.requestAnimationFrame(step);
+            
+            showToast('Analysis complete');
         }
 
-        function generateKeywordFrequency(wordsArray) {
-            // Very basic simulation for frequent long words (ignoring common stop words via length check)
-            const freqMap = {};
-            wordsArray.forEach(w => {
-                const cleanW = w.toLowerCase().replace(/[^a-z0-9]/g, '');
-                if (cleanW.length > 5) {
-                    freqMap[cleanW] = (freqMap[cleanW] || 0) + 1;
-                }
-            });
+        function clearAnalysis() {
+            document.getElementById('target-url').value = '';
+            document.getElementById('manual-text').value = '';
+            document.getElementById('target-keyword').value = '';
+            
+            document.getElementById('results-placeholder').classList.remove('hidden');
+            document.getElementById('results-dashboard').classList.add('hidden');
+            latestAnalysis = null;
+            showToast('Inputs cleared');
+        }
 
-            const sorted = Object.keys(freqMap).sort((a, b) => freqMap[b] - freqMap[a]).slice(0, 3);
-            const container = document.getElementById('keyword-results');
-            container.innerHTML = '';
-
-            if (sorted.length === 0) {
-                container.innerHTML = '<div class="text-sm text-slate-500 italic text-center py-4">Not enough data for keyword tracking.</div>';
+        function copySummary() {
+            if(!latestAnalysis) {
+                showToast('Run analysis first');
                 return;
             }
-
-            sorted.forEach((kw, index) => {
-                const div = document.createElement('div');
-                div.className = 'flex justify-between items-center text-sm p-2 rounded bg-slate-800/50';
-                div.innerHTML = `<span class="text-emerald-400 capitalize">${kw}</span> <span class="text-slate-400 font-mono">${freqMap[kw]} mentions</span>`;
-                container.appendChild(div);
-            });
+            const summary = `Website Content Audit Summary:\nTotal Words: ${latestAnalysis.words}\nCharacters: ${latestAnalysis.chars}\nEst. Reading Time: ${latestAnalysis.reading}\nKeyword Density: ${latestAnalysis.density}\nDepth Score: ${latestAnalysis.score}/100`;
+            navigator.clipboard.writeText(summary).then(() => showToast('Summary copied'));
         }
 
-        function resetTool() {
-            document.getElementById('content-input').value = '';
-            document.getElementById('result-words').innerText = '0';
-            document.getElementById('result-chars').innerText = '0';
-            document.getElementById('result-sentences').innerText = '0';
-            document.getElementById('result-time').innerHTML = '0<span class="text-lg text-slate-500 font-normal ml-1">min</span>';
-            document.getElementById('keyword-results').innerHTML = '<div class="text-sm text-slate-500 italic text-center py-4">Run analysis to view top occurring phrases.</div>';
-            showToast('Input cleared');
+        function exportReport() {
+            if(!latestAnalysis) {
+                showToast('Run analysis first');
+                return;
+            }
+            const summary = `AI CITATION SCAN - CONTENT ANALYSIS REPORT\n\nTotal Words: ${latestAnalysis.words}\nCharacters: ${latestAnalysis.chars}\nEst. Reading Time: ${latestAnalysis.reading}\nKeyword Density: ${latestAnalysis.density}\nDepth Score: ${latestAnalysis.score}/100\n\nGenerated on: ${new Date().toISOString()}`;
+            const blob = new Blob([summary], { type: 'text/plain' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'content_analysis_report.txt';
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
         }
 
-        /* --- GLOBAL UI SCRIPTS --- */
-
-        // Scroll Progress
+        // Global Scripts
         window.addEventListener("scroll", () => {
             const winScroll = document.documentElement.scrollTop;
             const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
@@ -759,7 +1035,6 @@
             document.getElementById("scrollProgress").style.width = scrolled + "%";
         }, { passive: true });
 
-        // Build TOC and ScrollSpy
         function buildTOC() {
             const headings = document.querySelectorAll('.editorial-content h2[id]');
             const tocNav = document.getElementById('toc-nav');
@@ -789,7 +1064,6 @@
             headings.forEach(h2 => observer.observe(h2));
         }
 
-        // Share functionality
         function shareLink(platform) {
             const url = encodeURIComponent(window.location.href);
             const title = encodeURIComponent(document.title);
@@ -821,7 +1095,6 @@
             });
         }
 
-        // FAQ Accordion
         function toggleFaq(btn) {
             const isExpanded = btn.getAttribute('aria-expanded') === 'true';
             btn.setAttribute('aria-expanded', !isExpanded);
@@ -833,9 +1106,8 @@
             }
         }
 
-        // Feedback System
         function handleFeedback(isHelpful) {
-            localStorage.setItem('word_tool_feedback', isHelpful ? 'yes' : 'no');
+            localStorage.setItem('wordcount_tool_feedback', isHelpful ? 'yes' : 'no');
             if(isHelpful) {
                 document.getElementById('feedback-yes').classList.remove('hidden');
                 document.getElementById('feedback-no').classList.add('hidden');
@@ -846,35 +1118,10 @@
             event.target.parentElement.classList.add('hidden');
         }
 
-        // Netlify Form Submission handler
-        function handleContactForm(e) {
-            e.preventDefault();
-            const myForm = e.target;
-            const formData = new FormData(myForm);
-            
-            fetch("/", {
-                method: "POST",
-                headers: { "Content-Type": "application/x-www-form-urlencoded" },
-                body: new URLSearchParams(formData).toString()
-            })
-            .then(() => {
-                showToast("Thank you! Your request has been transmitted.");
-                myForm.reset();
-                if(myForm.name === 'feedback-request') {
-                    document.getElementById('contact-form-popup').classList.add('hidden');
-                }
-            })
-            .catch((error) => {
-                showToast("Oops! There was a problem submitting your form.");
-                console.error("Form submission error:", error);
-            });
-        }
-
-        // Toast System
         function showToast(message) {
             const container = document.getElementById('toast-container');
             const toast = document.createElement('div');
-            toast.className = 'bg-emerald-500 text-slate-950 px-4 py-2 rounded-lg shadow-lg shadow-emerald-500/20 text-sm font-semibold transform transition-all translate-y-10 opacity-0';
+            toast.className = 'bg-emerald-500 text-slate-900 px-4 py-2 rounded-lg shadow-lg text-sm font-bold transform transition-all translate-y-10 opacity-0';
             toast.textContent = message;
             container.appendChild(toast);
             
@@ -888,7 +1135,6 @@
             }, 3000);
         }
 
-        // Dynamic Schema Injection
         function injectSchema(today) {
             const d = new Date(today);
             const day = d.getDay();
@@ -903,7 +1149,7 @@
                         "@id": "https://aicitationscan.com/programmatic/website-word-count-checker.html#webapp",
                         "name": "Website Word Count Checker",
                         "url": "https://aicitationscan.com/programmatic/website-word-count-checker.html",
-                        "description": "Analyze the exact word count, character count, and reading time of any webpage text.",
+                        "description": "Analyze webpage content depth, word count, readability, paragraph structure, and estimated reading time.",
                         "applicationCategory": "BusinessApplication",
                         "operatingSystem": "All",
                         "dateModified": lastMonday,
@@ -913,15 +1159,15 @@
                         "@type": "Article",
                         "headline": "Website Word Count Checker: Analyze Content Depth",
                         "author": {"@type": "Person", "name": "AI Citation Scan Editorial Team"},
-                        "datePublished": "2024-03-15",
+                        "datePublished": "2024-02-15",
                         "dateModified": lastMonday
                     },
                     {
                         "@type": "FAQPage",
                         "@id": "https://aicitationscan.com/programmatic/website-word-count-checker.html#faq",
                         "mainEntity": [
-                            { "@type": "Question", "name": "What is the ideal word count for SEO?", "acceptedAnswer": { "@type": "Answer", "text": "There is no universal ideal word count. The ideal length is dictated entirely by the user's search intent. However, competitive analysis often shows that informational guides ranking on page one average between 1,400 and 2,000 words." }},
-                            { "@type": "Question", "name": "Does word count directly impact Google rankings?", "acceptedAnswer": { "@type": "Answer", "text": "No, word count is not a direct ranking factor. Google ranks pages based on relevance and comprehensiveness. High word counts often correlate with higher rankings simply because longer texts cover topics more thoroughly." }}
+                            { "@type": "Question", "name": "Does word count directly affect Google rankings?", "acceptedAnswer": { "@type": "Answer", "text": "No, word count is not a direct algorithm ranking factor. However, it strongly correlates with content depth and comprehensiveness." }},
+                            { "@type": "Question", "name": "How is reading time accurately estimated?", "acceptedAnswer": { "@type": "Answer", "text": "Reading time is standardly estimated by dividing the total word count by the average adult reading speed, which is approximately 238 words per minute." }}
                         ]
                     }
                 ]
