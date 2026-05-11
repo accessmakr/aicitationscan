@@ -1,0 +1,22 @@
+{
+  "jsonld": {
+    "name": "JSON-LD Schema",
+    "category": "schema",
+
+    "signals": [
+      {
+        "type": "html",
+        "pattern": "application/ld+json",
+        "match": "contains",
+
+        "weight": 5,
+        "reliability": 0.98,
+        "uniqueness": 0.95,
+
+        "severity": "strong",
+
+        "evidence": "JSON-LD structured data detected"
+      }
+    ]
+  }
+}
