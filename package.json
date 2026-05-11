@@ -1,0 +1,11 @@
+{
+  "name": "ai-citation-scan",
+  "version": "1.0.0",
+  "description": "AI Citation Scan Tools",
+  "type": "module",
+  "dependencies": {
+    "axios": "^1.7.2",
+    "cheerio": "^1.0.0",
+    "ua-parser-js": "^2.0.0"
+  }
+}
