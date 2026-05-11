@@ -1,167 +1,217 @@
 {
   "wordpress": {
-    "confidence": 0.95,
+    "baseConfidence": 0.92,
     "signals": [
       {
         "type": "html",
         "pattern": "wp-content",
-        "weight": 3
+        "weight": 4,
+        "reliability": 0.95,
+        "exclusive": true
       },
       {
         "type": "html",
         "pattern": "wp-includes",
-        "weight": 3
+        "weight": 4,
+        "reliability": 0.95,
+        "exclusive": true
       },
       {
         "type": "url",
         "pattern": "wp-json",
-        "weight": 2
+        "weight": 3,
+        "reliability": 0.8,
+        "exclusive": false
       },
       {
         "type": "url",
         "pattern": "xmlrpc.php",
-        "weight": 3
+        "weight": 5,
+        "reliability": 0.98,
+        "exclusive": true
       },
       {
         "type": "html",
         "pattern": "wordpress",
-        "weight": 1
+        "weight": 1,
+        "reliability": 0.4,
+        "exclusive": false
       }
     ]
   },
 
   "shopify": {
-    "confidence": 0.95,
+    "baseConfidence": 0.95,
     "signals": [
       {
         "type": "url",
         "pattern": "cdn.shopify.com",
-        "weight": 3
+        "weight": 5,
+        "reliability": 0.99,
+        "exclusive": true
       },
       {
         "type": "html",
         "pattern": "Shopify.theme",
-        "weight": 3
+        "weight": 4,
+        "reliability": 0.95,
+        "exclusive": true
       },
       {
         "type": "script",
         "pattern": "ShopifyAnalytics",
-        "weight": 3
+        "weight": 4,
+        "reliability": 0.9,
+        "exclusive": true
       },
       {
         "type": "html",
         "pattern": "myshopify.com",
-        "weight": 3
+        "weight": 5,
+        "reliability": 0.99,
+        "exclusive": true
       },
       {
         "type": "html",
         "pattern": "shopify-section",
-        "weight": 2
+        "weight": 3,
+        "reliability": 0.85,
+        "exclusive": true
       }
     ]
   },
 
   "webflow": {
-    "confidence": 0.9,
+    "baseConfidence": 0.9,
     "signals": [
       {
         "type": "script",
         "pattern": "webflow.js",
-        "weight": 3
+        "weight": 4,
+        "reliability": 0.95,
+        "exclusive": true
       },
       {
         "type": "html",
         "pattern": "data-wf-page",
-        "weight": 3
+        "weight": 5,
+        "reliability": 0.98,
+        "exclusive": true
       },
       {
         "type": "html",
         "pattern": "data-wf-site",
-        "weight": 3
+        "weight": 5,
+        "reliability": 0.98,
+        "exclusive": true
       }
     ]
   },
 
   "wix": {
-    "confidence": 0.9,
+    "baseConfidence": 0.88,
     "signals": [
       {
         "type": "url",
         "pattern": "wixstatic.com",
-        "weight": 3
+        "weight": 5,
+        "reliability": 0.99,
+        "exclusive": true
       },
       {
         "type": "header",
-        "pattern": "X-Wix-Request-Id",
-        "weight": 3
+        "pattern": "x-wix-request-id",
+        "weight": 5,
+        "reliability": 0.99,
+        "exclusive": true
       },
       {
         "type": "html",
         "pattern": "wix.com",
-        "weight": 2
+        "weight": 2,
+        "reliability": 0.6,
+        "exclusive": false
       }
     ]
   },
 
   "squarespace": {
-    "confidence": 0.85,
+    "baseConfidence": 0.85,
     "signals": [
       {
         "type": "url",
         "pattern": "squarespace.com",
-        "weight": 3
+        "weight": 4,
+        "reliability": 0.95,
+        "exclusive": true
       },
       {
         "type": "html",
         "pattern": "static.squarespace",
-        "weight": 3
+        "weight": 4,
+        "reliability": 0.95,
+        "exclusive": true
       },
       {
         "type": "html",
         "pattern": "sqs-block",
-        "weight": 2
+        "weight": 3,
+        "reliability": 0.9,
+        "exclusive": true
       }
     ]
   },
 
   "ghost": {
-    "confidence": 0.8,
+    "baseConfidence": 0.8,
     "signals": [
       {
         "type": "url",
         "pattern": "ghost.org",
-        "weight": 3
+        "weight": 4,
+        "reliability": 0.95,
+        "exclusive": true
       },
       {
         "type": "script",
         "pattern": "ghost.min.js",
-        "weight": 3
+        "weight": 4,
+        "reliability": 0.95,
+        "exclusive": true
       },
       {
         "type": "html",
         "pattern": "content-api",
-        "weight": 2
+        "weight": 2,
+        "reliability": 0.7,
+        "exclusive": false
       }
     ]
   },
 
   "drupal": {
-    "confidence": 0.85,
+    "baseConfidence": 0.85,
     "signals": [
       {
         "type": "html",
-        "pattern": "Drupal.settings",
-        "weight": 3
+        "pattern": "drupal.settings",
+        "weight": 5,
+        "reliability": 0.98,
+        "exclusive": true
       },
       {
         "type": "url",
         "pattern": "sites/default",
-        "weight": 3
+        "weight": 4,
+        "reliability": 0.95,
+        "exclusive": true
       },
       {
         "type": "script",
         "pattern": "drupal.js",
-        "weight": 2
+        "weight": 3,
+        "reliability": 0.9,
+        "exclusive": true
       }
     ]
   }
