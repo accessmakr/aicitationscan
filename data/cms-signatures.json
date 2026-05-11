@@ -1,0 +1,39 @@
+
+  {
+    "name": "WordPress",
+    "patterns": [
+      "wp-con[tent",
+      "wp-includes",
+      "wordpress"
+    ]
+  },
+  {
+    "name": "Shopify",
+    "patterns": [
+      "cdn.shopify.com",
+      "shopify.theme",
+      "shopify-payment-button"
+    ]
+  },
+  {
+    "name": "Webflow",
+    "patterns": [
+      "webflow",
+      "w-webflow"
+    ]
+  },
+  {
+    "name": "Wix",
+    "patterns": [
+      "wix.com",
+      "wix-image"
+    ]
+  },
+  {
+    "name": "Squarespace",
+    "patterns": [
+      "squarespace",
+      "static.squarespace"
+    ]
+  }
+]
