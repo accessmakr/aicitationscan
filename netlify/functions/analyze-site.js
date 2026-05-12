@@ -7,17 +7,26 @@ import { analyzeTechnology } from "../../engine/intelligence-engine.js";
 import { calculateScores } from "../../engine/scoring-engine.js";
 import { generateInsights } from "../../engine/explanation-engine.js";
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
+/**
+ * FIX: ensure these are declared ONLY ONCE
+ */
+const currentFile = fileURLToPath(import.meta.url);
+const currentDir = path.dirname(currentFile);
 
-// LOAD JSON SAFELY
+/**
+ * SAFE JSON LOADER
+ */
 function loadJSON(file) {
   try {
     const filePath = path.join(
-      __dirname,
+      currentDir,
       "../../public/data",
       file
     );
+
+    if (!fs.existsSync(filePath)) {
+      return {};
+    }
 
     return JSON.parse(fs.readFileSync(filePath, "utf-8"));
   } catch (e) {
@@ -43,53 +52,79 @@ export default async (req) => {
       ? url
       : `https://${url}`;
 
-    // FETCH SITE
+    // FETCH TARGET SITE
     const response = await axios.get(target, {
       timeout: 15000,
       maxRedirects: 5,
       headers: {
-        "User-Agent": "AI Citation Scan Bot"
+        "User-Agent": "AI Visibility Scanner Bot"
       }
     });
 
-    const html = response.data;
-    const headers = response.headers;
+    const html = response.data || "";
+    const headers = response.headers || {};
 
-    // LOAD SIGNATURES (CRITICAL FIX)
+    /**
+     * LOAD SIGNATURES SAFELY
+     */
     const signatures = {
       ...loadJSON("cms-signatures.json"),
       ...loadJSON("framework-signatures.json"),
       ...loadJSON("hosting-signatures.json"),
-      ...loadJSON("analytics-signatures.json")
+      ...loadJSON("analytics-signatures.json"),
+      ...loadJSON("ai-signatures.json"),
+      ...loadJSON("marketing-signatures.json"),
+      ...loadJSON("ecommerce-signatures.json"),
+      ...loadJSON("cdn-signatures.json"),
+      ...loadJSON("security-signatures.json")
     };
 
-    // SAFETY CHECK (THIS FIXES YOUR ERROR)
+    // HARD SAFETY CHECK
     if (!signatures || Object.keys(signatures).length === 0) {
       return new Response(
         JSON.stringify({
           success: false,
-          error: "No signatures loaded"
+          error: "No signatures loaded from /public/data"
         }),
         { status: 500 }
       );
     }
 
-    // RUN ENGINE
+    /**
+     * RUN DETECTION ENGINE
+     */
     const detections = await analyzeTechnology(
       { html, headers },
       signatures
     );
 
-    const scores = calculateScores(detections);
-    const insights = generateInsights(detections, scores);
+    /**
+     * SCORE ENGINE (SAFE FALLBACK)
+     */
+    const scores =
+      typeof calculateScores === "function"
+        ? calculateScores(detections)
+        : {
+            score: 0,
+            grade: "N/A",
+            breakdown: detections
+          };
+
+    /**
+     * INSIGHTS ENGINE (SAFE FALLBACK)
+     */
+    const insights =
+      typeof generateInsights === "function"
+        ? generateInsights(detections, scores)
+        : [];
 
     return new Response(
       JSON.stringify({
         success: true,
         url: target,
         detections,
-        score: scores.score,
-        grade: scores.grade,
+        score: scores.score || 0,
+        grade: scores.grade || "Unknown",
         insights
       }),
       {
