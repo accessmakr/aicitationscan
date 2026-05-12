@@ -91,18 +91,6 @@ window.siteRegistry = [
                 "url": "/terms-of-use"
             }
         ]
-    },
-    {
-        "folderName": "Public",
-        "folderPath": "/public/",
-        "icon": "📁",
-        "priority": 0,
-        "pages": [
-            {
-                "name": "Scanner",
-                "url": "/public/scanner"
-            }
-        ]
     }
 ];
 
@@ -161,11 +149,6 @@ window.seoRegistry = {
         "url": "/programmatic/website-word-count-checker",
         "title": "Website Word Count Checker — Analyze Content Depth & Reading Time | AI Citation Scan",
         "desc": "Free website word count checker — analyze content depth, reading time, keyword density, heading structure, and thin content risks for any URL or pasted text instantly."
-    },
-    "scanner.html": {
-        "url": "/public/scanner",
-        "title": "Website Tech Stack Checker",
-        "desc": ""
     },
     "meta-description-generator.html": {
         "url": "/seo-tools/meta-description-generator",
