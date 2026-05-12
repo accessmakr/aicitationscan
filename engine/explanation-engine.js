@@ -1,39 +1,23 @@
-export function generateInsights(detections = [], scores = {}) {
+export function generateInsights({ detections, score, aiVisibility, migration }) {
   const insights = [];
 
-  const hasCMS = detections.some(d =>
-    ["wordpress", "shopify", "webflow"].includes(d.technology)
-  );
-
-  const hasAI = detections.some(d =>
-    ["claude", "hubspot", "framer"].includes(d.technology)
-  );
-
-  const score = scores.score || 0;
-
-  if (score >= 80) {
-    insights.push("Strong modern architecture detected with good optimization signals.");
+  if (score.score >= 80) {
+    insights.push("Strong modern tech stack detected.");
   } else {
-    insights.push("Website structure may limit SEO and AI visibility performance.");
+    insights.push("Website may need modernization for better SEO + AI visibility.");
   }
 
-  if (!hasCMS) {
-    insights.push("No dominant CMS detected — likely custom or headless architecture.");
+  if (aiVisibility.score < 60) {
+    insights.push("Low AI visibility: improve schema + semantic structure.");
   }
 
-  if (hasCMS) {
-    insights.push("Traditional CMS detected — may impact performance or flexibility.");
+  if (migration.riskScore > 70) {
+    insights.push("High migration risk: strong platform lock-in detected.");
   }
 
-  if (hasAI) {
-    insights.push("AI tooling detected (Claude/HubSpot/Framer integrations present).");
+  if (detections.length > 5) {
+    insights.push("Complex stack detected: multiple dependencies increase maintenance cost.");
   }
-
-  if (score < 60) {
-    insights.push("Migration opportunity: site may benefit from modern stack upgrades.");
-  }
-
-  insights.push("Structured data and semantic HTML strongly influence AI visibility scoring.");
 
   return insights;
 }
