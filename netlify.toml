@@ -1,6 +1,22 @@
 [build]
-  publish = "public"
-  functions = "netlify/functions"
+publish = "public"
 
 [functions]
-  node_bundler = "esbuild"
+directory = "netlify/functions"
+node_bundler = "esbuild"
+
+[[headers]]
+for = "/*"
+
+[headers.values]
+Access-Control-Allow-Origin = "*"
+Access-Control-Allow-Headers = "*"
+Access-Control-Allow-Methods = "GET, POST, OPTIONS"
+X-Frame-Options = "DENY"
+X-Content-Type-Options = "nosniff"
+Referrer-Policy = "strict-origin-when-cross-origin"
+
+[[redirects]]
+from = "/programmatic/website-tech-stack-checker"
+to = "/scanner.html"
+status = 200
