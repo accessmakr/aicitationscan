@@ -1,10 +1,32 @@
-export function generateExplanation(detection) {
+export function generateInsights({ stack = [], html = "", scores = {} }) {
+  const insights = [];
 
-  const explanations = [];
+  // Stack insights
+  if (stack.some(s => s.technology === "Next.js")) {
+    insights.push("Modern React framework (Next.js) detected, optimized for SSR/SSG.");
+  }
 
-  detection.matches.forEach(match => {
-    explanations.push(match.evidence);
-  });
+  if (stack.some(s => s.technology === "WordPress")) {
+    insights.push("Legacy CMS detected (WordPress) — may limit performance and AI readability.");
+  }
 
-  return explanations;
+  if (stack.length > 8) {
+    insights.push("High number of technologies detected — potential stack complexity risk.");
+  }
+
+  // SEO insights
+  if (scores.seo > 85) {
+    insights.push("Strong SEO implementation detected.");
+  } else {
+    insights.push("SEO structure may need improvement for better indexing.");
+  }
+
+  // AI visibility insights
+  if (html.includes("schema.org")) {
+    insights.push("Structured data present — improves AI and search understanding.");
+  } else {
+    insights.push("Missing structured data reduces AI visibility.");
+  }
+
+  return insights;
 }
