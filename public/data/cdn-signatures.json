@@ -1,31 +1,30 @@
 {
   "cloudflare": {
-    "name": "Cloudflare",
-    "category": "cdn",
-    "baseConfidence": 0.95,
-    "minimumDetectionScore": 5,
-
     "signals": [
       {
         "type": "header",
         "pattern": "cloudflare",
-        "match": "contains",
-        "weight": 5,
-        "reliability": 0.99,
-        "uniqueness": 0.98,
-        "severity": "strong",
-        "evidence": "Cloudflare response headers detected"
-      },
+        "weight": 5
+      }
+    ]
+  },
 
+  "fastly": {
+    "signals": [
       {
         "type": "header",
-        "pattern": "cf-ray",
-        "match": "contains",
-        "weight": 5,
-        "reliability": 1,
-        "uniqueness": 1,
-        "severity": "definitive",
-        "evidence": "Cloudflare CF-Ray header detected"
+        "pattern": "fastly",
+        "weight": 5
+      }
+    ]
+  },
+
+  "akamai": {
+    "signals": [
+      {
+        "type": "header",
+        "pattern": "akamai",
+        "weight": 5
       }
     ]
   }
