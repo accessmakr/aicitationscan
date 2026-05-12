@@ -1,28 +1,40 @@
-export function calculateScores({ html = "", headers = {}, stack = [] }) {
-  const text = html.toLowerCase();
-  const headerText = JSON.stringify(headers).toLowerCase();
+export function calculateScores(detections) {
+  if (!Array.isArray(detections)) {
+    return {
+      score: 0,
+      grade: "Unknown",
+      breakdown: []
+    };
+  }
 
-  let seo = 70;
-  let performance = 70;
-  let security = 70;
+  let total = 0;
 
-  // SEO signals
-  if (text.includes("meta name=\"description\"")) seo += 5;
-  if (text.includes("schema.org")) seo += 10;
-  if (text.includes("og:title")) seo += 5;
+  const breakdown = detections.map((item) => {
+    const confidence = item.confidence || 0;
+    total += confidence;
 
-  // Performance signals
-  if (text.includes("cdn")) performance += 5;
-  if (text.includes("cloudflare")) performance += 5;
-  if (stack.length > 5) performance -= 5;
+    return {
+      technology: item.technology,
+      confidence
+    };
+  });
 
-  // Security signals
-  if (headerText.includes("strict-transport-security")) security += 10;
-  if (headerText.includes("content-security-policy")) security += 10;
+  const avgScore =
+    detections.length > 0
+      ? Math.round(total / detections.length)
+      : 0;
 
   return {
-    seo: Math.min(seo, 100),
-    performance: Math.min(performance, 100),
-    security: Math.min(security, 100)
+    score: avgScore,
+    grade: getGrade(avgScore),
+    breakdown
   };
+}
+
+function getGrade(score) {
+  if (score >= 85) return "A (Modern Stack)";
+  if (score >= 70) return "B (Good Stack)";
+  if (score >= 50) return "C (Average Stack)";
+  if (score >= 30) return "D (Legacy Stack)";
+  return "F (Outdated Stack)";
 }
