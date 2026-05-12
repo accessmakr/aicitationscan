@@ -1,41 +1,33 @@
 {
+  "claude_ai": {
+    "baseConfidence": 0.9,
+    "signals": [
+      { "type": "html", "pattern": "anthropic", "weight": 5 },
+      { "type": "script", "pattern": "claude", "weight": 5 }
+    ]
+  },
+
   "openai": {
+    "baseConfidence": 0.9,
     "signals": [
-      {
-        "type": "html",
-        "pattern": "openai",
-        "weight": 5
-      },
-      {
-        "type": "script",
-        "pattern": "chatgpt",
-        "weight": 4
-      }
+      { "type": "url", "pattern": "openai", "weight": 5 },
+      { "type": "script", "pattern": "chatgpt", "weight": 4 }
     ]
   },
 
-  "claude": {
+  "hubspot": {
+    "baseConfidence": 0.95,
     "signals": [
-      {
-        "type": "html",
-        "pattern": "anthropic",
-        "weight": 5
-      },
-      {
-        "type": "script",
-        "pattern": "claude",
-        "weight": 5
-      }
+      { "type": "script", "pattern": "js.hs-scripts", "weight": 5 },
+      { "type": "html", "pattern": "hsforms", "weight": 5 },
+      { "type": "cookie", "pattern": "__hstc", "weight": 5 }
     ]
   },
 
-  "langchain": {
+  "intercom": {
+    "baseConfidence": 0.85,
     "signals": [
-      {
-        "type": "html",
-        "pattern": "langchain",
-        "weight": 5
-      }
+      { "type": "script", "pattern": "intercom", "weight": 5 }
     ]
   }
 }
