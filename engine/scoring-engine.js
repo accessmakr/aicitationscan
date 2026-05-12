@@ -1,40 +1,42 @@
-export function calculateScores(detections) {
+export function calculateScores(detections = []) {
   if (!Array.isArray(detections)) {
     return {
       score: 0,
-      grade: "Unknown",
+      grade: "F",
       breakdown: []
     };
   }
 
   let total = 0;
+  let max = 0;
 
-  const breakdown = detections.map((item) => {
-    const confidence = item.confidence || 0;
-    total += confidence;
+  const breakdown = detections.map((d) => {
+    const weight = d.confidence || 0;
+
+    total += weight;
+    max += 100;
 
     return {
-      technology: item.technology,
-      confidence
+      technology: d.technology,
+      contribution: weight
     };
   });
 
-  const avgScore =
-    detections.length > 0
-      ? Math.round(total / detections.length)
-      : 0;
+  const score = Math.min(
+    Math.round((total / Math.max(max, 1)) * 100),
+    100
+  );
+
+  let grade = "F";
+
+  if (score >= 90) grade = "A (Modern Stack)";
+  else if (score >= 75) grade = "B";
+  else if (score >= 60) grade = "C";
+  else if (score >= 40) grade = "D";
 
   return {
-    score: avgScore,
-    grade: getGrade(avgScore),
+    score,
+    grade,
     breakdown
   };
-}
-
-function getGrade(score) {
-  if (score >= 85) return "A (Modern Stack)";
-  if (score >= 70) return "B (Good Stack)";
-  if (score >= 50) return "C (Average Stack)";
-  if (score >= 30) return "D (Legacy Stack)";
-  return "F (Outdated Stack)";
 }
