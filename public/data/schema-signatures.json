@@ -1,22 +1,24 @@
 {
-  "jsonld": {
-    "name": "JSON-LD Schema",
-    "category": "schema",
-
+  "schema_presence": {
     "signals": [
-      {
-        "type": "html",
-        "pattern": "application/ld+json",
-        "match": "contains",
+      { "type": "html", "pattern": "application/ld+json", "weight": 5 },
+      { "type": "html", "pattern": "schema.org", "weight": 4 }
+    ]
+  },
 
-        "weight": 5,
-        "reliability": 0.98,
-        "uniqueness": 0.95,
+  "seo_structure": {
+    "signals": [
+      { "type": "html", "pattern": "<h1", "weight": 3 },
+      { "type": "html", "pattern": "<h2", "weight": 2 },
+      { "type": "html", "pattern": "meta name=\"description\"", "weight": 4 },
+      { "type": "html", "pattern": "canonical", "weight": 4 }
+    ]
+  },
 
-        "severity": "strong",
-
-        "evidence": "JSON-LD structured data detected"
-      }
+  "ai_readiness": {
+    "signals": [
+      { "type": "html", "pattern": "llms.txt", "weight": 5 },
+      { "type": "html", "pattern": "semantic", "weight": 3 }
     ]
   }
 }
