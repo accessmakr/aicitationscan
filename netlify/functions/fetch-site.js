@@ -1,55 +1,58 @@
-export async function handler(event) {
+import axios from "axios";
 
+export default async (req, context) => {
   try {
-
-    const url = event.queryStringParameters.url;
+    const url = new URL(req.url).searchParams.get("url");
 
     if (!url) {
-      return {
-        statusCode: 400,
-        body: JSON.stringify({
+      return new Response(
+        JSON.stringify({
+          success: false,
           error: "Missing URL"
-        })
-      };
+        }),
+        {
+          status: 400
+        }
+      );
     }
 
-    const response = await fetch(url, {
+    const target =
+      url.startsWith("http")
+        ? url
+        : `https://${url}`;
+
+    const response = await axios.get(target, {
+      timeout: 15000,
+      maxRedirects: 5,
       headers: {
-        "User-Agent": "AI Citation Scan Bot"
+        "User-Agent":
+          "AI Citation Scan Bot"
       }
     });
 
-    const html = await response.text();
-
-    const headers = {};
-
-    response.headers.forEach((value, key) => {
-      headers[key] = value;
-    });
-
-    return {
-      statusCode: 200,
-
-      headers: {
-        "Content-Type": "application/json"
-      },
-
-      body: JSON.stringify({
+    return new Response(
+      JSON.stringify({
         success: true,
-        html,
-        headers
-      })
-    };
-
+        html: response.data,
+        headers: response.headers,
+        finalUrl: response.request.res.responseUrl,
+        status: response.status
+      }),
+      {
+        headers: {
+          "content-type": "application/json"
+        }
+      }
+    );
   } catch (error) {
-
-    return {
-      statusCode: 500,
-
-      body: JSON.stringify({
+    return new Response(
+      JSON.stringify({
         success: false,
         error: error.message
-      })
-    };
+      }),
+      {
+        status: 500
+      }
+    );
   }
-}
+};
