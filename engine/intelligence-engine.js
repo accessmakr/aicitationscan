@@ -1,84 +1,52 @@
-import { matchPattern } from "./detector-utils.js";
-import { calculateConfidence } from "./scoring-engine.js";
-import { generateExplanation } from "./explanation-engine.js";
+export async function analyzeTechnology(data, signatures) {
+  const html =
+    data.html.toLowerCase();
 
-export async function analyzeWebsite(data, signatures) {
+  const headers =
+    JSON.stringify(data.headers).toLowerCase();
 
   const results = [];
 
-  for (const [slug, tech] of Object.entries(signatures)) {
-
+  for (const [tech, config] of Object.entries(signatures)) {
     let score = 0;
+    const matchedSignals = [];
 
-    const matches = [];
+    for (const signal of config.signals) {
+      let source = "";
 
-    for (const signal of tech.signals) {
-
-      let sourceContent = "";
-
-      if (signal.type === "html") {
-        sourceContent = data.html || "";
-      }
-
-      if (signal.type === "script") {
-        sourceContent = data.scripts || "";
+      if (
+        signal.type === "html" ||
+        signal.type === "script"
+      ) {
+        source = html;
       }
 
       if (signal.type === "header") {
-        sourceContent = JSON.stringify(data.headers || {});
+        source = headers;
       }
 
-      const matched = matchPattern(
-        sourceContent,
-        signal.pattern,
-        signal.match
-      );
-
-      if (matched) {
-
+      if (
+        source.includes(
+          signal.pattern.toLowerCase()
+        )
+      ) {
         score += signal.weight;
-
-        matches.push({
-          pattern: signal.pattern,
-          evidence: signal.evidence,
-          severity: signal.severity
-        });
+        matchedSignals.push(signal.pattern);
       }
     }
 
-    if (tech.negativeSignals) {
-
-      for (const negative of tech.negativeSignals) {
-
-        const negativeMatched = matchPattern(
-          data.html || "",
-          negative.pattern,
-          negative.match
-        );
-
-        if (negativeMatched) {
-          score -= negative.weightPenalty;
-        }
-      }
-    }
-
-    if (score >= (tech.minimumDetectionScore || 1)) {
-
-      const confidence = calculateConfidence(
-        score,
-        tech.baseConfidence || 1
-      );
-
+    if (score > 0) {
       results.push({
-        slug,
-        name: tech.name,
-        category: tech.category,
-        confidence,
-        matches,
-        explanations: generateExplanation({ matches })
+        technology: tech,
+        confidence:
+          Math.min(score * 20, 100),
+        signals: matchedSignals
       });
     }
   }
 
-  return results;
+  return results.sort(
+    (a, b) =>
+      b.confidence - a.confidence
+  );
 }
