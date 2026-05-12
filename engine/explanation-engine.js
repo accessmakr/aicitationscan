@@ -1,32 +1,39 @@
-export function generateInsights({ stack = [], html = "", scores = {} }) {
+export function generateInsights(detections = [], scores = {}) {
   const insights = [];
 
-  // Stack insights
-  if (stack.some(s => s.technology === "Next.js")) {
-    insights.push("Modern React framework (Next.js) detected, optimized for SSR/SSG.");
-  }
+  const hasCMS = detections.some(d =>
+    ["wordpress", "shopify", "webflow"].includes(d.technology)
+  );
 
-  if (stack.some(s => s.technology === "WordPress")) {
-    insights.push("Legacy CMS detected (WordPress) — may limit performance and AI readability.");
-  }
+  const hasAI = detections.some(d =>
+    ["claude", "hubspot", "framer"].includes(d.technology)
+  );
 
-  if (stack.length > 8) {
-    insights.push("High number of technologies detected — potential stack complexity risk.");
-  }
+  const score = scores.score || 0;
 
-  // SEO insights
-  if (scores.seo > 85) {
-    insights.push("Strong SEO implementation detected.");
+  if (score >= 80) {
+    insights.push("Strong modern architecture detected with good optimization signals.");
   } else {
-    insights.push("SEO structure may need improvement for better indexing.");
+    insights.push("Website structure may limit SEO and AI visibility performance.");
   }
 
-  // AI visibility insights
-  if (html.includes("schema.org")) {
-    insights.push("Structured data present — improves AI and search understanding.");
-  } else {
-    insights.push("Missing structured data reduces AI visibility.");
+  if (!hasCMS) {
+    insights.push("No dominant CMS detected — likely custom or headless architecture.");
   }
+
+  if (hasCMS) {
+    insights.push("Traditional CMS detected — may impact performance or flexibility.");
+  }
+
+  if (hasAI) {
+    insights.push("AI tooling detected (Claude/HubSpot/Framer integrations present).");
+  }
+
+  if (score < 60) {
+    insights.push("Migration opportunity: site may benefit from modern stack upgrades.");
+  }
+
+  insights.push("Structured data and semantic HTML strongly influence AI visibility scoring.");
 
   return insights;
 }
