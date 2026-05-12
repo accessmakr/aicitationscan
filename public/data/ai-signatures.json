@@ -1,0 +1,41 @@
+{
+  "openai": {
+    "signals": [
+      {
+        "type": "html",
+        "pattern": "openai",
+        "weight": 5
+      },
+      {
+        "type": "script",
+        "pattern": "chatgpt",
+        "weight": 4
+      }
+    ]
+  },
+
+  "claude": {
+    "signals": [
+      {
+        "type": "html",
+        "pattern": "anthropic",
+        "weight": 5
+      },
+      {
+        "type": "script",
+        "pattern": "claude",
+        "weight": 5
+      }
+    ]
+  },
+
+  "langchain": {
+    "signals": [
+      {
+        "type": "html",
+        "pattern": "langchain",
+        "weight": 5
+      }
+    ]
+  }
+}
