@@ -1,62 +1,32 @@
 {
   "vercel": {
-    "patterns": [
-      "vercel.app",
-      "x-vercel-id",
-      "Vercel"
-    ]
-  },
-
-  "netlify": {
-    "patterns": [
-      "netlify.app",
-      "x-nf-request-id",
-      "X-NF-Request-ID"
+    "baseConfidence": 0.95,
+    "signals": [
+      { "type": "header", "pattern": "x-vercel-id", "weight": 5 },
+      { "type": "url", "pattern": "vercel.app", "weight": 5 }
     ]
   },
 
   "cloudflare": {
-    "patterns": [
-      "cf-ray",
-      "cloudflare",
-      "server: cloudflare"
+    "baseConfidence": 0.95,
+    "signals": [
+      { "type": "header", "pattern": "cf-ray", "weight": 5 },
+      { "type": "header", "pattern": "cloudflare", "weight": 5 }
     ]
   },
 
-  "aws": {
-    "patterns": [
-      "x-amz-cf-id",
-      "amazonaws.com",
-      "AWS"
+  "netlify": {
+    "baseConfidence": 0.9,
+    "signals": [
+      { "type": "header", "pattern": "x-nf-request-id", "weight": 5 },
+      { "type": "url", "pattern": "netlify", "weight": 4 }
     ]
   },
 
   "fastly": {
-    "patterns": [
-      "fastly",
-      "x-served-by"
-    ]
-  },
-
-  "firebase": {
-    "patterns": [
-      "firebaseapp.com",
-      "firebase",
-      "x-firebase"
-    ]
-  },
-
-  "github_pages": {
-    "patterns": [
-      "github.io",
-      "pages.github.com"
-    ]
-  },
-
-  "render": {
-    "patterns": [
-      "render.com",
-      "x-render"
+    "baseConfidence": 0.85,
+    "signals": [
+      { "type": "header", "pattern": "fastly", "weight": 5 }
     ]
   }
 }
