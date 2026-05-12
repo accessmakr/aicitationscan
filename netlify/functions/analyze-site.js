@@ -1,84 +1,28 @@
 import axios from "axios";
+import fs from "fs";
+import path from "path";
+import { fileURLToPath } from "url";
+
 import { analyzeTechnology } from "../../engine/intelligence-engine.js";
 import { calculateScores } from "../../engine/scoring-engine.js";
 import { generateInsights } from "../../engine/explanation-engine.js";
 
-// Helper: normalize URL
-function normalizeUrl(url) {
-  if (!url) return null;
-  return url.startsWith("http") ? url : `https://${url}`;
-}
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
-// Fetch raw site data (same logic as fetch-site.js but internal)
-async function fetchSite(targetUrl) {
-  const response = await axios.get(targetUrl, {
-    timeout: 15000,
-    maxRedirects: 5,
-    headers: {
-      "User-Agent": "AI Visibility Intelligence Engine"
-    }
-  });
+// LOAD JSON SAFELY
+function loadJSON(file) {
+  try {
+    const filePath = path.join(
+      __dirname,
+      "../../public/data",
+      file
+    );
 
-  return {
-    html: response.data,
-    headers: response.headers,
-    finalUrl: response.request?.res?.responseUrl || targetUrl,
-    status: response.status
-  };
-}
-
-// AI Visibility Scoring (your moat layer)
-function calculateAIVisibility(stack, html) {
-  let score = 70; // baseline modern web assumption
-
-  const text = html.toLowerCase();
-
-  // Positive signals
-  if (text.includes("schema.org")) score += 5;
-  if (text.includes("application/ld+json")) score += 8;
-  if (text.includes("llms.txt")) score += 10;
-  if (text.includes("openai")) score += 2;
-  if (text.includes("anthropic")) score += 2;
-
-  // Stack-based boosts
-  if (stack.some(s => s.technology === "Next.js")) score += 5;
-  if (stack.some(s => s.technology === "React")) score += 3;
-  if (stack.some(s => s.technology === "Cloudflare")) score += 3;
-
-  // Penalties
-  if (text.includes("jquery")) score -= 5;
-  if (text.includes("wp-content")) score -= 3;
-
-  return Math.max(0, Math.min(100, score));
-}
-
-// Migration risk engine
-function calculateMigrationRisk(stack) {
-  const techCount = stack.length;
-
-  const hasLegacy = stack.some(t =>
-    ["jQuery", "WordPress", "Drupal"].includes(t.technology)
-  );
-
-  if (hasLegacy || techCount > 10) return "high";
-  if (techCount > 6) return "medium";
-  return "low";
-}
-
-// Grade system
-function calculateGrade(scores) {
-  const avg =
-    (scores.seo +
-      scores.performance +
-      scores.security +
-      scores.ai_visibility) /
-    4;
-
-  if (avg >= 90) return "A+";
-  if (avg >= 80) return "A";
-  if (avg >= 70) return "B";
-  if (avg >= 60) return "C";
-  return "D";
+    return JSON.parse(fs.readFileSync(filePath, "utf-8"));
+  } catch (e) {
+    return {};
+  }
 }
 
 export default async (req) => {
@@ -89,86 +33,71 @@ export default async (req) => {
       return new Response(
         JSON.stringify({
           success: false,
-          error: "Missing URL parameter"
+          error: "Missing URL"
         }),
         { status: 400 }
       );
     }
 
-    const targetUrl = normalizeUrl(url);
+    const target = url.startsWith("http")
+      ? url
+      : `https://${url}`;
 
-    // 1. Fetch site
-    const siteData = await fetchSite(targetUrl);
-
-    // 2. Detect technologies
-    const techStack = await analyzeTechnology(siteData);
-
-    // 3. Compute scores
-    const scores = calculateScores({
-      html: siteData.html,
-      headers: siteData.headers,
-      stack: techStack
-    });
-
-    // 4. AI Visibility (your moat)
-    const aiVisibility = calculateAIVisibility(
-      techStack,
-      siteData.html
-    );
-
-    // 5. Migration risk
-    const migrationRisk = calculateMigrationRisk(techStack);
-
-    // 6. Insights engine
-    const insights = generateInsights({
-      stack: techStack,
-      html: siteData.html,
-      scores
-    });
-
-    // 7. Final grade
-    const grade = calculateGrade({
-      ...scores,
-      ai_visibility: aiVisibility
-    });
-
-    // 8. Final SaaS response
-    const result = {
-      success: true,
-      url: targetUrl,
-      finalUrl: siteData.finalUrl,
-
-      stack: techStack,
-
-      scores: {
-        ...scores,
-        ai_visibility: aiVisibility
-      },
-
-      migration_risk: migrationRisk,
-
-      grade,
-
-      insights,
-
-      summary: {
-        isModernStack: aiVisibility > 80,
-        enterpriseReadiness: scores.security > 80,
-        seoStrength: scores.seo,
-        performanceHealth: scores.performance
-      },
-
-      meta: {
-        status: siteData.status,
-        analyzedAt: new Date().toISOString()
+    // FETCH SITE
+    const response = await axios.get(target, {
+      timeout: 15000,
+      maxRedirects: 5,
+      headers: {
+        "User-Agent": "AI Citation Scan Bot"
       }
+    });
+
+    const html = response.data;
+    const headers = response.headers;
+
+    // LOAD SIGNATURES (CRITICAL FIX)
+    const signatures = {
+      ...loadJSON("cms-signatures.json"),
+      ...loadJSON("framework-signatures.json"),
+      ...loadJSON("hosting-signatures.json"),
+      ...loadJSON("analytics-signatures.json")
     };
 
-    return new Response(JSON.stringify(result, null, 2), {
-      headers: {
-        "content-type": "application/json"
+    // SAFETY CHECK (THIS FIXES YOUR ERROR)
+    if (!signatures || Object.keys(signatures).length === 0) {
+      return new Response(
+        JSON.stringify({
+          success: false,
+          error: "No signatures loaded"
+        }),
+        { status: 500 }
+      );
+    }
+
+    // RUN ENGINE
+    const detections = await analyzeTechnology(
+      { html, headers },
+      signatures
+    );
+
+    const scores = calculateScores(detections);
+    const insights = generateInsights(detections, scores);
+
+    return new Response(
+      JSON.stringify({
+        success: true,
+        url: target,
+        detections,
+        score: scores.score,
+        grade: scores.grade,
+        insights
+      }),
+      {
+        headers: {
+          "content-type": "application/json"
+        }
       }
-    });
+    );
 
   } catch (error) {
     return new Response(
