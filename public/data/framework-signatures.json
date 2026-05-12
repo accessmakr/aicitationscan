@@ -1,61 +1,34 @@
 {
   "react": {
+    "baseConfidence": 0.85,
     "signals": [
-      {
-        "type": "html",
-        "pattern": "react",
-        "weight": 4
-      },
-      {
-        "type": "html",
-        "pattern": "__NEXT_DATA__",
-        "weight": 5
-      }
+      { "type": "html", "pattern": "reactroot", "weight": 5 },
+      { "type": "html", "pattern": "__react", "weight": 5 },
+      { "type": "script", "pattern": "react.production", "weight": 4 }
     ]
   },
 
   "nextjs": {
+    "baseConfidence": 0.9,
     "signals": [
-      {
-        "type": "html",
-        "pattern": "_next/static",
-        "weight": 5
-      }
+      { "type": "html", "pattern": "__next", "weight": 5 },
+      { "type": "script", "pattern": "_next/static", "weight": 5 },
+      { "type": "html", "pattern": "next-data", "weight": 4 }
     ]
   },
 
   "vue": {
+    "baseConfidence": 0.85,
     "signals": [
-      {
-        "type": "html",
-        "pattern": "vue",
-        "weight": 4
-      }
+      { "type": "html", "pattern": "vue", "weight": 4 },
+      { "type": "script", "pattern": "vue.runtime", "weight": 5 }
     ]
   },
 
-  "tailwind": {
+  "svelte": {
+    "baseConfidence": 0.8,
     "signals": [
-      {
-        "type": "html",
-        "pattern": "tailwind",
-        "weight": 4
-      }
-    ]
-  },
-
-  "framer": {
-    "signals": [
-      {
-        "type": "html",
-        "pattern": "framerusercontent",
-        "weight": 5
-      },
-      {
-        "type": "html",
-        "pattern": "framer.app",
-        "weight": 5
-      }
+      { "type": "html", "pattern": "svelte", "weight": 5 }
     ]
   }
 }
