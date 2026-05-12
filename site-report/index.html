@@ -1,1 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 
+  <title>AI Site Reports Index | AI Visibility Audit</title>
+
+  <meta name="description" content="Browse AI-generated site reports including SEO score, AI visibility, migration risk, and technology detection." />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://aicitationscan.com/site-report/" />
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      background: #0b0f19;
+      color: #e7eaf0;
+    }
+
+    header {
+      padding: 40px 20px;
+      text-align: center;
+      border-bottom: 1px solid #1f2a44;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: 28px;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: auto;
+      padding: 20px;
+    }
+
+    input {
+      width: 100%;
+      padding: 12px;
+      margin: 20px 0;
+      border-radius: 8px;
+      border: 1px solid #2a3a5f;
+      background: #121a2b;
+      color: white;
+    }
+
+    .item {
+      padding: 14px;
+      margin-bottom: 10px;
+      background: #121a2b;
+      border: 1px solid #1f2a44;
+      border-radius: 10px;
+    }
+
+    a {
+      color: #6ea8fe;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    .meta {
+      font-size: 12px;
+      color: #9aa6bd;
+      margin-top: 4px;
+    }
+
+    footer {
+      text-align: center;
+      padding: 30px;
+      color: #6b778c;
+      border-top: 1px solid #1f2a44;
+      margin-top: 40px;
+    }
+
+    .fallback {
+      display: none;
+    }
+  </style>
+</head>
+
+<body>
+
+<header>
+  <h1>AI Site Reports Index</h1>
+  <p>Programmatic SEO intelligence reports generated from live site analysis</p>
+</header>
+
+<div class="container">
+
+  <input
+    id="search"
+    placeholder="Search domains (e.g. openai, stripe, shopify)"
+    onkeyup="filter()"
+  />
+
+  <!-- JS RENDERED LIST -->
+  <div id="list"></div>
+
+  <!-- FALLBACK SEO LIST (IMPORTANT FOR INDEXING) -->
+  <div class="fallback">
+    <div class="item">
+      <a href="/site-report/openai-com.html">openai.com report</a>
+    </div>
+    <div class="item">
+      <a href="/site-report/shopify-com.html">shopify.com report</a>
+    </div>
+  </div>
+
+</div>
+
+<footer>
+  AI Visibility Audit — Programmatic SEO Engine
+</footer>
+
+<script>
+let reports = [];
+
+async function loadReports() {
+  try {
+    const res = await fetch('/site-report/index.json');
+    reports = await res.json();
+
+    render(reports);
+  } catch (e) {
+    document.getElementById("list").innerHTML =
+      "<p>Unable to load reports.</p>";
+  }
+}
+
+function render(data) {
+  const list = document.getElementById("list");
+  list.innerHTML = "";
+
+  data
+    .sort((a, b) => (b.score || 0) - (a.score || 0))
+    .forEach(r => {
+      const div = document.createElement("div");
+      div.className = "item";
+
+      div.innerHTML = `
+        <a href="${r.file}">
+          ${r.domain}
+        </a>
+        <div class="meta">
+          Grade: ${r.grade || "N/A"} |
+          Score: ${r.score || 0} |
+          Date: ${r.date || ""}
+        </div>
+      `;
+
+      list.appendChild(div);
+    });
+}
+
+function filter() {
+  const q = document.getElementById("search").value.toLowerCase();
+
+  const filtered = reports.filter(r =>
+    r.domain.toLowerCase().includes(q)
+  );
+
+  render(filtered);
+}
+
+loadReports();
+</script>
+
+</body>
+</html>
