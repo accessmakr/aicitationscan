@@ -1,30 +1,33 @@
-export function normalizeOutput({
-  detections = [],
-  score = {},
-  aiVisibility = {},
-  migrationRisk = {},
-  competitor = null,
-  insights = []
+export function buildUnifiedResponse({
+  url,
+  detections,
+  score,
+  aiVisibility,
+  migrationRisk
 }) {
+
   return {
+
     success: true,
 
-    meta: {
-      timestamp: new Date().toISOString(),
-      version: "v2-unified"
-    },
+    analyzedAt:
+      new Date().toISOString(),
+
+    url,
 
     detections,
-    score,
-    aiVisibility,
-    migrationRisk,
-    competitor,
-    insights,
 
-    summary: {
-      grade: score.grade || "F",
-      aiLevel: aiVisibility.grade || "Unknown",
-      migrationLevel: migrationRisk.level || "Low"
-    }
+    score,
+
+    aiVisibility,
+
+    migrationRisk,
+
+    reportPath:
+      `/site-report/${
+        url
+          .replace("https://", "")
+          .replace("http://", "")
+      }.html`
   };
 }
