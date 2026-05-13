@@ -1,37 +1,48 @@
-export async function analyzeTechnology(data = {}, signatures = {}) {
-  const html = (data.html || "").toLowerCase();
-  const headers = JSON.stringify(data.headers || {}).toLowerCase();
+export async function analyzeTechnology(
+  { html = "", headers = {} },
+  signatures = {}
+) {
 
-  const results = [];
+  const text =
+    `${html} ${JSON.stringify(headers)}`
+      .toLowerCase();
 
-  for (const [tech, config] of Object.entries(signatures || {})) {
-    let score = config.baseConfidence || 50;
-    const signals = config.signals || [];
-    const matched = [];
+  const detections = [];
 
-    for (const s of signals) {
-      let source = "";
+  for (const category of Object.keys(signatures)) {
 
-      if (["html", "script", "url"].includes(s.type)) {
-        source = html;
-      } else if (s.type === "header") {
-        source = headers;
+    const technologies =
+      signatures[category];
+
+    for (const techName of Object.keys(technologies)) {
+
+      const patterns =
+        technologies[techName];
+
+      let matched = false;
+
+      for (const pattern of patterns) {
+
+        if (
+          text.includes(
+            pattern.toLowerCase()
+          )
+        ) {
+
+          matched = true;
+
+          detections.push({
+            category,
+            technology: techName,
+            confidence: 90,
+            matchedPattern: pattern
+          });
+
+          break;
+        }
       }
-
-      if (source.includes((s.pattern || "").toLowerCase())) {
-        score += s.weight || 1;
-        matched.push(s.pattern);
-      }
-    }
-
-    if (matched.length > 0) {
-      results.push({
-        technology: tech,
-        confidence: Math.min(score, 100),
-        signals: matched
-      });
     }
   }
 
-  return results.sort((a, b) => b.confidence - a.confidence);
+  return detections;
 }
