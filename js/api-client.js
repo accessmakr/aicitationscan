@@ -1,69 +1,17 @@
-// /js/api-client.js
+export async function analyzeDomain(domain) {
 
-const API_BASE = "/.netlify/functions";
+  const response = await fetch(
+    `/.netlify/functions/analyze-site?url=${encodeURIComponent(domain)}`
+  );
 
-export async function analyzeSite(domain) {
-  try {
-    const res = await fetch(
-      `${API_BASE}/analyze-site?url=${encodeURIComponent(domain)}`
-    );
-
-    if (!res.ok) {
-      throw new Error("Failed to analyze site");
-    }
-
-    return await res.json();
-
-  } catch (err) {
-    console.error("analyzeSite error:", err);
-
-    return {
-      success: false,
-      error: err.message
-    };
-  }
+  return await response.json();
 }
 
-export async function compareDomains(urlA, urlB) {
-  try {
-    const res = await fetch(
-      `${API_BASE}/compare-domains?urlA=${encodeURIComponent(urlA)}&urlB=${encodeURIComponent(urlB)}`
-    );
+export async function compareDomains(a, b) {
 
-    if (!res.ok) {
-      throw new Error("Failed to compare domains");
-    }
+  const response = await fetch(
+    `/.netlify/functions/compare-domains?urlA=${encodeURIComponent(a)}&urlB=${encodeURIComponent(b)}`
+  );
 
-    return await res.json();
-
-  } catch (err) {
-    console.error("compareDomains error:", err);
-
-    return {
-      success: false,
-      error: err.message
-    };
-  }
-}
-
-export async function getCachedReport(domain) {
-  try {
-    const res = await fetch(
-      `${API_BASE}/cache-site-report?url=${encodeURIComponent(domain)}`
-    );
-
-    if (!res.ok) {
-      throw new Error("Failed to fetch cached report");
-    }
-
-    return await res.json();
-
-  } catch (err) {
-    console.error("getCachedReport error:", err);
-
-    return {
-      success: false,
-      error: err.message
-    };
-  }
+  return await response.json();
 }
