@@ -1,57 +1,95 @@
-import axios from "axios";
-import { analyzeTechnology } from "../../engine/intelligence-engine.js";
-import { calculateScores } from "../../engine/scoring-engine.js";
-import { computeAIVisibility } from "../../engine/ai-visibility-engine.js";
-import { computeMigrationRisk } from "../../engine/migration-engine.js";
+import {
+  compareDomains
+} from "../../engine/competitor-engine.js";
 
-import signatures from "../../public/data/signature-intelligence.json" assert { type: "json" };
+import {
+  analyzeTechnology
+} from "../../engine/intelligence-engine.js";
+
+import {
+  calculateScores
+} from "../../engine/scoring-engine.js";
+
+import signatures from "../../engine/signatures/signature-intelligence.json" assert { type: "json" };
+
+import {
+  fetchWithRetry
+} from "./fetch-site.js";
 
 export default async (req) => {
+
   try {
-    const urlA = new URL(req.url).searchParams.get("urlA");
-    const urlB = new URL(req.url).searchParams.get("urlB");
 
-    const fetchSite = async (url) => {
-      const target = url.startsWith("http") ? url : `https://${url}`;
+    const params =
+      new URL(req.url).searchParams;
 
-      const res = await axios.get(target, { timeout: 15000 });
+    const urlA =
+      params.get("urlA");
 
-      const html = res.data;
+    const urlB =
+      params.get("urlB");
 
-      const detections = await analyzeTechnology({ html }, signatures);
+    if (!urlA || !urlB) {
+
+      return Response.json({
+        success: false,
+        error:
+          "Both domains required"
+      });
+    }
+
+    async function analyze(url) {
+
+      const target =
+        url.startsWith("http")
+          ? url
+          : `https://${url}`;
+
+      const {
+        html,
+        headers
+      } = await fetchWithRetry(target);
+
+      const detections =
+        await analyzeTechnology(
+          { html, headers },
+          signatures
+        );
+
+      const score =
+        calculateScores(detections);
 
       return {
         url: target,
         detections,
-        score: calculateScores(detections),
-        aiVisibility: computeAIVisibility({ html }),
-        migrationRisk: computeMigrationRisk({ detections })
+        score
       };
-    };
+    }
 
-    const [a, b] = await Promise.all([
-      fetchSite(urlA),
-      fetchSite(urlB)
-    ]);
+    const a =
+      await analyze(urlA);
 
-    const winner =
-      a.score.score > b.score.score ? "A" :
-      a.score.score < b.score.score ? "B" : "Tie";
+    const b =
+      await analyze(urlB);
+
+    const comparison =
+      compareDomains(
+        a.score,
+        b.score
+      );
 
     return Response.json({
       success: true,
-      a,
-      b,
-      comparison: {
-        winner,
-        gap: Math.abs(a.score.score - b.score.score)
-      }
+      siteA: a,
+      siteB: b,
+      comparison
     });
 
-  } catch (e) {
+  } catch (error) {
+
     return Response.json({
       success: false,
-      error: e.message
+      error: error.message
     });
   }
 };
