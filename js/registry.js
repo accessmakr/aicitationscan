@@ -43,6 +43,10 @@ window.siteRegistry = [
         "priority": 14,
         "pages": [
             {
+                "name": "Website Tech Stack Checker",
+                "url": "/programmatic/website-tech-stack-checker"
+            },
+            {
                 "name": "Website Word Count Checker",
                 "url": "/programmatic/website-word-count-checker"
             }
@@ -144,6 +148,11 @@ window.seoRegistry = {
         "url": "/ai-tools/ai-citation-checker",
         "title": "AI Citation Checker — Analyze Reference Quality & Source Attribution | AI Citation Scan",
         "desc": "Analyze AI-generated citations, review reference consistency, detect incomplete sources, and evaluate attribution structure — free citation checker tool by AI Citation Scan."
+    },
+    "website-tech-stack-checker.html": {
+        "url": "/programmatic/website-tech-stack-checker",
+        "title": "Website Tech Stack Checker — Detect Frameworks, CMS & Infrastructure | AI Citation Scan",
+        "desc": "Instantly detect any website's tech stack — frameworks, CMS, hosting, CDN, analytics & frontend libraries. Fast, lightweight browser analysis. No signup required."
     },
     "website-word-count-checker.html": {
         "url": "/programmatic/website-word-count-checker",
