@@ -1,78 +1,51 @@
 [build]
-  publish = "."
-  functions = "netlify/functions"
+publish = "."
+functions = "netlify/functions"
 
 [functions]
-  node_bundler = "esbuild"
+node_bundler = "esbuild"
+
+[functions."*"]
+included_files = [
+  "engine/**"
+]
 
 # ---------------------------
-# SECURITY + GLOBAL HEADERS
+# SECURITY HEADERS
 # ---------------------------
+
 [[headers]]
-  for = "/*"
+for = "/*"
 
-  [headers.values]
-    Access-Control-Allow-Origin = "*"
-    Access-Control-Allow-Headers = "*"
-    Access-Control-Allow-Methods = "GET, POST, OPTIONS"
-    X-Frame-Options = "DENY"
-    X-Content-Type-Options = "nosniff"
-    Referrer-Policy = "strict-origin-when-cross-origin"
+[headers.values]
+X-Frame-Options = "DENY"
+X-Content-Type-Options = "nosniff"
+Referrer-Policy = "strict-origin-when-cross-origin"
 
 # ---------------------------
-# PROGRAMMATIC SEO ROUTES
-# ---------------------------
-
-# Allow generated SEO pages
-[[redirects]]
-  from = "/site-report/*"
-  to = "/site-report/:splat"
-  status = 200
-
-# ---------------------------
-# API ROUTES (NETLIFY FUNCTIONS)
+# API REDIRECTS
 # ---------------------------
 
 [[redirects]]
-  from = "/api/*"
-  to = "/.netlify/functions/:splat"
-  status = 200
-
-# Your direct endpoint compatibility
-[[redirects]]
-  from = "/analyze-site"
-  to = "/.netlify/functions/analyze-site"
-  status = 200
-
-[[redirects]]
-  from = "/fetch-site"
-  to = "/.netlify/functions/fetch-site"
-  status = 200
+from = "/api/*"
+to = "/.netlify/functions/:splat"
+status = 200
 
 # ---------------------------
-# PROGRAMMATIC TOOL ROUTES
+# CLEAN PROGRAMMATIC ROUTES
 # ---------------------------
 
 [[redirects]]
-  from = "/programmatic/website-tech-stack-checker"
-  to = "/programmatic/website-tech-stack-checker.html"
-  status = 200
+from = "/programmatic/website-tech-stack-checker"
+to = "/programmatic/website-tech-stack-checker.html"
+status = 200
 
 # ---------------------------
-# CLEAN URL SUPPORT (IMPORTANT FOR SCALE)
+# CLEAN TOOL URLS
 # ---------------------------
 
-# Allow tool pages without .html extension
 [[redirects]]
-  from = "/*"
-  to = "/:splat.html"
-  status = 200
-  force = false
-
-# ---------------------------
-# FALLBACK 404 (DO NOT BREAK SEO)
-# ---------------------------
-[[redirects]]
-  from = "/*"
-  to = "/index.html"
-  status = 404
+from = "/*"
+to = "/:splat.html"
+status = 200
+force = false
