@@ -1,58 +1,49 @@
 import axios from "axios";
 
-export default async (req, context) => {
-  try {
-    const url = new URL(req.url).searchParams.get("url");
+const userAgents = [
+  "Mozilla/5.0 (Windows NT 10.0; Win64; x64)",
+  "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7)",
+  "Mozilla/5.0 (X11; Linux x86_64)"
+];
 
-    if (!url) {
-      return new Response(
-        JSON.stringify({
-          success: false,
-          error: "Missing URL"
-        }),
-        {
-          status: 400
+export async function fetchWithRetry(url, retries = 2) {
+
+  for (let i = 0; i <= retries; i++) {
+
+    try {
+
+      const response = await axios.get(url, {
+        timeout: 10000,
+
+        headers: {
+          "User-Agent":
+            userAgents[
+              Math.floor(Math.random() * userAgents.length)
+            ],
+
+          "Accept":
+            "text/html,application/xhtml+xml"
         }
+      });
+
+      return {
+        html: response.data,
+        headers: response.headers
+      };
+
+    } catch (error) {
+
+      if (i === retries) {
+        throw new Error(
+          `Unable to fetch site: ${
+            error.response?.status || "Timeout"
+          }`
+        );
+      }
+
+      await new Promise(resolve =>
+        setTimeout(resolve, 1200)
       );
     }
-
-    const target =
-      url.startsWith("http")
-        ? url
-        : `https://${url}`;
-
-    const response = await axios.get(target, {
-      timeout: 15000,
-      maxRedirects: 5,
-      headers: {
-        "User-Agent":
-          "AI Citation Scan Bot"
-      }
-    });
-
-    return new Response(
-      JSON.stringify({
-        success: true,
-        html: response.data,
-        headers: response.headers,
-        finalUrl: response.request.res.responseUrl,
-        status: response.status
-      }),
-      {
-        headers: {
-          "content-type": "application/json"
-        }
-      }
-    );
-  } catch (error) {
-    return new Response(
-      JSON.stringify({
-        success: false,
-        error: error.message
-      }),
-      {
-        status: 500
-      }
-    );
   }
-};
+}
