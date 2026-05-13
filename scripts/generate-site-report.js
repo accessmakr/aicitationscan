@@ -1,11 +1,36 @@
-* Single:
+/**
+ * =========================================================
+ * AI CITATION SCAN
+ * PRODUCTION REPORT GENERATOR v3
+ * =========================================================
+ *
+ * FEATURES
+ * ---------------------------------------------------------
+ * ✅ Batch domain processing
+ * ✅ Queue processing
+ * ✅ Cache-first architecture
+ * ✅ Curated SEO generation
+ * ✅ Pagination generation
+ * ✅ Internal linking
+ * ✅ Duplicate prevention
+ * ✅ search-index.json support
+ * ✅ index.json support
+ * ✅ pending/completed queue support
+ * ✅ Netlify-safe static generation
+ * ✅ SaaS-scale architecture
+ *
+ * =========================================================
+ *
+ * SINGLE:
  * node scripts/generate-site-report.js openai.com
  *
- * Multiple:
- * node scripts/generate-site-report.js openai.com claude.ai vercel.com
+ * MULTIPLE:
+ * node scripts/generate-site-report.js openai.com claude.ai
  *
- * Queue file:
+ * QUEUE FILE:
  * node scripts/generate-site-report.js --queue domains.txt
+ *
+ * =========================================================
  */
 
 import fs from "fs";
@@ -14,22 +39,61 @@ import path from "path";
 const ROOT = process.cwd();
 
 const SITE_REPORT_DIR = path.join(ROOT, "site-report");
-const CACHE_DIR = path.join(ROOT, ".cache");
-const SEARCH_INDEX_PATH = path.join(SITE_REPORT_DIR, "search-index.json");
-const INDEX_JSON_PATH = path.join(SITE_REPORT_DIR, "index.json");
-const SITEMAP_PATH = path.join(ROOT, "sitemap.xml");
 
-const API_BASE = "https://aicitationscan.com/.netlify/functions";
+const CACHE_DIR = path.join(ROOT, ".cache");
+
+const PENDING_DIR = path.join(
+  ROOT,
+  "site-report",
+  "cache",
+  "pending"
+);
+
+const COMPLETED_DIR = path.join(
+  ROOT,
+  "site-report",
+  "cache",
+  "completed"
+);
+
+const INDEX_JSON_PATH = path.join(
+  SITE_REPORT_DIR,
+  "index.json"
+);
+
+const SEARCH_INDEX_PATH = path.join(
+  SITE_REPORT_DIR,
+  "search-index.json"
+);
+
+const API_BASE =
+  "https://aicitationscan.com/.netlify/functions";
 
 const PAGE_SIZE = 25;
 
 ensureDir(SITE_REPORT_DIR);
 ensureDir(CACHE_DIR);
+ensureDir(PENDING_DIR);
+ensureDir(COMPLETED_DIR);
+
+main();
+
+/**
+ * =========================================================
+ * MAIN
+ * =========================================================
+ */
 
 async function main() {
   const args = process.argv.slice(2);
 
   let domains = [];
+
+  /**
+   * ---------------------------------------------------------
+   * QUEUE FILE MODE
+   * ---------------------------------------------------------
+   */
 
   if (args[0] === "--queue") {
     const queueFile = args[1];
@@ -49,11 +113,24 @@ async function main() {
     domains = fs
       .readFileSync(queuePath, "utf8")
       .split("\n")
-      .map(d => d.trim())
+      .map((d) => d.trim())
       .filter(Boolean);
   } else {
     domains = args;
   }
+
+  /**
+   * ---------------------------------------------------------
+   * PENDING QUEUE MODE
+   * ---------------------------------------------------------
+   */
+
+  const pendingDomains = fs
+    .readdirSync(PENDING_DIR)
+    .filter((f) => f.endsWith(".json"))
+    .map((f) => f.replace(".json", ""));
+
+  domains = [...new Set([...domains, ...pendingDomains])];
 
   if (!domains.length) {
     console.error("No domains supplied.");
@@ -62,11 +139,35 @@ async function main() {
 
   console.log(`\nGenerating ${domains.length} reports...\n`);
 
-  const existingRegistry = loadJSON(INDEX_JSON_PATH, []);
-  const registryMap = new Map(existingRegistry.map(i => [i.domain, i]));
+  /**
+   * ---------------------------------------------------------
+   * LOAD EXISTING REGISTRIES
+   * ---------------------------------------------------------
+   */
 
-  const searchIndex = loadJSON(SEARCH_INDEX_PATH, []);
-  const searchMap = new Map(searchIndex.map(i => [i.domain, i]));
+  const existingRegistry = loadJSON(
+    INDEX_JSON_PATH,
+    []
+  );
+
+  const registryMap = new Map(
+    existingRegistry.map((i) => [i.domain, i])
+  );
+
+  const searchIndex = loadJSON(
+    SEARCH_INDEX_PATH,
+    []
+  );
+
+  const searchMap = new Map(
+    searchIndex.map((i) => [i.domain, i])
+  );
+
+  /**
+   * =========================================================
+   * PROCESS DOMAINS
+   * =========================================================
+   */
 
   for (const domain of domains) {
     try {
@@ -74,43 +175,174 @@ async function main() {
 
       console.log(`→ ${normalized}`);
 
+      /**
+       * -----------------------------------------------------
+       * FETCH ANALYSIS
+       * -----------------------------------------------------
+       */
+
       const report = await fetchAnalysis(normalized);
 
-      const html = buildHTML(report);
+      /**
+       * -----------------------------------------------------
+       * CURATED PROGRAMMATIC SEO LOGIC
+       * -----------------------------------------------------
+       */
 
-      const filePath = path.join(SITE_REPORT_DIR, `${normalized}.html`);
+      const existingSearch =
+        searchMap.get(normalized);
 
-      fs.writeFileSync(filePath, html);
+      const searchCount =
+        existingSearch?.searchCount || 1;
 
-      registryMap.set(normalized, {
-        domain: normalized,
-        title: `${normalized} Tech Stack Report`,
-        grade: report.score?.grade || "Unknown",
-        score: report.score?.score || 0,
-        aiVisibility: report.aiVisibility?.score || 0,
-        migrationRisk: report.migrationRisk?.level || "Unknown",
-        path: `/site-report/${normalized}.html`,
-        generatedAt: new Date().toISOString()
-      });
+      const manuallyApproved =
+        existingSearch?.manuallyApproved || false;
+
+      const shouldGenerate =
+        (report.score?.score || 0) >= 60 ||
+        searchCount >= 3 ||
+        manuallyApproved === true;
+
+      /**
+       * -----------------------------------------------------
+       * ALWAYS UPDATE SEARCH REGISTRY
+       * -----------------------------------------------------
+       */
 
       searchMap.set(normalized, {
         domain: normalized,
-        technologies: report.detections?.map(d => d.technology) || [],
+
+        technologies:
+          report.detections?.map(
+            (d) => d.technology
+          ) || [],
+
         score: report.score?.score || 0,
-        path: `/site-report/${normalized}.html`
+
+        grade: report.score?.grade || "Unknown",
+
+        aiVisibility:
+          report.aiVisibility?.score || 0,
+
+        migrationRisk:
+          report.migrationRisk?.level || "Unknown",
+
+        path: `/site-report/${normalized}.html`,
+
+        searchCount: searchCount + 1,
+
+        manuallyApproved,
+
+        updatedAt: new Date().toISOString()
       });
 
-      console.log(`✓ Generated ${normalized}.html`);
+      /**
+       * -----------------------------------------------------
+       * SKIP LOW QUALITY PAGES
+       * -----------------------------------------------------
+       */
+
+      if (!shouldGenerate) {
+        console.log(
+          `↳ skipped ${normalized} (quality threshold not met)`
+        );
+
+        continue;
+      }
+
+      /**
+       * -----------------------------------------------------
+       * BUILD HTML
+       * -----------------------------------------------------
+       */
+
+      const html = buildHTML(report);
+
+      const htmlFilePath = path.join(
+        SITE_REPORT_DIR,
+        `${normalized}.html`
+      );
+
+      fs.writeFileSync(htmlFilePath, html);
+
+      /**
+       * -----------------------------------------------------
+       * UPDATE INDEX REGISTRY
+       * -----------------------------------------------------
+       */
+
+      registryMap.set(normalized, {
+        domain: normalized,
+
+        title:
+          `${normalized} Tech Stack Report`,
+
+        grade:
+          report.score?.grade || "Unknown",
+
+        score:
+          report.score?.score || 0,
+
+        aiVisibility:
+          report.aiVisibility?.score || 0,
+
+        migrationRisk:
+          report.migrationRisk?.level ||
+          "Unknown",
+
+        path:
+          `/site-report/${normalized}.html`,
+
+        generatedAt:
+          new Date().toISOString()
+      });
+
+      /**
+       * -----------------------------------------------------
+       * MOVE QUEUE FILE TO COMPLETED
+       * -----------------------------------------------------
+       */
+
+      const pendingFile = path.join(
+        PENDING_DIR,
+        `${normalized}.json`
+      );
+
+      const completedFile = path.join(
+        COMPLETED_DIR,
+        `${normalized}.json`
+      );
+
+      if (fs.existsSync(pendingFile)) {
+        fs.renameSync(
+          pendingFile,
+          completedFile
+        );
+      }
+
+      console.log(
+        `✓ Generated ${normalized}.html`
+      );
+
     } catch (err) {
       console.error(`✗ Failed ${domain}`);
       console.error(err.message);
     }
   }
 
-  const registry = Array.from(registryMap.values())
-    .sort((a, b) => b.score - a.score);
+  /**
+   * =========================================================
+   * SAVE REGISTRIES
+   * =========================================================
+   */
 
-  const searchRegistry = Array.from(searchMap.values());
+  const registry = Array.from(
+    registryMap.values()
+  ).sort((a, b) => b.score - a.score);
+
+  const searchRegistry = Array.from(
+    searchMap.values()
+  );
 
   fs.writeFileSync(
     INDEX_JSON_PATH,
@@ -122,6 +354,12 @@ async function main() {
     JSON.stringify(searchRegistry, null, 2)
   );
 
+  /**
+   * =========================================================
+   * GENERATE PAGINATION
+   * =========================================================
+   */
+
   generatePaginationPages(registry);
 
   console.log("\n✓ index.json updated");
@@ -130,67 +368,162 @@ async function main() {
   console.log("\nDone.\n");
 }
 
+/**
+ * =========================================================
+ * FETCH ANALYSIS
+ * =========================================================
+ */
+
 async function fetchAnalysis(domain) {
-  const cacheFile = path.join(CACHE_DIR, `${domain}.json`);
+  const cacheFile = path.join(
+    CACHE_DIR,
+    `${domain}.json`
+  );
+
+  /**
+   * ---------------------------------------------------------
+   * CACHE HIT
+   * ---------------------------------------------------------
+   */
 
   if (fs.existsSync(cacheFile)) {
-    const age = Date.now() - fs.statSync(cacheFile).mtimeMs;
+    const age =
+      Date.now() -
+      fs.statSync(cacheFile).mtimeMs;
 
-    const sixHours = 1000 * 60 * 60 * 6;
+    const sixHours =
+      1000 * 60 * 60 * 6;
 
     if (age < sixHours) {
       console.log(`  ↳ using cache`);
 
-      return JSON.parse(fs.readFileSync(cacheFile, "utf8"));
+      return JSON.parse(
+        fs.readFileSync(cacheFile, "utf8")
+      );
     }
   }
 
-  const endpoint = `${API_BASE}/analyze-site?url=${encodeURIComponent(domain)}`;
+  /**
+   * ---------------------------------------------------------
+   * FETCH LIVE API
+   * ---------------------------------------------------------
+   */
+
+  const endpoint =
+    `${API_BASE}/analyze-site?url=` +
+    encodeURIComponent(domain);
 
   const res = await fetch(endpoint);
 
   if (!res.ok) {
-    throw new Error(`API failed: ${res.status}`);
+    throw new Error(
+      `API failed: ${res.status}`
+    );
   }
 
   const json = await res.json();
 
-  fs.writeFileSync(cacheFile, JSON.stringify(json, null, 2));
+  /**
+   * ---------------------------------------------------------
+   * SAVE CACHE
+   * ---------------------------------------------------------
+   */
+
+  fs.writeFileSync(
+    cacheFile,
+    JSON.stringify(json, null, 2)
+  );
+
+  /**
+   * ---------------------------------------------------------
+   * WRITE PENDING QUEUE FILE
+   * ---------------------------------------------------------
+   */
+
+  fs.writeFileSync(
+    path.join(
+      PENDING_DIR,
+      `${domain}.json`
+    ),
+    JSON.stringify({
+      domain,
+      queuedAt: new Date().toISOString()
+    })
+  );
 
   return json;
 }
 
-function buildHTML(report) {
-  const domain = clean(report.url || "unknown-site");
+/**
+ * =========================================================
+ * BUILD REPORT HTML
+ * =========================================================
+ */
 
-  const detections = report.detections || [];
+function buildHTML(report) {
+  const domain = clean(
+    report.url || "unknown-site"
+  );
+
+  const detections =
+    report.detections || [];
 
   const techHTML = detections.length
-    ? detections.map(d => `
-        <li class="border rounded-xl p-4 bg-white shadow-sm">
-          <strong>${escapeHTML(d.technology)}</strong>
-          <div class="text-sm text-gray-500 mt-1">
-            Confidence: ${d.confidence || 0}
-          </div>
-        </li>
-      `).join("")
+    ? detections.map(
+        (d) => `
+<li class="border rounded-xl p-4 bg-white shadow-sm">
+<strong>${escapeHTML(
+          d.technology
+        )}</strong>
+
+<div class="text-sm text-gray-500 mt-1">
+Confidence:
+${d.confidence || 0}
+</div>
+</li>
+`
+      ).join("")
     : `<li>No technologies detected.</li>`;
 
-  return `<!DOCTYPE html>
+  return `
+<!DOCTYPE html>
 <html lang="en">
+
 <head>
+
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>${domain} Technology Stack Report</title>
-<meta name="description" content="Technology stack, AI visibility, SEO intelligence, migration risk, and infrastructure analysis for ${domain}.">
-<link rel="canonical" href="https://aicitationscan.com/site-report/${domain}.html">
+
+<meta
+name="viewport"
+content="width=device-width, initial-scale=1.0"
+>
+
+<title>
+${domain} Technology Stack Report
+</title>
+
+<meta
+name="description"
+content="Technology stack, AI visibility, migration risk, SEO intelligence, and infrastructure analysis for ${domain}."
+>
+
+<link
+rel="canonical"
+href="https://aicitationscan.com/site-report/${domain}.html"
+>
+
 <script src="https://cdn.tailwindcss.com"></script>
+
 </head>
+
 <body class="bg-gray-50 text-gray-900">
 
 <div class="max-w-5xl mx-auto px-6 py-12">
 
-<a href="/site-report/index.html" class="text-emerald-600 font-semibold">
+<a
+href="/site-report/index.html"
+class="text-emerald-600 font-semibold"
+>
 ← Back to Reports
 </a>
 
@@ -205,30 +538,42 @@ AI visibility audit, CMS detection, migration complexity, and infrastructure ana
 <div class="grid md:grid-cols-3 gap-6 mb-10">
 
 <div class="bg-white rounded-2xl p-6 shadow-sm border">
-<div class="text-sm text-gray-500">Overall Score</div>
+<div class="text-sm text-gray-500">
+Overall Score
+</div>
+
 <div class="text-4xl font-bold mt-2">
 ${report.score?.score || 0}
 </div>
+
 <div class="mt-2 text-emerald-600 font-semibold">
 ${report.score?.grade || "Unknown"}
 </div>
 </div>
 
 <div class="bg-white rounded-2xl p-6 shadow-sm border">
-<div class="text-sm text-gray-500">AI Visibility</div>
+<div class="text-sm text-gray-500">
+AI Visibility
+</div>
+
 <div class="text-4xl font-bold mt-2">
 ${report.aiVisibility?.score || 0}
 </div>
+
 <div class="mt-2 text-violet-600 font-semibold">
 ${report.aiVisibility?.grade || "Unknown"}
 </div>
 </div>
 
 <div class="bg-white rounded-2xl p-6 shadow-sm border">
-<div class="text-sm text-gray-500">Migration Risk</div>
+<div class="text-sm text-gray-500">
+Migration Risk
+</div>
+
 <div class="text-4xl font-bold mt-2">
 ${report.migrationRisk?.riskScore || 0}
 </div>
+
 <div class="mt-2 text-red-600 font-semibold">
 ${report.migrationRisk?.level || "Unknown"}
 </div>
@@ -237,6 +582,7 @@ ${report.migrationRisk?.level || "Unknown"}
 </div>
 
 <section class="mb-12">
+
 <h2 class="text-2xl font-bold mb-6">
 Detected Technologies
 </h2>
@@ -244,26 +590,26 @@ Detected Technologies
 <ul class="grid md:grid-cols-2 gap-4">
 ${techHTML}
 </ul>
+
 </section>
 
 <section class="mb-12">
-<h2 class="text-2xl font-bold mb-4">
-AI Visibility Signals
-</h2>
 
-<pre class="bg-black text-green-400 p-6 rounded-2xl overflow-x-auto text-sm">
-${escapeHTML(JSON.stringify(report.aiVisibility, null, 2))}
-</pre>
-</section>
-
-<section class="mb-12">
 <h2 class="text-2xl font-bold mb-4">
 Insights
 </h2>
 
 <ul class="list-disc pl-6 space-y-2">
-${(report.insights || []).map(i => `<li>${escapeHTML(i)}</li>`).join("")}
+
+${(report.insights || [])
+  .map(
+    (i) =>
+      `<li>${escapeHTML(i)}</li>`
+  )
+  .join("")}
+
 </ul>
+
 </section>
 
 <section class="mt-20 border-t pt-10 text-sm text-gray-500">
@@ -273,39 +619,90 @@ Generated by AI Citation Scan.
 </div>
 
 </body>
-</html>`;
+</html>
+`;
 }
 
-function generatePaginationPages(registry) {
-  const totalPages = Math.ceil(registry.length / PAGE_SIZE);
+/**
+ * =========================================================
+ * PAGINATION
+ * =========================================================
+ */
 
-  for (let page = 1; page <= totalPages; page++) {
-    const start = (page - 1) * PAGE_SIZE;
-    const items = registry.slice(start, start + PAGE_SIZE);
+function generatePaginationPages(
+  registry
+) {
+  const totalPages = Math.ceil(
+    registry.length / PAGE_SIZE
+  );
 
-    const html = buildPaginationHTML(items, page, totalPages);
+  for (
+    let page = 1;
+    page <= totalPages;
+    page++
+  ) {
+    const start =
+      (page - 1) * PAGE_SIZE;
 
-    const filename = page === 1
-      ? "index.html"
-      : `page-${page}.html`;
+    const items =
+      registry.slice(
+        start,
+        start + PAGE_SIZE
+      );
+
+    const html =
+      buildPaginationHTML(
+        items,
+        page,
+        totalPages
+      );
+
+    const filename =
+      page === 1
+        ? "index.html"
+        : `page-${page}.html`;
 
     fs.writeFileSync(
-      path.join(SITE_REPORT_DIR, filename),
+      path.join(
+        SITE_REPORT_DIR,
+        filename
+      ),
       html
     );
   }
 }
 
-function buildPaginationHTML(items, currentPage, totalPages) {
-  return `<!DOCTYPE html>
+function buildPaginationHTML(
+  items,
+  currentPage,
+  totalPages
+) {
+  return `
+<!DOCTYPE html>
 <html lang="en">
+
 <head>
+
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Website Technology Reports</title>
-<meta name="description" content="Browse AI visibility reports and technology stack intelligence.">
+
+<meta
+name="viewport"
+content="width=device-width, initial-scale=1.0"
+>
+
+<title>
+Website Technology Reports
+</title>
+
+<meta
+name="description"
+content="Browse website technology stack intelligence reports."
+>
+
 <script src="https://cdn.tailwindcss.com"></script>
+
 </head>
+
 <body class="bg-gray-50 text-gray-900">
 
 <div class="max-w-6xl mx-auto px-6 py-12">
@@ -315,34 +712,77 @@ Website Technology Reports
 </h1>
 
 <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-${items.map(item => `
-<a href="${item.path}" class="bg-white border rounded-2xl p-6 shadow-sm hover:shadow-lg transition block">
-<h2 class="text-xl font-bold mb-2">${item.domain}</h2>
-<div class="text-sm text-gray-500 mb-3">${item.grade}</div>
-<div class="text-sm">AI Visibility: ${item.aiVisibility}</div>
-<div class="text-sm">Migration Risk: ${item.migrationRisk}</div>
+
+${items.map((item) => `
+<a
+href="${item.path}"
+class="bg-white border rounded-2xl p-6 shadow-sm hover:shadow-lg transition block"
+>
+
+<h2 class="text-xl font-bold mb-2">
+${item.domain}
+</h2>
+
+<div class="text-sm text-gray-500 mb-3">
+${item.grade}
+</div>
+
+<div class="text-sm">
+AI Visibility:
+${item.aiVisibility}
+</div>
+
+<div class="text-sm">
+Migration Risk:
+${item.migrationRisk}
+</div>
+
 </a>
 `).join("")}
+
 </div>
 
 <div class="flex gap-3 mt-12 flex-wrap">
-${Array.from({ length: totalPages }, (_, i) => {
-  const p = i + 1;
-  const href = p === 1 ? "/site-report/index.html" : `/site-report/page-${p}.html`;
 
-  return `
-<a href="${href}" class="px-4 py-2 rounded-xl border ${p === currentPage ? "bg-black text-white" : "bg-white"}">
+${Array.from(
+  { length: totalPages },
+  (_, i) => {
+    const p = i + 1;
+
+    const href =
+      p === 1
+        ? "/site-report/index.html"
+        : `/site-report/page-${p}.html`;
+
+    return `
+<a
+href="${href}"
+class="px-4 py-2 rounded-xl border ${
+  p === currentPage
+    ? "bg-black text-white"
+    : "bg-white"
+}"
+>
 ${p}
 </a>
 `;
-}).join("")}
+  }
+).join("")}
+
 </div>
 
 </div>
 
 </body>
-</html>`;
+</html>
+`;
 }
+
+/**
+ * =========================================================
+ * HELPERS
+ * =========================================================
+ */
 
 function normalizeDomain(domain) {
   return domain
@@ -360,15 +800,21 @@ function clean(url) {
 
 function ensureDir(dir) {
   if (!fs.existsSync(dir)) {
-    fs.mkdirSync(dir, { recursive: true });
+    fs.mkdirSync(dir, {
+      recursive: true
+    });
   }
 }
 
 function loadJSON(file, fallback) {
-  if (!fs.existsSync(file)) return fallback;
+  if (!fs.existsSync(file)) {
+    return fallback;
+  }
 
   try {
-    return JSON.parse(fs.readFileSync(file, "utf8"));
+    return JSON.parse(
+      fs.readFileSync(file, "utf8")
+    );
   } catch {
     return fallback;
   }
@@ -382,53 +828,3 @@ function escapeHTML(str = "") {
     .replace(/"/g, "&quot;")
     .replace(/'/g, "&#039;");
 }
-
-main();
-```
-
-# REQUIRED REPO STRUCTURE
-
-```txt
-/site-report/
-  index.html
-  index.json
-  search-index.json
-  openai.com.html
-  claude.ai.html
-
-/scripts/
-  generate-site-report.js
-
-/.cache/
-  openai.com.json
-```
-
-# REQUIRED package.json
-
-```json
-{
-  "type": "module",
-  "scripts": {
-    "generate-report": "node scripts/generate-site-report.js"
-  }
-}
-```
-
-# REQUIRED WEBSITE-TECH-STACK-CHECKER API ENDPOINT
-
-```js
-const API_ENDPOINT =
-  "https://aicitationscan.com/.netlify/functions/analyze-site";
-```
-
-# REQUIRED COMPETITOR ENDPOINT
-
-```js
-const COMPARE_ENDPOINT =
-  "https://aicitationscan.com/.netlify/functions/compare-domains";
-```
-
-# REQUIRED compare-domains.js FILE
-
-```txt
-/netlify/functions/compare-domains.js
