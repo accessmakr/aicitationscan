@@ -1,120 +1,100 @@
-import axios from "axios";
+import {
+  analyzeTechnology
+} from "../../engine/intelligence-engine.js";
 
-import { analyzeTechnology } from "../../engine/intelligence-engine.js";
-import { calculateScores } from "../../engine/scoring-engine.js";
-import { generateAIVisibility } from "../../engine/ai-visibility-engine.js";
-import { calculateMigrationRisk } from "../../engine/migration-engine.js";
-import { compareCompetitors } from "../../engine/competitor-engine.js";
-import { generateInsights } from "../../engine/explanation-engine.js";
+import {
+  calculateScores
+} from "../../engine/scoring-engine.js";
 
-function safeJSONParse(str) {
-  try {
-    return JSON.parse(str);
-  } catch {
-    return {};
-  }
-}
+import {
+  computeAIVisibility
+} from "../../engine/ai-visibility-engine.js";
 
-async function fetchSite(url) {
-  const target = url.startsWith("http") ? url : `https://${url}`;
+import {
+  computeMigrationRisk
+} from "../../engine/migration-engine.js";
 
-  const res = await axios.get(target, {
-    timeout: 15000,
-    headers: { "User-Agent": "AI Visibility Engine Bot" }
-  });
+import {
+  buildUnifiedResponse
+} from "../../engine/unified-contract.js";
 
-  return {
-    html: res.data || "",
-    headers: res.headers || {},
-    url: target
-  };
-}
+import signatures from "../../engine/signatures/signature-intelligence.json" assert { type: "json" };
+
+import {
+  fetchWithRetry
+} from "./fetch-site.js";
 
 export default async (req) => {
+
   try {
-    const url = new URL(req.url).searchParams.get("url");
-    const competitor = new URL(req.url).searchParams.get("compare");
+
+    const url =
+      new URL(req.url)
+      .searchParams
+      .get("url");
+
+    const hp =
+      new URL(req.url)
+      .searchParams
+      .get("hp_field");
+
+    if (hp) {
+      return Response.json({
+        success: false,
+        error: "Bot detected"
+      });
+    }
 
     if (!url) {
-      return json({ success: false, error: "Missing URL" }, 400);
+      return Response.json({
+        success: false,
+        error: "Missing URL"
+      });
     }
 
-    const siteA = await fetchSite(url);
+    const target =
+      url.startsWith("http")
+        ? url
+        : `https://${url}`;
 
-    const signatures = await loadSignatures();
+    const {
+      html,
+      headers
+    } = await fetchWithRetry(target);
 
-    const detections = await analyzeTechnology(siteA, signatures);
-
-    const score = calculateScores(detections);
-
-    const aiVisibility = generateAIVisibility(siteA, detections);
-
-    const migration = calculateMigrationRisk(detections);
-
-    let competitorData = null;
-
-    if (competitor) {
-      const siteB = await fetchSite(competitor);
-      const detB = await analyzeTechnology(siteB, signatures);
-
-      competitorData = compareCompetitors(
-        { url, detections, score },
-        { url: competitor, detections: detB }
+    const detections =
+      await analyzeTechnology(
+        { html, headers },
+        signatures
       );
-    }
 
-    const insights = generateInsights({
-      detections,
-      score,
-      aiVisibility,
-      migration
-    });
+    const score =
+      calculateScores(detections);
 
-    return json({
-      success: true,
-      url: siteA.url,
-      detections,
-      score,
-      aiVisibility,
-      migrationRisk: migration,
-      competitor: competitorData,
-      insights
-    });
+    const aiVisibility =
+      computeAIVisibility({ html });
 
-  } catch (err) {
-    return json({
+    const migrationRisk =
+      computeMigrationRisk({
+        detections
+      });
+
+    const finalResponse =
+      buildUnifiedResponse({
+        url: target,
+        detections,
+        score,
+        aiVisibility,
+        migrationRisk
+      });
+
+    return Response.json(finalResponse);
+
+  } catch (error) {
+
+    return Response.json({
       success: false,
-      error: err.message
-    }, 500);
+      error: error.message
+    });
   }
 };
-
-function json(data, status = 200) {
-  return new Response(JSON.stringify(data), {
-    status,
-    headers: { "content-type": "application/json" }
-  });
-}
-
-async function loadSignatures() {
-  const base = "../../public/data/";
-
-  const files = [
-    "cms-signatures.json",
-    "framework-signatures.json",
-    "hosting-signatures.json",
-    "analytics-signatures.json",
-    "ai-signatures.json"
-  ];
-
-  const merged = {};
-
-  for (const file of files) {
-    try {
-      const mod = await import(base + file, { assert: { type: "json" } });
-      Object.assign(merged, mod.default || {});
-    } catch {}
-  }
-
-  return merged;
-}
