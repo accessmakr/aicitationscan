@@ -151,8 +151,8 @@ window.seoRegistry = {
     },
     "website-tech-stack-checker.html": {
         "url": "/programmatic/website-tech-stack-checker",
-        "title": "Website Tech Stack Checker — Detect Any Site's Technologies Instantly | AI Citation Scan",
-        "desc": "Instantly detect any website's full technology stack — CMS, frameworks, hosting, CDN, AI visibility score, and migration risk. Free enterprise-grade tech intelligence."
+        "title": "Website Technology Intelligence",
+        "desc": "EIGE v10 Intelligence Console — Production-grade technology stack analysis, graph intelligence, and ecosystem classification."
     },
     "website-word-count-checker.html": {
         "url": "/programmatic/website-word-count-checker",
