@@ -519,10 +519,12 @@
         <div class="flex-1">
           <label for="hero-url" class="sr-only">Enter Website URL</label>
           <input
-            type="url"
+            type="text"
             id="hero-url"
             name="url"
-            placeholder="https://example.com"
+            placeholder="e.g. aicitationscan.com"
+            autocomplete="url"
+            spellcheck="false"
             class="intel-input w-full px-5 py-4 rounded-xl text-base font-mono"
             aria-label="Enter Website URL"
           >
@@ -1296,9 +1298,11 @@
 
     <form id="final-form" onsubmit="handleFinalSubmit(event)" class="flex flex-col sm:flex-row gap-3 max-w-xl mx-auto mb-6">
       <input
-        type="url"
+        type="text"
         id="final-url"
-        placeholder="https://example.com"
+        placeholder="e.g. aicitationscan.com"
+        autocomplete="url"
+        spellcheck="false"
         class="intel-input flex-1 px-5 py-4 rounded-xl text-base font-mono"
         aria-label="Enter website URL for analysis"
       >
@@ -1550,10 +1554,25 @@ window.addEventListener('scroll', function() {
   }, 3500);
 })();
 
+// ─── URL Normalizer ───────────────────────
+// Accepts plain domains (aicitationscan.com), www-prefixed (www.aicitationscan.com),
+// and full URLs (https://aicitationscan.com). Always returns a full https:// URL.
+function normalizeUrl(raw) {
+  var url = raw.trim();
+  if (!url) return '';
+  // Already has a scheme — pass through as-is
+  if (/^https?:\/\//i.test(url)) return url;
+  // Has a scheme but wrong one (ftp://, etc.) — still pass through
+  if (/^[a-zA-Z][a-zA-Z\d+\-.]*:\/\//.test(url)) return url;
+  // No scheme at all — prepend https://
+  return 'https://' + url;
+}
+
 // ─── Hero Form Submit ─────────────────────
 function handleHeroSubmit(e) {
   e.preventDefault();
-  var url = document.getElementById('hero-url').value.trim();
+  var raw = document.getElementById('hero-url').value;
+  var url = normalizeUrl(raw);
   if (!url) { showToast('Please enter a website URL.'); return; }
   window.location.href = '/programmatic/website-tech-stack-checker.html?url=' + encodeURIComponent(url);
 }
@@ -1561,7 +1580,8 @@ function handleHeroSubmit(e) {
 // ─── Final Form Submit ────────────────────
 function handleFinalSubmit(e) {
   e.preventDefault();
-  var url = document.getElementById('final-url').value.trim();
+  var raw = document.getElementById('final-url').value;
+  var url = normalizeUrl(raw);
   if (!url) { showToast('Please enter a website URL.'); return; }
   window.location.href = '/programmatic/website-tech-stack-checker.html?url=' + encodeURIComponent(url);
 }
