@@ -76,7 +76,7 @@
 
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-    html { font-size: 14px; scroll-behavior: smooth; }
+    html { font-size: 14px; scroll-behavior: smooth; overflow-x: hidden; }
 
     body {
       background: linear-gradient(135deg, #EEF2F9 0%, #E4ECF7 40%, #EDF1FA 100%);
@@ -143,6 +143,7 @@
       border-bottom: 1px solid var(--border-subtle);
       display: flex;
       align-items: center;
+      justify-content: space-between;
       padding: 0 20px;
       gap: 0;
     }
@@ -173,32 +174,43 @@
       padding-left: 8px;
     }
 
-    .header-mode-nav {
-      display: flex;
-      align-items: center;
-      gap: 1px;
-      margin-right: auto;
-    }
     .mode-tab {
-      padding: 5px 12px;
+      padding: 6px 12px;
       font-family: var(--font-mono);
       font-size: 10px;
       font-weight: 500;
       letter-spacing: 0.05em;
       text-transform: uppercase;
       color: var(--text-secondary);
-      background: transparent;
-      border: 1px solid transparent;
+      background: var(--bg-surface);
+      border: 1px solid var(--border-default);
       border-radius: var(--radius-sm);
       cursor: pointer;
       transition: all var(--transition);
       white-space: nowrap;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
     .mode-tab:hover { color: var(--text-primary); background: var(--bg-elevated); }
     .mode-tab.active {
       color: var(--blue);
       background: var(--blue-glow);
       border-color: var(--border-accent);
+    }
+
+    /* ── Mode Selector (moved from header to command canvas) ── */
+    .mode-selector {
+      display: flex;
+      flex-wrap: nowrap;
+      gap: 4px;
+      margin-bottom: 18px;
+      align-items: center;
+    }
+    .mode-selector .mode-tab {
+      flex: 1;
+      text-align: center;
+      justify-content: center;
     }
 
     .header-status-strip {
@@ -405,53 +417,81 @@
       transition: border-color var(--transition);
     }
     .compare-input:focus { border-color: var(--blue); }
+
+    .compare-btn-wrap {
+      display: flex;
+      align-items: flex-end;
+      flex-shrink: 0;
+    }
     .compare-input.error { border-color: var(--red); box-shadow: 0 0 0 3px var(--red-dim); }
 
     /* Advanced drawer */
     .advanced-drawer {
       border-top: 1px solid var(--border-subtle);
-      padding: 10px 0 16px;
+      padding: 12px 0 16px;
+      margin-top: 4px;
     }
     .advanced-toggle {
-      display: flex;
+      display: inline-flex;
       align-items: center;
-      gap: 6px;
+      gap: 8px;
       font-family: var(--font-mono);
       font-size: 10px;
-      color: var(--text-muted);
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--text-secondary);
       cursor: pointer;
-      background: none;
-      border: none;
-      padding: 4px 0;
-      transition: color var(--transition);
+      background: var(--bg-elevated);
+      border: 1px solid var(--border-default);
+      border-radius: var(--radius-sm);
+      padding: 6px 14px;
+      transition: all var(--transition);
     }
-    .advanced-toggle:hover { color: var(--text-secondary); }
-    .advanced-toggle-icon { transition: transform 200ms; }
+    .advanced-toggle:hover {
+      background: var(--bg-hover);
+      color: var(--text-primary);
+      border-color: var(--border-strong);
+    }
+    .advanced-toggle-icon { transition: transform 200ms; display: inline-block; }
     .advanced-toggle.open .advanced-toggle-icon { transform: rotate(90deg); }
+    .advanced-toggle.open {
+      background: var(--blue-glow);
+      color: var(--blue);
+      border-color: var(--border-accent);
+    }
 
     .advanced-options {
       display: none;
-      gap: 24px;
+      gap: 12px 24px;
       margin-top: 10px;
       flex-wrap: wrap;
+      background: var(--bg-elevated);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-md);
+      padding: 14px 16px;
     }
     .advanced-options.visible { display: flex; }
 
     .option-check {
       display: flex;
       align-items: center;
-      gap: 6px;
+      gap: 8px;
       cursor: pointer;
       font-family: var(--font-mono);
-      font-size: 10px;
+      font-size: 11px;
+      font-weight: 500;
       color: var(--text-secondary);
       transition: color var(--transition);
+      padding: 4px 0;
     }
     .option-check:hover { color: var(--text-primary); }
     .option-check input[type="checkbox"] {
-      width: 12px;
-      height: 12px;
+      width: 14px;
+      height: 14px;
       accent-color: var(--blue);
+      cursor: pointer;
+      flex-shrink: 0;
     }
 
     .action-row {
@@ -742,9 +782,10 @@
       grid-template-columns: 1fr 380px;
       gap: 16px;
       align-items: start;
+      min-width: 0;
     }
-    .results-main { display: flex; flex-direction: column; gap: 16px; min-width: 0; }
-    .results-sidebar { display: flex; flex-direction: column; gap: 16px; }
+    .results-main { display: flex; flex-direction: column; gap: 16px; min-width: 0; overflow: hidden; }
+    .results-sidebar { display: flex; flex-direction: column; gap: 16px; min-width: 0; overflow: hidden; }
 
     /* Panel card */
     .panel {
@@ -1418,13 +1459,15 @@
     .request-meta-strip {
       display: flex;
       align-items: center;
-      gap: 16px;
+      gap: 8px 16px;
       margin-bottom: 20px;
       padding: 8px 12px;
       background: var(--bg-surface);
       border: 1px solid var(--border-subtle);
       border-radius: var(--radius-md);
       flex-wrap: wrap;
+      min-width: 0;
+      overflow: hidden;
     }
     .req-meta-item {
       display: flex;
@@ -1466,6 +1509,13 @@
     }
     .btn-export:hover { background: var(--bg-hover); color: var(--text-primary); }
 
+    .meta-export-actions {
+      margin-left: auto;
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+    }
+
     /* ══════════════════════════════════════════════
        RESPONSIVE
     ══════════════════════════════════════════════ */
@@ -1475,6 +1525,9 @@
       .telemetry-grid { grid-template-columns: repeat(2, 1fr); }
       .compare-header-row { grid-template-columns: 1fr; }
       .compare-vs { display: none; }
+      .mode-selector { gap: 4px; }
+      .mode-selector .mode-tab { font-size: 9px; padding: 5px 8px; }
+      #command-canvas { padding: 20px 16px 0; }
     }
     @media (max-width: 600px) {
       #top-header { padding: 0 12px; }
@@ -1487,6 +1540,59 @@
       .telemetry-grid { grid-template-columns: 1fr; }
       .compare-matrix { grid-template-columns: 1fr; }
       .header-status-strip .status-chip:not(:first-child) { display: none; }
+      /* ── Mobile: scan form stacks vertically ── */
+      .scan-form { flex-direction: column; }
+      .scan-form .btn-analyze { width: 100%; justify-content: center; height: 46px; font-size: 14px; }
+      /* ── Mobile: compare inputs stack vertically ── */
+      .compare-inputs { flex-direction: column; }
+      .compare-inputs .compare-input-group { width: 100%; }
+      .compare-inputs .compare-btn-wrap { width: 100%; }
+      .compare-inputs .btn-analyze { width: 100%; justify-content: center; }
+      /* ── Mobile: action-row is 2-row grid ── */
+      .action-row {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 6px;
+      }
+      .action-row .btn-secondary {
+        flex: none;
+        width: 100%;
+        justify-content: center;
+        text-align: center;
+        height: 38px;
+        font-size: 10px;
+        padding: 0 8px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        min-width: 0;
+      }
+      .action-row .demo-badge {
+        grid-column: 3;
+        justify-self: stretch;
+        text-align: center;
+        height: 38px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        white-space: nowrap;
+        overflow: hidden;
+      }
+      /* ── Mobile: request meta strip ── */
+      .request-meta-strip { gap: 6px 12px; padding: 8px 10px; }
+      .meta-export-actions { margin-left: 0; width: 100%; justify-content: flex-start; }
+      /* ── Mobile: mode selector is 2-column grid ── */
+      .mode-selector {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 6px;
+        margin-bottom: 14px;
+      }
+      .mode-selector .mode-tab { flex: none; width: 100%; }
+      #command-canvas { padding: 16px 12px 0; }
+      .command-headline { font-size: 10px; margin-bottom: 12px; }
+      .history-dropdown { min-width: 0; width: 100%; }
+      .advanced-options { padding: 12px; gap: 10px 16px; }
     }
 
     /* ══════════════════════════════════════════════
@@ -1686,14 +1792,6 @@
       <div class="header-system-name">Intelligence Console</div>
     </div>
 
-    <nav class="header-mode-nav">
-      <button class="mode-tab active" data-mode="scan">Scan</button>
-      <button class="mode-tab" data-mode="compare">Compare</button>
-      <button class="mode-tab" data-mode="cluster">Cluster</button>
-      <button class="mode-tab" data-mode="graph">Graph</button>
-      <button class="mode-tab" data-mode="telemetry">Telemetry</button>
-    </nav>
-
     <div class="header-status-strip">
       <div class="status-chip">
         <div class="status-dot" id="api-status-dot"></div>
@@ -1715,6 +1813,14 @@
   ════════════════════════════════════════════ -->
   <section id="command-canvas">
     <div class="command-inner">
+      <!-- ── Mode Selector (relocated from header) ── -->
+      <nav class="mode-selector" aria-label="Analysis mode selector">
+        <button class="mode-tab active" data-mode="scan">Scan</button>
+        <button class="mode-tab" data-mode="compare">Compare</button>
+        <button class="mode-tab" data-mode="cluster">Cluster</button>
+        <button class="mode-tab" data-mode="graph">Graph</button>
+        <button class="mode-tab" data-mode="telemetry">Telemetry</button>
+      </nav>
       <div class="command-headline">Mission Control / Domain Intelligence</div>
 
       <!-- Single URL input row (scan / cluster) -->
@@ -1753,7 +1859,7 @@
           <div class="compare-label">Domain Beta</div>
           <input class="compare-input" id="compare-b" placeholder="paddle.com" spellcheck="false" aria-label="Domain Beta" />
         </div>
-        <div style="display:flex;align-items:flex-end">
+        <div class="compare-btn-wrap">
           <button class="btn-analyze" onclick="runCompare()" aria-label="Run comparison">
             <svg class="btn-icon" viewBox="0 0 16 16" fill="none" aria-hidden="true">
               <path d="M1 8h14M1 4h6M9 12h6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
@@ -1784,6 +1890,8 @@
         <button class="btn-secondary" onclick="clearResults()">Clear</button>
         <button class="btn-secondary" id="export-btn" onclick="exportJSON()" disabled>Export JSON</button>
         <button class="btn-secondary" id="copy-payload-btn" onclick="copyPayload()">Copy Payload</button>
+        <button class="btn-secondary" onclick="window.print()" title="Print via browser print dialog">⎙ Print</button>
+        <button class="btn-secondary" onclick="downloadPDF()" title="Save current results as PDF">⬇ PDF</button>
         <span class="demo-badge" onclick="loadDemo()">▶ DEMO</span>
       </div>
     </div>
@@ -1913,7 +2021,7 @@
         <div class="req-meta-item"><span class="req-meta-label">CACHE</span><span class="req-meta-val" id="meta-cache">—</span></div>
         <div class="req-meta-item"><span class="req-meta-label">TECHNOLOGIES</span><span class="req-meta-val" id="meta-tech-count">—</span></div>
         <div class="req-meta-item"><span class="req-meta-label">TIMESTAMP</span><span class="req-meta-val" id="meta-timestamp">—</span></div>
-        <div style="margin-left:auto;display:flex;gap:6px">
+        <div class="meta-export-actions">
           <button class="btn-export" onclick="exportJSON()">↓ JSON</button>
           <button class="btn-export" onclick="exportCSV()">↓ CSV</button>
           <button class="btn-export" onclick="copyReport()">⎘ Copy Report</button>
@@ -4051,6 +4159,13 @@
     }
 
     boot();
+
+    function downloadPDF() {
+      const orig = document.title;
+      document.title = 'EIGE-v10-report-' + new Date().toISOString().slice(0,10);
+      window.print();
+      setTimeout(() => { document.title = orig; }, 500);
+    }
   </script>
 </body>
 </html>
