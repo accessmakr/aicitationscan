@@ -141,8 +141,8 @@ window.seoRegistry = {
     },
     "terms-of-use.html": {
         "url": "/terms-of-use",
-        "title": "Terms of Use",
-        "desc": "Read the AI Citation Scan Terms of Use. Understand your rights, our tool license, and our directory disclaimer for enterprise-grade SEO tool usage."
+        "title": "Terms of Use — AI Citation Scan | Website Intelligence Platform",
+        "desc": "Read the Terms of Use for AI Citation Scan. Understand your license, acceptable use conditions, no-warranty provisions, platform limitations, and directory disclaimer for our website intelligence tools."
     },
     "ai-citation-checker.html": {
         "url": "/ai-tools/ai-citation-checker",
