@@ -136,8 +136,8 @@ window.seoRegistry = {
     },
     "privacy-policy.html": {
         "url": "/privacy-policy",
-        "title": "Privacy Policy",
-        "desc": "Read the AI Citation Scan Privacy Policy. Learn how we protect your data through zero-trust minimization, cookieless analytics, and strict CCPA/GDPR compliance."
+        "title": "Privacy Policy — AI Citation Scan | Website Intelligence Platform",
+        "desc": "Read AI Citation Scan's Privacy Policy. We collect no personal data, use no marketing cookies, and operate Plausible privacy-first analytics. Your intelligence, your data."
     },
     "terms-of-use.html": {
         "url": "/terms-of-use",
