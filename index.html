@@ -9,6 +9,11 @@
   <meta name="robots" content="index, follow">
   <meta name="author" content="AI Citation Scan">
   <link rel="canonical" href="https://aicitationscan.com/">
+  <script
+    defer
+    data-domain="aicitationscan.com"
+    src="https://plausible.io/js/plausible.js">
+  </script>
   <link rel="alternate" hreflang="en" href="https://aicitationscan.com/">
   <link rel="sitemap" type="application/xml" href="/sitemap.xml">
 
@@ -172,11 +177,14 @@
     #scroll-progress {
       position: fixed;
       top: 0; left: 0;
-      height: 3px;
-      width: 0%;
+      height: 4px;
+      width: 100%;
       background: linear-gradient(90deg, #3B82F6, #8B5CF6);
       z-index: 9999;
-      transition: width 0.1s linear;
+      transform: scaleX(0);
+      transform-origin: left center;
+      transition: transform 0.1s linear;
+      will-change: transform;
     }
 
     /* Grid noise texture overlay */
@@ -203,12 +211,27 @@
     .intel-card {
       border: 1px solid rgba(255,255,255,0.07);
       background: #111827;
-      transition: border-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+      position: relative;
+      transition: border-color 0.2s ease, transform 0.2s ease;
+      will-change: transform;
+    }
+    .intel-card::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: inherit;
+      box-shadow: 0 16px 48px rgba(59,130,246,0.12);
+      opacity: 0;
+      transition: opacity 0.2s ease;
+      pointer-events: none;
+      will-change: opacity;
     }
     .intel-card:hover {
       border-color: rgba(59,130,246,0.35);
       transform: translateY(-2px);
-      box-shadow: 0 16px 48px rgba(59,130,246,0.08);
+    }
+    .intel-card:hover::after {
+      opacity: 1;
     }
 
     /* Accent gradient text */
@@ -224,12 +247,12 @@
       background: rgba(15,23,42,0.8);
       border: 1px solid rgba(255,255,255,0.1);
       color: #E2E8F0;
-      transition: border-color 0.2s, box-shadow 0.2s;
+      transition: border-color 0.2s;
     }
     .intel-input:focus {
-      outline: none;
+      outline: 2px solid rgba(59,130,246,0.4);
+      outline-offset: 0;
       border-color: #3B82F6;
-      box-shadow: 0 0 0 3px rgba(59,130,246,0.12);
     }
     .intel-input::placeholder { color: rgba(148,163,184,0.5); }
 
@@ -238,12 +261,27 @@
       background: linear-gradient(135deg, #3B82F6, #6366F1);
       color: white;
       font-weight: 600;
-      transition: opacity 0.2s, transform 0.15s, box-shadow 0.2s;
+      position: relative;
+      transition: opacity 0.2s, transform 0.15s;
+      will-change: transform, opacity;
+    }
+    .btn-primary::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: inherit;
+      box-shadow: 0 8px 24px rgba(59,130,246,0.3);
+      opacity: 0;
+      transition: opacity 0.2s ease;
+      will-change: opacity;
+      pointer-events: none;
     }
     .btn-primary:hover {
       opacity: 0.92;
       transform: translateY(-1px);
-      box-shadow: 0 8px 24px rgba(59,130,246,0.25);
+    }
+    .btn-primary:hover::after {
+      opacity: 1;
     }
 
     /* Ghost button */
@@ -267,7 +305,10 @@
     .meter-fill {
       height: 100%;
       border-radius: 2px;
-      transition: width 1.2s ease;
+      transform: scaleX(0);
+      transform-origin: left center;
+      transition: transform 1.2s ease;
+      will-change: transform;
     }
 
     /* Signal dot */
@@ -306,9 +347,20 @@
     }
 
     /* FAQ accordion */
-    .faq-answer { max-height: 0; overflow: hidden; transition: max-height 0.35s ease; }
-    .faq-answer.open { max-height: 400px; }
-    .faq-chevron { transition: transform 0.3s ease; }
+    .faq-answer {
+      overflow: hidden;
+      max-height: 0;
+      opacity: 0;
+      transform: translateY(-4px);
+      transition: max-height 0.35s ease, opacity 0.25s ease, transform 0.25s ease;
+      will-change: opacity, transform;
+    }
+    .faq-answer.open {
+      max-height: 400px;
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .faq-chevron { transition: transform 0.3s ease; will-change: transform; }
     .faq-chevron.open { transform: rotate(180deg); }
 
     /* Comparison table */
@@ -325,6 +377,7 @@
       opacity: 0;
       transform: translateY(20px);
       transition: opacity 0.6s ease, transform 0.6s ease;
+      will-change: opacity, transform;
     }
     .reveal.visible {
       opacity: 1;
@@ -343,13 +396,14 @@
       padding: 5px 14px;
       color: #94A3B8;
       cursor: pointer;
-      transition: border-color 0.2s, color 0.2s, background 0.2s;
+      transition: border-color 0.2s, color 0.2s, opacity 0.2s;
       white-space: nowrap;
+      background: transparent;
     }
     .share-pill:hover {
       border-color: rgba(59,130,246,0.4);
       color: #E2E8F0;
-      background: rgba(59,130,246,0.06);
+      opacity: 0.85;
     }
 
     /* Dashboard preview */
@@ -440,6 +494,13 @@
     ::-webkit-scrollbar-track { background: #0B1020; }
     ::-webkit-scrollbar-thumb { background: rgba(59,130,246,0.3); border-radius: 3px; }
   </style>
+  <link rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css"
+    media="print" onload="this.media='all'">
+  <noscript>
+    <link rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
+  </noscript>
 </head>
 
 <body class="antialiased">
@@ -718,25 +779,25 @@
         <div class="dash-card">
           <div class="dash-label">CMS Platform</div>
           <div class="dash-value mt-1">WordPress</div>
-          <div class="meter-bar mt-2"><div class="meter-fill" style="width:92%; background: linear-gradient(90deg, #3B82F6, #6366F1);"></div></div>
+          <div class="meter-bar mt-2"><div class="meter-fill" style="background: linear-gradient(90deg, #3B82F6, #6366F1);" data-scale="0.92"></div></div>
           <div class="text-xs text-slate-500 mt-1 font-mono">92% confidence</div>
         </div>
         <div class="dash-card">
           <div class="dash-label">Framework</div>
           <div class="dash-value mt-1">Next.js</div>
-          <div class="meter-bar mt-2"><div class="meter-fill" style="width:87%; background: linear-gradient(90deg, #8B5CF6, #6366F1);"></div></div>
+          <div class="meter-bar mt-2"><div class="meter-fill" style="background: linear-gradient(90deg, #8B5CF6, #6366F1);" data-scale="0.87"></div></div>
           <div class="text-xs text-slate-500 mt-1 font-mono">87% confidence</div>
         </div>
         <div class="dash-card">
           <div class="dash-label">CDN Provider</div>
           <div class="dash-value mt-1">Cloudflare</div>
-          <div class="meter-bar mt-2"><div class="meter-fill" style="width:99%; background: linear-gradient(90deg, #F59E0B, #EF4444);"></div></div>
+          <div class="meter-bar mt-2"><div class="meter-fill" style="background: linear-gradient(90deg, #F59E0B, #EF4444);" data-scale="0.99"></div></div>
           <div class="text-xs text-slate-500 mt-1 font-mono">99% confidence</div>
         </div>
         <div class="dash-card">
           <div class="dash-label">Hosting</div>
           <div class="dash-value mt-1">Vercel Edge</div>
-          <div class="meter-bar mt-2"><div class="meter-fill" style="width:95%; background: linear-gradient(90deg, #10B981, #3B82F6);"></div></div>
+          <div class="meter-bar mt-2"><div class="meter-fill" style="background: linear-gradient(90deg, #10B981, #3B82F6);" data-scale="0.95"></div></div>
           <div class="text-xs text-slate-500 mt-1 font-mono">95% confidence</div>
         </div>
       </div>
@@ -749,7 +810,7 @@
             <span class="text-3xl font-bold font-mono" style="color: #10B981;">86</span>
             <span class="text-sm text-slate-500 mb-1">/100</span>
           </div>
-          <div class="meter-bar mt-2"><div class="meter-fill" style="width:86%; background: linear-gradient(90deg, #10B981, #3B82F6);"></div></div>
+          <div class="meter-bar mt-2"><div class="meter-fill" style="background: linear-gradient(90deg, #10B981, #3B82F6);" data-scale="0.86"></div></div>
           <div class="flex flex-wrap gap-1 mt-3">
             <span class="dash-badge badge-green">Schema ✓</span>
             <span class="dash-badge badge-blue">Structured ✓</span>
@@ -970,35 +1031,35 @@
                 <span class="text-xs text-slate-300">AI Crawlability</span>
                 <span class="text-xs font-mono text-emerald-400">94/100</span>
               </div>
-              <div class="meter-bar"><div class="meter-fill" style="width:94%; background: #10B981;"></div></div>
+              <div class="meter-bar"><div class="meter-fill" style="background: #10B981;" data-scale="0.94"></div></div>
             </div>
             <div>
               <div class="flex justify-between items-center mb-1">
                 <span class="text-xs text-slate-300">Semantic Clarity</span>
                 <span class="text-xs font-mono text-blue-400">81/100</span>
               </div>
-              <div class="meter-bar"><div class="meter-fill" style="width:81%; background: #3B82F6;"></div></div>
+              <div class="meter-bar"><div class="meter-fill" style="background: #3B82F6;" data-scale="0.81"></div></div>
             </div>
             <div>
               <div class="flex justify-between items-center mb-1">
                 <span class="text-xs text-slate-300">Citation Readiness</span>
                 <span class="text-xs font-mono text-violet-400">76/100</span>
               </div>
-              <div class="meter-bar"><div class="meter-fill" style="width:76%; background: #8B5CF6;"></div></div>
+              <div class="meter-bar"><div class="meter-fill" style="background: #8B5CF6;" data-scale="0.76"></div></div>
             </div>
             <div>
               <div class="flex justify-between items-center mb-1">
                 <span class="text-xs text-slate-300">Entity Clarity</span>
                 <span class="text-xs font-mono text-yellow-400">88/100</span>
               </div>
-              <div class="meter-bar"><div class="meter-fill" style="width:88%; background: #F59E0B;"></div></div>
+              <div class="meter-bar"><div class="meter-fill" style="background: #F59E0B;" data-scale="0.88"></div></div>
             </div>
             <div>
               <div class="flex justify-between items-center mb-1">
                 <span class="text-xs text-slate-300">Structured Data</span>
                 <span class="text-xs font-mono text-emerald-400">91/100</span>
               </div>
-              <div class="meter-bar"><div class="meter-fill" style="width:91%; background: #10B981;"></div></div>
+              <div class="meter-bar"><div class="meter-fill" style="background: #10B981;" data-scale="0.91"></div></div>
             </div>
           </div>
           <div class="mt-6 pt-4" style="border-top: 1px solid rgba(255,255,255,0.06);">
@@ -1479,16 +1540,28 @@
 <!-- Toast Container -->
 <div id="toast-container"></div>
 
+<script
+  src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"
+  async
+  onload="AOS.init({duration:600,easing:'ease-out',once:true,offset:80})">
+</script>
+<script
+  src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"
+  async>
+</script>
+
 <!-- ═══════════════════════════════════════════
      INLINE JAVASCRIPT
 ═══════════════════════════════════════════ -->
 <script>
 // ─── Scroll Progress Bar ───────────────────
 window.addEventListener('scroll', function() {
-  const scrollTop = document.documentElement.scrollTop;
-  const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-  const progress = scrollHeight > 0 ? (scrollTop / scrollHeight) * 100 : 0;
-  document.getElementById('scroll-progress').style.width = progress + '%';
+  var scrollTop = document.documentElement.scrollTop;
+  var scrollHeight = document.documentElement.scrollHeight
+    - document.documentElement.clientHeight;
+  var progress = scrollHeight > 0 ? scrollTop / scrollHeight : 0;
+  document.getElementById('scroll-progress').style.transform
+    = 'scaleX(' + progress + ')';
 }, { passive: true });
 
 // ─── Reveal on Scroll ─────────────────────
@@ -1702,17 +1775,13 @@ function handleContactForm(e) {
   var observer = new IntersectionObserver(function(entries) {
     entries.forEach(function(entry) {
       if (entry.isIntersecting) {
-        entry.target.style.width = entry.target.style.width;
+        var scale = parseFloat(entry.target.getAttribute('data-scale')) || 0;
+        entry.target.style.transform = 'scaleX(' + scale + ')';
         observer.unobserve(entry.target);
       }
     });
-  }, { threshold: 0.5 });
-  meters.forEach(function(m) {
-    var finalWidth = m.style.width;
-    m.style.width = '0%';
-    observer.observe(m);
-    setTimeout(function() { m.style.width = finalWidth; }, 300);
-  });
+  }, { threshold: 0.4 });
+  meters.forEach(function(m) { observer.observe(m); });
 })();
 
 // ─── Helpfulness Widget ───────────────────
