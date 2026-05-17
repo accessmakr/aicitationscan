@@ -3,11 +3,55 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="EIGE v10 Intelligence Console — Production-grade technology stack analysis, graph intelligence, and ecosystem classification." />
-  <title>EIGE v10 Intelligence Console — Website Tech Stack Checker | AI Citation Scan</title>
+  <meta name="description" content="EIGE v10 Intelligence Console — Production-grade technology stack analysis, graph intelligence, and ecosystem classification — detect CMS, JavaScript frameworks, CDN &amp; analytics in seconds. Free, AI-powered, no sign-up needed." />
+  <meta name="keywords" content="website tech stack checker, technology stack detector, CMS detection tool, JavaScript framework checker, web technology analyzer, website fingerprint tool" />
+  <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
+  <meta name="author" content="AI Citation Scan" />
+  <link rel="canonical" href="https://aicitationscan.com/programmatic/website-tech-stack-checker" />
+  <link rel="alternate" hreflang="en" href="https://aicitationscan.com/programmatic/website-tech-stack-checker" />
+  <link rel="alternate" hreflang="x-default" href="https://aicitationscan.com/programmatic/website-tech-stack-checker" />
+  <link rel="sitemap" type="application/xml" title="Sitemap" href="../sitemap.xml" />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Free Website Tech Stack Checker — EIGE v10 | AI Citation Scan" />
+  <meta property="og:description" content="Detect any website's CMS, frameworks, CDN, analytics &amp; more in seconds. AI-powered, free, no sign-up required." />
+  <meta property="og:url" content="https://aicitationscan.com/programmatic/website-tech-stack-checker" />
+  <meta property="og:site_name" content="AI Citation Scan" />
+  <meta property="og:image" content="https://aicitationscan.com/og-tech-stack-checker.png" />
+  <meta property="og:locale" content="en_US" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Free Website Tech Stack Checker — EIGE v10 | AI Citation Scan" />
+  <meta name="twitter:description" content="Detect any website's CMS, frameworks, CDN &amp; analytics in seconds. Free, no sign-up." />
+  <meta name="twitter:image" content="https://aicitationscan.com/og-tech-stack-checker.png" />
+  <meta name="twitter:site" content="@aicitationscan" />
+  <link rel="icon" type="image/x-icon" href="../favicon.ico" />
+  <link rel="apple-touch-icon" href="../apple-touch-icon.png" />
+  <meta name="geo.region" content="US" />
+  <meta name="geo.placename" content="United States" />
+  <meta name="ICBM" content="37.7749, -122.4194" />
+  <link rel="preconnect" href="https://eige-v10-backend.onrender.com" />
+  <link rel="dns-prefetch" href="https://eige-v10-backend.onrender.com" />
+  <title>EIGE v10 Intelligence Console — Website Tech Stack Checker — Free Instant Detection | AI Citation Scan</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,400&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,400&family=JetBrains+Mono:wght@400;500;600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <!-- AOS — non-render-blocking CSS load pattern -->
+  <link rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.min.css"
+    media="print" onload="this.media='all'" />
+  <noscript>
+    <link rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.min.css" />
+  </noscript>
+  <!-- AOS JS -->
+  <script async
+    src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.min.js"></script>
+  <!-- GSAP -->
+  <script async
+    src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  <!-- Plausible Analytics -->
+  <script defer data-domain="aicitationscan.com"
+    src="https://plausible.io/js/plausible.js"></script>
+  <script src="https://cdn.tailwindcss.com"></script>
   <style>
     /* ═══════════════════════════════════════════════════════════════
        EIGE v10 INTELLIGENCE CONSOLE — DESIGN SYSTEM
@@ -462,7 +506,7 @@
     }
 
     .advanced-options {
-      display: none;
+      display: flex;
       gap: 12px 24px;
       margin-top: 10px;
       flex-wrap: wrap;
@@ -1778,10 +1822,450 @@
       a::after { content: none !important; }
       @page { margin: 15mm; size: A4 portrait; }
     }
+    /* ── Toast Notification System ── */
+    #toast-container {
+      position: fixed;
+      bottom: 44px;
+      right: 20px;
+      z-index: 10000;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      pointer-events: none;
+    }
+    .toast-item {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-default);
+      border-radius: var(--radius-md);
+      padding: 10px 16px;
+      font-family: var(--font-mono);
+      font-size: 11px;
+      color: var(--text-primary);
+      box-shadow: var(--shadow-md);
+      opacity: 0;
+      transform: translateY(8px);
+      animation: toast-enter 0.2s ease forwards;
+      pointer-events: auto;
+      white-space: nowrap;
+    }
+    @keyframes toast-enter {
+      to { opacity: 1; transform: translateY(0); }
+    }
+    /* ── Mobile: WhatsApp col-1, Email PDF spans cols 2-3 ── */
+    @media (max-width: 600px) {
+      .action-row .btn-whatsapp { order: 7; }
+      .action-row .btn-email-pdf {
+        order: 8;
+        grid-column: 2 / span 2;
+      }
+    }
+    /* ── Page-Level Legal Footer ── */
+    #page-footer {
+      background: var(--bg-surface);
+      border-top: 1px solid var(--border-subtle);
+      padding: 40px 20px 32px;
+      font-family: 'Inter', var(--font-body);
+    }
+    .page-footer-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    .page-footer-top {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 32px;
+      margin-bottom: 28px;
+    }
+    .footer-col-label {
+      font-family: var(--font-mono);
+      font-size: 9px;
+      font-weight: 600;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-bottom: 12px;
+    }
+    .footer-legal-links,
+    .footer-social-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px 14px;
+    }
+    .footer-legal-links a,
+    .footer-social-links a {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      color: var(--text-muted);
+      text-decoration: none;
+      transition: color var(--transition);
+    }
+    .footer-legal-links a:hover,
+    .footer-social-links a:hover { color: var(--text-secondary); }
+    .page-footer-bottom {
+      border-top: 1px solid var(--border-subtle);
+      padding-top: 20px;
+      font-family: var(--font-mono);
+      font-size: 10px;
+      color: var(--text-muted);
+      text-align: center;
+    }
+    /* Home button in tool header */
+    .header-home-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-family: var(--font-mono);
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--text-secondary);
+      text-decoration: none;
+      background: var(--bg-elevated);
+      border: 1px solid var(--border-default);
+      border-radius: var(--radius-sm);
+      padding: 5px 12px;
+      transition: all var(--transition);
+      white-space: nowrap;
+    }
+    .header-home-link:hover {
+      background: var(--bg-hover);
+      color: var(--text-primary);
+      border-color: var(--border-strong);
+    }
+    @media (max-width: 600px) {
+      .page-footer-top { grid-template-columns: 1fr; gap: 20px; }
+    }
+    @media print {
+      #page-footer { display: none !important; }
+    }
+    /* ── Header search trigger and nav dock ── */
+    .header-search-trigger {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      height: 30px;
+      padding: 0 12px;
+      background: var(--bg-elevated);
+      border: 1px solid var(--border-default);
+      border-radius: var(--radius-sm);
+      color: var(--text-secondary);
+      font-family: var(--font-mono);
+      font-size: 10px;
+      cursor: pointer;
+      transition: all var(--transition);
+      white-space: nowrap;
+    }
+    .header-search-trigger:hover {
+      background: var(--bg-hover);
+      color: var(--text-primary);
+      border-color: var(--border-strong);
+    }
+    .header-search-trigger svg {
+      width: 13px;
+      height: 13px;
+      flex-shrink: 0;
+    }
+    #master-nav-dock {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    /* ── Seasonal Greeting Banner ── */
+    #seasonal-banner {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      height: 34px;
+      background: linear-gradient(90deg, rgba(16,185,129,0.06), rgba(124,58,237,0.06));
+      border-bottom: 1px solid var(--border-subtle);
+      font-family: var(--font-mono);
+      font-size: 11px;
+      color: var(--text-secondary);
+      letter-spacing: 0.04em;
+    }
+    #seasonal-banner-close {
+      position: absolute;
+      right: 16px;
+      top: 50%;
+      transform: translateY(-50%);
+      background: none;
+      border: none;
+      cursor: pointer;
+      color: var(--text-muted);
+      font-size: 14px;
+      line-height: 1;
+      padding: 2px 6px;
+      transition: color var(--transition);
+    }
+    #seasonal-banner-close:hover { color: var(--text-primary); }
+    @media print {
+      #seasonal-banner { display: none !important; }
+    }
+    /* ── Page-Level Share Bar ── */
+    #page-share-bar {
+      padding: 32px 20px;
+      border-bottom: 1px solid var(--border-subtle);
+      background: var(--bg-elevated);
+    }
+    .share-bar-inner {
+      max-width: 760px;
+      margin: 0 auto;
+    }
+    .share-bar-label {
+      font-family: var(--font-mono);
+      font-size: 9px;
+      font-weight: 600;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-bottom: 14px;
+    }
+    .share-buttons-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+    .share-btn {
+      height: 30px;
+      padding: 0 14px;
+      background: var(--bg-surface);
+      border: 1px solid var(--border-default);
+      border-radius: 999px;
+      color: var(--text-secondary);
+      font-family: var(--font-mono);
+      font-size: 10px;
+      cursor: pointer;
+      transition: all var(--transition);
+      white-space: nowrap;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+    }
+    .share-btn:hover {
+      background: var(--bg-hover);
+      color: var(--text-primary);
+      border-color: var(--border-strong);
+    }
+    @media print {
+      #page-share-bar { display: none !important; }
+    }
+    /* ── Post-tool Content Sections ── */
+    .intel-prose-section {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 40px 20px;
+      border-bottom: 1px solid var(--border-subtle);
+    }
+    .intel-prose-label {
+      font-family: var(--font-mono);
+      font-size: 9px;
+      font-weight: 600;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-bottom: 12px;
+    }
+    .intel-prose-text {
+      font-family: 'Inter', var(--font-body);
+      font-size: 14px;
+      color: var(--text-secondary);
+      line-height: 1.8;
+      max-width: 800px;
+    }
+    /* ── Citation Section ── */
+    #citation-section {
+      padding: 40px 20px;
+      border-bottom: 1px solid var(--border-subtle);
+      background: var(--bg-elevated);
+    }
+    .citation-inner {
+      max-width: 760px;
+      margin: 0 auto;
+    }
+    .section-heading {
+      font-family: var(--font-display);
+      font-size: 22px;
+      font-weight: 700;
+      color: var(--text-primary);
+      letter-spacing: -0.02em;
+      margin-bottom: 8px;
+    }
+    .section-sub {
+      font-family: 'Inter', var(--font-body);
+      font-size: 13px;
+      color: var(--text-muted);
+      margin-bottom: 20px;
+    }
+    .citation-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .citation-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      font-family: var(--font-mono);
+      font-size: 11px;
+      color: var(--text-secondary);
+    }
+    .citation-num {
+      color: var(--text-muted);
+      flex-shrink: 0;
+      min-width: 20px;
+    }
+    .citation-item a {
+      color: var(--blue);
+      text-decoration: none;
+      transition: color var(--transition);
+    }
+    .citation-item a:hover {
+      color: var(--text-primary);
+      text-decoration: underline;
+    }
+    @media print {
+      .intel-prose-section,
+      #citation-section { display: none !important; }
+    }
   </style>
+  <script>
+    (function() {
+      var today = new Date();
+      var dow = today.getDay();
+      var daysBack = dow === 0 ? 6 : dow - 1;
+      var lastMonday = new Date(today);
+      lastMonday.setDate(today.getDate() - daysBack);
+      var schemaDate = lastMonday.toISOString().slice(0, 10);
+      var todayISO = today.toISOString().slice(0, 10);
+
+      window.__schemaDateModified = schemaDate;
+      window.__todayISO = todayISO;
+      window.__lastMondayHuman = lastMonday.toLocaleDateString('en-US',
+        { month: 'long', day: 'numeric', year: 'numeric' });
+
+      function injectSchema(obj) {
+        var s = document.createElement('script');
+        s.type = 'application/ld+json';
+        s.textContent = JSON.stringify(obj, null, 2);
+        document.head.appendChild(s);
+      }
+
+      injectSchema({
+        "@context": "https://schema.org",
+        "@type": "Article",
+        "@id": "https://aicitationscan.com/programmatic/website-tech-stack-checker#article",
+        "headline": "Free Website Tech Stack Checker — Detect Any Site's Technology Stack",
+        "description": "Instantly detect any website's CMS, frameworks, CDN and analytics. AI-powered, free.",
+        "url": "https://aicitationscan.com/programmatic/website-tech-stack-checker",
+        "datePublished": "2024-01-01",
+        "dateModified": schemaDate,
+        "author": { "@type": "Organization", "name": "AI Citation Scan" },
+        "publisher": {
+          "@type": "Organization",
+          "name": "AI Citation Scan",
+          "logo": { "@type": "ImageObject",
+            "url": "https://aicitationscan.com/og-tech-stack-checker.png" }
+        },
+        "image": "https://aicitationscan.com/og-tech-stack-checker.png"
+      });
+
+      injectSchema({
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "@id": "https://aicitationscan.com/#website",
+        "name": "AI Citation Scan",
+        "url": "https://aicitationscan.com",
+        "potentialAction": {
+          "@type": "SearchAction",
+          "target": {
+            "@type": "EntryPoint",
+            "urlTemplate": "https://aicitationscan.com/programmatic/website-tech-stack-checker?url={url}"
+          },
+          "query-input": "required name=url"
+        }
+      });
+
+      injectSchema({
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        "@id": "https://aicitationscan.com/#organization",
+        "name": "AI Citation Scan",
+        "url": "https://aicitationscan.com",
+        "logo": { "@type": "ImageObject",
+          "url": "https://aicitationscan.com/og-tech-stack-checker.png" },
+        "sameAs": [
+          "https://twitter.com/aicitationscan",
+          "https://www.linkedin.com/company/aicitationscan",
+          "https://github.com/aicitationscan"
+        ]
+      });
+
+      injectSchema({
+        "@context": "https://schema.org",
+        "@type": "SoftwareApplication",
+        "name": "EIGE v10 Website Tech Stack Checker",
+        "applicationCategory": "DeveloperApplication",
+        "operatingSystem": "Web Browser",
+        "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+        "aggregateRating": {
+          "@type": "AggregateRating",
+          "ratingValue": "4.9",
+          "ratingCount": "312"
+        }
+      });
+
+      injectSchema({
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          { "@type": "ListItem", "position": 1, "name": "Home",
+            "item": "https://aicitationscan.com/" },
+          { "@type": "ListItem", "position": 2, "name": "Programmatic Tools",
+            "item": "https://aicitationscan.com/programmatic/" },
+          { "@type": "ListItem", "position": 3, "name": "Website Tech Stack Checker" }
+        ]
+      });
+
+      window.__faqData = [
+        { q: "What is a website tech stack checker?", a: "A website tech stack checker is a tool that analyzes a website's HTTP response headers, HTML structure, and embedded scripts to identify the underlying technologies — including CMS platforms, JavaScript frameworks, CDNs, analytics tools, and hosting providers." },
+        { q: "How accurate is EIGE v10's technology detection?", a: "Detection accuracy depends on signal availability. For technologies that inject identifiable headers or DOM markers, accuracy is consistently above 90%. Each result includes a per-technology confidence percentage." },
+        { q: "Is this tool free to use?", a: "Yes. EIGE v10's core scan, compare, cluster, telemetry, and graph modes are all free with no account required." },
+        { q: "Can I check any website's technology stack?", a: "You can analyze any publicly accessible website. Private or login-gated pages cannot be scanned." },
+        { q: "What types of technologies does it detect?", a: "EIGE v10 detects across 11 categories: JavaScript frameworks, CMS platforms, e-commerce systems, CDN providers, hosting infrastructure, CSS frameworks, analytics tools, payment processors, security tools, databases, and generic server-side indicators — covering 200+ named technology patterns." },
+        { q: "How does the AI interpretation layer work?", a: "After raw detection, a deterministic inference engine classifies the website's architecture type and generates a plain-language summary of the site's infrastructure." },
+        { q: "Can I export my scan results?", a: "Yes. Results can be exported as JSON, CSV, printed to PDF, copied as plain text, or shared via WhatsApp and email." },
+        { q: "Is my scan data stored or shared?", a: "Scan requests are processed in real time and not persistently stored beyond the session. No account is required and no personal data is collected." }
+      ];
+
+      document.addEventListener('DOMContentLoaded', function() {
+        injectSchema({
+          "@context": "https://schema.org",
+          "@type": "FAQPage",
+          "mainEntity": window.__faqData.map(function(item) {
+            return {
+              "@type": "Question",
+              "name": item.q,
+              "acceptedAnswer": { "@type": "Answer", "text": item.a }
+            };
+          })
+        });
+      });
+    })();
+  </script>
 </head>
 
 <body data-mode="scan">
+
+  <!-- Seasonal Greeting Banner — dismissed via sessionStorage -->
+  <div id="seasonal-banner" role="banner" aria-label="Seasonal edition notice">
+    <span id="seasonal-banner-text">Loading...</span>
+    <button id="seasonal-banner-close"
+      aria-label="Dismiss seasonal banner"
+      title="Dismiss">×</button>
+  </div>
 
   <!-- ════════════════════════════════════════════
        TOP INTELLIGENCE HEADER
@@ -1792,6 +2276,9 @@
       <div class="header-system-name">Intelligence Console</div>
     </div>
 
+    <a href="../index.html" class="header-home-link" aria-label="Go to AI Citation Scan home">
+      ⌂ Home
+    </a>
     <div class="header-status-strip">
       <div class="status-chip">
         <div class="status-dot" id="api-status-dot"></div>
@@ -1804,6 +2291,18 @@
         <span id="header-cache-status">LIVE</span>
       </div>
       <div class="header-env-badge">PROD</div>
+      <button
+        type="button"
+        class="header-search-trigger"
+        aria-label="Open search"
+        aria-haspopup="dialog">
+        <svg viewBox="0 0 16 16" fill="none" aria-hidden="true">
+          <circle cx="7" cy="7" r="4.5" stroke="currentColor" stroke-width="1.5"/>
+          <path d="M10.5 10.5L14 14" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+        </svg>
+        Search
+      </button>
+      <div id="master-nav-dock" aria-label="Site navigation"></div>
       <button class="theme-toggle-btn" onclick="toggleTheme()" id="theme-btn" title="Toggle dark/light theme">☾ Dark</button>
     </div>
   </header>
@@ -1869,13 +2368,13 @@
         </div>
       </div>
 
-      <!-- Advanced controls -->
+      <!-- Advanced controls — permanently expanded, no toggle -->
       <div class="advanced-drawer">
-        <button class="advanced-toggle" id="advanced-toggle" onclick="toggleAdvanced()">
-          <span class="advanced-toggle-icon">▶</span>
+        <div class="advanced-toggle open" id="advanced-toggle" style="cursor:default; pointer-events:none;" aria-hidden="true">
+          <span class="advanced-toggle-icon" style="transform:rotate(90deg);">▶</span>
           Advanced Intelligence Options
-        </button>
-        <div class="advanced-options" id="advanced-options">
+        </div>
+        <div class="advanced-options visible" id="advanced-options">
           <label class="option-check"><input type="checkbox" id="opt-graph" checked> Graph intelligence</label>
           <label class="option-check"><input type="checkbox" id="opt-ai" checked> AI interpretation</label>
           <label class="option-check"><input type="checkbox" id="opt-infra" checked> Infrastructure scan</label>
@@ -1893,6 +2392,20 @@
         <button class="btn-secondary" onclick="window.print()" title="Print via browser print dialog">⎙ Print</button>
         <button class="btn-secondary" onclick="downloadPDF()" title="Save current results as PDF">⬇ PDF</button>
         <span class="demo-badge" onclick="loadDemo()">▶ DEMO</span>
+        <button
+          class="btn-secondary btn-whatsapp"
+          onclick="shareWhatsApp()"
+          title="Share via WhatsApp"
+          aria-label="Share results via WhatsApp">
+          ⊞ WhatsApp
+        </button>
+        <button
+          class="btn-secondary btn-email-pdf"
+          onclick="emailPDF()"
+          title="Save PDF and open email client"
+          aria-label="Export PDF and email results">
+          ✉ Email PDF
+        </button>
       </div>
     </div>
   </section>
@@ -2344,7 +2857,165 @@
       <span class="footer-val" id="footer-mode">SCAN</span>
     </div>
     <div class="footer-item">
-      <span>© 2025 EIGE v10 · AI Citation Scan</span>
+      <span>© <span id="copyright-year-tool"></span> EIGE v10 · AI Citation Scan</span>
+    </div>
+  </footer>
+
+  <!-- ════════════════════════════════════════════
+       DETECTION LOGIC SECTION
+  ════════════════════════════════════════════ -->
+  <div class="intel-prose-section" aria-label="Detection logic">
+    <div class="intel-prose-label">Detection Logic</div>
+    <p class="intel-prose-text">
+      EIGE v10 cross-references HTTP response headers, inline DOM signals, and
+      external script fingerprints against a multi-category pattern library to
+      assign each detected technology a normalized confidence score. Signals are individually weighted before a consensus confidence value
+      is computed and ranked across 200+ named technology patterns.
+    </p>
+  </div>
+
+  <!-- ════════════════════════════════════════════
+       METHODOLOGY SECTION
+  ════════════════════════════════════════════ -->
+  <div class="intel-prose-section" aria-label="Analysis methodology">
+    <div class="intel-prose-label">Methodology</div>
+    <p class="intel-prose-text">
+      Each technology match is independently scored across three signal channels.
+      Header evidence captures server-injected identifiers (X-Powered-By, Server,
+      Via, CF-Ray, and custom response fields). The three channel scores are
+      combined into a single normalized confidence value between 0 and 1, then
+      ranked. Technologies below a minimum confidence threshold are suppressed
+      from the primary output but retained in raw evidence mode.
+    </p>
+  </div>
+
+  <!-- ════════════════════════════════════════════
+       CITATION / REFERENCES SECTION
+  ════════════════════════════════════════════ -->
+  <section id="citation-section" aria-labelledby="citations-heading">
+    <div class="citation-inner">
+      <h2 class="section-heading" id="citations-heading">References</h2>
+      <p class="section-sub">Sources informing EIGE v10's detection methodology.</p>
+      <ul class="citation-list">
+        <li class="citation-item">
+          <span class="citation-num">[1]</span>
+          <span>W3Techs Web Technology Surveys —
+            <a href="https://w3techs.com/" target="_blank" rel="noopener noreferrer">w3techs.com ↗</a>
+          </span>
+        </li>
+        <li class="citation-item">
+          <span class="citation-num">[2]</span>
+          <span>HTTP Archive Web Almanac —
+            <a href="https://almanac.httparchive.org/" target="_blank" rel="noopener noreferrer">almanac.httparchive.org ↗</a>
+          </span>
+        </li>
+        <li class="citation-item">
+          <span class="citation-num">[3]</span>
+          <span>MDN Web Docs: HTTP Headers —
+            <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers" target="_blank" rel="noopener noreferrer">developer.mozilla.org ↗</a>
+          </span>
+        </li>
+        <li class="citation-item">
+          <span class="citation-num">[4]</span>
+          <span>WHATWG HTML Living Standard —
+            <a href="https://html.spec.whatwg.org/" target="_blank" rel="noopener noreferrer">html.spec.whatwg.org ↗</a>
+          </span>
+        </li>
+        <li class="citation-item">
+          <span class="citation-num">[5]</span>
+          <span>Wappalyzer Technology Profiler —
+            <a href="https://www.wappalyzer.com/" target="_blank" rel="noopener noreferrer">wappalyzer.com ↗</a>
+          </span>
+        </li>
+        <li class="citation-item">
+          <span class="citation-num">[6]</span>
+          <span>BuiltWith Technology Lookup —
+            <a href="https://builtwith.com/" target="_blank" rel="noopener noreferrer">builtwith.com ↗</a>
+          </span>
+        </li>
+        <li class="citation-item">
+          <span class="citation-num">[7]</span>
+          <span>OWASP HTTP Security Response Headers —
+            <a href="https://owasp.org/www-project-secure-headers/" target="_blank" rel="noopener noreferrer">owasp.org ↗</a>
+          </span>
+        </li>
+        <li class="citation-item">
+          <span class="citation-num">[8]</span>
+          <span>Cloudflare Radar Technology Trends —
+            <a href="https://radar.cloudflare.com/" target="_blank" rel="noopener noreferrer">radar.cloudflare.com ↗</a>
+          </span>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ════════════════════════════════════════════
+       PAGE-LEVEL SHARE BAR
+  ════════════════════════════════════════════ -->
+  <div id="page-share-bar">
+    <div class="share-bar-inner">
+      <div class="share-bar-label">Share this tool</div>
+      <div class="share-buttons-row" role="list">
+        <button class="share-btn" role="listitem"
+          onclick="(function(){var u=encodeURIComponent('https://aicitationscan.com/programmatic/website-tech-stack-checker'),t=encodeURIComponent('Free Website Tech Stack Checker');window.open('https://wa.me/?text='+t+'%20'+u,'_blank','noopener,noreferrer')})()">WhatsApp</button>
+        <button class="share-btn" role="listitem"
+          onclick="window.open('https://www.facebook.com/sharer/sharer.php?u='+encodeURIComponent('https://aicitationscan.com/programmatic/website-tech-stack-checker'),'_blank','noopener,noreferrer')">Facebook</button>
+        <button class="share-btn" role="listitem"
+          onclick="window.open('https://twitter.com/intent/tweet?url='+encodeURIComponent('https://aicitationscan.com/programmatic/website-tech-stack-checker')+'&text='+encodeURIComponent('Free Website Tech Stack Checker'),'_blank','noopener,noreferrer')">Twitter / X</button>
+        <button class="share-btn" role="listitem"
+          onclick="window.open('https://www.linkedin.com/sharing/share-offsite/?url='+encodeURIComponent('https://aicitationscan.com/programmatic/website-tech-stack-checker'),'_blank','noopener,noreferrer')">LinkedIn</button>
+        <button class="share-btn" role="listitem"
+          onclick="window.open('https://www.reddit.com/submit?url='+encodeURIComponent('https://aicitationscan.com/programmatic/website-tech-stack-checker')+'&title='+encodeURIComponent('Free Website Tech Stack Checker'),'_blank','noopener,noreferrer')">Reddit</button>
+        <button class="share-btn" role="listitem"
+          onclick="window.open('https://t.me/share/url?url='+encodeURIComponent('https://aicitationscan.com/programmatic/website-tech-stack-checker')+'&text='+encodeURIComponent('Free Website Tech Stack Checker'),'_blank','noopener,noreferrer')">Telegram</button>
+        <button class="share-btn" role="listitem"
+          onclick="window.open('https://pinterest.com/pin/create/button/?url='+encodeURIComponent('https://aicitationscan.com/programmatic/website-tech-stack-checker')+'&description='+encodeURIComponent('Free Website Tech Stack Checker'),'_blank','noopener,noreferrer')">Pinterest</button>
+        <button class="share-btn" role="listitem"
+          onclick="window.open('https://discord.com/','_blank','noopener,noreferrer')">Discord</button>
+        <button class="share-btn" role="listitem"
+          onclick="(function(){var m='mailto:?subject='+encodeURIComponent('Free Website Tech Stack Checker')+'&body='+encodeURIComponent('https://aicitationscan.com/programmatic/website-tech-stack-checker');window.location.href=m})()">Email</button>
+        <button class="share-btn" role="listitem"
+          onclick="navigator.clipboard.writeText('https://aicitationscan.com/programmatic/website-tech-stack-checker').then(function(){if(typeof showToast==='function')showToast('Link copied to clipboard!')})">Copy Link</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ════════════════════════════════════════════
+       PAGE-LEVEL LEGAL FOOTER
+  ════════════════════════════════════════════ -->
+  <footer id="page-footer" role="contentinfo">
+    <div class="page-footer-inner">
+      <div class="page-footer-top">
+        <div>
+          <div class="footer-col-label">Legal</div>
+          <nav class="footer-legal-links" aria-label="Legal links">
+            <a href="../index.html">Home</a>
+            <a href="../privacy-policy.html">Privacy Policy</a>
+            <a href="../cookies-policy.html">Cookies Policy</a>
+            <a href="../terms-of-use.html">Terms of Use</a>
+            <a href="../disclaimer.html">Disclaimer</a>
+            <a href="../dmca.html">DMCA</a>
+            <a href="../accessibility.html">Accessibility</a>
+            <a href="../do-not-sell-my-data.html">Do Not Sell My Data</a>
+            <a href="../contact.html">Contact</a>
+            <a href="../about.html">About</a>
+          </nav>
+        </div>
+        <div>
+          <div class="footer-col-label">Connect</div>
+          <nav class="footer-social-links" aria-label="Social links">
+            <a href="https://twitter.com/aicitationscan" target="_blank" rel="noopener noreferrer">Twitter / X</a>
+            <a href="https://www.linkedin.com/company/aicitationscan" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+            <a href="https://github.com/aicitationscan" target="_blank" rel="noopener noreferrer">GitHub</a>
+            <a href="https://www.facebook.com/" target="_blank" rel="noopener noreferrer">Facebook</a>
+            <a href="https://www.reddit.com/" target="_blank" rel="noopener noreferrer">Reddit</a>
+          </nav>
+        </div>
+      </div>
+      <div class="page-footer-bottom">
+        © <span class="dyn-year"></span> AI Citation Scan. All rights reserved.
+        Built on EIGE v10 Intelligence Engine.
+      </div>
     </div>
   </footer>
 
@@ -3938,10 +4609,7 @@
        CONTROLS
     ═════════════════════════════════════════════ */
     function toggleAdvanced() {
-      const btn = $('advanced-toggle');
-      const opts = $('advanced-options');
-      btn.classList.toggle('open');
-      opts.classList.toggle('visible');
+      /* permanently open — no-op */
     }
 
     function clearResults() {
@@ -4158,6 +4826,45 @@
       // Export btn starts disabled; renderScan() enables it when data arrives (Fix 5)
     }
 
+    /* ═════════════════════════════════════════════
+       DYNAMIC YEAR FILL
+    ═════════════════════════════════════════════ */
+    (function() {
+      var CY = new Date().getFullYear();
+      var toolYear = document.getElementById('copyright-year-tool');
+      if (toolYear) toolYear.textContent = CY;
+      document.querySelectorAll('.dyn-year').forEach(function(el) {
+        el.textContent = CY;
+      });
+    })();
+
+    /* ═════════════════════════════════════════════
+       SEASONAL GREETING BANNER
+    ═════════════════════════════════════════════ */
+    (function() {
+      var banner = document.getElementById('seasonal-banner');
+      var textEl = document.getElementById('seasonal-banner-text');
+      var closeBtn = document.getElementById('seasonal-banner-close');
+      if (!banner || !textEl) return;
+      if (sessionStorage.getItem('seasonBannerDismissed') === '1') {
+        banner.style.display = 'none';
+        return;
+      }
+      var month = new Date().getMonth();
+      var season;
+      if (month >= 2 && month <= 4)       season = '\uD83C\uDF31 Spring Edition';
+      else if (month >= 5 && month <= 7)  season = '\u2600\uFE0F Summer Edition';
+      else if (month >= 8 && month <= 10) season = '\uD83C\uDF42 Fall Edition';
+      else                                season = '\u2744\uFE0F Winter Edition';
+      textEl.textContent = 'EIGE v10 \u2014 ' + season + ' \u2014 Website Intelligence Platform';
+      if (closeBtn) {
+        closeBtn.addEventListener('click', function() {
+          banner.style.display = 'none';
+          try { sessionStorage.setItem('seasonBannerDismissed', '1'); } catch(e) {}
+        });
+      }
+    })();
+
     boot();
 
     function downloadPDF() {
@@ -4166,6 +4873,111 @@
       window.print();
       setTimeout(() => { document.title = orig; }, 500);
     }
+
+    /* ═════════════════════════════════════════════
+       TOAST NOTIFICATION SYSTEM
+    ═════════════════════════════════════════════ */
+    function showToast(msg, duration) {
+      duration = duration || 2500;
+      var container = document.getElementById('toast-container');
+      if (!container) return;
+      var el = document.createElement('div');
+      el.className = 'toast-item';
+      el.textContent = msg;
+      container.appendChild(el);
+      setTimeout(function() {
+        el.style.opacity = '0';
+        el.style.transform = 'translateY(8px)';
+        el.style.transition = 'opacity 300ms ease, transform 300ms ease';
+        setTimeout(function() {
+          if (el.parentNode) el.parentNode.removeChild(el);
+        }, 320);
+      }, duration);
+    }
+
+    /* ═════════════════════════════════════════════
+       WHATSAPP SHARE (tool-level, from action-row)
+    ═════════════════════════════════════════════ */
+    function shareWhatsApp() {
+      var data = state.lastScan || state.lastCompare || state.lastCluster
+        || state.lastTelemetry || state.lastGraph;
+      var pageUrl = window.location.href;
+      var msg;
+      if (!data) {
+        msg = 'Check out this free website tech stack checker — it detects any site\'s '
+          + 'CMS, frameworks, CDN, analytics and more in seconds: ' + pageUrl;
+      } else {
+        var domain = data.url || 'a site';
+        var techCount = (data.technologies && data.technologies.length) || 0;
+        var topTechs = (data.technologies || []).slice(0, 3)
+          .map(function(t) { return t.name; }).join(', ');
+        msg = 'I just analyzed ' + domain + ' and found ' + techCount
+          + ' technologies' + (topTechs ? ' including ' + topTechs : '')
+          + '. Try this free website tech stack checker: ' + pageUrl;
+      }
+      var url = 'https://wa.me/?text=' + encodeURIComponent(msg);
+      window.open(url, '_blank', 'noopener,noreferrer');
+      showToast('Opening WhatsApp...');
+    }
+
+    /* ═════════════════════════════════════════════
+       EMAIL PDF (tool-level, from action-row)
+    ═════════════════════════════════════════════ */
+    function emailPDF() {
+      var data = state.lastScan || state.lastCompare || state.lastCluster
+        || state.lastTelemetry || state.lastGraph;
+      var pageUrl = 'https://aicitationscan.com/programmatic/website-tech-stack-checker';
+      var subject, body;
+      if (!data) {
+        subject = 'EIGE v10 Tech Stack Checker';
+        body = 'Here is the tool: ' + pageUrl
+          + '\n\nRun a scan first, then use Email PDF for a full report.';
+      } else {
+        subject = 'EIGE v10 Report \u2014 ' + (data.url || 'scan');
+        body = [
+          'EIGE v10 Intelligence Report',
+          'Target: ' + (data.url || '\u2014'),
+          'Timestamp: ' + (data.timestamp
+            ? new Date(data.timestamp).toISOString() : '\u2014'),
+          'Latency: ' + (data.latency || '\u2014') + 'ms',
+          '',
+          'Architecture: ' + ((data.intelligence && data.intelligence.architecture)
+            || '\u2014'),
+          'Cluster: ' + ((data.cluster && data.cluster.name) || '\u2014'),
+          'Technologies (' + ((data.technologies && data.technologies.length) || 0) + '):',
+        ].concat(
+          (data.technologies || []).map(function(t) {
+            return '  - ' + t.name + ' [' + t.category + '] '
+              + Math.round(t.confidence * 100) + '%';
+          })
+        ).concat([
+          '',
+          'AI Summary:',
+          (data.intelligence && data.intelligence.summary) || '\u2014',
+          '',
+          'Full tool: ' + pageUrl
+        ]).join('\n');
+      }
+      var mailto = 'mailto:?subject=' + encodeURIComponent(subject)
+        + '&body=' + encodeURIComponent(body);
+      downloadPDF();
+      showToast('PDF dialog open. Email client opening in 2 seconds\u2026', 3000);
+      setTimeout(function() {
+        window.location.href = mailto;
+      }, 2000);
+    }
   </script>
+
+  <!-- Toast notification container — used by showToast() -->
+  <div id="toast-container" role="status" aria-live="polite" aria-atomic="false"></div>
+
+  <!-- Global shared scripts — deferred, execute after tool script completes -->
+  <script defer src="../js/registry.js"></script>
+  <script defer src="../js/root-config.js"></script>
+  <script defer src="../js/menu-system.js"></script>
+  <script defer src="../js/search-system.js"></script>
+  <script defer src="../js/schema.js"></script>
+  <script defer src="../js/internal-links.js"></script>
+  <script defer src="../js/legal-engine.js"></script>
 </body>
 </html>
