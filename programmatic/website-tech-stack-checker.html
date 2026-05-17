@@ -1822,6 +1822,7 @@
       a::after { content: none !important; }
       @page { margin: 15mm; size: A4 portrait; }
     }
+
     /* ── Toast Notification System ── */
     #toast-container {
       position: fixed;
@@ -1851,6 +1852,7 @@
     @keyframes toast-enter {
       to { opacity: 1; transform: translateY(0); }
     }
+
     /* ── Mobile: WhatsApp col-1, Email PDF spans cols 2-3 ── */
     @media (max-width: 600px) {
       .action-row .btn-whatsapp { order: 7; }
@@ -1859,6 +1861,7 @@
         grid-column: 2 / span 2;
       }
     }
+
     /* ── Page-Level Legal Footer ── */
     #page-footer {
       background: var(--bg-surface);
@@ -1939,38 +1942,7 @@
     @media print {
       #page-footer { display: none !important; }
     }
-    /* ── Header search trigger and nav dock ── */
-    .header-search-trigger {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      height: 30px;
-      padding: 0 12px;
-      background: var(--bg-elevated);
-      border: 1px solid var(--border-default);
-      border-radius: var(--radius-sm);
-      color: var(--text-secondary);
-      font-family: var(--font-mono);
-      font-size: 10px;
-      cursor: pointer;
-      transition: all var(--transition);
-      white-space: nowrap;
-    }
-    .header-search-trigger:hover {
-      background: var(--bg-hover);
-      color: var(--text-primary);
-      border-color: var(--border-strong);
-    }
-    .header-search-trigger svg {
-      width: 13px;
-      height: 13px;
-      flex-shrink: 0;
-    }
-    #master-nav-dock {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
+
     /* ── Seasonal Greeting Banner ── */
     #seasonal-banner {
       display: flex;
@@ -2003,6 +1975,7 @@
     @media print {
       #seasonal-banner { display: none !important; }
     }
+
     /* ── Page-Level Share Bar ── */
     #page-share-bar {
       padding: 32px 20px;
@@ -2051,6 +2024,7 @@
     @media print {
       #page-share-bar { display: none !important; }
     }
+
     /* ── Post-tool Content Sections ── */
     .intel-prose-section {
       max-width: 1200px;
@@ -2291,18 +2265,6 @@
         <span id="header-cache-status">LIVE</span>
       </div>
       <div class="header-env-badge">PROD</div>
-      <button
-        type="button"
-        class="header-search-trigger"
-        aria-label="Open search"
-        aria-haspopup="dialog">
-        <svg viewBox="0 0 16 16" fill="none" aria-hidden="true">
-          <circle cx="7" cy="7" r="4.5" stroke="currentColor" stroke-width="1.5"/>
-          <path d="M10.5 10.5L14 14" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
-        </svg>
-        Search
-      </button>
-      <div id="master-nav-dock" aria-label="Site navigation"></div>
       <button class="theme-toggle-btn" onclick="toggleTheme()" id="theme-btn" title="Toggle dark/light theme">☾ Dark</button>
     </div>
   </header>
@@ -2867,10 +2829,7 @@
   <div class="intel-prose-section" aria-label="Detection logic">
     <div class="intel-prose-label">Detection Logic</div>
     <p class="intel-prose-text">
-      EIGE v10 cross-references HTTP response headers, inline DOM signals, and
-      external script fingerprints against a multi-category pattern library to
-      assign each detected technology a normalized confidence score. Signals are individually weighted before a consensus confidence value
-      is computed and ranked across 200+ named technology patterns.
+      EIGE v10 cross-references HTTP response headers, inline DOM signals, and external script fingerprints against a multi-category pattern library to assign each detected technology a normalized confidence score across 200+ named technology patterns.
     </p>
   </div>
 
@@ -2880,12 +2839,7 @@
   <div class="intel-prose-section" aria-label="Analysis methodology">
     <div class="intel-prose-label">Methodology</div>
     <p class="intel-prose-text">
-      Each technology match is independently scored across three signal channels.
-      Header evidence captures server-injected identifiers (X-Powered-By, Server,
-      Via, CF-Ray, and custom response fields). The three channel scores are
-      combined into a single normalized confidence value between 0 and 1, then
-      ranked. Technologies below a minimum confidence threshold are suppressed
-      from the primary output but retained in raw evidence mode.
+      Each technology match is independently scored across header evidence, HTML markers, and script fingerprint channels, then combined into a single normalized confidence value between 0 and 1, with technologies below the minimum threshold suppressed from primary output.
     </p>
   </div>
 
