@@ -79,10 +79,6 @@ window.siteRegistry = [
                 "url": "/dmca"
             },
             {
-                "name": "Do Not Sell My Data",
-                "url": "/do-not-sell-my-data"
-            },
-            {
                 "name": "Privacy Policy",
                 "url": "/privacy-policy"
             },
@@ -119,11 +115,6 @@ window.seoRegistry = {
         "url": "/dmca",
         "title": "DMCA Policy",
         "desc": "AI Citation Scan DMCA Policy. Learn about our copyright infringement reporting process, takedown notice form, and intellectual property guidelines."
-    },
-    "do-not-sell-my-data.html": {
-        "url": "/do-not-sell-my-data",
-        "title": "Do Not Sell My Data",
-        "desc": "AI Citation Scan CCPA/CPRA rights declaration. We do not sell your personal data. Learn more about our privacy practices and lightweight tracking."
     },
     "privacy-policy.html": {
         "url": "/privacy-policy",
