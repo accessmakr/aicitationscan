@@ -63,10 +63,6 @@ window.siteRegistry = [
                 "url": "/about"
             },
             {
-                "name": "Accessibility",
-                "url": "/accessibility"
-            },
-            {
                 "name": "Contact",
                 "url": "/contact"
             },
@@ -91,11 +87,6 @@ window.seoRegistry = {
         "url": "/about",
         "title": "About Us",
         "desc": "Learn about AI Citation Scan's mission, directory methodology, and curation logic. We build enterprise-grade SEO tools for modern developers and marketers."
-    },
-    "accessibility.html": {
-        "url": "/accessibility",
-        "title": "Accessibility Statement",
-        "desc": "AI Citation Scan Accessibility Statement. Learn about our commitment to WCAG 2.1 AA compliance and ensuring our tools are usable by everyone."
     },
     "contact.html": {
         "url": "/contact",
