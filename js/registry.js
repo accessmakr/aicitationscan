@@ -75,10 +75,6 @@ window.siteRegistry = [
                 "url": "/cookies-policy"
             },
             {
-                "name": "Disclaimer",
-                "url": "/disclaimer"
-            },
-            {
                 "name": "Dmca",
                 "url": "/dmca"
             },
@@ -118,11 +114,6 @@ window.seoRegistry = {
         "url": "/cookies-policy",
         "title": "Cookies Policy — AI Citation Scan | No Tracking Cookies, Plausible Only",
         "desc": "AI Citation Scan uses zero marketing or tracking cookies. Our Cookies Policy explains Plausible's cookieless analytics, what browser storage we use, and your full control over preferences."
-    },
-    "disclaimer.html": {
-        "url": "/disclaimer",
-        "title": "Disclaimer — AI Citation Scan | Website Intelligence Platform",
-        "desc": "Read the full disclaimer for AI Citation Scan. Analysis outputs are informational only, provided as-is without warranty. No professional advice. No liability for decisions made from results."
     },
     "dmca.html": {
         "url": "/dmca",
