@@ -28,8 +28,8 @@
   <meta name="geo.region" content="US" />
   <meta name="geo.placename" content="United States" />
   <meta name="ICBM" content="37.7749, -122.4194" />
-  <link rel="preconnect" href="https://eige-v10-backend.onrender.com" />
-  <link rel="dns-prefetch" href="https://eige-v10-backend.onrender.com" />
+  <link rel="preconnect" href="https://eige-api.onrender.com" />
+  <link rel="dns-prefetch" href="https://eige-api.onrender.com" />
   <title>EIGE v10 Intelligence Console — Website Tech Stack Checker — Free Instant Detection | AI Citation Scan</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -276,6 +276,23 @@
       0%, 100% { opacity: 1; }
       50% { opacity: 0.4; }
     }
+
+    /* ── Demo-mode warning banner ── */
+    #demo-mode-banner {
+      display: none;
+      position: sticky;
+      top: var(--header-h);
+      z-index: 99;
+      background: rgba(245,158,11,0.12);
+      border-bottom: 1px solid rgba(245,158,11,0.35);
+      padding: 7px 20px;
+      font-family: var(--font-mono);
+      font-size: 11px;
+      color: var(--amber);
+      text-align: center;
+      letter-spacing: 0.03em;
+    }
+    #demo-mode-banner.visible { display: block; }
 
     .header-env-badge {
       font-family: var(--font-mono);
@@ -2255,6 +2272,11 @@
     </div>
   </header>
 
+  <!-- Demo-mode warning banner — shown when API is unreachable and results are synthetic -->
+  <div id="demo-mode-banner" role="alert" aria-live="polite">
+    ⚠ API UNREACHABLE — results below are synthetic demo data for stripe.com, not a real scan of your URL. Retrying connection…
+  </div>
+
   <!-- ════════════════════════════════════════════
        COMMAND CANVAS
   ════════════════════════════════════════════ -->
@@ -2964,6 +2986,16 @@
     ═════════════════════════════════════════════ */
     const API_BASE = "https://eige-api.onrender.com";
     const CLIENT_VERSION = 'v10'; /* Fix L24: clientVersion in all API payloads */
+
+    /* ── Demo-mode banner helpers ── */
+    function showDemoBanner() {
+      const b = document.getElementById('demo-mode-banner');
+      if (b) b.classList.add('visible');
+    }
+    function hideDemoBanner() {
+      const b = document.getElementById('demo-mode-banner');
+      if (b) b.classList.remove('visible');
+    }
     let _analyzeDebounceTimer = null;
 
     /* ═════════════════════════════════════════════
@@ -3399,9 +3431,10 @@
 
     async function checkAPIHealth() {
       try {
-        const r = await fetch(`${API_BASE}/health`, { signal: AbortSignal.timeout(4000) });
+        const r = await fetch(`${API_BASE}/health`, { signal: AbortSignal.timeout(20000) });
         if (r.ok) {
           state.apiOnline = true;
+          hideDemoBanner();
           $('api-status-dot').className = 'status-dot live';
           $('api-status-text').textContent = 'API LIVE';
           $('footer-api').textContent = 'ONLINE';
@@ -3447,13 +3480,16 @@
 
       try {
         let data;
-        if (!state.apiOnline) {
-          // Simulate latency then return demo
-          await new Promise(r => setTimeout(r, 2800));
+        try {
+          hideDemoBanner();
+          data = await callAPI({ mode: 'scan', url, withGraph, withAI, withInfra, withSecurity, rawEvidence, cacheBypass });
+        } catch (apiErr) {
+          if (apiErr.name === 'AbortError') throw apiErr;
+          // API unreachable — fall back to demo data with visible warning
+          showDemoBanner();
+          await new Promise(r => setTimeout(r, 800));
           data = { ...DEMO.scan, url, latency: Date.now() - t0, timestamp: Date.now(), cached: false };
           data = patchDemoWithUrl(data, url);
-        } else {
-          data = await callAPI({ mode: 'scan', url, withGraph, withAI, withInfra, withSecurity, rawEvidence, cacheBypass });
         }
 
         stopLoading();
@@ -3469,7 +3505,29 @@
     }
 
     function patchDemoWithUrl(data, url) {
-      return { ...data, url, infrastructure: { ...data.infrastructure, domain: url } };
+      /* Clear Stripe-specific demo technologies so fake data is not misleading.
+         Replace with a single placeholder card explaining the API is offline. */
+      return {
+        ...data,
+        url,
+        _isDemo: true,
+        infrastructure: { ...data.infrastructure, domain: url },
+        technologies: [
+          {
+            name: 'API Offline — Demo Mode',
+            category: 'Notice',
+            confidence: 0,
+            signals: { html: 0, scripts: 0, headers: 0 },
+            _demoPlaceholder: true
+          }
+        ],
+        intelligence: {
+          ...data.intelligence,
+          summary: 'The EIGE API could not be reached (cold-start or network issue). ' +
+                   'These results are synthetic demo data for stripe.com — they do NOT reflect the real tech stack of ' + url + '. ' +
+                   'The page will retry the API automatically. Refresh or wait a moment and scan again.'
+        }
+      };
     }
 
     /* ═════════════════════════════════════════════
@@ -3515,12 +3573,15 @@
 
       try {
         let data;
-        if (!state.apiOnline) {
-          await new Promise(r => setTimeout(r, 2800));
+        try {
+          hideDemoBanner();
+          data = await callAPI({ mode: 'cluster', url, withGraph, withAI, withInfra, withSecurity, rawEvidence, cacheBypass });
+        } catch (apiErr) {
+          if (apiErr.name === 'AbortError') throw apiErr;
+          showDemoBanner();
+          await new Promise(r => setTimeout(r, 800));
           data = { ...DEMO.scan, url, latency: Date.now() - t0, timestamp: Date.now(), cached: false };
           data = patchDemoWithUrl(data, url);
-        } else {
-          data = await callAPI({ mode: 'cluster', url, withGraph, withAI, withInfra, withSecurity, rawEvidence, cacheBypass });
         }
         stopLoading();
         state.lastCluster = data;
@@ -3606,11 +3667,14 @@
 
       try {
         let data;
-        if (!state.apiOnline) {
-          await new Promise(r => setTimeout(r, 3200));
-          data = { ...DEMO.compare, domains: [normalizeUrl(a), normalizeUrl(b)], latency: Date.now() - t0, timestamp: Date.now() };
-        } else {
+        try {
+          hideDemoBanner();
           data = await callAPI({ mode: 'compare', domains: [normalizeUrl(a), normalizeUrl(b)] });
+        } catch (apiErr) {
+          if (apiErr.name === 'AbortError') throw apiErr;
+          showDemoBanner();
+          await new Promise(r => setTimeout(r, 800));
+          data = { ...DEMO.compare, domains: [normalizeUrl(a), normalizeUrl(b)], latency: Date.now() - t0, timestamp: Date.now() };
         }
 
         stopLoading();
@@ -3632,11 +3696,14 @@
       startLoading('system telemetry');
       try {
         let data;
-        if (!state.apiOnline) {
-          await new Promise(r => setTimeout(r, 800));
-          data = { ...DEMO.telemetry, timestamp: Date.now() };
-        } else {
+        try {
+          hideDemoBanner();
           data = await callAPI({ mode: 'telemetry' });
+        } catch (apiErr) {
+          if (apiErr.name === 'AbortError') throw apiErr;
+          showDemoBanner();
+          await new Promise(r => setTimeout(r, 400));
+          data = { ...DEMO.telemetry, timestamp: Date.now() };
         }
         stopLoading();
         state.lastTelemetry = data;
@@ -3656,11 +3723,14 @@
       startLoading('global graph state');
       try {
         let data;
-        if (!state.apiOnline) {
-          await new Promise(r => setTimeout(r, 900));
-          data = DEMO.scan.graph;
-        } else {
+        try {
+          hideDemoBanner();
           data = await callAPI({ mode: 'graph' });
+        } catch (apiErr) {
+          if (apiErr.name === 'AbortError') throw apiErr;
+          showDemoBanner();
+          await new Promise(r => setTimeout(r, 400));
+          data = DEMO.scan.graph;
         }
         stopLoading();
         state.lastGraph = data;
@@ -4773,7 +4843,7 @@
       await checkAPIHealth();
 
       // Re-check every 30s
-      setInterval(checkAPIHealth, 30000);
+      setInterval(checkAPIHealth, 8000);
 
       // Show empty state
       $('empty-state').style.display = 'flex';
