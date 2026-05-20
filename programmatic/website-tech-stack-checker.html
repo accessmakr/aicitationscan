@@ -34,20 +34,6 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,400&family=JetBrains+Mono:wght@400;500;600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
-  <!-- AOS — non-render-blocking CSS load pattern -->
-  <link rel="stylesheet"
-    href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.min.css"
-    media="print" onload="this.media='all'" />
-  <noscript>
-    <link rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.min.css" />
-  </noscript>
-  <!-- AOS JS -->
-  <script async
-    src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.min.js"></script>
-  <!-- GSAP -->
-  <script async
-    src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
   <!-- Plausible Analytics -->
   <script defer data-domain="aicitationscan.com"
     src="https://plausible.io/js/plausible.js"></script>
@@ -1625,10 +1611,10 @@
       /* ── Mobile: request meta strip ── */
       .request-meta-strip { gap: 6px 12px; padding: 8px 10px; }
       .meta-export-actions { margin-left: 0; width: 100%; justify-content: flex-start; }
-      /* ── Mobile: mode selector is 2-column grid ── */
+      /* ── Mobile: mode selector is 3-column grid ── */
       .mode-selector {
         display: grid;
-        grid-template-columns: repeat(2, 1fr);
+        grid-template-columns: repeat(3, 1fr);
         gap: 6px;
         margin-bottom: 14px;
       }
@@ -2925,7 +2911,7 @@
         <button class="share-btn" role="listitem"
           onclick="window.open('https://pinterest.com/pin/create/button/?url='+encodeURIComponent('https://aicitationscan.com/programmatic/website-tech-stack-checker')+'&description='+encodeURIComponent('Free Website Tech Stack Checker'),'_blank','noopener,noreferrer')">Pinterest</button>
         <button class="share-btn" role="listitem"
-          onclick="window.open('https://discord.com/','_blank','noopener,noreferrer')">Discord</button>
+          onclick="navigator.clipboard.writeText('https://aicitationscan.com/programmatic/website-tech-stack-checker').then(function(){if(typeof showToast==='function')showToast('Link copied! Paste into Discord.')})">Discord (Copy)</button>
         <button class="share-btn" role="listitem"
           onclick="(function(){var m='mailto:?subject='+encodeURIComponent('Free Website Tech Stack Checker')+'&body='+encodeURIComponent('https://aicitationscan.com/programmatic/website-tech-stack-checker');window.location.href=m})()">Email</button>
         <button class="share-btn" role="listitem"
@@ -3254,13 +3240,15 @@
 
     /* Fix L21: Dark/light theme toggle */
     function toggleTheme() {
-      const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
-      document.documentElement.setAttribute('data-theme', isDark ? 'light' : 'dark');
+      var isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+      var nextTheme = isDark ? 'light' : 'dark';
+      document.documentElement.setAttribute('data-theme', nextTheme);
       document.body.style.background = isDark
         ? 'linear-gradient(135deg, #EEF2F9 0%, #E4ECF7 40%, #EDF1FA 100%)'
         : '#0D1117';
-      const btn = $('theme-btn');
-      if (btn) btn.textContent = isDark ? '☀ Light' : '☾ Dark';
+      var btn = $('theme-btn');
+      if (btn) btn.textContent = isDark ? '\u2600 Light' : '\u263E Dark';
+      try { localStorage.setItem('eige_theme', nextTheme); } catch(e) {}
     }
 
     function hideAllStates() {
@@ -3296,6 +3284,7 @@
       state.loading = true;
       hideAllStates();
       $('loading-state').style.display = 'block';
+      if (window.innerWidth < 900) { setTimeout(() => { $('loading-state').scrollIntoView({ behavior: 'smooth', block: 'start' }); }, 80); }
       $('analyze-btn').disabled = true;
       $('loading-url').textContent = targetUrl || '';
 
@@ -3555,6 +3544,7 @@
     function renderCluster(data) {
       hideAllStates();
       $('scan-results').style.display = 'block';
+      if (window.innerWidth < 900) { setTimeout(() => { $('scan-results').scrollIntoView({ behavior: 'smooth', block: 'start' }); }, 80); }
       $('export-btn').disabled = false;
 
       const { technologies = [], infrastructure = {}, intelligence = {}, graph = {}, cluster = {}, security = {}, performance = {}, seo = {} } = data;
@@ -3677,6 +3667,7 @@
         updateHeaderStats(data);
         hideAllStates();
         $('graph-results').style.display = 'block';
+        if (window.innerWidth < 900) { setTimeout(() => { $('graph-results').scrollIntoView({ behavior: 'smooth', block: 'start' }); }, 80); }
 
         $('global-graph-badge').textContent = `${(data.nodes||[]).length} nodes · ${(data.edges||[]).length} edges`;
 
@@ -3766,6 +3757,7 @@
     function renderScan(data) {
       hideAllStates();
       $('scan-results').style.display = 'block';
+      if (window.innerWidth < 900) { setTimeout(() => { $('scan-results').scrollIntoView({ behavior: 'smooth', block: 'start' }); }, 80); }
       // Enable export now that we have data
       $('export-btn').disabled = false;
 
@@ -4108,6 +4100,7 @@
     function renderCompare(data) {
       hideAllStates();
       $('compare-results').style.display = 'block';
+      if (window.innerWidth < 900) { setTimeout(() => { $('compare-results').scrollIntoView({ behavior: 'smooth', block: 'start' }); }, 80); }
 
       const { domains = [], similarity = 0, overlap = [], divergence = {}, ecosystem = {} } = data;
       const [a, b] = domains;
@@ -4158,6 +4151,7 @@
     function renderTelemetry(data) {
       hideAllStates();
       $('telemetry-results').style.display = 'block';
+      if (window.innerWidth < 900) { setTimeout(() => { $('telemetry-results').scrollIntoView({ behavior: 'smooth', block: 'start' }); }, 80); }
 
       const { cache = {}, learning = {}, graph = {}, rateLimit = {}, runtime = {} } = data;
 
@@ -4763,6 +4757,18 @@
         setTimeout(() => handleAnalyze(), 200);
       }
 
+      (function() {
+        try {
+          var saved = localStorage.getItem('eige_theme');
+          if (saved === 'dark') {
+            document.documentElement.setAttribute('data-theme', 'dark');
+            document.body.style.background = '#0D1117';
+            var btn = $('theme-btn');
+            if (btn) btn.textContent = '\u263E Dark';
+          }
+        } catch(e) {}
+      })();
+
       // Check API health silently
       await checkAPIHealth();
 
@@ -4849,19 +4855,24 @@
     function shareWhatsApp() {
       var data = state.lastScan || state.lastCompare || state.lastCluster
         || state.lastTelemetry || state.lastGraph;
-      var pageUrl = window.location.href;
+      var pageUrl = window.location.href.split('?')[0];
       var msg;
       if (!data) {
-        msg = 'Check out this free website tech stack checker — it detects any site\'s '
-          + 'CMS, frameworks, CDN, analytics and more in seconds: ' + pageUrl;
+        msg = '\uD83D\uDD0D *EIGE v10 — Free Website Tech Stack Checker*\n'
+          + 'Detect any site\'s CMS, frameworks, CDN, analytics & more in seconds.\n'
+          + 'Try it free: ' + pageUrl;
       } else {
-        var domain = data.url || 'a site';
+        var domain = data.url || (data.domains ? data.domains.join(' vs ') : 'a site');
         var techCount = (data.technologies && data.technologies.length) || 0;
-        var topTechs = (data.technologies || []).slice(0, 3)
-          .map(function(t) { return t.name; }).join(', ');
-        msg = 'I just analyzed ' + domain + ' and found ' + techCount
-          + ' technologies' + (topTechs ? ' including ' + topTechs : '')
-          + '. Try this free website tech stack checker: ' + pageUrl;
+        var topTechs = (data.technologies || []).slice(0, 5)
+          .map(function(t) { return t.name + ' (' + Math.round(t.confidence * 100) + '%)'; }).join(', ');
+        var arch = (data.intelligence && data.intelligence.architecture) ? '\nArchitecture: ' + data.intelligence.architecture : '';
+        var cluster = (data.cluster && data.cluster.name) ? '\nCluster: ' + data.cluster.name : '';
+        msg = '\uD83D\uDD0D *EIGE v10 Tech Stack Report — ' + domain + '*\n'
+          + (techCount ? techCount + ' technologies detected' + (topTechs ? ':\n' + topTechs : '') : '')
+          + arch + cluster
+          + '\n\nFull scan: ' + pageUrl + '?url=' + encodeURIComponent(domain)
+          + '\n\nTry it free \u2192 ' + pageUrl;
       }
       var url = 'https://wa.me/?text=' + encodeURIComponent(msg);
       window.open(url, '_blank', 'noopener,noreferrer');
@@ -4878,41 +4889,39 @@
       var subject, body;
       if (!data) {
         subject = 'EIGE v10 Tech Stack Checker';
-        body = 'Here is the tool: ' + pageUrl
-          + '\n\nRun a scan first, then use Email PDF for a full report.';
+        body = 'Check out this free website tech stack analyzer:\n' + pageUrl
+          + '\n\nTip: Run a scan first, then use Email PDF to send a full report.';
       } else {
-        subject = 'EIGE v10 Report \u2014 ' + (data.url || 'scan');
+        subject = 'EIGE v10 Report \u2014 ' + (data.url || (data.domains ? data.domains.join(' vs ') : 'scan'));
         body = [
           'EIGE v10 Intelligence Report',
-          'Target: ' + (data.url || '\u2014'),
-          'Timestamp: ' + (data.timestamp
-            ? new Date(data.timestamp).toISOString() : '\u2014'),
+          'Target: ' + (data.url || (data.domains ? data.domains.join(' vs ') : '\u2014')),
+          'Timestamp: ' + (data.timestamp ? new Date(data.timestamp).toISOString() : '\u2014'),
           'Latency: ' + (data.latency || '\u2014') + 'ms',
           '',
-          'Architecture: ' + ((data.intelligence && data.intelligence.architecture)
-            || '\u2014'),
+          'Architecture: ' + ((data.intelligence && data.intelligence.architecture) || '\u2014'),
           'Cluster: ' + ((data.cluster && data.cluster.name) || '\u2014'),
           'Technologies (' + ((data.technologies && data.technologies.length) || 0) + '):',
         ].concat(
           (data.technologies || []).map(function(t) {
-            return '  - ' + t.name + ' [' + t.category + '] '
-              + Math.round(t.confidence * 100) + '%';
+            return '  - ' + t.name + ' [' + t.category + '] ' + Math.round(t.confidence * 100) + '%';
           })
         ).concat([
           '',
           'AI Summary:',
           (data.intelligence && data.intelligence.summary) || '\u2014',
           '',
-          'Full tool: ' + pageUrl
+          'Full tool: ' + pageUrl,
+          '',
+          'Tip: To attach a PDF, click the PDF button in the tool before sending this email.'
         ]).join('\n');
       }
       var mailto = 'mailto:?subject=' + encodeURIComponent(subject)
         + '&body=' + encodeURIComponent(body);
-      downloadPDF();
-      showToast('PDF dialog open. Email client opening in 2 seconds\u2026', 3000);
+      showToast('Opening your email client\u2026', 2500);
       setTimeout(function() {
         window.location.href = mailto;
-      }, 2000);
+      }, 300);
     }
   </script>
 
