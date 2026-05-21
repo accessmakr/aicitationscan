@@ -4842,8 +4842,8 @@
       // Check API health silently
       await checkAPIHealth();
 
-      // Re-check every 30s
-      setInterval(checkAPIHealth, 8000);
+      // External pinger (UptimeRobot) keeps backend alive — no need to spam from frontend
+// setInterval(checkAPIHealth, 8000); // removed
 
       // Show empty state
       $('empty-state').style.display = 'flex';
