@@ -3631,9 +3631,26 @@
       $('exec-maturity').textContent = mat + '/100';
       $('exec-maturity').className = 'exec-metric-value ' + (mat >= 80 ? 'green' : mat >= 50 ? '' : 'amber');
 
-      // AI Summary
+      // AI Summary — FIX 3.1: build rich fallback from cluster data when summary is absent/short
       const summaryEl = $('ai-summary-text');
-      summaryEl.textContent = intelligence.summary || 'Cluster intelligence analysis unavailable.';
+      const _rawSummary = intelligence.summary || '';
+      if (_rawSummary.length > 20) {
+        summaryEl.textContent = _rawSummary;
+      } else {
+        // Build fallback from cluster fields
+        let _fallback = '';
+        if (cluster.name) {
+          const _confPct = cluster.confidence != null ? ' (' + Math.round((cluster.confidence || 0) * 100) + '% confidence)' : '';
+          _fallback += 'Ecosystem classified as ' + cluster.name + _confPct + '. ';
+        }
+        if (cluster.description) {
+          _fallback += cluster.description + ' ';
+        }
+        if (cluster.insights && cluster.insights.length) {
+          _fallback += cluster.insights.slice(0, 3).join(' ');
+        }
+        summaryEl.textContent = _fallback.trim() || 'Classification complete. Enable AI interpretation for detailed analysis.';
+      }
 
       // Sub-panels — identical to renderScan
       renderTechGrid(technologies);
@@ -4119,6 +4136,45 @@
           <div class="adjacent-clusters">
             ${cluster.adjacentClusters.map(c => `<div class="adjacent-chip">${escapeHtml(c)}</div>`).join('')}
           </div>` : ''}
+        ${(cluster.allScores && cluster.allScores.length > 0) ? `
+          <div style="margin-top:14px">
+            <div class="t-label" style="margin-bottom:8px">Archetype Ranking</div>
+            <div style="display:flex;flex-direction:column;gap:6px">
+              ${(function() {
+                const scores = cluster.allScores;
+                const topScore = scores[0]?.score || scores[0]?.confidence || 1;
+                return scores.map((s, i) => {
+                  const name  = escapeHtml(s.name || s.id || 'Unknown');
+                  const score = s.score != null ? s.score : (s.confidence != null ? s.confidence : 0);
+                  const pct   = Math.round(score * 100);
+                  const barW  = topScore > 0 ? Math.round((score / topScore) * 100) : 0;
+                  const col   = i === 0 ? 'var(--blue)' : i < 3 ? 'var(--cyan)' : 'var(--border-strong)';
+                  const rank  = i + 1;
+                  return `<div style="display:grid;grid-template-columns:18px 1fr 38px;gap:6px;align-items:center">
+                    <div style="font-family:var(--font-mono);font-size:9px;color:var(--text-muted);text-align:right">#${rank}</div>
+                    <div>
+                      <div style="font-family:var(--font-mono);font-size:11px;color:${i === 0 ? 'var(--text-primary)' : 'var(--text-secondary)'};margin-bottom:3px">${name}</div>
+                      <div style="height:4px;background:var(--border-subtle);border-radius:2px;overflow:hidden">
+                        <div style="height:100%;width:${barW}%;background:${col};transition:width 600ms ease;border-radius:2px"></div>
+                      </div>
+                    </div>
+                    <div style="font-family:var(--font-mono);font-size:11px;color:${col};text-align:right">${pct}%</div>
+                  </div>`;
+                }).join('');
+              })()}
+            </div>
+          </div>` : ''}
+        ${(cluster.insights && cluster.insights.length > 0) ? `
+          <div style="margin-top:14px">
+            <div class="t-label" style="margin-bottom:8px">Cluster Insights</div>
+            <div style="display:flex;flex-direction:column;gap:5px">
+              ${cluster.insights.map(ins => `
+                <div style="display:flex;gap:8px;align-items:flex-start;font-family:var(--font-body);font-size:12px;color:var(--text-secondary);line-height:1.45">
+                  <span style="color:var(--blue);flex-shrink:0;margin-top:1px;font-size:10px">▸</span>
+                  <span>${escapeHtml(typeof ins === 'object' ? (ins.text || ins.message || JSON.stringify(ins)) : ins)}</span>
+                </div>`).join('')}
+            </div>
+          </div>` : ''}
       `;
     }
 
@@ -4211,40 +4267,82 @@
 
       const { domains = [], similarity = 0, overlap = [], divergence = {}, ecosystem = {} } = data;
       const [a, b] = domains;
-      const aStack = ecosystem[a] || [];
-      const bStack = ecosystem[b] || [];
+      // FIX 2.1: ecosystem[domain] may be an object {technologies:[...], infrastructure:{...}, intelligence:{...}}
+      // Extract the nested technologies array; fall back to treating it as a flat array for legacy formats
+      const aStack = (ecosystem[a]?.technologies) || (Array.isArray(ecosystem[a]) ? ecosystem[a] : []);
+      const bStack = (ecosystem[b]?.technologies) || (Array.isArray(ecosystem[b]) ? ecosystem[b] : []);
 
       $('compare-a-name').textContent = a || '—';
       $('compare-b-name').textContent = b || '—';
+      // FIX 2.5: aStack/bStack are now proper arrays so .length is a number
       $('compare-a-count').textContent = aStack.length + ' technologies';
       $('compare-b-count').textContent = bStack.length + ' technologies';
       $('compare-sim-score').textContent = Math.round(similarity * 100) + '%';
 
       // Matrix
       const matrix = $('compare-matrix-body');
+      // FIX 2.2: divergence arrays may contain full technology objects {name, category, confidence}
+      const _renderDivItem = (t, side) => {
+        const name = typeof t === 'object' ? (t.name || '—') : t;
+        const cat  = typeof t === 'object' && t.category ? t.category : null;
+        const pct  = typeof t === 'object' && t.confidence != null ? Math.round(t.confidence * 100) + '%' : null;
+        return `<div class="compare-tech-item ${side}">
+          <div class="compare-tech-name">${escapeHtml(name)}</div>
+          ${cat ? `<div style="font-family:var(--font-mono);font-size:9px;color:var(--text-muted);margin-top:2px;letter-spacing:0.05em;text-transform:uppercase">${escapeHtml(cat)}${pct ? ' · ' + pct : ''}</div>` : (pct ? `<div style="font-family:var(--font-mono);font-size:9px;color:var(--text-muted);margin-top:2px">${pct}</div>` : '')}
+        </div>`;
+      };
       matrix.innerHTML = `
         <div>
           <div class="compare-col-header">Unique to ${escapeHtml(a)}</div>
-          ${(divergence[a] || []).map(t => `<div class="compare-tech-item unique-a">
-            <div class="compare-tech-name">${escapeHtml(t)}</div>
-          </div>`).join('') || '<div class="compare-tech-item"><div class="compare-tech-name" style="color:var(--text-muted)">None</div></div>'}
+          ${(divergence[a] || []).map(t => _renderDivItem(t, 'unique-a')).join('') || '<div class="compare-tech-item"><div class="compare-tech-name" style="color:var(--text-muted)">None</div></div>'}
         </div>
         <div>
           <div class="compare-col-header">Unique to ${escapeHtml(b)}</div>
-          ${(divergence[b] || []).map(t => `<div class="compare-tech-item unique-b">
-            <div class="compare-tech-name">${escapeHtml(t)}</div>
-          </div>`).join('') || '<div class="compare-tech-item"><div class="compare-tech-name" style="color:var(--text-muted)">None</div></div>'}
+          ${(divergence[b] || []).map(t => _renderDivItem(t, 'unique-b')).join('') || '<div class="compare-tech-item"><div class="compare-tech-name" style="color:var(--text-muted)">None</div></div>'}
         </div>
       `;
 
       // Overlap chips
+      // FIX 2.3: overlap may be array of objects {name, category, confidenceA, confidenceB}
       const chips = $('compare-overlap-chips');
-      chips.innerHTML = overlap.map(t => `<div class="overlap-chip">${escapeHtml(t)}</div>`).join('') ||
+      chips.innerHTML = overlap.map(t => {
+        const name = typeof t === 'object' ? (t.name || '—') : t;
+        const cat  = typeof t === 'object' && t.category ? t.category : null;
+        return `<div class="overlap-chip">${escapeHtml(name)}${cat ? `<span style="font-size:9px;opacity:0.65;margin-left:4px;font-family:var(--font-mono)">${escapeHtml(cat)}</span>` : ''}</div>`;
+      }).join('') ||
         '<div style="font-family:var(--font-mono);font-size:11px;color:var(--text-muted)">No shared technologies detected</div>';
 
+      // FIX 2.4: Infrastructure — extract from ecosystem nested objects
+      const infraA = ecosystem[a]?.infrastructure || null;
+      const infraB = ecosystem[b]?.infrastructure || null;
       const infraPanel = $('compare-infra-panel');
       if (infraPanel) {
-        infraPanel.innerHTML = `<div style="font-family:var(--font-mono);font-size:11px;color:var(--text-secondary)">Infrastructure comparison requires backend <code style="color:var(--text-code)">infraA</code> and <code style="color:var(--text-code)">infraB</code> fields. Connect the API to populate this panel.</div>`;
+        if (!infraA && !infraB) {
+          infraPanel.innerHTML = `<div style="font-family:var(--font-mono);font-size:11px;color:var(--text-muted)">Infrastructure data unavailable for this comparison.</div>`;
+        } else {
+          const _infraField = (label, valA, valB) => {
+            const da = escapeHtml(valA != null ? String(valA) : '—');
+            const db = escapeHtml(valB != null ? String(valB) : '—');
+            return `<div style="display:grid;grid-template-columns:90px 1fr 1fr;gap:4px;padding:5px 0;border-bottom:1px solid var(--border-subtle);font-family:var(--font-mono);font-size:11px;align-items:center">
+              <div style="color:var(--text-muted);font-size:10px;letter-spacing:0.05em;text-transform:uppercase">${label}</div>
+              <div style="color:var(--text-primary)">${da}</div>
+              <div style="color:var(--text-primary)">${db}</div>
+            </div>`;
+          };
+          infraPanel.innerHTML = `
+            <div style="display:grid;grid-template-columns:90px 1fr 1fr;gap:4px;padding:4px 0 6px;font-family:var(--font-mono);font-size:10px;letter-spacing:0.06em;text-transform:uppercase;color:var(--text-muted);border-bottom:2px solid var(--border-default)">
+              <div></div>
+              <div>${escapeHtml(a)}</div>
+              <div>${escapeHtml(b)}</div>
+            </div>
+            ${_infraField('Provider',  infraA?.provider,  infraB?.provider)}
+            ${_infraField('CDN',       infraA?.cdn,       infraB?.cdn)}
+            ${_infraField('Hosting',   infraA?.hosting,   infraB?.hosting)}
+            ${_infraField('WAF',       infraA?.wafDetected ? 'Detected' : (infraA ? 'None' : null), infraB?.wafDetected ? 'Detected' : (infraB ? 'None' : null))}
+            ${_infraField('IPs',       infraA?.ips ? infraA.ips.length + ' addr.' : null, infraB?.ips ? infraB.ips.length + ' addr.' : null)}
+            ${_infraField('Resolved',  infraA?.resolved != null ? (infraA.resolved ? 'Yes' : 'No') : null, infraB?.resolved != null ? (infraB.resolved ? 'Yes' : 'No') : null)}
+          `;
+        }
       }
 
       // JSON
