@@ -3620,7 +3620,8 @@
 
       // Executive summary
       $('exec-tech-count').textContent = technologies.length;
-      $('exec-arch').textContent = intelligence.architecture || '—';
+      const _archRaw13 = intelligence.architecture;
+      $('exec-arch').textContent = (_archRaw13 && typeof _archRaw13 === 'object') ? (_archRaw13.name || '—') : (_archRaw13 || '—');
       $('exec-infra').textContent = infrastructure.provider || '—';
       $('exec-cluster').textContent = cluster.name || '—';
       const risk = security.riskScore || 0;
@@ -3843,7 +3844,8 @@
 
       // Executive summary
       $('exec-tech-count').textContent = technologies.length;
-      $('exec-arch').textContent = intelligence.architecture || '—';
+      const _archRaw11 = intelligence.architecture;
+      $('exec-arch').textContent = (_archRaw11 && typeof _archRaw11 === 'object') ? (_archRaw11.name || '—') : (_archRaw11 || '—');
       $('exec-infra').textContent = infrastructure.provider || '—';
       $('exec-cluster').textContent = cluster.name || '—';
       const risk = security.riskScore || 0;
@@ -4049,20 +4051,54 @@
     /* ── SEO ── */
     function renderSEOPanel(seo, data) {
       const panel = $('seo-panel');
+
+      // FIX 1.4 — seo.title may be { status, value, detail }
+      const _titleRaw = seo.title;
+      const _titleVal = (_titleRaw && typeof _titleRaw === 'object') ? (_titleRaw.value || '—') : (_titleRaw || '—');
+      const _titleOk  = (_titleRaw && typeof _titleRaw === 'object') ? _titleRaw.status === 'ok' : !!_titleRaw;
+
+      // FIX 1.5 — seo.description may be { status, value, detail }
+      const _descRaw = seo.description;
+      const _descStr = (_descRaw && typeof _descRaw === 'object') ? (_descRaw.value || '') : (_descRaw || '');
+      const _descVal = _descStr ? (_descStr.length > 60 ? _descStr.slice(0, 60) + '...' : _descStr) : '—';
+      const _descOk  = (_descRaw && typeof _descRaw === 'object') ? _descRaw.status === 'ok' : !!_descRaw;
+
+      // FIX 1.6 — seo.canonical may be { status, value }
+      const _canRaw = seo.canonical;
+      const _canVal = (_canRaw && typeof _canRaw === 'object') ? (_canRaw.value || '—') : (_canRaw || '—');
+      const _canOk  = (_canRaw && typeof _canRaw === 'object') ? _canRaw.status === 'ok' : !!_canRaw;
+
+      // FIX 1.7 — seo.robots may be { status, value }
+      const _robRaw = seo.robots;
+      const _robVal = (_robRaw && typeof _robRaw === 'object') ? (_robRaw.value || '—') : (_robRaw || '—');
+      const _robOk  = (_robRaw && typeof _robRaw === 'object') ? _robRaw.status === 'ok' : _robRaw === 'index, follow';
+
+      // FIX 1.8 — seo.og should have keys to count as Present
+      const _ogPresent = seo.og && typeof seo.og === 'object' && Object.keys(seo.og).length > 0;
+      const _ogCount   = _ogPresent ? Object.keys(seo.og).length : 0;
+
+      // FIX 1.9 — seo.twitter should have keys to count as Present
+      const _twPresent = seo.twitter && typeof seo.twitter === 'object' && Object.keys(seo.twitter).length > 0;
+      const _twCount   = _twPresent ? Object.keys(seo.twitter).length : 0;
+
+      // FIX 1.10 — seo.structured should be a non-empty array
+      const _strPresent = Array.isArray(seo.structured) ? seo.structured.length > 0 : (seo.structured && typeof seo.structured === 'object' ? Object.keys(seo.structured).length > 0 : !!seo.structured);
+      const _strCount   = Array.isArray(seo.structured) ? seo.structured.length : (_strPresent ? 1 : 0);
+
       const rows = [
-        { key: 'Title',       val: seo.title || '—',            ok: !!seo.title },
-        { key: 'Description', val: seo.description ? (seo.description.length > 60 ? seo.description.slice(0, 60) + '...' : seo.description) : '—', ok: !!seo.description },
-        { key: 'Canonical',   val: seo.canonical || '—',         ok: !!seo.canonical },
-        { key: 'Robots',      val: seo.robots || '—',            ok: seo.robots === 'index, follow' },
-        { key: 'Open Graph',  val: seo.og ? 'Present' : 'Missing', ok: !!seo.og },
-        { key: 'Twitter Card',val: seo.twitter ? 'Present' : 'Missing', ok: !!seo.twitter },
-        { key: 'Structured',  val: seo.structured ? 'Detected' : 'None', ok: !!seo.structured }
+        { key: 'Title',        val: _titleVal,                                                         ok: _titleOk },
+        { key: 'Description',  val: _descVal,                                                          ok: _descOk },
+        { key: 'Canonical',    val: _canVal,                                                            ok: _canOk },
+        { key: 'Robots',       val: _robVal,                                                            ok: _robOk },
+        { key: 'Open Graph',   val: _ogPresent ? `Present (${_ogCount} tags)` : 'Missing',             ok: _ogPresent },
+        { key: 'Twitter Card', val: _twPresent ? `Present (${_twCount} tags)` : 'Missing',             ok: _twPresent },
+        { key: 'Structured',   val: _strPresent ? `Detected (${_strCount} block${_strCount !== 1 ? 's' : ''})` : 'None', ok: _strPresent }
       ];
 
       panel.innerHTML = `<div class="seo-table">
         ${rows.map(r => `<div class="seo-row">
           <div class="seo-key">${r.key}</div>
-          <div class="seo-val ${r.ok ? 'ok' : (r.val === '—' ? 'missing' : 'warn')}">${escapeHtml(r.val)}</div>
+          <div class="seo-val ${r.ok ? 'ok' : (r.val === '—' || r.val === 'Missing' || r.val === 'None' ? 'missing' : 'warn')}">${escapeHtml(r.val)}</div>
         </div>`).join('')}
       </div>`;
     }
@@ -4090,13 +4126,14 @@
     function renderIntelPanel(intelligence) {
       const panel = $('intel-panel');
       const { strengths = [], weaknesses = [], architecture, maturityScore = 0 } = intelligence;
+      const _archDisplay = (architecture && typeof architecture === 'object') ? (architecture.name || 'Unclassified') : (architecture || 'Unclassified');
 
       panel.innerHTML = `
         <div class="intel-section">
           <div class="intel-section-title">Architecture Classification</div>
           <div class="arch-badge">
             <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><circle cx="6" cy="6" r="4" stroke="currentColor" stroke-width="1.5"/></svg>
-            ${escapeHtml(architecture || 'Unclassified')}
+            ${escapeHtml(_archDisplay)}
           </div>
         </div>
         ${strengths.length ? `
