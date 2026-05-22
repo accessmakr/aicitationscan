@@ -1835,22 +1835,402 @@
        PRINT / PDF STYLESHEET
     ══════════════════════════════════════════════ */
     @media print {
-      body { background: #fff !important; color: #000 !important; font-size: 11px !important; }
-      #top-header, #command-canvas, #system-footer, #empty-state, #loading-state,
-      #error-state, .action-row, .advanced-drawer, .btn-analyze, .btn-export,
-      .btn-secondary, .json-inspector-wrap, #graph-canvas, #global-graph-canvas,
-      .graph-legend, .graph-canvas-wrap, #signal-panel { display: none !important; }
-      body::before { display: none !important; }
-      #main-content { padding: 0 !important; max-width: 100% !important; }
-      .panel { break-inside: avoid; border: 1px solid #ccc !important; box-shadow: none !important; }
-      .exec-summary-strip { grid-template-columns: repeat(3, 1fr) !important; }
-      .results-grid { grid-template-columns: 1fr !important; }
-      .tech-grid { grid-template-columns: repeat(3, 1fr) !important; }
-      .tech-card { break-inside: avoid; }
-      .ai-summary-banner { border-left: 3px solid #000 !important; }
-      * { color: #000 !important; background: transparent !important; border-color: #ccc !important; }
+
+      /* ── Base page setup ────────────────────────────────────── */
+      @page {
+        margin: 15mm 15mm 18mm 15mm;
+        size: A4 portrait;
+      }
+
+      /* ── Running page header via body::before ────────────────── */
+      body::before {
+        content: 'EIGE v10 Intelligence Report';
+        display: block !important;
+        font-family: 'JetBrains Mono', monospace;
+        font-size: 8pt;
+        color: #808080;
+        text-align: right;
+        border-bottom: 0.5pt solid #cccccc;
+        padding-bottom: 4pt;
+        margin-bottom: 10pt;
+      }
+
+      /* ── Reset base ─────────────────────────────────────────── */
+      body {
+        background: #ffffff !important;
+        color: #0F111A !important;
+        font-size: 10pt !important;
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+      }
+
+      /* ── Elements to hide in print ──────────────────────────── */
+      #top-header,
+      #command-canvas,
+      #system-footer,
+      #empty-state,
+      #loading-state,
+      #error-state,
+      .action-row,
+      .advanced-drawer,
+      .btn-analyze,
+      .btn-export,
+      .btn-secondary,
+      .sort-row,
+      .confidence-filter-row,
+      .meta-export-actions,
+      .json-inspector-wrap,
+      #graph-canvas,
+      #global-graph-canvas,
+      .graph-canvas-wrap,
+      .graph-tooltip,
+      .mode-tab,
+      .theme-toggle-btn,
+      .demo-badge { display: none !important; }
+
+      /* ── Layout ─────────────────────────────────────────────── */
+      #main-content {
+        padding: 0 !important;
+        max-width: 100% !important;
+      }
+
+      .results-grid {
+        display: block !important;
+      }
+
+      .results-main,
+      .results-sidebar {
+        display: block !important;
+        width: 100% !important;
+      }
+
+      /* ── Panel base style ───────────────────────────────────── */
+      .panel {
+        break-inside: avoid;
+        border: 0.5pt solid #c8d6e8 !important;
+        box-shadow: none !important;
+        margin-bottom: 10pt !important;
+        page-break-inside: avoid;
+        background: #ffffff !important;
+      }
+
+      .panel-header {
+        background: #f4f7fd !important;
+        border-bottom: 0.5pt solid #c8d6e8 !important;
+      }
+
+      .panel-title {
+        color: #0F111A !important;
+        font-weight: 600;
+      }
+
+      .panel-badge {
+        color: #50596e !important;
+      }
+
+      /* ── Request meta strip ─────────────────────────────────── */
+      .request-meta-strip {
+        display: flex !important;
+        flex-wrap: wrap !important;
+        gap: 12pt !important;
+        background: #f4f7fd !important;
+        border: 0.5pt solid #c8d6e8 !important;
+        margin-bottom: 8pt !important;
+      }
+
+      .req-meta-label { color: #8899aa !important; }
+      .req-meta-val   { color: #0F111A !important; font-weight: 600; }
+      .req-meta-val.cached { color: #F59E0B !important; }
+      .req-meta-val.live   { color: #10B981 !important; }
+
+      /* ── Executive Summary Strip ────────────────────────────── */
+      .exec-summary-strip {
+        display: grid !important;
+        grid-template-columns: repeat(3, 1fr) !important;
+        gap: 6pt !important;
+        margin-bottom: 8pt !important;
+        break-inside: avoid;
+      }
+
+      .exec-metric {
+        background: #f4f7fd !important;
+        border: 0.5pt solid #c8d6e8 !important;
+        padding: 8pt !important;
+        break-inside: avoid;
+      }
+
+      .exec-metric-label { color: #8899aa !important; font-size: 7pt !important; }
+
+      /* Restore colour-coded metric values — do NOT force black */
+      .exec-metric-value        { color: #0F111A !important; font-size: 11pt !important; font-weight: 700; }
+      .exec-metric-value.blue   { color: #3D8EF5 !important; }
+      .exec-metric-value.cyan   { color: #22D3EE !important; }
+      .exec-metric-value.green  { color: #10B981 !important; }
+      .exec-metric-value.amber  { color: #F59E0B !important; }
+      .exec-metric-value.red    { color: #EF4444 !important; }
+      .exec-metric-sub          { color: #8899aa !important; font-size: 7.5pt !important; }
+
+      /* ── AI Summary Banner ──────────────────────────────────── */
+      .ai-summary-banner {
+        border-left: 3pt solid #3D8EF5 !important;
+        background: #EBF3FF !important;
+        padding: 10pt 12pt !important;
+        margin-bottom: 8pt !important;
+        break-inside: avoid;
+      }
+
+      .ai-summary-label {
+        color: #3D8EF5 !important;
+        font-size: 8pt !important;
+        font-weight: 700 !important;
+        margin-bottom: 4pt !important;
+      }
+
+      .ai-summary-text {
+        color: #0F111A !important;
+        font-size: 9.5pt !important;
+        line-height: 1.55 !important;
+        white-space: normal !important;
+      }
+
+      /* ── Technology Grid ─────────────────────────────────────── */
+      .tech-grid {
+        display: grid !important;
+        grid-template-columns: repeat(3, 1fr) !important;
+        gap: 5pt !important;
+      }
+
+      .tech-card {
+        break-inside: avoid;
+        background: #f4f7fd !important;
+        border: 0.5pt solid #c8d6e8 !important;
+        padding: 6pt !important;
+      }
+
+      .tech-name     { color: #0F111A !important; font-size: 9.5pt !important; font-weight: 600; }
+      .tech-version  { color: #8899aa !important; font-size: 7.5pt !important; }
+
+      /* Category badge: restore pill colour */
+      .tech-category-badge {
+        font-size: 7pt !important;
+        padding: 1pt 5pt !important;
+        border-radius: 2pt !important;
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+      }
+
+      /* Confidence value: restore colour classes */
+      .tech-confidence-val  { font-size: 13pt !important; font-weight: 700; }
+      .tech-confidence-label { color: #8899aa !important; font-size: 7pt !important; }
+
+      /* Confidence bar: restore filled colour bar */
+      .tech-bar-track {
+        background: #dce4f0 !important;
+        height: 3pt !important;
+        border-radius: 1.5pt !important;
+        margin: 3pt 0 !important;
+        overflow: hidden;
+      }
+
+      .tech-bar-fill {
+        height: 100% !important;
+        border-radius: 1.5pt !important;
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+        /* inline background colour from JS is preserved by print-color-adjust */
+      }
+
+      /* Signal chips */
+      .tech-signals { display: flex !important; gap: 3pt !important; flex-wrap: wrap !important; }
+      .tech-signal-chip {
+        font-size: 7pt !important;
+        padding: 1pt 4pt !important;
+        background: #eef2f9 !important;
+        border: 0.4pt solid #c8d6e8 !important;
+        border-radius: 2pt !important;
+        color: #3D8EF5 !important;
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+      }
+      .tech-signal-chip span { color: #3D8EF5 !important; font-weight: 600; }
+
+      /* ── Graph panel: hide canvas, keep legend ───────────────── */
+      .graph-canvas-wrap { display: none !important; }
+      .graph-legend {
+        display: flex !important;
+        flex-wrap: wrap !important;
+        gap: 8pt !important;
+        padding: 6pt 0 !important;
+      }
+      .legend-item  { color: #50596e !important; font-size: 8pt !important; }
+      .legend-dot {
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+      }
+
+      /* ── Signal Evidence Explorer ────────────────────────────── */
+      #signal-panel { display: block !important; }
+
+      .signal-section { break-inside: avoid; margin-bottom: 8pt !important; }
+      .signal-section-header { color: #3D8EF5 !important; font-size: 8.5pt !important; font-weight: 700; }
+      .signal-row { border-bottom: 0.3pt solid #eef2f9 !important; padding: 2pt 0 !important; }
+      .signal-pattern { color: #8899aa !important; font-size: 7.5pt !important; }
+      .signal-tech    { color: #0F111A !important; font-size: 8.5pt !important; }
+      .signal-weight  { color: #10B981 !important; font-size: 8.5pt !important; font-weight: 600; }
+
+      /* ── Infrastructure Panel ───────────────────────────────── */
+      .infra-grid {
+        display: grid !important;
+        grid-template-columns: repeat(2, 1fr) !important;
+        gap: 1pt !important;
+        break-inside: avoid;
+      }
+
+      .infra-item { background: #f4f7fd !important; padding: 7pt 10pt !important; }
+      .infra-label  { color: #8899aa !important; font-size: 7.5pt !important; }
+      .infra-value  { color: #0F111A !important; font-size: 10pt !important; }
+      .infra-value.highlight { color: #22D3EE !important; -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; }
+
+      /* ── Security Panel ─────────────────────────────────────── */
+      .security-list { break-inside: avoid; }
+      .security-row {
+        background: #f4f7fd !important;
+        border: 0.4pt solid #c8d6e8 !important;
+        margin-bottom: 3pt !important;
+        padding: 5pt 8pt !important;
+        break-inside: avoid;
+      }
+      .security-item-name { color: #0F111A !important; font-size: 9pt !important; }
+
+      /* Restore PRESENT/MISSING pill colours — critical for readability */
+      .security-status {
+        font-size: 8pt !important;
+        font-weight: 700 !important;
+        padding: 2pt 6pt !important;
+        border-radius: 2pt !important;
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+      }
+      .security-status.present {
+        background: #dcfce7 !important;
+        color: #10B981 !important;
+      }
+      .security-status.missing {
+        background: #fee2e2 !important;
+        color: #EF4444 !important;
+      }
+      .security-status.warn {
+        background: #fef3c7 !important;
+        color: #F59E0B !important;
+      }
+
+      /* Risk Score bar */
+      .risk-score-bar {
+        background: #f4f7fd !important;
+        border: 0.4pt solid #c8d6e8 !important;
+        break-inside: avoid;
+      }
+      .risk-score-label { color: #8899aa !important; }
+      .risk-score-val   { font-weight: 700 !important; }
+
+      .tech-bar-track { background: #dce4f0 !important; }
+      /* risk/maturity fill: inline background preserved by print-color-adjust */
+      .tech-bar-fill {
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+      }
+
+      /* ── SEO Panel ──────────────────────────────────────────── */
+      .seo-table { break-inside: avoid; }
+      .seo-row   { background: #f4f7fd !important; padding: 5pt 10pt !important; }
+      .seo-key   { color: #8899aa !important; font-size: 8pt !important; }
+
+      /* Restore OK / warn / missing colour coding */
+      .seo-val         { color: #0F111A !important; font-size: 9pt !important; white-space: normal !important; overflow: visible !important; text-overflow: clip !important; }
+      .seo-val.ok      { color: #10B981 !important; -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; }
+      .seo-val.warn    { color: #F59E0B !important; -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; }
+      .seo-val.missing { color: #8899aa !important; font-style: italic !important; }
+
+      /* ── Cluster Panel ──────────────────────────────────────── */
+      .cluster-id-display {
+        background: #EBF3FF !important;
+        border: 0.5pt solid #3D8EF5 !important;
+        break-inside: avoid;
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+      }
+      .cluster-arch  { color: #0F111A !important; font-size: 14pt !important; font-weight: 700; }
+      .cluster-conf  { color: #8899aa !important; }
+      .cluster-conf strong { color: #3D8EF5 !important; }
+      .cluster-desc  { color: #50596e !important; font-size: 9pt !important; }
+
+      .adjacent-clusters { display: flex !important; flex-wrap: wrap !important; gap: 4pt !important; }
+      .adjacent-chip {
+        background: #f4f7fd !important;
+        border: 0.4pt solid #c8d6e8 !important;
+        color: #50596e !important;
+        font-size: 8pt !important;
+        padding: 2pt 6pt !important;
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+      }
+
+      /* ── AI Intelligence Panel ──────────────────────────────── */
+      .intel-section       { break-inside: avoid; }
+      .intel-section-title { color: #8899aa !important; font-size: 8pt !important; }
+      .intel-item          { color: #0F111A !important; font-size: 9pt !important; }
+      .intel-item-marker.green { color: #10B981 !important; -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; }
+      .intel-item-marker.red   { color: #EF4444 !important; -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; }
+
+      /* Architecture badge */
+      .arch-badge {
+        background: #EBF3FF !important;
+        border: 0.5pt solid #3D8EF5 !important;
+        color: #3D8EF5 !important;
+        font-size: 9pt !important;
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+      }
+
+      /* Maturity bar */
+      .maturity-track { background: #dce4f0 !important; height: 4pt !important; }
+      .maturity-fill  {
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+        /* gradient preserved */
+      }
+      .maturity-label { color: #8899aa !important; }
+      .maturity-val   { color: #10B981 !important; font-weight: 700 !important; }
+
+      /* ── Performance Panel ──────────────────────────────────── */
+      .perf-metrics { display: grid !important; grid-template-columns: repeat(2, 1fr) !important; gap: 5pt !important; break-inside: avoid; }
+      .perf-metric  { background: #f4f7fd !important; border: 0.4pt solid #c8d6e8 !important; break-inside: avoid; }
+      .perf-metric-label { color: #8899aa !important; font-size: 7.5pt !important; }
+      .perf-metric-val   { color: #0F111A !important; font-size: 14pt !important; font-weight: 700; }
+      .perf-metric-val.good  { color: #10B981 !important; -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; }
+      .perf-metric-val.warn  { color: #F59E0B !important; -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; }
+      .perf-metric-val.bad   { color: #EF4444 !important; -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; }
+      .perf-metric-unit { color: #8899aa !important; font-size: 8pt !important; }
+
+      /* ── Page break helpers ──────────────────────────────────── */
+      .panel          { page-break-inside: avoid; }
+      .tech-card      { page-break-inside: avoid; }
+      .security-row   { page-break-inside: avoid; }
+      .seo-row        { page-break-inside: avoid; }
+      .intel-section  { page-break-inside: avoid; }
+      .perf-metric    { page-break-inside: avoid; }
+      .cluster-id-display { page-break-inside: avoid; }
+
+      /* ── Links: no URL suffix ───────────────────────────────── */
       a::after { content: none !important; }
-      @page { margin: 15mm; size: A4 portrait; }
+
+      /* ── Remove all fade-in animation artifacts ─────────────── */
+      .fade-in, .stagger-1, .stagger-2, .stagger-3, .stagger-4, .stagger-5 {
+        opacity: 1 !important;
+        animation: none !important;
+        transition: none !important;
+      }
+
     }
 
     /* ── Toast Notification System ── */
@@ -5096,10 +5476,9 @@
     boot();
 
     function downloadPDF() {
-      // Resolve data source
       const data = state.lastScan || state.lastCompare || state.lastCluster || state.lastTelemetry || state.lastGraph;
       if (!data || !window.jspdf) {
-        // Fallback to browser print if jsPDF not loaded
+        showToast('PDF library not ready — using browser print fallback');
         const orig = document.title;
         document.title = 'EIGE-v10-report-' + new Date().toISOString().slice(0,10);
         window.print();
@@ -5110,490 +5489,937 @@
       const { jsPDF } = window.jspdf;
       const doc = new jsPDF({ orientation: 'portrait', unit: 'mm', format: 'a4' });
 
-      // ── Constants ──────────────────────────────────────────────────
-      const PAGE_W   = 210;
-      const PAGE_H   = 297;
-      const ML       = 20;   // left margin
-      const MR       = 20;   // right margin
-      const MT       = 15;   // top margin
-      const MB       = 20;   // bottom margin
-      const CONTENT_W = PAGE_W - ML - MR;
-      const ACCENT   = [61, 142, 245];   // --blue  #3D8EF5
-      const BLACK    = [15, 17, 26];
-      const DGRAY    = [80, 90, 110];
-      const LGRAY    = [200, 210, 225];
-      const WHITE    = [255, 255, 255];
-      const GREEN    = [16, 185, 129];
-      const RED      = [239, 68, 68];
-      const AMBER    = [245, 158, 11];
-      const TOOL_URL = 'aicitationscan.com/programmatic/website-tech-stack-checker';
+      /* ── Layout constants ─────────────────────────────────── */
+      const PAGE_W    = 210;
+      const PAGE_H    = 297;
+      const ML        = 20;
+      const MR        = 20;
+      const MT        = 18;
+      const MB        = 22;
+      const CW        = PAGE_W - ML - MR;   // content width = 170mm
 
-      // ── Helpers ────────────────────────────────────────────────────
+      /* ── Colour palette (mirrors CSS design tokens exactly) ── */
+      const C_ACCENT  = [61,  142, 245];   // --blue        #3D8EF5
+      const C_PURPLE  = [139, 92,  246];   // --purple      #8B5CF6
+      const C_CYAN    = [34,  211, 238];   // --cyan        #22D3EE
+      const C_BLACK   = [15,  17,  26];    // --text-primary
+      const C_DGRAY   = [80,  90,  110];   // --text-secondary
+      const C_MGRAY   = [140, 155, 175];   // --text-muted
+      const C_LGRAY   = [200, 210, 225];   // --border-default
+      const C_BGLIGHT = [245, 248, 255];   // light page bg
+      const C_WHITE   = [255, 255, 255];
+      const C_GREEN   = [16,  185, 129];   // --green       #10B981
+      const C_RED     = [239, 68,  68];    // --red         #EF4444
+      const C_AMBER   = [245, 158, 11];    // --amber       #F59E0B
+      const TOOL_URL  = 'aicitationscan.com/programmatic/website-tech-stack-checker';
+
+      /* ── Page counter ─────────────────────────────────────── */
       let pageNum = 1;
-      const totalPagesPlaceholder = '{{TOTAL}}';
 
-      function addFooter(pn) {
-        doc.setFontSize(8);
-        doc.setTextColor(...DGRAY);
-        doc.setFont('helvetica', 'normal');
-        const domain = data.url || (data.domains ? data.domains.join(' vs ') : '');
-        const ts = new Date().toISOString().replace('T', ' ').slice(0, 19) + ' UTC';
-        doc.setDrawColor(...LGRAY);
-        doc.line(ML, PAGE_H - MB + 4, PAGE_W - MR, PAGE_H - MB + 4);
-        doc.text('Page ' + pn, ML, PAGE_H - MB + 9);
-        doc.text('EIGE v10  ·  ' + TOOL_URL, PAGE_W / 2, PAGE_H - MB + 9, { align: 'center' });
-        doc.text(domain + '  ·  ' + ts, PAGE_W - MR, PAGE_H - MB + 9, { align: 'right' });
+      /* ── Helper: resolve category hex (matches getCategoryColorHex exactly) ── */
+      function _catHex(cat) {
+        const m = {
+          'JavaScript Framework': '#3D8EF5', 'CMS':           '#10B981',
+          'E-Commerce':           '#F59E0B', 'CDN':           '#22D3EE',
+          'Hosting':              '#8B5CF6', 'CSS Framework': '#EC4899',
+          'Analytics':            '#F97316', 'Payment':       '#10B981',
+          'Security':             '#EF4444', 'Database':      '#A78BFA'
+        };
+        return m[cat] || '#7A8699';
       }
 
-      function newPage() {
-        addFooter(pageNum);
+      /* ── Helper: hex string → [r,g,b] array ── */
+      function _hex(h) {
+        return [parseInt(h.slice(1,3),16), parseInt(h.slice(3,5),16), parseInt(h.slice(5,7),16)];
+      }
+
+      /* ── Helper: unwrap SEO fields that may be {status,value} objects ── */
+      /* Mirrors the exact unwrap logic in renderSEOPanel */
+      function _seoVal(raw) {
+        if (!raw) return '—';
+        if (typeof raw === 'object') return raw.value || '—';
+        return String(raw);
+      }
+      function _seoOk(raw) {
+        if (!raw) return false;
+        if (typeof raw === 'object') return raw.status === 'ok';
+        return !!raw;
+      }
+
+      /* ── Helper: resolve architecture to display string ── */
+      function _archStr(raw) {
+        if (!raw) return 'Unclassified';
+        if (typeof raw === 'object') return raw.name || 'Unclassified';
+        return String(raw);
+      }
+
+      /* ── Helper: resolve infrastructure display (mirrors FIX 9.1) ── */
+      function _infraDisplay(infra) {
+        if (!infra) return 'Undetected';
+        if (infra.provider && infra.provider !== 'Unknown') return infra.provider;
+        return infra.cdn || infra.hosting || 'Undetected';
+      }
+
+      /* ═══════════════════════════════════════════════════════
+         DRAWING PRIMITIVES
+      ═══════════════════════════════════════════════════════ */
+
+      /* Footer: rule + page number + tool URL + domain + timestamp */
+      function _footer() {
+        const domain = data.url || (data.domains ? data.domains.join(' vs ') : '');
+        const ts     = new Date().toISOString().replace('T',' ').slice(0,19) + ' UTC';
+        doc.setDrawColor(...C_LGRAY);
+        doc.setLineWidth(0.3);
+        doc.line(ML, PAGE_H - MB + 3, PAGE_W - MR, PAGE_H - MB + 3);
+        doc.setFontSize(7.5);
+        doc.setFont('helvetica','normal');
+        doc.setTextColor(...C_MGRAY);
+        doc.text('Page ' + pageNum, ML, PAGE_H - MB + 8);
+        doc.text('EIGE v10  ·  ' + TOOL_URL, PAGE_W/2, PAGE_H - MB + 8, { align:'center' });
+        doc.text(domain + '  ·  ' + ts, PAGE_W - MR, PAGE_H - MB + 8, { align:'right' });
+      }
+
+      /* New page: stamp footer on current page, advance, return cursor to MT */
+      function _newPage() {
+        _footer();
         doc.addPage();
         pageNum++;
         return MT;
       }
 
-      function sectionTitle(y, text) {
-        doc.setFontSize(11);
-        doc.setFont('helvetica', 'bold');
-        doc.setTextColor(...BLACK);
+      /* Accent-rule section title — uppercase, blue underline rule */
+      function _sectionTitle(y, text) {
+        if (y > PAGE_H - MB - 20) y = _newPage();
+        doc.setFontSize(10);
+        doc.setFont('helvetica','bold');
+        doc.setTextColor(...C_BLACK);
         doc.text(text.toUpperCase(), ML, y);
-        doc.setDrawColor(...ACCENT);
-        doc.setLineWidth(0.5);
+        doc.setDrawColor(...C_ACCENT);
+        doc.setLineWidth(0.6);
         doc.line(ML, y + 1.5, PAGE_W - MR, y + 1.5);
+        doc.setLineWidth(0.3);
         return y + 7;
       }
 
-      function bodyText(y, text, color) {
-        doc.setFontSize(10);
-        doc.setFont('helvetica', 'normal');
-        doc.setTextColor(...(color || BLACK));
-        const lines = doc.splitTextToSize(text, CONTENT_W);
-        doc.text(lines, ML, y);
-        return y + lines.length * 5;
+      /* Sub-heading inside a section — smaller, gray */
+      function _subHead(y, text) {
+        if (y > PAGE_H - MB - 12) y = _newPage();
+        doc.setFontSize(9);
+        doc.setFont('helvetica','bold');
+        doc.setTextColor(...C_DGRAY);
+        doc.text(text, ML, y);
+        return y + 5.5;
       }
 
-      function labelValue(y, label, value, valColor) {
+      /* Wrapped body text */
+      function _body(y, text, col, indent) {
+        indent = indent || 0;
+        col    = col || C_BLACK;
         doc.setFontSize(9);
-        doc.setFont('helvetica', 'bold');
-        doc.setTextColor(...DGRAY);
+        doc.setFont('helvetica','normal');
+        doc.setTextColor(...col);
+        const lines = doc.splitTextToSize(text, CW - indent);
+        if (y + lines.length * 4.8 > PAGE_H - MB) y = _newPage();
+        doc.text(lines, ML + indent, y);
+        return y + lines.length * 4.8 + 1;
+      }
+
+      /* Label:Value row — label left-fixed at ML, value after label column */
+      function _kv(y, label, value, valCol) {
+        if (y > PAGE_H - MB - 7) y = _newPage();
+        doc.setFontSize(9);
+        doc.setFont('helvetica','bold');
+        doc.setTextColor(...C_MGRAY);
         doc.text(label + ':', ML, y);
-        doc.setFont('helvetica', 'normal');
-        doc.setTextColor(...(valColor || BLACK));
-        doc.text(String(value || '—'), ML + 45, y);
-        return y + 6;
+        doc.setFont('helvetica','normal');
+        doc.setTextColor(...(valCol || C_BLACK));
+        const lines = doc.splitTextToSize(String(value || '—'), CW - 48);
+        doc.text(lines, ML + 48, y);
+        return y + Math.max(lines.length * 4.8, 5.5) + 0.5;
       }
 
-      function progressBar(y, label, value, max, color) {
-        max = max || 100;
-        const pct = Math.min(Math.max(value / max, 0), 1);
-        const barW = CONTENT_W * 0.55;
-        doc.setFontSize(9);
-        doc.setFont('helvetica', 'normal');
-        doc.setTextColor(...DGRAY);
-        doc.text(label, ML, y + 3);
-        // track
-        doc.setFillColor(...LGRAY);
-        doc.roundedRect(ML + 45, y, barW, 5, 1, 1, 'F');
-        // fill
-        doc.setFillColor(...(color || ACCENT));
-        if (pct > 0) doc.roundedRect(ML + 45, y, barW * pct, 5, 1, 1, 'F');
-        // label
+      /* Horizontal progress bar with label on left and value text on right */
+      function _bar(y, label, value, max, col) {
+        if (y > PAGE_H - MB - 10) y = _newPage();
+        max     = max || 100;
+        col     = col || C_ACCENT;
+        const pct   = Math.min(Math.max(value/max, 0), 1);
+        const barW  = CW * 0.52;
+        const barX  = ML + 46;
+        doc.setFontSize(8.5);
+        doc.setFont('helvetica','normal');
+        doc.setTextColor(...C_DGRAY);
+        doc.text(label, ML, y + 3.5);
+        /* track */
+        doc.setFillColor(...C_LGRAY);
+        doc.roundedRect(barX, y, barW, 5, 1, 1, 'F');
+        /* fill */
+        doc.setFillColor(...col);
+        if (pct > 0) doc.roundedRect(barX, y, barW * pct, 5, 1, 1, 'F');
+        /* value text */
         doc.setFontSize(8);
-        doc.setTextColor(...BLACK);
-        doc.text(Math.round(value) + '/' + max, ML + 45 + barW + 3, y + 4);
+        doc.setTextColor(...C_BLACK);
+        doc.text(Math.round(value) + '/' + max, barX + barW + 3, y + 4);
         return y + 9;
       }
 
-      function hexToRgb(hex) {
-        const r = parseInt(hex.slice(1,3),16);
-        const g = parseInt(hex.slice(3,5),16);
-        const b = parseInt(hex.slice(5,7),16);
-        return [r,g,b];
+      /* Bullet point — coloured circle + wrapped text */
+      function _bullet(y, text, col) {
+        col = col || C_BLACK;
+        if (y > PAGE_H - MB - 8) y = _newPage();
+        doc.setFillColor(...col);
+        doc.circle(ML + 1.5, y - 0.8, 1.1, 'F');
+        doc.setFontSize(9);
+        doc.setFont('helvetica','normal');
+        doc.setTextColor(...C_BLACK);
+        const lines = doc.splitTextToSize(text, CW - 9);
+        doc.text(lines, ML + 5, y);
+        return y + lines.length * 4.8 + 1;
       }
 
-      function getCatHex(cat) {
-        const map = {
-          'JavaScript Framework':'#3D8EF5','CMS':'#10B981','E-Commerce':'#F59E0B',
-          'CDN':'#22D3EE','Hosting':'#8B5CF6','CSS Framework':'#EC4899',
-          'Analytics':'#F97316','Payment':'#10B981','Security':'#EF4444','Database':'#A78BFA'
-        };
-        return map[cat] || '#7A8699';
+      /* Thin horizontal rule divider */
+      function _rule(y) {
+        doc.setDrawColor(...C_LGRAY);
+        doc.setLineWidth(0.2);
+        doc.line(ML, y, PAGE_W - MR, y);
+        return y + 4;
       }
 
-      // ── Destructure data ───────────────────────────────────────────
-      const technologies  = data.technologies || [];
-      const intelligence  = data.intelligence || {};
-      const security      = data.security || {};
-      const seo           = data.seo || {};
-      const infrastructure= data.infrastructure || {};
-      const cluster       = data.cluster || {};
-      const performance   = data.performance || {};
+      /* Coloured status pill — filled rounded rect + white label */
+      function _pill(x, y, text, col) {
+        const tw = doc.getTextWidth(text);
+        const pw = tw + 6;
+        doc.setFillColor(...col);
+        doc.roundedRect(x, y - 3.5, pw, 5, 1.5, 1.5, 'F');
+        doc.setFontSize(7.5);
+        doc.setFont('helvetica','bold');
+        doc.setTextColor(...C_WHITE);
+        doc.text(text, x + 3, y);
+        return pw;
+      }
 
-      const archRaw    = intelligence.architecture;
-      const archStr    = archRaw ? (typeof archRaw === 'object' ? (archRaw.name || 'Unclassified') : String(archRaw)) : 'Unclassified';
-      const matScore   = intelligence.maturityScore || 0;
-      const riskScore  = security.riskScore != null ? Math.round(security.riskScore * 100) : null;
-      const riskLabel  = riskScore == null ? '—' : riskScore < 20 ? 'Low' : riskScore < 50 ? 'Medium' : riskScore < 75 ? 'High' : 'Critical';
-      const riskColor  = riskScore == null ? DGRAY : riskScore < 20 ? GREEN : riskScore < 50 ? AMBER : RED;
-      const seoScore   = seo.score || 0;
-      const infraDisplay = (infrastructure.provider && infrastructure.provider !== 'Unknown')
-        ? infrastructure.provider
-        : (infrastructure.cdn || infrastructure.hosting || 'Undetected');
-      const scanDate   = data.timestamp ? new Date(data.timestamp).toLocaleString() : new Date().toLocaleString();
+      /* ═══════════════════════════════════════════════════════
+         DATA EXTRACTION
+      ═══════════════════════════════════════════════════════ */
+      const technologies   = data.technologies   || [];
+      const intelligence   = data.intelligence   || {};
+      const security       = data.security       || {};
+      const seo            = data.seo            || {};
+      const infrastructure = data.infrastructure || {};
+      const cluster        = data.cluster        || {};
+      const performance    = data.performance    || {};
+      const graph          = data.graph          || {};
+      const rawHeaders     = data.rawHeaders     || {};
 
-      // ══════════════════════════════════════════
-      //  PAGE 1 — COVER
-      // ══════════════════════════════════════════
+      const archDisplay  = _archStr(intelligence.architecture);
+      const matScore     = intelligence.maturityScore || 0;
+      const riskRaw      = security.riskScore != null ? security.riskScore : null;
+      const riskPct      = riskRaw != null ? Math.round(riskRaw * 100) : null;
+      const riskLabel    = riskPct == null ? '—' : riskPct < 20 ? 'Low' : riskPct < 50 ? 'Medium' : riskPct < 75 ? 'High' : 'Critical';
+      const riskCol      = riskPct == null ? C_DGRAY : riskPct < 20 ? C_GREEN : riskPct < 50 ? C_AMBER : C_RED;
+      const seoScore     = seo.score || 0;
+      const infraStr     = _infraDisplay(infrastructure);
+      const scanDate     = data.timestamp ? new Date(data.timestamp).toLocaleString() : new Date().toLocaleString();
+      const domainLabel  = data.url || (data.domains ? data.domains.join(' vs ') : 'Unknown');
+
+      /* ── Security checks — mirrors renderSecurityPanel exactly ── */
+      const secChecks = [
+        { name: 'Content-Security-Policy', present: !!rawHeaders['content-security-policy'] },
+        { name: 'HSTS (Strict-Transport-Security)', present: !!rawHeaders['strict-transport-security'] },
+        { name: 'X-Frame-Options', present: !!rawHeaders['x-frame-options'] },
+        { name: 'Referrer-Policy', present: !!rawHeaders['referrer-policy'] },
+        { name: 'WAF / CDN Protection', present: !!(security.wafDetected || ['Cloudflare','Akamai','Fastly','Imperva','Sucuri','AWS CloudFront'].includes(infrastructure.provider)) },
+        { name: 'Bot Protection', present: riskPct != null && riskPct < 10 }
+      ];
+
+      /* ── SEO rows — mirrors renderSEOPanel field unwrapping exactly ── */
+      const _ogPresent  = seo.og && typeof seo.og === 'object' ? Object.keys(seo.og).length > 0 : !!seo.og;
+      const _ogCount    = _ogPresent && typeof seo.og === 'object' ? Object.keys(seo.og).length : 0;
+      const _twPresent  = seo.twitter && typeof seo.twitter === 'object' ? Object.keys(seo.twitter).length > 0 : !!seo.twitter;
+      const _twCount    = _twPresent && typeof seo.twitter === 'object' ? Object.keys(seo.twitter).length : 0;
+      const _strPresent = Array.isArray(seo.structured) ? seo.structured.length > 0 : !!(seo.structured && (typeof seo.structured === 'object' ? Object.keys(seo.structured).length > 0 : seo.structured));
+      const _strCount   = Array.isArray(seo.structured) ? seo.structured.length : (_strPresent ? 1 : 0);
+
+      const seoRows = [
+        { key: 'Title',        val: _seoVal(seo.title),       ok: _seoOk(seo.title) },
+        { key: 'Description',  val: _seoVal(seo.description), ok: _seoOk(seo.description) },
+        { key: 'Canonical',    val: _seoVal(seo.canonical),   ok: _seoOk(seo.canonical) },
+        { key: 'Robots',       val: _seoVal(seo.robots),      ok: _seoOk(seo.robots) },
+        { key: 'Open Graph',   val: _ogPresent ? 'Present (' + _ogCount + ' tags)' : 'Missing',  ok: _ogPresent },
+        { key: 'Twitter Card', val: _twPresent ? 'Present (' + _twCount + ' tags)' : 'Missing',  ok: _twPresent },
+        { key: 'Structured',   val: _strPresent ? 'Detected (' + _strCount + ' block' + (_strCount !== 1 ? 's' : '') + ')' : 'None', ok: _strPresent }
+      ];
+
+      /* ═══════════════════════════════════════════════════════
+         PAGE 1 — COVER
+      ═══════════════════════════════════════════════════════ */
       let y = MT;
 
-      // Top accent bar
-      doc.setFillColor(...ACCENT);
-      doc.rect(0, 0, PAGE_W, 3, 'F');
+      /* Top accent bar */
+      doc.setFillColor(...C_ACCENT);
+      doc.rect(0, 0, PAGE_W, 2.5, 'F');
 
-      // EIGE logo text
+      /* Logo */
       y = 22;
-      doc.setFontSize(22);
-      doc.setFont('helvetica', 'bold');
-      doc.setTextColor(...BLACK);
+      doc.setFontSize(24);
+      doc.setFont('helvetica','bold');
+      doc.setTextColor(...C_BLACK);
       doc.text('EIGE', ML, y);
-      doc.setFontSize(10);
-      doc.setFont('helvetica', 'normal');
-      doc.setTextColor(...ACCENT);
-      doc.text('v10', ML + 25, y);
+      doc.setFontSize(11);
+      doc.setFont('helvetica','normal');
+      doc.setTextColor(...C_ACCENT);
+      doc.text('v10', ML + 28, y);
 
-      // Version badge box
-      doc.setFillColor(...ACCENT);
-      doc.roundedRect(PAGE_W - MR - 36, y - 6, 36, 8, 2, 2, 'F');
+      /* Badge top-right */
+      doc.setFillColor(...C_ACCENT);
+      doc.roundedRect(PAGE_W - MR - 38, y - 6.5, 38, 8.5, 2, 2, 'F');
       doc.setFontSize(8);
-      doc.setFont('helvetica', 'bold');
-      doc.setTextColor(...WHITE);
-      doc.text('Intelligence Console', PAGE_W - MR - 18, y - 1.5, { align: 'center' });
+      doc.setFont('helvetica','bold');
+      doc.setTextColor(...C_WHITE);
+      doc.text('Intelligence Console', PAGE_W - MR - 19, y - 1.5, { align:'center' });
 
-      y += 6;
-      doc.setDrawColor(...LGRAY);
+      /* Rule under logo */
+      y += 5;
+      doc.setDrawColor(...C_LGRAY);
+      doc.setLineWidth(0.3);
       doc.line(ML, y, PAGE_W - MR, y);
 
-      // Report title
-      y += 14;
-      doc.setFontSize(20);
-      doc.setFont('helvetica', 'bold');
-      doc.setTextColor(...BLACK);
+      /* Report title */
+      y += 13;
+      doc.setFontSize(19);
+      doc.setFont('helvetica','bold');
+      doc.setTextColor(...C_BLACK);
       doc.text('Website Intelligence Report', ML, y);
 
-      // Domain hero
-      y += 10;
-      doc.setFillColor(245, 248, 255);
-      doc.roundedRect(ML, y, CONTENT_W, 18, 3, 3, 'F');
-      doc.setFontSize(16);
-      doc.setFont('helvetica', 'bold');
-      doc.setTextColor(...ACCENT);
-      doc.text(data.url || (data.domains ? data.domains.join(' vs ') : 'Unknown'), ML + CONTENT_W / 2, y + 11, { align: 'center' });
+      /* Domain hero box */
+      y += 9;
+      doc.setFillColor(...C_BGLIGHT);
+      doc.roundedRect(ML, y, CW, 17, 3, 3, 'F');
+      doc.setDrawColor(...C_ACCENT);
+      doc.setLineWidth(0.4);
+      doc.roundedRect(ML, y, CW, 17, 3, 3, 'S');
+      doc.setFontSize(15);
+      doc.setFont('helvetica','bold');
+      doc.setTextColor(...C_ACCENT);
+      doc.text(domainLabel, ML + CW/2, y + 11, { align:'center' });
 
-      // Scan meta grid
-      y += 26;
-      const metaItems = [
-        ['Scan Date',  scanDate],
-        ['Latency',    data.latency ? data.latency + ' ms' : '—'],
-        ['Cache',      data.cached ? 'HIT' : 'MISS'],
-        ['Technologies', String(technologies.length)],
-        ['Architecture', archStr],
-        ['Cluster',    cluster.name || '—'],
+      /* Scan meta — 2-column grid */
+      y += 24;
+      const metaGrid = [
+        ['Scan Date',     scanDate],
+        ['Latency',       data.latency ? data.latency + ' ms' : '—'],
+        ['Cache',         data.cached ? 'HIT' : 'MISS'],
+        ['Technologies',  String(technologies.length)],
+        ['Architecture',  archDisplay],
+        ['Cluster',       cluster.name || '—'],
+        ['Infrastructure',infraStr],
+        ['Risk Level',    riskLabel + (riskPct != null ? ' (' + riskPct + '/100)' : '')],
       ];
       let col = 0;
-      metaItems.forEach(([lbl, val]) => {
-        const cx = ML + (col % 2) * (CONTENT_W / 2);
-        const cy = y + Math.floor(col / 2) * 10;
-        doc.setFontSize(8);
-        doc.setFont('helvetica', 'bold');
-        doc.setTextColor(...DGRAY);
+      metaGrid.forEach(([lbl, val]) => {
+        const cx = ML + (col % 2) * (CW/2);
+        const cy = y + Math.floor(col/2) * 11;
+        doc.setFontSize(7.5);
+        doc.setFont('helvetica','bold');
+        doc.setTextColor(...C_MGRAY);
         doc.text(lbl.toUpperCase(), cx, cy);
-        doc.setFontSize(10);
-        doc.setFont('helvetica', 'normal');
-        doc.setTextColor(...BLACK);
-        doc.text(String(val), cx, cy + 5);
+        doc.setFontSize(9.5);
+        doc.setFont('helvetica','normal');
+        doc.setTextColor(...C_BLACK);
+        const vLines = doc.splitTextToSize(String(val), (CW/2) - 4);
+        doc.text(vLines, cx, cy + 5);
         col++;
       });
+      y += Math.ceil(metaGrid.length/2) * 11 + 6;
 
-      y += Math.ceil(metaItems.length / 2) * 10 + 8;
+      /* Score bars */
+      y = _bar(y, 'Engineering Maturity', matScore, 100, matScore >= 80 ? C_GREEN : matScore >= 50 ? C_ACCENT : C_AMBER);
+      y += 1;
+      if (riskPct != null) { y = _bar(y, 'Security Risk Score', riskPct, 100, riskCol); y += 1; }
+      if (seoScore)        { y = _bar(y, 'SEO Score',           seoScore, 100, seoScore >= 70 ? C_GREEN : seoScore >= 40 ? C_AMBER : C_RED); y += 1; }
 
-      // Maturity score bar
-      y = progressBar(y, 'Engineering Maturity', matScore, 100, matScore >= 80 ? GREEN : matScore >= 50 ? ACCENT : AMBER);
-      y += 2;
-      if (riskScore != null) {
-        y = progressBar(y, 'Security Risk Score', riskScore, 100, riskColor);
-        y += 2;
-      }
-      if (seoScore) {
-        y = progressBar(y, 'SEO Score', seoScore, 100, seoScore >= 70 ? GREEN : seoScore >= 40 ? AMBER : RED);
-        y += 2;
-      }
+      /* Generated-by line */
+      y += 5;
+      doc.setFontSize(7.5);
+      doc.setFont('helvetica','italic');
+      doc.setTextColor(...C_MGRAY);
+      doc.text('Generated by EIGE v10 Intelligence Console — ' + TOOL_URL + '  ·  ' + scanDate, ML, y);
 
-      // Generated by
-      y += 6;
-      doc.setFontSize(8);
-      doc.setFont('helvetica', 'italic');
-      doc.setTextColor(...DGRAY);
-      doc.text('Generated by EIGE v10 Intelligence Console — ' + TOOL_URL, ML, y);
+      _footer();
 
-      addFooter(pageNum);
+      /* ═══════════════════════════════════════════════════════
+         PAGE 2 — REQUEST META + EXECUTIVE SUMMARY STRIP + AI SUMMARY BANNER
+      ═══════════════════════════════════════════════════════ */
+      y = _newPage();
 
-      // ══════════════════════════════════════════
-      //  PAGE 2 — EXECUTIVE SUMMARY
-      // ══════════════════════════════════════════
-      y = newPage();
+      /* REQUEST META STRIP */
+      y = _sectionTitle(y, 'Request Metadata');
+      y = _kv(y, 'Target Domain', data.url || domainLabel);
+      y = _kv(y, 'Scan Timestamp', scanDate);
+      y = _kv(y, 'Latency', data.latency ? data.latency + ' ms' : '—');
+      y = _kv(y, 'Cache Status', data.cached ? 'HIT' : 'MISS', data.cached ? C_AMBER : C_GREEN);
+      y = _kv(y, 'Technologies', String(technologies.length) + ' detected');
+      y += 3;
 
-      y = sectionTitle(y, 'Executive Summary');
+      /* EXECUTIVE SUMMARY STRIP — all 6 metrics in a 3×2 grid of boxes */
+      y = _sectionTitle(y, 'Executive Summary');
+      const execMetrics = [
+        { label:'Technologies',  val: String(technologies.length), sub:'detected',        col: C_ACCENT },
+        { label:'Architecture',  val: archDisplay,                  sub:'classification',  col: C_BLACK  },
+        { label:'Infrastructure',val: infraStr,                     sub:'provider',        col: C_CYAN   },
+        { label:'Cluster',       val: cluster.name || '—',          sub:'ecosystem',       col: C_BLACK  },
+        { label:'Risk Score',    val: (riskPct != null ? riskPct + '/100' : '—'),  sub: riskLabel, col: riskCol },
+        { label:'Maturity',      val: matScore + '/100',            sub:'eng. profile',    col: matScore >= 80 ? C_GREEN : C_AMBER }
+      ];
+      const boxW = (CW - 6) / 3;
+      const boxH = 20;
+      execMetrics.forEach((m, i) => {
+        const bx = ML + (i % 3) * (boxW + 3);
+        const by = y + Math.floor(i/3) * (boxH + 3);
+        doc.setFillColor(...C_BGLIGHT);
+        doc.roundedRect(bx, by, boxW, boxH, 2, 2, 'F');
+        doc.setDrawColor(...C_LGRAY);
+        doc.setLineWidth(0.2);
+        doc.roundedRect(bx, by, boxW, boxH, 2, 2, 'S');
+        doc.setFontSize(7);
+        doc.setFont('helvetica','bold');
+        doc.setTextColor(...C_MGRAY);
+        doc.text(m.label.toUpperCase(), bx + 4, by + 5);
+        doc.setFontSize(9.5);
+        doc.setFont('helvetica','bold');
+        doc.setTextColor(...m.col);
+        const vl = doc.splitTextToSize(m.val, boxW - 8);
+        doc.text(vl[0], bx + 4, by + 11);
+        doc.setFontSize(7);
+        doc.setFont('helvetica','normal');
+        doc.setTextColor(...C_MGRAY);
+        doc.text(m.sub, bx + 4, by + 17);
+      });
+      y += Math.ceil(execMetrics.length/3) * (boxH + 3) + 5;
 
-      // AI Summary paragraph
+      /* AI SUMMARY BANNER — styled box with accent left border + label + full text */
+      y = _sectionTitle(y, 'AI Intelligence Summary');
       if (intelligence.summary) {
-        y = bodyText(y, intelligence.summary);
-        y += 4;
+        /* accent left bar */
+        doc.setFillColor(...C_ACCENT);
+        doc.rect(ML, y, 2.5, 0, 'F'); /* placeholder — drawn after measuring height */
+        const sumLines = doc.splitTextToSize(intelligence.summary, CW - 10);
+        const sumH     = sumLines.length * 4.8 + 10;
+        /* background box */
+        doc.setFillColor(235, 243, 255);
+        doc.roundedRect(ML, y, CW, sumH, 2, 2, 'F');
+        /* left accent bar */
+        doc.setFillColor(...C_ACCENT);
+        doc.rect(ML, y, 2.5, sumH, 'F');
+        /* label */
+        doc.setFontSize(7.5);
+        doc.setFont('helvetica','bold');
+        doc.setTextColor(...C_ACCENT);
+        doc.text('▸ AI INTELLIGENCE SUMMARY', ML + 6, y + 5);
+        /* text */
+        doc.setFontSize(9);
+        doc.setFont('helvetica','normal');
+        doc.setTextColor(...C_BLACK);
+        doc.text(sumLines, ML + 6, y + 10);
+        y += sumH + 4;
+      } else {
+        y = _body(y, 'Intelligence analysis unavailable.', C_MGRAY);
       }
 
-      y = sectionTitle(y, 'Infrastructure & Classification');
-      y = labelValue(y, 'Architecture', archStr);
-      y = labelValue(y, 'Cluster', (cluster.name || '—') + (cluster.confidence ? '  (' + Math.round(cluster.confidence * 100) + '% confidence)' : ''));
-      y = labelValue(y, 'Provider / CDN', infraDisplay);
-      y = labelValue(y, 'Security Risk', riskLabel + (riskScore != null ? '  (' + riskScore + '/100)' : ''), riskColor);
-      y = labelValue(y, 'Maturity Score', matScore + '/100');
-      if (seoScore) y = labelValue(y, 'SEO Score', seoScore + '/100');
-      y += 4;
+      _footer();
 
-      // Top technologies quick list
-      if (technologies.length) {
-        y = sectionTitle(y, 'Top Technologies Detected');
-        const topN = technologies.slice(0, 8);
-        topN.forEach(t => {
-          const pct = Math.round((t.confidence || 0) * 100);
-          const barW = 60;
-          doc.setFontSize(9);
-          doc.setFont('helvetica', 'normal');
-          doc.setTextColor(...BLACK);
-          doc.text(t.name || '—', ML, y + 3.5);
-          doc.setFontSize(8);
-          doc.setTextColor(...DGRAY);
-          doc.text(t.category || '—', ML + 52, y + 3.5);
-          // mini bar
-          const rgb = hexToRgb(getCatHex(t.category));
-          doc.setFillColor(...LGRAY);
-          doc.roundedRect(ML + 100, y + 0.5, barW, 4, 1, 1, 'F');
-          doc.setFillColor(...rgb);
-          doc.roundedRect(ML + 100, y + 0.5, barW * (pct / 100), 4, 1, 1, 'F');
-          doc.setFontSize(7.5);
-          doc.setTextColor(...BLACK);
-          doc.text(pct + '%', ML + 100 + barW + 2, y + 4);
-          y += 7;
-          if (y > PAGE_H - MB - 15) { y = newPage(); }
-        });
-      }
-
-      addFooter(pageNum);
-
-      // ══════════════════════════════════════════
-      //  PAGE 3 — TECHNOLOGY STACK TABLE
-      // ══════════════════════════════════════════
-      y = newPage();
-      y = sectionTitle(y, 'Full Technology Stack');
+      /* ═══════════════════════════════════════════════════════
+         PAGE 3 — TECHNOLOGY DETECTION MATRIX (full table)
+      ═══════════════════════════════════════════════════════ */
+      y = _newPage();
+      y = _sectionTitle(y, 'Technology Detection Matrix — ' + technologies.length + ' detected');
 
       if (technologies.length === 0) {
-        bodyText(y, 'No technologies detected.');
+        y = _body(y, 'No technologies detected.', C_MGRAY);
       } else {
-        const sorted = [...technologies].sort((a, b) => (b.confidence || 0) - (a.confidence || 0));
-        const tableRows = sorted.map(t => {
+        const sorted = [...technologies].sort((a,b) => (b.confidence||0) - (a.confidence||0));
+
+        /* Build table rows — Name | Version | Category | Confidence | HTML | HDR | JS */
+        const tRows = sorted.map(t => {
           const sig = t.signals || {};
           return [
-            t.name || '—',
+            t.name    || '—',
+            t.version ? 'v' + t.version : '—',
             t.category || '—',
-            Math.round((t.confidence || 0) * 100) + '%',
-            [sig.html || 0, sig.headers || 0, sig.scripts || 0].join(' / ')
+            Math.round((t.confidence||0)*100) + '%',
+            String(sig.html    || 0),
+            String(sig.headers || 0),
+            String(sig.scripts || 0)
           ];
         });
 
         doc.autoTable({
           startY: y,
-          head: [['Technology', 'Category', 'Confidence', 'HTML / Headers / Scripts']],
-          body: tableRows,
+          head: [['Technology','Version','Category','Conf.','HTML','HDR','JS']],
+          body: tRows,
           margin: { left: ML, right: MR },
-          styles: { fontSize: 9, cellPadding: 2.5, textColor: BLACK, lineColor: LGRAY, lineWidth: 0.1 },
-          headStyles: { fillColor: BLACK, textColor: WHITE, fontStyle: 'bold', fontSize: 9 },
+          styles: {
+            fontSize: 8.5, cellPadding: 2.2,
+            textColor: C_BLACK, lineColor: C_LGRAY, lineWidth: 0.1
+          },
+          headStyles: {
+            fillColor: C_BLACK, textColor: C_WHITE,
+            fontStyle: 'bold', fontSize: 8.5
+          },
           columnStyles: {
-            0: { cellWidth: 55 },
-            1: { cellWidth: 42 },
-            2: { cellWidth: 25, halign: 'center' },
-            3: { cellWidth: 45, halign: 'center' }
+            0: { cellWidth: 44 },
+            1: { cellWidth: 18 },
+            2: { cellWidth: 36 },
+            3: { cellWidth: 16, halign: 'center' },
+            4: { cellWidth: 14, halign: 'center' },
+            5: { cellWidth: 14, halign: 'center' },
+            6: { cellWidth: 14, halign: 'center' }
           },
           alternateRowStyles: { fillColor: [248, 250, 255] },
-          didParseCell: function(hookData) {
-            if (hookData.section === 'body' && hookData.column.index === 1) {
-              const cat = hookData.cell.raw;
-              const rgb = hexToRgb(getCatHex(cat));
-              hookData.cell.styles.textColor = rgb;
-              hookData.cell.styles.fontStyle = 'bold';
+          didParseCell: function(h) {
+            /* Category column: colour-coded text matching getCategoryColorHex */
+            if (h.section === 'body' && h.column.index === 2) {
+              h.cell.styles.textColor  = _hex(_catHex(h.cell.raw));
+              h.cell.styles.fontStyle  = 'bold';
             }
-            if (hookData.section === 'body' && hookData.column.index === 2) {
-              const pct = parseInt(hookData.cell.raw);
-              hookData.cell.styles.textColor = pct >= 90 ? GREEN : pct >= 70 ? ACCENT : pct >= 50 ? AMBER : RED;
-              hookData.cell.styles.fontStyle = 'bold';
+            /* Confidence column: colour by threshold */
+            if (h.section === 'body' && h.column.index === 3) {
+              const p = parseInt(h.cell.raw);
+              h.cell.styles.textColor  = p >= 90 ? C_GREEN : p >= 70 ? C_ACCENT : p >= 50 ? C_AMBER : C_RED;
+              h.cell.styles.fontStyle  = 'bold';
+            }
+            /* Signal count columns: blue accent */
+            if (h.section === 'body' && h.column.index >= 4) {
+              h.cell.styles.textColor  = h.cell.raw !== '0' ? C_ACCENT : C_MGRAY;
+            }
+            /* Version column: gray */
+            if (h.section === 'body' && h.column.index === 1) {
+              h.cell.styles.textColor  = C_MGRAY;
+              h.cell.styles.fontStyle  = 'italic';
             }
           },
-          didDrawPage: (hookData) => {
-            if (hookData.pageNumber > 1) { pageNum++; }
-            addFooter(pageNum);
+          didDrawPage: function(h) {
+            /* Correctly stamp footer on every page the table draws */
+            if (h.pageNumber > 1) { pageNum++; }
+            _footer();
           }
         });
+
+        y = doc.lastAutoTable.finalY + 6;
       }
 
-      // ══════════════════════════════════════════
-      //  PAGE 4 — INTELLIGENCE ANALYSIS
-      // ══════════════════════════════════════════
-      doc.addPage();
-      pageNum++;
-      y = MT;
+      _footer();
 
-      y = sectionTitle(y, 'Intelligence Analysis');
+      /* ═══════════════════════════════════════════════════════
+         PAGE 4 — SIGNAL EVIDENCE EXPLORER
+      ═══════════════════════════════════════════════════════ */
+      y = _newPage();
+      y = _sectionTitle(y, 'Signal Evidence Explorer');
 
-      // Strengths
-      const strengths = intelligence.strengths || [];
+      const sigSections = [
+        { key:'html',    label:'HTML Signals',   icon:'⬡', col: C_ACCENT },
+        { key:'headers', label:'Header Signals',  icon:'⬢', col: C_GREEN  },
+        { key:'scripts', label:'Script Signals',  icon:'⬣', col: C_AMBER  }
+      ];
+
+      let hasAnySig = false;
+      for (const sec of sigSections) {
+        const rows = technologies.filter(t => (t.signals||{})[sec.key] > 0);
+        if (!rows.length) continue;
+        hasAnySig = true;
+        if (y > PAGE_H - MB - 20) y = _newPage();
+
+        /* Section header with icon */
+        doc.setFontSize(9);
+        doc.setFont('helvetica','bold');
+        doc.setTextColor(...sec.col);
+        doc.text(sec.icon + '  ' + sec.label.toUpperCase(), ML, y);
+        y += 5;
+
+        /* Rows: pattern | technology | weight */
+        const sigRows = rows.map(t => {
+          const count  = (t.signals||{})[sec.key];
+          const weight = (count * 0.3).toFixed(2);
+          return [
+            t.name.toLowerCase().replace(/\s+/g,'-') + '_' + sec.key + '_pattern',
+            t.name,
+            '+' + weight
+          ];
+        });
+
+        doc.autoTable({
+          startY: y,
+          head: [['Pattern', 'Technology', 'Weight']],
+          body: sigRows,
+          margin: { left: ML, right: MR },
+          styles: { fontSize: 8.5, cellPadding: 2, textColor: C_BLACK, lineColor: C_LGRAY, lineWidth: 0.1 },
+          headStyles: { fillColor: sec.col, textColor: C_WHITE, fontStyle:'bold', fontSize:8.5 },
+          columnStyles: {
+            0: { cellWidth: 90, textColor: C_MGRAY, fontStyle:'italic' },
+            1: { cellWidth: 50 },
+            2: { cellWidth: 26, halign:'right', textColor: C_GREEN, fontStyle:'bold' }
+          },
+          didDrawPage: function(h) {
+            if (h.pageNumber > 1) { pageNum++; }
+            _footer();
+          }
+        });
+        y = doc.lastAutoTable.finalY + 6;
+      }
+
+      if (!hasAnySig) { y = _body(y, 'No signal evidence logged.', C_MGRAY); }
+      _footer();
+
+      /* ═══════════════════════════════════════════════════════
+         PAGE 5 — GRAPH RELATIONSHIP ENGINE (static table)
+      ═══════════════════════════════════════════════════════ */
+      y = _newPage();
+      y = _sectionTitle(y, 'Graph Relationship Engine');
+
+      const gNodes = (graph.nodes || []);
+      const gEdges = (graph.edges || []);
+
+      if (!gNodes.length) {
+        y = _body(y, 'No graph data available.', C_MGRAY);
+      } else {
+        /* Node table */
+        y = _subHead(y, 'Technology Nodes — ' + gNodes.length + ' nodes');
+        const nodeRows = gNodes.map(n => [
+          n.label || n.id || '—',
+          n.category || '—',
+          n.weight != null ? Math.round(n.weight * 100) + '%' : '—'
+        ]);
+        doc.autoTable({
+          startY: y,
+          head: [['Node / Technology', 'Category', 'Weight']],
+          body: nodeRows,
+          margin: { left: ML, right: MR },
+          styles: { fontSize: 8.5, cellPadding: 2, textColor: C_BLACK, lineColor: C_LGRAY, lineWidth: 0.1 },
+          headStyles: { fillColor: C_BLACK, textColor: C_WHITE, fontStyle:'bold' },
+          columnStyles: {
+            0: { cellWidth: 70 },
+            1: { cellWidth: 60, textColor: C_ACCENT, fontStyle:'bold' },
+            2: { cellWidth: 36, halign:'center', textColor: C_GREEN, fontStyle:'bold' }
+          },
+          alternateRowStyles: { fillColor: [248, 250, 255] },
+          didParseCell: function(h) {
+            if (h.section === 'body' && h.column.index === 1) {
+              h.cell.styles.textColor = _hex(_catHex(h.cell.raw));
+            }
+          },
+          didDrawPage: function(h) { if (h.pageNumber > 1) { pageNum++; } _footer(); }
+        });
+        y = doc.lastAutoTable.finalY + 6;
+
+        /* Edge table */
+        if (gEdges.length) {
+          if (y > PAGE_H - MB - 30) y = _newPage();
+          y = _subHead(y, 'Technology Relationships — ' + gEdges.length + ' edges');
+          const edgeRows = gEdges.map(e => [
+            String(e.source || '—'),
+            '→',
+            String(e.target || '—'),
+            e.weight != null ? Math.round(e.weight * 100) + '%' : '—'
+          ]);
+          doc.autoTable({
+            startY: y,
+            head: [['Source', '', 'Target', 'Edge Weight']],
+            body: edgeRows,
+            margin: { left: ML, right: MR },
+            styles: { fontSize: 8.5, cellPadding: 2, textColor: C_BLACK, lineColor: C_LGRAY, lineWidth: 0.1 },
+            headStyles: { fillColor: C_BLACK, textColor: C_WHITE, fontStyle:'bold' },
+            columnStyles: {
+              0: { cellWidth: 60 },
+              1: { cellWidth: 12, halign:'center', textColor: C_MGRAY },
+              2: { cellWidth: 60 },
+              3: { cellWidth: 34, halign:'center', textColor: C_ACCENT, fontStyle:'bold' }
+            },
+            alternateRowStyles: { fillColor: [248, 250, 255] },
+            didDrawPage: function(h) { if (h.pageNumber > 1) { pageNum++; } _footer(); }
+          });
+          y = doc.lastAutoTable.finalY + 6;
+        }
+      }
+
+      _footer();
+
+      /* ═══════════════════════════════════════════════════════
+         PAGE 6 — AI INTERPRETATION LAYER + INFRASTRUCTURE
+      ═══════════════════════════════════════════════════════ */
+      y = _newPage();
+
+      /* AI INTERPRETATION LAYER */
+      y = _sectionTitle(y, 'AI Interpretation Layer');
+
+      /* Architecture Classification badge */
+      {
+        const badgeText = archDisplay;
+        const tw = doc.getTextWidth(badgeText);
+        doc.setFillColor(235, 243, 255);
+        doc.roundedRect(ML, y - 1, tw + 20, 8, 2, 2, 'F');
+        doc.setDrawColor(...C_ACCENT);
+        doc.setLineWidth(0.4);
+        doc.roundedRect(ML, y - 1, tw + 20, 8, 2, 2, 'S');
+        /* circle icon */
+        doc.setDrawColor(...C_ACCENT);
+        doc.setLineWidth(0.8);
+        doc.circle(ML + 5.5, y + 3, 2.5, 'S');
+        doc.setFontSize(9.5);
+        doc.setFont('helvetica','bold');
+        doc.setTextColor(...C_ACCENT);
+        doc.text(badgeText, ML + 11, y + 4);
+        y += 12;
+      }
+
+      /* Strengths */
+      const strengths  = intelligence.strengths  || [];
       const weaknesses = intelligence.weaknesses || [];
 
       if (strengths.length) {
-        doc.setFontSize(10);
-        doc.setFont('helvetica', 'bold');
-        doc.setTextColor(...BLACK);
-        doc.text('Identified Strengths', ML, y);
-        y += 6;
-        strengths.forEach(s => {
-          if (y > PAGE_H - MB - 10) { y = newPage(); }
-          doc.setFillColor(...GREEN);
-          doc.circle(ML + 1.5, y - 1, 1.2, 'F');
-          doc.setFontSize(9);
-          doc.setFont('helvetica', 'normal');
-          doc.setTextColor(...BLACK);
-          const lines = doc.splitTextToSize(s, CONTENT_W - 8);
-          doc.text(lines, ML + 5, y);
-          y += lines.length * 5 + 1;
-        });
+        y = _subHead(y, 'Identified Strengths');
+        strengths.forEach(s => { y = _bullet(y, s, C_GREEN); });
         y += 3;
       }
 
       if (weaknesses.length) {
-        if (y > PAGE_H - MB - 20) { y = newPage(); }
-        doc.setFontSize(10);
-        doc.setFont('helvetica', 'bold');
-        doc.setTextColor(...BLACK);
-        doc.text('Identified Weaknesses', ML, y);
-        y += 6;
-        weaknesses.forEach(w => {
-          if (y > PAGE_H - MB - 10) { y = newPage(); }
-          doc.setFillColor(...RED);
-          doc.circle(ML + 1.5, y - 1, 1.2, 'F');
-          doc.setFontSize(9);
-          doc.setFont('helvetica', 'normal');
-          doc.setTextColor(...BLACK);
-          const lines = doc.splitTextToSize(w, CONTENT_W - 8);
-          doc.text(lines, ML + 5, y);
-          y += lines.length * 5 + 1;
-        });
+        if (y > PAGE_H - MB - 25) y = _newPage();
+        y = _subHead(y, 'Identified Weaknesses');
+        weaknesses.forEach(w => { y = _bullet(y, w, C_RED); });
         y += 3;
       }
 
-      if (y > PAGE_H - MB - 30) { y = newPage(); }
-      y = sectionTitle(y, 'Maturity Score Breakdown');
-      y = progressBar(y, 'Engineering Maturity', matScore, 100, matScore >= 80 ? GREEN : matScore >= 50 ? ACCENT : AMBER);
-      y += 3;
+      /* Maturity Score bar */
+      if (y > PAGE_H - MB - 18) y = _newPage();
+      y = _sectionTitle(y, 'Engineering Maturity Score');
+      y = _bar(y, 'Maturity Score', matScore, 100, matScore >= 80 ? C_GREEN : matScore >= 50 ? C_ACCENT : C_AMBER);
+      y += 5;
 
-      if (cluster.name) {
-        y = labelValue(y, 'Ecosystem', cluster.name);
-        if (cluster.confidence) y = labelValue(y, 'Confidence', Math.round(cluster.confidence * 100) + '%');
-        if (cluster.summary) {
-          y += 2;
-          y = bodyText(y, cluster.summary, DGRAY);
+      /* INFRASTRUCTURE PANEL */
+      if (y > PAGE_H - MB - 40) y = _newPage();
+      y = _sectionTitle(y, 'Infrastructure');
+      y = _kv(y, 'Domain',        infrastructure.domain   || data.url || '—');
+      y = _kv(y, 'Provider / CDN',infraStr);
+      if (infrastructure.ips && infrastructure.ips.length) {
+        y = _kv(y, 'IP Addresses',   infrastructure.ips.join('  ·  '));
+      }
+      y = _kv(y, 'DNS Resolved',  infrastructure.resolved ? 'YES' : 'NO', infrastructure.resolved ? C_GREEN : C_RED);
+      if (infrastructure.hosting) y = _kv(y, 'Hosting', infrastructure.hosting);
+      if (infrastructure.cdn && infrastructure.cdn !== infraStr) y = _kv(y, 'CDN', infrastructure.cdn);
+      y += 2;
+
+      /* PERFORMANCE DIAGNOSTICS */
+      if (y > PAGE_H - MB - 40) y = _newPage();
+      y = _sectionTitle(y, 'Performance Diagnostics');
+      const fetchMs  = performance.fetchMs  != null ? performance.fetchMs  : (data.latency || 0);
+      const sizeKB   = performance.sizeKB   != null ? String(performance.sizeKB) + ' KB' : '—';
+      const fetchCol = fetchMs < 500 ? C_GREEN : fetchMs < 2000 ? C_AMBER : C_RED;
+      const latCol   = (data.latency||0) < 500 ? C_GREEN : (data.latency||0) < 2000 ? C_AMBER : C_RED;
+      y = _kv(y, 'Fetch Time',    fetchMs + ' ms' + (performance.fetchMs == null ? ' (est.)' : ''), fetchCol);
+      y = _kv(y, 'Total Latency', (data.latency || 0) + ' ms', latCol);
+      y = _kv(y, 'Response Size', sizeKB);
+      y = _kv(y, 'Cache Status',  data.cached ? 'HIT' : 'MISS', data.cached ? C_AMBER : C_GREEN);
+      y += 2;
+
+      _footer();
+
+      /* ═══════════════════════════════════════════════════════
+         PAGE 7 — SECURITY INTELLIGENCE
+      ═══════════════════════════════════════════════════════ */
+      y = _newPage();
+      y = _sectionTitle(y, 'Security Intelligence');
+
+      /* Risk Score bar */
+      if (riskPct != null) {
+        y = _bar(y, 'Risk Score — ' + riskLabel, riskPct, 100, riskCol);
+        y += 4;
+      }
+
+      /* Security header checks table — mirrors renderSecurityPanel's 6 derived checks */
+      const secRows = secChecks.map(c => [c.name, c.present ? 'PRESENT' : 'MISSING']);
+      doc.autoTable({
+        startY: y,
+        head: [['Security Check', 'Status']],
+        body: secRows,
+        margin: { left: ML, right: MR },
+        styles: { fontSize: 9, cellPadding: 3, textColor: C_BLACK, lineColor: C_LGRAY, lineWidth: 0.1 },
+        headStyles: { fillColor: C_BLACK, textColor: C_WHITE, fontStyle:'bold' },
+        columnStyles: {
+          0: { cellWidth: CW - 35 },
+          1: { cellWidth: 35, halign: 'center', fontStyle: 'bold' }
+        },
+        alternateRowStyles: { fillColor: [248, 250, 255] },
+        didParseCell: function(h) {
+          if (h.section === 'body' && h.column.index === 1) {
+            h.cell.styles.textColor = h.cell.raw === 'PRESENT' ? C_GREEN : C_RED;
+            /* Pill-style: draw coloured background */
+            h.cell.styles.fillColor = h.cell.raw === 'PRESENT' ? [220, 252, 231] : [254, 226, 226];
+          }
+        },
+        didDrawPage: function(h) { if (h.pageNumber > 1) { pageNum++; } _footer(); }
+      });
+      y = doc.lastAutoTable.finalY + 6;
+
+      _footer();
+
+      /* ═══════════════════════════════════════════════════════
+         PAGE 8 — SEO INTELLIGENCE
+      ═══════════════════════════════════════════════════════ */
+      y = _newPage();
+      y = _sectionTitle(y, 'SEO Intelligence');
+
+      /* SEO Score bar */
+      if (seoScore) {
+        y = _bar(y, 'SEO Score', seoScore, 100, seoScore >= 70 ? C_GREEN : seoScore >= 40 ? C_AMBER : C_RED);
+        y += 4;
+      }
+
+      /* SEO rows table — uses correctly unwrapped field values, includes Twitter Card */
+      const seoTableRows = seoRows.map(r => [r.key, r.val, r.ok ? 'OK' : (r.val === '—' || r.val === 'Missing' || r.val === 'None' ? 'MISSING' : 'WARN')]);
+      doc.autoTable({
+        startY: y,
+        head: [['SEO Field', 'Value', 'Status']],
+        body: seoTableRows,
+        margin: { left: ML, right: MR },
+        styles: { fontSize: 8.5, cellPadding: 2.5, textColor: C_BLACK, lineColor: C_LGRAY, lineWidth: 0.1 },
+        headStyles: { fillColor: C_BLACK, textColor: C_WHITE, fontStyle:'bold' },
+        columnStyles: {
+          0: { cellWidth: 32 },
+          1: { cellWidth: CW - 65 },
+          2: { cellWidth: 28, halign:'center', fontStyle:'bold' }
+        },
+        alternateRowStyles: { fillColor: [248, 250, 255] },
+        didParseCell: function(h) {
+          if (h.section === 'body' && h.column.index === 2) {
+            h.cell.styles.textColor  = h.cell.raw === 'OK' ? C_GREEN : h.cell.raw === 'MISSING' ? C_RED : C_AMBER;
+            h.cell.styles.fillColor  = h.cell.raw === 'OK' ? [220,252,231] : h.cell.raw === 'MISSING' ? [254,226,226] : [255,244,220];
+          }
+        },
+        didDrawPage: function(h) { if (h.pageNumber > 1) { pageNum++; } _footer(); }
+      });
+      y = doc.lastAutoTable.finalY + 6;
+
+      _footer();
+
+      /* ═══════════════════════════════════════════════════════
+         PAGE 9 — CLUSTER CLASSIFICATION (full detail)
+      ═══════════════════════════════════════════════════════ */
+      y = _newPage();
+      y = _sectionTitle(y, 'Cluster Classification');
+
+      if (!cluster || !cluster.id) {
+        y = _body(y, 'No cluster detected.', C_MGRAY);
+      } else {
+        /* Cluster hero box — mirrors cluster-id-display gradient card */
+        doc.setFillColor(235, 243, 255);
+        doc.roundedRect(ML, y, CW, 22, 3, 3, 'F');
+        doc.setDrawColor(...C_ACCENT);
+        doc.setLineWidth(0.4);
+        doc.roundedRect(ML, y, CW, 22, 3, 3, 'S');
+        doc.setFontSize(14);
+        doc.setFont('helvetica','bold');
+        doc.setTextColor(...C_BLACK);
+        doc.text(cluster.name || '—', ML + 6, y + 9);
+        doc.setFontSize(8.5);
+        doc.setFont('helvetica','normal');
+        doc.setTextColor(...C_MGRAY);
+        doc.text('Confidence: ', ML + 6, y + 17);
+        doc.setFont('helvetica','bold');
+        doc.setTextColor(...C_ACCENT);
+        doc.text(Math.round((cluster.confidence||0)*100) + '%', ML + 28, y + 17);
+        y += 27;
+
+        /* Description */
+        if (cluster.description) {
+          y = _body(y, cluster.description, C_DGRAY);
+          y += 3;
+        }
+
+        /* Adjacent ecosystems */
+        const adj = cluster.adjacentClusters || [];
+        if (adj.length) {
+          if (y > PAGE_H - MB - 20) y = _newPage();
+          y = _subHead(y, 'Adjacent Ecosystems');
+          /* Draw chips inline */
+          let chipX = ML;
+          const chipH = 7;
+          adj.forEach(c => {
+            const tw   = doc.getTextWidth(c) + 12;
+            if (chipX + tw > PAGE_W - MR) { chipX = ML; y += chipH + 2; }
+            doc.setFillColor(...C_BGLIGHT);
+            doc.setDrawColor(...C_LGRAY);
+            doc.setLineWidth(0.2);
+            doc.roundedRect(chipX, y - 3, tw, chipH, 2, 2, 'F');
+            doc.roundedRect(chipX, y - 3, tw, chipH, 2, 2, 'S');
+            doc.setFontSize(8.5);
+            doc.setFont('helvetica','normal');
+            doc.setTextColor(...C_DGRAY);
+            doc.text(c, chipX + 6, y + 2.5);
+            chipX += tw + 4;
+          });
+          y += chipH + 4;
+        }
+
+        /* Archetype Ranking — allScores */
+        const allScores = cluster.allScores || [];
+        if (allScores.length) {
+          if (y > PAGE_H - MB - 30) y = _newPage();
+          y = _subHead(y, 'Archetype Ranking');
+          const topScore = allScores[0]?.score || allScores[0]?.confidence || 1;
+          allScores.forEach((s, i) => {
+            if (y > PAGE_H - MB - 10) y = _newPage();
+            const name  = s.name || s.id || 'Unknown';
+            const score = s.score != null ? s.score : (s.confidence != null ? s.confidence : 0);
+            const pct   = Math.round(score * 100);
+            const barW  = (CW - 30) * (topScore > 0 ? score/topScore : 0);
+            const col   = i === 0 ? C_ACCENT : i < 3 ? C_CYAN : C_LGRAY;
+
+            /* Rank number */
+            doc.setFontSize(8);
+            doc.setFont('helvetica','bold');
+            doc.setTextColor(...C_MGRAY);
+            doc.text('#' + (i+1), ML, y + 3.5);
+
+            /* Name */
+            doc.setFontSize(9);
+            doc.setFont('helvetica', i === 0 ? 'bold' : 'normal');
+            doc.setTextColor(...(i === 0 ? C_BLACK : C_DGRAY));
+            doc.text(name, ML + 10, y + 3.5);
+
+            /* Bar track */
+            doc.setFillColor(...C_LGRAY);
+            doc.roundedRect(ML + 82, y, CW - 92, 5, 1, 1, 'F');
+            /* Bar fill */
+            doc.setFillColor(...col);
+            if (barW > 0) doc.roundedRect(ML + 82, y, barW, 5, 1, 1, 'F');
+            /* Percentage */
+            doc.setFontSize(8);
+            doc.setFont('helvetica','bold');
+            doc.setTextColor(...col);
+            doc.text(pct + '%', PAGE_W - MR, y + 4, { align:'right' });
+
+            y += 9;
+          });
+          y += 3;
+        }
+
+        /* Cluster Insights */
+        const insights = cluster.insights || [];
+        if (insights.length) {
+          if (y > PAGE_H - MB - 25) y = _newPage();
+          y = _subHead(y, 'Cluster Insights');
+          insights.forEach(ins => {
+            const text = typeof ins === 'object' ? (ins.text || ins.message || JSON.stringify(ins)) : String(ins);
+            y = _bullet(y, text, C_ACCENT);
+          });
         }
       }
 
-      addFooter(pageNum);
+      _footer();
 
-      // ══════════════════════════════════════════
-      //  PAGE 5 — SECURITY & SEO
-      // ══════════════════════════════════════════
-      doc.addPage();
-      pageNum++;
-      y = MT;
-
-      y = sectionTitle(y, 'Security Analysis');
-      if (riskScore != null) y = progressBar(y, 'Risk Score', riskScore, 100, riskColor);
-      y += 2;
-
-      // Security headers table
-      const secHeaders = security.headers || [];
-      if (secHeaders.length) {
-        const secRows = secHeaders.map(h => [
-          h.name || h.header || '—',
-          h.present ? 'Present' : (h.warn ? 'Warning' : 'Missing'),
-          h.value || h.detail || '—'
-        ]);
-        doc.autoTable({
-          startY: y + 2,
-          head: [['Security Header', 'Status', 'Detail']],
-          body: secRows,
-          margin: { left: ML, right: MR },
-          styles: { fontSize: 8.5, cellPadding: 2, textColor: BLACK, lineColor: LGRAY, lineWidth: 0.1 },
-          headStyles: { fillColor: BLACK, textColor: WHITE, fontStyle: 'bold' },
-          columnStyles: { 0: { cellWidth: 60 }, 1: { cellWidth: 22, halign: 'center' }, 2: { cellWidth: CONTENT_W - 82 } },
-          didParseCell: function(hookData) {
-            if (hookData.section === 'body' && hookData.column.index === 1) {
-              const v = hookData.cell.raw;
-              hookData.cell.styles.textColor = v === 'Present' ? GREEN : v === 'Warning' ? AMBER : RED;
-              hookData.cell.styles.fontStyle = 'bold';
-            }
-          },
-          didDrawPage: () => { pageNum++; addFooter(pageNum); }
-        });
-        y = doc.lastAutoTable.finalY + 6;
-      } else {
-        y += 6;
-        bodyText(y, 'No security header data available.', DGRAY);
-        y += 8;
-      }
-
-      if (y > PAGE_H - MB - 40) { y = newPage(); }
-      y = sectionTitle(y, 'SEO Analysis');
-      if (seoScore) y = progressBar(y, 'SEO Score', seoScore, 100, seoScore >= 70 ? GREEN : seoScore >= 40 ? AMBER : RED);
-      y += 2;
-
-      // SEO metadata table
-      const seoFields = [
-        ['Title', seo.title],
-        ['Description', seo.description],
-        ['H1 Count', seo.h1Count != null ? String(seo.h1Count) : null],
-        ['Canonical', seo.canonical],
-        ['robots.txt', seo.robotsTxt ? 'Present' : null],
-        ['Sitemap', seo.sitemap ? 'Present' : null],
-        ['Open Graph', seo.openGraph ? 'Present' : null],
-        ['Schema Markup', seo.schema ? 'Present' : null],
-      ].filter(([, v]) => v != null);
-
-      if (seoFields.length) {
-        doc.autoTable({
-          startY: y + 2,
-          head: [['SEO Field', 'Value']],
-          body: seoFields,
-          margin: { left: ML, right: MR },
-          styles: { fontSize: 8.5, cellPadding: 2, textColor: BLACK, lineColor: LGRAY, lineWidth: 0.1 },
-          headStyles: { fillColor: BLACK, textColor: WHITE, fontStyle: 'bold' },
-          columnStyles: { 0: { cellWidth: 40 }, 1: { cellWidth: CONTENT_W - 40 } },
-          didDrawPage: () => { pageNum++; addFooter(pageNum); }
-        });
-      } else {
-        bodyText(y, 'No SEO data available.', DGRAY);
-      }
-
-      addFooter(pageNum);
-
-      // ── Save ──────────────────────────────────────────────────────
-      const filename = 'EIGE-v10-' + (data.url || 'report').replace(/[^a-z0-9]/gi, '-') + '-' + new Date().toISOString().slice(0,10) + '.pdf';
+      /* ── Save ──────────────────────────────────────────────── */
+      const filename = 'EIGE-v10-' + (data.url || 'report').replace(/[^a-z0-9]/gi,'-') + '-' + new Date().toISOString().slice(0,10) + '.pdf';
       doc.save(filename);
-      showToast('PDF report downloaded (' + (technologies.length) + ' technologies, ' + pageNum + ' pages)');
+      showToast('PDF downloaded — ' + pageNum + ' pages  ·  ' + technologies.length + ' technologies  ·  ' + filename);
     }
 
     /* ═════════════════════════════════════════════
