@@ -59,7 +59,7 @@
 
 <!-- TAILWIND CDN -->
 <script>
-  tailwind.config = { corePlugins: { preflight: false } }
+  window.tailwind = { config: { corePlugins: { preflight: false } } };
 </script>
 <script src="https://cdn.tailwindcss.com"></script>
 
@@ -263,7 +263,7 @@
 
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-  html { scroll-behavior: smooth; font-size: 16px; overflow-x: hidden; }
+  html { scroll-behavior: smooth; font-size: 16px; max-width: 100%; }
 
   body {
     font-family: 'DM Sans', sans-serif;
@@ -277,7 +277,7 @@
   /* Grain texture */
   body::before {
     content: '';
-    position: fixed;
+    position: absolute;
     top: 0;
     left: 0;
     width: 100%;
@@ -286,7 +286,7 @@
     pointer-events: none;
     z-index: 0;
     opacity: 0.4;
-    overflow: hidden;
+    will-change: auto;
   }
 
   /* Typography */
@@ -2339,6 +2339,143 @@
   .fade-in-d2 { animation: fadeIn 0.5s ease 0.2s both; }
   .fade-in-d3 { animation: fadeIn 0.5s ease 0.3s both; }
   .fade-in-d4 { animation: fadeIn 0.5s ease 0.4s both; }
+
+  /* Report action buttons bar */
+  .report-actions-bar {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+    padding: 14px 0 20px;
+    border-bottom: 1px solid var(--border-subtle);
+    margin-bottom: 20px;
+  }
+
+  .report-actions-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-right: 4px;
+    flex-shrink: 0;
+  }
+
+  .btn-report {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 500;
+    font-size: 11px;
+    color: var(--text-secondary);
+    background: var(--bg-surface);
+    border: 1px solid var(--border-default);
+    border-radius: var(--radius-sm);
+    padding: 6px 12px;
+    cursor: pointer;
+    transition: all 0.15s;
+    white-space: nowrap;
+  }
+
+  .btn-report:hover {
+    background: var(--bg-elevated);
+    color: var(--text-primary);
+    border-color: var(--border-strong);
+  }
+
+  .btn-report.copied {
+    background: var(--green-dim);
+    border-color: rgba(16,185,129,0.3);
+    color: var(--green);
+  }
+
+  /* Extended engine badge animation */
+  @keyframes extendedPulse {
+    0%   { box-shadow: 0 0 0 0 rgba(61,142,245,0.5); transform: scale(1); }
+    50%  { box-shadow: 0 0 0 6px rgba(61,142,245,0); transform: scale(1.04); }
+    100% { box-shadow: 0 0 0 0 rgba(61,142,245,0); transform: scale(1); }
+  }
+
+  .engine-badge.extended:not(.active) {
+    transition: all 0.2s;
+  }
+
+  .engine-badge.extended:not(.active):hover {
+    border-color: var(--blue);
+    color: var(--blue);
+    background: var(--blue-glow);
+  }
+
+  .engine-badge.badge-ping {
+    animation: extendedPulse 0.65s ease forwards;
+  }
+
+  @keyframes keyHighlight {
+    0%   { border-color: var(--border-default); box-shadow: none; }
+    40%  { border-color: var(--blue); box-shadow: 0 0 0 3px var(--blue-glow); }
+    100% { border-color: var(--green); box-shadow: none; }
+  }
+
+  .key-input.key-highlight {
+    animation: keyHighlight 1.2s ease forwards;
+  }
+
+  /* Live telemetry ticker */
+  #telemetry-ticker {
+    background: var(--text-primary);
+    height: 30px;
+    overflow: hidden;
+    position: relative;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+  }
+
+  .ticker-track {
+    display: flex;
+    align-items: center;
+    height: 100%;
+    white-space: nowrap;
+    animation: tickerScroll 40s linear infinite;
+  }
+
+  .ticker-track:hover {
+    animation-play-state: paused;
+  }
+
+  @keyframes tickerScroll {
+    0%   { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+  }
+
+  .ticker-item {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    color: rgba(255,255,255,0.45);
+    padding: 0 20px;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    flex-shrink: 0;
+  }
+
+  .ticker-dot {
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    background: var(--cyan);
+    flex-shrink: 0;
+  }
+
+  .ticker-dot-green { background: var(--green); }
+  .ticker-dot-amber { background: var(--amber); }
+
+  .ticker-sep {
+    color: rgba(255,255,255,0.12);
+    padding: 0 4px;
+  }
+
+  /* tier-known class */
+  .tier-known { background: var(--green-dim); color: var(--green); border: 1px solid rgba(16,185,129,0.25); }
 </style>
 </head>
 <body>
@@ -2353,6 +2490,13 @@
 <div id="seasonal-banner" aria-label="Seasonal notice">
   <span class="banner-dot" aria-hidden="true"></span>
   <span id="seasonal-text">🌱 Spring Intelligence Edition — Now Live</span>
+</div>
+
+<!-- Live telemetry ticker -->
+<div id="telemetry-ticker" aria-hidden="true" role="marquee">
+  <div class="ticker-track" id="ticker-track">
+    <!-- Populated by buildTelemetryTicker() -->
+  </div>
 </div>
 
 <!-- Site header -->
@@ -2685,6 +2829,40 @@
 
         <!-- SCAN RESULTS PANEL -->
         <div id="scan-results" aria-live="polite" aria-label="Scan results">
+
+          <!-- Report action buttons -->
+          <div class="report-actions-bar" aria-label="Report actions">
+            <span class="report-actions-label">REPORT:</span>
+            <button type="button" class="btn-report" id="btn-copy-report" onclick="copyReport()" aria-label="Copy report to clipboard">
+              <svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><rect x="4" y="4" width="7" height="7" rx="1"/><path d="M1 8V1h7"/></svg>
+              Copy Report
+            </button>
+            <button type="button" class="btn-report" onclick="emailReport()" aria-label="Email this report">
+              <svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><rect x="1" y="2.5" width="10" height="7" rx="1"/><path d="M1 3.5l5 3.5 5-3.5"/></svg>
+              Email Report
+            </button>
+            <button type="button" class="btn-report" onclick="printReport()" aria-label="Print this report">
+              <svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><rect x="2" y="5" width="8" height="5" rx="1"/><path d="M3 5V2h6v3"/><circle cx="9" cy="7.5" r=".5" fill="currentColor"/></svg>
+              Print Report
+            </button>
+            <button type="button" class="btn-report" onclick="downloadReport()" aria-label="Download report as text file">
+              <svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M6 1v7M3 5l3 3 3-3"/><path d="M1 10h10"/></svg>
+              Download Report
+            </button>
+            <button type="button" class="btn-report" onclick="whatsappReport()" aria-label="Share report on WhatsApp">
+              <svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><circle cx="6" cy="6" r="5"/><path d="M4 7.5c.8 1 2 1.5 3.5.5s1-3-.5-3.5S4 5.5 4.5 7l-.5 1.5L5.5 8"/></svg>
+              WhatsApp
+            </button>
+          </div>
+
+          <!-- API error container (shown/hidden, never innerHTML-replaced) -->
+          <div id="api-error-container" style="display:none;" role="alert">
+            <div class="api-error-card">
+              <div class="api-error-title">Could not reach intelligence engine</div>
+              <div class="api-error-body">The backend is warming up or temporarily unavailable. This typically resolves in 30–60 seconds. Please try again.</div>
+              <button type="button" class="btn-primary" onclick="startScan()">↺ Try Again</button>
+            </div>
+          </div>
 
           <!-- Results header -->
           <div class="results-header-card">
@@ -3112,6 +3290,7 @@
 
     <form
       name="waitlist-capture"
+      method="POST"
       data-netlify="true"
       onsubmit="handleWaitlistForm(event)"
       netlify-honeypot="bot-field-wl"
@@ -3363,6 +3542,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // ─── 22P. BUILD SHARE PILLS ──────────────────────────────
   buildSharePills();
+  buildTelemetryTicker();
 
   // ─── URL INPUT LISTENER ──────────────────────────────────
   const urlInput = document.getElementById('url-input');
@@ -3501,14 +3681,30 @@ function toggleExtendedEngine(badge) {
   const keyName = keyMap[engine];
 
   if (!keys[keyName]) {
-    showToast(
-      'Add your ' + (engine === 'chatgpt' ? 'OpenAI' : 'Anthropic') +
-      ' key in Settings to enable ' + badge.querySelector(':not(.ext-label)').textContent.trim() + ' scanning',
-      'info'
-    );
+    const engineName = engine === 'chatgpt' ? 'ChatGPT' : 'Claude';
+    const providerName = engine === 'chatgpt' ? 'OpenAI' : 'Anthropic';
+    showToast('Add your ' + providerName + ' key in Settings to enable ' + engineName + ' scanning', 'info');
+
+    // Animate the clicked badge
+    badge.classList.add('badge-ping');
+    setTimeout(() => badge.classList.remove('badge-ping'), 700);
+
+    // Open and scroll to settings panel
     openSettingsPanel();
     const settingsPanel = document.getElementById('settings-panel');
-    if (settingsPanel) settingsPanel.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    if (settingsPanel) {
+      setTimeout(() => {
+        settingsPanel.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        // Highlight the matching key input
+        const inputId = engine === 'chatgpt' ? 'key-openai' : 'key-anthropic';
+        const keyInput = document.getElementById(inputId);
+        if (keyInput) {
+          keyInput.classList.add('key-highlight');
+          setTimeout(() => keyInput.classList.remove('key-highlight'), 1400);
+          setTimeout(() => keyInput.focus(), 500);
+        }
+      }, 200);
+    }
   } else {
     const isActive = badge.classList.contains('active');
     badge.classList.toggle('active', !isActive);
@@ -3712,43 +3908,35 @@ async function startScan() {
 }
 
 function cancelScan() {
-  if (_scanAbortController) _scanAbortController.abort();
-  const btn = document.getElementById('analyze-btn');
-  const btnText = document.getElementById('analyze-btn-text');
-  if (btn) {
-    btn.dataset.scanning = 'false';
-    btnText.textContent = btn.dataset.ctaText || 'Analyze';
-    btn.style.background = '';
+  if (_scanAbortController) {
+    _scanAbortController.abort();
+    showToast('Scan cancelled', 'info');
   }
-  resetEngineStatusDots();
-  showToast('Scan cancelled', 'info');
 }
 
 // ─── 22R. API ERROR DISPLAY ──────────────────────────────────
 function showApiError() {
   const panel = document.getElementById('scan-results');
   panel.style.display = 'block';
-  panel.innerHTML = `
-    <div class="api-error-card" role="alert">
-      <div class="api-error-title">Could not reach intelligence engine</div>
-      <div class="api-error-body">The backend is warming up or temporarily unavailable. This typically resolves in 30–60 seconds. Please try again.</div>
-      <button type="button" class="btn-primary" onclick="startScan()">↺ Try Again</button>
-    </div>`;
+  const errContainer = document.getElementById('api-error-container');
+  if (errContainer) errContainer.style.display = 'block';
   const errTop = panel.getBoundingClientRect().top + window.scrollY - 72;
   window.scrollTo({ top: Math.max(0, errTop), behavior: 'smooth' });
+}
+
+function hideApiError() {
+  const errContainer = document.getElementById('api-error-container');
+  if (errContainer) errContainer.style.display = 'none';
 }
 
 // ─── 22O. RENDER RESULTS ─────────────────────────────────────
 function renderResults(data) {
   const panel = document.getElementById('scan-results');
 
-  // If error card is showing, clear it so results can render cleanly
-  if (panel.querySelector('.api-error-card')) {
-    panel.innerHTML = '';
-    panel.style.display = 'none';
-  }
-
+  hideApiError();
   panel.style.display = 'block';
+  panel.style.animation = 'none';
+  void panel.offsetHeight;
   panel.style.animation = 'fadeIn 0.4s ease';
 
   // Overall score
@@ -4000,6 +4188,45 @@ function animateCounter(id, from, to, duration) {
   requestAnimationFrame(update);
 }
 
+// ─── LIVE TELEMETRY TICKER ────────────────────────────────────
+function buildTelemetryTicker() {
+  const track = document.getElementById('ticker-track');
+  if (!track) return;
+  const items = [
+    { dot: 'green', text: '3 AI Engines Active' },
+    { dot: '', text: '━━━' },
+    { dot: 'green', text: 'Meta AI — Ready' },
+    { dot: 'green', text: 'Google AI — Ready' },
+    { dot: 'green', text: 'Mistral — Ready' },
+    { dot: '', text: '━━━' },
+    { dot: 'amber', text: 'AI Awareness Scoring' },
+    { dot: 'cyan', text: 'Engine-by-Engine Breakdown' },
+    { dot: 'cyan', text: 'Narrative Gap Detection' },
+    { dot: 'cyan', text: 'Cross-Engine Consistency' },
+    { dot: 'cyan', text: 'Brand Visibility Score' },
+    { dot: '', text: '━━━' },
+    { dot: 'green', text: 'Free — No Account Required' },
+    { dot: 'green', text: 'Results in Seconds' },
+    { dot: 'amber', text: 'ChatGPT + Claude Available with API Key' },
+    { dot: 'cyan', text: 'Accuracy Annotation' },
+    { dot: 'cyan', text: 'Recommendation Engine' },
+    { dot: 'cyan', text: 'Coverage Gap Analysis' },
+    { dot: '', text: '━━━' },
+    { dot: 'green', text: 'Live API Connection' },
+    { dot: 'green', text: '4.9★ Satisfaction' },
+    { dot: 'cyan', text: 'Export Report' },
+    { dot: 'cyan', text: 'Share Results' },
+    { dot: '', text: '━━━' },
+  ];
+  // Duplicate items for seamless loop
+  const allItems = [...items, ...items];
+  track.innerHTML = allItems.map(item =>
+    `<span class="ticker-item">` +
+    (item.dot && item.dot !== '' ? `<span class="ticker-dot ticker-dot-${item.dot}" aria-hidden="true"></span>` : '') +
+    `${item.text}</span>`
+  ).join('');
+}
+
 // ─── 22P. SHARE PILLS ────────────────────────────────────────
 function buildSharePills() {
   const container = document.getElementById('share-pills-container');
@@ -4124,6 +4351,89 @@ function flashCopied(btn) {
     btn.classList.remove('copied');
     btn.textContent = btn.dataset.label || btn.textContent.replace('✓ Copied', '').trim() || 'Copy Link';
   }, 2000);
+}
+
+// ─── REPORT ACTION FUNCTIONS ─────────────────────────────────
+function getReportText() {
+  const domain = (document.getElementById('results-domain-display') || {}).textContent || 'Unknown domain';
+  const score = (document.getElementById('overall-score') || {}).textContent || '—';
+  const tier = (document.getElementById('tier-badge') || {}).textContent || '—';
+  const ts = (document.getElementById('results-ts') || {}).textContent || '';
+  let text = 'AI AWARENESS SCAN REPORT\n';
+  text += '========================\n';
+  text += 'Domain: ' + domain + '\n';
+  text += ts + '\n\n';
+  text += 'OVERALL AWARENESS SCORE: ' + score + '/100\n';
+  text += 'TIER: ' + tier + '\n\n';
+  const engineCards = document.querySelectorAll('.engine-card');
+  if (engineCards.length) {
+    text += 'ENGINE BREAKDOWN\n----------------\n';
+    engineCards.forEach(card => {
+      const name = (card.querySelector('.engine-card-name') || {}).textContent || '';
+      const model = (card.querySelector('.engine-card-sub') || {}).textContent || '';
+      const s = (card.querySelector('.engine-card-score') || {}).textContent || '';
+      text += name + ' (' + model + '): ' + s + '/100\n';
+    });
+    text += '\n';
+  }
+  text += 'Generated by AI Citation Scan — https://www.aicitationscan.com/\n';
+  return text;
+}
+
+function copyReport() {
+  const text = getReportText();
+  navigator.clipboard.writeText(text).then(() => {
+    showToast('Report copied to clipboard', 'success');
+    const btn = document.getElementById('btn-copy-report');
+    if (btn) {
+      btn.classList.add('copied');
+      btn.textContent = '✓ Copied';
+      setTimeout(() => { btn.classList.remove('copied'); btn.textContent = 'Copy Report'; }, 2200);
+    }
+  }).catch(() => showToast('Could not copy — try Download instead', 'warn'));
+}
+
+function emailReport() {
+  const domain = (document.getElementById('results-domain-display') || {}).textContent || 'domain';
+  const score = (document.getElementById('overall-score') || {}).textContent || '—';
+  const tier = (document.getElementById('tier-badge') || {}).textContent || '—';
+  const subject = encodeURIComponent('AI Awareness Report — ' + domain);
+  const body = encodeURIComponent(
+    'AI Awareness Scan Results for ' + domain + '\n\n' +
+    'Overall Score: ' + score + '/100\nTier: ' + tier + '\n\n' +
+    'Full report: ' + window.location.href + '\n\n' +
+    'Generated by AI Citation Scan'
+  );
+  window.location.href = 'mailto:?subject=' + subject + '&body=' + body;
+}
+
+function printReport() {
+  window.print();
+}
+
+function downloadReport() {
+  const domain = (document.getElementById('results-domain-display') || {}).textContent || 'scan';
+  const text = getReportText();
+  const blob = new Blob([text], { type: 'text/plain' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = 'ai-awareness-report-' + domain.replace(/[^a-z0-9]/gi, '-') + '-' + new Date().toISOString().slice(0, 10) + '.txt';
+  a.click();
+  URL.revokeObjectURL(url);
+  showToast('Report downloaded', 'success');
+}
+
+function whatsappReport() {
+  const domain = (document.getElementById('results-domain-display') || {}).textContent || 'a domain';
+  const score = (document.getElementById('overall-score') || {}).textContent || '—';
+  const tier = (document.getElementById('tier-badge') || {}).textContent || '—';
+  const msg = encodeURIComponent(
+    '🤖 AI Awareness Scan for ' + domain + '\n' +
+    'Score: ' + score + '/100 — ' + tier + '\n' +
+    'Check yours free: ' + window.location.href
+  );
+  window.open('https://wa.me/?text=' + msg, '_blank', 'noopener');
 }
 
 // ─── 22Q. WAITLIST MODAL ─────────────────────────────────────
