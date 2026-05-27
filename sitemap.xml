@@ -2,62 +2,67 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://aicitationscan.com/about</loc>
-    <lastmod>2026-05-24</lastmod>
+    <lastmod>2026-05-27</lastmod>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://aicitationscan.com/contact</loc>
-    <lastmod>2026-05-24</lastmod>
+    <lastmod>2026-05-27</lastmod>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://aicitationscan.com/cookies-policy</loc>
-    <lastmod>2026-05-24</lastmod>
+    <lastmod>2026-05-27</lastmod>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://aicitationscan.com/privacy-policy</loc>
-    <lastmod>2026-05-24</lastmod>
+    <lastmod>2026-05-27</lastmod>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://aicitationscan.com/terms-of-use</loc>
-    <lastmod>2026-05-24</lastmod>
+    <lastmod>2026-05-27</lastmod>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://aicitationscan.com/ai-tools/ai-citation-checker</loc>
-    <lastmod>2026-05-24</lastmod>
+    <lastmod>2026-05-27</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://aicitationscan.com/guides/how-to-find-out-who-built-a-website</loc>
+    <lastmod>2026-05-27</lastmod>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://aicitationscan.com/programmatic/website-tech-stack-checker</loc>
-    <lastmod>2026-05-24</lastmod>
+    <lastmod>2026-05-27</lastmod>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://aicitationscan.com/programmatic/website-word-count-checker</loc>
-    <lastmod>2026-05-24</lastmod>
+    <lastmod>2026-05-27</lastmod>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://aicitationscan.com/seo-tools/meta-description-generator</loc>
-    <lastmod>2026-05-24</lastmod>
+    <lastmod>2026-05-27</lastmod>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://aicitationscan.com/seo-tools/robots-txt-generator</loc>
-    <lastmod>2026-05-24</lastmod>
+    <lastmod>2026-05-27</lastmod>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://aicitationscan.com/seo-tools/schema-generator</loc>
-    <lastmod>2026-05-24</lastmod>
+    <lastmod>2026-05-27</lastmod>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://aicitationscan.com/seo-tools/serp-preview-tool</loc>
-    <lastmod>2026-05-24</lastmod>
+    <lastmod>2026-05-27</lastmod>
     <priority>0.8</priority>
   </url>
 </urlset>

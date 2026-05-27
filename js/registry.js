@@ -79,6 +79,18 @@ window.siteRegistry = [
                 "url": "/terms-of-use"
             }
         ]
+    },
+    {
+        "folderName": "Guides",
+        "folderPath": "/guides/",
+        "icon": "📁",
+        "priority": 0,
+        "pages": [
+            {
+                "name": "How To Find Out Who Built A Website",
+                "url": "/guides/how-to-find-out-who-built-a-website"
+            }
+        ]
     }
 ];
 
@@ -112,6 +124,11 @@ window.seoRegistry = {
         "url": "/ai-tools/ai-citation-checker",
         "title": "AI Citation Checker — Analyze Reference Quality & Source Attribution | AI Citation Scan",
         "desc": "Analyze AI-generated citations, review reference consistency, detect incomplete sources, and evaluate attribution structure — free citation checker tool by AI Citation Scan."
+    },
+    "how-to-find-out-who-built-a-website.html": {
+        "url": "/guides/how-to-find-out-who-built-a-website",
+        "title": "How to Find Out Who Built, Designed, or Created a Website",
+        "desc": "Want to know who built, designed, created or developed a website? Here are 5 proven methods — including a free instant tech stack checker that reveals the builder, CMS, and framework in seconds."
     },
     "website-tech-stack-checker.html": {
         "url": "/programmatic/website-tech-stack-checker",
