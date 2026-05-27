@@ -2527,12 +2527,12 @@
 
     <!-- Right side -->
     <div class="nav-right">
-      <button class="btn-nav trigger-search" aria-label="Open search" type="button">
-        <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
-          <circle cx="6" cy="6" r="4"/>
-          <line x1="9.5" y1="9.5" x2="13" y2="13"/>
+      <!-- SEARCH SYSTEM TRIGGER -->
+      <button type="button" class="trigger-search flex items-center text-gray-600 hover:text-emerald-700 transition-colors duration-200 focus:outline-none" aria-label="Open Search">
+        <span class="mr-2 text-sm font-medium hidden sm:inline">Search</span>
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
         </svg>
-        <span>Search</span>
       </button>
       <button class="btn-nav" id="settings-toggle-btn" aria-label="Open API key settings" type="button" aria-expanded="false">
         <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
@@ -2548,6 +2548,8 @@
         <span></span>
         <span></span>
       </button>
+      <!-- Master Nav Dock — empty; populated by js/menu-system.js at runtime -->
+      <div id="master-nav-dock" class="flex items-center justify-between"></div>
     </div>
   </div>
 
@@ -2993,6 +2995,9 @@
       </article>
     </section>
 
+    <!-- INTERNAL LINKS BLOCK — populated by js/internal-links.js at runtime -->
+    <div id="dynamic-internal-links"></div>
+
     <!-- Logic & Methodology -->
     <section id="how-it-works" aria-labelledby="how-it-works-heading" class="section-sm">
       <h2 id="how-it-works-heading" style="font-family:'Syne',sans-serif;font-weight:700;font-size:18px;color:var(--text-primary);margin-bottom:16px;">How It Works</h2>
@@ -3007,15 +3012,6 @@
         </div>
       </div>
     </section>
-
-    <!-- Internal links -->
-    <nav id="dynamic-internal-links" role="navigation" aria-label="Internal navigation" style="margin-bottom:32px;">
-      <a href="/programmatic/website-tech-stack-checker" class="internal-link-card">
-        <span class="il-label">LIVE TOOL</span>
-        <span class="il-title">Website Tech Stack Checker</span>
-        <span class="il-desc">Detect CMS, frameworks, CDN and analytics</span>
-      </a>
-    </nav>
 
     <!-- Citations -->
     <section class="section-sm" aria-labelledby="citations-heading">
