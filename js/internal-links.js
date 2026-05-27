@@ -1,86 +1,104 @@
-* js/internal-links.js
+/*!
+ * js/internal-links.js
  * ─────────────────────────────────────────────────────────────────────────
- * Reads window.siteRegistry (set by registry.js) to discover every real
- * page on the site, then injects contextually-relevant link cards into
- * <div id="dynamic-internal-links"> on whichever page loads this script.
+ * Reads window.siteRegistry (set by registry.js) and injects up to 4
+ * contextually-relevant link cards into <div id="dynamic-internal-links">.
  *
  * Zero hardcoded pages. Zero hardcoded URLs.
  * Everything is derived from the live registry at runtime.
  *
  * Noise filtering
  * ───────────────
- * Folders and pages that match NOISE_FOLDER_RE or NOISE_URL_RE are silently
- * excluded — legal docs, contact pages, social redirects, admin routes, etc.
- * Users have no reason to navigate to those from a tool page.
+ * Folders and pages matching NOISE_FOLDER_RE or NOISE_URL_RE are excluded —
+ * legal docs, admin routes, contact pages, social redirects, etc.
  *
- * Relevance scoring (per candidate vs current page)
- * ──────────────────────────────────────────────────
- *  +8   same folder in the registry
- *  +4   identical URL directory prefix (e.g. both under /programmatic/)
- *  +3   per shared keyword in page name (after stop-word removal)
- * Candidates scoring ≤ 0 are discarded.
- * Top MAX_LINKS by score are rendered.
+ * Relevance scoring  (candidate vs current page)
+ * ───────────────────────────────────────────────
+ *  +10  same folder in registry              (tightest topical grouping)
+ *  +6   same URL directory prefix            (e.g. both /programmatic/*)
+ *  +3   per shared keyword in page name      (meaningful words only)
+ *  +2   per shared tag                       (if registry supplies page.tags)
+ *
+ * Candidates with score > 0 are ranked and the top MAX_LINKS shown.
+ * If fewer than MAX_LINKS score above 0, the gap is filled from the
+ * remaining pages in registry order — self always excluded.
  *
  * SEO
  * ───
- * • Descriptive anchor text taken directly from registry page names
- * • Folder name used as visible badge — signals content type to crawlers
- * • <section> + <h2> + <nav> landmark structure
- * • <a title> carries full page name for assistive tech
- * • Max 4 links — avoids PageRank dilution
+ * • Anchor text = page name from registry (descriptive, no "click here")
+ * • Folder badge signals content type to crawlers
+ * • <section> / <h2> / <nav> landmark structure
+ * • <a title> + aria-label for assistive tech
+ * • Max 4 links — preserves crawl equity / avoids PageRank dilution
  * ─────────────────────────────────────────────────────────────────────────
  */
 
 (function () {
   'use strict';
 
-  /* ── CONFIG ─────────────────────────────────────────────────────────── */
   var MAX_LINKS = 4;
-  var MIN_LINKS = 2;
 
-  /* ── NOISE FILTERS ───────────────────────────────────────────────────
-   * Match against folderName OR page url.
-   * Anything that hits either regex is excluded from suggestions.        */
+  /* ── NOISE FILTERS ──────────────────────────────────────────────────────
+   * Matched against folderName OR page URL — either hit = excluded.       */
   var NOISE_FOLDER_RE = /legal|polic|social|company|corporate|admin|contact|support|terms|privacy|cookie|press|media|career|job|about/i;
   var NOISE_URL_RE    = /\/privacy|\/terms|\/cookie|\/legal\/|\/contact|\/social|\/admin|\/policy|\/404|\/sitemap|\/about\b/i;
 
-  /* ── STOP WORDS ──────────────────────────────────────────────────────
-   * Ignored during keyword extraction so common words don't inflate score */
-  var STOP = 'the a an and or of for to in on at is are how what does your our any all new get use with from this that into web site page free check run scan test'.split(' ');
+  /* ── STOP WORDS ─────────────────────────────────────────────────────────
+   * True grammatical filler only.
+   * Domain words like "scan", "check", "ai", "tool" are intentionally kept —
+   * they are meaningful on a tool site and drive keyword-overlap scoring.  */
+  var STOP_SET = (function () {
+    var words = 'a an the and or but of for to in on at by is are was were be been have has had it its this that these those i you he she we they me him her us them do did will would could should may might shall';
+    var set = {};
+    words.split(' ').forEach(function (w) { set[w] = true; });
+    return set;
+  }());
 
-  /* ════════════════════════════════════════════════════════════════════
-     HELPERS
-     ════════════════════════════════════════════════════════════════════ */
+  /* ══════════════════════════════════════════════════════════════════════
+     UTILITIES
+     ══════════════════════════════════════════════════════════════════════ */
 
+  /* Normalise a URL or pathname: strip query string, trailing slash, lowercase */
   function normPath(p) {
-    // Remove query string, trailing slash, lowercase
     return (p || '').split('?')[0].replace(/\/+$/, '').toLowerCase() || '/';
   }
 
-  function isNoise(url, folderName) {
-    if (NOISE_FOLDER_RE.test(folderName || '')) return true;
-    if (NOISE_URL_RE.test(url || ''))            return true;
-    return false;
+  /* Return the directory portion of a normalised path.
+     Root page (/) returns '/' so it can earn the +6 directory bonus.
+     e.g. /programmatic/foo → /programmatic
+          /                 → /                                           */
+  function dirOf(normedPath) {
+    var parts = normedPath.split('/');          // ['','programmatic','foo']
+    var dir   = parts.slice(0, -1).join('/');   // '/programmatic'
+    return dir || '/';                          // guard: root case
   }
 
-  function keywords(str) {
-    // Extract meaningful words from a page name
+  /* True if folder name or URL matches a noise pattern */
+  function isNoise(url, folderName) {
+    return NOISE_FOLDER_RE.test(folderName || '') || NOISE_URL_RE.test(url || '');
+  }
+
+  /* Extract meaningful words from a string (page name, description, etc.) */
+  function extractKeywords(str) {
     return (str || '')
       .toLowerCase()
       .replace(/[^a-z0-9\s]/g, ' ')
       .split(/\s+/)
-      .filter(function (w) { return w.length > 2 && STOP.indexOf(w) === -1; });
+      .filter(function (w) { return w.length > 1 && !STOP_SET[w]; });
   }
 
-  function countShared(a, b) {
+  /* Count how many words in array a also appear in array b */
+  function sharedCount(a, b) {
+    if (!a.length || !b.length) return 0;
+    var bSet = {};
+    b.forEach(function (w) { bSet[w] = true; });
     var n = 0;
-    for (var i = 0; i < a.length; i++) {
-      if (b.indexOf(a[i]) !== -1) n++;
-    }
+    a.forEach(function (w) { if (bSet[w]) n++; });
     return n;
   }
 
-  function escHtml(s) {
+  /* HTML-escape a string */
+  function esc(s) {
     return (s || '')
       .replace(/&/g, '&amp;')
       .replace(/</g, '&lt;')
@@ -88,149 +106,173 @@
       .replace(/"/g, '&quot;');
   }
 
-  /* ════════════════════════════════════════════════════════════════════
-     REGISTRY PROCESSING
-     ════════════════════════════════════════════════════════════════════ */
+  /* ══════════════════════════════════════════════════════════════════════
+     REGISTRY  →  FLAT PAGE LIST
+     ══════════════════════════════════════════════════════════════════════ */
 
-  /**
-   * Flatten window.siteRegistry into a plain array of page objects,
-   * each enriched with its parent folder meta.
-   * Noise entries are silently dropped.
+  /*
+   * Flatten window.siteRegistry into enriched page objects.
+   * Each page gets its parent folder's metadata and pre-computed keywords.
+   * Noise pages are silently dropped.
    */
   function flattenRegistry(registry) {
     var pages = [];
     (registry || []).forEach(function (folder) {
-      var fn   = folder.folderName || '';
-      var icon = folder.icon       || '📄';
+      var folderName = folder.folderName || '';
+      var icon       = folder.icon       || '📄';
       (folder.pages || []).forEach(function (page) {
-        var url  = page.url  || '#';
+        var url  = page.url  || '';
         var name = page.name || '';
-        if (!name || isNoise(url, fn)) return;
+        if (!name || !url || isNoise(url, folderName)) return;
+        var normed = normPath(url);
         pages.push({
           name:       name,
           url:        url,
-          folderName: fn,
+          normUrl:    normed,
+          dirUrl:     dirOf(normed),
+          folderName: folderName,
           folderIcon: icon,
-          // Pre-compute keywords so scoring doesn't repeat work
-          kw: keywords(name)
+          tags:       Array.isArray(page.tags) ? page.tags : [],
+          kw:         extractKeywords(name)
         });
       });
     });
     return pages;
   }
 
-  /**
-   * Find which page in the flat list best matches the current URL.
-   * Prefers exact match; falls back to longest-prefix substring match
-   * so pages on sub-paths (/programmatic/foo) still resolve correctly.
+  /*
+   * Identify which registry page best matches the current browser URL.
+   * Exact path match preferred; falls back to longest registered prefix
+   * so /programmatic/foo/bar still resolves to /programmatic/foo.
    */
   function detectCurrent(pages) {
     var path    = normPath(window.location.pathname);
     var best    = null;
     var bestLen = 0;
     pages.forEach(function (p) {
-      var ep = normPath(p.url);
+      var ep = p.normUrl;
       if (ep === path) {
-        if (ep.length > bestLen) { best = p; bestLen = ep.length; }
+        if (ep.length >= bestLen) { best = p; bestLen = ep.length; }
         return;
       }
-      // sub-path: current URL contains the registered URL
-      if (ep !== '/' && path.indexOf(ep) !== -1 && ep.length > bestLen) {
+      // Prefix match: registered URL must be at the start of the current path
+      if (ep !== '/' && path.indexOf(ep) === 0 && ep.length > bestLen) {
         best = p; bestLen = ep.length;
       }
     });
     return best;
   }
 
-  /* ════════════════════════════════════════════════════════════════════
+  /* ══════════════════════════════════════════════════════════════════════
      RELEVANCE SCORING
-     ════════════════════════════════════════════════════════════════════ */
+     ══════════════════════════════════════════════════════════════════════ */
 
-  function score(current, candidate) {
-    if (normPath(candidate.url) === normPath(current.url)) return -1; // never self
+  /*
+   * Score one candidate against the current page.
+   * Returns -999 for self (excluded unconditionally).
+   * Returns 0 for pages with no detectable relationship.
+   */
+  function scoreCandidate(current, candidate) {
+    if (candidate.normUrl === current.normUrl) return -999;
 
     var s = 0;
 
-    // Same folder in the registry → tightest grouping
-    if (candidate.folderName && candidate.folderName === current.folderName) s += 8;
+    // Same registry folder — strongest signal of topical grouping
+    if (current.folderName && current.folderName === candidate.folderName) {
+      s += 10;
+    }
 
-    // Shared URL directory prefix (e.g. both /programmatic/*)
-    var cDir = normPath(current.url).split('/').slice(0, -1).join('/');
-    var eDir = normPath(candidate.url).split('/').slice(0, -1).join('/');
-    if (cDir && eDir && cDir === eDir) s += 4;
+    // Same URL directory — structural proximity
+    // dirOf('/') === '/' so root-level pages can still match each other
+    if (current.dirUrl === candidate.dirUrl) {
+      s += 6;
+    }
 
     // Keyword overlap in page names
-    s += countShared(current.kw, candidate.kw) * 3;
+    s += sharedCount(current.kw, candidate.kw) * 3;
+
+    // Tag overlap — if registry.js supplies page.tags arrays
+    if (current.tags.length && candidate.tags.length) {
+      s += sharedCount(current.tags, candidate.tags) * 2;
+    }
 
     return s;
   }
 
-  function getLinks(current, allPages) {
-    var scored = [];
+  /*
+   * Return up to MAX_LINKS pages, ranked by relevance.
+   *
+   * Primary pool  — pages with score > 0, sorted high → low.
+   *                 Ties broken alphabetically for stable output.
+   * Backfill pool — remaining pages in registry order, only used if
+   *                 primary pool has fewer than MAX_LINKS entries.
+   *
+   * Self is excluded in every branch.
+   */
+  function selectLinks(current, allPages) {
+    var primary  = [];
+    var backfill = [];
+
     allPages.forEach(function (p) {
-      var s = score(current, p);
-      if (s > 0) scored.push({ page: p, score: s });
+      if (p.normUrl === current.normUrl) return; // never self
+      var s = scoreCandidate(current, p);
+      if (s > 0) {
+        primary.push({ page: p, score: s });
+      } else {
+        backfill.push(p);
+      }
     });
 
-    scored.sort(function (a, b) { return b.score - a.score; });
+    primary.sort(function (a, b) {
+      return b.score - a.score || a.page.name.localeCompare(b.page.name);
+    });
 
-    var results = scored.slice(0, MAX_LINKS).map(function (x) { return x.page; });
+    var results = primary.slice(0, MAX_LINKS).map(function (x) { return x.page; });
 
-    // Backfill if below minimum (rare — only on sites with very few pages)
-    if (results.length < MIN_LINKS) {
-      allPages.forEach(function (p) {
-        if (results.length >= MIN_LINKS) return;
-        if (normPath(p.url) !== normPath(current.url) && results.indexOf(p) === -1) {
-          results.push(p);
-        }
-      });
+    // Fill remaining slots from backfill (registry order = editorial order)
+    var i = 0;
+    while (results.length < MAX_LINKS && i < backfill.length) {
+      results.push(backfill[i]);
+      i++;
     }
 
     return results;
   }
 
-  /* ════════════════════════════════════════════════════════════════════
-     STYLES  (injected once; reuse existing site CSS vars + card classes)
-     ════════════════════════════════════════════════════════════════════ */
+  /* ══════════════════════════════════════════════════════════════════════
+     STYLES  (injected once into <head>; reuses site CSS custom properties)
+     ══════════════════════════════════════════════════════════════════════ */
 
   function injectStyles() {
     if (document.getElementById('il-styles')) return;
-    var s = document.createElement('style');
-    s.id  = 'il-styles';
-    s.textContent = [
-      /* Section shell */
+    var el = document.createElement('style');
+    el.id  = 'il-styles';
+    el.textContent = [
       '.il-section{padding:28px 0 4px;}',
       '.il-head{margin-bottom:18px;}',
-      '.il-h2{',
-        'font-family:\'Syne\',sans-serif;font-weight:700;font-size:18px;',
+      '.il-h2{font-family:"Syne",sans-serif;font-weight:700;font-size:18px;',
         'color:var(--text-primary,#1A2540);margin:0 0 5px;line-height:1.2;}',
-      '.il-sub{',
-        'font-family:\'DM Sans\',sans-serif;font-size:13px;',
+      '.il-sub{font-family:"DM Sans",sans-serif;font-size:13px;',
         'color:var(--text-muted,#7A90AA);margin:0;}',
-      /* Card grid — overrides the inline-flex + max-width on .internal-link-card */
-      '.il-grid{',
-        'display:grid;',
-        'grid-template-columns:repeat(auto-fill,minmax(200px,1fr));',
-        'gap:14px;}',
+      /* Grid — overrides inline-flex + max-width from .internal-link-card */
+      '.il-grid{display:grid;',
+        'grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:14px;}',
       '.il-grid .internal-link-card{',
-        'max-width:none !important;width:100%;display:flex;flex-direction:column;}',
-      /* Folder badge inside each card */
-      '.il-badge{',
-        'display:inline-flex;align-items:center;gap:5px;margin-bottom:6px;}',
+        'max-width:none!important;width:100%;display:flex;flex-direction:column;}',
+      /* Folder badge */
+      '.il-badge{display:inline-flex;align-items:center;gap:5px;margin-bottom:6px;}',
       '.il-icon{font-size:11px;line-height:1;}',
-      '.il-folder{',
-        'font-family:\'JetBrains Mono\',monospace;font-size:9px;',
-        'color:var(--text-muted,#7A90AA);text-transform:uppercase;',
-        'letter-spacing:.1em;}',
-      /* Mobile: single column */
+      '.il-folder{font-family:"JetBrains Mono",monospace;font-size:9px;',
+        'color:var(--text-muted,#7A90AA);text-transform:uppercase;letter-spacing:.1em;}',
+      /* Mobile */
       '@media(max-width:560px){.il-grid{grid-template-columns:1fr;}}'
     ].join('');
-    document.head.appendChild(s);
+    document.head.appendChild(el);
   }
 
-  /* ════════════════════════════════════════════════════════════════════
-     DOM BUILDING
-     ════════════════════════════════════════════════════════════════════ */
+  /* ══════════════════════════════════════════════════════════════════════
+     DOM  BUILDING
+     ══════════════════════════════════════════════════════════════════════ */
 
   function buildCard(page) {
     var a = document.createElement('a');
@@ -239,13 +281,12 @@
     a.title     = page.name;
     a.setAttribute('aria-label', page.name);
 
-    // Folder badge — only if the page has a folder name
     if (page.folderName) {
       var badge = document.createElement('span');
       badge.className = 'il-badge';
       badge.innerHTML =
-        '<span class="il-icon" aria-hidden="true">' + escHtml(page.folderIcon) + '</span>' +
-        '<span class="il-folder il-label">' + escHtml(page.folderName) + '</span>';
+        '<span class="il-icon" aria-hidden="true">' + esc(page.folderIcon) + '</span>' +
+        '<span class="il-folder">' + esc(page.folderName) + '</span>';
       a.appendChild(badge);
     }
 
@@ -257,30 +298,26 @@
     return a;
   }
 
-  function render(container, currentFolderName, links) {
+  function render(container, subtitle, links) {
     var section = document.createElement('section');
     section.className = 'il-section';
-    section.setAttribute('aria-labelledby', 'il-section-heading');
+    section.setAttribute('aria-labelledby', 'il-heading');
 
-    /* Heading */
     var head = document.createElement('header');
     head.className = 'il-head';
 
     var h2 = document.createElement('h2');
-    h2.id          = 'il-section-heading';
+    h2.id          = 'il-heading';
     h2.className   = 'il-h2';
     h2.textContent = 'Related Tools & Resources';
 
     var sub = document.createElement('p');
     sub.className   = 'il-sub';
-    sub.textContent = currentFolderName
-      ? 'More from the ' + currentFolderName + ' collection'
-      : 'Explore more on AI Citation Scan';
+    sub.textContent = subtitle;
 
     head.appendChild(h2);
     head.appendChild(sub);
 
-    /* Nav grid */
     var grid = document.createElement('nav');
     grid.className = 'il-grid';
     grid.setAttribute('aria-label', 'Related pages on this site');
@@ -292,14 +329,14 @@
     container.innerHTML = '';
     container.appendChild(section);
 
-    /* Staggered fade-in — matches site .fade-in-dN pattern */
+    // Staggered fade-in — matches site animation pattern
     var cards = grid.querySelectorAll('.internal-link-card');
     cards.forEach(function (card, i) {
-      card.style.opacity    = '0';
-      card.style.transform  = 'translateY(8px)';
+      card.style.opacity   = '0';
+      card.style.transform = 'translateY(8px)';
       card.style.transition =
-        'opacity .3s ease ' + (i * .07) + 's,' +
-        'transform .3s ease ' + (i * .07) + 's';
+        'opacity .3s ease ' + (i * 0.07) + 's,' +
+        'transform .3s ease ' + (i * 0.07) + 's';
       requestAnimationFrame(function () {
         requestAnimationFrame(function () {
           card.style.opacity   = '1';
@@ -309,49 +346,53 @@
     });
   }
 
-  /* ════════════════════════════════════════════════════════════════════
+  /* ══════════════════════════════════════════════════════════════════════
      ENTRY POINT
-     ════════════════════════════════════════════════════════════════════ */
+     ══════════════════════════════════════════════════════════════════════ */
 
   function init() {
     var container = document.getElementById('dynamic-internal-links');
-    if (!container) return; // page opted out — nothing to do
+    if (!container) return; // page opted out
 
     var registry = window.siteRegistry;
 
-    /* registry.js loads before this file (both defer'd, in source order).
-       If it hasn't run yet (edge case: very slow parser), retry once.   */
+    // registry.js is defer'd before this file — should always be ready.
+    // Retry once in the rare edge case of a very slow parser.
     if (!registry || !registry.length) {
-      if (!window._ilBootRetried) {
-        window._ilBootRetried = true;
-        setTimeout(init, 300);
+      if (!window._ilRetried) {
+        window._ilRetried = true;
+        setTimeout(init, 350);
       }
       return;
     }
 
     var allPages = flattenRegistry(registry);
-    if (!allPages.length) return; // every page was noise — bail
+    if (!allPages.length) return; // everything was noise
 
-    var current = detectCurrent(allPages);
+    var selfPath = normPath(window.location.pathname);
+    var current  = detectCurrent(allPages);
+    var links, subtitle;
 
-    /* Current page not found in registry (e.g. unlisted, 404 path).
-       Show first MAX_LINKS content pages as a neutral fallback.         */
     if (!current) {
-      var fallback = allPages.slice(0, MAX_LINKS);
-      if (!fallback.length) return;
-      injectStyles();
-      render(container, '', fallback);
-      return;
+      // Current page not listed in registry (unlisted path, 404, etc.)
+      // Show first MAX_LINKS content pages, excluding self by URL.
+      links = allPages
+        .filter(function (p) { return p.normUrl !== selfPath; })
+        .slice(0, MAX_LINKS);
+      subtitle = 'Explore more tools and resources';
+    } else {
+      links    = selectLinks(current, allPages);
+      subtitle = current.folderName
+        ? 'More from ' + current.folderName
+        : 'Explore more tools and resources';
     }
 
-    var links = getLinks(current, allPages);
     if (!links.length) return;
 
     injectStyles();
-    render(container, current.folderName, links);
+    render(container, subtitle, links);
   }
 
-  /* Fire after DOM is ready */
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', init);
   } else {
