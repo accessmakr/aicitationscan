@@ -1,0 +1,945 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>How to Find Out Who Built, Designed, or Created a Website (5 Methods) | AI Citation Scan</title>
+<meta name="description" content="Want to know who built, designed, created or developed a website? Here are 5 proven methods — including a free instant tech stack checker that reveals the builder, CMS, and framework in seconds.">
+<meta name="keywords" content="how to find out who built a website, how to find out who designed a website, how do i find out who created a website, how to find who designed a website, how do you find out who made a website, how to find out who developed a website">
+<link rel="canonical" href="https://www.aicitationscan.com/guides/how-to-find-out-who-built-a-website">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "How to Find Out Who Built, Designed, or Created a Website",
+  "description": "5 proven methods to find out who built, designed, created or developed any website — including a free instant tech stack checker.",
+  "author": {"@type": "Organization", "name": "AI Citation Scan"},
+  "publisher": {"@type": "Organization", "name": "AI Citation Scan", "url": "https://www.aicitationscan.com"},
+  "datePublished": "2025-05-01",
+  "dateModified": "2025-05-27",
+  "mainEntityOfPage": "https://www.aicitationscan.com/guides/how-to-find-out-who-built-a-website"
+}
+</script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "How do I find out who designed a website?",
+      "acceptedAnswer": {"@type": "Answer", "text": "Check the page footer for agency credit, run a free tech stack checker to identify the CMS and theme, or search the designer's name in the page source code via browser DevTools."}
+    },
+    {
+      "@type": "Question",
+      "name": "Can you tell who built a website from its URL?",
+      "acceptedAnswer": {"@type": "Answer", "text": "The URL alone rarely reveals the builder, but a WHOIS lookup on the domain can expose the registrant, hosting provider, and sometimes the agency or developer who registered it."}
+    },
+    {
+      "@type": "Question",
+      "name": "Is it legal to check what technology a website uses?",
+      "acceptedAnswer": {"@type": "Answer", "text": "Yes — reading publicly visible HTTP headers, meta tags, and JavaScript globals on a website you are visiting is entirely legal. No login credentials or hacking is involved."}
+    },
+    {
+      "@type": "Question",
+      "name": "What is the fastest way to find out what platform a website uses?",
+      "acceptedAnswer": {"@type": "Answer", "text": "Run the domain through a free tech stack checker such as the one at aicitationscan.com/programmatic/website-tech-stack-checker — it returns the CMS, framework, CDN, and analytics stack in seconds with no sign-up required."}
+    },
+    {
+      "@type": "Question",
+      "name": "Can I find out who developed a custom-coded website?",
+      "acceptedAnswer": {"@type": "Answer", "text": "Custom-built sites are harder to attribute, but checking GitHub repositories, the Wayback Machine, LinkedIn, and any residual meta generator tags can narrow down the developer or agency."}
+    }
+  ]
+}
+</script>
+
+<style>
+  :root {
+    --bg: #F4F7FD;
+    --surface: #FFFFFF;
+    --elevated: #EEF2F9;
+    --border: #DCE4F0;
+    --border-med: #C8D6E8;
+    --text: #1A2540;
+    --text-2: #435470;
+    --text-3: #7A90AA;
+    --accent: #1D3A6E;
+    --blue: #3D8EF5;
+    --blue-dim: rgba(61,142,245,0.10);
+    --green: #10B981;
+    --green-dim: rgba(16,185,129,0.10);
+    --amber: #F59E0B;
+    --amber-dim: rgba(245,158,11,0.10);
+    --red: #EF4444;
+    --code: #1D6FA8;
+    --radius: 10px;
+    --radius-sm: 6px;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 16px;
+    line-height: 1.75;
+    color: var(--text);
+    background: var(--bg);
+  }
+
+  .page-wrap {
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 2.5rem 1.5rem 4rem;
+  }
+
+  /* ── BREADCRUMB ── */
+  .breadcrumb {
+    font-size: 12px;
+    color: var(--text-3);
+    margin-bottom: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    flex-wrap: wrap;
+  }
+  .breadcrumb a { color: var(--blue); text-decoration: none; }
+  .breadcrumb a:hover { text-decoration: underline; }
+  .breadcrumb span { color: var(--text-3); }
+
+  /* ── HEADER ── */
+  .article-header { margin-bottom: 2rem; }
+  .topic-tag {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.07em;
+    text-transform: uppercase;
+    color: var(--blue);
+    background: var(--blue-dim);
+    padding: 4px 10px;
+    border-radius: 20px;
+    margin-bottom: 1rem;
+  }
+  h1 {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(1.75rem, 4vw, 2.4rem);
+    font-weight: 800;
+    line-height: 1.2;
+    color: var(--accent);
+    margin-bottom: 1rem;
+  }
+  .article-meta {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    flex-wrap: wrap;
+    font-size: 13px;
+    color: var(--text-3);
+    margin-bottom: 1.25rem;
+  }
+  .article-meta strong { color: var(--text-2); }
+  .article-intro {
+    font-size: 17px;
+    line-height: 1.7;
+    color: var(--text-2);
+  }
+
+  /* ── QUICK ANSWER ── */
+  .quick-answer {
+    background: var(--surface);
+    border: 1px solid var(--border-med);
+    border-left: 4px solid var(--blue);
+    border-radius: var(--radius);
+    padding: 1.25rem 1.5rem;
+    margin: 2rem 0;
+  }
+  .quick-answer-label {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--blue);
+    margin-bottom: 0.5rem;
+  }
+  .quick-answer p {
+    font-size: 15px;
+    line-height: 1.65;
+    color: var(--text);
+  }
+
+  /* ── TABLE OF CONTENTS ── */
+  .toc {
+    background: var(--surface);
+    border: 0.5px solid var(--border);
+    border-radius: var(--radius);
+    padding: 1.25rem 1.5rem;
+    margin: 2rem 0;
+  }
+  .toc-title {
+    font-family: 'Syne', sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--text-3);
+    margin-bottom: 0.75rem;
+  }
+  .toc ol {
+    list-style: none;
+    counter-reset: toc;
+    padding: 0;
+  }
+  .toc ol li {
+    counter-increment: toc;
+    display: flex;
+    align-items: baseline;
+    gap: 8px;
+    padding: 3px 0;
+    font-size: 14px;
+  }
+  .toc ol li::before {
+    content: counter(toc);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--blue);
+    font-weight: 600;
+    min-width: 18px;
+  }
+  .toc ol li a {
+    color: var(--text-2);
+    text-decoration: none;
+  }
+  .toc ol li a:hover { color: var(--blue); text-decoration: underline; }
+
+  /* ── TYPOGRAPHY ── */
+  h2 {
+    font-family: 'Syne', sans-serif;
+    font-size: 1.45rem;
+    font-weight: 700;
+    color: var(--accent);
+    margin: 2.5rem 0 0.75rem;
+    padding-top: 0.5rem;
+    border-top: 0.5px solid var(--border);
+  }
+  h3 {
+    font-family: 'Syne', sans-serif;
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--text);
+    margin: 1.75rem 0 0.5rem;
+  }
+  h4 {
+    font-size: 0.9rem;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: var(--text-3);
+    margin: 1.25rem 0 0.4rem;
+  }
+  p { margin-bottom: 1rem; color: var(--text-2); }
+  strong { color: var(--text); font-weight: 600; }
+  a { color: var(--blue); }
+  code {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 13px;
+    background: var(--elevated);
+    color: var(--code);
+    padding: 2px 6px;
+    border-radius: 4px;
+    border: 0.5px solid var(--border);
+  }
+
+  /* ── STEP CARDS ── */
+  .step-card {
+    background: var(--surface);
+    border: 0.5px solid var(--border);
+    border-radius: var(--radius);
+    padding: 1.25rem 1.5rem;
+    margin: 1.25rem 0;
+    position: relative;
+  }
+  .step-num {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--blue);
+    background: var(--blue-dim);
+    padding: 3px 9px;
+    border-radius: 20px;
+    display: inline-block;
+    margin-bottom: 0.6rem;
+  }
+  .step-card h3 { margin-top: 0; font-size: 1.05rem; }
+  .step-card p { margin-bottom: 0.5rem; }
+  .step-card p:last-child { margin-bottom: 0; }
+
+  /* ── COMPARISON TABLES ── */
+  .table-wrap {
+    overflow-x: auto;
+    margin: 1.5rem 0;
+    border-radius: var(--radius);
+    border: 0.5px solid var(--border);
+  }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+    background: var(--surface);
+  }
+  thead { background: var(--elevated); }
+  th {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--text-3);
+    padding: 10px 14px;
+    text-align: left;
+    border-bottom: 0.5px solid var(--border-med);
+  }
+  td {
+    padding: 10px 14px;
+    border-bottom: 0.5px solid var(--border);
+    color: var(--text-2);
+    vertical-align: top;
+  }
+  tr:last-child td { border-bottom: none; }
+  tr:hover td { background: var(--elevated); }
+  .tag {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 600;
+    padding: 2px 8px;
+    border-radius: 20px;
+  }
+  .tag-fast { background: var(--green-dim); color: #065f46; }
+  .tag-med  { background: var(--amber-dim); color: #92400e; }
+  .tag-slow { background: rgba(239,68,68,0.10); color: #991b1b; }
+  .tag-free { background: var(--blue-dim); color: #1e3a5f; }
+  .tag-paid { background: rgba(139,92,246,0.10); color: #4c1d95; }
+  .tick { color: var(--green); font-weight: 700; }
+  .cross { color: var(--red); font-weight: 700; }
+
+  /* ── CALLOUT BOXES ── */
+  .callout {
+    border-radius: var(--radius);
+    padding: 1rem 1.25rem;
+    margin: 1.5rem 0;
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+  }
+  .callout-icon { font-size: 18px; flex-shrink: 0; margin-top: 2px; }
+  .callout-body { flex: 1; }
+  .callout-body strong { display: block; margin-bottom: 3px; font-size: 14px; }
+  .callout-body p { margin: 0; font-size: 13.5px; }
+  .callout.info { background: var(--blue-dim); border: 0.5px solid rgba(61,142,245,0.25); }
+  .callout.tip  { background: var(--green-dim); border: 0.5px solid rgba(16,185,129,0.25); }
+  .callout.warn { background: var(--amber-dim); border: 0.5px solid rgba(245,158,11,0.25); }
+
+  /* ── CTA BLOCKS ── */
+  .cta-block {
+    background: linear-gradient(135deg, #1A2540 0%, #1D3A6E 100%);
+    border-radius: var(--radius);
+    padding: 1.75rem 2rem;
+    margin: 2.25rem 0;
+    text-align: center;
+  }
+  .cta-block .cta-label {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: rgba(61,142,245,0.9);
+    margin-bottom: 0.5rem;
+  }
+  .cta-block h3 {
+    font-family: 'Syne', sans-serif;
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: #fff;
+    margin: 0 0 0.5rem;
+  }
+  .cta-block p {
+    color: rgba(255,255,255,0.7);
+    font-size: 14px;
+    margin-bottom: 1.25rem;
+  }
+  .cta-btn {
+    display: inline-block;
+    background: var(--blue);
+    color: #fff;
+    font-weight: 600;
+    font-size: 14px;
+    padding: 10px 24px;
+    border-radius: var(--radius-sm);
+    text-decoration: none;
+    margin: 4px;
+    transition: opacity 0.15s;
+  }
+  .cta-btn:hover { opacity: 0.88; }
+  .cta-btn.outline {
+    background: transparent;
+    border: 1px solid rgba(255,255,255,0.3);
+    color: rgba(255,255,255,0.85);
+  }
+
+  /* ── INLINE CTA ── */
+  .inline-cta {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    background: var(--surface);
+    border: 0.5px solid var(--border-med);
+    border-radius: var(--radius);
+    padding: 1rem 1.25rem;
+    margin: 1.5rem 0;
+    flex-wrap: wrap;
+  }
+  .inline-cta-text { flex: 1; min-width: 180px; }
+  .inline-cta-text strong { display: block; font-size: 14px; margin-bottom: 2px; color: var(--text); }
+  .inline-cta-text span { font-size: 13px; color: var(--text-3); }
+  .inline-cta a {
+    background: var(--blue);
+    color: #fff;
+    font-size: 13px;
+    font-weight: 600;
+    padding: 8px 18px;
+    border-radius: var(--radius-sm);
+    text-decoration: none;
+    white-space: nowrap;
+  }
+
+  /* ── PLATFORM SIGNATURES ── */
+  .sig-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+    gap: 10px;
+    margin: 1.25rem 0;
+  }
+  .sig-card {
+    background: var(--surface);
+    border: 0.5px solid var(--border);
+    border-radius: var(--radius-sm);
+    padding: 0.9rem 1rem;
+  }
+  .sig-name {
+    font-weight: 600;
+    font-size: 14px;
+    color: var(--text);
+    margin-bottom: 4px;
+  }
+  .sig-tell {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--code);
+    background: var(--elevated);
+    padding: 2px 6px;
+    border-radius: 4px;
+    display: inline-block;
+    margin: 2px 0;
+  }
+  .sig-note { font-size: 12px; color: var(--text-3); margin-top: 5px; }
+
+  /* ── FAQ ── */
+  .faq-section { margin: 2.5rem 0; }
+  .faq-item {
+    border-bottom: 0.5px solid var(--border);
+    padding: 1rem 0;
+  }
+  .faq-item:last-child { border-bottom: none; }
+  .faq-q {
+    font-family: 'Syne', sans-serif;
+    font-weight: 600;
+    font-size: 15px;
+    color: var(--text);
+    margin-bottom: 0.4rem;
+  }
+  .faq-a { font-size: 14px; color: var(--text-2); line-height: 1.65; }
+
+  /* ── SUMMARY BOX ── */
+  .summary-box {
+    background: var(--surface);
+    border: 0.5px solid var(--border);
+    border-radius: var(--radius);
+    padding: 1.25rem 1.5rem;
+    margin: 2rem 0;
+  }
+  .summary-box h4 { text-transform: uppercase; font-size: 10px; letter-spacing: 0.1em; color: var(--text-3); margin-bottom: 0.75rem; }
+  .summary-list { list-style: none; padding: 0; }
+  .summary-list li {
+    display: flex;
+    align-items: baseline;
+    gap: 8px;
+    font-size: 14px;
+    color: var(--text-2);
+    padding: 3px 0;
+  }
+  .summary-list li::before { content: '→'; color: var(--blue); font-weight: 700; flex-shrink: 0; }
+
+  /* ── FOOTER ── */
+  .article-footer {
+    margin-top: 3rem;
+    padding-top: 1.5rem;
+    border-top: 0.5px solid var(--border);
+    font-size: 12px;
+    color: var(--text-3);
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  .article-footer a { color: var(--blue); }
+
+  @media (max-width: 560px) {
+    h1 { font-size: 1.6rem; }
+    h2 { font-size: 1.25rem; }
+    .cta-block { padding: 1.25rem 1rem; }
+    .page-wrap { padding: 1.5rem 1rem 3rem; }
+  }
+</style>
+</head>
+<body>
+<div class="page-wrap">
+
+  <!-- BREADCRUMB -->
+  <nav class="breadcrumb" aria-label="Breadcrumb">
+    <a href="https://www.aicitationscan.com/">Home</a>
+    <span>›</span>
+    <a href="https://www.aicitationscan.com/guides/">Guides</a>
+    <span>›</span>
+    <span>How to find out who built a website</span>
+  </nav>
+
+  <!-- ARTICLE HEADER -->
+  <header class="article-header">
+    <div class="topic-tag">Website Research</div>
+    <h1>How to Find Out Who Built, Designed, or Created a Website</h1>
+    <div class="article-meta">
+      <span>By <strong>AI Citation Scan</strong></span>
+      <span>·</span>
+      <span>Updated <strong>May 2025</strong></span>
+      <span>·</span>
+      <span>8 min read</span>
+    </div>
+    <p class="article-intro">Whether you're reverse-engineering a competitor, hunting for a web agency to hire, or just satisfying your curiosity, this guide covers every reliable method to find out who designed, built, created, or developed any website — from a one-click tool to deeper manual techniques.</p>
+  </header>
+
+  <!-- QUICK ANSWER -->
+  <div class="quick-answer" role="note" aria-label="Quick answer">
+    <div class="quick-answer-label">⚡ Quick Answer</div>
+    <p>The fastest method is to run the domain through a <strong><a href="https://aicitationscan.com/programmatic/website-tech-stack-checker">free tech stack checker</a></strong> — it instantly reveals the CMS, theme, framework, and hosting provider, which together fingerprint the builder. For a human name or agency, also check the page footer and run a WHOIS lookup on the domain.</p>
+  </div>
+
+  <!-- TABLE OF CONTENTS -->
+  <nav class="toc" aria-label="Table of contents">
+    <div class="toc-title">Table of Contents</div>
+    <ol>
+      <li><a href="#why-people-want-to-know">Why people want to know who built a site</a></li>
+      <li><a href="#method-1-footer">Method 1 — Check the page footer</a></li>
+      <li><a href="#method-2-tech-stack">Method 2 — Run a tech stack checker (fastest)</a></li>
+      <li><a href="#method-3-source">Method 3 — Read the page source code</a></li>
+      <li><a href="#method-4-whois">Method 4 — WHOIS lookup</a></li>
+      <li><a href="#method-5-linkedin">Method 5 — LinkedIn and portfolio research</a></li>
+      <li><a href="#platform-signatures">How to identify platforms from their fingerprints</a></li>
+      <li><a href="#method-comparison">Method comparison table</a></li>
+      <li><a href="#custom-builds">What about custom-coded websites?</a></li>
+      <li><a href="#faq">Frequently asked questions</a></li>
+    </ol>
+  </nav>
+
+  <!-- SECTION 1 -->
+  <section id="why-people-want-to-know">
+    <h2>Why people want to know who built a website</h2>
+    <p>People ask this question for a handful of concrete reasons — and the best method to use depends on which one applies to you.</p>
+    <p><strong>Competitor research.</strong> Knowing that a rival is running on Webflow rather than a custom React build tells you their development budget, their time-to-publish speed, and the design constraints they're working within.</p>
+    <p><strong>Hiring or agency sourcing.</strong> You found a website that looks exactly like what you want. Finding out who designed it is the fastest route to hiring the right studio or freelancer.</p>
+    <p><strong>Migration planning.</strong> Before moving your own site to a new platform, checking what stack high-performing sites in your niche use helps you make an informed choice.</p>
+    <p><strong>Sales prospecting.</strong> Web agencies and SaaS vendors often want to know whether a prospect's site is on a platform they can integrate with, migrate away from, or sell adjacent services to.</p>
+    <p><strong>Security research.</strong> Knowing the underlying CMS version or JavaScript framework helps developers and security teams identify vulnerable stacks in their own portfolio or in sites they're auditing.</p>
+
+    <div class="callout info">
+      <span class="callout-icon">ℹ️</span>
+      <div class="callout-body">
+        <strong>Is it legal to investigate a website's tech stack?</strong>
+        <p>Reading publicly visible page source code, HTTP response headers, and meta tags on a site you can access normally is entirely legal — no hacking, credential use, or data scraping of private data is involved.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 2 -->
+  <section id="method-1-footer">
+    <h2>Method 1 — Check the page footer</h2>
+    <p>The footer is the first place to look because many agencies and platform builders include their branding there by default, either as a legal attribution or as a free advertising trade-off baked into their pricing model.</p>
+
+    <div class="step-card">
+      <span class="step-num">Step 1</span>
+      <h3>Scroll to the very bottom of any page</h3>
+      <p>Look for text such as "Designed by Studio X", "Built with Webflow", "Powered by Squarespace", "Shopify — E-commerce by <em>Theme Name</em>", or a small agency logo with a link.</p>
+      <p>Free tiers of website builders (Wix, Weebly, Webflow Starter) almost always add a branded footer badge — this immediately tells you both the platform and the fact that the owner is on a free plan.</p>
+    </div>
+
+    <p><strong>Limitation:</strong> Paid plans and custom builds routinely strip footer attribution, so the absence of a credit does not mean there is nothing to find.</p>
+  </section>
+
+  <!-- SECTION 3 — MAIN CTA -->
+  <section id="method-2-tech-stack">
+    <h2>Method 2 — Run a tech stack checker (fastest and most complete)</h2>
+    <p>A dedicated tech stack detection tool is the single most reliable method because it analyses dozens of signals simultaneously — HTTP headers, cookie names, JavaScript globals, meta tags, DNS records, and CDN fingerprints — in under five seconds.</p>
+    <p>It answers not just "who built this?" but "what are they running, who hosts it, what analytics are they using, and what CDN serves their assets?" — a full intelligence picture in one click.</p>
+
+    <!-- PRIMARY CTA #1 -->
+    <div class="cta-block">
+      <div class="cta-label">Free Tool</div>
+      <h3>Try the EIGE Website Tech Stack Checker</h3>
+      <p>Paste any domain and get the full technology fingerprint — CMS, framework, CDN, analytics, and more — in seconds. No sign-up required.</p>
+      <a class="cta-btn" href="https://aicitationscan.com/programmatic/website-tech-stack-checker">Run a free tech stack scan →</a>
+    </div>
+
+    <h3>What the tech stack checker reveals</h3>
+    <p>Each detected technology is categorised and explained, giving you context rather than just a list of names.</p>
+
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Signal type</th><th>What it tells you</th><th>Example output</th></tr></thead>
+        <tbody>
+          <tr><td><strong>CMS / Builder</strong></td><td>The platform the site was built and published on</td><td>WordPress 6.5, Webflow, Shopify</td></tr>
+          <tr><td><strong>Theme / Template</strong></td><td>The visual framework and sometimes the designer who made it</td><td>Divi, Kadence, Flatsome</td></tr>
+          <tr><td><strong>JavaScript framework</strong></td><td>The frontend stack, pointing to the dev's skill set</td><td>React, Next.js, Vue, Alpine.js</td></tr>
+          <tr><td><strong>Hosting / CDN</strong></td><td>Where the site lives and how it's delivered</td><td>Cloudflare, Vercel, WP Engine</td></tr>
+          <tr><td><strong>Analytics</strong></td><td>What measurement tools the team uses</td><td>GA4, Plausible, Mixpanel</td></tr>
+          <tr><td><strong>Marketing stack</strong></td><td>CRM, email, chatbot integrations</td><td>HubSpot, Intercom, Klaviyo</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="callout tip">
+      <span class="callout-icon">💡</span>
+      <div class="callout-body">
+        <strong>Pro tip — the theme name points to the designer</strong>
+        <p>If the stack checker returns a premium theme like "Avada" or a niche Shopify theme like "Prestige", searching that theme name on Behance, Dribbble, or the theme author's partner page surfaces the designer or agency who customised it.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 4 -->
+  <section id="method-3-source">
+    <h2>Method 3 — Read the page source code</h2>
+    <p>Inspecting page source is the manual version of what a tech stack tool does automatically — it takes longer but teaches you to read the signals yourself.</p>
+
+    <div class="step-card">
+      <span class="step-num">Step 1</span>
+      <h3>Open the page source</h3>
+      <p>In any browser, navigate to the site and press <code>Ctrl + U</code> on Windows or <code>Cmd + Option + U</code> on Mac. Alternatively, right-click any blank area of the page and select <strong>View Page Source</strong>.</p>
+    </div>
+
+    <div class="step-card">
+      <span class="step-num">Step 2</span>
+      <h3>Search for the generator meta tag</h3>
+      <p>Press <code>Ctrl + F</code> and search for <code>generator</code>. The generator meta tag — when present — directly names the platform. WordPress inserts <code>&lt;meta name="generator" content="WordPress 6.x"&gt;</code>. Drupal, Joomla, and many page builders do the same.</p>
+    </div>
+
+    <div class="step-card">
+      <span class="step-num">Step 3</span>
+      <h3>Search for platform-specific strings</h3>
+      <p>Search for <code>wp-content</code> (WordPress), <code>shopify</code> (Shopify), <code>wixsite</code> (Wix), <code>webflow</code> (Webflow), or <code>squarespace</code> (Squarespace) — these strings appear in asset URLs and script paths and survive even when the generator tag is removed.</p>
+    </div>
+
+    <div class="callout warn">
+      <span class="callout-icon">⚠️</span>
+      <div class="callout-body">
+        <strong>Generator tags are often stripped</strong>
+        <p>Security-conscious WordPress installs and professionally configured sites frequently remove the generator tag with a single line of code. Absence of the tag does not confirm a custom build — use a tech stack checker to look at all signals simultaneously.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 5 -->
+  <section id="method-4-whois">
+    <h2>Method 4 — WHOIS lookup</h2>
+    <p>A WHOIS lookup queries the public registry record for a domain, which can expose the registrant name, registration date, name servers, and hosting provider — sometimes pointing directly to the developer or agency that set up the account.</p>
+
+    <div class="step-card">
+      <span class="step-num">Step 1</span>
+      <h3>Run the lookup</h3>
+      <p>Go to <a href="https://who.is" target="_blank" rel="noopener">who.is</a>, <a href="https://lookup.icann.org" target="_blank" rel="noopener">lookup.icann.org</a>, or type <code>whois domain.com</code> in your terminal. Enter the domain without the <code>https://</code> prefix.</p>
+    </div>
+
+    <div class="step-card">
+      <span class="step-num">Step 2</span>
+      <h3>Read the registrant and name server fields</h3>
+      <p>The <strong>registrant</strong> field shows who registered the domain — sometimes this is the agency that set up the site for the client, especially on older registrations made before GDPR/CCPA privacy shields became standard. The <strong>name servers</strong> point to the DNS provider and often the hosting platform (e.g., <code>ns1.cloudflare.com</code> = Cloudflare, <code>ns.vercel-dns.com</code> = Vercel).</p>
+    </div>
+
+    <p><strong>Limitation:</strong> Since GDPR came into effect in 2018, most registrars in Europe and many globally now redact personal registrant data behind privacy proxy services, so the registrant field often returns "Redacted for Privacy" rather than a person's name.</p>
+  </section>
+
+  <!-- SECTION 6 -->
+  <section id="method-5-linkedin">
+    <h2>Method 5 — LinkedIn and portfolio research</h2>
+    <p>Once you have a company name, CMS, or agency name from the methods above, LinkedIn and portfolio platforms let you find the specific humans who built the site.</p>
+
+    <div class="step-card">
+      <span class="step-num">Step 1</span>
+      <h3>Search LinkedIn for "website designer" + company name</h3>
+      <p>Employees often list the companies they built sites for in their experience or featured sections. Searching <code>"[Company Name]" web designer</code> or <code>"[Company Name]" Webflow developer</code> on LinkedIn surfaces past and current contractors and employees.</p>
+    </div>
+
+    <div class="step-card">
+      <span class="step-num">Step 2</span>
+      <h3>Search Behance and Dribbble</h3>
+      <p>Designers frequently publish the finished site in their portfolio. Searching the company or brand name on Behance, Dribbble, or Awwwards can directly surface the original design submission along with the studio credit.</p>
+    </div>
+
+    <div class="step-card">
+      <span class="step-num">Step 3</span>
+      <h3>Check the Wayback Machine</h3>
+      <p>Early archived versions of a site at <a href="https://web.archive.org" target="_blank" rel="noopener">web.archive.org</a> often still contain footer credits, generator tags, and uncleaned asset paths that were later removed — especially useful for custom builds where all traces have since been erased.</p>
+    </div>
+
+    <!-- INLINE CTA #2 -->
+    <div class="inline-cta">
+      <div class="inline-cta-text">
+        <strong>Already know the stack? Check the brand's AI visibility.</strong>
+        <span>See if AI systems like ChatGPT and Google AI actually know about this website and what they say.</span>
+      </div>
+      <a href="https://www.aicitationscan.com/">Run AI scan →</a>
+    </div>
+  </section>
+
+  <!-- SECTION 7 -->
+  <section id="platform-signatures">
+    <h2>How to identify platforms from their fingerprints</h2>
+    <p>Each major platform leaves distinctive traces in the HTML, asset paths, and cookie names — once you learn these, you can identify the builder with a 10-second manual inspection.</p>
+
+    <div class="sig-grid">
+      <div class="sig-card">
+        <div class="sig-name">WordPress</div>
+        <div><span class="sig-tell">wp-content/</span></div>
+        <div><span class="sig-tell">wp-includes/</span></div>
+        <div><span class="sig-tell">?ver=6.x</span></div>
+        <div class="sig-note">Found in asset URLs. Plugins and themes are always under /wp-content/.</div>
+      </div>
+      <div class="sig-card">
+        <div class="sig-name">Shopify</div>
+        <div><span class="sig-tell">cdn.shopify.com</span></div>
+        <div><span class="sig-tell">shopify.js</span></div>
+        <div><span class="sig-tell">Shopify.shop</span></div>
+        <div class="sig-note">All product images are served from the Shopify CDN domain.</div>
+      </div>
+      <div class="sig-card">
+        <div class="sig-name">Webflow</div>
+        <div><span class="sig-tell">assets.website-files</span></div>
+        <div><span class="sig-tell">webflow.js</span></div>
+        <div><span class="sig-tell">wf-form-</span></div>
+        <div class="sig-note">Webflow sites export with highly distinctive CSS class names and form IDs.</div>
+      </div>
+      <div class="sig-card">
+        <div class="sig-name">Squarespace</div>
+        <div><span class="sig-tell">static1.squarespace</span></div>
+        <div><span class="sig-tell">squarespace-cdn</span></div>
+        <div><span class="sig-tell">SQSUtils</span></div>
+        <div class="sig-note">Squarespace injects its CDN domain into every image and asset path.</div>
+      </div>
+      <div class="sig-card">
+        <div class="sig-name">Wix</div>
+        <div><span class="sig-tell">static.wixstatic.com</span></div>
+        <div><span class="sig-tell">wix-bolt</span></div>
+        <div><span class="sig-tell">WixHeader</span></div>
+        <div class="sig-note">Wix renders in a proprietary React-like runtime visible in the JS globals.</div>
+      </div>
+      <div class="sig-card">
+        <div class="sig-name">Next.js / Vercel</div>
+        <div><span class="sig-tell">_next/static/</span></div>
+        <div><span class="sig-tell">__NEXT_DATA__</span></div>
+        <div><span class="sig-tell">vercel.app</span></div>
+        <div class="sig-note">Custom-built React apps deployed to Vercel — points to an in-house dev team.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 8 — COMPARISON TABLE -->
+  <section id="method-comparison">
+    <h2>Method comparison: which approach should you use?</h2>
+    <p>Each method has a different cost in terms of time, skill, and the specificity of what it reveals — use this table to pick the right one for your goal.</p>
+
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Method</th>
+            <th>Speed</th>
+            <th>Cost</th>
+            <th>Reveals platform?</th>
+            <th>Reveals human/agency?</th>
+            <th>Skill required</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Tech stack checker</strong></td>
+            <td><span class="tag tag-fast">Seconds</span></td>
+            <td><span class="tag tag-free">Free</span></td>
+            <td><span class="tick">✓ Always</span></td>
+            <td><span class="tick">✓ Via theme/agency</span></td>
+            <td>None</td>
+          </tr>
+          <tr>
+            <td><strong>Footer inspection</strong></td>
+            <td><span class="tag tag-fast">Seconds</span></td>
+            <td><span class="tag tag-free">Free</span></td>
+            <td><span class="tick">✓ Sometimes</span></td>
+            <td><span class="tick">✓ Sometimes</span></td>
+            <td>None</td>
+          </tr>
+          <tr>
+            <td><strong>Page source / DevTools</strong></td>
+            <td><span class="tag tag-med">2–5 min</span></td>
+            <td><span class="tag tag-free">Free</span></td>
+            <td><span class="tick">✓ Usually</span></td>
+            <td><span class="cross">✗ Rarely</span></td>
+            <td>Basic</td>
+          </tr>
+          <tr>
+            <td><strong>WHOIS lookup</strong></td>
+            <td><span class="tag tag-med">1–2 min</span></td>
+            <td><span class="tag tag-free">Free</span></td>
+            <td><span class="tick">✓ Via nameservers</span></td>
+            <td><span class="tick">✓ Pre-GDPR sites</span></td>
+            <td>Low</td>
+          </tr>
+          <tr>
+            <td><strong>LinkedIn / portfolio</strong></td>
+            <td><span class="tag tag-slow">10–30 min</span></td>
+            <td><span class="tag tag-free">Free</span></td>
+            <td><span class="cross">✗ Indirect</span></td>
+            <td><span class="tick">✓ Best for this</span></td>
+            <td>Low</td>
+          </tr>
+          <tr>
+            <td><strong>Wayback Machine</strong></td>
+            <td><span class="tag tag-slow">5–15 min</span></td>
+            <td><span class="tag tag-free">Free</span></td>
+            <td><span class="tick">✓ Historical</span></td>
+            <td><span class="tick">✓ Old credits</span></td>
+            <td>Low</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="summary-box">
+      <h4>Recommended workflow</h4>
+      <ul class="summary-list">
+        <li>Start with the tech stack checker to identify the platform and CMS in seconds.</li>
+        <li>Scan the footer while the tool runs — it costs nothing extra.</li>
+        <li>If you need a person's name, search LinkedIn using the platform and company name together.</li>
+        <li>For legacy or custom-built sites, check the Wayback Machine for old footer credits before diving into source code.</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- SECTION 9 -->
+  <section id="custom-builds">
+    <h2>What about custom-coded websites?</h2>
+    <p>Custom-built sites — those hand-coded in frameworks like Next.js, Nuxt, SvelteKit, or plain HTML/CSS — are the hardest to attribute because they deliberately leave no platform fingerprint.</p>
+
+    <h3>Signals that point to a custom build</h3>
+    <p>If the tech stack checker returns no recognised CMS but identifies React, Vue, or Angular as the frontend framework, alongside a cloud provider like Vercel, Netlify, or AWS, the site was almost certainly built by an in-house developer or specialist agency rather than a platform builder.</p>
+
+    <h3>How to find the developer anyway</h3>
+    <p><strong>GitHub.</strong> Some companies host their frontend in a public GitHub repository — search the company name on GitHub and look for a repository named after the site or the company's main product.</p>
+    <p><strong>Code comments.</strong> Custom builds sometimes contain developer email addresses, GitHub usernames, or agency names in HTML comments or JavaScript source files — search the page source for <code>&lt;!--</code> and read any comments present.</p>
+    <p><strong>Open Graph and Twitter card credits.</strong> Some developers include their studio's Twitter handle in the <code>twitter:site</code> or <code>og:site_name</code> tags as a form of quiet attribution.</p>
+    <p><strong>SSL certificate.</strong> The organisation field of the SSL certificate occasionally names the agency that set up TLS — check via your browser's padlock icon → Certificate → Details.</p>
+
+    <!-- INLINE CTA #3 -->
+    <div class="inline-cta">
+      <div class="inline-cta-text">
+        <strong>Detect any website's full technology stack instantly.</strong>
+        <span>CMS, framework, CDN, analytics, and more — free, no sign-up.</span>
+      </div>
+      <a href="https://aicitationscan.com/programmatic/website-tech-stack-checker">Try the tech stack checker →</a>
+    </div>
+  </section>
+
+  <!-- SECONDARY CTA — AI Citation Scan -->
+  <div class="cta-block">
+    <div class="cta-label">Also Free</div>
+    <h3>Does AI know the website you just researched?</h3>
+    <p>Once you know who built a site, check whether AI systems like ChatGPT, Google AI, and Meta AI actually know about that brand — and what they're saying about it.</p>
+    <a class="cta-btn" href="https://www.aicitationscan.com/">Check AI brand awareness →</a>
+    <a class="cta-btn outline" href="https://aicitationscan.com/programmatic/website-tech-stack-checker">Tech stack checker</a>
+  </div>
+
+  <!-- FAQ -->
+  <section id="faq" class="faq-section">
+    <h2>Frequently asked questions</h2>
+
+    <div class="faq-item">
+      <div class="faq-q">How do I find out who designed a website?</div>
+      <div class="faq-a">The quickest route is a combination of three checks: look at the footer for a design credit, run the domain through a free tech stack checker to identify the theme or page builder (which often points to the designer), and search the agency or theme name on LinkedIn or Dribbble to find the specific person or studio.</div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q">Can you tell who built a website just from its URL?</div>
+      <div class="faq-a">Not in most cases. The URL alone tells you the domain name and sometimes the hosting environment (e.g., <code>mysite.webflow.io</code> or <code>mysite.myshopify.com</code> on unmasked subdomains), but a custom domain gives nothing away. A WHOIS lookup on that domain and a tech stack scan are the next steps.</div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q">What is the fastest free way to find out what platform a website uses?</div>
+      <div class="faq-a">Run the domain through the <a href="https://aicitationscan.com/programmatic/website-tech-stack-checker">AI Citation Scan tech stack checker</a> — it analyses the full fingerprint and returns a categorised breakdown in under five seconds, with no account or browser extension required.</div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q">Is it legal to check the tech stack of someone else's website?</div>
+      <div class="faq-a">Yes. Reading publicly accessible page source, HTTP headers, and meta tags constitutes normal web browsing — no authentication is bypassed and no private data is accessed. Commercial tools like BuiltWith and Wappalyzer have operated lawfully on this basis for over a decade.</div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q">Can I find out who developed a custom-coded website?</div>
+      <div class="faq-a">Custom builds are harder to attribute, but checking for an open GitHub repository, reading HTML comments in the page source, inspecting the SSL certificate's organisation field, and searching the Wayback Machine for early versions that may still contain footer credits are all worth trying before giving up.</div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q">Why doesn't the generator meta tag always show the CMS?</div>
+      <div class="faq-a">Any developer can remove the generator tag with one line of code — it's a common security hardening step because advertising your CMS version tells attackers exactly which vulnerabilities to probe. A proper tech stack checker reads dozens of other signals that cannot be easily removed, making it more reliable than the generator tag alone.</div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q">What does the tech stack tell me about who designed the site?</div>
+      <div class="faq-a">The CMS and theme combination is a strong designer fingerprint. Agencies typically specialise: a Webflow build points toward a UX-focused studio, a Divi or Elementor build suggests an independent WordPress freelancer, and a headless Next.js + Contentful stack points toward a larger technical agency. The theme name itself — if it's a premium commercial theme — can be searched on the theme marketplace to find its author and any certified customisers.</div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q">Does WHOIS still show who registered a domain after GDPR?</div>
+      <div class="faq-a">For most commercial domains registered since 2018, the registrant's personal details are redacted and replaced by a privacy proxy service. However, the registrar name, registration date, name servers, and sometimes the abuse contact email are still visible — and the name server data often points to the hosting platform or CDN, narrowing down the builder significantly.</div>
+    </div>
+  </section>
+
+  <!-- FINAL CTA -->
+  <div class="cta-block">
+    <div class="cta-label">Two Free Tools</div>
+    <h3>Ready to investigate any website?</h3>
+    <p>Identify the full technology stack in seconds, or check whether AI systems recognise the brand behind it.</p>
+    <a class="cta-btn" href="https://aicitationscan.com/programmatic/website-tech-stack-checker">Tech stack checker →</a>
+    <a class="cta-btn outline" href="https://www.aicitationscan.com/">AI brand awareness check →</a>
+  </div>
+
+  <!-- ARTICLE FOOTER -->
+  <footer class="article-footer">
+    <span>Published by <a href="https://www.aicitationscan.com/">AI Citation Scan</a> · May 2025</span>
+    <span>
+      <a href="https://www.aicitationscan.com/guides/">← All guides</a>
+    </span>
+  </footer>
+
+</div>
+</body>
+</html>
