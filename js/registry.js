@@ -152,8 +152,8 @@ window.seoRegistry = {
     },
     "schema-generator.html": {
         "url": "/seo-tools/schema-generator",
-        "title": "Schema Generator",
-        "desc": "Generate valid JSON-LD schema markup for SEO, rich results, ecommerce, local SEO, and AI visibility using this free structured data generator."
+        "title": "Schema Generator – Free JSON-LD Structured Data Tool | AI Citation Scan",
+        "desc": "Generate valid JSON-LD schema markup instantly for articles, FAQs, products, local businesses, events and websites. Implementation-ready output for Google rich results eligibility."
     },
     "serp-preview-tool.html": {
         "url": "/seo-tools/serp-preview-tool",
