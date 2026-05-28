@@ -128,7 +128,7 @@ window.seoRegistry = {
     "how-to-find-out-who-built-a-website.html": {
         "url": "/guides/how-to-find-out-who-built-a-website",
         "title": "How to Find Out Who Built, Designed, or Created a Website",
-        "desc": "Want to know who built, designed, created or developed a website? Here are 5 proven methods — including a free instant tech stack checker that reveals the builder, CMS, and framework in seconds."
+        "desc": "Want to know who built, designed, created or developed a website? 5 proven methods including a free tech stack checker that reveals the builder, CMS, and framework in seconds."
     },
     "website-tech-stack-checker.html": {
         "url": "/programmatic/website-tech-stack-checker",
