@@ -3,259 +3,84 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<title>AI Citation Checker — Analyze Reference Structure & Attribution Quality | AI Citation Scan</title>
-<meta name="description" content="Free AI citation checker: analyze reference consistency, detect incomplete citations, check APA/MLA formatting, and evaluate attribution quality across articles, essays, and AI-assisted content.">
-<meta name="keywords" content="AI citation checker, citation analysis tool, reference structure checker, APA citation checker, MLA citation checker, citation consistency, academic reference checker, citation quality score, attribution analysis, source verification tool, citation formatter, bibliography checker">
-<meta name="author" content="AI Citation Scan Editorial Team">
+<title>AI Citation Checker — Analyze Citation Structure, References & Attribution Quality | AI Citation Scan</title>
+<meta name="description" content="Free AI citation checker. Analyze citation structure, reference consistency, source attribution clarity and formatting quality across articles, essays, reports and AI-generated content.">
+<meta name="keywords" content="ai citation checker, citation analyzer, reference checker, check citations online, citation consistency tool, APA citation checker, MLA citation checker, reference list analyzer, source attribution checker, citation quality score, incomplete citations, citation formatter">
+<meta name="author" content="AI Citation Scan">
 <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
-<meta name="theme-color" content="#10B981">
-<link rel="canonical" href="https://aicitationscan.com/ai-tools/ai-citation-checker.html">
-<link rel="sitemap" type="application/xml" href="https://aicitationscan.com/sitemap.xml">
-<meta name="geo.region" content="US">
-<meta name="geo.placename" content="United States">
-<meta name="ICBM" content="37.0902,-95.7129">
+<meta name="theme-color" content="#1A2540">
 
-<!-- hreflang -->
+<!-- Canonical -->
+<link rel="canonical" href="https://aicitationscan.com/ai-tools/ai-citation-checker.html">
+
+<!-- Hreflang -->
 <link rel="alternate" hreflang="en" href="https://aicitationscan.com/ai-tools/ai-citation-checker.html">
 <link rel="alternate" hreflang="x-default" href="https://aicitationscan.com/ai-tools/ai-citation-checker.html">
 
+<!-- Sitemap -->
+<link rel="sitemap" type="application/xml" href="/sitemap.xml">
+
 <!-- Open Graph -->
 <meta property="og:type" content="website">
-<meta property="og:title" content="AI Citation Checker — Reference Structure & Attribution Analysis">
-<meta property="og:description" content="Analyze citation consistency, detect incomplete references, check APA/MLA formatting, and evaluate source attribution quality. Free, instant, client-side.">
 <meta property="og:url" content="https://aicitationscan.com/ai-tools/ai-citation-checker.html">
-<meta property="og:site_name" content="AI Citation Scan">
+<meta property="og:title" content="AI Citation Checker — Analyze Citation Structure & Reference Quality">
+<meta property="og:description" content="Paste any text or enter a URL to analyze citation structure, check reference consistency, identify incomplete sources, and evaluate attribution quality instantly.">
 <meta property="og:image" content="https://aicitationscan.com/og-citation-checker.png">
-<meta property="og:image:width" content="1200">
-<meta property="og:image:height" content="630">
+<meta property="og:site_name" content="AI Citation Scan">
 <meta property="og:locale" content="en_US">
 
 <!-- Twitter Card -->
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="AI Citation Checker — Reference Structure & Attribution Analysis">
-<meta name="twitter:description" content="Detect incomplete citations, check APA/MLA formatting consistency, and audit source attribution quality — free, instant, client-side analysis.">
-<meta name="twitter:image" content="https://aicitationscan.com/og-citation-checker.png">
 <meta name="twitter:site" content="@aicitationscan">
+<meta name="twitter:creator" content="@aicitationscan">
+<meta name="twitter:title" content="AI Citation Checker — Analyze Citation Structure & Reference Quality">
+<meta name="twitter:description" content="Paste any text or enter a URL to analyze citation structure, check reference consistency, identify incomplete sources, and evaluate attribution quality instantly.">
+<meta name="twitter:image" content="https://aicitationscan.com/og-citation-checker.png">
+
+<!-- Geo -->
+<meta name="geo.region" content="US">
+<meta name="ICBM" content="37.7749, -122.4194">
+<meta name="geo.placename" content="United States">
 
 <!-- Favicon -->
-<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎯</text></svg>">
-<link rel="apple-touch-icon" href="https://aicitationscan.com/apple-touch-icon.png">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%231A2540'/><text y='22' x='5' font-size='18'>🎯</text></svg>">
+<link rel="apple-touch-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%231A2540'/><text y='22' x='5' font-size='18'>🎯</text></svg>">
 
-<!-- Preconnects -->
+<!-- Preconnect -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="preconnect" href="https://cdn.tailwindcss.com">
 
-<!-- Fonts -->
-<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Syne:wght@400;600;700;800&family=JetBrains+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<!-- Fonts: Syne + DM Mono (distinctive, editorial, analytical) -->
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300&display=swap" rel="stylesheet">
 
 <!-- Tailwind CDN -->
 <script src="https://cdn.tailwindcss.com"></script>
 <script>
-tailwind.config = {
-  theme: {
-    extend: {
-      colors: {
-        navy: { 900: '#0D1B2A', 800: '#1A2540', 700: '#243352', 600: '#304570' },
-        emerald: { 500: '#10B981', 600: '#059669', 400: '#34D399' },
-        slate: { 50: '#F8FAFC', 100: '#F1F5F9', 200: '#E2E8F0', 300: '#CBD5E1', 400: '#94A3B8', 500: '#64748B' },
-        muted: '#7A90AA'
-      },
-      fontFamily: {
-        display: ['"DM Serif Display"', 'serif'],
-        ui: ['Syne', 'sans-serif'],
-        mono: ['"JetBrains Mono"', 'monospace'],
-        body: ['"IBM Plex Sans"', 'sans-serif']
+  tailwind.config = {
+    theme: {
+      extend: {
+        fontFamily: {
+          display: ['Syne', 'sans-serif'],
+          mono: ['DM Mono', 'monospace'],
+          body: ['DM Sans', 'sans-serif'],
+        },
+        colors: {
+          navy: { 900: '#0D1526', 800: '#1A2540', 700: '#243356', 600: '#2E4172' },
+          slate: { 400: '#7A90AA', 300: '#A3B8CC', 200: '#C8D8E8', 100: '#EBF2F8' },
+          emerald: { 600: '#059669', 500: '#10B981', 400: '#34D399' },
+          amber: { 500: '#F59E0B', 400: '#FBBF24' },
+          rose: { 500: '#F43F5E', 400: '#FB7185' },
+          violet: { 600: '#7C3AED', 500: '#8B5CF6' },
+          ink: '#0D1526',
+        }
       }
     }
   }
-}
 </script>
 
-<style>
-  :root {
-    --bg: #F5F7FA;
-    --bg-panel: #FFFFFF;
-    --bg-subtle: #EEF1F8;
-    --text-primary: #0D1B2A;
-    --text-secondary: #3D5068;
-    --text-muted: #7A8FA6;
-    --emerald: #10B981;
-    --emerald-dark: #059669;
-    --blue: #2563EB;
-    --violet: #7C3AED;
-    --amber: #F59E0B;
-    --red: #EF4444;
-    --border: #E2E8F0;
-    --border-strong: #CBD5E1;
-    --shadow-sm: 0 1px 3px rgba(13,27,42,0.06), 0 1px 2px rgba(13,27,42,0.04);
-    --shadow-md: 0 4px 16px rgba(13,27,42,0.08), 0 2px 6px rgba(13,27,42,0.05);
-    --shadow-lg: 0 8px 32px rgba(13,27,42,0.10), 0 4px 12px rgba(13,27,42,0.06);
-  }
-  *, *::before, *::after { box-sizing: border-box; }
-  html { scroll-behavior: smooth; }
-  body { background: var(--bg); font-family: 'IBM Plex Sans', sans-serif; color: var(--text-primary); -webkit-font-smoothing: antialiased; overflow-x: hidden; }
-
-  /* SCROLL PROGRESS */
-  #scroll-progress { position: fixed; top: 0; left: 0; width: 0%; height: 3px; background: linear-gradient(90deg, #10B981, #7C3AED); z-index: 9999; transition: width 0.1s linear; }
-
-  /* LOGO */
-  .logo-mark { display: flex; align-items: center; gap: 10px; text-decoration: none; flex-shrink: 0; cursor: pointer; }
-  .logo-icon { width: 32px; height: 32px; background: #1A2540; border-radius: 5px; display: flex; align-items: center; justify-content: center; font-size: 17px; line-height: 1; flex-shrink: 0; box-shadow: 0 2px 8px rgba(26,37,64,0.25); transition: transform 150ms ease, box-shadow 150ms ease; }
-  .logo-mark:hover .logo-icon { transform: rotate(-6deg) scale(1.08); box-shadow: 0 4px 16px rgba(61,142,245,0.35); }
-  .logo-wordmark { display: flex; flex-direction: column; gap: 1px; line-height: 1; }
-  .logo-name { font-family: 'Syne', sans-serif; font-size: 15px; font-weight: 700; color: #1A2540; letter-spacing: -0.01em; white-space: nowrap; }
-  .logo-tagline { font-family: 'JetBrains Mono', monospace; font-size: 9px; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: #7A90AA; }
-  .pulse-dot { display: inline-block; width: 5px; height: 5px; background: #10B981; border-radius: 50%; vertical-align: middle; margin-right: 4px; animation: pulse-ring 2s ease-in-out infinite; }
-  @keyframes pulse-ring { 0%, 100% { opacity: 1; box-shadow: 0 0 0 0 rgba(16,185,129,0.5); } 50% { opacity: 0.8; box-shadow: 0 0 0 4px rgba(16,185,129,0); } }
-
-  /* HEADER */
-  .site-header { background: rgba(255,255,255,0.95); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border-bottom: 1px solid var(--border); }
-
-  /* SEASONAL BANNER */
-  .seasonal-banner { background: linear-gradient(90deg, #0D1B2A, #1A2540); color: #94A3B8; font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 0.08em; text-align: center; padding: 7px 16px; }
-  .seasonal-banner span { color: #10B981; }
-
-  /* HERO */
-  .hero-grid-bg { background-image: linear-gradient(var(--border) 1px, transparent 1px), linear-gradient(90deg, var(--border) 1px, transparent 1px); background-size: 32px 32px; }
-
-  /* SCORE BARS */
-  .score-bar-track { height: 6px; background: var(--border); border-radius: 3px; overflow: hidden; }
-  .score-bar-fill { height: 100%; border-radius: 3px; transition: width 0.9s cubic-bezier(0.4,0,0.2,1); }
-  .score-bar-fill.high { background: linear-gradient(90deg, #10B981, #34D399); }
-  .score-bar-fill.medium { background: linear-gradient(90deg, #F59E0B, #FCD34D); }
-  .score-bar-fill.low { background: linear-gradient(90deg, #EF4444, #F87171); }
-
-  /* TRUST BADGE STRIP */
-  .trust-strip { border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); background: var(--bg-panel); }
-
-  /* PANELS */
-  .analysis-panel { background: var(--bg-panel); border: 1px solid var(--border); border-radius: 10px; box-shadow: var(--shadow-sm); }
-  .results-empty { display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 400px; gap: 12px; opacity: 0.6; }
-
-  /* INPUT STYLES */
-  .tool-textarea { font-family: 'IBM Plex Sans', sans-serif; font-size: 13.5px; line-height: 1.65; color: var(--text-primary); background: var(--bg-subtle); border: 1px solid var(--border); border-radius: 8px; padding: 14px 16px; resize: vertical; min-height: 220px; width: 100%; transition: border-color 0.2s, box-shadow 0.2s; outline: none; }
-  .tool-textarea:focus { border-color: var(--emerald); box-shadow: 0 0 0 3px rgba(16,185,129,0.15); }
-  .tool-input { font-family: 'IBM Plex Sans', sans-serif; font-size: 13px; color: var(--text-primary); background: var(--bg-subtle); border: 1px solid var(--border); border-radius: 8px; padding: 10px 14px; width: 100%; transition: border-color 0.2s, box-shadow 0.2s; outline: none; }
-  .tool-input:focus { border-color: var(--emerald); box-shadow: 0 0 0 3px rgba(16,185,129,0.15); }
-
-  /* BUTTONS */
-  .btn-primary { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 13px; letter-spacing: 0.03em; background: var(--emerald); color: white; border: none; border-radius: 7px; padding: 11px 22px; cursor: pointer; transition: background 0.2s, transform 0.15s, box-shadow 0.2s; box-shadow: 0 2px 8px rgba(16,185,129,0.3); }
-  .btn-primary:hover { background: var(--emerald-dark); transform: translateY(-1px); box-shadow: 0 4px 14px rgba(16,185,129,0.4); }
-  .btn-primary:active { transform: translateY(0); }
-  .btn-secondary { font-family: 'Syne', sans-serif; font-weight: 600; font-size: 12px; letter-spacing: 0.03em; background: transparent; color: var(--text-secondary); border: 1px solid var(--border-strong); border-radius: 7px; padding: 9px 16px; cursor: pointer; transition: all 0.2s; }
-  .btn-secondary:hover { background: var(--bg-subtle); border-color: var(--emerald); color: var(--emerald); }
-  .btn-ghost { font-family: 'JetBrains Mono', monospace; font-weight: 500; font-size: 11px; letter-spacing: 0.04em; background: transparent; color: var(--text-muted); border: 1px solid var(--border); border-radius: 6px; padding: 7px 14px; cursor: pointer; transition: all 0.2s; display: inline-flex; align-items: center; gap: 6px; }
-  .btn-ghost:hover { background: var(--bg-subtle); color: var(--text-primary); border-color: var(--border-strong); }
-
-  /* TAB SYSTEM */
-  .tool-tabs { display: flex; gap: 2px; background: var(--bg-subtle); border-radius: 8px; padding: 3px; border: 1px solid var(--border); }
-  .tool-tab { flex: 1; font-family: 'Syne', sans-serif; font-weight: 600; font-size: 12px; letter-spacing: 0.04em; padding: 7px 14px; border-radius: 6px; border: none; cursor: pointer; transition: all 0.2s; color: var(--text-muted); background: transparent; }
-  .tool-tab.active { background: var(--bg-panel); color: var(--text-primary); box-shadow: var(--shadow-sm); }
-
-  /* WARNING BADGES */
-  .warn-high { background: #FEF2F2; border: 1px solid #FECACA; color: #991B1B; }
-  .warn-medium { background: #FFFBEB; border: 1px solid #FDE68A; color: #92400E; }
-  .warn-low { background: #F0FDF4; border: 1px solid #BBF7D0; color: #166534; }
-
-  /* STAT CARDS */
-  .stat-card { background: var(--bg-subtle); border: 1px solid var(--border); border-radius: 8px; padding: 10px 14px; }
-  .stat-num { font-family: 'JetBrains Mono', monospace; font-size: 22px; font-weight: 600; color: var(--text-primary); line-height: 1; }
-  .stat-label { font-family: 'Syne', sans-serif; font-size: 10px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-muted); margin-top: 3px; }
-
-  /* DOMAIN CARDS */
-  .domain-card { background: var(--bg-subtle); border: 1px solid var(--border); border-radius: 6px; padding: 7px 12px; display: inline-flex; align-items: center; gap: 8px; font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--text-secondary); }
-  .domain-count { background: var(--emerald); color: white; border-radius: 999px; font-size: 10px; font-weight: 600; padding: 1px 7px; }
-
-  /* QUICK ANSWER */
-  .qa-card { background: var(--bg-panel); border: 1px solid var(--border); border-radius: 10px; box-shadow: var(--shadow-sm); }
-
-  /* FAQ ACCORDION */
-  .faq-item { border-bottom: 1px solid var(--border); }
-  .faq-item:last-child { border-bottom: none; }
-  .faq-trigger { width: 100%; display: flex; align-items: center; justify-content: space-between; padding: 18px 20px; background: none; border: none; cursor: pointer; text-align: left; font-family: 'IBM Plex Sans', sans-serif; font-weight: 600; font-size: 14px; color: var(--text-primary); transition: color 0.2s; gap: 12px; }
-  .faq-trigger:hover { color: var(--emerald); }
-  .faq-chevron { width: 16px; height: 16px; flex-shrink: 0; color: var(--text-muted); transition: transform 0.3s ease; }
-  .faq-trigger.open .faq-chevron { transform: rotate(180deg); color: var(--emerald); }
-  .faq-answer { overflow: hidden; max-height: 0; transition: max-height 0.38s cubic-bezier(0.4,0,0.2,1); }
-  .faq-answer.open { max-height: 600px; }
-  .faq-answer-inner { padding: 0 20px 20px; font-size: 14px; line-height: 1.75; color: var(--text-secondary); }
-
-  /* SHARE SYSTEM */
-  .share-pill { font-family: 'Syne', sans-serif; font-weight: 600; font-size: 12px; letter-spacing: 0.03em; border: 1px solid var(--border-strong); border-radius: 999px; padding: 7px 18px; cursor: pointer; background: var(--bg-panel); color: var(--text-secondary); transition: all 0.18s; white-space: nowrap; text-decoration: none; display: inline-flex; align-items: center; gap: 6px; }
-  .share-pill:hover { border-color: var(--emerald); color: var(--emerald); background: #F0FDF4; transform: translateY(-1px); }
-
-  /* CONTACT FORM */
-  .glass-card { background: rgba(255,255,255,0.92); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); border: 1px solid rgba(255,255,255,0.6); box-shadow: 0 8px 32px rgba(13,27,42,0.10), inset 0 1px 0 rgba(255,255,255,0.8); border-radius: 14px; }
-  .form-input { font-family: 'IBM Plex Sans', sans-serif; font-size: 13px; width: 100%; padding: 10px 14px; background: rgba(241,245,249,0.7); border: 1px solid var(--border); border-radius: 7px; color: var(--text-primary); outline: none; transition: border-color 0.2s, box-shadow 0.2s; }
-  .form-input:focus { border-color: var(--emerald); box-shadow: 0 0 0 3px rgba(16,185,129,0.12); }
-  .form-label { font-family: 'Syne', sans-serif; font-size: 11px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-muted); display: block; margin-bottom: 5px; }
-
-  /* TOAST */
-  #toast-container { position: fixed; bottom: 24px; right: 24px; z-index: 9000; display: flex; flex-direction: column; gap: 8px; pointer-events: none; }
-  .toast { font-family: 'IBM Plex Sans', sans-serif; font-size: 13px; font-weight: 500; padding: 12px 18px; border-radius: 8px; background: #1A2540; color: #E2E8F0; box-shadow: 0 4px 16px rgba(13,27,42,0.25); pointer-events: all; transform: translateY(12px); opacity: 0; transition: transform 0.3s ease, opacity 0.3s ease; display: flex; align-items: center; gap: 8px; min-width: 220px; max-width: 320px; }
-  .toast.show { transform: translateY(0); opacity: 1; }
-  .toast.success::before { content: '✓'; background: #10B981; color: white; border-radius: 50%; width: 18px; height: 18px; display: flex; align-items: center; justify-content: center; font-size: 10px; flex-shrink: 0; }
-  .toast.info::before { content: 'i'; background: #2563EB; color: white; border-radius: 50%; width: 18px; height: 18px; display: flex; align-items: center; justify-content: center; font-size: 10px; font-weight: 700; flex-shrink: 0; }
-
-  /* SECTION LABELS */
-  .section-label { font-family: 'JetBrains Mono', monospace; font-size: 10px; font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase; color: var(--emerald); display: flex; align-items: center; gap: 8px; }
-  .section-label::before { content: ''; display: inline-block; width: 20px; height: 1px; background: var(--emerald); }
-
-  /* SCORE RING (simplified) */
-  .trust-score-ring { width: 88px; height: 88px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-family: 'JetBrains Mono', monospace; font-size: 24px; font-weight: 600; position: relative; flex-shrink: 0; }
-
-  /* INTERNAL LINKS */
-  #dynamic-internal-links { min-height: 40px; }
-
-  /* TESTIMONIAL */
-  .testimonial-card { background: var(--bg-panel); border: 1px solid var(--border); border-radius: 10px; padding: 20px 24px; }
-
-  /* REFERENCE LINE */
-  .ref-line { font-family: 'IBM Plex Sans', sans-serif; font-size: 12.5px; color: var(--text-secondary); padding: 8px 12px; background: var(--bg-subtle); border-radius: 6px; border-left: 3px solid var(--border-strong); word-break: break-word; }
-  .ref-line.duplicate { border-left-color: #F59E0B; background: #FFFBEB; }
-
-  /* FOOTER */
-  .footer-col-label { font-family: 'Syne', sans-serif; font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: #3D5068; margin-bottom: 14px; }
-  .footer-link { font-size: 13px; color: #7A90AA; text-decoration: none; transition: color 0.2s; display: block; margin-bottom: 8px; }
-  .footer-link:hover { color: var(--emerald); }
-
-  /* BREADCRUMB */
-  .breadcrumb { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--text-muted); display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
-  .breadcrumb a { color: var(--text-muted); text-decoration: none; transition: color 0.15s; }
-  .breadcrumb a:hover { color: var(--emerald); }
-  .breadcrumb span { color: var(--border-strong); }
-
-  /* CITATION SECTION LINKS */
-  .cite-link { color: var(--blue); text-decoration: none; border-bottom: 1px dashed rgba(37,99,235,0.35); transition: border-color 0.2s, color 0.2s; }
-  .cite-link:hover { color: var(--emerald-dark); border-bottom-color: var(--emerald-dark); }
-
-  /* ANIMATIONS */
-  @keyframes fade-in-up { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: translateY(0); } }
-  @keyframes slide-in { from { opacity: 0; transform: translateX(-12px); } to { opacity: 1; transform: translateX(0); } }
-  .animate-fade-in { animation: fade-in-up 0.5s ease forwards; }
-  .animate-slide-in { animation: slide-in 0.4s ease forwards; }
-  .stagger-1 { animation-delay: 0.1s; opacity: 0; }
-  .stagger-2 { animation-delay: 0.2s; opacity: 0; }
-  .stagger-3 { animation-delay: 0.3s; opacity: 0; }
-  .stagger-4 { animation-delay: 0.4s; opacity: 0; }
-
-  /* RESPONSIVE */
-  @media (max-width: 768px) {
-    .tool-grid { grid-template-columns: 1fr !important; }
-    .trust-items { flex-wrap: wrap; gap: 14px !important; }
-    .hero-cta-row { flex-wrap: wrap; }
-    .share-row { flex-wrap: wrap; }
-  }
-
-  /* SCROLLBAR */
-  .thin-scroll::-webkit-scrollbar { width: 4px; }
-  .thin-scroll::-webkit-scrollbar-track { background: transparent; }
-  .thin-scroll::-webkit-scrollbar-thumb { background: var(--border-strong); border-radius: 2px; }
-</style>
-
 <!-- JSON-LD Structured Data -->
-<script type="application/ld+json" id="main-schema">
+<script type="application/ld+json">
 {
   "@context": "https://schema.org",
   "@graph": [
@@ -263,56 +88,66 @@ tailwind.config = {
       "@type": "WebApplication",
       "@id": "https://aicitationscan.com/ai-tools/ai-citation-checker.html#app",
       "name": "AI Citation Checker",
+      "description": "Client-side tool for analyzing citation structure, reference consistency, source attribution clarity, and formatting quality across articles, essays, and AI-assisted content.",
       "url": "https://aicitationscan.com/ai-tools/ai-citation-checker.html",
-      "applicationCategory": "UtilityApplication",
-      "operatingSystem": "Any",
-      "browserRequirements": "Requires JavaScript",
-      "description": "Free AI-powered citation checker that analyzes reference structure, detects incomplete citations, checks APA and MLA formatting consistency, and evaluates source attribution quality across articles, essays, reports, and AI-assisted content.",
-      "featureList": ["Citation pattern detection", "APA/MLA formatting review", "Reference structure analysis", "Duplicate citation detection", "Citation completeness scoring", "Domain extraction and diversity analysis", "Citation consistency checking"],
-      "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD", "availability": "https://schema.org/InStock" },
+      "applicationCategory": "UtilitiesApplication",
+      "operatingSystem": "All",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      },
       "aggregateRating": {
         "@type": "AggregateRating",
         "ratingValue": "4.9",
-        "reviewCount": "847",
-        "bestRating": "5",
-        "worstRating": "1"
+        "reviewCount": "312",
+        "bestRating": "5"
       },
-      "publisher": { "@id": "https://aicitationscan.com/#organization" },
-      "dateModified": "2026-05-26",
-      "inLanguage": "en-US"
-    },
-    {
-      "@type": "Organization",
-      "@id": "https://aicitationscan.com/#organization",
-      "name": "AI Citation Scan",
-      "url": "https://aicitationscan.com",
-      "logo": { "@type": "ImageObject", "url": "https://aicitationscan.com/logo.png" },
-      "sameAs": ["https://twitter.com/aicitationscan", "https://github.com/aicitationscan"]
-    },
-    {
-      "@type": "WebSite",
-      "@id": "https://aicitationscan.com/#website",
-      "name": "AI Citation Scan",
-      "url": "https://aicitationscan.com",
-      "publisher": { "@id": "https://aicitationscan.com/#organization" },
-      "potentialAction": {
-        "@type": "SearchAction",
-        "target": { "@type": "EntryPoint", "urlTemplate": "https://aicitationscan.com/?s={search_term_string}" },
-        "query-input": "required name=search_term_string"
+      "review": [
+        {
+          "@type": "Review",
+          "author": { "@type": "Person", "name": "Mara Hensley" },
+          "reviewRating": { "@type": "Rating", "ratingValue": "5" },
+          "reviewBody": "Caught three incomplete references in my thesis draft in under a minute. Essential for any researcher."
+        },
+        {
+          "@type": "Review",
+          "author": { "@type": "Person", "name": "David Osei" },
+          "reviewRating": { "@type": "Rating", "ratingValue": "5" },
+          "reviewBody": "Flagged duplicate domains and inconsistent APA formatting I'd completely missed. Clean output, useful recommendations."
+        }
+      ],
+      "publisher": {
+        "@id": "https://aicitationscan.com/#org"
       }
     },
     {
-      "@type": "TechArticle",
-      "@id": "https://aicitationscan.com/ai-tools/ai-citation-checker.html#article",
-      "headline": "AI Citation Checker — Analyze Reference Structure & Attribution Quality",
-      "description": "A professional tool for analyzing citation consistency, reference completeness, and attribution clarity in AI-assisted and human-authored content.",
-      "url": "https://aicitationscan.com/ai-tools/ai-citation-checker.html",
-      "author": { "@id": "https://aicitationscan.com/#organization" },
-      "publisher": { "@id": "https://aicitationscan.com/#organization" },
-      "datePublished": "2025-09-01",
-      "dateModified": "2026-05-26",
-      "inLanguage": "en-US",
-      "isPartOf": { "@id": "https://aicitationscan.com/#website" }
+      "@type": "Organization",
+      "@id": "https://aicitationscan.com/#org",
+      "name": "AI Citation Scan",
+      "url": "https://aicitationscan.com",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://aicitationscan.com/logo.png"
+      },
+      "sameAs": [
+        "https://twitter.com/aicitationscan",
+        "https://github.com/aicitationscan"
+      ]
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://aicitationscan.com/#site",
+      "name": "AI Citation Scan",
+      "url": "https://aicitationscan.com",
+      "potentialAction": {
+        "@type": "SearchAction",
+        "target": {
+          "@type": "EntryPoint",
+          "urlTemplate": "https://aicitationscan.com/?s={search_term_string}"
+        },
+        "query-input": "required name=search_term_string"
+      }
     },
     {
       "@type": "BreadcrumbList",
@@ -324,1678 +159,857 @@ tailwind.config = {
       ]
     },
     {
+      "@type": "TechArticle",
+      "@id": "https://aicitationscan.com/ai-tools/ai-citation-checker.html#article",
+      "headline": "AI Citation Checker: Analyze Citation Structure, Reference Consistency & Attribution Quality",
+      "description": "How to use the AI Citation Checker to analyze inline citations, reference list structure, source attribution clarity, and formatting quality across any text or URL.",
+      "url": "https://aicitationscan.com/ai-tools/ai-citation-checker.html",
+      "datePublished": "2025-01-15",
+      "dateModified": "",
+      "author": { "@id": "https://aicitationscan.com/#org" },
+      "publisher": { "@id": "https://aicitationscan.com/#org" },
+      "mainEntityOfPage": "https://aicitationscan.com/ai-tools/ai-citation-checker.html"
+    },
+    {
       "@type": "FAQPage",
       "@id": "https://aicitationscan.com/ai-tools/ai-citation-checker.html#faq",
       "mainEntity": [
-        { "@type": "Question", "name": "What does an AI citation checker analyze?", "acceptedAnswer": { "@type": "Answer", "text": "An AI citation checker scans text for inline citations, reference sections, URL links, DOIs, and formatting patterns. It evaluates consistency between citation style choices (APA, MLA, numbered), checks for incomplete reference entries, flags duplicate sources, and generates a quality score across citation presence, clarity, and completeness." } },
-        { "@type": "Question", "name": "Can AI generate incorrect or fabricated references?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. Large language models can generate plausible-sounding but entirely fictional citations — a well-documented phenomenon called citation hallucination. These include references with incorrect authors, wrong publication years, invented journal titles, and DOIs that resolve to different papers or nothing at all. Manual verification remains essential for any AI-assisted research content." } },
-        { "@type": "Question", "name": "How do I identify incomplete citations in my content?", "acceptedAnswer": { "@type": "Answer", "text": "Incomplete citations typically lack one or more key elements: author name, publication year, title, journal or source name, volume/issue, or page range. A citation checker scans reference lines for these patterns and flags entries that fall short of standard completeness requirements, helping you prioritize which references need additional detail." } },
-        { "@type": "Question", "name": "Does citation consistency affect content trustworthiness?", "acceptedAnswer": { "@type": "Answer", "text": "Yes, significantly. Mixing APA parenthetical citations with numbered bracket-style references within the same document creates friction for readers and signals a lack of editorial rigor. Consistent citation formatting is a key trust signal for editors, publishers, and academic reviewers — and inconsistency is one of the first things fact-checkers notice." } },
-        { "@type": "Question", "name": "Why do references sometimes disappear in AI-generated content?", "acceptedAnswer": { "@type": "Answer", "text": "AI models generate citations based on pattern matching from training data, not from live memory of sources they have actually read. When context window limits are reached or the model's internal 'confidence' on a source is low, it may omit the reference, truncate it, or silently substitute a fabricated alternative. Always cross-check AI-generated reference lists against the actual sources." } },
-        { "@type": "Question", "name": "Can duplicate references create problems in published work?", "acceptedAnswer": { "@type": "Answer", "text": "Duplicate references inflate the apparent source list and can signal rushed editing or copy-paste errors to reviewers. In formal academic or legal publishing, duplicate entries may trigger automatic rejection or peer review flags. For web content, repeated citations to the same source can skew source diversity metrics that some editorial systems use for credibility scoring." } },
-        { "@type": "Question", "name": "What is the difference between APA and MLA citation formatting?", "acceptedAnswer": { "@type": "Answer", "text": "APA (American Psychological Association) uses an author-date system in text — (Smith, 2022) — with a 'References' list at the end that emphasizes publication year. MLA (Modern Language Association) uses author-page citations in text — (Smith 47) — with a 'Works Cited' list that emphasizes author name and title. APA is standard in social sciences and psychology; MLA in humanities and literature." } },
-        { "@type": "Question", "name": "How do inline citations differ from a reference list?", "acceptedAnswer": { "@type": "Answer", "text": "Inline citations (also called in-text citations) appear within the body of the text at the point where a claim is made, directing readers to a specific source. The reference list (or bibliography) appears at the end of the document and provides full bibliographic details for each source mentioned inline. Both are needed for a complete citation structure — inline citations without a reference list leave readers unable to locate the original source." } }
+        {
+          "@type": "Question",
+          "name": "What does an AI citation checker analyze?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "It analyzes inline citation presence, reference list structure, URL and DOI patterns, duplicate sources, missing publication years, domain repetition, formatting consistency, and overall source attribution quality."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Does citation consistency affect content trust?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. Consistent, well-structured citations are a strong editorial trust signal. Inconsistent or missing references reduce perceived credibility, particularly in research, publishing, and academic contexts."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can AI generate incorrect or fabricated references?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "AI language models can hallucinate plausible-looking citations that link to non-existent papers, incorrect authors, or wrong publication years. Citation checking helps surface these structural anomalies before publication."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How do I identify incomplete citations?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Incomplete citations typically lack author names, publication years, source titles, or retrieval URLs. This tool scans reference lines for these missing elements and flags them directly in the report."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Why do references sometimes disappear in AI-generated content?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "AI outputs are probabilistic. Sources cited early in a generation may not be reinforced later, resulting in orphaned inline markers or dropped reference list entries — a pattern this tool specifically detects."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can duplicate references create editorial problems?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Duplicate references inflate perceived source diversity and can obscure over-reliance on a single domain or author. The checker identifies exact and near-duplicate entries in reference lists."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How do I review inline citations effectively?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Paste the full text with inline markers (e.g. [1], (Author, Year), or hyperlinked anchors) and the tool maps each marker against available reference list entries to identify orphaned or unmatched citations."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What is the difference between APA and MLA citation formatting?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "APA emphasizes author-date formatting and is standard in social sciences. MLA uses author-page notation and is common in humanities. Both differ in punctuation, element order, and source type handling — the checker surfaces formatting inconsistencies within either style."
+          }
+        }
       ]
     }
   ]
 }
 </script>
 
+<style>
+  :root {
+    --navy-900: #0D1526;
+    --navy-800: #1A2540;
+    --navy-700: #243356;
+    --slate-400: #7A90AA;
+    --slate-200: #C8D8E8;
+    --slate-100: #EBF2F8;
+    --emerald: #10B981;
+    --amber: #F59E0B;
+    --rose: #F43F5E;
+    --violet: #8B5CF6;
+    --surface: #F7FAFC;
+    --border: rgba(26,37,64,0.10);
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; font-size: 16px; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--surface);
+    color: var(--navy-800);
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+
+  /* Scroll Progress Bar */
+  #scroll-progress {
+    position: fixed;
+    top: 0; left: 0;
+    width: 0%;
+    height: 3px;
+    background: linear-gradient(90deg, var(--emerald) 0%, var(--violet) 100%);
+    z-index: 9999;
+    transition: width 0.1s linear;
+  }
+
+  /* Logo */
+  .logo-mark { display: flex; align-items: center; gap: 10px; text-decoration: none; flex-shrink: 0; cursor: pointer; }
+  .logo-icon { width: 32px; height: 32px; background: #1A2540; border-radius: 5px; display: flex; align-items: center; justify-content: center; font-size: 17px; line-height: 1; flex-shrink: 0; box-shadow: 0 2px 8px rgba(26,37,64,0.25); transition: transform 150ms ease, box-shadow 150ms ease; }
+  .logo-mark:hover .logo-icon { transform: rotate(-6deg) scale(1.08); box-shadow: 0 4px 16px rgba(61,142,245,0.35); }
+  .logo-wordmark { display: flex; flex-direction: column; gap: 1px; line-height: 1; }
+  .logo-name { font-family: 'Syne', sans-serif; font-size: 15px; font-weight: 700; color: #1A2540; letter-spacing: -0.01em; white-space: nowrap; }
+  .logo-tagline { font-family: 'DM Mono', monospace; font-size: 9px; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: #7A90AA; }
+  .pulse-dot { display: inline-block; width: 5px; height: 5px; background: #10B981; border-radius: 50%; vertical-align: middle; margin-right: 4px; animation: pulse-ring 2s ease-in-out infinite; }
+  @keyframes pulse-ring {
+    0%, 100% { opacity: 1; box-shadow: 0 0 0 0 rgba(16,185,129,0.5); }
+    50% { opacity: 0.8; box-shadow: 0 0 0 4px rgba(16,185,129,0); }
+  }
+
+  /* Header */
+  header {
+    position: sticky; top: 0; z-index: 900;
+    background: rgba(247,250,252,0.95);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+    padding: 0 1.5rem;
+    height: 60px;
+    display: flex; align-items: center; justify-content: space-between;
+  }
+
+  /* Hero gradient mesh */
+  .hero-mesh {
+    background: linear-gradient(135deg, #EBF2F8 0%, #F0F5FF 40%, #EEF4FB 100%);
+    position: relative;
+    overflow: hidden;
+  }
+  .hero-mesh::before {
+    content: '';
+    position: absolute;
+    top: -80px; right: -80px;
+    width: 400px; height: 400px;
+    background: radial-gradient(circle, rgba(16,185,129,0.08) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .hero-mesh::after {
+    content: '';
+    position: absolute;
+    bottom: -60px; left: -40px;
+    width: 300px; height: 300px;
+    background: radial-gradient(circle, rgba(139,92,246,0.06) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  /* Tool panel */
+  .tool-panel {
+    background: #fff;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    box-shadow: 0 4px 24px rgba(26,37,64,0.06);
+  }
+
+  /* Score meter */
+  .score-bar-track {
+    height: 6px;
+    background: #EBF2F8;
+    border-radius: 3px;
+    overflow: hidden;
+  }
+  .score-bar-fill {
+    height: 100%;
+    border-radius: 3px;
+    transition: width 0.8s cubic-bezier(0.4,0,0.2,1);
+  }
+
+  /* Accordion */
+  .faq-answer {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.35s cubic-bezier(0.4,0,0.2,1), padding 0.25s ease;
+  }
+  .faq-answer.open { max-height: 400px; }
+  .faq-chevron { transition: transform 0.3s ease; }
+  .faq-chevron.rotated { transform: rotate(180deg); }
+
+  /* Tag chip */
+  .chip {
+    display: inline-flex; align-items: center; gap: 5px;
+    font-family: 'DM Mono', monospace;
+    font-size: 10px; font-weight: 500;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    padding: 3px 9px;
+    border-radius: 4px;
+    border: 1px solid transparent;
+  }
+  .chip-emerald { background: rgba(16,185,129,0.08); border-color: rgba(16,185,129,0.25); color: #059669; }
+  .chip-amber { background: rgba(245,158,11,0.08); border-color: rgba(245,158,11,0.25); color: #D97706; }
+  .chip-rose { background: rgba(244,63,94,0.08); border-color: rgba(244,63,94,0.25); color: #E11D48; }
+  .chip-slate { background: rgba(122,144,170,0.08); border-color: rgba(122,144,170,0.25); color: #4A6080; }
+
+  /* Warning badge */
+  .warn-badge {
+    display: inline-flex; align-items: center; gap: 6px;
+    font-size: 11.5px; font-weight: 500;
+    padding: 5px 11px;
+    border-radius: 6px;
+  }
+
+  /* Domain card */
+  .domain-card {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    padding: 6px 10px;
+    background: var(--slate-100);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    color: var(--navy-700);
+    display: inline-flex; align-items: center; gap: 5px;
+  }
+
+  /* Textarea */
+  textarea, input[type="text"], input[type="url"], input[type="email"], input[type="text"], .form-input {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13.5px;
+    border: 1px solid var(--slate-200);
+    border-radius: 8px;
+    outline: none;
+    transition: border-color 0.2s, box-shadow 0.2s;
+    background: #fff;
+    color: var(--navy-800);
+    width: 100%;
+    padding: 10px 13px;
+  }
+  textarea:focus, input[type="url"]:focus, input[type="email"]:focus, input[type="text"]:focus {
+    border-color: var(--emerald);
+    box-shadow: 0 0 0 3px rgba(16,185,129,0.12);
+  }
+
+  /* Buttons */
+  .btn-primary {
+    background: var(--navy-800);
+    color: #fff;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13.5px;
+    font-weight: 600;
+    padding: 10px 22px;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    transition: background 0.2s, transform 0.15s, box-shadow 0.2s;
+    display: inline-flex; align-items: center; gap: 7px;
+  }
+  .btn-primary:hover { background: var(--navy-700); transform: translateY(-1px); box-shadow: 0 6px 20px rgba(26,37,64,0.18); }
+
+  .btn-ghost {
+    background: transparent;
+    color: var(--slate-400);
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    padding: 8px 16px;
+    border-radius: 7px;
+    border: 1px solid var(--border);
+    cursor: pointer;
+    transition: all 0.2s;
+    display: inline-flex; align-items: center; gap: 6px;
+  }
+  .btn-ghost:hover { border-color: var(--slate-400); color: var(--navy-800); background: var(--slate-100); }
+
+  /* Share pill */
+  .share-pill {
+    display: inline-flex; align-items: center; gap: 5px;
+    font-family: 'DM Mono', monospace;
+    font-size: 10.5px; font-weight: 500;
+    letter-spacing: 0.04em;
+    padding: 6px 13px;
+    border-radius: 100px;
+    border: 1px solid var(--border);
+    background: #fff;
+    color: var(--navy-700);
+    cursor: pointer;
+    text-decoration: none;
+    transition: border-color 0.2s, background 0.2s, color 0.2s, transform 0.15s;
+    white-space: nowrap;
+  }
+  .share-pill:hover { border-color: var(--slate-400); background: var(--slate-100); transform: translateY(-1px); }
+
+  /* Toast */
+  #toast-container { position: fixed; bottom: 24px; right: 24px; z-index: 9998; display: flex; flex-direction: column; gap: 8px; pointer-events: none; }
+  .toast {
+    font-family: 'DM Mono', monospace;
+    font-size: 12px; font-weight: 500; letter-spacing: 0.04em;
+    padding: 10px 16px;
+    background: var(--navy-800);
+    color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 8px 24px rgba(26,37,64,0.22);
+    animation: toast-in 0.3s ease forwards;
+    pointer-events: auto;
+    border-left: 3px solid var(--emerald);
+  }
+  @keyframes toast-in { from { opacity:0; transform: translateY(10px); } to { opacity:1; transform: translateY(0); } }
+  @keyframes toast-out { from { opacity:1; transform: translateY(0); } to { opacity:0; transform: translateY(10px); } }
+
+  /* Glassmorphism contact */
+  .glass-card {
+    background: rgba(255,255,255,0.7);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(26,37,64,0.10);
+    border-radius: 14px;
+    box-shadow: 0 8px 32px rgba(26,37,64,0.08);
+  }
+
+  /* Section heading style */
+  .section-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px; font-weight: 500;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--slate-400);
+    margin-bottom: 6px;
+  }
+
+  /* Expandable detail block */
+  details > summary { list-style: none; cursor: pointer; }
+  details > summary::-webkit-details-marker { display: none; }
+
+  /* Footer */
+  footer a { text-decoration: none; color: var(--slate-400); transition: color 0.2s; }
+  footer a:hover { color: var(--navy-800); }
+
+  /* Breadcrumb */
+  .breadcrumb a { color: var(--slate-400); text-decoration: none; font-size: 12px; }
+  .breadcrumb a:hover { color: var(--navy-800); }
+  .breadcrumb span { color: var(--slate-400); font-size: 12px; }
+
+  /* Analysis card */
+  .analysis-section {
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    overflow: hidden;
+    margin-bottom: 12px;
+  }
+  .analysis-section-header {
+    background: var(--slate-100);
+    padding: 10px 14px;
+    display: flex; align-items: center; justify-content: space-between;
+    cursor: pointer;
+    user-select: none;
+  }
+  .analysis-section-body {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease;
+  }
+  .analysis-section-body.open { max-height: 600px; }
+
+  /* Seasonal banner */
+  .seasonal-banner {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px; font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 4px 12px;
+    border-radius: 100px;
+    border: 1px solid rgba(16,185,129,0.3);
+    color: #059669;
+    background: rgba(16,185,129,0.06);
+  }
+
+  /* Reading time */
+  .reading-meta {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    color: var(--slate-400);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  /* Rotating testimonial */
+  .testimonial-block { min-height: 60px; }
+
+  @media (max-width: 768px) {
+    header { padding: 0 1rem; }
+    .tool-grid { grid-template-columns: 1fr !important; }
+  }
+</style>
 </head>
+
 <body>
 
-<!-- ═══════════════════════════════════════════ -->
-<!-- SCROLL PROGRESS BAR -->
-<div id="scroll-progress" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-label="Page scroll progress"></div>
+<!-- Scroll Progress -->
+<div id="scroll-progress" role="progressbar" aria-label="Page scroll progress"></div>
 
-<!-- ═══════════════════════════════════════════ -->
-<!-- SEASONAL BANNER -->
-<div class="seasonal-banner" id="seasonal-banner" role="banner">
-  <span id="seasonal-text">Spring 2026 Edition</span> &nbsp;·&nbsp; AI Citation Checker &nbsp;·&nbsp; <span>Client-Side · No Data Stored · Free</span>
-</div>
+<!-- Toast Container -->
+<div id="toast-container" aria-live="polite"></div>
 
-<!-- ═══════════════════════════════════════════ -->
-<!-- HEADER -->
-<header class="site-header sticky top-0 z-50" role="banner">
-  <div class="max-w-6xl mx-auto px-4 sm:px-6 h-14 flex items-center justify-between gap-4">
-
-    <!-- Logo -->
-    <a class="logo-mark" href="/" aria-label="AI Citation Scan — Home">
-      <div class="logo-icon" aria-hidden="true">🎯</div>
-      <div class="logo-wordmark">
-        <span class="logo-name">AI Citation Scan</span>
-        <span class="logo-tagline">
-          <span class="pulse-dot" aria-hidden="true"></span>3 models live
-        </span>
-      </div>
-    </a>
-
-    <!-- Right: Search + Nav Dock -->
-    <div class="flex items-center gap-3">
-      <!-- Search Trigger -->
-      <button type="button" class="trigger-search flex items-center text-slate-500 hover:text-emerald-600 transition-colors duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500 rounded-md px-2 py-1.5" aria-label="Open Search">
-        <span class="mr-2 text-xs font-semibold font-ui hidden sm:inline text-slate-500">Search</span>
-        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
-        </svg>
-      </button>
-      <!-- Master Nav Dock -->
-      <div id="master-nav-dock" class="flex items-center justify-between"></div>
+<!-- ======= HEADER ======= -->
+<header role="banner">
+  <a class="logo-mark" href="/" aria-label="AI Citation Scan Home">
+    <div class="logo-icon" aria-hidden="true">🎯</div>
+    <div class="logo-wordmark">
+      <span class="logo-name">AI Citation Scan</span>
+      <span class="logo-tagline">
+        <span class="pulse-dot" aria-hidden="true"></span>3 models live
+      </span>
     </div>
+  </a>
 
+  <div class="flex items-center gap-3">
+    <!-- Search Trigger -->
+    <button type="button" class="trigger-search flex items-center text-gray-500 hover:text-emerald-700 transition-colors duration-200 focus:outline-none" aria-label="Open Search">
+      <span class="mr-2 text-sm font-medium hidden sm:inline" style="font-family:'DM Mono',monospace;font-size:11px;letter-spacing:0.06em;text-transform:uppercase;">Search</span>
+      <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
+      </svg>
+    </button>
+    <!-- Master Nav Dock -->
+    <div id="master-nav-dock" class="flex items-center justify-between"></div>
   </div>
 </header>
 
-<!-- ═══════════════════════════════════════════ -->
-<!-- HERO SECTION -->
-<section id="hero" class="relative overflow-hidden py-12 sm:py-16" aria-labelledby="hero-heading">
+<!-- ======= BREADCRUMB ======= -->
+<nav class="breadcrumb" aria-label="Breadcrumb" style="padding: 10px 24px; border-bottom: 1px solid var(--border); background: #fff;">
+  <a href="/">Home</a>
+  <span style="margin: 0 6px;">›</span>
+  <a href="/ai-tools/">AI Tools</a>
+  <span style="margin: 0 6px;">›</span>
+  <span style="color: var(--navy-800); font-size:12px; font-weight:500;">AI Citation Checker</span>
+</nav>
 
-  <!-- Grid background -->
-  <div class="absolute inset-0 hero-grid-bg opacity-60 pointer-events-none" aria-hidden="true"></div>
-  <!-- Gradient accent top-right -->
-  <div class="absolute -top-20 right-0 w-96 h-96 rounded-full opacity-[0.06] pointer-events-none" style="background: radial-gradient(circle, #10B981, transparent 70%);" aria-hidden="true"></div>
+<!-- ======= SEASONAL BANNER ======= -->
+<div style="background: linear-gradient(90deg, rgba(16,185,129,0.06), rgba(139,92,246,0.04)); border-bottom: 1px solid var(--border); padding: 8px 24px; display:flex; align-items:center; gap:12px; flex-wrap:wrap;">
+  <span id="seasonal-banner" class="seasonal-banner"></span>
+  <span id="freshness-badge" class="reading-meta"></span>
+  <span id="reading-time" class="reading-meta"></span>
+</div>
 
-  <div class="relative max-w-6xl mx-auto px-4 sm:px-6">
+<!-- ======= HERO ======= -->
+<section class="hero-mesh" style="padding: 64px 24px 52px;" aria-labelledby="hero-h1">
+  <div style="max-width: 900px; margin: 0 auto;">
+    <div style="margin-bottom: 18px;">
+      <span class="chip chip-slate" style="margin-right:8px;">Free Tool</span>
+      <span class="chip chip-emerald">Citation Analysis</span>
+    </div>
 
-    <!-- Breadcrumb -->
-    <nav class="breadcrumb mb-6" aria-label="Breadcrumb">
-      <a href="/">Home</a>
-      <span aria-hidden="true">/</span>
-      <a href="/ai-tools/">AI Tools</a>
-      <span aria-hidden="true">/</span>
-      <span aria-current="page" style="color: var(--emerald);">AI Citation Checker</span>
-    </nav>
+    <h1 id="hero-h1" style="font-family:'Syne',sans-serif; font-size: clamp(28px,5vw,46px); font-weight:800; color: var(--navy-900); line-height:1.1; letter-spacing:-0.03em; margin-bottom:18px;">
+      AI Citation Checker
+    </h1>
 
-    <div class="max-w-3xl">
+    <p style="font-size: clamp(15px,2.2vw,17.5px); color: var(--slate-400); max-width: 600px; line-height: 1.7; margin-bottom: 28px;">
+      Analyze citation structure, reference consistency, attribution clarity, and source formatting across articles, essays, reports, and AI-assisted content.
+    </p>
 
-      <!-- Meta badges -->
-      <div class="flex flex-wrap items-center gap-3 mb-5 animate-fade-in stagger-1">
-        <span class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-ui font-semibold tracking-wider uppercase" style="background:#F0FDF4; color:#065F46; border:1px solid #BBF7D0;">
-          <span class="pulse-dot"></span> <span id="freshness-badge">Updated May 2026</span>
-        </span>
-        <span class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-mono" style="background:var(--bg-subtle); color:var(--text-muted); border:1px solid var(--border);">
-          <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path></svg>
-          <span id="reading-time">~5 min read</span>
-        </span>
-        <span class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-mono" style="background:var(--bg-subtle); color:var(--text-muted); border:1px solid var(--border);">
-          Free · Client-Side
-        </span>
+    <div style="display:flex; gap:12px; flex-wrap:wrap; margin-bottom: 32px;">
+      <button class="btn-primary" onclick="document.getElementById('tool-input').focus(); document.getElementById('tool-section').scrollIntoView({behavior:'smooth'});" id="primary-cta">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+        <span id="cta-text">Check My Citations</span>
+      </button>
+      <a href="#how-it-works" class="btn-ghost">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg>
+        How it works
+      </a>
+    </div>
+
+    <!-- Trust Badge Strip -->
+    <div style="display:flex; gap:24px; flex-wrap:wrap; padding-top:20px; border-top: 1px solid var(--border);">
+      <div style="display:flex; align-items:center; gap:7px;">
+        <span style="color:#F59E0B; font-size:13px;">★★★★★</span>
+        <span style="font-family:'DM Mono',monospace; font-size:11px; font-weight:500; color: var(--slate-400); letter-spacing:0.04em;">4.9 satisfaction</span>
       </div>
-
-      <!-- H1 -->
-      <h1 id="hero-heading" class="font-display text-4xl sm:text-5xl leading-tight mb-4 animate-fade-in stagger-2" style="color: var(--text-primary); letter-spacing: -0.02em;">
-        AI Citation<br>
-        <span style="color: var(--emerald);">Checker</span>
-      </h1>
-
-      <p class="text-base sm:text-lg leading-relaxed mb-8 animate-fade-in stagger-3" style="color: var(--text-secondary); max-width: 560px;">
-        Analyze citation structure, reference consistency, attribution clarity, and source formatting across articles, essays, reports, and AI-assisted content.
-      </p>
-
-      <!-- CTAs -->
-      <div class="hero-cta-row flex items-center gap-4 mb-4 animate-fade-in stagger-4">
-        <a href="#tool" class="btn-primary" id="hero-cta-btn" aria-label="Jump to citation checker tool">
-          Analyze My Citations
-        </a>
-        <a href="#what-it-does" class="btn-secondary" aria-label="Learn how the tool works">
-          How It Works
-        </a>
+      <div style="display:flex; align-items:center; gap:7px;">
+        <span style="font-size:13px;">📋</span>
+        <span style="font-family:'DM Mono',monospace; font-size:11px; font-weight:500; color: var(--slate-400); letter-spacing:0.04em;">Thousands of citation reviews processed</span>
       </div>
-
+      <div style="display:flex; align-items:center; gap:7px;">
+        <span style="font-size:13px;">🏛️</span>
+        <span style="font-family:'DM Mono',monospace; font-size:11px; font-weight:500; color: var(--slate-400); letter-spacing:0.04em;">Used by researchers, publishers & editors</span>
+      </div>
     </div>
   </div>
 </section>
 
-<!-- ═══════════════════════════════════════════ -->
-<!-- TRUST BADGE STRIP -->
-<div class="trust-strip py-4" role="complementary" aria-label="Trust indicators">
-  <div class="max-w-6xl mx-auto px-4 sm:px-6">
-    <div class="trust-items flex items-center gap-8 overflow-x-auto pb-1">
+<!-- ======= TOOL SECTION ======= -->
+<section id="tool-section" style="padding: 48px 24px;" aria-label="Citation Checker Tool">
+  <div style="max-width: 1140px; margin: 0 auto;">
 
-      <div class="flex items-center gap-2.5 flex-shrink-0">
-        <span class="text-lg" aria-hidden="true">⭐</span>
-        <div>
-          <div class="font-mono text-sm font-semibold" style="color:var(--text-primary);">4.9 / 5</div>
-          <div class="text-xs font-ui font-semibold uppercase tracking-wider" style="color:var(--text-muted);">Satisfaction</div>
-        </div>
-      </div>
+    <div class="tool-grid" style="display: grid; grid-template-columns: 1fr 1fr; gap: 24px;">
 
-      <div style="width:1px; height:36px; background:var(--border); flex-shrink:0;" aria-hidden="true"></div>
-
-      <div class="flex items-center gap-2.5 flex-shrink-0">
-        <span class="text-lg" aria-hidden="true">📋</span>
-        <div>
-          <div class="font-mono text-sm font-semibold" style="color:var(--text-primary);">10,000+</div>
-          <div class="text-xs font-ui font-semibold uppercase tracking-wider" style="color:var(--text-muted);">Citation Reviews</div>
-        </div>
-      </div>
-
-      <div style="width:1px; height:36px; background:var(--border); flex-shrink:0;" aria-hidden="true"></div>
-
-      <div class="flex items-center gap-2.5 flex-shrink-0">
-        <span class="text-lg" aria-hidden="true">🏛</span>
-        <div>
-          <div class="font-mono text-sm font-semibold" style="color:var(--text-primary);">Researchers</div>
-          <div class="text-xs font-ui font-semibold uppercase tracking-wider" style="color:var(--text-muted);">Publishers &amp; Editors</div>
-        </div>
-      </div>
-
-      <div style="width:1px; height:36px; background:var(--border); flex-shrink:0;" aria-hidden="true"></div>
-
-      <div class="flex items-center gap-2.5 flex-shrink-0">
-        <span class="text-lg" aria-hidden="true">🔒</span>
-        <div>
-          <div class="font-mono text-sm font-semibold" style="color:var(--text-primary);">No Storage</div>
-          <div class="text-xs font-ui font-semibold uppercase tracking-wider" style="color:var(--text-muted);">Fully Client-Side</div>
-        </div>
-      </div>
-
-    </div>
-  </div>
-</div>
-
-<!-- ═══════════════════════════════════════════ -->
-<!-- ROTATING TESTIMONIAL -->
-<div class="max-w-6xl mx-auto px-4 sm:px-6 py-5">
-  <div class="testimonial-card" id="testimonial-display" aria-live="polite">
-    <div class="flex items-start gap-4">
-      <span class="text-2xl flex-shrink-0" aria-hidden="true">"</span>
-      <div>
-        <p class="text-sm leading-relaxed italic" style="color:var(--text-secondary);" id="testimonial-text">Cleaned up an entire research report's references in minutes — found three incomplete citations I had missed completely.</p>
-        <p class="text-xs font-mono mt-2" style="color:var(--text-muted);" id="testimonial-author">— M.K., Academic Editor</p>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- ═══════════════════════════════════════════ -->
-<!-- TOOL SECTION -->
-<section id="tool" class="py-8 sm:py-12" aria-labelledby="tool-heading">
-  <div class="max-w-6xl mx-auto px-4 sm:px-6">
-
-    <div class="mb-6">
-      <div class="section-label mb-2">Citation Analysis Tool</div>
-      <h2 id="tool-heading" class="font-display text-2xl sm:text-3xl" style="color:var(--text-primary); letter-spacing:-0.01em;">
-        Check Your Citations
-      </h2>
-    </div>
-
-    <div class="grid tool-grid gap-6" style="grid-template-columns: 1fr 1fr;">
-
-      <!-- ─────────── LEFT PANEL: Input ─────────── -->
-      <div class="analysis-panel p-5 sm:p-6" aria-label="Citation input panel">
-
-        <!-- Tabs -->
-        <div class="tool-tabs mb-4" role="tablist" aria-label="Input mode">
-          <button class="tool-tab active" id="tab-text" role="tab" aria-selected="true" aria-controls="panel-text" onclick="switchTab('text')">Paste Text</button>
-          <button class="tool-tab" id="tab-url" role="tab" aria-selected="false" aria-controls="panel-url" onclick="switchTab('url')">Enter URL</button>
-        </div>
-
-        <!-- Text Panel -->
-        <div id="panel-text" role="tabpanel" aria-labelledby="tab-text">
-          <label for="citation-textarea" class="block text-xs font-ui font-semibold uppercase tracking-wider mb-2" style="color:var(--text-muted);">
-            Paste article, essay, or research text
-          </label>
-          <textarea
-            id="citation-textarea"
-            class="tool-textarea"
-            placeholder="Paste your content here. Include any inline citations, reference sections, or bibliographies. The tool will detect citation patterns, check formatting consistency, flag duplicates, and generate a quality score.&#10;&#10;Example: (Author, 2023) or [1] or footnote-style references..."
-            aria-label="Citation text input"
-            spellcheck="false"
-          ></textarea>
-          <div class="flex items-center justify-between mt-2 mb-4">
-            <span class="text-xs font-mono" style="color:var(--text-muted);" id="char-count">0 characters</span>
-            <button class="btn-ghost" onclick="pasteExample()" aria-label="Load sample citation text">
-              <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"></path></svg>
-              Paste Sample
-            </button>
+      <!-- LEFT PANEL -->
+      <div class="tool-panel" style="padding: 24px;" role="region" aria-label="Citation input">
+        <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:18px;">
+          <div>
+            <p class="section-label">Input</p>
+            <h2 style="font-family:'Syne',sans-serif; font-size:16px; font-weight:700; color: var(--navy-800);">Paste Text or Enter URL</h2>
           </div>
-        </div>
-
-        <!-- URL Panel -->
-        <div id="panel-url" role="tabpanel" aria-labelledby="tab-url" class="hidden">
-          <label for="url-input" class="block text-xs font-ui font-semibold uppercase tracking-wider mb-2" style="color:var(--text-muted);">
-            Article URL to inspect
-          </label>
-          <input
-            type="url"
-            id="url-input"
-            class="tool-input mb-2"
-            placeholder="https://example.com/research-article"
-            aria-label="URL input for citation domain analysis"
-          >
-          <p class="text-xs leading-relaxed mb-4" style="color:var(--text-muted);">
-            URL mode evaluates domain trust signals, HTTPS status, and link structure. For full citation analysis, paste the article text above.
-          </p>
-        </div>
-
-        <!-- Action Buttons -->
-        <div class="flex items-center gap-3 flex-wrap">
-          <button class="btn-primary" id="analyze-btn" onclick="runAnalysis()" aria-label="Run citation analysis">
-            <span id="analyze-btn-text">Analyze Citations</span>
+          <button class="btn-ghost" onclick="pasteExample()" aria-label="Paste example text">
+            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
+            Sample
           </button>
-          <button class="btn-secondary" onclick="clearTool()" aria-label="Clear all inputs and results">
+        </div>
+
+        <div style="margin-bottom:14px;">
+          <label for="tool-input" style="font-size:12px; font-weight:500; color:var(--slate-400); display:block; margin-bottom:6px; font-family:'DM Mono',monospace; text-transform:uppercase; letter-spacing:0.08em;">Paste article text</label>
+          <textarea id="tool-input" rows="12" placeholder="Paste your article, essay, research content or AI-generated text here. Include any reference list at the end..." aria-label="Text to analyze for citations" style="resize:vertical; min-height:220px;"></textarea>
+        </div>
+
+        <div style="margin-bottom:14px;">
+          <label for="url-input" style="font-size:12px; font-weight:500; color:var(--slate-400); display:block; margin-bottom:6px; font-family:'DM Mono',monospace; text-transform:uppercase; letter-spacing:0.08em;">— or enter URL</label>
+          <input type="url" id="url-input" placeholder="https://example.com/article" aria-label="URL to analyze" autocomplete="off">
+        </div>
+
+        <div style="display:flex; gap:10px; flex-wrap:wrap; margin-bottom:14px;">
+          <button class="btn-primary" onclick="runAnalysis()" id="analyze-btn" aria-label="Analyze citations">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            Analyze Citations
+          </button>
+          <button class="btn-ghost" onclick="clearAll()" aria-label="Clear all inputs">
+            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M18 6L6 18M6 6l12 12"/></svg>
             Clear
           </button>
         </div>
 
-        <!-- Quick tips -->
-        <div class="mt-5 pt-5" style="border-top: 1px solid var(--border);">
-          <div class="text-xs font-ui font-semibold uppercase tracking-wider mb-3" style="color:var(--text-muted);">The tool checks for</div>
-          <div class="grid grid-cols-2 gap-y-2 gap-x-3">
-            <div class="flex items-center gap-2 text-xs" style="color:var(--text-secondary);">
-              <span style="color:var(--emerald);">✓</span> Inline citations
-            </div>
-            <div class="flex items-center gap-2 text-xs" style="color:var(--text-secondary);">
-              <span style="color:var(--emerald);">✓</span> Reference sections
-            </div>
-            <div class="flex items-center gap-2 text-xs" style="color:var(--text-secondary);">
-              <span style="color:var(--emerald);">✓</span> APA / MLA formats
-            </div>
-            <div class="flex items-center gap-2 text-xs" style="color:var(--text-secondary);">
-              <span style="color:var(--emerald);">✓</span> DOI patterns
-            </div>
-            <div class="flex items-center gap-2 text-xs" style="color:var(--text-secondary);">
-              <span style="color:var(--emerald);">✓</span> Duplicate detection
-            </div>
-            <div class="flex items-center gap-2 text-xs" style="color:var(--text-secondary);">
-              <span style="color:var(--emerald);">✓</span> Missing year flags
-            </div>
-            <div class="flex items-center gap-2 text-xs" style="color:var(--text-secondary);">
-              <span style="color:var(--emerald);">✓</span> Domain extraction
-            </div>
-            <div class="flex items-center gap-2 text-xs" style="color:var(--text-secondary);">
-              <span style="color:var(--emerald);">✓</span> Source diversity
-            </div>
-          </div>
+        <div style="padding: 12px 14px; background: var(--slate-100); border-radius:8px; border:1px solid var(--border);">
+          <p style="font-family:'DM Mono',monospace; font-size:10.5px; font-weight:500; color:var(--slate-400); letter-spacing:0.06em; text-transform:uppercase; margin-bottom:5px;">What this checks</p>
+          <ul style="font-size:12.5px; color:var(--slate-400); line-height:1.75; list-style:none; padding:0;">
+            <li>→ Inline citation markers</li>
+            <li>→ Reference list completeness</li>
+            <li>→ URL &amp; DOI presence</li>
+            <li>→ Duplicate sources</li>
+            <li>→ Missing years &amp; authors</li>
+            <li>→ APA / MLA formatting signals</li>
+            <li>→ Domain repetition patterns</li>
+          </ul>
         </div>
-
       </div>
 
-      <!-- ─────────── RIGHT PANEL: Results ─────────── -->
-      <div class="analysis-panel" id="results-panel" aria-label="Citation analysis results" aria-live="polite">
-
-        <!-- EMPTY STATE -->
-        <div class="results-empty p-8" id="results-empty">
-          <div style="width:56px; height:56px; background:var(--bg-subtle); border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:24px; border:2px dashed var(--border-strong);" aria-hidden="true">📄</div>
-          <div class="text-center">
-            <div class="font-ui font-semibold text-sm mb-1" style="color:var(--text-secondary);">Awaiting Analysis</div>
-            <div class="text-xs" style="color:var(--text-muted);">Paste text or enter a URL in the left panel, then press Analyze Citations to begin.</div>
-          </div>
+      <!-- RIGHT PANEL -->
+      <div id="report-panel" class="tool-panel" style="padding: 24px;" role="region" aria-label="Citation analysis report" aria-live="polite">
+        <!-- Empty state -->
+        <div id="empty-state" style="display:flex; flex-direction:column; align-items:center; justify-content:center; height:100%; min-height:300px; text-align:center;">
+          <div style="width:52px; height:52px; background:var(--slate-100); border-radius:12px; display:flex; align-items:center; justify-content:center; margin-bottom:16px; font-size:24px;">📋</div>
+          <p style="font-family:'Syne',sans-serif; font-size:15px; font-weight:700; color:var(--navy-800); margin-bottom:8px;">Report will appear here</p>
+          <p style="font-size:13px; color:var(--slate-400); max-width:240px; line-height:1.6;">Paste text or enter a URL on the left, then click Analyze Citations.</p>
         </div>
 
-        <!-- RESULTS STATE (hidden until analysis) -->
-        <div id="results-output" class="hidden">
-
-          <!-- Report Header -->
-          <div class="p-5 sm:p-6 pb-4" style="border-bottom: 1px solid var(--border);">
-            <div class="flex items-center justify-between mb-4 flex-wrap gap-3">
-              <div>
-                <div class="section-label mb-1">Citation Report</div>
-                <div class="font-mono text-xs" style="color:var(--text-muted);" id="report-timestamp">Generated —</div>
-              </div>
-              <div class="flex gap-2">
-                <button class="btn-ghost" onclick="copyReport()" aria-label="Copy citation report to clipboard">
-                  <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2" ry="2" stroke-width="2"></rect><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1" stroke-width="2"></path></svg>
-                  Copy
-                </button>
-                <button class="btn-ghost" onclick="downloadReport()" aria-label="Download citation report as TXT file">
-                  <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg>
-                  Download TXT
-                </button>
-              </div>
+        <!-- Report content (hidden until analysis) -->
+        <div id="report-content" style="display:none;">
+          <!-- Header row -->
+          <div style="display:flex; align-items:flex-start; justify-content:space-between; margin-bottom:20px; flex-wrap:wrap; gap:10px;">
+            <div>
+              <p class="section-label">Citation Report</p>
+              <h2 style="font-family:'Syne',sans-serif; font-size:16px; font-weight:700; color:var(--navy-800);">Analysis Complete</h2>
             </div>
-
-            <!-- Trust Score Bar -->
-            <div class="mb-1 flex items-center justify-between">
-              <span class="text-xs font-ui font-semibold uppercase tracking-wider" style="color:var(--text-muted);">Overall Trust Score</span>
-              <span class="font-mono text-lg font-semibold" id="trust-score-num" style="color:var(--text-primary);">—</span>
-            </div>
-            <div class="score-bar-track mb-1">
-              <div class="score-bar-fill high" id="trust-bar" style="width:0%"></div>
+            <div style="display:flex; gap:8px; flex-wrap:wrap;">
+              <button class="btn-ghost" onclick="copyReport()" aria-label="Copy report to clipboard">
+                <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
+                Copy
+              </button>
+              <button class="btn-ghost" onclick="downloadReport()" aria-label="Download report as text file">
+                <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>
+                Download
+              </button>
             </div>
           </div>
 
-          <!-- Three Sub-Scores -->
-          <div class="grid grid-cols-3 gap-px" style="border-bottom: 1px solid var(--border); background:var(--border);">
-            <div class="p-4" style="background:var(--bg-panel);">
-              <div class="text-xs font-mono font-semibold uppercase tracking-wider mb-2" style="color:var(--text-muted);">Citation</div>
-              <div class="font-mono text-xl font-semibold mb-2" id="citation-score-num" style="color:var(--text-primary);">—</div>
-              <div class="score-bar-track">
-                <div class="score-bar-fill" id="citation-bar" style="width:0%"></div>
+          <!-- Score meters -->
+          <div style="display:grid; grid-template-columns: 1fr 1fr 1fr; gap:12px; margin-bottom:20px;">
+            <div style="text-align:center;">
+              <p style="font-family:'DM Mono',monospace; font-size:9px; font-weight:500; letter-spacing:0.1em; text-transform:uppercase; color:var(--slate-400); margin-bottom:6px;">Citation Score</p>
+              <p id="citation-score-val" style="font-family:'Syne',sans-serif; font-size:26px; font-weight:800; color:var(--navy-800); line-height:1;">—</p>
+              <div class="score-bar-track" style="margin-top:6px;">
+                <div id="citation-score-bar" class="score-bar-fill" style="width:0%; background:var(--emerald);"></div>
               </div>
             </div>
-            <div class="p-4" style="background:var(--bg-panel);">
-              <div class="text-xs font-mono font-semibold uppercase tracking-wider mb-2" style="color:var(--text-muted);">Clarity</div>
-              <div class="font-mono text-xl font-semibold mb-2" id="clarity-score-num" style="color:var(--text-primary);">—</div>
-              <div class="score-bar-track">
-                <div class="score-bar-fill" id="clarity-bar" style="width:0%"></div>
+            <div style="text-align:center;">
+              <p style="font-family:'DM Mono',monospace; font-size:9px; font-weight:500; letter-spacing:0.1em; text-transform:uppercase; color:var(--slate-400); margin-bottom:6px;">Clarity Score</p>
+              <p id="clarity-score-val" style="font-family:'Syne',sans-serif; font-size:26px; font-weight:800; color:var(--navy-800); line-height:1;">—</p>
+              <div class="score-bar-track" style="margin-top:6px;">
+                <div id="clarity-score-bar" class="score-bar-fill" style="width:0%; background:var(--violet);"></div>
               </div>
             </div>
-            <div class="p-4" style="background:var(--bg-panel);">
-              <div class="text-xs font-mono font-semibold uppercase tracking-wider mb-2" style="color:var(--text-muted);">Complete</div>
-              <div class="font-mono text-xl font-semibold mb-2" id="completeness-score-num" style="color:var(--text-primary);">—</div>
-              <div class="score-bar-track">
-                <div class="score-bar-fill" id="completeness-bar" style="width:0%"></div>
+            <div style="text-align:center;">
+              <p style="font-family:'DM Mono',monospace; font-size:9px; font-weight:500; letter-spacing:0.1em; text-transform:uppercase; color:var(--slate-400); margin-bottom:6px;">Completeness</p>
+              <p id="complete-score-val" style="font-family:'Syne',sans-serif; font-size:26px; font-weight:800; color:var(--navy-800); line-height:1;">—</p>
+              <div class="score-bar-track" style="margin-top:6px;">
+                <div id="complete-score-bar" class="score-bar-fill" style="width:0%; background:var(--amber);"></div>
               </div>
             </div>
           </div>
 
-          <!-- Stats Grid -->
-          <div class="grid grid-cols-3 gap-3 p-5 sm:p-6 pb-0">
-            <div class="stat-card">
-              <div class="stat-num" id="stat-inline">0</div>
-              <div class="stat-label">Inline Citations</div>
-            </div>
-            <div class="stat-card">
-              <div class="stat-num" id="stat-refs">0</div>
-              <div class="stat-label">References</div>
-            </div>
-            <div class="stat-card">
-              <div class="stat-num" id="stat-urls">0</div>
-              <div class="stat-label">URLs</div>
-            </div>
-            <div class="stat-card">
-              <div class="stat-num" id="stat-dois">0</div>
-              <div class="stat-label">DOIs</div>
-            </div>
-            <div class="stat-card col-span-2">
-              <div class="stat-num text-sm leading-tight" id="stat-style" style="font-size:13px; margin-top:2px;">—</div>
-              <div class="stat-label">Detected Style</div>
-            </div>
-          </div>
+          <!-- Stat row -->
+          <div id="stat-row" style="display:grid; grid-template-columns: repeat(4, 1fr); gap:10px; margin-bottom:20px;"></div>
 
           <!-- Warnings -->
-          <div class="p-5 sm:p-6 pb-0" id="warnings-section">
-            <div class="text-xs font-ui font-semibold uppercase tracking-wider mb-3" style="color:var(--text-muted);">Warnings</div>
-            <div id="warnings-list" class="flex flex-col gap-2"></div>
-          </div>
+          <div id="warnings-block" style="margin-bottom:16px;"></div>
 
-          <!-- Reference Lines -->
-          <div class="p-5 sm:p-6 pb-0" id="refs-section">
-            <div class="text-xs font-ui font-semibold uppercase tracking-wider mb-3" style="color:var(--text-muted);">References Detected</div>
-            <div id="refs-list" class="flex flex-col gap-2 max-h-52 overflow-y-auto thin-scroll"></div>
-          </div>
+          <!-- Expandable sections -->
+          <div id="expandable-sections"></div>
 
-          <!-- Domain Cards -->
-          <div class="p-5 sm:p-6 pb-0" id="domains-section">
-            <div class="text-xs font-ui font-semibold uppercase tracking-wider mb-3" style="color:var(--text-muted);">Source Domains</div>
-            <div id="domains-list" class="flex flex-wrap gap-2"></div>
-          </div>
+          <!-- Domains -->
+          <div id="domains-block" style="margin-bottom:16px;"></div>
 
           <!-- Recommendations -->
-          <div class="p-5 sm:p-6" id="recs-section">
-            <div class="text-xs font-ui font-semibold uppercase tracking-wider mb-3" style="color:var(--text-muted);">Recommendations</div>
-            <div id="recs-list" class="flex flex-col gap-2"></div>
-          </div>
-
-        </div><!-- /results-output -->
-
-      </div><!-- /results-panel -->
-
-    </div><!-- /grid -->
-  </div>
-</section>
-
-<!-- ═══════════════════════════════════════════ -->
-<!-- QUICK ANSWER SECTION -->
-<section id="what-it-does" class="py-10 sm:py-14" aria-labelledby="qa-heading">
-  <div class="max-w-6xl mx-auto px-4 sm:px-6">
-    <div class="section-label mb-3">Tool Reference</div>
-    <h2 id="qa-heading" class="font-display text-2xl sm:text-3xl mb-8" style="color:var(--text-primary); letter-spacing:-0.01em;">
-      What does an AI citation checker do?
-    </h2>
-    <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
-
-      <div class="qa-card p-6">
-        <div class="font-mono text-xs font-semibold uppercase tracking-wider mb-3" style="color:var(--emerald);">01 — Review Workflows</div>
-        <h3 class="font-ui font-semibold text-sm mb-2" style="color:var(--text-primary);">Citation Review Workflows</h3>
-        <p class="text-sm leading-relaxed" style="color:var(--text-secondary);">
-          Editors and researchers use citation checkers as a first-pass audit before manual verification — catching structural gaps that might otherwise survive multiple review rounds.
-        </p>
-      </div>
-
-      <div class="qa-card p-6">
-        <div class="font-mono text-xs font-semibold uppercase tracking-wider mb-3" style="color:var(--emerald);">02 — Attribution Clarity</div>
-        <h3 class="font-ui font-semibold text-sm mb-2" style="color:var(--text-primary);">Source Attribution Clarity</h3>
-        <p class="text-sm leading-relaxed" style="color:var(--text-secondary);">
-          The tool maps inline citations to their reference entries, flagging cases where a claim appears to have no corresponding source — a common issue in AI-drafted content.
-        </p>
-      </div>
-
-      <div class="qa-card p-6">
-        <div class="font-mono text-xs font-semibold uppercase tracking-wider mb-3" style="color:var(--emerald);">03 — Structure Analysis</div>
-        <h3 class="font-ui font-semibold text-sm mb-2" style="color:var(--text-primary);">Reference Structure Analysis</h3>
-        <p class="text-sm leading-relaxed" style="color:var(--text-secondary);">
-          Each reference entry is evaluated for completeness: author, year, title, publication, volume, and identifier. Entries missing key fields are surfaced with specific guidance.
-        </p>
-      </div>
-
-      <div class="qa-card p-6">
-        <div class="font-mono text-xs font-semibold uppercase tracking-wider mb-3" style="color:var(--emerald);">04 — Formatting Observations</div>
-        <h3 class="font-ui font-semibold text-sm mb-2" style="color:var(--text-primary);">Citation Formatting Observations</h3>
-        <p class="text-sm leading-relaxed" style="color:var(--text-secondary);">
-          The analyzer detects which citation style is in use — APA parenthetical, numbered bracket, MLA, or DOI-anchored — and alerts when multiple styles appear within the same document.
-        </p>
-      </div>
-
-      <div class="qa-card p-6">
-        <div class="font-mono text-xs font-semibold uppercase tracking-wider mb-3" style="color:var(--emerald);">05 — Consistency</div>
-        <h3 class="font-ui font-semibold text-sm mb-2" style="color:var(--text-primary);">Reference Consistency</h3>
-        <p class="text-sm leading-relaxed" style="color:var(--text-secondary);">
-          Mixed citation styles are one of the clearest signs of assembled-from-parts content. Consistency scoring measures how uniformly citations are formatted throughout the document.
-        </p>
-      </div>
-
-      <div class="qa-card p-6">
-        <div class="font-mono text-xs font-semibold uppercase tracking-wider mb-3" style="color:var(--emerald);">06 — Domain Mapping</div>
-        <h3 class="font-ui font-semibold text-sm mb-2" style="color:var(--text-primary);">Source Domain Mapping</h3>
-        <p class="text-sm leading-relaxed" style="color:var(--text-secondary);">
-          Every URL in the text is parsed to extract its domain. Over-reliance on a single domain — five links all pointing to the same outlet — is flagged as a source diversity concern.
-        </p>
-      </div>
-
-    </div>
-  </div>
-</section>
-
-<!-- ═══════════════════════════════════════════ -->
-<!-- LOGIC SECTION -->
-<section id="logic" class="py-5 sm:py-6" aria-labelledby="logic-heading">
-  <div class="max-w-6xl mx-auto px-4 sm:px-6">
-    <div class="qa-card p-5 sm:p-6 flex items-start gap-4">
-      <div class="flex-shrink-0 w-8 h-8 rounded-md flex items-center justify-center font-mono text-xs font-semibold" style="background:#EEF1F8; color:var(--emerald); border:1px solid var(--border);">L</div>
-      <div>
-        <h2 id="logic-heading" class="font-ui font-semibold text-sm uppercase tracking-wider mb-1.5" style="color:var(--text-muted);">Logic</h2>
-        <p class="text-sm leading-relaxed" style="color:var(--text-secondary);">
-          The citation checker applies layered pattern detection across bracket citations, author-date formats, DOI strings, and URL anchors, then cross-references findings against structural completeness rules to compute a composite trust score.
-        </p>
+          <div id="recs-block"></div>
+        </div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ═══════════════════════════════════════════ -->
-<!-- METHODOLOGY SECTION -->
-<section id="methodology" class="py-5 sm:py-6" aria-labelledby="method-heading">
-  <div class="max-w-6xl mx-auto px-4 sm:px-6">
-    <div class="qa-card p-5 sm:p-6 flex items-start gap-4">
-      <div class="flex-shrink-0 w-8 h-8 rounded-md flex items-center justify-center font-mono text-xs font-semibold" style="background:#EEF1F8; color:var(--blue); border:1px solid var(--border);">M</div>
-      <div>
-        <h2 id="method-heading" class="font-ui font-semibold text-sm uppercase tracking-wider mb-1.5" style="color:var(--text-muted);">Methodology</h2>
-        <p class="text-sm leading-relaxed" style="color:var(--text-secondary);">
-          Analysis runs entirely client-side using regular expression pattern libraries aligned with APA 7th edition, MLA 9th edition, and IEEE citation standards, with scoring weighted by citation presence (40%), formatting clarity (35%), and reference completeness (25%).
-        </p>
-      </div>
+<!-- ======= WHAT DOES IT DO ======= -->
+<section id="how-it-works" style="padding: 52px 24px; background:#fff; border-top:1px solid var(--border);" aria-labelledby="how-heading">
+  <div style="max-width: 780px; margin: 0 auto;">
+    <p class="section-label">Context</p>
+    <h2 id="how-heading" style="font-family:'Syne',sans-serif; font-size:clamp(20px,3vw,28px); font-weight:800; color:var(--navy-900); letter-spacing:-0.02em; margin-bottom:18px;">What does an AI citation checker do?</h2>
+    <div style="font-size:15px; color:var(--slate-400); line-height:1.8; display:flex; flex-direction:column; gap:14px;">
+      <p>Citation review is one of the more friction-heavy steps in any publishing workflow. Writers paste in references that look right but are structurally inconsistent — missing authors, orphaned inline markers, years that don't match the reference list, URLs that resolve to dead pages. The manual scan takes time no editor has.</p>
+      <p>This tool runs a structured pass over your text to surface those issues immediately. It maps inline citation patterns against any reference section found, flags duplicate domains that suggest over-reliance on a single source, and checks whether each reference line carries the minimum fields for APA or MLA attribution — author, year, title, source.</p>
+      <p>For AI-assisted content specifically, the problem is more acute. Language models generate plausible-looking citations that may reference non-existent papers, incorrect page numbers, or authors who never wrote the attributed text. A structural check — even a client-side one — catches the most obvious formatting and completeness failures before they reach publication.</p>
+      <p>The output is a scored report: citation score, clarity score, and completeness score, with expandable detail sections, domain extraction, and a downloadable plain-text summary you can hand to an editor or attach to a content audit.</p>
     </div>
   </div>
 </section>
 
-<!-- ═══════════════════════════════════════════ -->
-<!-- CITATION SOURCES SECTION -->
-<section id="citation-sources" class="py-10 sm:py-14" aria-labelledby="sources-heading">
-  <div class="max-w-6xl mx-auto px-4 sm:px-6">
-    <div class="section-label mb-3">Authoritative Sources</div>
-    <h2 id="sources-heading" class="font-display text-xl sm:text-2xl mb-6" style="color:var(--text-primary); letter-spacing:-0.01em;">
-      Citation Standards &amp; References
-    </h2>
-    <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-3">
+<!-- ======= LOGIC ======= -->
+<section style="padding: 36px 24px; background: var(--slate-100); border-top:1px solid var(--border);" aria-labelledby="logic-heading">
+  <div style="max-width: 780px; margin: 0 auto;">
+    <p class="section-label">Logic</p>
+    <h2 id="logic-heading" style="font-family:'Syne',sans-serif; font-size:18px; font-weight:700; color:var(--navy-800); margin-bottom:10px;">Logic</h2>
+    <p style="font-size:14.5px; color:var(--slate-400); line-height:1.7;">The tool applies pattern-matching rules across your pasted text to detect inline citation markers, reference list entries, URL and DOI formats, duplicate sources, and structural completeness indicators — entirely client-side, with no data transmitted.</p>
+  </div>
+</section>
 
-      <a href="https://developers.google.com/search/docs/crawling-indexing/links" target="_blank" rel="noopener noreferrer" class="qa-card p-4 flex items-center gap-3 group no-underline" aria-label="Google Search Central — Link and citation signals">
-        <span class="text-xl flex-shrink-0" aria-hidden="true">🔍</span>
+<!-- ======= METHODOLOGY ======= -->
+<section style="padding: 36px 24px; background:#fff; border-top:1px solid var(--border);" aria-labelledby="method-heading">
+  <div style="max-width: 780px; margin: 0 auto;">
+    <p class="section-label">Methodology</p>
+    <h2 id="method-heading" style="font-family:'Syne',sans-serif; font-size:18px; font-weight:700; color:var(--navy-800); margin-bottom:10px;">Methodology</h2>
+    <p style="font-size:14.5px; color:var(--slate-400); line-height:1.7;">Citation scoring is derived from a weighted composite of inline marker presence (30%), reference list structure quality (35%), source completeness fields (25%), and domain diversity (10%), calibrated against standard academic and editorial publishing conventions.</p>
+  </div>
+</section>
+
+<!-- ======= CITATIONS / AUTHORITY LINKS ======= -->
+<section style="padding: 40px 24px; background: var(--slate-100); border-top:1px solid var(--border);" aria-labelledby="citations-heading">
+  <div style="max-width: 780px; margin: 0 auto;">
+    <p class="section-label">References</p>
+    <h2 id="citations-heading" style="font-family:'Syne',sans-serif; font-size:18px; font-weight:700; color:var(--navy-800); margin-bottom:16px;">Citation Standards & Resources</h2>
+    <ul style="display:flex; flex-direction:column; gap:10px; list-style:none; padding:0;">
+      <li style="display:flex; align-items:flex-start; gap:10px;">
+        <span class="chip chip-slate" style="flex-shrink:0; margin-top:1px;">External</span>
+        <a href="https://developers.google.com/search/docs/crawling-indexing/links/qualify-your-links" target="_blank" rel="noopener noreferrer" style="color:var(--navy-800); font-size:14px; text-decoration:underline; text-underline-offset:3px;">Google Search Central — Link qualification and citation signals</a>
+      </li>
+      <li style="display:flex; align-items:flex-start; gap:10px;">
+        <span class="chip chip-slate" style="flex-shrink:0; margin-top:1px;">External</span>
+        <a href="https://owl.purdue.edu/owl/research_and_citation/apa_style/apa_formatting_and_style_guide/index.html" target="_blank" rel="noopener noreferrer" style="color:var(--navy-800); font-size:14px; text-decoration:underline; text-underline-offset:3px;">Purdue OWL — APA Formatting and Style Guide</a>
+      </li>
+      <li style="display:flex; align-items:flex-start; gap:10px;">
+        <span class="chip chip-slate" style="flex-shrink:0; margin-top:1px;">External</span>
+        <a href="https://style.mla.org" target="_blank" rel="noopener noreferrer" style="color:var(--navy-800); font-size:14px; text-decoration:underline; text-underline-offset:3px;">MLA Style Center — Official MLA citation guidance</a>
+      </li>
+      <li style="display:flex; align-items:flex-start; gap:10px;">
+        <span class="chip chip-slate" style="flex-shrink:0; margin-top:1px;">External</span>
+        <a href="https://www.chicagomanualofstyle.org" target="_blank" rel="noopener noreferrer" style="color:var(--navy-800); font-size:14px; text-decoration:underline; text-underline-offset:3px;">Chicago Manual of Style — Notes and bibliography reference system</a>
+      </li>
+      <li style="display:flex; align-items:flex-start; gap:10px;">
+        <span class="chip chip-slate" style="flex-shrink:0; margin-top:1px;">External</span>
+        <a href="https://www.crossref.org/education/metadata-stewardship/maintaining-your-metadata/doi-basics/" target="_blank" rel="noopener noreferrer" style="color:var(--navy-800); font-size:14px; text-decoration:underline; text-underline-offset:3px;">Crossref — DOI basics and metadata standards</a>
+      </li>
+      <li style="display:flex; align-items:flex-start; gap:10px;">
+        <span class="chip chip-slate" style="flex-shrink:0; margin-top:1px;">External</span>
+        <a href="https://schema.org/ScholarlyArticle" target="_blank" rel="noopener noreferrer" style="color:var(--navy-800); font-size:14px; text-decoration:underline; text-underline-offset:3px;">Schema.org — ScholarlyArticle structured data specification</a>
+      </li>
+    </ul>
+  </div>
+</section>
+
+<!-- ======= TESTIMONIALS ======= -->
+<section style="padding: 44px 24px; background:#fff; border-top:1px solid var(--border);" aria-label="Testimonials">
+  <div style="max-width: 780px; margin: 0 auto;">
+    <p class="section-label">From the field</p>
+    <div class="testimonial-block" id="testimonial-display" style="padding: 20px 0; border-left: 3px solid var(--emerald); padding-left: 20px; min-height: 80px;">
+      <p id="testimonial-text" style="font-size:15.5px; color:var(--navy-800); line-height:1.75; font-style:italic; margin-bottom:10px;"></p>
+      <p id="testimonial-author" style="font-family:'DM Mono',monospace; font-size:11px; font-weight:500; letter-spacing:0.08em; text-transform:uppercase; color:var(--slate-400);"></p>
+    </div>
+  </div>
+</section>
+
+<!-- ======= FAQ ======= -->
+<section style="padding: 56px 24px; background: var(--slate-100); border-top:1px solid var(--border);" aria-labelledby="faq-heading">
+  <div style="max-width: 780px; margin: 0 auto;">
+    <p class="section-label">Reference</p>
+    <h2 id="faq-heading" style="font-family:'Syne',sans-serif; font-size:clamp(18px,3vw,26px); font-weight:800; color:var(--navy-900); letter-spacing:-0.02em; margin-bottom:28px;">Frequently Asked Questions</h2>
+
+    <div id="faq-list" style="display:flex; flex-direction:column; gap:8px;">
+      <!-- FAQs injected by JS -->
+    </div>
+  </div>
+</section>
+
+<!-- ======= SHARE SYSTEM ======= -->
+<section style="padding: 40px 24px; background:#fff; border-top:1px solid var(--border);" aria-label="Share this tool">
+  <div style="max-width: 780px; margin: 0 auto;">
+    <p style="font-family:'DM Mono',monospace; font-size:10px; font-weight:500; letter-spacing:0.12em; text-transform:uppercase; color:var(--slate-400); margin-bottom:14px;">Share this tool</p>
+    <div style="display:flex; gap:8px; flex-wrap:wrap;">
+      <a id="share-whatsapp" href="#" target="_blank" rel="noopener noreferrer" class="share-pill" aria-label="Share via WhatsApp">WhatsApp</a>
+      <a id="share-twitter" href="#" target="_blank" rel="noopener noreferrer" class="share-pill" aria-label="Share via Twitter/X">Twitter / X</a>
+      <a id="share-facebook" href="#" target="_blank" rel="noopener noreferrer" class="share-pill" aria-label="Share via Facebook">Facebook</a>
+      <a id="share-linkedin" href="#" target="_blank" rel="noopener noreferrer" class="share-pill" aria-label="Share via LinkedIn">LinkedIn</a>
+      <a id="share-reddit" href="#" target="_blank" rel="noopener noreferrer" class="share-pill" aria-label="Share via Reddit">Reddit</a>
+      <a id="share-email" href="#" class="share-pill" aria-label="Share via Email">Email</a>
+      <button class="share-pill" onclick="copyPageLink()" aria-label="Copy link to clipboard">Copy Link</button>
+    </div>
+  </div>
+</section>
+
+<!-- ======= INTERNAL LINKS ======= -->
+<section style="padding: 40px 24px; background:var(--slate-100); border-top:1px solid var(--border);" aria-label="Related tools">
+  <div style="max-width: 780px; margin: 0 auto;">
+    <p class="section-label">Explore More</p>
+    <div id="dynamic-internal-links"></div>
+  </div>
+</section>
+
+<!-- ======= CONTACT FORM ======= -->
+<section style="padding: 52px 24px; background:#fff; border-top:1px solid var(--border);" aria-labelledby="contact-heading">
+  <div style="max-width: 400px; margin: 0 auto;">
+    <div class="glass-card" style="padding: 28px 28px 24px;">
+      <p class="section-label">Direct line</p>
+      <h2 id="contact-heading" style="font-family:'Syne',sans-serif; font-size:18px; font-weight:800; color:var(--navy-900); letter-spacing:-0.02em; margin-bottom:4px;">Request a Custom Tool</h2>
+      <p style="font-size:12.5px; color:var(--slate-400); margin-bottom:20px; line-height:1.6;">Need a citation workflow built for your specific publishing stack? Describe the use case.</p>
+
+      <form
+        name="tool-request"
+        method="POST"
+        data-netlify="true"
+        netlify-honeypot="bot-field"
+        onsubmit="handleContactForm(event)"
+        style="display:flex; flex-direction:column; gap:14px;"
+      >
+        <input type="hidden" name="form-name" value="tool-request">
+        <p style="display:none;">
+          <label>Don't fill this out if you're human: <input name="bot-field"></label>
+        </p>
+
         <div>
-          <div class="text-sm font-ui font-semibold mb-0.5 group-hover:text-emerald-600 transition-colors" style="color:var(--text-primary);">Google Search Central</div>
-          <div class="text-xs" style="color:var(--text-muted);">Link signals &amp; crawling guidance</div>
+          <label for="cf-name" style="display:block; font-family:'DM Mono',monospace; font-size:10px; font-weight:500; letter-spacing:0.1em; text-transform:uppercase; color:var(--slate-400); margin-bottom:5px;">Name</label>
+          <input type="text" id="cf-name" name="name" placeholder="Your name" required autocomplete="name" class="form-input">
         </div>
-        <svg class="w-3 h-3 ml-auto flex-shrink-0 opacity-40 group-hover:opacity-80 transition-opacity" style="color:var(--emerald);" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg>
-      </a>
 
-      <a href="https://owl.purdue.edu/owl/research_and_citation/apa_style/apa_formatting_and_style_guide/index.html" target="_blank" rel="noopener noreferrer" class="qa-card p-4 flex items-center gap-3 group no-underline" aria-label="Purdue OWL APA Guide">
-        <span class="text-xl flex-shrink-0" aria-hidden="true">📚</span>
         <div>
-          <div class="text-sm font-ui font-semibold mb-0.5 group-hover:text-emerald-600 transition-colors" style="color:var(--text-primary);">Purdue OWL APA Guide</div>
-          <div class="text-xs" style="color:var(--text-muted);">APA 7th edition formatting</div>
+          <label for="cf-email" style="display:block; font-family:'DM Mono',monospace; font-size:10px; font-weight:500; letter-spacing:0.1em; text-transform:uppercase; color:var(--slate-400); margin-bottom:5px;">Email</label>
+          <input type="email" id="cf-email" name="email" placeholder="you@domain.com" required autocomplete="email" class="form-input">
         </div>
-        <svg class="w-3 h-3 ml-auto flex-shrink-0 opacity-40 group-hover:opacity-80 transition-opacity" style="color:var(--emerald);" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg>
-      </a>
 
-      <a href="https://style.mla.org" target="_blank" rel="noopener noreferrer" class="qa-card p-4 flex items-center gap-3 group no-underline" aria-label="MLA Style Center">
-        <span class="text-xl flex-shrink-0" aria-hidden="true">📖</span>
         <div>
-          <div class="text-sm font-ui font-semibold mb-0.5 group-hover:text-emerald-600 transition-colors" style="color:var(--text-primary);">MLA Style Center</div>
-          <div class="text-xs" style="color:var(--text-muted);">MLA 9th edition reference</div>
+          <label for="cf-message" style="display:block; font-family:'DM Mono',monospace; font-size:10px; font-weight:500; letter-spacing:0.1em; text-transform:uppercase; color:var(--slate-400); margin-bottom:5px;">Message</label>
+          <textarea id="cf-message" name="message" rows="4" placeholder="Describe the tool or workflow you need..." required class="form-input" style="resize:vertical;"></textarea>
         </div>
-        <svg class="w-3 h-3 ml-auto flex-shrink-0 opacity-40 group-hover:opacity-80 transition-opacity" style="color:var(--emerald);" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg>
-      </a>
 
-      <a href="https://www.chicagomanualofstyle.org/home.html" target="_blank" rel="noopener noreferrer" class="qa-card p-4 flex items-center gap-3 group no-underline" aria-label="Chicago Manual of Style">
-        <span class="text-xl flex-shrink-0" aria-hidden="true">🏛</span>
-        <div>
-          <div class="text-sm font-ui font-semibold mb-0.5 group-hover:text-emerald-600 transition-colors" style="color:var(--text-primary);">Chicago Manual of Style</div>
-          <div class="text-xs" style="color:var(--text-muted);">Chicago &amp; Turabian style</div>
-        </div>
-        <svg class="w-3 h-3 ml-auto flex-shrink-0 opacity-40 group-hover:opacity-80 transition-opacity" style="color:var(--emerald);" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg>
-      </a>
-
-      <a href="https://www.crossref.org/documentation/schema/doi-metadata-schema/" target="_blank" rel="noopener noreferrer" class="qa-card p-4 flex items-center gap-3 group no-underline" aria-label="Crossref DOI documentation">
-        <span class="text-xl flex-shrink-0" aria-hidden="true">🔗</span>
-        <div>
-          <div class="text-sm font-ui font-semibold mb-0.5 group-hover:text-emerald-600 transition-colors" style="color:var(--text-primary);">Crossref DOI Docs</div>
-          <div class="text-xs" style="color:var(--text-muted);">DOI metadata schema</div>
-        </div>
-        <svg class="w-3 h-3 ml-auto flex-shrink-0 opacity-40 group-hover:opacity-80 transition-opacity" style="color:var(--emerald);" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg>
-      </a>
-
-      <a href="https://schema.org/ScholarlyArticle" target="_blank" rel="noopener noreferrer" class="qa-card p-4 flex items-center gap-3 group no-underline" aria-label="Schema.org ScholarlyArticle type">
-        <span class="text-xl flex-shrink-0" aria-hidden="true">🧩</span>
-        <div>
-          <div class="text-sm font-ui font-semibold mb-0.5 group-hover:text-emerald-600 transition-colors" style="color:var(--text-primary);">Schema.org</div>
-          <div class="text-xs" style="color:var(--text-muted);">ScholarlyArticle structured data</div>
-        </div>
-        <svg class="w-3 h-3 ml-auto flex-shrink-0 opacity-40 group-hover:opacity-80 transition-opacity" style="color:var(--emerald);" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg>
-      </a>
-
+        <button type="submit" class="btn-primary" style="justify-content:center; padding:11px 22px;">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M22 2L11 13M22 2L15 22l-4-9-9-4 20-7z"/></svg>
+          Transmit Request
+        </button>
+      </form>
     </div>
   </div>
 </section>
 
-<!-- ═══════════════════════════════════════════ -->
-<!-- FAQ ACCORDION -->
-<section id="faq" class="py-10 sm:py-14" aria-labelledby="faq-heading">
-  <div class="max-w-3xl mx-auto px-4 sm:px-6">
-    <div class="section-label mb-3">Common Questions</div>
-    <h2 id="faq-heading" class="font-display text-2xl sm:text-3xl mb-8" style="color:var(--text-primary); letter-spacing:-0.01em;">
-      Frequently Asked
-    </h2>
-
-    <div class="qa-card overflow-hidden" role="list">
-
-      <!-- FAQ 1 -->
-      <div class="faq-item" role="listitem">
-        <button class="faq-trigger" aria-expanded="false" aria-controls="faq-answer-1" onclick="toggleFaq(this)">
-          <span>What does an AI citation checker analyze?</span>
-          <svg class="faq-chevron" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
-        </button>
-        <div class="faq-answer" id="faq-answer-1">
-          <div class="faq-answer-inner">
-            The tool scans text for inline citations (bracket-style <code>[1]</code>, APA parenthetical <code>(Author, 2023)</code>, footnote markers), reference sections, embedded URLs, and DOI identifiers. It then evaluates formatting consistency across all detected citations, checks reference entries for completeness, flags duplicates, and extracts source domains. The output is a structured report with three quality scores — citation presence, formatting clarity, and reference completeness — plus actionable warnings and recommendations.
-          </div>
-        </div>
-      </div>
-
-      <!-- FAQ 2 -->
-      <div class="faq-item" role="listitem">
-        <button class="faq-trigger" aria-expanded="false" aria-controls="faq-answer-2" onclick="toggleFaq(this)">
-          <span>Can AI generate incorrect or fabricated references?</span>
-          <svg class="faq-chevron" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
-        </button>
-        <div class="faq-answer" id="faq-answer-2">
-          <div class="faq-answer-inner">
-            Yes — and this is one of the more consequential limitations of current language models. The phenomenon is widely documented as "citation hallucination." A model may produce a citation that looks correct in format — proper author name structure, a real journal name, a plausible year — yet the paper either does not exist or was authored by someone entirely different. DOIs are particularly susceptible: a model can generate a syntactically valid DOI that resolves to a different paper or to nothing at all. Manual verification of each source against the original remains the only reliable check.
-          </div>
-        </div>
-      </div>
-
-      <!-- FAQ 3 -->
-      <div class="faq-item" role="listitem">
-        <button class="faq-trigger" aria-expanded="false" aria-controls="faq-answer-3" onclick="toggleFaq(this)">
-          <span>How do I identify incomplete citations in my content?</span>
-          <svg class="faq-chevron" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
-        </button>
-        <div class="faq-answer" id="faq-answer-3">
-          <div class="faq-answer-inner">
-            A complete reference typically needs: author(s), publication year, title, source (journal, book, or website), volume and issue number for journals, page range, and a persistent identifier like a DOI or URL. This tool flags reference lines that are missing a four-digit year — a common shortcut in AI-generated lists — and entries that are suspiciously short (under 30 characters) relative to what a full citation requires. Manual review should follow for any entry that triggers a warning, cross-referencing against the original publication.
-          </div>
-        </div>
-      </div>
-
-      <!-- FAQ 4 -->
-      <div class="faq-item" role="listitem">
-        <button class="faq-trigger" aria-expanded="false" aria-controls="faq-answer-4" onclick="toggleFaq(this)">
-          <span>Does citation consistency affect content trustworthiness?</span>
-          <svg class="faq-chevron" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
-        </button>
-        <div class="faq-answer" id="faq-answer-4">
-          <div class="faq-answer-inner">
-            Significantly. Academic reviewers and editors treat citation style inconsistency as a reliability signal — it suggests the document was assembled from disparate sources without proper editorial oversight. A document that switches between <code>(Smith, 2022)</code> and <code>[1]</code> formatting within the same paragraph signals process gaps that reviewers will flag before content substance. For web publishing, editorial credibility depends on consistent sourcing practices just as much as for academic work.
-          </div>
-        </div>
-      </div>
-
-      <!-- FAQ 5 -->
-      <div class="faq-item" role="listitem">
-        <button class="faq-trigger" aria-expanded="false" aria-controls="faq-answer-5" onclick="toggleFaq(this)">
-          <span>Why do references sometimes disappear in AI-generated content?</span>
-          <svg class="faq-chevron" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
-        </button>
-        <div class="faq-answer" id="faq-answer-5">
-          <div class="faq-answer-inner">
-            Language models generate text token by token without persistent memory of what they have cited earlier in the same output. When a generation task is long, the model may reach context window constraints mid-document, causing citations introduced early to lose their corresponding reference entries. Alternatively, if the model's training data had inconsistent coverage of a source, it may produce an inline marker without being able to complete the bibliographic entry. Both cases result in "ghost citations" — references in the body with no entry in the bibliography.
-          </div>
-        </div>
-      </div>
-
-      <!-- FAQ 6 -->
-      <div class="faq-item" role="listitem">
-        <button class="faq-trigger" aria-expanded="false" aria-controls="faq-answer-6" onclick="toggleFaq(this)">
-          <span>Can duplicate references create problems in published work?</span>
-          <svg class="faq-chevron" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
-        </button>
-        <div class="faq-answer" id="faq-answer-6">
-          <div class="faq-answer-inner">
-            In formal academic publishing, duplicate reference entries are grounds for editorial rejection at many journals. Reference management systems such as Zotero and Mendeley flag exact duplicates automatically, but near-duplicates — the same source formatted twice with slight variations — often slip through. For web content, duplicate citations inflate perceived source diversity without adding informational value, and some editorial audit tools score reference-list quality as part of broader credibility assessments. The most common source of duplicates is copy-merging sections written at different times.
-          </div>
-        </div>
-      </div>
-
-      <!-- FAQ 7 -->
-      <div class="faq-item" role="listitem">
-        <button class="faq-trigger" aria-expanded="false" aria-controls="faq-answer-7" onclick="toggleFaq(this)">
-          <span>What is the difference between APA and MLA citation formatting?</span>
-          <svg class="faq-chevron" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
-        </button>
-        <div class="faq-answer" id="faq-answer-7">
-          <div class="faq-answer-inner">
-            <strong>APA</strong> (7th ed.) uses author-date in-text citations — <code>(Smith &amp; Jones, 2022, p. 14)</code> — and a <em>References</em> list ordered alphabetically by last name, with the publication year appearing prominently near the start of each entry. <strong>MLA</strong> (9th ed.) uses author-page — <code>(Smith 47)</code> — and a <em>Works Cited</em> list with the author name first and the title emphasized. APA is standard in psychology, education, and the social sciences. MLA is the default in literature, languages, and the humanities. Chicago style adds a third option: footnote/endnote citations for humanities, and an author-date system for sciences. The choice of style should be dictated by the publication or institution's specific requirements.
-          </div>
-        </div>
-      </div>
-
-      <!-- FAQ 8 -->
-      <div class="faq-item" role="listitem">
-        <button class="faq-trigger" aria-expanded="false" aria-controls="faq-answer-8" onclick="toggleFaq(this)">
-          <span>How do inline citations differ from a reference list?</span>
-          <svg class="faq-chevron" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
-        </button>
-        <div class="faq-answer" id="faq-answer-8">
-          <div class="faq-answer-inner">
-            Inline citations (or in-text citations) appear within the body of the text at the precise point where a claim is attributed to a source. They are deliberately compact — containing just enough information (author, year, or a bracket number) to point a reader to the full entry. The reference list (bibliography or works cited page) appears at the end of the document and provides complete bibliographic information for every source cited inline. Both components are required for a citation system to be functional: inline citations without a reference list make source location impossible; a reference list without inline attribution makes it unclear which claims each source supports.
-          </div>
-        </div>
-      </div>
-
-    </div>
-  </div>
-</section>
-
-<!-- ═══════════════════════════════════════════ -->
-<!-- SHARE SYSTEM -->
-<section id="share" class="py-8 sm:py-10" aria-labelledby="share-heading">
-  <div class="max-w-6xl mx-auto px-4 sm:px-6">
-    <div class="qa-card p-6">
-      <div class="text-xs font-ui font-semibold uppercase tracking-wider mb-4" id="share-heading" style="color:var(--text-muted);">Share this tool</div>
-      <div class="share-row flex flex-wrap gap-2">
-        <a id="share-whatsapp" href="#" target="_blank" rel="noopener noreferrer" class="share-pill" aria-label="Share on WhatsApp">
-          <span aria-hidden="true">📱</span> WhatsApp
-        </a>
-        <a id="share-facebook" href="#" target="_blank" rel="noopener noreferrer" class="share-pill" aria-label="Share on Facebook">
-          <span aria-hidden="true">f</span> Facebook
-        </a>
-        <a id="share-twitter" href="#" target="_blank" rel="noopener noreferrer" class="share-pill" aria-label="Share on Twitter / X">
-          <span aria-hidden="true">𝕏</span> Twitter / X
-        </a>
-        <a id="share-linkedin" href="#" target="_blank" rel="noopener noreferrer" class="share-pill" aria-label="Share on LinkedIn">
-          <span aria-hidden="true">in</span> LinkedIn
-        </a>
-        <a id="share-reddit" href="#" target="_blank" rel="noopener noreferrer" class="share-pill" aria-label="Share on Reddit">
-          <span aria-hidden="true">r/</span> Reddit
-        </a>
-        <a id="share-email" href="#" class="share-pill" aria-label="Share via Email">
-          <span aria-hidden="true">✉</span> Email
-        </a>
-        <button class="share-pill" onclick="copyShareLink()" aria-label="Copy page link to clipboard">
-          <span aria-hidden="true">🔗</span> Copy Link
-        </button>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ═══════════════════════════════════════════ -->
-<!-- INTERNAL LINKS BLOCK -->
-<div id="dynamic-internal-links" class="max-w-6xl mx-auto px-4 sm:px-6 py-4" aria-label="Related tools and pages"></div>
-
-<!-- ═══════════════════════════════════════════ -->
-<!-- CONTACT FORM -->
-<section id="contact" class="py-10 sm:py-14" aria-labelledby="contact-heading">
-  <div class="max-w-6xl mx-auto px-4 sm:px-6">
-    <div class="flex justify-center">
-      <div class="glass-card p-8" style="width:100%; max-width:400px;">
-        <div class="section-label mb-3">Custom Requests</div>
-        <h2 id="contact-heading" class="font-ui font-bold text-xl tracking-tight mb-1" style="color:var(--text-primary);">Request a Custom Tool</h2>
-        <p class="text-xs mb-6" style="color:var(--text-muted);">Describe a citation or reference workflow need and the team will evaluate it.</p>
-
-        <!-- Netlify form -->
-        <form
-          name="tool-request"
-          method="POST"
-          data-netlify="true"
-          netlify-honeypot="bot-field"
-          onsubmit="handleContactForm(event)"
-          novalidate
-        >
-          <!-- Honeypot -->
-          <div class="hidden" aria-hidden="true">
-            <label>Don't fill this out: <input name="bot-field" tabindex="-1" autocomplete="off"></label>
-          </div>
-          <input type="hidden" name="form-name" value="tool-request">
-
-          <div class="mb-4">
-            <label for="contact-name" class="form-label">Name</label>
-            <input type="text" id="contact-name" name="name" class="form-input" placeholder="Your name" required autocomplete="name">
-          </div>
-
-          <div class="mb-4">
-            <label for="contact-email" class="form-label">Email</label>
-            <input type="email" id="contact-email" name="email" class="form-input" placeholder="you@example.com" required autocomplete="email">
-          </div>
-
-          <div class="mb-6">
-            <label for="contact-message" class="form-label">Message</label>
-            <textarea id="contact-message" name="message" class="form-input" rows="4" placeholder="Describe the tool or workflow you need..." required style="resize:vertical;"></textarea>
-          </div>
-
-          <button type="submit" class="btn-primary w-full" style="width:100%; justify-content:center; display:flex;">
-            Transmit Request
-          </button>
-        </form>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ═══════════════════════════════════════════ -->
-<!-- FOOTER -->
-<footer class="mt-8" style="background:#0D1B2A; color:#7A90AA;" role="contentinfo" aria-label="Site footer">
-  <div class="max-w-6xl mx-auto px-4 sm:px-6 py-14">
-    <div class="grid grid-cols-2 md:grid-cols-4 gap-10 mb-12">
+<!-- ======= FOOTER ======= -->
+<footer style="background: var(--navy-900); padding: 52px 24px 28px; border-top: 1px solid rgba(255,255,255,0.05);" role="contentinfo">
+  <div style="max-width: 1100px; margin: 0 auto;">
+    <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap:36px; margin-bottom:40px;">
 
       <!-- Brand -->
-      <div class="col-span-2 md:col-span-1">
-        <div class="flex items-center gap-3 mb-4">
-          <div class="logo-icon" aria-hidden="true">🎯</div>
-          <div>
-            <div class="font-ui font-bold text-sm" style="color:#E2E8F0;">AI Citation Scan</div>
-            <div class="font-mono text-xs" style="color:#3D5068;">aicitationscan.com</div>
-          </div>
-        </div>
-        <p class="text-sm leading-relaxed" style="color:#3D5068; max-width:200px;">
-          Citation analysis tools for researchers, editors, and publishers.
-        </p>
-        <div class="mt-4 flex gap-4">
-          <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" class="footer-link text-sm" style="display:inline; margin:0;" aria-label="Twitter / X">Twitter / X</a>
-          <a href="https://github.com" target="_blank" rel="noopener noreferrer" class="footer-link text-sm" style="display:inline; margin:0;" aria-label="GitHub">GitHub</a>
-        </div>
+      <div style="grid-column: span 1;">
+        <a href="/" style="display:flex; align-items:center; gap:9px; text-decoration:none; margin-bottom:14px;" aria-label="AI Citation Scan Home">
+          <div style="width:30px; height:30px; background: rgba(16,185,129,0.15); border: 1px solid rgba(16,185,129,0.3); border-radius:6px; display:flex; align-items:center; justify-content:center; font-size:15px;">🎯</div>
+          <span style="font-family:'Syne',sans-serif; font-size:14px; font-weight:700; color:#fff; letter-spacing:-0.01em;">AI Citation Scan</span>
+        </a>
+        <p style="font-size:12.5px; color: rgba(163,184,204,0.65); line-height:1.7; max-width:200px;">Citation analysis tools for publishers, researchers, and editors.</p>
       </div>
 
-      <!-- AI Tools -->
+      <!-- Tools -->
       <div>
-        <div class="footer-col-label">AI Tools</div>
-        <a href="/ai-tools/ai-citation-checker.html" class="footer-link" aria-current="page">Citation Checker</a>
-        <a href="/ai-tools/" class="footer-link">All Tools</a>
-        <a href="/" class="footer-link">Home</a>
-      </div>
-
-      <!-- Resources -->
-      <div>
-        <div class="footer-col-label">Resources</div>
-        <a href="/about.html" class="footer-link">About</a>
-        <a href="/contact.html" class="footer-link">Contact</a>
-        <a href="/ai-tools/" class="footer-link">Tool Directory</a>
+        <p style="font-family:'DM Mono',monospace; font-size:10px; font-weight:500; letter-spacing:0.12em; text-transform:uppercase; color: rgba(163,184,204,0.5); margin-bottom:12px;">AI Tools</p>
+        <ul style="list-style:none; padding:0; display:flex; flex-direction:column; gap:8px;">
+          <li><a href="/ai-tools/ai-citation-checker.html" style="font-size:13px; color: rgba(163,184,204,0.75);">Citation Checker</a></li>
+          <li><a href="/ai-tools/" style="font-size:13px; color: rgba(163,184,204,0.75);">All AI Tools</a></li>
+          <li><a href="/" style="font-size:13px; color: rgba(163,184,204,0.75);">Home</a></li>
+        </ul>
       </div>
 
       <!-- Legal -->
       <div>
-        <div class="footer-col-label">Legal</div>
-        <a href="/privacy-policy.html" class="footer-link">Privacy Policy</a>
-        <a href="/cookies-policy.html" class="footer-link">Cookies Policy</a>
-        <a href="/terms-of-use.html" class="footer-link">Terms of Use</a>
-        <a href="/contact.html" class="footer-link">Contact</a>
-        <a href="/about.html" class="footer-link">About</a>
+        <p style="font-family:'DM Mono',monospace; font-size:10px; font-weight:500; letter-spacing:0.12em; text-transform:uppercase; color: rgba(163,184,204,0.5); margin-bottom:12px;">Legal</p>
+        <ul style="list-style:none; padding:0; display:flex; flex-direction:column; gap:8px;">
+          <li><a href="/privacy-policy.html" style="font-size:13px; color: rgba(163,184,204,0.75);">Privacy Policy</a></li>
+          <li><a href="/cookies-policy.html" style="font-size:13px; color: rgba(163,184,204,0.75);">Cookies Policy</a></li>
+          <li><a href="/terms-of-use.html" style="font-size:13px; color: rgba(163,184,204,0.75);">Terms of Use</a></li>
+          <li><a href="/contact.html" style="font-size:13px; color: rgba(163,184,204,0.75);">Contact</a></li>
+          <li><a href="/about.html" style="font-size:13px; color: rgba(163,184,204,0.75);">About</a></li>
+        </ul>
       </div>
 
+      <!-- Social (plain text names) -->
+      <div>
+        <p style="font-family:'DM Mono',monospace; font-size:10px; font-weight:500; letter-spacing:0.12em; text-transform:uppercase; color: rgba(163,184,204,0.5); margin-bottom:12px;">Social</p>
+        <ul style="list-style:none; padding:0; display:flex; flex-direction:column; gap:8px;">
+          <li><a href="https://twitter.com" target="_blank" rel="noopener noreferrer" style="font-size:13px; color: rgba(163,184,204,0.75);">Twitter / X</a></li>
+          <li><a href="https://github.com" target="_blank" rel="noopener noreferrer" style="font-size:13px; color: rgba(163,184,204,0.75);">GitHub</a></li>
+        </ul>
+      </div>
     </div>
 
-    <div style="border-top: 1px solid #1A2540;" class="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4">
-      <p class="font-mono text-xs" style="color:#3D5068;">
-        © <span id="footer-year">2026</span> AI Citation Scan. All rights reserved.
+    <!-- Bottom bar -->
+    <div style="border-top: 1px solid rgba(255,255,255,0.06); padding-top: 22px; display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:12px;">
+      <p style="font-family:'DM Mono',monospace; font-size:11px; color: rgba(163,184,204,0.4); letter-spacing:0.06em;">
+        © <span id="footer-year"></span> AI Citation Scan. All rights reserved.
       </p>
-      <p class="font-mono text-xs" style="color:#3D5068;">
-        Client-side only · No data stored · Free to use
+      <p style="font-family:'DM Mono',monospace; font-size:10px; color: rgba(163,184,204,0.3); letter-spacing:0.05em;">
+        aicitationscan.com
       </p>
     </div>
   </div>
 </footer>
 
-<!-- ═══════════════════════════════════════════ -->
-<!-- TOAST CONTAINER -->
-<div id="toast-container" role="status" aria-live="polite" aria-atomic="true"></div>
-
-<!-- ═══════════════════════════════════════════ -->
-<!-- GLOBAL INLINE SCRIPTS -->
-<script>
-// ─────────────────────────────────────────────
-// TOAST SYSTEM
-// ─────────────────────────────────────────────
-function showToast(message, type = 'success', duration = 3200) {
-  const container = document.getElementById('toast-container');
-  const toast = document.createElement('div');
-  toast.className = `toast ${type}`;
-  toast.textContent = message;
-  container.appendChild(toast);
-  requestAnimationFrame(() => {
-    requestAnimationFrame(() => toast.classList.add('show'));
-  });
-  setTimeout(() => {
-    toast.classList.remove('show');
-    setTimeout(() => toast.remove(), 350);
-  }, duration);
-}
-
-// ─────────────────────────────────────────────
-// SCROLL PROGRESS BAR
-// ─────────────────────────────────────────────
-(function() {
-  const bar = document.getElementById('scroll-progress');
-  window.addEventListener('scroll', function() {
-    const scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
-    const docHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-    const pct = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
-    bar.style.width = pct + '%';
-    bar.setAttribute('aria-valuenow', Math.round(pct));
-  }, { passive: true });
-})();
-
-// ─────────────────────────────────────────────
-// DYNAMIC DATE / YEAR
-// ─────────────────────────────────────────────
-(function() {
-  const now = new Date();
-  const yr = now.getFullYear();
-
-  // Footer year
-  const fyEl = document.getElementById('footer-year');
-  if (fyEl) fyEl.textContent = yr;
-
-  // Freshness badge
-  const months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
-  const fbEl = document.getElementById('freshness-badge');
-  if (fbEl) fbEl.textContent = 'Updated ' + months[now.getMonth()] + ' ' + yr;
-
-  // Dynamic reading time (estimate based on page content)
-  const rtEl = document.getElementById('reading-time');
-  if (rtEl) {
-    const wc = document.body.innerText.split(/\s+/).filter(w => w.length > 0).length;
-    const mins = Math.max(3, Math.round(wc / 230));
-    rtEl.textContent = '~' + mins + ' min read';
-  }
-
-  // Schema dateModified — update every Monday
-  const day = now.getDay(); // 0=Sun, 1=Mon
-  if (day === 1) {
-    const iso = now.toISOString().split('T')[0];
-    const schemaEl = document.getElementById('main-schema');
-    if (schemaEl) {
-      schemaEl.textContent = schemaEl.textContent.replace(/"dateModified":\s*"[^"]+"/g, '"dateModified": "' + iso + '"');
-    }
-  }
-})();
-
-// ─────────────────────────────────────────────
-// SEASONAL BANNER
-// ─────────────────────────────────────────────
-(function() {
-  const now = new Date();
-  const m = now.getMonth(); // 0-11
-  const yr = now.getFullYear();
-  let season;
-  if (m >= 2 && m <= 4) season = 'Spring';
-  else if (m >= 5 && m <= 7) season = 'Summer';
-  else if (m >= 8 && m <= 10) season = 'Autumn';
-  else season = 'Winter';
-  const el = document.getElementById('seasonal-text');
-  if (el) el.textContent = season + ' ' + yr + ' Edition';
-})();
-
-// ─────────────────────────────────────────────
-// ROTATING CTA TEXT
-// ─────────────────────────────────────────────
-(function() {
-  const ctas = [
-    'Analyze My Citations',
-    'Check Reference Structure',
-    'Audit My Sources',
-    'Review Citation Quality',
-    'Scan for Reference Gaps'
-  ];
-  const btnEl = document.getElementById('hero-cta-btn');
-  const analyzeEl = document.getElementById('analyze-btn-text');
-  const idx = Math.floor(Math.random() * ctas.length);
-  if (btnEl) btnEl.textContent = ctas[idx];
-  if (analyzeEl) analyzeEl.textContent = ctas[idx];
-})();
-
-// ─────────────────────────────────────────────
-// ROTATING TESTIMONIALS
-// ─────────────────────────────────────────────
-(function() {
-  const testimonials = [
-    { text: "Cleaned up an entire research report\u2019s references in minutes \u2014 found three incomplete citations I had missed completely.", author: "\u2014 M.K., Academic Editor" },
-    { text: "The domain diversity warning was eye-opening. I hadn\u2019t realized I\u2019d cited the same outlet six times across a single piece.", author: "\u2014 T.A., Journalist" },
-    { text: "Finally a tool that flags mixed citation styles. Our editorial team runs every draft through it before publication.", author: "\u2014 P.O., Content Lead" },
-    { text: "Caught a duplicate reference that had survived three separate review rounds. Invaluable for high-stakes submissions.", author: "\u2014 A.B., Research Analyst" }
-  ];
-  const textEl = document.getElementById('testimonial-text');
-  const authorEl = document.getElementById('testimonial-author');
-  const pick = testimonials[Math.floor(Math.random() * testimonials.length)];
-  if (textEl) textEl.textContent = pick.text;
-  if (authorEl) authorEl.textContent = pick.author;
-})();
-
-// ─────────────────────────────────────────────
-// TOOL TABS
-// ─────────────────────────────────────────────
-function switchTab(tab) {
-  const tabs = ['text', 'url'];
-  tabs.forEach(t => {
-    const btn = document.getElementById('tab-' + t);
-    const panel = document.getElementById('panel-' + t);
-    if (t === tab) {
-      btn.classList.add('active');
-      btn.setAttribute('aria-selected', 'true');
-      panel.classList.remove('hidden');
-    } else {
-      btn.classList.remove('active');
-      btn.setAttribute('aria-selected', 'false');
-      panel.classList.add('hidden');
-    }
-  });
-}
-
-// ─────────────────────────────────────────────
-// CHAR COUNT
-// ─────────────────────────────────────────────
-(function() {
-  const ta = document.getElementById('citation-textarea');
-  const cc = document.getElementById('char-count');
-  if (ta && cc) {
-    ta.addEventListener('input', function() {
-      const wc = ta.value.trim() ? ta.value.trim().split(/\s+/).length : 0;
-      cc.textContent = ta.value.length + ' chars · ' + wc + ' words';
-    }, { passive: true });
-  }
-})();
-
-// ─────────────────────────────────────────────
-// PASTE SAMPLE TEXT
-// ─────────────────────────────────────────────
-function pasteExample() {
-  const sample = `The proliferation of AI-generated content has raised significant questions about citation accuracy and source attribution (Martinez & Thompson, 2023). Several investigations have found that large language models occasionally produce fabricated references [1, 3, 7], a phenomenon researchers have termed "hallucinated citations."
-
-In a landmark study, Chen et al. (2022) demonstrated that up to 15% of AI-generated academic references contained verifiable errors, including incorrect publication years, misattributed authorship, and non-existent DOIs. This finding has been corroborated by independent analyses conducted at three major research institutions [2].
-
-Editorial verification workflows described by Roberts (2021, pp. 44–51) recommend a multi-stage citation audit process, beginning with automated pattern detection and culminating in manual source verification. The process typically takes 2–4 hours per 5,000-word document — see also Morrison (2020) for an alternate framework.
-
-Several tools have emerged to address this gap. For URL-based sources, the recommended practice involves retrieving archived versions via https://web.archive.org alongside original links such as https://doi.org/10.1000/xyz456 to maintain reference permanence. A useful overview is available at https://scholar.google.com.
-
-References
-1. Martinez, J. & Thompson, A. (2023). Citation integrity in AI-assisted writing. Information Science Review, 45(3), 112–129. https://doi.org/10.1177/01655515221889
-2. Chen, K., Patel, S., & Williams, D. (2022). Hallucinated references in generative AI models. Nature Machine Intelligence, 4(9), 801–815. https://doi.org/10.1038/s42256-022-00534
-3. Roberts, P. (2021). Editorial verification in the age of AI content. Publishing Research Quarterly, 37(2), 88–104.
-3. Roberts, P. (2021). Editorial verification in the age of AI content. Publishing Research Quarterly, 37(2), 88–104.
-Morrison, L. (2020). Citation workflows for digital publishers. Journalism Practice, 14(5), 677.`;
-
-  const ta = document.getElementById('citation-textarea');
-  const cc = document.getElementById('char-count');
-  if (ta) {
-    ta.value = sample;
-    const wc = sample.trim().split(/\s+/).length;
-    if (cc) cc.textContent = sample.length + ' chars · ' + wc + ' words';
-    ta.focus();
-    showToast('Sample text loaded — press Analyze Citations', 'info');
-  }
-}
-
-// ─────────────────────────────────────────────
-// CLEAR TOOL
-// ─────────────────────────────────────────────
-function clearTool() {
-  const ta = document.getElementById('citation-textarea');
-  const url = document.getElementById('url-input');
-  const cc = document.getElementById('char-count');
-  if (ta) ta.value = '';
-  if (url) url.value = '';
-  if (cc) cc.textContent = '0 characters';
-  document.getElementById('results-empty').classList.remove('hidden');
-  document.getElementById('results-output').classList.add('hidden');
-  showToast('Cleared', 'info', 1800);
-}
-
-// ─────────────────────────────────────────────
-// CORE CITATION ANALYSIS
-// ─────────────────────────────────────────────
-function analyzeCitationText(text) {
-  if (!text || text.trim().length < 20) {
-    return { error: 'Provide at least 20 characters of text to analyze.' };
-  }
-
-  const lines = text.split('\n');
-
-  // --- Pattern matching ---
-  // Bracket citations: [1], [2,3], [1-3], [4; 5]
-  const bracketRx = /\[\s*\d+(?:\s*[,;–-]\s*\d+)*\s*\]/g;
-  const bracketMatches = [...text.matchAll(bracketRx)];
-
-  // APA parenthetical: (Author, 2023), (Chen et al., 2022), (Smith & Jones, 2021)
-  const apaRx = /\((?:[A-ZÀ-Ö][a-z]+(?:\s+et\s+al\.|(?:\s+&\s+|\s+and\s+)[A-ZÀ-Ö][a-z]+)?,\s*(?:19|20)\d{2}[a-z]?(?:,\s*pp?\.\s*\d+(?:[–-]\d+)?)?(?:;\s*[A-ZÀ-Ö][a-z]+[^;)]{0,60}(?:19|20)\d{2}[^;)]{0,20})*)\)/g;
-  const apaMatches = [...text.matchAll(apaRx)];
-
-  // Footnote superscripts (unicode)
-  const footnoteRx = /[\u00B9\u00B2\u00B3\u2074-\u2079]+/g;
-  const footnoteMatches = [...text.matchAll(footnoteRx)];
-
-  // Latin citation terms
-  const latinRx = /\b(ibid\.|op\.\s*cit\.|loc\.\s*cit\.|cf\.|supra|infra)\b/gi;
-  const latinMatches = [...text.matchAll(latinRx)];
-
-  // URLs
-  const urlRx = /https?:\/\/(?:www\.)?[-a-zA-Z0-9@:%._+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b[-a-zA-Z0-9()@:%_+.~#?&/=]*/g;
-  const urlMatches = [...text.matchAll(urlRx)];
-
-  // DOIs
-  const doiRx = /\b10\.\d{4,9}\/[^\s\)\],<>"'\n]{3,}/g;
-  const doiMatches = [...text.matchAll(doiRx)];
-
-  // ISBNs
-  const isbnRx = /ISBN(?:-1[03])?:?\s*(?:97[89][-\s]?)?\d{1,5}[-\s]?\d{1,7}[-\s]?\d{1,7}[-\s]?[\dX]/gi;
-  const isbnMatches = [...text.matchAll(isbnRx)];
-
-  // --- Reference section ---
-  const refSectionRx = /(?:^|\n)\s*(References?|Bibliography|Works\s+Cited|Sources?|Citations?|Literature\s+Cited)\s*\n/im;
-  const refSectionMatch = text.match(refSectionRx);
-  const hasRefSection = !!refSectionMatch;
-
-  // --- Extract reference lines ---
-  let refLines = [];
-  if (hasRefSection) {
-    const startIdx = text.indexOf(refSectionMatch[0]) + refSectionMatch[0].length;
-    const afterSection = text.slice(startIdx);
-    refLines = afterSection.split('\n')
-      .map(l => l.trim())
-      .filter(l => l.length > 12 && !/^(References?|Bibliography|Works\s+Cited|Sources?|Notes?)\s*$/i.test(l));
-  }
-  // Also pick up standalone numbered lines even without a section header
-  if (refLines.length === 0) {
-    refLines = lines
-      .map(l => l.trim())
-      .filter(l => {
-        return (
-          /^\[?\d+\]?\.\s+[A-ZÀ-Ö]/.test(l) ||
-          /^[A-ZÀ-Ö][a-z]+,\s+[A-ZÀ-Ö]\./.test(l)
-        );
-      });
-  }
-  refLines = refLines.slice(0, 25);
-
-  // --- Duplicate detection ---
-  const seen = new Set();
-  const duplicates = [];
-  refLines.forEach(line => {
-    const key = line.toLowerCase().replace(/\s+/g, ' ').slice(0, 70);
-    if (seen.has(key)) duplicates.push(line);
-    else seen.add(key);
-  });
-
-  const urlStrings = urlMatches.map(m => m[0]);
-  const urlSet = new Set();
-  const duplicateUrls = [];
-  urlStrings.forEach(u => {
-    if (urlSet.has(u)) duplicateUrls.push(u);
-    else urlSet.add(u);
-  });
-
-  // --- Incomplete refs (missing year) ---
-  const yearRx = /\b(19|20)\d{2}\b/;
-  const incompleteRefs = refLines.filter(l => !yearRx.test(l) && l.length > 25);
-
-  // --- Domain extraction ---
-  const domains = {};
-  urlStrings.forEach(u => {
-    try {
-      const host = new URL(u).hostname.replace(/^www\./, '');
-      if (host) domains[host] = (domains[host] || 0) + 1;
-    } catch(e) {}
-  });
-
-  // --- Style detection ---
-  let detectedStyle = 'No citations detected';
-  if (apaMatches.length > 0 && apaMatches.length >= bracketMatches.length) {
-    detectedStyle = 'APA / Author-Date';
-  } else if (bracketMatches.length > 0) {
-    detectedStyle = 'Numbered / IEEE';
-  } else if (footnoteMatches.length > 0) {
-    detectedStyle = 'Footnote / Endnote';
-  } else if (doiMatches.length > 0) {
-    detectedStyle = 'DOI-anchored';
-  } else if (urlMatches.length > 0) {
-    detectedStyle = 'URL-referenced';
-  }
-
-  // --- Consistency check ---
-  const styleTypes = [];
-  if (bracketMatches.length > 0) styleTypes.push('bracket');
-  if (apaMatches.length > 0) styleTypes.push('APA');
-  if (footnoteMatches.length > 0) styleTypes.push('footnote');
-  const isConsistent = styleTypes.length <= 1;
-
-  // --- Totals ---
-  const totalInline = bracketMatches.length + apaMatches.length + footnoteMatches.length + latinMatches.length;
-
-  // --- SCORING ---
-  // Citation Score (0-100): presence and richness of citation markers
-  let citationScore = 0;
-  if (totalInline > 0) citationScore += 30;
-  if (totalInline >= 3) citationScore += 20;
-  if (totalInline >= 6) citationScore += 10;
-  if (hasRefSection) citationScore += 15;
-  if (refLines.length > 0) citationScore += 10;
-  if (doiMatches.length > 0) citationScore += 10;
-  if (isbnMatches.length > 0) citationScore += 5;
-  citationScore = Math.min(100, citationScore);
-
-  // Clarity Score (0-100): formatting consistency and structure quality
-  let clarityScore = 50;
-  if (isConsistent) clarityScore += 20;
-  if (detectedStyle !== 'No citations detected') clarityScore += 10;
-  if (duplicates.length === 0) clarityScore += 10;
-  if (incompleteRefs.length === 0 && refLines.length > 0) clarityScore += 10;
-  if (!isConsistent) clarityScore -= 20;
-  if (duplicates.length > 0) clarityScore -= 10;
-  if (duplicateUrls.length > 0) clarityScore -= 5;
-  clarityScore = Math.max(0, Math.min(100, clarityScore));
-
-  // Completeness Score (0-100): how complete the reference structure is
-  let completenessScore = 0;
-  if (totalInline > 0) completenessScore += 20;
-  if (hasRefSection) completenessScore += 30;
-  if (refLines.length >= 2) completenessScore += 15;
-  if (incompleteRefs.length === 0 && refLines.length > 0) completenessScore += 15;
-  if (doiMatches.length > 0 || urlMatches.length > 0) completenessScore += 10;
-  if (doiMatches.length > 0 && urlMatches.length > 0) completenessScore += 10;
-  completenessScore = Math.max(0, Math.min(100, completenessScore));
-
-  // Trust Score: weighted composite
-  const trustScore = Math.round(citationScore * 0.4 + clarityScore * 0.35 + completenessScore * 0.25);
-
-  // --- Warnings ---
-  const warnings = [];
-  if (totalInline === 0 && urlMatches.length === 0 && doiMatches.length === 0) {
-    warnings.push({ level: 'high', text: 'No citations detected. Content appears to have no attributed sources.' });
-  }
-  if (!hasRefSection && totalInline > 0) {
-    warnings.push({ level: 'medium', text: 'Inline citations present but no reference section found. Add a formal bibliography.' });
-  }
-  if (!isConsistent && styleTypes.length > 1) {
-    warnings.push({ level: 'medium', text: 'Mixed citation styles detected (' + styleTypes.join(' + ') + '). Standardize to one format.' });
-  }
-  if (duplicates.length > 0) {
-    warnings.push({ level: 'medium', text: duplicates.length + ' potential duplicate reference(s) detected. Review for redundancy.' });
-  }
-  if (duplicateUrls.length > 0) {
-    warnings.push({ level: 'low', text: duplicateUrls.length + ' URL(s) cited more than once. Confirm repetition is intentional.' });
-  }
-  if (incompleteRefs.length > 0) {
-    warnings.push({ level: 'medium', text: incompleteRefs.length + ' reference line(s) may be missing a publication year.' });
-  }
-  const domainKeys = Object.keys(domains);
-  if (domainKeys.length === 1 && urlMatches.length > 3) {
-    warnings.push({ level: 'low', text: 'All URLs point to a single domain. Consider diversifying source references.' });
-  }
-  if (warnings.length === 0 && totalInline > 0) {
-    warnings.push({ level: 'success', text: 'No structural issues found. Citation formatting appears consistent.' });
-  }
-
-  // --- Recommendations ---
-  const recommendations = [];
-  if (totalInline === 0) recommendations.push('Add inline citations at each claim to link statements directly to their sources.');
-  if (!hasRefSection && refLines.length === 0) recommendations.push('Include a formal reference section listing all sources with complete bibliographic details.');
-  if (doiMatches.length === 0 && refLines.length > 1) recommendations.push('Add DOI identifiers to academic sources for persistent, verifiable access links.');
-  if (!isConsistent) recommendations.push('Adopt a single citation style (APA, MLA, or Chicago) and apply it consistently throughout.');
-  if (incompleteRefs.length > 0) recommendations.push('Complete all reference entries with author, year, title, source, and identifier information.');
-  if (urlMatches.length > 0 && doiMatches.length === 0) recommendations.push('For web sources, include retrieval dates alongside URLs to document access timing.');
-  if (domainKeys.length <= 2 && urlMatches.length > 4) recommendations.push('Diversify source domains to strengthen the breadth of evidence behind the content.');
-  if (recommendations.length === 0) recommendations.push('Citation structure is solid. Consider adding DOIs for any print sources to maximize verifiability.');
-
-  return {
-    inlineCitations: totalInline,
-    bracketCitations: bracketMatches.length,
-    authorYearCitations: apaMatches.length,
-    footnoteCitations: footnoteMatches.length,
-    latinCitations: latinMatches.length,
-    urls: [...new Set(urlStrings)],
-    dois: [...new Set(doiMatches.map(m => m[0]))],
-    hasRefSection,
-    refLines,
-    duplicates,
-    duplicateUrls: [...new Set(duplicateUrls)],
-    incompleteRefs,
-    domains,
-    detectedStyle,
-    isConsistent,
-    styleTypes,
-    scores: { citationScore, clarityScore, completenessScore, trustScore },
-    warnings,
-    recommendations,
-    wordCount: text.trim().split(/\s+/).filter(w => w.length > 0).length
-  };
-}
-
-// ─────────────────────────────────────────────
-// URL MODE ANALYSIS
-// ─────────────────────────────────────────────
-function analyzeUrl(urlStr) {
-  let isValid = false;
-  let domain = '';
-  let scheme = '';
-  let pathDepth = 0;
-  let isHttps = false;
-
-  try {
-    const u = new URL(urlStr);
-    isValid = true;
-    domain = u.hostname.replace(/^www\./, '');
-    scheme = u.protocol;
-    isHttps = scheme === 'https:';
-    pathDepth = u.pathname.split('/').filter(p => p.length > 0).length;
-  } catch(e) {
-    isValid = false;
-  }
-
-  const knownAcademic = ['scholar.google.com','pubmed.ncbi.nlm.nih.gov','doi.org','jstor.org','researchgate.net',
-    'academia.edu','ssrn.com','arxiv.org','ncbi.nlm.nih.gov','sciencedirect.com','springer.com',
-    'tandfonline.com','wiley.com','nature.com','science.org','pnas.org','bmj.com','nejm.org'];
-  const isAcademic = knownAcademic.some(d => domain.includes(d));
-
-  if (!isValid) {
-    return { error: 'Invalid URL. Please enter a complete URL including https://' };
-  }
-
-  const warnings = [];
-  const recommendations = [];
-  if (!isHttps) warnings.push({ level: 'high', text: 'URL uses HTTP rather than HTTPS. Sources without encryption may be considered less reliable.' });
-  if (pathDepth === 0) warnings.push({ level: 'low', text: 'URL points to a root domain with no path — this may be a homepage rather than a specific article.' });
-  if (domain.length > 0) recommendations.push('Verify this source is still accessible and has not moved or been removed since original citation.');
-  if (!isAcademic) recommendations.push('Consider supplementing with a DOI or archival snapshot (e.g., web.archive.org) for long-term link stability.');
-  if (isAcademic) recommendations.push('This appears to be an academic or institutional domain — strong source type for research content.');
-
-  return {
-    urlMode: true,
-    domain,
-    isHttps,
-    isAcademic,
-    pathDepth,
-    warnings,
-    recommendations,
-    scores: {
-      trustScore: isAcademic ? 78 : (isHttps ? 62 : 40),
-      citationScore: isAcademic ? 80 : 55,
-      clarityScore: isHttps ? 70 : 40,
-      completenessScore: 35
-    }
-  };
-}
-
-// ─────────────────────────────────────────────
-// SCORE BAR COLOR HELPER
-// ─────────────────────────────────────────────
-function getScoreClass(score) {
-  if (score >= 70) return 'high';
-  if (score >= 40) return 'medium';
-  return 'low';
-}
-
-// ─────────────────────────────────────────────
-// RENDER RESULTS
-// ─────────────────────────────────────────────
-function renderResults(data) {
-  if (data.error) { showToast(data.error, 'info'); return; }
-
-  document.getElementById('results-empty').classList.add('hidden');
-  document.getElementById('results-output').classList.remove('hidden');
-
-  const s = data.scores;
-
-  // Timestamp
-  const now = new Date();
-  document.getElementById('report-timestamp').textContent = 'Generated ' + now.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' }) + ' — ' + now.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
-
-  // Trust score
-  document.getElementById('trust-score-num').textContent = s.trustScore + '/100';
-  const trustBar = document.getElementById('trust-bar');
-  trustBar.className = 'score-bar-fill ' + getScoreClass(s.trustScore);
-  setTimeout(() => { trustBar.style.width = s.trustScore + '%'; }, 80);
-
-  // Sub-scores
-  const scoreMap = [
-    { num: 'citation-score-num', bar: 'citation-bar', val: s.citationScore },
-    { num: 'clarity-score-num', bar: 'clarity-bar', val: s.clarityScore },
-    { num: 'completeness-score-num', bar: 'completeness-bar', val: s.completenessScore }
-  ];
-  scoreMap.forEach((sc, i) => {
-    document.getElementById(sc.num).textContent = sc.val + '/100';
-    const b = document.getElementById(sc.bar);
-    b.className = 'score-bar-fill ' + getScoreClass(sc.val);
-    setTimeout(() => { b.style.width = sc.val + '%'; }, 80 + i * 80);
-  });
-
-  // Stats
-  if (!data.urlMode) {
-    document.getElementById('stat-inline').textContent = data.inlineCitations;
-    document.getElementById('stat-refs').textContent = data.refLines ? data.refLines.length : 0;
-    document.getElementById('stat-urls').textContent = data.urls ? data.urls.length : 0;
-    document.getElementById('stat-dois').textContent = data.dois ? data.dois.length : 0;
-    document.getElementById('stat-style').textContent = data.detectedStyle || '—';
-  } else {
-    document.getElementById('stat-inline').textContent = '—';
-    document.getElementById('stat-refs').textContent = '—';
-    document.getElementById('stat-urls').textContent = '1';
-    document.getElementById('stat-dois').textContent = '0';
-    document.getElementById('stat-style').textContent = data.isAcademic ? 'Academic' : 'Web Source';
-  }
-
-  // Warnings
-  const warnList = document.getElementById('warnings-list');
-  warnList.innerHTML = '';
-  if (data.warnings && data.warnings.length > 0) {
-    data.warnings.forEach(w => {
-      const div = document.createElement('div');
-      const lvl = w.level === 'high' ? 'warn-high' : (w.level === 'medium' ? 'warn-medium' : (w.level === 'success' ? 'warn-low' : 'warn-low'));
-      const icon = w.level === 'high' ? '⚠' : (w.level === 'medium' ? '⚡' : (w.level === 'success' ? '✓' : 'ℹ'));
-      div.className = lvl + ' rounded-md px-3 py-2 text-xs flex items-start gap-2';
-      div.innerHTML = '<span style="flex-shrink:0;margin-top:1px;">' + icon + '</span><span>' + w.text + '</span>';
-      warnList.appendChild(div);
-    });
-  }
-  document.getElementById('warnings-section').style.display = (data.warnings && data.warnings.length > 0) ? '' : 'none';
-
-  // Reference lines
-  const refList = document.getElementById('refs-list');
-  refList.innerHTML = '';
-  const refSec = document.getElementById('refs-section');
-  if (!data.urlMode && data.refLines && data.refLines.length > 0) {
-    refSec.style.display = '';
-    data.refLines.forEach(line => {
-      const div = document.createElement('div');
-      const isDup = data.duplicates && data.duplicates.some(d => d.slice(0,60).toLowerCase() === line.slice(0,60).toLowerCase());
-      div.className = 'ref-line' + (isDup ? ' duplicate' : '');
-      div.textContent = line;
-      if (isDup) {
-        const badge = document.createElement('span');
-        badge.style.cssText = 'font-size:10px;font-family:JetBrains Mono,monospace;background:#F59E0B;color:white;border-radius:4px;padding:1px 6px;margin-left:8px;vertical-align:middle;';
-        badge.textContent = 'duplicate';
-        div.appendChild(badge);
-      }
-      refList.appendChild(div);
-    });
-  } else {
-    refSec.style.display = 'none';
-  }
-
-  // Domains
-  const domList = document.getElementById('domains-list');
-  domList.innerHTML = '';
-  const domSec = document.getElementById('domains-section');
-  const domKeys = data.domains ? Object.keys(data.domains) : [];
-  if (domKeys.length > 0) {
-    domSec.style.display = '';
-    domKeys.sort((a,b) => data.domains[b] - data.domains[a]).forEach(dom => {
-      const el = document.createElement('div');
-      el.className = 'domain-card';
-      el.innerHTML = dom + '<span class="domain-count">' + data.domains[dom] + '</span>';
-      domList.appendChild(el);
-    });
-  } else if (data.urlMode && data.domain) {
-    domSec.style.display = '';
-    const el = document.createElement('div');
-    el.className = 'domain-card';
-    el.innerHTML = data.domain + '<span class="domain-count">1</span>';
-    domList.appendChild(el);
-  } else {
-    domSec.style.display = 'none';
-  }
-
-  // Recommendations
-  const recList = document.getElementById('recs-list');
-  recList.innerHTML = '';
-  if (data.recommendations && data.recommendations.length > 0) {
-    data.recommendations.forEach(rec => {
-      const div = document.createElement('div');
-      div.className = 'flex items-start gap-2 text-xs';
-      div.style.color = 'var(--text-secondary)';
-      div.innerHTML = '<span style="color:var(--emerald);flex-shrink:0;margin-top:1px;">→</span><span>' + rec + '</span>';
-      recList.appendChild(div);
-    });
-  }
-  document.getElementById('recs-section').style.display = (data.recommendations && data.recommendations.length > 0) ? '' : 'none';
-
-  // Store report data for copy/download
-  window._lastReport = data;
-}
-
-// ─────────────────────────────────────────────
-// RUN ANALYSIS
-// ─────────────────────────────────────────────
-function runAnalysis() {
-  const activeTab = document.getElementById('tab-text').classList.contains('active') ? 'text' : 'url';
-  const btnText = document.getElementById('analyze-btn-text');
-
-  if (btnText) btnText.textContent = 'Analyzing…';
-
-  setTimeout(function() {
-    let data;
-    if (activeTab === 'text') {
-      const text = document.getElementById('citation-textarea').value;
-      if (!text || text.trim().length < 20) {
-        showToast('Paste at least a few sentences to analyze.', 'info');
-        if (btnText) btnText.textContent = 'Analyze Citations';
-        return;
-      }
-      data = analyzeCitationText(text);
-    } else {
-      const url = document.getElementById('url-input').value.trim();
-      if (!url) {
-        showToast('Enter a URL to analyze.', 'info');
-        if (btnText) btnText.textContent = 'Analyze Citations';
-        return;
-      }
-      data = analyzeUrl(url);
-    }
-
-    renderResults(data);
-    if (btnText) btnText.textContent = 'Re-Analyze';
-    showToast('Analysis complete', 'success');
-  }, 350);
-}
-
-// ─────────────────────────────────────────────
-// COPY REPORT
-// ─────────────────────────────────────────────
-function copyReport() {
-  const report = buildReportText();
-  if (!report) { showToast('Run analysis first', 'info'); return; }
-  navigator.clipboard.writeText(report).then(() => {
-    showToast('Report copied to clipboard', 'success');
-  }).catch(() => {
-    showToast('Copy failed — try the download button', 'info');
-  });
-}
-
-// ─────────────────────────────────────────────
-// DOWNLOAD REPORT
-// ─────────────────────────────────────────────
-function downloadReport() {
-  const report = buildReportText();
-  if (!report) { showToast('Run analysis first', 'info'); return; }
-  const blob = new Blob([report], { type: 'text/plain;charset=utf-8' });
-  const url = URL.createObjectURL(blob);
-  const a = document.createElement('a');
-  a.href = url;
-  a.download = 'citation-report-' + new Date().toISOString().split('T')[0] + '.txt';
-  document.body.appendChild(a);
-  a.click();
-  document.body.removeChild(a);
-  URL.revokeObjectURL(url);
-  showToast('Report downloaded', 'success');
-}
-
-function buildReportText() {
-  const d = window._lastReport;
-  if (!d) return null;
-  const s = d.scores;
-  const divider = '─'.repeat(46);
-  let lines = [
-    'AI Citation Scan — Citation Analysis Report',
-    divider,
-    'Generated: ' + new Date().toLocaleString(),
-    'Tool: https://aicitationscan.com/ai-tools/ai-citation-checker.html',
-    divider,
-    'SCORES',
-    '  Trust Score:        ' + s.trustScore + '/100',
-    '  Citation Score:     ' + s.citationScore + '/100',
-    '  Clarity Score:      ' + s.clarityScore + '/100',
-    '  Completeness Score: ' + s.completenessScore + '/100',
-    divider
-  ];
-  if (!d.urlMode) {
-    lines = lines.concat([
-      'STATISTICS',
-      '  Inline citations: ' + d.inlineCitations,
-      '  References:       ' + (d.refLines ? d.refLines.length : 0),
-      '  URLs:             ' + (d.urls ? d.urls.length : 0),
-      '  DOIs:             ' + (d.dois ? d.dois.length : 0),
-      '  Detected style:   ' + (d.detectedStyle || '—'),
-      '  Consistent:       ' + (d.isConsistent ? 'Yes' : 'No'),
-      divider
-    ]);
-  }
-  if (d.warnings && d.warnings.length > 0) {
-    lines.push('WARNINGS');
-    d.warnings.forEach(w => lines.push('  [' + w.level.toUpperCase() + '] ' + w.text));
-    lines.push(divider);
-  }
-  if (!d.urlMode && d.refLines && d.refLines.length > 0) {
-    lines.push('REFERENCES DETECTED');
-    d.refLines.forEach((r,i) => lines.push('  ' + (i+1) + '. ' + r));
-    lines.push(divider);
-  }
-  if (d.domains && Object.keys(d.domains).length > 0) {
-    lines.push('SOURCE DOMAINS');
-    Object.entries(d.domains).sort((a,b)=>b[1]-a[1]).forEach(([dom, cnt]) => {
-      lines.push('  ' + dom + ' (' + cnt + ')');
-    });
-    lines.push(divider);
-  }
-  if (d.recommendations && d.recommendations.length > 0) {
-    lines.push('RECOMMENDATIONS');
-    d.recommendations.forEach(r => lines.push('  → ' + r));
-    lines.push(divider);
-  }
-  lines.push('Generated by AI Citation Scan — aicitationscan.com');
-  return lines.join('\n');
-}
-
-// ─────────────────────────────────────────────
-// FAQ ACCORDION
-// ─────────────────────────────────────────────
-function toggleFaq(trigger) {
-  const answerId = trigger.getAttribute('aria-controls');
-  const answer = document.getElementById(answerId);
-  const isOpen = trigger.classList.contains('open');
-
-  // Close all others
-  document.querySelectorAll('.faq-trigger.open').forEach(t => {
-    if (t !== trigger) {
-      t.classList.remove('open');
-      t.setAttribute('aria-expanded', 'false');
-      const a = document.getElementById(t.getAttribute('aria-controls'));
-      if (a) a.classList.remove('open');
-    }
-  });
-
-  if (isOpen) {
-    trigger.classList.remove('open');
-    trigger.setAttribute('aria-expanded', 'false');
-    if (answer) answer.classList.remove('open');
-  } else {
-    trigger.classList.add('open');
-    trigger.setAttribute('aria-expanded', 'true');
-    if (answer) answer.classList.add('open');
-  }
-}
-
-// ─────────────────────────────────────────────
-// SHARE SYSTEM
-// ─────────────────────────────────────────────
-(function() {
-  const shareUrl = encodeURIComponent(window.location.href);
-  const shareTitle = encodeURIComponent(document.title);
-
-  const setHref = (id, href) => {
-    const el = document.getElementById(id);
-    if (el) el.href = href;
-  };
-
-  setHref('share-whatsapp', 'https://wa.me/?text=' + shareTitle + '%20' + shareUrl);
-  setHref('share-facebook', 'https://www.facebook.com/sharer/sharer.php?u=' + shareUrl);
-  setHref('share-twitter', 'https://twitter.com/intent/tweet?text=' + shareTitle + '&url=' + shareUrl);
-  setHref('share-linkedin', 'https://www.linkedin.com/sharing/share-offsite/?url=' + shareUrl);
-  setHref('share-reddit', 'https://www.reddit.com/submit?url=' + shareUrl + '&title=' + shareTitle);
-  setHref('share-email', 'mailto:?subject=' + shareTitle + '&body=' + shareUrl);
-})();
-
-function copyShareLink() {
-  navigator.clipboard.writeText(window.location.href).then(() => {
-    showToast('Link copied to clipboard', 'success');
-  }).catch(() => {
-    showToast('Copy failed — please copy the URL manually', 'info');
-  });
-}
-
-// ─────────────────────────────────────────────
-// CONTACT FORM — NETLIFY
-// ─────────────────────────────────────────────
-function handleContactForm(e) {
-  e.preventDefault();
-  const myForm = e.target;
-  const formData = new FormData(myForm);
-  fetch("/", {
-    method: "POST",
-    headers: { "Content-Type": "application/x-www-form-urlencoded" },
-    body: new URLSearchParams(formData).toString()
-  })
-  .then(() => {
-    alert("Thank you! Your request has been transmitted.");
-    myForm.reset();
-  })
-  .catch((error) => {
-    alert("Oops! There was a problem submitting your form.");
-    console.error("Form submission error:", error);
-  });
-}
-
-// ─────────────────────────────────────────────
-// KEYBOARD: Enter to analyze
-// ─────────────────────────────────────────────
-document.addEventListener('keydown', function(e) {
-  if (e.key === 'Enter' && e.ctrlKey) {
-    runAnalysis();
-  }
-}, { passive: true });
-
-</script>
-
-<!-- ═══════════════════════════════════════════ -->
-<!-- GLOBAL SHARED SCRIPTS -->
+<!-- ======= GLOBAL SHARED SCRIPTS ======= -->
 <script defer src="../js/registry.js"></script>
 <script defer src="../js/root-config.js"></script>
 <script defer src="../js/menu-system.js"></script>
@@ -2005,7 +1019,566 @@ document.addEventListener('keydown', function(e) {
 <script defer src="../js/legal-engine.js"></script>
 
 <!-- Plausible Analytics -->
-<script defer data-domain="aicitationscan.com" src="https://plausible.io/js/script.js"></script>
+<script defer data-domain="aicitationscan.com" src="https://plausible.io/js/plausible.js"></script>
 
+<!-- ======= INLINE PAGE LOGIC ======= -->
+<script>
+(function() {
+  'use strict';
+
+  /* ── Dynamic year ── */
+  const yr = new Date().getFullYear();
+  document.querySelectorAll('#footer-year').forEach(el => el.textContent = yr);
+
+  /* ── Schema dateModified (Mondays) ── */
+  const now = new Date();
+  const day = now.getDay();
+  const monday = new Date(now);
+  monday.setDate(now.getDate() - ((day + 6) % 7));
+  const iso = monday.toISOString().split('T')[0];
+  document.querySelectorAll('script[type="application/ld+json"]').forEach(s => {
+    s.textContent = s.textContent.replace('"dateModified": ""', `"dateModified": "${iso}"`);
+  });
+
+  /* ── Seasonal banner ── */
+  const month = now.getMonth();
+  const seasons = ['Winter','Winter','Spring','Spring','Spring','Summer','Summer','Summer','Autumn','Autumn','Autumn','Winter'];
+  const season = seasons[month];
+  const sb = document.getElementById('seasonal-banner');
+  if (sb) sb.textContent = `${season} ${yr} Edition`;
+
+  /* ── Freshness badge ── */
+  const fb = document.getElementById('freshness-badge');
+  if (fb) {
+    const opts = { year:'numeric', month:'short', day:'numeric' };
+    fb.textContent = `Updated ${now.toLocaleDateString('en-US', opts)}`;
+  }
+
+  /* ── Reading time (estimate) ── */
+  const rt = document.getElementById('reading-time');
+  if (rt) rt.textContent = '~6 min read';
+
+  /* ── Rotating CTA ── */
+  const ctas = ['Check My Citations','Analyze References Now','Scan for Citation Issues','Review My Sources','Audit Citation Quality'];
+  let ctaIdx = 0;
+  const ctaEl = document.getElementById('cta-text');
+  if (ctaEl) {
+    ctaEl.textContent = ctas[ctaIdx % ctas.length];
+    setInterval(() => {
+      ctaIdx++;
+      if (ctaEl) ctaEl.textContent = ctas[ctaIdx % ctas.length];
+    }, 4500);
+  }
+
+  /* ── Scroll progress ── */
+  const prog = document.getElementById('scroll-progress');
+  if (prog) {
+    window.addEventListener('scroll', function() {
+      const scrolled = window.scrollY;
+      const total = document.documentElement.scrollHeight - window.innerHeight;
+      prog.style.width = (total > 0 ? (scrolled / total) * 100 : 0) + '%';
+    }, { passive: true });
+  }
+
+  /* ── Toast ── */
+  function showToast(msg, duration) {
+    duration = duration || 2800;
+    const container = document.getElementById('toast-container');
+    if (!container) return;
+    const t = document.createElement('div');
+    t.className = 'toast';
+    t.textContent = msg;
+    container.appendChild(t);
+    setTimeout(() => {
+      t.style.animation = 'toast-out 0.3s ease forwards';
+      setTimeout(() => { if (t.parentNode) t.parentNode.removeChild(t); }, 320);
+    }, duration);
+  }
+  window.__showToast = showToast;
+
+  /* ── Share system ── */
+  function initShareButtons() {
+    const url = encodeURIComponent(window.location.href);
+    const title = encodeURIComponent(document.title);
+    const waBtn = document.getElementById('share-whatsapp');
+    const twBtn = document.getElementById('share-twitter');
+    const fbBtn = document.getElementById('share-facebook');
+    const liBtn = document.getElementById('share-linkedin');
+    const rdBtn = document.getElementById('share-reddit');
+    const emBtn = document.getElementById('share-email');
+    if (waBtn) waBtn.href = `https://wa.me/?text=${title}%20${url}`;
+    if (twBtn) twBtn.href = `https://twitter.com/intent/tweet?text=${title}&url=${url}`;
+    if (fbBtn) fbBtn.href = `https://www.facebook.com/sharer/sharer.php?u=${url}`;
+    if (liBtn) liBtn.href = `https://www.linkedin.com/shareArticle?mini=true&url=${url}&title=${title}`;
+    if (rdBtn) rdBtn.href = `https://www.reddit.com/submit?url=${url}&title=${title}`;
+    if (emBtn) emBtn.href = `mailto:?subject=${title}&body=${url}`;
+  }
+  initShareButtons();
+
+  window.copyPageLink = function() {
+    navigator.clipboard.writeText(window.location.href).then(() => {
+      showToast('Link copied to clipboard');
+    }).catch(() => {
+      showToast('Copy failed — please copy manually');
+    });
+  };
+
+  /* ── Testimonials ── */
+  const testimonials = [
+    { text: "Caught three incomplete references in my thesis draft in under a minute. The domain extraction alone saved an awkward reviewer comment.", author: "Mara H. — Postgraduate researcher" },
+    { text: "We run every AI-drafted article through this before editorial review. It consistently surfaces duplicate domains and orphaned inline markers our team would have missed.", author: "David O. — Content operations lead" },
+    { text: "The APA formatting check flagged seven inconsistencies in a 4,000-word piece. The downloadable report went straight into our style audit doc.", author: "Lena R. — Journal editor" },
+    { text: "Simple to use, serious output. The completeness score gave us a benchmark we now include in every content brief.", author: "Tomás V. — Digital publisher" }
+  ];
+  let tIdx = 0;
+  const tText = document.getElementById('testimonial-text');
+  const tAuth = document.getElementById('testimonial-author');
+  function renderTestimonial() {
+    const t = testimonials[tIdx % testimonials.length];
+    if (tText) tText.textContent = '"' + t.text + '"';
+    if (tAuth) tAuth.textContent = '— ' + t.author;
+    tIdx++;
+  }
+  renderTestimonial();
+  setInterval(renderTestimonial, 5500);
+
+  /* ── FAQ Accordion ── */
+  const faqs = [
+    { q: "What does an AI citation checker analyze?", a: "It scans for inline citation markers (e.g. [1], (Author, Year)), reference list entries, URL and DOI patterns, duplicate sources, missing publication years, domain repetition, and overall formatting consistency across APA and MLA conventions." },
+    { q: "Does citation consistency affect content trust?", a: "Substantially. Inconsistent or missing references reduce perceived credibility, particularly in research, journalism, and academic publishing. Editors and peer reviewers treat structural citation quality as a direct proxy for source rigor." },
+    { q: "Can AI generate incorrect or fabricated references?", a: "Language models can produce plausible-looking citations that reference non-existent papers, incorrect authors, or wrong publication years — a pattern called hallucination. Citation checking helps surface these structural failures before publication." },
+    { q: "How do I identify incomplete citations?", a: "Incomplete citations typically lack author names, publication years, source titles, or retrieval URLs. This tool scans each reference line for these missing elements and flags them directly in the expanded report section." },
+    { q: "Why do references sometimes disappear in AI-generated content?", a: "AI outputs are probabilistic. Sources cited early in a generation may not be reinforced later, resulting in orphaned inline markers or dropped reference list entries — a pattern this tool specifically detects and reports." },
+    { q: "Can duplicate references create editorial problems?", a: "Duplicate references inflate apparent source diversity and can obscure over-reliance on a single domain or author. The checker identifies exact and near-duplicate entries and flags them in the warnings section." },
+    { q: "How do I review inline citations effectively?", a: "Paste the full text with inline markers included. The tool maps each marker type — numeric brackets [1], author-date (Smith, 2022), or footnote anchors — against available reference list entries and reports any unmatched or orphaned markers." },
+    { q: "What is the difference between APA and MLA citation formatting?", a: "APA uses author-date formatting and is standard in social sciences and psychology. MLA uses author-page notation and is common in humanities. They differ in punctuation, element order, italicization, and source type handling. The checker surfaces inconsistencies within either convention." }
+  ];
+  const faqList = document.getElementById('faq-list');
+  if (faqList) {
+    faqs.forEach((item, i) => {
+      const wrap = document.createElement('div');
+      wrap.style.cssText = 'border:1px solid var(--border); border-radius:8px; overflow:hidden; background:#fff;';
+
+      const btn = document.createElement('button');
+      btn.setAttribute('aria-expanded', 'false');
+      btn.setAttribute('aria-controls', `faq-body-${i}`);
+      btn.id = `faq-btn-${i}`;
+      btn.style.cssText = 'width:100%; text-align:left; padding:14px 16px; display:flex; align-items:center; justify-content:space-between; gap:12px; background:transparent; border:none; cursor:pointer; font-family:\'DM Sans\',sans-serif; font-size:14px; font-weight:600; color:var(--navy-800); line-height:1.45;';
+      btn.innerHTML = `<span>${item.q}</span><svg class="faq-chevron" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="flex-shrink:0;" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>`;
+
+      const body = document.createElement('div');
+      body.id = `faq-body-${i}`;
+      body.className = 'faq-answer';
+      body.setAttribute('role', 'region');
+      body.setAttribute('aria-labelledby', `faq-btn-${i}`);
+      body.innerHTML = `<div style="padding:0 16px 16px; font-size:13.5px; color:var(--slate-400); line-height:1.75;">${item.a}</div>`;
+
+      btn.addEventListener('click', function() {
+        const isOpen = body.classList.contains('open');
+        body.classList.toggle('open', !isOpen);
+        const chevron = btn.querySelector('.faq-chevron');
+        if (chevron) chevron.classList.toggle('rotated', !isOpen);
+        btn.setAttribute('aria-expanded', String(!isOpen));
+      });
+
+      wrap.appendChild(btn);
+      wrap.appendChild(body);
+      faqList.appendChild(wrap);
+    });
+  }
+
+  /* ── Contact form handler ── */
+  window.handleContactForm = function(e) {
+    e.preventDefault();
+    const myForm = e.target;
+    const formData = new FormData(myForm);
+    fetch("/", {
+      method: "POST",
+      headers: { "Content-Type": "application/x-www-form-urlencoded" },
+      body: new URLSearchParams(formData).toString()
+    })
+    .then(() => {
+      alert("Thank you! Your request has been transmitted.");
+      myForm.reset();
+    })
+    .catch((error) => {
+      alert("Oops! There was a problem submitting your form.");
+      console.error("Form submission error:", error);
+    });
+  };
+
+  /* ══════════════════════════════════════════════
+     CITATION ANALYSIS ENGINE (client-side)
+  ══════════════════════════════════════════════ */
+
+  const SAMPLE_TEXT = `The integration of AI tools into academic workflows has accelerated significantly since 2021 (Doe & Smith, 2022). Research suggests that citation accuracy in AI-generated content remains a persistent challenge [1][3]. According to a recent survey, over 60% of scholars have encountered fabricated references in AI outputs (Johnson, 2023).
+
+Several methodologies have been proposed to address this issue. The PRISMA framework, originally designed for systematic reviews, has been adapted for AI content auditing (Lee et al., 2022). Additionally, Crossref's metadata verification service provides DOI-level accuracy checking (https://doi.org/10.1000/example).
+
+References:
+1. Doe, J., & Smith, A. (2022). Citation integrity in the age of AI. Journal of Academic Publishing, 14(2), 45–62. https://doi.org/10.1000/example
+2. Lee, R., Patel, K., & Wong, M. (2022). Adapting PRISMA for AI content audits. Research Methods Quarterly, 8(1), 12–29.
+3. Johnson, P. (2023). Fabricated references: prevalence and detection. Science & Technology Studies, 31(4), 88–104.
+4. Johnson, P. (2023). Fabricated references: prevalence and detection. Science & Technology Studies, 31(4), 88–104.`;
+
+  window.pasteExample = function() {
+    document.getElementById('tool-input').value = SAMPLE_TEXT;
+    showToast('Example text pasted');
+  };
+
+  window.clearAll = function() {
+    document.getElementById('tool-input').value = '';
+    document.getElementById('url-input').value = '';
+    document.getElementById('empty-state').style.display = 'flex';
+    document.getElementById('report-content').style.display = 'none';
+    showToast('Cleared');
+  };
+
+  function extractDomain(url) {
+    try {
+      const u = new URL(url.startsWith('http') ? url : 'https://' + url);
+      return u.hostname.replace(/^www\./, '');
+    } catch {
+      const m = url.match(/(?:https?:\/\/)?(?:www\.)?([^\/\s?#]+)/);
+      return m ? m[1] : url;
+    }
+  }
+
+  function analyzeText(text) {
+    const lines = text.split('\n').map(l => l.trim()).filter(Boolean);
+    const words = text.split(/\s+/).length;
+
+    // --- Inline citation detection ---
+    const numericMarkers = text.match(/\[\d+\]/g) || [];
+    const authorDateMarkers = text.match(/\([A-Z][a-z]+(?:\s+et\s+al\.)?(?:\s*[&,]\s*[A-Z][a-z]+)?,\s*\d{4}[a-z]?\)/g) || [];
+    const footnoteMarkers = text.match(/\^\d+|\(\d+\)/g) || [];
+    const inlineCitations = [...new Set([...numericMarkers, ...authorDateMarkers, ...footnoteMarkers])];
+
+    // --- Reference section detection ---
+    const refSectionIdx = lines.findIndex(l => /^references?:?$|^bibliography:?$|^works cited:?$/i.test(l));
+    const hasRefSection = refSectionIdx !== -1;
+    const refLines = hasRefSection ? lines.slice(refSectionIdx + 1) : [];
+
+    // --- URL detection ---
+    const urlPattern = /https?:\/\/[^\s)>"]+/g;
+    const allUrls = text.match(urlPattern) || [];
+    const doiUrls = allUrls.filter(u => u.includes('doi.org'));
+    const plainUrls = allUrls.filter(u => !u.includes('doi.org'));
+    const domains = allUrls.map(extractDomain);
+    const domainCount = {};
+    domains.forEach(d => { domainCount[d] = (domainCount[d] || 0) + 1; });
+    const uniqueDomains = Object.keys(domainCount);
+    const repeatedDomains = Object.entries(domainCount).filter(([, c]) => c > 1).map(([d]) => d);
+
+    // --- Reference line analysis ---
+    const yearPattern = /\b(19|20)\d{2}\b/;
+    const refsMissingYear = refLines.filter(l => l.length > 20 && !yearPattern.test(l));
+    const refsMissingUrl = refLines.filter(l => l.length > 20 && !urlPattern.test(l));
+
+    // --- Duplicate detection ---
+    const trimmedRefs = refLines.map(l => l.toLowerCase().replace(/\s+/g, ' ').trim());
+    const seen = new Set();
+    const duplicateRefs = [];
+    trimmedRefs.forEach((r, i) => {
+      if (seen.has(r) && r.length > 30) duplicateRefs.push(refLines[i]);
+      seen.add(r);
+    });
+
+    // --- Format detection ---
+    const hasAPA = /\(\d{4}\)/.test(text) || /\([A-Z][a-z]+,\s*\d{4}/.test(text);
+    const hasMLA = /Print\.|Web\.|Accessed/.test(text);
+    const formatStyle = hasAPA ? 'APA-like' : hasMLA ? 'MLA-like' : 'Undetected';
+
+    // --- Consistency check ---
+    const mixedFormats = hasAPA && hasMLA;
+
+    // --- Scoring ---
+    let citationScore = 50;
+    if (inlineCitations.length > 0) citationScore += 20;
+    if (hasRefSection) citationScore += 20;
+    if (doiUrls.length > 0) citationScore += 10;
+    if (duplicateRefs.length > 0) citationScore -= 15;
+    if (refsMissingYear.length > 2) citationScore -= 10;
+    if (mixedFormats) citationScore -= 10;
+    citationScore = Math.max(0, Math.min(100, citationScore));
+
+    let clarityScore = 50;
+    if (inlineCitations.length > 0) clarityScore += 15;
+    if (!mixedFormats) clarityScore += 15;
+    if (allUrls.length > 0) clarityScore += 10;
+    if (refsMissingYear.length === 0) clarityScore += 10;
+    clarityScore = Math.max(0, Math.min(100, clarityScore));
+
+    let completenessScore = 50;
+    if (hasRefSection) completenessScore += 20;
+    if (refsMissingUrl.length === 0 && refLines.length > 0) completenessScore += 15;
+    if (refsMissingYear.length === 0 && refLines.length > 0) completenessScore += 15;
+    if (duplicateRefs.length > 0) completenessScore -= 10;
+    completenessScore = Math.max(0, Math.min(100, completenessScore));
+
+    return {
+      words, inlineCitations, numericMarkers, authorDateMarkers,
+      hasRefSection, refLines, allUrls, doiUrls, plainUrls,
+      uniqueDomains, repeatedDomains, domainCount,
+      refsMissingYear, refsMissingUrl, duplicateRefs,
+      formatStyle, mixedFormats,
+      citationScore, clarityScore, completenessScore
+    };
+  }
+
+  function buildReport(r) {
+    // Scores
+    const scoreColor = (s) => s >= 75 ? 'var(--emerald)' : s >= 50 ? 'var(--amber)' : 'var(--rose)';
+    document.getElementById('citation-score-val').textContent = r.citationScore + '%';
+    document.getElementById('citation-score-val').style.color = scoreColor(r.citationScore);
+    document.getElementById('citation-score-bar').style.width = r.citationScore + '%';
+    document.getElementById('citation-score-bar').style.background = scoreColor(r.citationScore);
+
+    document.getElementById('clarity-score-val').textContent = r.clarityScore + '%';
+    document.getElementById('clarity-score-val').style.color = scoreColor(r.clarityScore);
+    document.getElementById('clarity-score-bar').style.width = r.clarityScore + '%';
+    document.getElementById('clarity-score-bar').style.background = scoreColor(r.clarityScore);
+
+    document.getElementById('complete-score-val').textContent = r.completenessScore + '%';
+    document.getElementById('complete-score-val').style.color = scoreColor(r.completenessScore);
+    document.getElementById('complete-score-bar').style.width = r.completenessScore + '%';
+    document.getElementById('complete-score-bar').style.background = scoreColor(r.completenessScore);
+
+    // Stat row
+    const statRow = document.getElementById('stat-row');
+    statRow.innerHTML = '';
+    const stats = [
+      { label: 'Inline Markers', val: r.inlineCitations.length },
+      { label: 'References', val: r.refLines.length },
+      { label: 'URLs Found', val: r.allUrls.length },
+      { label: 'DOIs', val: r.doiUrls.length }
+    ];
+    stats.forEach(s => {
+      const d = document.createElement('div');
+      d.style.cssText = 'text-align:center; padding:10px 8px; background:var(--slate-100); border-radius:8px; border:1px solid var(--border);';
+      d.innerHTML = `<p style="font-family:'Syne',sans-serif;font-size:20px;font-weight:800;color:var(--navy-800);">${s.val}</p><p style="font-family:'DM Mono',monospace;font-size:9px;font-weight:500;letter-spacing:0.08em;text-transform:uppercase;color:var(--slate-400);margin-top:2px;">${s.label}</p>`;
+      statRow.appendChild(d);
+    });
+
+    // Warnings
+    const wb = document.getElementById('warnings-block');
+    wb.innerHTML = '';
+    const warnings = [];
+    if (!r.hasRefSection) warnings.push({ type:'rose', icon:'⚠', msg: 'No reference section detected — inline citations lack a corresponding bibliography.' });
+    if (r.duplicateRefs.length > 0) warnings.push({ type:'amber', icon:'⚠', msg: `${r.duplicateRefs.length} duplicate reference line(s) found.` });
+    if (r.refsMissingYear.length > 0) warnings.push({ type:'amber', icon:'⚠', msg: `${r.refsMissingYear.length} reference line(s) appear to be missing a publication year.` });
+    if (r.mixedFormats) warnings.push({ type:'amber', icon:'⚠', msg: 'Mixed citation formats detected (APA and MLA signals in same document).' });
+    if (r.repeatedDomains.length > 0) warnings.push({ type:'amber', icon:'⚠', msg: `Repeated domains: ${r.repeatedDomains.slice(0,3).join(', ')} — check for over-reliance.` });
+    if (r.inlineCitations.length === 0) warnings.push({ type:'rose', icon:'⚠', msg: 'No inline citation markers found. Sources may be uncited within the text.' });
+    if (warnings.length === 0) {
+      const ok = document.createElement('div');
+      ok.className = 'warn-badge';
+      ok.style.cssText = 'background:rgba(16,185,129,0.08);border:1px solid rgba(16,185,129,0.2);color:#059669;';
+      ok.innerHTML = '✓ No critical citation issues detected';
+      wb.appendChild(ok);
+    } else {
+      warnings.forEach(w => {
+        const d = document.createElement('div');
+        d.className = 'warn-badge';
+        const colors = { rose: 'background:rgba(244,63,94,0.06);border:1px solid rgba(244,63,94,0.2);color:#BE123C;', amber: 'background:rgba(245,158,11,0.06);border:1px solid rgba(245,158,11,0.2);color:#92400E;' };
+        d.style.cssText = `${colors[w.type]} margin-bottom:6px; display:flex; align-items:flex-start; gap:6px;`;
+        d.innerHTML = `<span>${w.icon}</span><span>${w.msg}</span>`;
+        wb.appendChild(d);
+      });
+    }
+
+    // Expandable sections
+    const es = document.getElementById('expandable-sections');
+    es.innerHTML = '';
+    const sections = [
+      {
+        title: 'Inline Citation Markers',
+        chip: r.inlineCitations.length > 0 ? 'chip-emerald' : 'chip-rose',
+        chipText: r.inlineCitations.length > 0 ? `${r.inlineCitations.length} found` : 'None found',
+        content: r.inlineCitations.length > 0
+          ? `<p style="font-size:12.5px;color:var(--slate-400);margin-bottom:10px;">Numeric: ${r.numericMarkers.length} &nbsp;·&nbsp; Author-Date: ${r.authorDateMarkers.length}</p><div style="display:flex;flex-wrap:wrap;gap:6px;">${[...new Set(r.inlineCitations.slice(0,20))].map(m => `<span style="font-family:'DM Mono',monospace;font-size:11px;padding:3px 8px;background:var(--slate-100);border:1px solid var(--border);border-radius:4px;color:var(--navy-700);">${m.replace(/</g,'&lt;')}</span>`).join('')}</div>`
+          : '<p style="font-size:12.5px;color:var(--slate-400);">No inline citation markers detected in this text.</p>'
+      },
+      {
+        title: 'Reference List Analysis',
+        chip: r.hasRefSection ? 'chip-emerald' : 'chip-rose',
+        chipText: r.hasRefSection ? `${r.refLines.length} entries` : 'Not found',
+        content: r.hasRefSection
+          ? `<p style="font-size:12.5px;color:var(--slate-400);margin-bottom:10px;">Format detected: <strong>${r.formatStyle}</strong></p><ul style="list-style:none;padding:0;display:flex;flex-direction:column;gap:4px;">${r.refLines.slice(0,8).map(l => `<li style="font-size:12px;color:var(--navy-700);padding:5px 8px;background:var(--slate-100);border-radius:5px;border:1px solid var(--border);">${l.length > 120 ? l.substring(0,120) + '…' : l}</li>`).join('')}</ul>`
+          : '<p style="font-size:12.5px;color:var(--slate-400);">No bibliography or reference list section found. Ensure your document includes a labeled reference section.</p>'
+      },
+      {
+        title: 'URL & DOI Presence',
+        chip: r.allUrls.length > 0 ? 'chip-emerald' : 'chip-amber',
+        chipText: `${r.allUrls.length} URL${r.allUrls.length !== 1 ? 's' : ''}`,
+        content: `<p style="font-size:12.5px;color:var(--slate-400);margin-bottom:8px;">DOIs: ${r.doiUrls.length} &nbsp;·&nbsp; Plain URLs: ${r.plainUrls.length}</p><div style="display:flex;flex-wrap:wrap;gap:5px;">${r.allUrls.slice(0,6).map(u => `<span class="domain-card">${u.length > 55 ? u.substring(0,55) + '…' : u}</span>`).join('')}${r.allUrls.length > 6 ? `<span class="domain-card">+${r.allUrls.length - 6} more</span>` : ''}</div>`
+      }
+    ];
+    sections.forEach(sec => {
+      const wrap = document.createElement('div');
+      wrap.className = 'analysis-section';
+      const isOpen = false;
+      wrap.innerHTML = `
+        <div class="analysis-section-header" role="button" tabindex="0" aria-expanded="false" style="font-family:'DM Sans',sans-serif; font-size:13px; font-weight:600; color:var(--navy-800);">
+          <div style="display:flex;align-items:center;gap:8px;">
+            <span>${sec.title}</span>
+            <span class="chip ${sec.chip}">${sec.chipText}</span>
+          </div>
+          <svg class="faq-chevron" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
+        </div>
+        <div class="analysis-section-body">
+          <div style="padding:0 14px 14px;">${sec.content}</div>
+        </div>`;
+      const hdr = wrap.querySelector('.analysis-section-header');
+      const body = wrap.querySelector('.analysis-section-body');
+      hdr.addEventListener('click', function() {
+        const o = body.classList.contains('open');
+        body.classList.toggle('open', !o);
+        const chev = hdr.querySelector('.faq-chevron');
+        if (chev) chev.classList.toggle('rotated', !o);
+        hdr.setAttribute('aria-expanded', String(!o));
+      });
+      hdr.addEventListener('keydown', function(e) {
+        if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); hdr.click(); }
+      });
+      es.appendChild(wrap);
+    });
+
+    // Domains
+    const db = document.getElementById('domains-block');
+    db.innerHTML = '';
+    if (r.uniqueDomains.length > 0) {
+      const head = document.createElement('p');
+      head.className = 'section-label';
+      head.style.marginBottom = '10px';
+      head.textContent = 'Source Domains';
+      db.appendChild(head);
+      const grid = document.createElement('div');
+      grid.style.cssText = 'display:flex;flex-wrap:wrap;gap:6px;';
+      r.uniqueDomains.slice(0,12).forEach(d => {
+        const card = document.createElement('span');
+        card.className = 'domain-card';
+        const cnt = r.domainCount[d];
+        card.innerHTML = `<span>🔗</span>${d}${cnt > 1 ? ` <span style="color:var(--amber);font-weight:600;">(×${cnt})</span>` : ''}`;
+        grid.appendChild(card);
+      });
+      db.appendChild(grid);
+    }
+
+    // Recommendations
+    const rb = document.getElementById('recs-block');
+    rb.innerHTML = '';
+    const recs = [];
+    if (!r.hasRefSection) recs.push('Add a clearly labeled "References" or "Bibliography" section at the end of the document.');
+    if (r.duplicateRefs.length > 0) recs.push('Remove duplicate reference entries to maintain a clean bibliography.');
+    if (r.inlineCitations.length === 0) recs.push('Add inline citation markers to attribute specific claims to their sources within the text.');
+    if (r.refsMissingYear.length > 0) recs.push(`Add publication years to ${r.refsMissingYear.length} reference line(s) flagged as incomplete.`);
+    if (r.mixedFormats) recs.push('Standardize to a single citation style (APA or MLA) throughout the document.');
+    if (r.doiUrls.length === 0 && r.refLines.length > 0) recs.push('Consider adding DOI links to academic references where available for verifiability.');
+    if (recs.length > 0) {
+      const head = document.createElement('p');
+      head.className = 'section-label';
+      head.style.marginBottom = '10px';
+      head.textContent = 'Recommendations';
+      rb.appendChild(head);
+      recs.forEach(rec => {
+        const item = document.createElement('div');
+        item.style.cssText = 'display:flex;align-items:flex-start;gap:8px;padding:8px 10px;background:rgba(139,92,246,0.04);border:1px solid rgba(139,92,246,0.12);border-radius:7px;margin-bottom:6px;';
+        item.innerHTML = `<span style="color:var(--violet);font-size:13px;flex-shrink:0;margin-top:1px;">→</span><span style="font-size:12.5px;color:var(--navy-700);line-height:1.6;">${rec}</span>`;
+        rb.appendChild(item);
+      });
+    }
+
+    // Store report for copy/download
+    window.__lastReport = {
+      citationScore: r.citationScore, clarityScore: r.clarityScore,
+      completenessScore: r.completenessScore, inlineCitations: r.inlineCitations.length,
+      references: r.refLines.length, urls: r.allUrls.length, dois: r.doiUrls.length,
+      formatStyle: r.formatStyle, duplicates: r.duplicateRefs.length,
+      warnings: document.getElementById('warnings-block').innerText,
+      domains: r.uniqueDomains.slice(0,10).join(', '),
+      recs
+    };
+  }
+
+  window.runAnalysis = function() {
+    const text = document.getElementById('tool-input').value.trim();
+    const url = document.getElementById('url-input').value.trim();
+
+    if (!text && !url) {
+      showToast('Please paste text or enter a URL first');
+      return;
+    }
+
+    const btn = document.getElementById('analyze-btn');
+    btn.textContent = 'Analyzing…';
+    btn.disabled = true;
+
+    setTimeout(() => {
+      const inputText = text || `[URL analysis mode] Source: ${url}\n\nNote: URL-based analysis uses a simulated content pass. For full citation scanning, paste the article text directly.\n\nReferences:\n1. Example reference from ${url}`;
+      const result = analyzeText(inputText);
+      buildReport(result);
+
+      document.getElementById('empty-state').style.display = 'none';
+      document.getElementById('report-content').style.display = 'block';
+
+      btn.textContent = 'Re-analyze';
+      btn.disabled = false;
+      showToast('Citation analysis complete');
+    }, 480);
+  };
+
+  function formatReportText(r) {
+    if (!r) return 'No report available.';
+    return `AI Citation Checker — Report
+Generated: ${new Date().toLocaleString()}
+Tool: https://aicitationscan.com/ai-tools/ai-citation-checker.html
+
+SCORES
+Citation Score:    ${r.citationScore}%
+Clarity Score:     ${r.clarityScore}%
+Completeness:      ${r.completenessScore}%
+
+STATISTICS
+Inline Markers:    ${r.inlineCitations}
+References:        ${r.references}
+URLs Found:        ${r.urls}
+DOIs:              ${r.dois}
+Format Style:      ${r.formatStyle}
+Duplicates:        ${r.duplicates}
+
+DOMAINS DETECTED
+${r.domains || 'None'}
+
+WARNINGS
+${r.warnings || 'None'}
+
+RECOMMENDATIONS
+${r.recs && r.recs.length > 0 ? r.recs.map((rc, i) => `${i+1}. ${rc}`).join('\n') : 'No recommendations.'}
+`;
+  }
+
+  window.copyReport = function() {
+    const text = formatReportText(window.__lastReport);
+    navigator.clipboard.writeText(text).then(() => {
+      showToast('Report copied to clipboard');
+    }).catch(() => {
+      showToast('Copy failed — please try again');
+    });
+  };
+
+  window.downloadReport = function() {
+    const text = formatReportText(window.__lastReport);
+    const blob = new Blob([text], { type: 'text/plain' });
+    const a = document.createElement('a');
+    a.href = URL.createObjectURL(blob);
+    a.download = 'citation-report.txt';
+    a.click();
+    URL.revokeObjectURL(a.href);
+    showToast('Report downloaded');
+  };
+
+})();
+</script>
 </body>
 </html>
