@@ -122,8 +122,8 @@ window.seoRegistry = {
     },
     "ai-citation-checker.html": {
         "url": "/ai-tools/ai-citation-checker",
-        "title": "AI Citation Checker — Analyze Reference Quality & Source Attribution | AI Citation Scan",
-        "desc": "Analyze AI-generated citations, review reference consistency, detect incomplete sources, and evaluate attribution structure — free citation checker tool by AI Citation Scan."
+        "title": "AI Citation Checker — Analyze Reference Structure & Attribution Quality | AI Citation Scan",
+        "desc": "Free AI citation checker: analyze reference consistency, detect incomplete citations, check APA/MLA formatting, and evaluate attribution quality across articles, essays, and AI-assisted content."
     },
     "how-to-find-out-who-built-a-website.html": {
         "url": "/guides/how-to-find-out-who-built-a-website",
