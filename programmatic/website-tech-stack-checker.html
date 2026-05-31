@@ -3672,6 +3672,17 @@
     ═════════════════════════════════════════════ */
     function switchMode(mode) {
       state.activeAbortController?.abort(); state.activeAbortController = null;
+
+      // Stop any running graph animation loops when switching away from their mode.
+      // Without this the ForceGraph animation runs at 60fps in a hidden canvas
+      // indefinitely — consuming CPU and causing interference when switching back.
+      if (state.globalGraphInstance) {
+        state.globalGraphInstance.stop();
+      }
+      if (state.graphInstance) {
+        state.graphInstance.stop();
+      }
+
       state.mode = mode;
       document.body.setAttribute('data-mode', mode);
 
@@ -4204,15 +4215,34 @@
         $('graph-results').style.display = 'block';
         if (window.innerWidth < 900) { setTimeout(() => { $('graph-results').scrollIntoView({ behavior: 'smooth', block: 'start' }); }, 80); }
 
-        $('global-graph-badge').textContent = `${(data.nodes||[]).length} nodes · ${(data.edges||[]).length} edges`;
+        // Cap the global graph to the 30 highest-weight nodes.
+        // The co-occurrence graph can have 89+ nodes. With that many nodes
+        // the N² repulsion calculation creates catastrophic forces that
+        // cause chaotic "noise" animation. 30 nodes is enough to show
+        // the most meaningful global technology relationships while
+        // keeping the physics simulation stable and readable.
+        let graphNodes = [...(data.nodes || [])];
+        let graphEdges = [...(data.edges || [])];
+        const MAX_GLOBAL_NODES = 30;
+        if (graphNodes.length > MAX_GLOBAL_NODES) {
+          graphNodes = graphNodes
+            .sort((a, b) => (b.weight || 0) - (a.weight || 0))
+            .slice(0, MAX_GLOBAL_NODES);
+          const nodeIds = new Set(graphNodes.map(n => n.id));
+          graphEdges = graphEdges.filter(e =>
+            nodeIds.has(e.source) && nodeIds.has(e.target)
+          );
+        }
+
+        $('global-graph-badge').textContent = `${graphNodes.length} nodes · ${graphEdges.length} edges`;
 
         const canvas = $('global-graph-canvas');
         canvas.width = canvas.offsetWidth || 800;
         if (state.globalGraphInstance) state.globalGraphInstance.destroy();
-        state.globalGraphInstance = new ForceGraph(canvas, data.nodes || [], data.edges || [], 'global-graph-tooltip');
+        state.globalGraphInstance = new ForceGraph(canvas, graphNodes, graphEdges, 'global-graph-tooltip');
         state.globalGraphInstance.start();
 
-        renderGraphLegend(data.nodes || [], 'global-graph-legend');
+        renderGraphLegend(graphNodes, 'global-graph-legend');
       } catch (err) {
         if (err.name === 'AbortError') return;
         stopLoading();
@@ -5011,7 +5041,7 @@
             const a = this.nodes[i], b = this.nodes[j];
             const dx = b.x - a.x, dy = b.y - a.y;
             const d = Math.sqrt(dx*dx + dy*dy) || 1;
-            const f = -900 / (d * d);
+            const f = -380 / (d * d);
             const fx = f * dx / d, fy = f * dy / d;
             a.vx += fx; a.vy += fy;
             b.vx -= fx; b.vy -= fy;
@@ -5035,10 +5065,10 @@
         // Center gravity + boundary + damping
         for (const n of this.nodes) {
           if (n === this.dragging) continue;
-          n.vx += (cx - n.x) * 0.008;
-          n.vy += (cy - n.y) * 0.008;
-          n.vx *= 0.82;
-          n.vy *= 0.82;
+          n.vx += (cx - n.x) * 0.006;
+          n.vy += (cy - n.y) * 0.006;
+          n.vx *= 0.72;
+          n.vy *= 0.72;
           n.x += n.vx;
           n.y += n.vy;
           const margin = 24;
@@ -5144,10 +5174,37 @@
 
       start() {
         this.running = true;
+        // Settlement detection — stop the animation loop once all nodes
+        // have come to rest. This prevents the graph from burning 60fps
+        // indefinitely after nodes have visually settled.
+        // A node is considered settled when its velocity magnitude < 0.6.
+        // When all nodes are settled for 90 consecutive frames (~1.5 seconds)
+        // the loop stops. Dragging a node restarts the loop.
+        let settledFrames = 0;
+        const SETTLE_VELOCITY = 0.6;
+        const SETTLE_FRAMES = 90;
+
         const loop = () => {
           if (!this.running) return;
           this._simulate();
           this._draw();
+
+          const maxVel = this.nodes.reduce((max, n) => {
+            const v = Math.sqrt(n.vx * n.vx + n.vy * n.vy);
+            return v > max ? v : max;
+          }, 0);
+
+          if (maxVel < SETTLE_VELOCITY) {
+            settledFrames++;
+            if (settledFrames >= SETTLE_FRAMES) {
+              this.running = false;
+              this._draw();
+              return;
+            }
+          } else {
+            settledFrames = 0;
+          }
+
           this._raf = requestAnimationFrame(loop);
         };
         this._raf = requestAnimationFrame(loop);
