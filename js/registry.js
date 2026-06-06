@@ -43,8 +43,8 @@ window.siteRegistry = [
         "priority": 14,
         "pages": [
             {
-                "name": "Website Tech Stack Checker",
-                "url": "/programmatic/website-tech-stack-checker"
+                "name": "Website Tech Stack Checker1",
+                "url": "/programmatic/website-tech-stack-checker1"
             },
             {
                 "name": "Website Word Count Checker",
@@ -130,8 +130,8 @@ window.seoRegistry = {
         "title": "How to Find Out Who Built, Designed, or Created a Website",
         "desc": "Want to know who built, designed, created or developed a website? 5 proven methods including a free tech stack checker that reveals the builder, CMS, and framework in seconds."
     },
-    "website-tech-stack-checker.html": {
-        "url": "/programmatic/website-tech-stack-checker",
+    "website-tech-stack-checker1.html": {
+        "url": "/programmatic/website-tech-stack-checker1",
         "title": "Website Technology Intelligence",
         "desc": "EIGE v10 Intelligence Console — Production-grade technology stack analysis, graph intelligence, and ecosystem classification — detect CMS, JavaScript frameworks, CDN &amp; analytics in seconds. Free, AI-powered, no sign-up needed."
     },
