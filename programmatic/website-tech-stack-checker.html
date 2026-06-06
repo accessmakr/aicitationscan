@@ -3816,10 +3816,10 @@
       const controller = new AbortController();
       let timeoutSignal;
       if (typeof AbortSignal.timeout === 'function') {
-        timeoutSignal = AbortSignal.timeout(30000);
+        timeoutSignal = AbortSignal.timeout(90000);
       } else {
         const tc = new AbortController();
-        setTimeout(() => tc.abort(), 30000);
+        setTimeout(() => tc.abort(), 90000);
         timeoutSignal = tc.signal;
       }
       // Combine manual abort and timeout into one signal
@@ -3855,7 +3855,7 @@
 
     async function checkAPIHealth() {
       try {
-        const r = await fetch(`${API_BASE}/health`, { signal: AbortSignal.timeout(20000) });
+        const r = await fetch(`${API_BASE}/health`, { signal: AbortSignal.timeout(90000) });
         if (r.ok) {
           state.apiOnline = true;
           hideDemoBanner();
@@ -3867,11 +3867,32 @@
           throw new Error('Non-OK');
         }
       } catch {
+        // First attempt failed — Render free tier may be cold-starting.
+        // Wait 35 seconds and retry once before marking offline.
         state.apiOnline = false;
         $('api-status-dot').className = 'status-dot warn';
-        $('api-status-text').textContent = 'API UNREACHABLE';
-        $('footer-api').textContent = 'OFFLINE';
+        $('api-status-text').textContent = 'WARMING UP…';
+        $('footer-api').textContent = 'WARMING';
         $('footer-api').style.color = 'var(--amber)';
+        setTimeout(async () => {
+          try {
+            const r2 = await fetch(`${API_BASE}/health`, { signal: AbortSignal.timeout(90000) });
+            if (r2.ok) {
+              state.apiOnline = true;
+              hideDemoBanner();
+              $('api-status-dot').className = 'status-dot live';
+              $('api-status-text').textContent = 'API LIVE';
+              $('footer-api').textContent = 'ONLINE';
+              $('footer-api').style.color = 'var(--green)';
+            } else { throw new Error('Non-OK retry'); }
+          } catch {
+            state.apiOnline = false;
+            $('api-status-dot').className = 'status-dot warn';
+            $('api-status-text').textContent = 'API UNREACHABLE';
+            $('footer-api').textContent = 'OFFLINE';
+            $('footer-api').style.color = 'var(--amber)';
+          }
+        }, 35000);
       }
     }
 
@@ -4055,7 +4076,16 @@
       if (window.innerWidth < 900) { setTimeout(() => { $('scan-results').scrollIntoView({ behavior: 'smooth', block: 'start' }); }, 80); }
       $('export-btn').disabled = false;
 
-      const { technologies = [], infrastructure = {}, intelligence = {}, graph = {}, cluster = {}, security = {}, performance = {}, seo = {} } = data;
+      const { technologies: _rawTechnologies = [], infrastructure = {}, intelligence = {}, graph = {}, cluster = {}, security = {}, performance = {}, seo = {} } = data;
+      // Deduplicate technologies by name. Backend can return the same technology twice
+      // when multiple header patterns match the same entry (e.g. AWS CloudFront matched
+      // by x-amz-cf-id AND via:.*cloudfront). Keep first occurrence — highest confidence.
+      const _seenTechNames = new Set();
+      const technologies = _rawTechnologies.filter(t => {
+        if (_seenTechNames.has(t.name)) return false;
+        _seenTechNames.add(t.name);
+        return true;
+      });
 
       // Request meta
       $('meta-url').textContent = data.url || '—';
@@ -4296,7 +4326,16 @@
       // Enable export now that we have data
       $('export-btn').disabled = false;
 
-      const { technologies = [], infrastructure = {}, intelligence = {}, graph = {}, cluster = {}, security = {}, performance = {}, seo = {} } = data;
+      const { technologies: _rawTechnologies = [], infrastructure = {}, intelligence = {}, graph = {}, cluster = {}, security = {}, performance = {}, seo = {} } = data;
+      // Deduplicate technologies by name. Backend can return the same technology twice
+      // when multiple header patterns match the same entry (e.g. AWS CloudFront matched
+      // by x-amz-cf-id AND via:.*cloudfront). Keep first occurrence — highest confidence.
+      const _seenTechNames = new Set();
+      const technologies = _rawTechnologies.filter(t => {
+        if (_seenTechNames.has(t.name)) return false;
+        _seenTechNames.add(t.name);
+        return true;
+      });
 
       // Request meta
       $('meta-url').textContent = data.url || '—';
@@ -4466,9 +4505,15 @@
     /* ── Infrastructure ── */
     function renderInfraPanel(infra) {
       const panel = $('infra-panel');
+      const wafDisplay = infra.waf && (Array.isArray(infra.waf) ? infra.waf.length > 0 : !!infra.waf)
+        ? (Array.isArray(infra.waf) ? infra.waf.join(', ') : String(infra.waf))
+        : 'Undetected';
       panel.innerHTML = `<div class="infra-grid">
         <div class="infra-item"><div class="infra-label">Domain</div><div class="infra-value highlight">${escapeHtml(infra.domain || '—')}</div></div>
-        <div class="infra-item"><div class="infra-label">Provider</div><div class="infra-value">${escapeHtml(infra.provider || '—')}</div></div>
+        <div class="infra-item"><div class="infra-label">Provider</div><div class="infra-value">${escapeHtml(infra.provider || 'Undetected')}</div></div>
+        <div class="infra-item"><div class="infra-label">CDN</div><div class="infra-value">${escapeHtml(infra.cdn || 'Undetected')}</div></div>
+        <div class="infra-item"><div class="infra-label">Hosting</div><div class="infra-value">${escapeHtml(infra.hosting || 'Undetected')}</div></div>
+        <div class="infra-item"><div class="infra-label">WAF</div><div class="infra-value" style="color:${wafDisplay !== 'Undetected' ? 'var(--green)' : 'var(--text-muted)'}">${escapeHtml(wafDisplay)}</div></div>
         <div class="infra-item"><div class="infra-label">IP Addresses</div><div class="infra-value" style="font-size:10px">${(infra.ips || []).map(escapeHtml).join('<br>') || '—'}</div></div>
         <div class="infra-item"><div class="infra-label">DNS Resolved</div><div class="infra-value" style="color:${infra.resolved ? 'var(--green)' : 'var(--red)'}">${infra.resolved ? 'YES' : 'NO'}</div></div>
       </div>`;
@@ -4487,7 +4532,7 @@
         { name: 'X-Frame-Options', present: !!headers['x-frame-options'] },
         { name: 'Referrer-Policy', present: !!headers['referrer-policy'] },
         { name: 'WAF / CDN Protection', present: !!(security?.wafDetected || ['Cloudflare','Akamai','Fastly','Imperva','Sucuri','AWS CloudFront'].includes(data?.infrastructure?.provider)) },
-        { name: 'Bot Protection', present: risk < 0.1 }
+        { name: 'Bot Protection', present: !!(security?.botProtection) }
       ];
 
       let html = '<div class="security-list">';
@@ -4785,7 +4830,7 @@
             ${_infraField('Provider',  infraA?.provider,  infraB?.provider)}
             ${_infraField('CDN',       infraA?.cdn,       infraB?.cdn)}
             ${_infraField('Hosting',   infraA?.hosting,   infraB?.hosting)}
-            ${_infraField('WAF',       infraA?.wafDetected ? 'Detected' : (infraA ? 'None' : null), infraB?.wafDetected ? 'Detected' : (infraB ? 'None' : null))}
+            ${_infraField('WAF',       infraA ? (infraA.waf && (Array.isArray(infraA.waf) ? infraA.waf.length > 0 : !!infraA.waf) ? (Array.isArray(infraA.waf) ? infraA.waf[0] : String(infraA.waf)) : 'None') : null, infraB ? (infraB.waf && (Array.isArray(infraB.waf) ? infraB.waf.length > 0 : !!infraB.waf) ? (Array.isArray(infraB.waf) ? infraB.waf[0] : String(infraB.waf)) : 'None') : null)}
             ${_infraField('IPs',       infraA?.ips ? infraA.ips.length + ' addr.' : null, infraB?.ips ? infraB.ips.length + ' addr.' : null)}
             ${_infraField('Resolved',  infraA?.resolved != null ? (infraA.resolved ? 'Yes' : 'No') : null, infraB?.resolved != null ? (infraB.resolved ? 'Yes' : 'No') : null)}
           `;
@@ -5729,7 +5774,7 @@
         { name: 'X-Frame-Options', present: !!rawHeaders['x-frame-options'] },
         { name: 'Referrer-Policy', present: !!rawHeaders['referrer-policy'] },
         { name: 'WAF / CDN Protection', present: !!(security.wafDetected || ['Cloudflare','Akamai','Fastly','Imperva','Sucuri','AWS CloudFront'].includes(infrastructure.provider)) },
-        { name: 'Bot Protection', present: riskPct != null && riskPct < 10 }
+        { name: 'Bot Protection', present: !!(security.botProtection) }
       ];
 
       /* ── SEO rows — mirrors renderSEOPanel field unwrapping exactly ── */
