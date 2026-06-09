@@ -139,11 +139,6 @@ window.seoRegistry = {
         "title": "Website Technology Intelligence",
         "desc": "EIGE v10 Intelligence Console — Production-grade technology stack analysis, graph intelligence, and ecosystem classification — detect CMS, JavaScript frameworks, CDN &amp; analytics in seconds. Free, AI-powered, no sign-up needed."
     },
-    "website-tech-stack-checker1.html": {
-        "url": "/programmatic/website-tech-stack-checker1",
-        "title": "Website Technology Intelligence",
-        "desc": "EIGE v10 Intelligence Console — Production-grade technology stack analysis, graph intelligence, and ecosystem classification — detect CMS, JavaScript frameworks, CDN &amp; analytics in seconds. Free, AI-powered, no sign-up needed."
-    },
     "website-word-count-checker.html": {
         "url": "/programmatic/website-word-count-checker",
         "title": "Website Word Count Checker — Analyze Content Depth & Reading Time | AI Citation Scan",
