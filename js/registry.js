@@ -71,10 +71,6 @@ window.siteRegistry = [
                 "url": "/cookies-policy"
             },
             {
-                "name": "Disclaimer",
-                "url": "/disclaimer"
-            },
-            {
                 "name": "Privacy Policy",
                 "url": "/privacy-policy"
             },
@@ -113,11 +109,6 @@ window.seoRegistry = {
         "url": "/cookies-policy",
         "title": "Cookies Policy — AI Citation Scan | No Tracking Cookies, Plausible Only",
         "desc": "AI Citation Scan uses zero marketing or tracking cookies. Our Cookies Policy explains Plausible's cookieless analytics, what browser storage we use, and your full control over preferences."
-    },
-    "disclaimer.html": {
-        "url": "/disclaimer",
-        "title": "AI Citation Scan",
-        "desc": ""
     },
     "privacy-policy.html": {
         "url": "/privacy-policy",
