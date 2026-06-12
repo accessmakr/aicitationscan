@@ -43,6 +43,10 @@ window.siteRegistry = [
         "priority": 14,
         "pages": [
             {
+                "name": "Website Tech Stack Checker For Shopify",
+                "url": "/programmatic/website-tech-stack-checker-for-shopify"
+            },
+            {
                 "name": "Website Tech Stack Checker",
                 "url": "/programmatic/website-tech-stack-checker"
             },
@@ -138,6 +142,11 @@ window.seoRegistry = {
         "url": "/guides/how-to-identify-website-technology",
         "title": "How to Identify What Technology a Website Uses — Free Tool | AI Citation Scan",
         "desc": "Find out exactly what technology, CMS, framework, and hosting any website uses. Free tech stack identifier — enter any URL and get the full technology profile in seconds."
+    },
+    "website-tech-stack-checker-for-shopify.html": {
+        "url": "/programmatic/website-tech-stack-checker-for-shopify",
+        "title": "Website Tech Stack Checker for Shopify — Identify Theme, Apps & Stack | AI Citation Scan",
+        "desc": "Identify which Shopify theme, apps, and technology any Shopify store uses. Free tech stack checker. Detect Shopify Plus, theme name, installed apps, CDN and analytics in seconds."
     },
     "website-tech-stack-checker.html": {
         "url": "/programmatic/website-tech-stack-checker",
