@@ -172,7 +172,7 @@
           "name": "Which AI systems are tested in the free version?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "The free scan tests three AI model families: Meta AI (powered by Llama 3.1 70B, which also powers Perplexity's free tier), Google AI (powered by Gemini 1.5 Flash, which powers Google AI Studio and Google Search AI Overviews), and Mistral (powered by Mixtral 8x7B). ChatGPT (GPT-4o) and Claude (3.5 Sonnet) require adding your own API keys in Settings."
+            "text": "The free scan tests four AI model families: Meta AI (powered by Llama 3.3 70B via Groq), Google AI (powered by Gemini 2.0 Flash), Mistral (powered by Llama 3.1 8B via Groq), and Gemma (powered by Gemma 2 9B via Groq). ChatGPT (GPT-4o) and Claude (3.5 Sonnet) require adding your own API keys in Settings."
           }
         },
         {
@@ -204,7 +204,7 @@
           "name": "Why are GPT-4 and Claude not free to test?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "OpenAI and Anthropic do not offer free API access. The free engines (Llama 3.1, Gemini 1.5, Mixtral) cover Meta AI, Google AI, and Mistral Le Chat. To include ChatGPT and Claude in your scan, add your own OpenAI and Anthropic API keys in the Settings panel. Your keys are stored only in your browser and used only for your scans."
+            "text": "OpenAI and Anthropic do not offer free API access. The four free engines (Meta AI, Google AI, Mistral, and Gemma) run at no cost using current production models. To include ChatGPT and Claude in your scan, add your own OpenAI and Anthropic API keys in the Settings panel. Your keys are stored only in your browser and used only for your scans."
           }
         },
         {
@@ -1343,6 +1343,7 @@
   .sev-critical { background: var(--red-dim); color: var(--red); border: 1px solid rgba(239,68,68,0.2); }
   .sev-high { background: var(--amber-dim); color: var(--amber); border: 1px solid rgba(245,158,11,0.2); }
   .sev-medium { background: var(--blue-glow); color: var(--blue); border: 1px solid rgba(61,142,245,0.2); }
+  .sev-minor  { background: var(--bg-elevated); color: var(--text-muted); border: 1px solid var(--border-default); }
 
   .gap-row {
     display: flex;
@@ -1831,6 +1832,7 @@
     border: 1px solid var(--border-default);
     box-shadow: 0 4px 32px rgba(26,37,64,0.08);
     position: relative;
+    isolation: isolate;
   }
 
   .contact-form-card::before {
@@ -2396,6 +2398,7 @@
     height: 100%;
     white-space: nowrap;
     animation: tickerScroll 40s linear infinite;
+    will-change: transform;
   }
 
   .ticker-track:hover {
@@ -2436,6 +2439,42 @@
 
   /* tier-known class */
   .tier-known { background: var(--green-dim); color: var(--green); border: 1px solid rgba(16,185,129,0.25); }
+
+  /* C5: Contact form pulse animation */
+  @keyframes contactFormPulse {
+    0%   { box-shadow: 0 4px 32px rgba(26,37,64,0.08); border-color: var(--border-default); }
+    25%  { box-shadow: 0 0 0 4px rgba(61,142,245,0.18), 0 4px 32px rgba(26,37,64,0.08); border-color: var(--blue); }
+    55%  { box-shadow: 0 0 0 4px rgba(61,142,245,0.18), 0 4px 32px rgba(26,37,64,0.08); border-color: var(--blue); }
+    100% { box-shadow: 0 4px 32px rgba(26,37,64,0.08); border-color: var(--border-default); }
+  }
+  .contact-form-card.waitlist-highlight {
+    animation: contactFormPulse 1.4s ease forwards;
+  }
+
+  /* C4: Print CSS */
+  @media print {
+    #site-header, #seasonal-banner, #telemetry-ticker,
+    .breadcrumb-bar, #scroll-progress, #toast-container,
+    #waitlist-modal, #search-modal, .scan-card,
+    .trust-strip, #settings-panel, #hero .hero-grid > div:last-child,
+    .eyebrow, .hero-sub, .freshness-badge,
+    .tool-pointer-card, #how-it-works, #dynamic-internal-links,
+    .citations-list, #share-pills-container, .faq-list,
+    .contact-form-card, #site-footer, .report-actions-bar,
+    .platform-teaser, .coverage-gap-box, .skip-link,
+    .hamburger, .nav-right, .btn-rescan { display: none !important; }
+    body { background: #fff !important; color: #000 !important; }
+    .page-container { padding: 0 !important; max-width: 100% !important; }
+    #scan-results { display: block !important; margin: 0 !important; }
+    .result-section { break-inside: avoid; border: 1px solid #ccc !important;
+      box-shadow: none !important; margin-bottom: 12px !important; }
+    .results-header-card { border: 1px solid #ccc !important; box-shadow: none !important; }
+    #overall-score { color: #000 !important; }
+    .engine-card-score { color: #000 !important; }
+    .score-bar-fill { print-color-adjust: exact; -webkit-print-color-adjust: exact; }
+    h1.hero-title { font-size: 18px !important; margin-bottom: 4px !important; }
+    .result-section-title { font-size: 13px !important; }
+  }
 </style>
 </head>
 <body>
@@ -2570,6 +2609,13 @@
               <span id="val-mistral">Ready</span>
             </span>
           </div>
+          <div class="engine-status-row">
+            <span class="engine-status-name">Gemma</span>
+            <span class="engine-status-val" id="status-gemma">
+              <span class="status-dot-small" id="dot-gemma" aria-hidden="true"></span>
+              <span id="val-gemma">Ready</span>
+            </span>
+          </div>
 
           <div class="topology" aria-hidden="true">
             <div class="topo-ring"></div>
@@ -2652,6 +2698,14 @@
               aria-label="Toggle Mistral engine"
               onclick="toggleEngine(this)"
             >Mistral</button>
+            <button
+              class="engine-badge active"
+              data-engine="gemma"
+              type="button"
+              aria-pressed="true"
+              aria-label="Toggle Gemma engine"
+              onclick="toggleEngine(this)"
+            >Gemma</button>
             <span class="engine-divider" aria-hidden="true"></span>
             <button
               class="engine-badge extended"
@@ -2698,15 +2752,15 @@
               <span aria-hidden="true" style="color:var(--green);font-size:14px;">✅</span>
               <div class="free-engine-info">
                 <div class="free-engine-name">Meta AI</div>
-                <div class="free-engine-sub">Powered by Llama 3.1 70B</div>
-                <div class="free-engine-sub" style="margin-top:2px;">Covers: Meta AI · Perplexity (free)</div>
+                <div class="free-engine-sub">Powered by Llama 3.3 70B</div>
+                <div class="free-engine-sub" style="margin-top:2px;">Covers: Meta AI · Groq-powered inference</div>
               </div>
             </div>
             <div class="free-engine-item">
               <span aria-hidden="true" style="color:var(--green);font-size:14px;">✅</span>
               <div class="free-engine-info">
                 <div class="free-engine-name">Google AI</div>
-                <div class="free-engine-sub">Powered by Gemini 1.5 Flash</div>
+                <div class="free-engine-sub">Powered by Gemini 2.0 Flash</div>
                 <div class="free-engine-sub" style="margin-top:2px;">Covers: Google AI Studio · AI Overviews</div>
               </div>
             </div>
@@ -2714,7 +2768,7 @@
               <span aria-hidden="true" style="color:var(--green);font-size:14px;">✅</span>
               <div class="free-engine-info">
                 <div class="free-engine-name">Mistral</div>
-                <div class="free-engine-sub">Powered by Mixtral 8x7B</div>
+                <div class="free-engine-sub">Powered by Llama 3.1 8B</div>
                 <div class="free-engine-sub" style="margin-top:2px;">Covers: Mistral Le Chat</div>
               </div>
             </div>
@@ -2760,6 +2814,38 @@
             </div>
           </div>
 
+          <!-- H4: Gemini API key override -->
+          <div class="extended-engine-row">
+            <div class="ext-engine-header">
+              <div>
+                <div class="ext-engine-name">Google AI — Your Key <span style="font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--green);margin-left:6px;padding:2px 6px;background:var(--green-dim);border-radius:99px;">OPTIONAL</span></div>
+                <div class="ext-engine-sub">Override the server Gemini key — restores Google AI when the server quota is exhausted</div>
+              </div>
+              <a href="https://aistudio.google.com/app/apikey" target="_blank" rel="noopener noreferrer" class="get-key-link">Get key →</a>
+            </div>
+            <div class="key-input-row">
+              <label for="key-gemini" style="position:absolute;opacity:0;pointer-events:none;">Gemini API key</label>
+              <input type="password" id="key-gemini" class="key-input" placeholder="AIzaSy..." autocomplete="off" aria-label="Gemini API key">
+              <button type="button" class="btn-save-key" onclick="saveKey('gemini', 'key-gemini')">Save</button>
+            </div>
+          </div>
+
+          <!-- H5: Groq API key override -->
+          <div class="extended-engine-row">
+            <div class="ext-engine-header">
+              <div>
+                <div class="ext-engine-name">Groq — Your Key <span style="font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--green);margin-left:6px;padding:2px 6px;background:var(--green-dim);border-radius:99px;">OPTIONAL</span></div>
+                <div class="ext-engine-sub">Use your own Groq key for Meta AI, Mistral, and Gemma — uses your quota instead of the shared server key</div>
+              </div>
+              <a href="https://console.groq.com/keys" target="_blank" rel="noopener noreferrer" class="get-key-link">Get key →</a>
+            </div>
+            <div class="key-input-row">
+              <label for="key-groq" style="position:absolute;opacity:0;pointer-events:none;">Groq API key</label>
+              <input type="password" id="key-groq" class="key-input" placeholder="gsk_..." autocomplete="off" aria-label="Groq API key">
+              <button type="button" class="btn-save-key" onclick="saveKey('groq', 'key-groq')">Save</button>
+            </div>
+          </div>
+
           <div class="storage-notice" role="note" aria-label="API key storage notice">
             <div class="storage-notice-title">🔒 Browser Storage Notice</div>
             <div class="storage-notice-body">
@@ -2779,25 +2865,25 @@
         <div id="scan-results" aria-live="polite" aria-label="Scan results">
 
           <!-- Report action buttons -->
-          <div class="report-actions-bar" aria-label="Report actions">
+          <div class="report-actions-bar" id="report-actions-bar" aria-label="Report actions">
             <span class="report-actions-label">REPORT:</span>
-            <button type="button" class="btn-report" id="btn-copy-report" onclick="copyReport()" aria-label="Copy report to clipboard">
+            <button type="button" class="btn-report" id="btn-copy-report" onclick="copyReport()" aria-label="Copy report to clipboard" disabled style="opacity:0.4;cursor:not-allowed;">
               <svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><rect x="4" y="4" width="7" height="7" rx="1"/><path d="M1 8V1h7"/></svg>
               Copy Report
             </button>
-            <button type="button" class="btn-report" onclick="emailReport()" aria-label="Email this report">
+            <button type="button" class="btn-report" onclick="emailReport()" aria-label="Email this report" disabled style="opacity:0.4;cursor:not-allowed;">
               <svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><rect x="1" y="2.5" width="10" height="7" rx="1"/><path d="M1 3.5l5 3.5 5-3.5"/></svg>
               Email Report
             </button>
-            <button type="button" class="btn-report" onclick="printReport()" aria-label="Print this report">
+            <button type="button" class="btn-report" onclick="printReport()" aria-label="Print this report" disabled style="opacity:0.4;cursor:not-allowed;">
               <svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><rect x="2" y="5" width="8" height="5" rx="1"/><path d="M3 5V2h6v3"/><circle cx="9" cy="7.5" r=".5" fill="currentColor"/></svg>
               Print Report
             </button>
-            <button type="button" class="btn-report" onclick="downloadReport()" aria-label="Download report as text file">
+            <button type="button" class="btn-report" onclick="downloadReport()" aria-label="Download report as text file" disabled style="opacity:0.4;cursor:not-allowed;">
               <svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M6 1v7M3 5l3 3 3-3"/><path d="M1 10h10"/></svg>
               Download Report
             </button>
-            <button type="button" class="btn-report" onclick="whatsappReport()" aria-label="Share report on WhatsApp">
+            <button type="button" class="btn-report" onclick="whatsappReport()" aria-label="Share report on WhatsApp" disabled style="opacity:0.4;cursor:not-allowed;">
               <svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><circle cx="6" cy="6" r="5"/><path d="M4 7.5c.8 1 2 1.5 3.5.5s1-3-.5-3.5S4 5.5 4.5 7l-.5 1.5L5.5 8"/></svg>
               WhatsApp
             </button>
@@ -2862,13 +2948,13 @@
           </div>
 
           <!-- Coverage gap notice -->
-          <div class="result-section" style="padding:0;border:none;background:transparent;box-shadow:none;">
+          <div id="coverage-gap-section" class="result-section" style="padding:0;border:none;background:transparent;box-shadow:none;">
             <div class="coverage-gap-box">
               <div class="coverage-gap-icon" aria-hidden="true">ℹ</div>
               <div>
                 <div class="coverage-gap-title">Coverage Gap — ChatGPT and Claude Not Tested</div>
-                <div class="coverage-gap-body">This scan tested Meta AI (Llama 3.1), Google AI (Gemini 1.5), and Mistral (Mixtral 8x7B). ChatGPT (GPT-4o) and Claude (3.5 Sonnet) were not included. These cover a significant portion of AI user queries. Add your OpenAI and Anthropic API keys in Settings to include them in your next scan.</div>
-                <button type="button" class="btn-primary btn-blue" onclick="openSettingsPanel()" style="font-size:12px;padding:8px 14px;">Add API Keys →</button>
+                <div class="coverage-gap-body">This scan tested Meta AI, Google AI, Mistral, and Gemma. ChatGPT (GPT-4o) and Claude (3.5 Sonnet) were not included. These cover a significant portion of AI user queries. Add your API keys in Settings to include them in your next scan.</div>
+                <button type="button" class="btn-primary btn-blue" onclick="openSettingsPanel('key-openai')" style="font-size:12px;padding:8px 14px;">Add API Keys →</button>
               </div>
             </div>
           </div>
@@ -2884,7 +2970,7 @@
             <div class="platform-teaser">
               <div class="platform-teaser-title">Want the full intelligence report?</div>
               <div class="platform-teaser-body">The full AI Citation Scan platform includes citation probability scoring, chunk survivability analysis, entity knowledge graph, retrieval simulation, and 3 deep-dive intelligence canvases.</div>
-              <button type="button" class="btn-primary" onclick="showWaitlistModal()">Join the waitlist →</button>
+              <button type="button" class="btn-primary" onclick="scrollToContactForm()">Join the waitlist →</button>
             </div>
           </div>
 
@@ -3039,7 +3125,7 @@
             <span class="faq-chevron" aria-hidden="true">▾</span>
           </div>
           <div class="faq-a" id="faq-a-2" role="region">
-            <div class="faq-a-inner">The free scan tests three AI model families: Meta AI (powered by Llama 3.1 70B, which also powers Perplexity's free tier), Google AI (powered by Gemini 1.5 Flash, which powers Google AI Studio and Google Search AI Overviews), and Mistral (powered by Mixtral 8x7B). ChatGPT (GPT-4o) and Claude (3.5 Sonnet) require adding your own API keys in Settings.</div>
+            <div class="faq-a-inner">The free scan tests four AI model families: Meta AI (powered by Llama 3.3 70B via Groq), Google AI (powered by Gemini 2.0 Flash), Mistral (powered by Llama 3.1 8B via Groq), and Gemma (powered by Gemma 2 9B via Groq). ChatGPT (GPT-4o) and Claude (3.5 Sonnet) require adding your own API keys in Settings. Models are auto-detected and updated automatically when providers change them.</div>
           </div>
         </div>
 
@@ -3079,7 +3165,7 @@
             <span class="faq-chevron" aria-hidden="true">▾</span>
           </div>
           <div class="faq-a" id="faq-a-6" role="region">
-            <div class="faq-a-inner">OpenAI and Anthropic do not offer free API access. The free engines (Llama 3.1, Gemini 1.5, Mixtral) cover Meta AI, Google AI, and Mistral Le Chat. To include ChatGPT and Claude in your scan, add your own OpenAI and Anthropic API keys in the Settings panel. Your keys are stored only in your browser and used only for your scans.</div>
+            <div class="faq-a-inner">OpenAI and Anthropic do not offer free API access. The four free engines (Meta AI via Llama 3.3 70B, Google AI via Gemini 2.0 Flash, Mistral via Llama 3.1 8B, and Gemma via Gemma 2 9B) run at no cost. To include ChatGPT and Claude in your scan, add your own OpenAI and Anthropic API keys in the Settings panel. Your keys are stored only in your browser and used only for your scans.</div>
           </div>
         </div>
 
