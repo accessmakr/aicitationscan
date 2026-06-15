@@ -9,10 +9,6 @@ window.siteRegistry = [
             {
                 "name": "Ai Citation Checker",
                 "url": "/ai-tools/ai-citation-checker"
-            },
-            {
-                "name": "Ai Citation Optimization",
-                "url": "/ai-tools/ai-citation-optimization"
             }
         ]
     },
@@ -144,11 +140,6 @@ window.seoRegistry = {
         "url": "/ai-tools/ai-citation-checker",
         "title": "AI Citation Checker — Analyze Citation Structure, References & Attribution Quality | AI Citation Scan",
         "desc": "Free AI citation checker. Analyze citation structure, reference consistency, source attribution clarity and formatting quality across articles, essays, reports and AI-generated content."
-    },
-    "ai-citation-optimization.html": {
-        "url": "/ai-tools/ai-citation-optimization",
-        "title": "AI Citation Optimization — Improve How AI Engines Describe Your Brand | AI Citation Scan",
-        "desc": "Optimize your brand's AI citations. Scan how Meta AI, Google AI and Mistral describe you, identify gaps, and get prioritized actions to improve your AI awareness score."
     },
     "how-to-find-out-who-built-a-website.html": {
         "url": "/guides/how-to-find-out-who-built-a-website",
