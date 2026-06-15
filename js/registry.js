@@ -47,14 +47,6 @@ window.siteRegistry = [
         "priority": 14,
         "pages": [
             {
-                "name": "Website Tech Stack Checker For Shopify",
-                "url": "/programmatic/website-tech-stack-checker-for-shopify"
-            },
-            {
-                "name": "Website Tech Stack Checker For Wordpress",
-                "url": "/programmatic/website-tech-stack-checker-for-wordpress"
-            },
-            {
                 "name": "Website Tech Stack Checker",
                 "url": "/programmatic/website-tech-stack-checker"
             },
@@ -141,16 +133,6 @@ window.seoRegistry = {
         "url": "/guides/how-to-find-out-who-built-a-website",
         "title": "How to Find Out Who Built, Designed, or Created a Website",
         "desc": "Want to know who built, designed, created or developed a website? 5 proven methods including a free tech stack checker that reveals the builder, CMS, and framework in seconds."
-    },
-    "website-tech-stack-checker-for-shopify.html": {
-        "url": "/programmatic/website-tech-stack-checker-for-shopify",
-        "title": "Website Tech Stack Checker for Shopify — Identify Theme, Apps & Stack | AI Citation Scan",
-        "desc": "Identify which Shopify theme, apps, and technology any Shopify store uses. Free tech stack checker. Detect Shopify Plus, theme name, installed apps, CDN and analytics in seconds."
-    },
-    "website-tech-stack-checker-for-wordpress.html": {
-        "url": "/programmatic/website-tech-stack-checker-for-wordpress",
-        "title": "Website Tech Stack Checker for WordPress — Identify Theme, Plugins & Host | AI Citation Scan",
-        "desc": "Instantly identify which theme, plugins, CDN, and hosting provider any WordPress site uses. Free website technology detector. No sign-up, results in seconds."
     },
     "website-tech-stack-checker.html": {
         "url": "/programmatic/website-tech-stack-checker",
