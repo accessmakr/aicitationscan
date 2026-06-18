@@ -118,7 +118,7 @@
       "isPartOf": { "@id": "https://www.aicitationscan.com/#website" },
       "breadcrumb": { "@id": "https://www.aicitationscan.com/#breadcrumb" },
       "datePublished": "2024-01-01",
-      "dateModified": "2025-05-19"
+      "dateModified": "2026-06-18"
     },
     {
       "@type": "SoftwareApplication",
@@ -2699,11 +2699,11 @@
               onclick="toggleEngine(this)"
             >Mistral</button>
             <button
-              class="engine-badge active"
+              class="engine-badge"
               data-engine="gemma"
               type="button"
-              aria-pressed="true"
-              aria-label="Toggle Gemma engine"
+              aria-pressed="false"
+              aria-label="Toggle Gemma engine (smaller model — optional)"
               onclick="toggleEngine(this)"
             >Gemma</button>
             <span class="engine-divider" aria-hidden="true"></span>
@@ -3462,22 +3462,22 @@ document.addEventListener('DOMContentLoaded', () => {
   document.querySelectorAll('.dynamic-year').forEach(el => el.textContent = yr);
 
   // ─── 22C. SCHEMA DATE MODIFIED ───────────────────────────
-  const now = new Date();
-  if (now.getDay() === 1) {
-    try {
-      const schemaEl = document.getElementById('main-schema');
-      if (schemaEl) {
-        const schema = JSON.parse(schemaEl.textContent);
-        const graph = schema['@graph'] || [];
-        graph.forEach(node => {
-          if (node['@type'] === 'WebPage') {
-            node.dateModified = now.toISOString().slice(0, 10);
-          }
-        });
-        schemaEl.textContent = JSON.stringify(schema, null, 2);
-      }
-    } catch(e) { /* graceful degradation */ }
-  }
+  // J20 FIX: updates every page load, not just Mondays — crawlers
+  // visiting on other days were seeing a stale dateModified value
+  try {
+    const schemaEl = document.getElementById('main-schema');
+    if (schemaEl) {
+      const schema = JSON.parse(schemaEl.textContent);
+      const graph = schema['@graph'] || [];
+      const todayIso = new Date().toISOString().slice(0, 10);
+      graph.forEach(node => {
+        if (node['@type'] === 'WebPage') {
+          node.dateModified = todayIso;
+        }
+      });
+      schemaEl.textContent = JSON.stringify(schema, null, 2);
+    }
+  } catch(e) { /* graceful degradation */ }
 
   // ─── 22D. FRESHNESS BADGE ────────────────────────────────
   const today = new Date();
@@ -3586,7 +3586,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (open) {
           loadSavedKeysIntoInputs();
           setTimeout(() => {
-            const panelTop = panel.getBoundingClientRect().top + window.scrollY - 72;
+            const panelTop = panel.getBoundingClientRect().top + window.scrollY - 80;
             window.scrollTo({ top: Math.max(0, panelTop), behavior: 'smooth' });
           }, 50);
         }
@@ -3673,15 +3673,23 @@ function updateEngineStatus(engine, status) {
     dot.style.background = '';
     val.textContent = 'Error';
     val.style.color = 'var(--red)';
+  } else if (status === 'unavailable') {
+    dot.classList.add('error');
+    dot.style.background = '';
+    val.textContent = 'Unavailable';
+    val.style.color = 'var(--red)';
   }
 }
 
 function showScanningState() {
-  ['meta', 'google', 'mistral'].forEach(e => updateEngineStatus(e, 'scanning'));
+  // J2 FIX: read actual active engine badges instead of hardcoded list
+  const activeEngines = [...document.querySelectorAll('.engine-badge.active')].map(b => b.dataset.engine);
+  activeEngines.forEach(e => updateEngineStatus(e, 'scanning'));
 }
 
 function resetEngineStatusDots() {
-  ['meta', 'google', 'mistral'].forEach(e => updateEngineStatus(e, 'ready'));
+  // J3 FIX: cover all six engine slots, not just the original three
+  ['meta', 'google', 'mistral', 'gemma', 'chatgpt', 'claude'].forEach(e => updateEngineStatus(e, 'ready'));
 }
 
 // ─── 22L. ENGINE TOGGLE BADGES ───────────────────────────────
@@ -3689,6 +3697,22 @@ function toggleEngine(badge) {
   const isActive = badge.classList.contains('active');
   badge.classList.toggle('active', !isActive);
   badge.setAttribute('aria-pressed', !isActive);
+  updateTickerEngineCount(); // J23 FIX: keep ticker engine count live
+}
+
+// J22 FIX (NEW): ticker liveness functions
+function updateTickerEngineCount() {
+  const count = document.querySelectorAll('.engine-badge.active').length;
+  document.querySelectorAll('.ticker-engine-count').forEach(el => {
+    el.textContent = count + ' AI Engine' + (count === 1 ? '' : 's') + ' Active';
+  });
+}
+
+function updateTickerScanState(scanning) {
+  document.querySelectorAll('.ticker-scan-state').forEach(el => {
+    el.textContent = scanning ? 'Scan Running...' : 'Ready to Scan';
+    el.style.color = scanning ? 'rgba(245,158,11,0.85)' : 'rgba(255,255,255,0.45)';
+  });
 }
 
 function toggleExtendedEngine(badge) {
@@ -3706,22 +3730,24 @@ function toggleExtendedEngine(badge) {
     badge.classList.add('badge-ping');
     setTimeout(() => badge.classList.remove('badge-ping'), 700);
 
-    // Open and scroll to settings panel
+    // J17 FIX: scroll directly to the specific key input using
+    // getBoundingClientRect + offset — scrollIntoView({block:'start'})
+    // positioned the panel title behind the sticky header on mobile,
+    // making it look like nothing happened when the badge was tapped
     openSettingsPanel();
-    const settingsPanel = document.getElementById('settings-panel');
-    if (settingsPanel) {
-      setTimeout(() => {
-        settingsPanel.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        // Highlight the matching key input
-        const inputId = engine === 'chatgpt' ? 'key-openai' : 'key-anthropic';
-        const keyInput = document.getElementById(inputId);
-        if (keyInput) {
+    setTimeout(() => {
+      const inputId = engine === 'chatgpt' ? 'key-openai' : 'key-anthropic';
+      const keyInput = document.getElementById(inputId);
+      if (keyInput) {
+        const inputTop = keyInput.getBoundingClientRect().top + window.scrollY - 80;
+        window.scrollTo({ top: Math.max(0, inputTop), behavior: 'smooth' });
+        setTimeout(() => {
           keyInput.classList.add('key-highlight');
+          keyInput.focus();
           setTimeout(() => keyInput.classList.remove('key-highlight'), 1400);
-          setTimeout(() => keyInput.focus(), 500);
-        }
-      }, 200);
-    }
+        }, 400);
+      }
+    }, 100);
   } else {
     const isActive = badge.classList.contains('active');
     badge.classList.toggle('active', !isActive);
@@ -3730,36 +3756,51 @@ function toggleExtendedEngine(badge) {
 }
 
 // ─── 22K. SETTINGS PANEL FUNCTIONS ──────────────────────────
-function openSettingsPanel() {
+// J18 FIX: accepts optional targetInputId so callers (e.g. the
+// coverage-gap "Add API Keys" button) can scroll straight to a
+// specific field instead of just opening the panel with no scroll
+function openSettingsPanel(targetInputId) {
   const panel = document.getElementById('settings-panel');
   const btn = document.getElementById('settings-toggle-btn');
   if (panel) {
     panel.classList.add('open');
     if (btn) btn.setAttribute('aria-expanded', 'true');
     loadSavedKeysIntoInputs();
+    setTimeout(() => {
+      const target = targetInputId ? document.getElementById(targetInputId) : panel;
+      if (target) {
+        const top = target.getBoundingClientRect().top + window.scrollY - 80;
+        window.scrollTo({ top: Math.max(0, top), behavior: 'smooth' });
+      }
+    }, 100);
   }
 }
 
 function loadSavedKeysIntoInputs() {
+  // J4 FIX: load all four key types — openai, anthropic, gemini, groq
   const keys = Storage.getKeys();
-  const openaiInput = document.getElementById('key-openai');
-  const anthropicInput = document.getElementById('key-anthropic');
-  if (openaiInput && keys.openai) {
-    openaiInput.value = '••••••••••••••••';
-    openaiInput.classList.add('saved');
-  }
-  if (anthropicInput && keys.anthropic) {
-    anthropicInput.value = '••••••••••••••••';
-    anthropicInput.classList.add('saved');
-  }
+  const inputMap = {
+    openai:    'key-openai',
+    anthropic: 'key-anthropic',
+    gemini:    'key-gemini',
+    groq:      'key-groq'
+  };
+  Object.keys(inputMap).forEach(engine => {
+    const input = document.getElementById(inputMap[engine]);
+    if (input && keys[engine]) {
+      input.value = '••••••••••••••••';
+      input.classList.add('saved');
+    }
+  });
   updateSettingsDot();
   updateExtendedBadgesFromKeys(keys);
 }
 
 function updateSettingsDot() {
+  // J5 FIX: dot is active if ANY of the four key types is set
   const keys = Storage.getKeys();
   const dot = document.getElementById('settings-dot');
-  if (dot) dot.classList.toggle('active', !!(keys.openai || keys.anthropic));
+  if (dot) dot.classList.toggle('active', !!(keys.openai || keys.anthropic || keys.gemini || keys.groq));
 }
 
 function updateExtendedBadgesFromKeys(keys) {
@@ -3785,7 +3826,14 @@ function saveKey(engine, inputId) {
   Storage.saveKey(engine, val);
   input.value = '••••••••••••••••';
   input.classList.add('saved');
-  showToast('Key saved for ' + (engine === 'openai' ? 'ChatGPT' : 'Claude'), 'success');
+  // J6 FIX: correct toast label for all four key types
+  const nameMap = {
+    openai:    'ChatGPT',
+    anthropic: 'Claude',
+    gemini:    'Google AI (your Gemini key)',
+    groq:      'Groq (Meta AI, Mistral, Gemma)'
+  };
+  showToast('Key saved for ' + (nameMap[engine] || engine), 'success');
   updateSettingsDot();
   updateExtendedBadgesFromKeys(Storage.getKeys());
 }
@@ -3793,10 +3841,11 @@ function saveKey(engine, inputId) {
 function clearAllKeys() {
   if (!confirm('Clear all saved API keys? This cannot be undone.')) return;
   Storage.clearKeys();
-  const openaiInput = document.getElementById('key-openai');
-  const anthropicInput = document.getElementById('key-anthropic');
-  if (openaiInput) { openaiInput.value = ''; openaiInput.classList.remove('saved'); }
-  if (anthropicInput) { anthropicInput.value = ''; anthropicInput.classList.remove('saved'); }
+  // J7 FIX: clear all four key inputs, not just openai/anthropic
+  ['key-openai', 'key-anthropic', 'key-gemini', 'key-groq'].forEach(id => {
+    const input = document.getElementById(id);
+    if (input) { input.value = ''; input.classList.remove('saved'); }
+  });
   document.querySelectorAll('.engine-badge.extended').forEach(b => {
     b.classList.remove('active');
     b.setAttribute('aria-pressed', 'false');
@@ -3865,7 +3914,16 @@ async function startScan() {
   btn.setAttribute('aria-label', 'Cancel scan');
 
   showScanningState();
+  updateTickerScanState(true); // J24 FIX: ticker reflects scan in progress
   document.getElementById('scan-results').style.display = 'none';
+
+  // J21 FIX: disable report buttons while a new scan is running —
+  // prevents copy/print/download from running against stale or empty data
+  document.querySelectorAll('.btn-report').forEach(b => {
+    b.disabled = true;
+    b.style.opacity = '0.4';
+    b.style.cursor = 'not-allowed';
+  });
 
   const activeEngines = [...document.querySelectorAll('.engine-badge.active')].map(b => b.dataset.engine);
   const keys = Storage.getKeys();
@@ -3901,9 +3959,11 @@ async function startScan() {
     if (tsEl) tsEl.textContent = 'Scanned just now';
 
     renderResults(data);
-    updateEngineStatus('meta', 'complete');
-    updateEngineStatus('google', 'complete');
-    updateEngineStatus('mistral', 'complete');
+
+    // J8 FIX: update status dots based on actual response, not hardcoded list
+    (data.engines || []).forEach(eng => {
+      updateEngineStatus(eng.key, eng.failed ? 'unavailable' : 'complete');
+    });
 
   } catch (err) {
     if (err.name === 'AbortError' || err.name === 'TimeoutError') {
@@ -3911,7 +3971,9 @@ async function startScan() {
     } else {
       showToast('API unavailable — check connection or try again', 'error');
       showApiError();
-      ['meta', 'google', 'mistral'].forEach(e => updateEngineStatus(e, 'error'));
+      // J8 FIX: mark active badges as error, not hardcoded 3-engine list
+      const activeEngineKeys = [...document.querySelectorAll('.engine-badge.active')].map(b => b.dataset.engine);
+      activeEngineKeys.forEach(e => updateEngineStatus(e, 'error'));
     }
   } finally {
     clearTimeout(timeoutId);
@@ -3919,7 +3981,9 @@ async function startScan() {
     btnText.textContent = btn.dataset.ctaText || 'Analyze';
     btn.style.background = '';
     btn.setAttribute('aria-label', 'Run AI awareness scan');
-    resetEngineStatusDots();
+    // J8 FIX: brief delay so user sees final complete/unavailable state before reset
+    setTimeout(() => resetEngineStatusDots(), 4000);
+    updateTickerScanState(false); // J24 FIX: ticker reflects scan finished
     _scanAbortController = null;
   }
 }
@@ -3937,13 +4001,65 @@ function showApiError() {
   panel.style.display = 'block';
   const errContainer = document.getElementById('api-error-container');
   if (errContainer) errContainer.style.display = 'block';
-  const errTop = panel.getBoundingClientRect().top + window.scrollY - 72;
+  const errTop = panel.getBoundingClientRect().top + window.scrollY - 80;
   window.scrollTo({ top: Math.max(0, errTop), behavior: 'smooth' });
 }
 
 function hideApiError() {
   const errContainer = document.getElementById('api-error-container');
   if (errContainer) errContainer.style.display = 'none';
+}
+
+// ─── UTILITY: MODEL DISPLAY NAME (J15 NEW) ───────────────────
+// Returns current model names for display. Backend auto-detects
+// live models; this map reflects what the backend currently resolves.
+function getModelDisplayName(engineKey) {
+  const modelMap = {
+    meta:    'Llama 3.3 70B',
+    google:  'Gemini 2.0 Flash',
+    mistral: 'Llama 3.1 8B',
+    gemma:   'Gemma 2 9B',
+    chatgpt: 'GPT-4o',
+    claude:  'Claude 3.5 Sonnet'
+  };
+  return modelMap[engineKey] || engineKey;
+}
+
+// ─── RENDER COVERAGE GAP BOX (J16 NEW) ────────────────────────
+// Shows/hides the coverage gap box dynamically based on which
+// engines actually ran. Hides entirely when both chatgpt and
+// claude returned successful (non-failed) results.
+function renderCoverageGapBox(queriedEngines) {
+  const section = document.getElementById('coverage-gap-section');
+  if (!section) return;
+
+  const engines = queriedEngines || [];
+  const chatgptEntry = engines.find(e => e.key === 'chatgpt');
+  const claudeEntry  = engines.find(e => e.key === 'claude');
+  const chatgptRan = !!chatgptEntry && !chatgptEntry.failed;
+  const claudeRan  = !!claudeEntry  && !claudeEntry.failed;
+
+  if (chatgptRan && claudeRan) {
+    section.style.display = 'none';
+    return;
+  }
+
+  section.style.display = '';
+
+  const freeEngineNames = engines
+    .filter(e => e.key !== 'chatgpt' && e.key !== 'claude')
+    .map(e => e.displayName)
+    .join(', ');
+
+  const missingEngines = [];
+  if (!chatgptRan) missingEngines.push('ChatGPT (GPT-4o)');
+  if (!claudeRan)  missingEngines.push('Claude (3.5 Sonnet)');
+
+  const bodyEl = section.querySelector('.coverage-gap-body');
+  if (bodyEl && freeEngineNames && missingEngines.length) {
+    bodyEl.textContent =
+      `This scan tested ${freeEngineNames}. ${missingEngines.join(' and ')} ${missingEngines.length > 1 ? 'were' : 'was'} not included. These cover a significant portion of AI user queries. Add your API keys in Settings to include them in your next scan.`;
+  }
 }
 
 // ─── 22O. RENDER RESULTS ─────────────────────────────────────
@@ -3965,54 +4081,49 @@ function renderResults(data) {
     scoreEl.textContent = '0';
     animateCounter('overall-score', 0, score, 800);
   }
+  // J9 FIX: use data.tier/data.tierClass from backend; local fallback matches
+  // recalibrated 80/65/45/25 thresholds and fixes the class mismatch where
+  // 76-90 previously mapped to tier-well-known instead of tier-known
   if (tierEl) {
-    const tier = score >= 91 ? 'WELL KNOWN' :
-                 score >= 76 ? 'KNOWN' :
-                 score >= 26 ? 'PARTIALLY KNOWN' : 'NOT KNOWN';
-    const tierClass = score >= 76 ? 'tier-well-known' :
-                      score >= 26 ? 'tier-partial' : 'tier-unknown';
+    const tier      = data.tier      || (score >= 80 ? 'WELL KNOWN' : score >= 65 ? 'KNOWN' : score >= 45 ? 'PARTIALLY KNOWN' : score >= 25 ? 'MINIMALLY KNOWN' : 'NOT KNOWN');
+    const tierClass = data.tierClass || (score >= 80 ? 'tier-well-known' : score >= 65 ? 'tier-known' : score >= 25 ? 'tier-partial' : 'tier-unknown');
     tierEl.textContent = tier;
     tierEl.className = tierClass;
   }
 
-  // Engine cards
+  // J9 FIX: engine cards rendered dynamically from data.engines[]
   const engineContainer = document.getElementById('engine-cards-container');
   if (engineContainer) {
     engineContainer.innerHTML = '';
-    const engines = [
-      { key: 'metaAI', name: 'Meta AI', model: 'Llama 3.1 70B', data: data.metaAI },
-      { key: 'googleAI', name: 'Google AI', model: 'Gemini 1.5 Flash', data: data.googleAI },
-      { key: 'mistral', name: 'Mistral', model: 'Mixtral 8x7B', data: data.mistral }
-    ];
-    engines.forEach(eng => {
-      if (!eng.data) return;
-      engineContainer.appendChild(buildEngineCard(eng.name, eng.model, eng.data));
+    (data.engines || []).forEach(eng => {
+      const engData = data[eng.frontendKey];
+      if (!engData) return;
+      engineContainer.appendChild(buildEngineCard(eng.displayName, getModelDisplayName(eng.key), engData, eng.failed));
     });
   }
 
-  // Narrative cards
+  // J9 FIX: narrative cards rendered dynamically from data.engines[]
   const narrativeContainer = document.getElementById('narrative-cards-container');
   if (narrativeContainer) {
     narrativeContainer.innerHTML = '';
-    const narEngines = [
-      { name: 'Meta AI', data: data.metaAI },
-      { name: 'Google AI', data: data.googleAI },
-      { name: 'Mistral', data: data.mistral }
-    ];
-    narEngines.forEach(eng => {
-      if (!eng.data || !eng.data.narrative) return;
-      narrativeContainer.appendChild(buildNarrativeCard(eng.name, eng.data));
+    (data.engines || []).forEach(eng => {
+      const engData = data[eng.frontendKey];
+      if (!engData) return;
+      narrativeContainer.appendChild(buildNarrativeCard(eng.displayName, engData));
     });
   }
 
-  // Consistency
-  renderConsistency(data.consistency || {});
+  // J9 FIX: pass data.engines to renderConsistency for engine-count context
+  renderConsistency(data.consistency || {}, data.engines || []);
 
   // Gaps
   renderNarrativeGaps(data.narrativeGaps || []);
 
-  // Recommendations
-  renderRecommendations(data.recommendations || []);
+  // J9 FIX: pass data.tier so Top Actions can hide for WELL KNOWN / KNOWN brands
+  renderRecommendations(data.recommendations || [], data.tier);
+
+  // J9 FIX: call renderCoverageGapBox with actual queried engines
+  renderCoverageGapBox(data.engines || []);
 
   // Animate bars after a tick
   setTimeout(() => {
@@ -4021,11 +4132,35 @@ function renderResults(data) {
     });
   }, 150);
 
-  const panelTop = panel.getBoundingClientRect().top + window.scrollY - 72;
+  // J21 FIX: re-enable report buttons now that results have rendered
+  document.querySelectorAll('.btn-report').forEach(b => {
+    b.disabled = false;
+    b.style.opacity = '';
+    b.style.cursor = '';
+  });
+
+  const panelTop = panel.getBoundingClientRect().top + window.scrollY - 80;
   window.scrollTo({ top: Math.max(0, panelTop), behavior: 'smooth' });
 }
 
-function buildEngineCard(name, model, d) {
+function buildEngineCard(name, model, d, failed) {
+  const card = document.createElement('div');
+  card.className = 'engine-card';
+
+  // J10 FIX: failed engines render a distinct unavailable card,
+  // never a zero-scored card indistinguishable from a real result
+  if (failed || d.failed) {
+    card.innerHTML = `
+      <div class="engine-card-name">${name}</div>
+      <div class="engine-card-sub">Powered by ${model}</div>
+      <div style="margin-top:16px;text-align:center;padding:12px 0;">
+        <div style="display:inline-block;font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:600;color:var(--red);background:var(--red-dim);padding:4px 10px;border-radius:99px;border:1px solid rgba(239,68,68,0.25);letter-spacing:0.06em;margin-bottom:10px;">TEMPORARILY UNAVAILABLE</div>
+        <div style="font-family:'DM Sans',sans-serif;font-size:12px;color:var(--text-muted);line-height:1.55;padding:0 8px;">${d.narrative || 'This engine is temporarily unavailable. Results from other engines are unaffected.'}</div>
+      </div>
+    `;
+    return card;
+  }
+
   const s = d.score || 0;
   const color = s >= 75 ? 'var(--green)' : s >= 50 ? 'var(--amber)' : 'var(--red)';
   const dims = [
@@ -4034,8 +4169,6 @@ function buildEngineCard(name, model, d) {
     { label: 'Accuracy', val: d.accuracy || 0 },
     { label: 'Confidence', val: d.confidence || 0 }
   ];
-  const card = document.createElement('div');
-  card.className = 'engine-card';
   card.innerHTML = `
     <div class="engine-card-name">${name}</div>
     <div class="engine-card-sub">Powered by ${model}</div>
@@ -4068,14 +4201,51 @@ function buildEngineCard(name, model, d) {
 
 function buildNarrativeCard(name, d) {
   const accuracy = d.accuracy || 0;
-  let hlClass = accuracy > 80 ? 'highlight-green' : accuracy >= 50 ? 'highlight-amber' : 'highlight-red';
-  const narrative = d.narrative || 'No narrative data returned.';
-  // Simple inline highlight: wrap first sentence in highlight class
-  const sentences = narrative.split('. ');
-  const highlighted = sentences.map((s, i) => {
-    const cls = i === 0 ? hlClass : (i % 3 === 0 ? 'highlight-amber' : '');
-    return cls ? `<span class="${cls}">${s}</span>` : s;
-  }).join('. ');
+
+  // J11 FIX: strip markdown — Mistral returns **bold** headers in narratives
+  function stripMarkdown(text) {
+    if (!text) return '';
+    return text
+      .replace(/\*\*([^*]+)\*\*/g, '$1')
+      .replace(/\*([^*]+)\*/g, '$1')
+      .replace(/^#{1,6}\s+/gm, '')
+      .replace(/__([^_]+)__/g, '$1')
+      .replace(/_([^_]+)_/g, '$1')
+      .replace(/`([^`]+)`/g, '$1')
+      .replace(/^\s*[-*+]\s+/gm, '')
+      .replace(/\n{3,}/g, '\n\n')
+      .trim();
+  }
+
+  const rawNarrative = d.narrative || 'No narrative data returned.';
+  const narrative = stripMarkdown(rawNarrative);
+
+  // J11 FIX: highlight class driven by accuracy score, not position index
+  const hlClass = accuracy >= 70 ? 'highlight-green' : accuracy >= 45 ? 'highlight-amber' : 'highlight-red';
+  const firstDotIdx = narrative.indexOf('. ');
+  let highlighted;
+  if (firstDotIdx > -1 && firstDotIdx < narrative.length - 1) {
+    highlighted = `<span class="${hlClass}">${narrative.slice(0, firstDotIdx + 1)}</span>${narrative.slice(firstDotIdx + 1)}`;
+  } else {
+    highlighted = `<span class="${hlClass}">${narrative}</span>`;
+  }
+
+  // J11 FIX: topicsKnown / topicsUnknown displayed as tag chips
+  const topicsKnown = d.topicsKnown || [];
+  const topicsUnknown = d.topicsUnknown || [];
+  const topicsHtml = (topicsKnown.length || topicsUnknown.length) ? `
+    <div style="margin-top:12px;padding-top:12px;border-top:1px solid var(--border-subtle);">
+      ${topicsKnown.length ? `
+        <div style="margin-bottom:6px;">
+          <span style="font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.06em;">Knows: </span>
+          ${topicsKnown.map(t => `<span style="font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--green);background:var(--green-dim);padding:2px 7px;border-radius:3px;margin:0 2px 2px 0;display:inline-block;">${t}</span>`).join('')}
+        </div>` : ''}
+      ${topicsUnknown.length ? `
+        <div>
+          <span style="font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.06em;">Gaps: </span>
+          ${topicsUnknown.map(t => `<span style="font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--red);background:var(--red-dim);padding:2px 7px;border-radius:3px;margin:0 2px 2px 0;display:inline-block;">${t}</span>`).join('')}
+        </div>` : ''}
+    </div>` : '';
 
   const card = document.createElement('div');
   card.className = 'narrative-card';
@@ -4099,18 +4269,26 @@ function buildNarrativeCard(name, d) {
         ${d.unverifiableClaims || 0} unverifiable
       </div>
     </div>
+    ${topicsHtml}
   `;
   return card;
 }
 
-function renderConsistency(c) {
+function renderConsistency(c, queriedEngines) {
   const container = document.getElementById('consistency-container');
   if (!container) return;
   const score = c.score || 0;
-  const label = c.label || (score >= 75 ? 'HIGH CONSISTENCY' : score >= 50 ? 'MODERATE CONSISTENCY' : 'LOW CONSISTENCY');
+  const baseLabel = c.label || (score >= 75 ? 'HIGH CONSISTENCY' : score >= 50 ? 'MODERATE CONSISTENCY' : 'LOW CONSISTENCY');
   const agreed = c.agreed || [];
   const conflicted = c.conflicted || [];
   const exclusive = c.exclusive || [];
+
+  // J12 FIX: append "X of Y engines active" context to the label
+  const engines = queriedEngines || [];
+  const activeCount = engines.filter(e => !e.failed).length;
+  const totalQueried = engines.length;
+  const engineContext = totalQueried > 0 ? ` — ${activeCount} of ${totalQueried} engine${totalQueried > 1 ? 's' : ''} active` : '';
+  const label = baseLabel + engineContext;
 
   container.innerHTML = `
     <div class="consistency-score-display">${score}</div>
@@ -4161,19 +4339,47 @@ function renderNarrativeGaps(gaps) {
     </div>`).join('');
 }
 
-function renderRecommendations(recs) {
+function renderRecommendations(recs, tier) {
   const container = document.getElementById('recs-container');
   if (!container) return;
+
+  // J13 FIX: WELL KNOWN / KNOWN brands have nothing meaningful to act on —
+  // show a clean confirmation instead of generic "improve" advice
+  if (tier === 'WELL KNOWN' || tier === 'KNOWN') {
+    container.innerHTML = `
+      <div style="text-align:center;padding:28px 16px;">
+        <div style="font-size:26px;margin-bottom:10px;" aria-hidden="true">✅</div>
+        <div style="font-family:'DM Sans',sans-serif;font-size:14px;font-weight:600;color:var(--text-primary);margin-bottom:6px;">Your AI presence is strong</div>
+        <div style="font-family:'DM Sans',sans-serif;font-size:12px;color:var(--text-muted);max-width:380px;margin:0 auto;line-height:1.6;">No urgent action needed right now. Re-scan periodically to catch any future signal decay as AI models update.</div>
+      </div>
+    `;
+    return;
+  }
+
   if (!recs.length) {
     container.innerHTML = '<p style="font-family:\'DM Sans\',sans-serif;font-size:13px;color:var(--text-muted);">No recommendations generated.</p>';
     return;
   }
-  container.innerHTML = recs.slice(0, 3).map(rec => `
+
+  // J13 FIX: map impact string to readable display text
+  // (was rendering the literal unmapped value, e.g. "+medium pts potential")
+  const impactDisplay = {
+    transformative: 'transformative impact',
+    high: 'high impact',
+    medium: 'medium impact',
+    low: 'low impact'
+  };
+
+  // J13 FIX: no .slice(0,3) cap — shows all recommendations from backend (up to 8)
+  container.innerHTML = recs.map(rec => {
+    const sevKey = (rec.severity || 'medium').toLowerCase();
+    const impactText = impactDisplay[rec.impact] || (rec.impact ? rec.impact + ' impact' : 'medium impact');
+    return `
     <div class="rec-card">
       <div class="rec-header">
-        <span class="gap-severity sev-${(rec.severity || 'medium').toLowerCase()}">${rec.severity || 'MEDIUM'}</span>
-        <span style="font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--green);">+${rec.impact || 0} pts potential</span>
-        <span class="rec-meta">Effort: ${rec.effort || 'Medium'}</span>
+        <span class="gap-severity sev-${sevKey}">${rec.severity || 'medium'}</span>
+        <span style="font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--green);">${impactText}</span>
+        <span class="rec-meta">Effort: ${rec.effort || 'medium'}</span>
       </div>
       <div class="rec-rows">
         <div class="rec-row">
@@ -4189,7 +4395,8 @@ function renderRecommendations(recs) {
           <span class="rec-row-val">${rec.result || '—'}</span>
         </div>
       </div>
-    </div>`).join('');
+    </div>`;
+  }).join('');
 }
 
 function animateCounter(id, from, to, duration) {
@@ -4206,15 +4413,19 @@ function animateCounter(id, from, to, duration) {
 }
 
 // ─── LIVE TELEMETRY TICKER ────────────────────────────────────
+// J14 FIX: Gemma is now available-but-inactive-by-default (4th engine);
+// ticker reflects the accurate 3-engine default and notes Gemma as optional
 function buildTelemetryTicker() {
   const track = document.getElementById('ticker-track');
   if (!track) return;
   const items = [
-    { dot: 'green', text: '3 AI Engines Active' },
+    { dot: 'green', text: '3 AI Engines Active', cls: 'ticker-engine-count' },
+    { dot: '', text: 'Ready to Scan', cls: 'ticker-scan-state' },
     { dot: '', text: '━━━' },
     { dot: 'green', text: 'Meta AI — Ready' },
     { dot: 'green', text: 'Google AI — Ready' },
     { dot: 'green', text: 'Mistral — Ready' },
+    { dot: 'cyan', text: 'Gemma — Available (optional)' },
     { dot: '', text: '━━━' },
     { dot: 'amber', text: 'AI Awareness Scoring' },
     { dot: 'cyan', text: 'Engine-by-Engine Breakdown' },
@@ -4237,8 +4448,9 @@ function buildTelemetryTicker() {
   ];
   // Duplicate items for seamless loop
   const allItems = [...items, ...items];
+  // J14 FIX: emit item.cls so live-updating ticker items can be targeted
   track.innerHTML = allItems.map(item =>
-    `<span class="ticker-item">` +
+    `<span class="ticker-item${item.cls ? ' ' + item.cls : ''}">` +
     (item.dot && item.dot !== '' ? `<span class="ticker-dot ticker-dot-${item.dot}" aria-hidden="true"></span>` : '') +
     `${item.text}</span>`
   ).join('');
@@ -4528,6 +4740,41 @@ function handleContactForm(e) {
 }
 
 // ─── SEARCH MODAL ─────────────────────────────────────────────
+// ─── SCROLL TO CONTACT FORM (J19 NEW — CRITICAL FIX) ──────────
+// The "Join the waitlist" button calls this. It did not exist
+// before this batch, so that button silently failed on click.
+function scrollToContactForm() {
+  const contactSection = document.getElementById('contact-heading');
+  if (!contactSection) return;
+
+  // -80px clears the 56px sticky header plus 24px breathing room
+  const sectionTop = contactSection.getBoundingClientRect().top + window.scrollY - 80;
+  window.scrollTo({ top: Math.max(0, sectionTop), behavior: 'smooth' });
+
+  setTimeout(() => {
+    const formCard = document.querySelector('.contact-form-card');
+    if (formCard) {
+      formCard.classList.remove('waitlist-highlight');
+      void formCard.offsetWidth;
+      formCard.classList.add('waitlist-highlight');
+      setTimeout(() => formCard.classList.remove('waitlist-highlight'), 1500);
+    }
+
+    const messageField = document.getElementById('contact-message');
+    if (messageField && messageField.value.trim() === '') {
+      messageField.value =
+        'I am interested in the full AI Citation Scan platform — '
+        + 'citation probability, entity knowledge graph, and retrieval '
+        + 'simulation. Please notify me when it launches.';
+    }
+
+    const nameField = document.getElementById('contact-name');
+    if (nameField && nameField.value.trim() === '') {
+      nameField.focus();
+    }
+  }, 700);
+}
+
 function openSearchModal() {
   const modal = document.getElementById('search-modal');
   if (!modal) return;
