@@ -122,8 +122,8 @@ window.seoRegistry = {
     },
     "ai-citation-checker.html": {
         "url": "/ai-tools/ai-citation-checker",
-        "title": "AI Citation Checker — Analyze Citation Structure, References & Attribution Quality | AI Citation Scan",
-        "desc": "Free AI citation checker. Analyze citation structure, reference consistency, source attribution clarity and formatting quality across articles, essays, reports and AI-generated content."
+        "title": "AI Citation Checker — Detect Hallucinated &amp; Fabricated References Free | AI Citation Scan",
+        "desc": "Free AI citation checker. Detect hallucinated references, verify citation structure, and score reference completeness across APA, MLA, Chicago, Harvard, and Vancouver styles in seconds."
     },
     "how-to-find-out-who-built-a-website.html": {
         "url": "/guides/how-to-find-out-who-built-a-website",
