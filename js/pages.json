@@ -48,6 +48,12 @@
     "k": "ai-tools"
   },
   {
+    "t": "ChatGPT Citation Checker — Detect Fake ChatGPT References Fast | AI Citation Scan",
+    "d": "ChatGPT produces plausible-looking references that often lack working DOIs or URLs. Run a structural check on any ChatGPT-generated reference list in seconds. Free, no sign-up.",
+    "u": "/ai-tools/chatgpt-citation-checker",
+    "k": "ai-tools"
+  },
+  {
     "t": "How to Find Out Who Built, Designed, or Created a Website (5 Methods) | AI Citation Scan",
     "d": "Want to know who built, designed, created or developed a website? 5 proven methods including a free tech stack checker that reveals the builder, CMS, and framework in seconds.",
     "u": "/guides/how-to-find-out-who-built-a-website",

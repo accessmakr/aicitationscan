@@ -17,6 +17,10 @@ window.siteRegistry = [
             {
                 "name": "Ai Citation Checker",
                 "url": "/ai-tools/ai-citation-checker"
+            },
+            {
+                "name": "Chatgpt Citation Checker",
+                "url": "/ai-tools/chatgpt-citation-checker"
             }
         ]
     },
@@ -142,6 +146,11 @@ window.seoRegistry = {
         "url": "/ai-tools/ai-citation-checker",
         "title": "AI Citation Checker — Detect Hallucinated &amp; Fabricated References Free | AI Citation Scan",
         "desc": "Free AI citation checker. Detect hallucinated references, verify citation structure, and score reference completeness across APA, MLA, Chicago, Harvard, and Vancouver styles in seconds."
+    },
+    "chatgpt-citation-checker.html": {
+        "url": "/ai-tools/chatgpt-citation-checker",
+        "title": "ChatGPT Citation Checker",
+        "desc": "ChatGPT produces plausible-looking references that often lack working DOIs or URLs. Run a structural check on any ChatGPT-generated reference list in seconds. Free, no sign-up."
     },
     "how-to-find-out-who-built-a-website.html": {
         "url": "/guides/how-to-find-out-who-built-a-website",
