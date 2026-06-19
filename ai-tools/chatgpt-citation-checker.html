@@ -318,7 +318,13 @@
     <div style="margin-bottom:16px;"><span class="chip chip-slate" style="margin-right:8px;">ChatGPT Verification</span><span class="chip chip-emerald">Free Tool Available</span></div>
     <h1 id="hero-h1" style="font-family:'Syne',sans-serif;font-size:clamp(27px,4.6vw,42px);font-weight:800;color:var(--navy-900);line-height:1.15;letter-spacing:-0.03em;margin-bottom:14px;">ChatGPT Citation Checker</h1>
     <p style="font-size:clamp(15px,2.1vw,17px);color:var(--navy-700);line-height:1.7;margin-bottom:10px;font-weight:600;">ChatGPT fabricates structurally convincing references — here is exactly how to detect them before they cause problems</p>
-    <p style="font-size:14.5px;color:var(--slate-400);line-height:1.75;">ChatGPT does not retrieve citations from a live bibliographic database. It generates reference strings by pattern-matching against the formatting it learned during training, which means the output can be perfectly formatted but entirely unverifiable. This page explains the specific patterns ChatGPT references follow when they are fabricated, and links to the structural checker that catches them.</p>
+    <p style="font-size:14.5px;color:var(--slate-400);line-height:1.75;margin-bottom:22px;">ChatGPT does not retrieve citations from a live bibliographic database. It generates reference strings by pattern-matching against the formatting it learned during training, which means the output can be perfectly formatted but entirely unverifiable. This page explains the specific patterns ChatGPT references follow when they are fabricated, and links to the structural checker that catches them.</p>
+
+    <!-- CTA #1 — immediate, above the fold, inside hero -->
+    <div class="cta-banner">
+      <div class="cta-banner-text"><div class="cta-banner-title">Check your ChatGPT reference list now</div><div class="cta-banner-sub">Free, no sign-up, results in seconds</div></div>
+      <a href="/ai-tools/ai-citation-checker" class="btn-primary">Open the Tool →</a>
+    </div>
   </div>
 </section>
 
@@ -337,12 +343,6 @@
       <a href="#the-specific-patterns-chatgpt-references-follow-when-fabricated"><span class="toc-num">02</span>The Specific Patterns ChatGPT References Follow When Fabricated</a>
       <a href="#what-the-structural-check-actually-tests"><span class="toc-num">03</span>What the Structural Check Actually Tests</a>
       <a href="#what-to-do-after-running-the-check"><span class="toc-num">04</span>What to Do After Running the Check</a>
-    </div>
-
-    <!-- CTA #1 -->
-    <div class="cta-banner">
-      <div class="cta-banner-text"><div class="cta-banner-title">Check your ChatGPT reference list now</div><div class="cta-banner-sub">Free, no sign-up, results in seconds</div></div>
-      <a href="/ai-tools/ai-citation-checker" class="btn-primary">Open the Tool →</a>
     </div>
 
   </div>
@@ -366,6 +366,11 @@
     <h2 id="the-specific-patterns-chatgpt-references-follow-when-fabricated">The Specific Patterns ChatGPT References Follow When Fabricated</h2>
     <p>Structurally fabricated ChatGPT references cluster into three patterns. The first is a complete entry with a plausible DOI that does not resolve — the DOI prefix is valid but the suffix is invented. The second is a complete entry with no identifier at all — the author, year, title, and journal are all present, but the DOI and URL fields are simply absent. The third is a complete entry with a journal name that is real but a volume, issue, or page range that does not correspond to any actual article in that journal.</p>
     <p>The structural checker catches the first two patterns directly — invalid DOI format and missing identifier are both flagged. The third pattern (real journal, invented article) requires a manual database lookup to detect, since the structural fields all pass the completeness test.</p>
+
+    <div class="cta-banner" style="margin:6px 0 30px;">
+      <div class="cta-banner-text"><div class="cta-banner-title">Run the fabrication check on ChatGPT output</div><div class="cta-banner-sub">Free, no sign-up, results in seconds</div></div>
+      <a href="/ai-tools/ai-citation-checker" class="btn-primary">Open the Tool →</a>
+    </div>
 
     <h2 id="what-the-structural-check-actually-tests">What the Structural Check Actually Tests</h2>
     <p>The check runs five tests per reference entry. It confirms that an author field is present in the expected position for the citation style. It confirms that a four-digit year appears in a plausible range. It confirms that a title fragment is present and long enough to be a real title. It confirms that a publisher or journal name is present. And it tests the identifier field — checking that a DOI matches the 10.XXXX/ prefix format and a URL begins with a valid scheme.</p>
@@ -392,16 +397,6 @@
           <tr><td>DOI / URL</td><td>Resolves to the actual document</td><td>DOI prefix may be valid but suffix is generated; does not resolve</td></tr>
         </tbody>
       </table>
-    </div>
-  </div>
-</section>
-
-<!-- CTA #2 -->
-<section style="padding:36px 24px;">
-  <div style="max-width:760px;margin:0 auto;">
-    <div class="cta-banner">
-      <div class="cta-banner-text"><div class="cta-banner-title">Run the fabrication check on ChatGPT output</div><div class="cta-banner-sub">Free, no sign-up, results in seconds</div></div>
-      <a href="/ai-tools/ai-citation-checker" class="btn-primary">Open the Tool →</a>
     </div>
   </div>
 </section>
