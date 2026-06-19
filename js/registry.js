@@ -7,6 +7,10 @@ window.siteRegistry = [
         "priority": 15,
         "pages": [
             {
+                "name": "Ai Citation Checker For Academic Papers",
+                "url": "/ai-tools/ai-citation-checker-for-academic-papers"
+            },
+            {
                 "name": "Ai Citation Checker",
                 "url": "/ai-tools/ai-citation-checker"
             }
@@ -119,6 +123,11 @@ window.seoRegistry = {
         "url": "/terms-of-use",
         "title": "Terms of Use — AI Citation Scan | Website Intelligence Platform",
         "desc": "Read the Terms of Use for AI Citation Scan. Understand your license, acceptable use conditions, no-warranty provisions, platform limitations, and directory disclaimer for our website intelligence tools."
+    },
+    "ai-citation-checker-for-academic-papers.html": {
+        "url": "/ai-tools/ai-citation-checker-for-academic-papers",
+        "title": "AI Citation Checker for Academic Papers — Free Structural Check | AI Citation Scan",
+        "desc": "Check academic paper citations for completeness and hallucination risk. Five-field structural test, free, no sign-up. See exactly which references are missing a verifiable identifier."
     },
     "ai-citation-checker.html": {
         "url": "/ai-tools/ai-citation-checker",
