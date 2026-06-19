@@ -318,7 +318,13 @@
     <div style="margin-bottom:16px;"><span class="chip chip-slate" style="margin-right:8px;">Student Use</span><span class="chip chip-emerald">Free Tool Available</span></div>
     <h1 id="hero-h1" style="font-family:'Syne',sans-serif;font-size:clamp(27px,4.6vw,42px);font-weight:800;color:var(--navy-900);line-height:1.15;letter-spacing:-0.03em;margin-bottom:14px;">AI Citation Checker for Students</h1>
     <p style="font-size:clamp(15px,2.1vw,17px);color:var(--navy-700);line-height:1.7;margin-bottom:10px;font-weight:600;">Why student submissions carry higher fabrication risk — and how to check every reference before it becomes an academic integrity issue</p>
-    <p style="font-size:14.5px;color:var(--slate-400);line-height:1.75;">Students using AI writing assistants face a specific risk that researchers using established databases do not: the AI generates plausible-looking references from memory rather than pulling from a verified index. This means student papers can contain references that look correctly formatted but do not resolve to real documents. The structural check on this page tests for exactly that pattern.</p>
+    <p style="font-size:14.5px;color:var(--slate-400);line-height:1.75;margin-bottom:22px;">Students using AI writing assistants face a specific risk that researchers using established databases do not: the AI generates plausible-looking references from memory rather than pulling from a verified index. This means student papers can contain references that look correctly formatted but do not resolve to real documents. The structural check on this page tests for exactly that pattern.</p>
+
+    <!-- CTA #1 — immediate, above the fold, inside hero -->
+    <div class="cta-banner">
+      <div class="cta-banner-text"><div class="cta-banner-title">Check your essay references now — free</div><div class="cta-banner-sub">Free, no sign-up, results in seconds</div></div>
+      <a href="/ai-tools/ai-citation-checker" class="btn-primary">Open the Tool →</a>
+    </div>
   </div>
 </section>
 
@@ -337,12 +343,6 @@
       <a href="#the-references-most-commonly-flagged-in-student-submissions"><span class="toc-num">02</span>The References Most Commonly Flagged in Student Submissions</a>
       <a href="#citation-style-by-discipline-what-students-need-to-know"><span class="toc-num">03</span>Citation Style by Discipline — What Students Need to Know</a>
       <a href="#what-to-do-with-a-flagged-reference"><span class="toc-num">04</span>What to Do With a Flagged Reference</a>
-    </div>
-
-    <!-- CTA #1 -->
-    <div class="cta-banner">
-      <div class="cta-banner-text"><div class="cta-banner-title">Check your essay references now — free</div><div class="cta-banner-sub">Free, no sign-up, results in seconds</div></div>
-      <a href="/ai-tools/ai-citation-checker" class="btn-primary">Open the Tool →</a>
     </div>
 
   </div>
@@ -366,6 +366,11 @@
     <h2 id="the-references-most-commonly-flagged-in-student-submissions">The References Most Commonly Flagged in Student Submissions</h2>
     <p>Across student paper submissions, the references that fail the structural check most often share a consistent profile: a named author, a plausible journal title, a year in the last ten years, but either no identifier at all or a DOI-formatted string that does not match the valid 10.XXXX/ prefix format. The second most common failure pattern is a plausible-looking journal name paired with a volume and issue number but no corresponding publisher confirmation.</p>
     <p>The third pattern is disciplinary: students submitting papers in humanities fields (where MLA is standard) have a higher rate of missing identifiers because MLA does not require DOIs as a core field for print sources. Checking these papers requires recognizing that a missing DOI in an MLA-formatted entry is expected for older print sources, but suspicious for anything published in the last decade.</p>
+
+    <div class="cta-banner" style="margin:6px 0 30px;">
+      <div class="cta-banner-text"><div class="cta-banner-title">Run a citation check before your submission deadline</div><div class="cta-banner-sub">Free, no sign-up, results in seconds</div></div>
+      <a href="/ai-tools/ai-citation-checker" class="btn-primary">Open the Tool →</a>
+    </div>
 
     <h2 id="citation-style-by-discipline-what-students-need-to-know">Citation Style by Discipline — What Students Need to Know</h2>
     <p>The citation style required for a student submission is set by the discipline, not the student. Psychology, education, and most social sciences use APA. English literature, languages, and arts use MLA. History, theology, and some humanities fields use Chicago or Turabian. Medical and biomedical sciences use Vancouver. Engineering and computer science programs use IEEE. A citation checker that assumes one style and flags everything else as malformed will generate false positives for any student submitting in a less common format.</p>
@@ -393,16 +398,6 @@
           <tr><td>Engineering, Computer Science</td><td>IEEE</td><td>Bracketed numeric</td><td>DOI or URL for conference/journal papers</td></tr>
         </tbody>
       </table>
-    </div>
-  </div>
-</section>
-
-<!-- CTA #2 -->
-<section style="padding:36px 24px;">
-  <div style="max-width:760px;margin:0 auto;">
-    <div class="cta-banner">
-      <div class="cta-banner-text"><div class="cta-banner-title">Run a citation check before your submission deadline</div><div class="cta-banner-sub">Free, no sign-up, results in seconds</div></div>
-      <a href="/ai-tools/ai-citation-checker" class="btn-primary">Open the Tool →</a>
     </div>
   </div>
 </section>
