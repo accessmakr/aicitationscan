@@ -11,6 +11,10 @@ window.siteRegistry = [
                 "url": "/ai-tools/ai-citation-checker-for-academic-papers"
             },
             {
+                "name": "Ai Citation Checker For Students",
+                "url": "/ai-tools/ai-citation-checker-for-students"
+            },
+            {
                 "name": "Ai Citation Checker",
                 "url": "/ai-tools/ai-citation-checker"
             }
@@ -128,6 +132,11 @@ window.seoRegistry = {
         "url": "/ai-tools/ai-citation-checker-for-academic-papers",
         "title": "AI Citation Checker for Academic Papers",
         "desc": "Check academic paper citations for completeness and hallucination risk. Five-field structural test, free, no sign-up. See exactly which references are missing a verifiable identifier."
+    },
+    "ai-citation-checker-for-students.html": {
+        "url": "/ai-tools/ai-citation-checker-for-students",
+        "title": "AI Citation Checker for Students",
+        "desc": "Student-specific AI citation checker. Tests every reference in your essay, dissertation, or coursework for the five structural fields that determine whether a source is real and verifiable. Free, in-browser, no sign-up."
     },
     "ai-citation-checker.html": {
         "url": "/ai-tools/ai-citation-checker",
