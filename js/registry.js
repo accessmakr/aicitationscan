@@ -11,6 +11,10 @@ window.siteRegistry = [
                 "url": "/ai-tools/ai-citation-checker-for-academic-papers"
             },
             {
+                "name": "Ai Citation Checker For Legal Documents",
+                "url": "/ai-tools/ai-citation-checker-for-legal-documents"
+            },
+            {
                 "name": "Ai Citation Checker For Students",
                 "url": "/ai-tools/ai-citation-checker-for-students"
             },
@@ -196,6 +200,11 @@ window.seoRegistry = {
         "url": "/ai-tools/ai-citation-checker-for-academic-papers",
         "title": "AI Citation Checker for Academic Papers",
         "desc": "Check academic paper citations — whether written by you or drafted with ChatGPT, Gemini, or Claude — for completeness and hallucination risk. Five-field structural test, free, no sign-up."
+    },
+    "ai-citation-checker-for-legal-documents.html": {
+        "url": "/ai-tools/ai-citation-checker-for-legal-documents",
+        "title": "AI Citation Checker for Legal Documents",
+        "desc": "Lawyers using ChatGPT, Gemini, or Claude for legal research risk submitting fabricated citations. Check reference and source citations for structural completeness before filing. Free, no sign-up."
     },
     "ai-citation-checker-for-students.html": {
         "url": "/ai-tools/ai-citation-checker-for-students",
