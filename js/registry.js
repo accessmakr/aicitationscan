@@ -171,6 +171,10 @@ window.siteRegistry = [
         "priority": 0,
         "pages": [
             {
+                "name": "Chatgpt Citation Hallucination Explained",
+                "url": "/guides/chatgpt-citation-hallucination-explained"
+            },
+            {
                 "name": "How To Find Out Who Built A Website",
                 "url": "/guides/how-to-find-out-who-built-a-website"
             },
@@ -256,6 +260,11 @@ window.seoRegistry = {
         "url": "/ai-tools/reference-and-bibliography-checker",
         "title": "Reference and Bibliography Checker",
         "desc": "Check any reference list or bibliography for structural completeness — author, year, title, source, identifier. Works on manually researched and AI-assisted citations alike. Free, no sign-up."
+    },
+    "chatgpt-citation-hallucination-explained.html": {
+        "url": "/guides/chatgpt-citation-hallucination-explained",
+        "title": "ChatGPT Citation Hallucination Explained",
+        "desc": "Why ChatGPT specifically generates fabricated citations, how its training process produces this pattern, and what makes it structurally invisible to proofreading."
     },
     "how-to-find-out-who-built-a-website.html": {
         "url": "/guides/how-to-find-out-who-built-a-website",

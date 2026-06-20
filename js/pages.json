@@ -84,6 +84,12 @@
     "k": "ai-tools"
   },
   {
+    "t": "ChatGPT Citation Hallucination Explained — The Technical Mechanism | AI Citation Scan",
+    "d": "Why ChatGPT specifically generates fabricated citations, how its training process produces this pattern, and what makes it structurally invisible to proofreading.",
+    "u": "/guides/chatgpt-citation-hallucination-explained",
+    "k": "guides"
+  },
+  {
     "t": "How to Find Out Who Built, Designed, or Created a Website (5 Methods) | AI Citation Scan",
     "d": "Want to know who built, designed, created or developed a website? 5 proven methods including a free tech stack checker that reveals the builder, CMS, and framework in seconds.",
     "u": "/guides/how-to-find-out-who-built-a-website",
