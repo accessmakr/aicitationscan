@@ -91,6 +91,10 @@ window.siteRegistry = [
                 "url": "/programmatic/how-to-identify-website-technology"
             },
             {
+                "name": "Identify Website Framework",
+                "url": "/programmatic/identify-website-framework"
+            },
+            {
                 "name": "Wappalyzer Alternative",
                 "url": "/programmatic/wappalyzer-alternative"
             },
@@ -247,6 +251,11 @@ window.seoRegistry = {
         "url": "/programmatic/how-to-identify-website-technology",
         "title": "How to Identify Website Technology",
         "desc": "Three methods for identifying the technology stack behind any website: HTTP header analysis, HTML source inspection, and DNS record analysis. Which signals reveal what, and how to read them."
+    },
+    "identify-website-framework.html": {
+        "url": "/programmatic/identify-website-framework",
+        "title": "Identify Website Framework",
+        "desc": "Find out what JavaScript framework or static site generator a website is built with — React, Vue, Next.js, Nuxt, Svelte, Astro, and more. Free, instant detection."
     },
     "wappalyzer-alternative.html": {
         "url": "/programmatic/wappalyzer-alternative",
