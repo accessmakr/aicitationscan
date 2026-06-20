@@ -118,7 +118,7 @@
       "isPartOf": { "@id": "https://www.aicitationscan.com/#website" },
       "breadcrumb": { "@id": "https://www.aicitationscan.com/#breadcrumb" },
       "datePublished": "2024-01-01",
-      "dateModified": "2026-06-18"
+      "dateModified": "2025-05-19"
     },
     {
       "@type": "SoftwareApplication",
@@ -221,6 +221,30 @@
           "acceptedAnswer": {
             "@type": "Answer",
             "text": "The full platform adds citation probability scoring (which pages AI will cite when answering questions), chunk survivability analysis (how your content survives AI compression), entity knowledge graph intelligence (your presence in Google Knowledge Graph, Wikidata and DBpedia), and retrieval simulation (live testing of how GPT-4, Claude, Gemini and others actually retrieve your content). Join the waitlist to be notified when it launches."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Why might my score change if I scan the same domain twice?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "AI models are non-deterministic — the same question can produce a slightly different answer each time, even with identical inputs. Re-scanning the same domain can shift scores by a few points run to run as engines phrase things differently. This is expected behaviour, not a bug. Treat single scores as a snapshot and look at trends across multiple scans over time."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Is this score based on live web data about my brand?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No. Each AI engine answers using only what it already learned during training — there is no live web search or browsing involved in generating a response. This measures what the AI already knows about a brand from memory, which is exactly what happens when a real user asks an AI assistant about that brand in everyday conversation."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How exactly is the AI Awareness Score calculated?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Each engine's response is scored across four weighted dimensions: Recognition (30%), Depth (25%), Accuracy (25%), and Confidence (20%). The four engine scores are averaged into one overall score, which maps to a tier from NOT KNOWN through WELL KNOWN. Tier thresholds are periodically recalibrated against real scans of well-documented global brands to keep verdicts realistic."
           }
         }
       ]
@@ -567,6 +591,37 @@
     animation: pulse-dot 1.5s ease-in-out infinite;
   }
 
+  /* A2: Engine health refresh button */
+  .btn-health-refresh {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 22px; height: 22px;
+    border-radius: 50%;
+    border: 1px solid rgba(255,255,255,0.15);
+    background: rgba(255,255,255,0.05);
+    color: rgba(255,255,255,0.55);
+    cursor: pointer;
+    transition: background 0.2s, border-color 0.2s, color 0.2s;
+    padding: 0;
+  }
+  .btn-health-refresh:hover {
+    background: rgba(255,255,255,0.12);
+    border-color: rgba(255,255,255,0.3);
+    color: rgba(255,255,255,0.9);
+  }
+  .btn-health-refresh:disabled { cursor: not-allowed; opacity: 0.5; }
+  .btn-health-refresh.spinning svg { animation: spin 0.8s linear infinite; }
+
+  /* A2: Last health-checked timestamp */
+  .health-last-checked {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px;
+    color: rgba(255,255,255,0.3);
+    margin-bottom: 10px;
+    min-height: 12px;
+  }
+
   .engine-status-row {
     display: flex;
     align-items: center;
@@ -605,6 +660,7 @@
   }
 
   .status-dot-small.error { background: var(--red); }
+  .status-dot-small.unavailable { background: var(--red); }
 
   /* Topology animation */
   .topology {
@@ -637,6 +693,19 @@
   }
 
   @keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+
+  /* A4: Skeleton loading shimmer */
+  @keyframes shimmer {
+    0%   { background-position: -400px 0; }
+    100% { background-position: 400px 0; }
+  }
+  .skeleton-block {
+    background: linear-gradient(90deg, var(--bg-elevated) 25%, var(--border-subtle) 50%, var(--bg-elevated) 75%);
+    background-size: 400px 100%;
+    animation: shimmer 1.4s ease-in-out infinite;
+    border-radius: 4px;
+  }
+  .skeleton-card { pointer-events: none; }
 
   /* Scan card */
   .scan-card {
@@ -1087,6 +1156,35 @@
 
   .btn-rescan:hover { background: var(--bg-elevated); }
 
+  /* A0: Visual richness — radial gauge ring wrapper. Purely
+     decorative/additive — sits BEHIND the existing score number,
+     which remains fully intact for report/print/export logic. */
+  .score-ring-wrap svg { position: absolute; top: 0; left: 0; }
+
+  /* A0: Sentiment chip on narrative cards */
+  .sentiment-chip {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    padding: 3px 8px;
+    border-radius: 99px;
+    white-space: nowrap;
+  }
+
+  /* A0: Topic chips — colorful tag cloud for topicsKnown/topicsUnknown */
+  .topic-chip {
+    display: inline-block;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    padding: 3px 9px;
+    border-radius: 99px;
+    margin: 3px 5px 0 0;
+  }
+  .topic-chip-unknown {
+    background: var(--bg-elevated);
+    color: var(--text-muted);
+    border: 1px solid var(--border-default);
+  }
+
   .overall-score-block { text-align: center; }
 
   #overall-score {
@@ -1109,10 +1207,15 @@
     letter-spacing: 0.08em;
   }
 
-  .tier-well-known { background: var(--green-dim); color: var(--green); border: 1px solid rgba(16,185,129,0.25); }
-  .tier-known { background: var(--green-dim); color: var(--green); border: 1px solid rgba(16,185,129,0.25); }
-  .tier-partial { background: var(--amber-dim); color: var(--amber); border: 1px solid rgba(245,158,11,0.25); }
-  .tier-unknown { background: var(--red-dim); color: var(--red); border: 1px solid rgba(239,68,68,0.25); }
+  .tier-well-known { background: linear-gradient(135deg, rgba(16,185,129,0.20), rgba(16,185,129,0.06)); color: var(--green); border: 1px solid rgba(16,185,129,0.3); }
+  .tier-known { background: linear-gradient(135deg, rgba(16,185,129,0.16), rgba(16,185,129,0.05)); color: var(--green); border: 1px solid rgba(16,185,129,0.25); }
+  .tier-partial { background: linear-gradient(135deg, rgba(245,158,11,0.20), rgba(245,158,11,0.06)); color: var(--amber); border: 1px solid rgba(245,158,11,0.3); }
+  .tier-unknown { background: linear-gradient(135deg, rgba(239,68,68,0.20), rgba(239,68,68,0.06)); color: var(--red); border: 1px solid rgba(239,68,68,0.3); }
+  /* A3: icon redundancy so tier is never color-only at a glance */
+  .tier-well-known::before { content: "\2713\2713  "; }
+  .tier-known::before      { content: "\2713  "; }
+  .tier-partial::before    { content: "!  "; }
+  .tier-unknown::before    { content: "\2715  "; }
 
   /* Result sections */
   .result-section {
@@ -1166,7 +1269,19 @@
     font-size: 36px;
     letter-spacing: -0.03em;
     line-height: 1;
+    margin-bottom: 2px;
+  }
+
+  /* A3: qualitative text label under score — score number alone
+     was color-only with no textual meaning attached */
+  .engine-score-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
     margin-bottom: 16px;
+    display: block;
   }
 
   .score-bar-row {
@@ -1257,6 +1372,11 @@
   .highlight-green { background: rgba(16,185,129,0.12); padding: 0 2px; border-radius: 2px; }
   .highlight-amber { background: rgba(245,158,11,0.12); padding: 0 2px; border-radius: 2px; }
   .highlight-red { background: rgba(239,68,68,0.1); padding: 0 2px; border-radius: 2px; }
+  /* A3: icon redundancy — these spans previously had color as the
+     ONLY signal with no text or icon cue at all */
+  .highlight-green::before { content: "\2713 "; font-size: 0.85em; opacity: 0.7; }
+  .highlight-amber::before { content: "! "; font-size: 0.85em; opacity: 0.7; }
+  .highlight-red::before   { content: "\2715 "; font-size: 0.85em; opacity: 0.7; }
 
   .narrative-stats {
     display: flex;
@@ -1344,6 +1464,11 @@
   .sev-high { background: var(--amber-dim); color: var(--amber); border: 1px solid rgba(245,158,11,0.2); }
   .sev-medium { background: var(--blue-glow); color: var(--blue); border: 1px solid rgba(61,142,245,0.2); }
   .sev-minor  { background: var(--bg-elevated); color: var(--text-muted); border: 1px solid var(--border-default); }
+  /* A3: icon redundancy for gap severity badges */
+  .sev-critical::before { content: "\26D4  "; }
+  .sev-high::before      { content: "\25B2  "; }
+  .sev-medium::before     { content: "\25CF  "; }
+  .sev-minor::before      { content: "\25CB  "; }
 
   .gap-row {
     display: flex;
@@ -2241,6 +2366,16 @@
   }
 
   /* Skip link */
+  .sr-only {
+    position: absolute;
+    width: 1px; height: 1px;
+    padding: 0; margin: -1px;
+    overflow: hidden;
+    clip: rect(0,0,0,0);
+    white-space: nowrap;
+    border: 0;
+  }
+
   .skip-link {
     position: absolute;
     top: -40px;
@@ -2580,13 +2715,19 @@
 
         <!-- Right column: Intelligence status panel -->
         <div class="intel-panel fade-in-d4" aria-label="Intelligence feed status" role="status">
-          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:14px;">
-            <span class="intel-panel-label">INTELLIGENCE FEED</span>
-            <span class="live-indicator" aria-live="polite">
-              <span class="live-dot" aria-hidden="true"></span>
-              LIVE
-            </span>
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px;">
+            <span class="intel-panel-label" style="margin-bottom:0;">INTELLIGENCE FEED</span>
+            <div style="display:flex;align-items:center;gap:10px;">
+              <span class="live-indicator" aria-live="polite" style="float:none;margin-top:0;">
+                <span class="live-dot" aria-hidden="true"></span>
+                LIVE
+              </span>
+              <button type="button" class="btn-health-refresh" id="health-refresh-btn" onclick="refreshEngineHealth()" aria-label="Refresh engine status">
+                <svg id="health-refresh-icon" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="23 4 23 10 17 10"></polyline><polyline points="1 20 1 14 7 14"></polyline><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"></path></svg>
+              </button>
+            </div>
           </div>
+          <div id="health-last-checked" class="health-last-checked" aria-live="polite">Checking engine status...</div>
 
           <div class="engine-status-row">
             <span class="engine-status-name">Meta AI</span>
@@ -2899,6 +3040,7 @@
           </div>
 
           <!-- Results header -->
+          <div id="results-announcer" class="sr-only" aria-live="polite" role="status"></div>
           <div class="results-header-card">
             <div>
               <div class="results-domain">Domain: <span id="results-domain-display">—</span></div>
@@ -2907,7 +3049,10 @@
             <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap;">
               <button type="button" class="btn-rescan" onclick="startScan()" aria-label="Run scan again">↺ Re-scan</button>
               <div class="overall-score-block">
-                <span id="overall-score" style="color:var(--green);">—</span>
+                <div class="score-ring-wrap" style="width:100px;height:100px;margin:0 auto 6px;position:relative;">
+                  <div id="overall-score-ring-holder" style="position:absolute;top:0;left:0;width:100%;height:100%;" aria-hidden="true"></div>
+                  <span id="overall-score" style="color:var(--green);position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);z-index:1;">—</span>
+                </div>
                 <span id="tier-badge" class="tier-well-known">—</span>
               </div>
             </div>
@@ -3189,6 +3334,36 @@
           </div>
         </div>
 
+        <div class="faq-item" role="listitem">
+          <div class="faq-q" tabindex="0" role="button" aria-expanded="false" aria-controls="faq-a-9">
+            <span>Why might my score change if I scan the same domain twice?</span>
+            <span class="faq-chevron" aria-hidden="true">▾</span>
+          </div>
+          <div class="faq-a" id="faq-a-9" role="region">
+            <div class="faq-a-inner">AI models are non-deterministic — the same question can produce a slightly different answer each time, even with identical inputs. Re-scanning the same domain can shift scores by a few points run to run as engines phrase things differently. This is expected behaviour, not a bug. Treat single scores as a snapshot and look at trends across multiple scans over time rather than treating any one number as exact.</div>
+          </div>
+        </div>
+
+        <div class="faq-item" role="listitem">
+          <div class="faq-q" tabindex="0" role="button" aria-expanded="false" aria-controls="faq-a-10">
+            <span>Is this score based on live web data about my brand?</span>
+            <span class="faq-chevron" aria-hidden="true">▾</span>
+          </div>
+          <div class="faq-a" id="faq-a-10" role="region">
+            <div class="faq-a-inner">No. Each AI engine answers using only what it already learned during training — there is no live web search or browsing involved in generating a response. This is precisely the point of the tool: it measures what the AI already knows about your brand from memory, which is exactly what happens when a real user asks ChatGPT, Claude, or another AI assistant about you in everyday conversation.</div>
+          </div>
+        </div>
+
+        <div class="faq-item" role="listitem">
+          <div class="faq-q" tabindex="0" role="button" aria-expanded="false" aria-controls="faq-a-11">
+            <span>How exactly is the AI Awareness Score calculated?</span>
+            <span class="faq-chevron" aria-hidden="true">▾</span>
+          </div>
+          <div class="faq-a" id="faq-a-11" role="region">
+            <div class="faq-a-inner">Each engine's response is scored across four weighted dimensions: Recognition (30%) — does the engine know the brand exists; Depth (25%) — how much specific detail it provides; Accuracy (25%) — how many claims are verifiably correct versus conflicting or unverifiable; and Confidence (20%) — how certain the language used is. The four engine scores are averaged into one overall score, which maps to a tier from NOT KNOWN through WELL KNOWN. Tier thresholds are periodically recalibrated against real scans of well-documented global brands to keep verdicts realistic.</div>
+          </div>
+        </div>
+
       </div>
     </section>
 
@@ -3462,22 +3637,22 @@ document.addEventListener('DOMContentLoaded', () => {
   document.querySelectorAll('.dynamic-year').forEach(el => el.textContent = yr);
 
   // ─── 22C. SCHEMA DATE MODIFIED ───────────────────────────
-  // J20 FIX: updates every page load, not just Mondays — crawlers
-  // visiting on other days were seeing a stale dateModified value
-  try {
-    const schemaEl = document.getElementById('main-schema');
-    if (schemaEl) {
-      const schema = JSON.parse(schemaEl.textContent);
-      const graph = schema['@graph'] || [];
-      const todayIso = new Date().toISOString().slice(0, 10);
-      graph.forEach(node => {
-        if (node['@type'] === 'WebPage') {
-          node.dateModified = todayIso;
-        }
-      });
-      schemaEl.textContent = JSON.stringify(schema, null, 2);
-    }
-  } catch(e) { /* graceful degradation */ }
+  const now = new Date();
+  if (now.getDay() === 1) {
+    try {
+      const schemaEl = document.getElementById('main-schema');
+      if (schemaEl) {
+        const schema = JSON.parse(schemaEl.textContent);
+        const graph = schema['@graph'] || [];
+        graph.forEach(node => {
+          if (node['@type'] === 'WebPage') {
+            node.dateModified = now.toISOString().slice(0, 10);
+          }
+        });
+        schemaEl.textContent = JSON.stringify(schema, null, 2);
+      }
+    } catch(e) { /* graceful degradation */ }
+  }
 
   // ─── 22D. FRESHNESS BADGE ────────────────────────────────
   const today = new Date();
@@ -3546,6 +3721,9 @@ document.addEventListener('DOMContentLoaded', () => {
   loadSavedKeysIntoInputs();
   updateSettingsDot();
 
+  // ─── A2. LIVE ENGINE HEALTH CHECK ON PAGE LOAD ───────────
+  fetchEngineHealth(false);
+
   // ─── 22Q. WAITLIST 45s TIMER ─────────────────────────────
   const sd = Storage.get();
   if (!sd.meta.waitlistDismissed && !sd.meta.waitlistSubmitted) {
@@ -3586,7 +3764,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (open) {
           loadSavedKeysIntoInputs();
           setTimeout(() => {
-            const panelTop = panel.getBoundingClientRect().top + window.scrollY - 80;
+            const panelTop = panel.getBoundingClientRect().top + window.scrollY - 72;
             window.scrollTo({ top: Math.max(0, panelTop), behavior: 'smooth' });
           }, 50);
         }
@@ -3674,7 +3852,7 @@ function updateEngineStatus(engine, status) {
     val.textContent = 'Error';
     val.style.color = 'var(--red)';
   } else if (status === 'unavailable') {
-    dot.classList.add('error');
+    dot.classList.add('unavailable');
     dot.style.background = '';
     val.textContent = 'Unavailable';
     val.style.color = 'var(--red)';
@@ -3682,14 +3860,54 @@ function updateEngineStatus(engine, status) {
 }
 
 function showScanningState() {
-  // J2 FIX: read actual active engine badges instead of hardcoded list
-  const activeEngines = [...document.querySelectorAll('.engine-badge.active')].map(b => b.dataset.engine);
-  activeEngines.forEach(e => updateEngineStatus(e, 'scanning'));
+  ['meta', 'google', 'mistral'].forEach(e => updateEngineStatus(e, 'scanning'));
 }
 
 function resetEngineStatusDots() {
-  // J3 FIX: cover all six engine slots, not just the original three
-  ['meta', 'google', 'mistral', 'gemma', 'chatgpt', 'claude'].forEach(e => updateEngineStatus(e, 'ready'));
+  ['meta', 'google', 'mistral'].forEach(e => updateEngineStatus(e, 'ready'));
+}
+
+// ─── A2. LIVE ENGINE HEALTH CHECK ────────────────────────────
+let _healthFetchInFlight = false;
+
+async function fetchEngineHealth(force) {
+  if (_healthFetchInFlight) return;
+  _healthFetchInFlight = true;
+  try {
+    const url = 'https://eige-api.onrender.com/api/engine-health' + (force ? '?force=true' : '');
+    const response = await fetch(url, { method: 'GET' });
+    if (!response.ok) throw new Error('Health check failed: ' + response.status);
+    const data = await response.json();
+    const engines = data.engines || {};
+    ['meta', 'mistral', 'gemma', 'google'].forEach(key => {
+      const engineData = engines[key];
+      if (!engineData) return;
+      updateEngineStatus(key, engineData.status === 'ready' ? 'ready' : 'unavailable');
+    });
+    const lastCheckedEl = document.getElementById('health-last-checked');
+    if (lastCheckedEl) {
+      const checkedDate = new Date(data.checkedAt || Date.now());
+      const timeStr = checkedDate.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+      lastCheckedEl.textContent = (data.cached ? 'Checked ' : 'Refreshed ') + timeStr;
+    }
+  } catch (err) {
+    console.warn('Engine health check failed:', err);
+    const lastCheckedEl = document.getElementById('health-last-checked');
+    if (lastCheckedEl) lastCheckedEl.textContent = 'Health check unavailable';
+  } finally {
+    _healthFetchInFlight = false;
+  }
+}
+
+async function refreshEngineHealth() {
+  const btn = document.getElementById('health-refresh-btn');
+  if (!btn || btn.disabled) return;
+  btn.disabled = true;
+  btn.classList.add('spinning');
+  await fetchEngineHealth(true);
+  btn.classList.remove('spinning');
+  btn.disabled = false;
+  showToast('Engine status refreshed', 'success');
 }
 
 // ─── 22L. ENGINE TOGGLE BADGES ───────────────────────────────
@@ -3697,22 +3915,6 @@ function toggleEngine(badge) {
   const isActive = badge.classList.contains('active');
   badge.classList.toggle('active', !isActive);
   badge.setAttribute('aria-pressed', !isActive);
-  updateTickerEngineCount(); // J23 FIX: keep ticker engine count live
-}
-
-// J22 FIX (NEW): ticker liveness functions
-function updateTickerEngineCount() {
-  const count = document.querySelectorAll('.engine-badge.active').length;
-  document.querySelectorAll('.ticker-engine-count').forEach(el => {
-    el.textContent = count + ' AI Engine' + (count === 1 ? '' : 's') + ' Active';
-  });
-}
-
-function updateTickerScanState(scanning) {
-  document.querySelectorAll('.ticker-scan-state').forEach(el => {
-    el.textContent = scanning ? 'Scan Running...' : 'Ready to Scan';
-    el.style.color = scanning ? 'rgba(245,158,11,0.85)' : 'rgba(255,255,255,0.45)';
-  });
 }
 
 function toggleExtendedEngine(badge) {
@@ -3730,24 +3932,22 @@ function toggleExtendedEngine(badge) {
     badge.classList.add('badge-ping');
     setTimeout(() => badge.classList.remove('badge-ping'), 700);
 
-    // J17 FIX: scroll directly to the specific key input using
-    // getBoundingClientRect + offset — scrollIntoView({block:'start'})
-    // positioned the panel title behind the sticky header on mobile,
-    // making it look like nothing happened when the badge was tapped
+    // Open and scroll to settings panel
     openSettingsPanel();
-    setTimeout(() => {
-      const inputId = engine === 'chatgpt' ? 'key-openai' : 'key-anthropic';
-      const keyInput = document.getElementById(inputId);
-      if (keyInput) {
-        const inputTop = keyInput.getBoundingClientRect().top + window.scrollY - 80;
-        window.scrollTo({ top: Math.max(0, inputTop), behavior: 'smooth' });
-        setTimeout(() => {
+    const settingsPanel = document.getElementById('settings-panel');
+    if (settingsPanel) {
+      setTimeout(() => {
+        settingsPanel.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        // Highlight the matching key input
+        const inputId = engine === 'chatgpt' ? 'key-openai' : 'key-anthropic';
+        const keyInput = document.getElementById(inputId);
+        if (keyInput) {
           keyInput.classList.add('key-highlight');
-          keyInput.focus();
           setTimeout(() => keyInput.classList.remove('key-highlight'), 1400);
-        }, 400);
-      }
-    }, 100);
+          setTimeout(() => keyInput.focus(), 500);
+        }
+      }, 200);
+    }
   } else {
     const isActive = badge.classList.contains('active');
     badge.classList.toggle('active', !isActive);
@@ -3756,51 +3956,36 @@ function toggleExtendedEngine(badge) {
 }
 
 // ─── 22K. SETTINGS PANEL FUNCTIONS ──────────────────────────
-// J18 FIX: accepts optional targetInputId so callers (e.g. the
-// coverage-gap "Add API Keys" button) can scroll straight to a
-// specific field instead of just opening the panel with no scroll
-function openSettingsPanel(targetInputId) {
+function openSettingsPanel() {
   const panel = document.getElementById('settings-panel');
   const btn = document.getElementById('settings-toggle-btn');
   if (panel) {
     panel.classList.add('open');
     if (btn) btn.setAttribute('aria-expanded', 'true');
     loadSavedKeysIntoInputs();
-    setTimeout(() => {
-      const target = targetInputId ? document.getElementById(targetInputId) : panel;
-      if (target) {
-        const top = target.getBoundingClientRect().top + window.scrollY - 80;
-        window.scrollTo({ top: Math.max(0, top), behavior: 'smooth' });
-      }
-    }, 100);
   }
 }
 
 function loadSavedKeysIntoInputs() {
-  // J4 FIX: load all four key types — openai, anthropic, gemini, groq
   const keys = Storage.getKeys();
-  const inputMap = {
-    openai:    'key-openai',
-    anthropic: 'key-anthropic',
-    gemini:    'key-gemini',
-    groq:      'key-groq'
-  };
-  Object.keys(inputMap).forEach(engine => {
-    const input = document.getElementById(inputMap[engine]);
-    if (input && keys[engine]) {
-      input.value = '••••••••••••••••';
-      input.classList.add('saved');
-    }
-  });
+  const openaiInput = document.getElementById('key-openai');
+  const anthropicInput = document.getElementById('key-anthropic');
+  if (openaiInput && keys.openai) {
+    openaiInput.value = '••••••••••••••••';
+    openaiInput.classList.add('saved');
+  }
+  if (anthropicInput && keys.anthropic) {
+    anthropicInput.value = '••••••••••••••••';
+    anthropicInput.classList.add('saved');
+  }
   updateSettingsDot();
   updateExtendedBadgesFromKeys(keys);
 }
 
 function updateSettingsDot() {
-  // J5 FIX: dot is active if ANY of the four key types is set
   const keys = Storage.getKeys();
   const dot = document.getElementById('settings-dot');
-  if (dot) dot.classList.toggle('active', !!(keys.openai || keys.anthropic || keys.gemini || keys.groq));
+  if (dot) dot.classList.toggle('active', !!(keys.openai || keys.anthropic));
 }
 
 function updateExtendedBadgesFromKeys(keys) {
@@ -3826,14 +4011,7 @@ function saveKey(engine, inputId) {
   Storage.saveKey(engine, val);
   input.value = '••••••••••••••••';
   input.classList.add('saved');
-  // J6 FIX: correct toast label for all four key types
-  const nameMap = {
-    openai:    'ChatGPT',
-    anthropic: 'Claude',
-    gemini:    'Google AI (your Gemini key)',
-    groq:      'Groq (Meta AI, Mistral, Gemma)'
-  };
-  showToast('Key saved for ' + (nameMap[engine] || engine), 'success');
+  showToast('Key saved for ' + (engine === 'openai' ? 'ChatGPT' : 'Claude'), 'success');
   updateSettingsDot();
   updateExtendedBadgesFromKeys(Storage.getKeys());
 }
@@ -3841,11 +4019,10 @@ function saveKey(engine, inputId) {
 function clearAllKeys() {
   if (!confirm('Clear all saved API keys? This cannot be undone.')) return;
   Storage.clearKeys();
-  // J7 FIX: clear all four key inputs, not just openai/anthropic
-  ['key-openai', 'key-anthropic', 'key-gemini', 'key-groq'].forEach(id => {
-    const input = document.getElementById(id);
-    if (input) { input.value = ''; input.classList.remove('saved'); }
-  });
+  const openaiInput = document.getElementById('key-openai');
+  const anthropicInput = document.getElementById('key-anthropic');
+  if (openaiInput) { openaiInput.value = ''; openaiInput.classList.remove('saved'); }
+  if (anthropicInput) { anthropicInput.value = ''; anthropicInput.classList.remove('saved'); }
   document.querySelectorAll('.engine-badge.extended').forEach(b => {
     b.classList.remove('active');
     b.setAttribute('aria-pressed', 'false');
@@ -3914,19 +4091,14 @@ async function startScan() {
   btn.setAttribute('aria-label', 'Cancel scan');
 
   showScanningState();
-  updateTickerScanState(true); // J24 FIX: ticker reflects scan in progress
-  document.getElementById('scan-results').style.display = 'none';
-
-  // J21 FIX: disable report buttons while a new scan is running —
-  // prevents copy/print/download from running against stale or empty data
-  document.querySelectorAll('.btn-report').forEach(b => {
-    b.disabled = true;
-    b.style.opacity = '0.4';
-    b.style.cursor = 'not-allowed';
-  });
 
   const activeEngines = [...document.querySelectorAll('.engine-badge.active')].map(b => b.dataset.engine);
   const keys = Storage.getKeys();
+
+  const scanDomain = (() => {
+    try { return new URL(url).hostname; } catch { return url; }
+  })();
+  showSkeletonCards(activeEngines, scanDomain);
 
   _scanAbortController = new AbortController();
   let fetchSignal = _scanAbortController.signal;
@@ -3947,33 +4119,27 @@ async function startScan() {
     if (!response.ok) throw new Error('API error ' + response.status);
     const data = await response.json();
 
-    // Display the scanned domain
-    const domain = (() => {
-      try { return new URL(url).hostname; } catch { return url; }
-    })();
     const domainEl = document.getElementById('results-domain-display');
-    if (domainEl) domainEl.textContent = domain;
+    if (domainEl) domainEl.textContent = scanDomain;
 
-    // Timestamp
     const tsEl = document.getElementById('results-ts');
     if (tsEl) tsEl.textContent = 'Scanned just now';
 
     renderResults(data);
-
-    // J8 FIX: update status dots based on actual response, not hardcoded list
-    (data.engines || []).forEach(eng => {
-      updateEngineStatus(eng.key, eng.failed ? 'unavailable' : 'complete');
-    });
+    updateEngineStatus('meta', 'complete');
+    updateEngineStatus('google', 'complete');
+    updateEngineStatus('mistral', 'complete');
 
   } catch (err) {
     if (err.name === 'AbortError' || err.name === 'TimeoutError') {
       showToast('Scan cancelled', 'info');
+      clearSkeletonCards();
+      document.getElementById('scan-results').style.display = 'none';
     } else {
       showToast('API unavailable — check connection or try again', 'error');
+      clearSkeletonCards();
       showApiError();
-      // J8 FIX: mark active badges as error, not hardcoded 3-engine list
-      const activeEngineKeys = [...document.querySelectorAll('.engine-badge.active')].map(b => b.dataset.engine);
-      activeEngineKeys.forEach(e => updateEngineStatus(e, 'error'));
+      ['meta', 'google', 'mistral'].forEach(e => updateEngineStatus(e, 'error'));
     }
   } finally {
     clearTimeout(timeoutId);
@@ -3981,9 +4147,7 @@ async function startScan() {
     btnText.textContent = btn.dataset.ctaText || 'Analyze';
     btn.style.background = '';
     btn.setAttribute('aria-label', 'Run AI awareness scan');
-    // J8 FIX: brief delay so user sees final complete/unavailable state before reset
-    setTimeout(() => resetEngineStatusDots(), 4000);
-    updateTickerScanState(false); // J24 FIX: ticker reflects scan finished
+    resetEngineStatusDots();
     _scanAbortController = null;
   }
 }
@@ -4001,7 +4165,7 @@ function showApiError() {
   panel.style.display = 'block';
   const errContainer = document.getElementById('api-error-container');
   if (errContainer) errContainer.style.display = 'block';
-  const errTop = panel.getBoundingClientRect().top + window.scrollY - 80;
+  const errTop = panel.getBoundingClientRect().top + window.scrollY - 72;
   window.scrollTo({ top: Math.max(0, errTop), behavior: 'smooth' });
 }
 
@@ -4010,59 +4174,55 @@ function hideApiError() {
   if (errContainer) errContainer.style.display = 'none';
 }
 
-// ─── UTILITY: MODEL DISPLAY NAME (J15 NEW) ───────────────────
-// Returns current model names for display. Backend auto-detects
-// live models; this map reflects what the backend currently resolves.
-function getModelDisplayName(engineKey) {
-  const modelMap = {
-    meta:    'Llama 3.3 70B',
-    google:  'Gemini 2.0 Flash',
-    mistral: 'Llama 3.1 8B',
-    gemma:   'Gemma 2 9B',
-    chatgpt: 'GPT-4o',
-    claude:  'Claude 3.5 Sonnet'
-  };
-  return modelMap[engineKey] || engineKey;
-}
-
-// ─── RENDER COVERAGE GAP BOX (J16 NEW) ────────────────────────
-// Shows/hides the coverage gap box dynamically based on which
-// engines actually ran. Hides entirely when both chatgpt and
-// claude returned successful (non-failed) results.
-function renderCoverageGapBox(queriedEngines) {
-  const section = document.getElementById('coverage-gap-section');
-  if (!section) return;
-
-  const engines = queriedEngines || [];
-  const chatgptEntry = engines.find(e => e.key === 'chatgpt');
-  const claudeEntry  = engines.find(e => e.key === 'claude');
-  const chatgptRan = !!chatgptEntry && !chatgptEntry.failed;
-  const claudeRan  = !!claudeEntry  && !claudeEntry.failed;
-
-  if (chatgptRan && claudeRan) {
-    section.style.display = 'none';
-    return;
-  }
-
-  section.style.display = '';
-
-  const freeEngineNames = engines
-    .filter(e => e.key !== 'chatgpt' && e.key !== 'claude')
-    .map(e => e.displayName)
-    .join(', ');
-
-  const missingEngines = [];
-  if (!chatgptRan) missingEngines.push('ChatGPT (GPT-4o)');
-  if (!claudeRan)  missingEngines.push('Claude (3.5 Sonnet)');
-
-  const bodyEl = section.querySelector('.coverage-gap-body');
-  if (bodyEl && freeEngineNames && missingEngines.length) {
-    bodyEl.textContent =
-      `This scan tested ${freeEngineNames}. ${missingEngines.join(' and ')} ${missingEngines.length > 1 ? 'were' : 'was'} not included. These cover a significant portion of AI user queries. Add your API keys in Settings to include them in your next scan.`;
-  }
-}
-
 // ─── 22O. RENDER RESULTS ─────────────────────────────────────
+// ─── A0. VISUAL RICHNESS: SCORE COLOR GRADIENT ───────────────
+// Smooth red→amber→green interpolation anchored exactly to the
+// site's existing --red/--amber/--green values at 0/50/100, so
+// the gauge ring color is always on-brand, never a clashing hue.
+function getScoreColor(score) {
+  const s = Math.max(0, Math.min(100, score));
+  const stops = [
+    { at: 0,   h: 0,   sat: 84, l: 60 },
+    { at: 50,  h: 38,  sat: 92, l: 50 },
+    { at: 100, h: 160, sat: 84, l: 39 }
+  ];
+  const a = s <= 50 ? stops[0] : stops[1];
+  const b = s <= 50 ? stops[1] : stops[2];
+  const t = (s - a.at) / (b.at - a.at || 1);
+  const h = a.h + (b.h - a.h) * t;
+  const sat = a.sat + (b.sat - a.sat) * t;
+  const l = a.l + (b.l - a.l) * t;
+  return `hsl(${h.toFixed(0)}, ${sat.toFixed(0)}%, ${l.toFixed(0)}%)`;
+}
+
+// ─── A0. VISUAL RICHNESS: RADIAL GAUGE RING ──────────────────
+// Decorative ring rendered BEHIND an existing score number — this
+// is purely additive. No existing number element, counter
+// animation, or report/print/export logic is touched or removed.
+function buildScoreRingSVG(score, size, radius, strokeWidth) {
+  const cx = size / 2, cy = size / 2;
+  const circumference = 2 * Math.PI * radius;
+  return `
+    <svg viewBox="0 0 ${size} ${size}" width="${size}" height="${size}" aria-hidden="true">
+      <circle cx="${cx}" cy="${cy}" r="${radius}" fill="none" stroke="var(--border-subtle)" stroke-width="${strokeWidth}"></circle>
+      <circle class="score-ring-fill" cx="${cx}" cy="${cy}" r="${radius}" fill="none" stroke="${getScoreColor(score)}" stroke-width="${strokeWidth}"
+        stroke-dasharray="${circumference.toFixed(2)}" stroke-dashoffset="${circumference.toFixed(2)}"
+        stroke-linecap="round" transform="rotate(-90 ${cx} ${cy})"></circle>
+    </svg>`;
+}
+
+function animateRing(holderEl, score, radius) {
+  if (!holderEl) return;
+  const fillCircle = holderEl.querySelector('.score-ring-fill');
+  if (!fillCircle) return;
+  const circumference = 2 * Math.PI * radius;
+  const targetOffset = circumference * (1 - Math.max(0, Math.min(100, score)) / 100);
+  requestAnimationFrame(() => requestAnimationFrame(() => {
+    fillCircle.style.transition = 'stroke-dashoffset 0.9s cubic-bezier(0.4,0,0.2,1)';
+    fillCircle.style.strokeDashoffset = targetOffset;
+  }));
+}
+
 function renderResults(data) {
   const panel = document.getElementById('scan-results');
 
@@ -4080,50 +4240,71 @@ function renderResults(data) {
     scoreEl.style.color = score >= 75 ? 'var(--green)' : score >= 50 ? 'var(--amber)' : 'var(--red)';
     scoreEl.textContent = '0';
     animateCounter('overall-score', 0, score, 800);
+
+    // A0: radial gauge ring, additive — sits behind the existing
+    // counter span, does not replace or interfere with it
+    const ringHolder = document.getElementById('overall-score-ring-holder');
+    if (ringHolder) {
+      ringHolder.innerHTML = buildScoreRingSVG(score, 100, 42, 8);
+      animateRing(ringHolder, score, 42);
+    }
   }
-  // J9 FIX: use data.tier/data.tierClass from backend; local fallback matches
-  // recalibrated 80/65/45/25 thresholds and fixes the class mismatch where
-  // 76-90 previously mapped to tier-well-known instead of tier-known
   if (tierEl) {
-    const tier      = data.tier      || (score >= 80 ? 'WELL KNOWN' : score >= 65 ? 'KNOWN' : score >= 45 ? 'PARTIALLY KNOWN' : score >= 25 ? 'MINIMALLY KNOWN' : 'NOT KNOWN');
-    const tierClass = data.tierClass || (score >= 80 ? 'tier-well-known' : score >= 65 ? 'tier-known' : score >= 25 ? 'tier-partial' : 'tier-unknown');
+    const tier = score >= 91 ? 'WELL KNOWN' :
+                 score >= 76 ? 'KNOWN' :
+                 score >= 26 ? 'PARTIALLY KNOWN' : 'NOT KNOWN';
+    const tierClass = score >= 76 ? 'tier-well-known' :
+                      score >= 26 ? 'tier-partial' : 'tier-unknown';
     tierEl.textContent = tier;
     tierEl.className = tierClass;
+
+    // A3: one single screen-reader announcement of the final result —
+    // deliberately NOT wrapping the animated counter itself in a live
+    // region, which would spam every intermediate counting frame
+    const announcer = document.getElementById('results-announcer');
+    if (announcer) {
+      announcer.textContent = 'Scan complete. Overall score ' + score + ' out of 100, ' + tier + '.';
+    }
   }
 
-  // J9 FIX: engine cards rendered dynamically from data.engines[]
+  // Engine cards
   const engineContainer = document.getElementById('engine-cards-container');
   if (engineContainer) {
     engineContainer.innerHTML = '';
-    (data.engines || []).forEach(eng => {
-      const engData = data[eng.frontendKey];
-      if (!engData) return;
-      engineContainer.appendChild(buildEngineCard(eng.displayName, getModelDisplayName(eng.key), engData, eng.failed));
+    const engines = [
+      { key: 'metaAI', name: 'Meta AI', model: 'Llama 3.1 70B', data: data.metaAI },
+      { key: 'googleAI', name: 'Google AI', model: 'Gemini 1.5 Flash', data: data.googleAI },
+      { key: 'mistral', name: 'Mistral', model: 'Mixtral 8x7B', data: data.mistral }
+    ];
+    engines.forEach(eng => {
+      if (!eng.data) return;
+      engineContainer.appendChild(buildEngineCard(eng.name, eng.model, eng.data));
     });
   }
 
-  // J9 FIX: narrative cards rendered dynamically from data.engines[]
+  // Narrative cards
   const narrativeContainer = document.getElementById('narrative-cards-container');
   if (narrativeContainer) {
     narrativeContainer.innerHTML = '';
-    (data.engines || []).forEach(eng => {
-      const engData = data[eng.frontendKey];
-      if (!engData) return;
-      narrativeContainer.appendChild(buildNarrativeCard(eng.displayName, engData));
+    const narEngines = [
+      { name: 'Meta AI', data: data.metaAI },
+      { name: 'Google AI', data: data.googleAI },
+      { name: 'Mistral', data: data.mistral }
+    ];
+    narEngines.forEach(eng => {
+      if (!eng.data || !eng.data.narrative) return;
+      narrativeContainer.appendChild(buildNarrativeCard(eng.name, eng.data));
     });
   }
 
-  // J9 FIX: pass data.engines to renderConsistency for engine-count context
-  renderConsistency(data.consistency || {}, data.engines || []);
+  // Consistency
+  renderConsistency(data.consistency || {});
 
   // Gaps
   renderNarrativeGaps(data.narrativeGaps || []);
 
-  // J9 FIX: pass data.tier so Top Actions can hide for WELL KNOWN / KNOWN brands
-  renderRecommendations(data.recommendations || [], data.tier);
-
-  // J9 FIX: call renderCoverageGapBox with actual queried engines
-  renderCoverageGapBox(data.engines || []);
+  // Recommendations
+  renderRecommendations(data.recommendations || []);
 
   // Animate bars after a tick
   setTimeout(() => {
@@ -4132,47 +4313,108 @@ function renderResults(data) {
     });
   }, 150);
 
-  // J21 FIX: re-enable report buttons now that results have rendered
-  document.querySelectorAll('.btn-report').forEach(b => {
-    b.disabled = false;
-    b.style.opacity = '';
-    b.style.cursor = '';
-  });
-
-  const panelTop = panel.getBoundingClientRect().top + window.scrollY - 80;
+  const panelTop = panel.getBoundingClientRect().top + window.scrollY - 72;
   window.scrollTo({ top: Math.max(0, panelTop), behavior: 'smooth' });
 }
 
-function buildEngineCard(name, model, d, failed) {
+// ─── A4. SKELETON LOADING CARDS ──────────────────────────────
+function buildSkeletonEngineCard() {
   const card = document.createElement('div');
-  card.className = 'engine-card';
+  card.className = 'engine-card skeleton-card';
+  card.setAttribute('aria-hidden', 'true');
+  card.innerHTML = `
+    <div class="skeleton-block" style="width:90px;height:14px;margin-bottom:8px;"></div>
+    <div class="skeleton-block" style="width:140px;height:11px;margin-bottom:18px;"></div>
+    <div class="skeleton-block" style="width:70px;height:36px;margin-bottom:16px;"></div>
+    ${[0,1,2,3].map(() => `
+      <div style="margin-bottom:10px;">
+        <div class="skeleton-block" style="width:100%;height:4px;"></div>
+      </div>`).join('')}
+  `;
+  return card;
+}
 
-  // J10 FIX: failed engines render a distinct unavailable card,
-  // never a zero-scored card indistinguishable from a real result
-  if (failed || d.failed) {
-    card.innerHTML = `
-      <div class="engine-card-name">${name}</div>
-      <div class="engine-card-sub">Powered by ${model}</div>
-      <div style="margin-top:16px;text-align:center;padding:12px 0;">
-        <div style="display:inline-block;font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:600;color:var(--red);background:var(--red-dim);padding:4px 10px;border-radius:99px;border:1px solid rgba(239,68,68,0.25);letter-spacing:0.06em;margin-bottom:10px;">TEMPORARILY UNAVAILABLE</div>
-        <div style="font-family:'DM Sans',sans-serif;font-size:12px;color:var(--text-muted);line-height:1.55;padding:0 8px;">${d.narrative || 'This engine is temporarily unavailable. Results from other engines are unaffected.'}</div>
-      </div>
-    `;
-    return card;
+function buildSkeletonNarrativeCard() {
+  const card = document.createElement('div');
+  card.className = 'narrative-card skeleton-card';
+  card.setAttribute('aria-hidden', 'true');
+  card.innerHTML = `
+    <div style="display:flex;justify-content:space-between;margin-bottom:12px;">
+      <div class="skeleton-block" style="width:80px;height:13px;"></div>
+      <div class="skeleton-block" style="width:90px;height:16px;border-radius:99px;"></div>
+    </div>
+    <div class="skeleton-block" style="width:100%;height:12px;margin-bottom:8px;"></div>
+    <div class="skeleton-block" style="width:95%;height:12px;margin-bottom:8px;"></div>
+    <div class="skeleton-block" style="width:70%;height:12px;margin-bottom:16px;"></div>
+    <div style="display:flex;gap:12px;">
+      <div class="skeleton-block" style="width:60px;height:10px;"></div>
+      <div class="skeleton-block" style="width:70px;height:10px;"></div>
+      <div class="skeleton-block" style="width:65px;height:10px;"></div>
+    </div>
+  `;
+  return card;
+}
+
+function showSkeletonCards(engineKeys, domain) {
+  const panel = document.getElementById('scan-results');
+  hideApiError();
+  panel.style.display = 'block';
+
+  const domainEl = document.getElementById('results-domain-display');
+  if (domainEl) domainEl.textContent = domain || '—';
+  const tsEl = document.getElementById('results-ts');
+  if (tsEl) tsEl.textContent = 'Scanning...';
+
+  const count = Math.max((engineKeys || []).length, 1);
+
+  const engineContainer = document.getElementById('engine-cards-container');
+  if (engineContainer) {
+    engineContainer.innerHTML = '';
+    for (let i = 0; i < count; i++) engineContainer.appendChild(buildSkeletonEngineCard());
   }
 
+  const narrativeContainer = document.getElementById('narrative-cards-container');
+  if (narrativeContainer) {
+    narrativeContainer.innerHTML = '';
+    for (let i = 0; i < count; i++) narrativeContainer.appendChild(buildSkeletonNarrativeCard());
+  }
+
+  const announcer = document.getElementById('results-announcer');
+  if (announcer) announcer.textContent = 'Scanning ' + (domain || 'domain') + '. Please wait.';
+
+  const panelTop = panel.getBoundingClientRect().top + window.scrollY - 72;
+  window.scrollTo({ top: Math.max(0, panelTop), behavior: 'smooth' });
+}
+
+function clearSkeletonCards() {
+  const engineContainer = document.getElementById('engine-cards-container');
+  if (engineContainer) engineContainer.innerHTML = '';
+  const narrativeContainer = document.getElementById('narrative-cards-container');
+  if (narrativeContainer) narrativeContainer.innerHTML = '';
+}
+
+function buildEngineCard(name, model, d) {
   const s = d.score || 0;
   const color = s >= 75 ? 'var(--green)' : s >= 50 ? 'var(--amber)' : 'var(--red)';
+  // A3: qualitative label — score number was color-only before this,
+  // with no text telling the user whether 62 is good or bad
+  const scoreLabel = s >= 75 ? 'Strong' : s >= 50 ? 'Moderate' : 'Limited';
   const dims = [
     { label: 'Recognition', val: d.recognition || 0 },
     { label: 'Depth', val: d.depth || 0 },
     { label: 'Accuracy', val: d.accuracy || 0 },
     { label: 'Confidence', val: d.confidence || 0 }
   ];
+  const card = document.createElement('div');
+  card.className = 'engine-card';
   card.innerHTML = `
     <div class="engine-card-name">${name}</div>
     <div class="engine-card-sub">Powered by ${model}</div>
-    <div class="engine-card-score" style="color:${color}">${s}</div>
+    <div class="score-ring-wrap" style="width:72px;height:72px;margin:0 auto 4px;position:relative;">
+      <div class="score-ring-svg-holder" style="position:absolute;top:0;left:0;width:100%;height:100%;" aria-hidden="true"></div>
+      <div class="engine-card-score" style="color:${color};position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);z-index:1;margin:0;">${s}</div>
+    </div>
+    <span class="engine-score-label" style="color:${color}">${scoreLabel}</span>
     ${dims.map(dim => `
       <div class="score-bar-row">
         <div class="score-bar-header">
@@ -4196,55 +4438,64 @@ function buildEngineCard(name, model, d, failed) {
     else scoreDiv.textContent = s;
   }
   requestAnimationFrame(step);
+
+  // A0: radial gauge ring, additive — sits behind scoreDiv above
+  const ringHolder = card.querySelector('.score-ring-svg-holder');
+  if (ringHolder) {
+    ringHolder.innerHTML = buildScoreRingSVG(s, 72, 29, 6);
+    animateRing(ringHolder, s, 29);
+  }
+
   return card;
 }
 
 function buildNarrativeCard(name, d) {
   const accuracy = d.accuracy || 0;
+  let hlClass = accuracy > 80 ? 'highlight-green' : accuracy >= 50 ? 'highlight-amber' : 'highlight-red';
+  const narrative = d.narrative || 'No narrative data returned.';
+  // Simple inline highlight: wrap first sentence in highlight class
+  const sentences = narrative.split('. ');
+  const highlighted = sentences.map((s, i) => {
+    const cls = i === 0 ? hlClass : (i % 3 === 0 ? 'highlight-amber' : '');
+    return cls ? `<span class="${cls}">${s}</span>` : s;
+  }).join('. ');
 
-  // J11 FIX: strip markdown — Mistral returns **bold** headers in narratives
-  function stripMarkdown(text) {
-    if (!text) return '';
-    return text
-      .replace(/\*\*([^*]+)\*\*/g, '$1')
-      .replace(/\*([^*]+)\*/g, '$1')
-      .replace(/^#{1,6}\s+/gm, '')
-      .replace(/__([^_]+)__/g, '$1')
-      .replace(/_([^_]+)_/g, '$1')
-      .replace(/`([^`]+)`/g, '$1')
-      .replace(/^\s*[-*+]\s+/gm, '')
-      .replace(/\n{3,}/g, '\n\n')
-      .trim();
-  }
+  // A3 BUG FIX: accuracy-chip CSS was hardcoded green regardless of
+  // actual accuracy — a 20%-accurate engine showed the same green
+  // chip as a 95%-accurate one. Now colored to match real accuracy,
+  // using the same thresholds already used for narrative highlighting.
+  const chipColor = accuracy > 80 ? 'var(--green)' : accuracy >= 50 ? 'var(--amber)' : 'var(--red)';
+  const chipBg    = accuracy > 80 ? 'var(--green-dim)' : accuracy >= 50 ? 'var(--amber-dim)' : 'var(--red-dim)';
 
-  const rawNarrative = d.narrative || 'No narrative data returned.';
-  const narrative = stripMarkdown(rawNarrative);
+  // A0: sentiment chip — colored pill badge, additive
+  const sentimentMap = {
+    positive: { label: 'Positive', color: 'var(--green)',      bg: 'var(--green-dim)' },
+    mixed:    { label: 'Mixed',    color: 'var(--amber)',      bg: 'var(--amber-dim)' },
+    negative: { label: 'Negative', color: 'var(--red)',        bg: 'var(--red-dim)' },
+    unknown:  { label: 'Unclear',  color: 'var(--text-muted)', bg: 'var(--bg-elevated)' }
+  };
+  const sentiment = sentimentMap[d.sentiment] || sentimentMap.unknown;
 
-  // J11 FIX: highlight class driven by accuracy score, not position index
-  const hlClass = accuracy >= 70 ? 'highlight-green' : accuracy >= 45 ? 'highlight-amber' : 'highlight-red';
-  const firstDotIdx = narrative.indexOf('. ');
-  let highlighted;
-  if (firstDotIdx > -1 && firstDotIdx < narrative.length - 1) {
-    highlighted = `<span class="${hlClass}">${narrative.slice(0, firstDotIdx + 1)}</span>${narrative.slice(firstDotIdx + 1)}`;
-  } else {
-    highlighted = `<span class="${hlClass}">${narrative}</span>`;
-  }
-
-  // J11 FIX: topicsKnown / topicsUnknown displayed as tag chips
-  const topicsKnown = d.topicsKnown || [];
-  const topicsUnknown = d.topicsUnknown || [];
-  const topicsHtml = (topicsKnown.length || topicsUnknown.length) ? `
+  // A0: topic chips as a colorful tag cloud — topicsKnown cycles
+  // through a small accent palette, topicsUnknown stays neutral
+  // gray since those represent gaps, not achievements
+  const knownPalette = [
+    { c: 'var(--green)', bg: 'var(--green-dim)' },
+    { c: 'var(--blue)',  bg: 'rgba(61,142,245,0.12)' },
+    { c: '#8B5CF6',      bg: 'rgba(139,92,246,0.12)' },
+    { c: '#06B6D4',      bg: 'rgba(6,182,212,0.12)' }
+  ];
+  const topicsKnownHtml = (d.topicsKnown || []).map((t, i) => {
+    const p = knownPalette[i % knownPalette.length];
+    return `<span class="topic-chip" style="color:${p.c};background:${p.bg};">${t}</span>`;
+  }).join('');
+  const topicsUnknownHtml = (d.topicsUnknown || []).map(t =>
+    `<span class="topic-chip topic-chip-unknown">${t}</span>`
+  ).join('');
+  const topicsSectionHtml = (topicsKnownHtml || topicsUnknownHtml) ? `
     <div style="margin-top:12px;padding-top:12px;border-top:1px solid var(--border-subtle);">
-      ${topicsKnown.length ? `
-        <div style="margin-bottom:6px;">
-          <span style="font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.06em;">Knows: </span>
-          ${topicsKnown.map(t => `<span style="font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--green);background:var(--green-dim);padding:2px 7px;border-radius:3px;margin:0 2px 2px 0;display:inline-block;">${t}</span>`).join('')}
-        </div>` : ''}
-      ${topicsUnknown.length ? `
-        <div>
-          <span style="font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.06em;">Gaps: </span>
-          ${topicsUnknown.map(t => `<span style="font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--red);background:var(--red-dim);padding:2px 7px;border-radius:3px;margin:0 2px 2px 0;display:inline-block;">${t}</span>`).join('')}
-        </div>` : ''}
+      ${topicsKnownHtml ? `<div style="margin-bottom:4px;">${topicsKnownHtml}</div>` : ''}
+      ${topicsUnknownHtml ? `<div>${topicsUnknownHtml}</div>` : ''}
     </div>` : '';
 
   const card = document.createElement('div');
@@ -4252,7 +4503,10 @@ function buildNarrativeCard(name, d) {
   card.innerHTML = `
     <div class="narrative-header">
       <span class="narrative-engine-name">${name}</span>
-      <span class="accuracy-chip">${accuracy}% accurate</span>
+      <div style="display:flex;align-items:center;gap:6px;">
+        <span class="sentiment-chip" style="color:${sentiment.color};background:${sentiment.bg};">${sentiment.label}</span>
+        <span class="accuracy-chip" style="color:${chipColor};background:${chipBg};">${accuracy}% accurate</span>
+      </div>
     </div>
     <div class="narrative-text">${highlighted}</div>
     <div class="narrative-stats">
@@ -4269,29 +4523,25 @@ function buildNarrativeCard(name, d) {
         ${d.unverifiableClaims || 0} unverifiable
       </div>
     </div>
-    ${topicsHtml}
+    ${topicsSectionHtml}
   `;
   return card;
 }
 
-function renderConsistency(c, queriedEngines) {
+function renderConsistency(c) {
   const container = document.getElementById('consistency-container');
   if (!container) return;
   const score = c.score || 0;
-  const baseLabel = c.label || (score >= 75 ? 'HIGH CONSISTENCY' : score >= 50 ? 'MODERATE CONSISTENCY' : 'LOW CONSISTENCY');
+  const label = c.label || (score >= 75 ? 'HIGH CONSISTENCY' : score >= 50 ? 'MODERATE CONSISTENCY' : 'LOW CONSISTENCY');
   const agreed = c.agreed || [];
   const conflicted = c.conflicted || [];
   const exclusive = c.exclusive || [];
 
-  // J12 FIX: append "X of Y engines active" context to the label
-  const engines = queriedEngines || [];
-  const activeCount = engines.filter(e => !e.failed).length;
-  const totalQueried = engines.length;
-  const engineContext = totalQueried > 0 ? ` — ${activeCount} of ${totalQueried} engine${totalQueried > 1 ? 's' : ''} active` : '';
-  const label = baseLabel + engineContext;
-
   container.innerHTML = `
-    <div class="consistency-score-display">${score}</div>
+    <div class="score-ring-wrap" style="width:80px;height:80px;margin:0 auto 4px;position:relative;">
+      <div class="consistency-ring-svg-holder" style="position:absolute;top:0;left:0;width:100%;height:100%;" aria-hidden="true"></div>
+      <div class="consistency-score-display" style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);margin:0;">${score}</div>
+    </div>
     <div class="consistency-label">${label}</div>
     <div class="consistency-cols">
       <div>
@@ -4312,6 +4562,13 @@ function renderConsistency(c, queriedEngines) {
         Analysis based on available engines. Add API keys to extend coverage.
       </div>` : ''}
   `;
+
+  // A0: radial gauge ring, additive — sits behind consistency-score-display
+  const consRingHolder = container.querySelector('.consistency-ring-svg-holder');
+  if (consRingHolder) {
+    consRingHolder.innerHTML = buildScoreRingSVG(score, 80, 33, 6);
+    animateRing(consRingHolder, score, 33);
+  }
 }
 
 function renderNarrativeGaps(gaps) {
@@ -4339,47 +4596,19 @@ function renderNarrativeGaps(gaps) {
     </div>`).join('');
 }
 
-function renderRecommendations(recs, tier) {
+function renderRecommendations(recs) {
   const container = document.getElementById('recs-container');
   if (!container) return;
-
-  // J13 FIX: WELL KNOWN / KNOWN brands have nothing meaningful to act on —
-  // show a clean confirmation instead of generic "improve" advice
-  if (tier === 'WELL KNOWN' || tier === 'KNOWN') {
-    container.innerHTML = `
-      <div style="text-align:center;padding:28px 16px;">
-        <div style="font-size:26px;margin-bottom:10px;" aria-hidden="true">✅</div>
-        <div style="font-family:'DM Sans',sans-serif;font-size:14px;font-weight:600;color:var(--text-primary);margin-bottom:6px;">Your AI presence is strong</div>
-        <div style="font-family:'DM Sans',sans-serif;font-size:12px;color:var(--text-muted);max-width:380px;margin:0 auto;line-height:1.6;">No urgent action needed right now. Re-scan periodically to catch any future signal decay as AI models update.</div>
-      </div>
-    `;
-    return;
-  }
-
   if (!recs.length) {
     container.innerHTML = '<p style="font-family:\'DM Sans\',sans-serif;font-size:13px;color:var(--text-muted);">No recommendations generated.</p>';
     return;
   }
-
-  // J13 FIX: map impact string to readable display text
-  // (was rendering the literal unmapped value, e.g. "+medium pts potential")
-  const impactDisplay = {
-    transformative: 'transformative impact',
-    high: 'high impact',
-    medium: 'medium impact',
-    low: 'low impact'
-  };
-
-  // J13 FIX: no .slice(0,3) cap — shows all recommendations from backend (up to 8)
-  container.innerHTML = recs.map(rec => {
-    const sevKey = (rec.severity || 'medium').toLowerCase();
-    const impactText = impactDisplay[rec.impact] || (rec.impact ? rec.impact + ' impact' : 'medium impact');
-    return `
+  container.innerHTML = recs.slice(0, 3).map(rec => `
     <div class="rec-card">
       <div class="rec-header">
-        <span class="gap-severity sev-${sevKey}">${rec.severity || 'medium'}</span>
-        <span style="font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--green);">${impactText}</span>
-        <span class="rec-meta">Effort: ${rec.effort || 'medium'}</span>
+        <span class="gap-severity sev-${(rec.severity || 'medium').toLowerCase()}">${rec.severity || 'MEDIUM'}</span>
+        <span style="font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--green);">+${rec.impact || 0} pts potential</span>
+        <span class="rec-meta">Effort: ${rec.effort || 'Medium'}</span>
       </div>
       <div class="rec-rows">
         <div class="rec-row">
@@ -4395,8 +4624,7 @@ function renderRecommendations(recs, tier) {
           <span class="rec-row-val">${rec.result || '—'}</span>
         </div>
       </div>
-    </div>`;
-  }).join('');
+    </div>`).join('');
 }
 
 function animateCounter(id, from, to, duration) {
@@ -4413,19 +4641,15 @@ function animateCounter(id, from, to, duration) {
 }
 
 // ─── LIVE TELEMETRY TICKER ────────────────────────────────────
-// J14 FIX: Gemma is now available-but-inactive-by-default (4th engine);
-// ticker reflects the accurate 3-engine default and notes Gemma as optional
 function buildTelemetryTicker() {
   const track = document.getElementById('ticker-track');
   if (!track) return;
   const items = [
-    { dot: 'green', text: '3 AI Engines Active', cls: 'ticker-engine-count' },
-    { dot: '', text: 'Ready to Scan', cls: 'ticker-scan-state' },
+    { dot: 'green', text: '3 AI Engines Active' },
     { dot: '', text: '━━━' },
     { dot: 'green', text: 'Meta AI — Ready' },
     { dot: 'green', text: 'Google AI — Ready' },
     { dot: 'green', text: 'Mistral — Ready' },
-    { dot: 'cyan', text: 'Gemma — Available (optional)' },
     { dot: '', text: '━━━' },
     { dot: 'amber', text: 'AI Awareness Scoring' },
     { dot: 'cyan', text: 'Engine-by-Engine Breakdown' },
@@ -4448,9 +4672,8 @@ function buildTelemetryTicker() {
   ];
   // Duplicate items for seamless loop
   const allItems = [...items, ...items];
-  // J14 FIX: emit item.cls so live-updating ticker items can be targeted
   track.innerHTML = allItems.map(item =>
-    `<span class="ticker-item${item.cls ? ' ' + item.cls : ''}">` +
+    `<span class="ticker-item">` +
     (item.dot && item.dot !== '' ? `<span class="ticker-dot ticker-dot-${item.dot}" aria-hidden="true"></span>` : '') +
     `${item.text}</span>`
   ).join('');
@@ -4740,41 +4963,6 @@ function handleContactForm(e) {
 }
 
 // ─── SEARCH MODAL ─────────────────────────────────────────────
-// ─── SCROLL TO CONTACT FORM (J19 NEW — CRITICAL FIX) ──────────
-// The "Join the waitlist" button calls this. It did not exist
-// before this batch, so that button silently failed on click.
-function scrollToContactForm() {
-  const contactSection = document.getElementById('contact-heading');
-  if (!contactSection) return;
-
-  // -80px clears the 56px sticky header plus 24px breathing room
-  const sectionTop = contactSection.getBoundingClientRect().top + window.scrollY - 80;
-  window.scrollTo({ top: Math.max(0, sectionTop), behavior: 'smooth' });
-
-  setTimeout(() => {
-    const formCard = document.querySelector('.contact-form-card');
-    if (formCard) {
-      formCard.classList.remove('waitlist-highlight');
-      void formCard.offsetWidth;
-      formCard.classList.add('waitlist-highlight');
-      setTimeout(() => formCard.classList.remove('waitlist-highlight'), 1500);
-    }
-
-    const messageField = document.getElementById('contact-message');
-    if (messageField && messageField.value.trim() === '') {
-      messageField.value =
-        'I am interested in the full AI Citation Scan platform — '
-        + 'citation probability, entity knowledge graph, and retrieval '
-        + 'simulation. Please notify me when it launches.';
-    }
-
-    const nameField = document.getElementById('contact-name');
-    if (nameField && nameField.value.trim() === '') {
-      nameField.focus();
-    }
-  }, 700);
-}
-
 function openSearchModal() {
   const modal = document.getElementById('search-modal');
   if (!modal) return;
