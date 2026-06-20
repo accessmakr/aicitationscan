@@ -47,6 +47,10 @@ window.siteRegistry = [
                 "url": "/seo-tools/robots-txt-generator"
             },
             {
+                "name": "Schema Generator For Local Business",
+                "url": "/seo-tools/schema-generator-for-local-business"
+            },
+            {
                 "name": "Schema Generator",
                 "url": "/seo-tools/schema-generator"
             },
@@ -221,6 +225,11 @@ window.seoRegistry = {
         "url": "/seo-tools/robots-txt-generator",
         "title": "Robots.txt Generator: Advanced Crawler Control | AI Citation Scan",
         "desc": "Generate properly structured robots.txt files. Control search engine crawlers, manage crawl budgets, and optimize technical SEO with our enterprise robots.txt generator."
+    },
+    "schema-generator-for-local-business.html": {
+        "url": "/seo-tools/schema-generator-for-local-business",
+        "title": "Schema Generator for Local Business",
+        "desc": "Generate JSON-LD LocalBusiness schema markup for your business. Covers required properties, rich result eligibility, and the right schema subtype for your business category. Free, no sign-up."
     },
     "schema-generator.html": {
         "url": "/seo-tools/schema-generator",
