@@ -97,6 +97,10 @@ window.siteRegistry = [
             {
                 "name": "What Cms Is This Website",
                 "url": "/programmatic/what-cms-is-this-website"
+            },
+            {
+                "name": "What Theme Is This Website",
+                "url": "/programmatic/what-theme-is-this-website"
             }
         ]
     },
@@ -237,6 +241,11 @@ window.seoRegistry = {
         "url": "/programmatic/what-cms-is-this-website",
         "title": "What CMS Is This Website?",
         "desc": "Find out what CMS any website is built on — WordPress, Shopify, Webflow, Squarespace, Wix, and more — from a single URL. Free, instant, no sign-up."
+    },
+    "what-theme-is-this-website.html": {
+        "url": "/programmatic/what-theme-is-this-website",
+        "title": "What Theme Is This Website?",
+        "desc": "Find out what theme a website is using — WordPress or Shopify. See the theme name, page builder, and customization signals from any URL. Free, instant."
     },
     "meta-description-generator.html": {
         "url": "/seo-tools/meta-description-generator",
