@@ -165,6 +165,10 @@ window.siteRegistry = [
             {
                 "name": "How To Find Out Who Built A Website",
                 "url": "/guides/how-to-find-out-who-built-a-website"
+            },
+            {
+                "name": "How To Find Website Technology",
+                "url": "/guides/how-to-find-website-technology"
             }
         ]
     }
@@ -235,6 +239,11 @@ window.seoRegistry = {
         "url": "/guides/how-to-find-out-who-built-a-website",
         "title": "How to Find Out Who Built, Designed, or Created a Website",
         "desc": "Want to know who built, designed, created or developed a website? 5 proven methods including a free tech stack checker that reveals the builder, CMS, and framework in seconds."
+    },
+    "how-to-find-website-technology.html": {
+        "url": "/guides/how-to-find-website-technology",
+        "title": "How to Find Website Technology",
+        "desc": "Quick answer: how to find out what technology any website uses in under 10 seconds. For the full technical breakdown of how detection works, see our detailed guide."
     },
     "builtwith-alternative.html": {
         "url": "/programmatic/builtwith-alternative",
