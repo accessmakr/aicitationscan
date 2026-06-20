@@ -153,7 +153,7 @@ window.seoRegistry = {
     "ai-citation-checker-free.html": {
         "url": "/ai-tools/ai-citation-checker-free",
         "title": "Free AI Citation Checker",
-        "desc": "Free AI citation checker that tests your entire reference list for structural completeness in one pass. No account, no subscription, no upload limit. Runs entirely in your browser."
+        "desc": "Free AI citation checker that tests your entire reference list — from ChatGPT, Gemini, Claude, or your own research — for structural completeness in one pass. No account, no subscription, no upload limit. Runs entirely in your browser."
     },
     "ai-citation-checker.html": {
         "url": "/ai-tools/ai-citation-checker",
