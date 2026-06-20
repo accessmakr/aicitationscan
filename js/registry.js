@@ -75,6 +75,10 @@ window.siteRegistry = [
                 "url": "/programmatic/builtwith-alternative"
             },
             {
+                "name": "Check Website Hosting",
+                "url": "/programmatic/check-website-hosting"
+            },
+            {
                 "name": "Competitor Tech Stack Checker",
                 "url": "/programmatic/competitor-tech-stack-checker"
             },
@@ -223,6 +227,11 @@ window.seoRegistry = {
         "url": "/programmatic/builtwith-alternative",
         "title": "BuiltWith Alternative",
         "desc": "Looking for a BuiltWith alternative? Compare detection coverage, pricing, and lookup limits. Free unlimited tech stack lookups, no account, no per-lookup paywall."
+    },
+    "check-website-hosting.html": {
+        "url": "/programmatic/check-website-hosting",
+        "title": "Check Website Hosting",
+        "desc": "Find out who hosts any website and what hosting environment it runs on — shared, managed, or cloud. Free hosting checker, instant results from any URL."
     },
     "competitor-tech-stack-checker.html": {
         "url": "/programmatic/competitor-tech-stack-checker",
