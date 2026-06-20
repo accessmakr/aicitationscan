@@ -148,7 +148,7 @@ window.seoRegistry = {
     "ai-citation-checker-for-students.html": {
         "url": "/ai-tools/ai-citation-checker-for-students",
         "title": "AI Citation Checker for Students",
-        "desc": "Student-specific AI citation checker. Tests every reference in your essay, dissertation, or coursework for the five structural fields that determine whether a source is real and verifiable. Free, in-browser, no sign-up."
+        "desc": "Student-specific AI citation checker. Tests every reference — whether drafted with ChatGPT, Gemini, Claude, or Copilot — in your essay, dissertation, or coursework for the five structural fields that determine whether a source is real and verifiable. Free, in-browser, no sign-up."
     },
     "ai-citation-checker-free.html": {
         "url": "/ai-tools/ai-citation-checker-free",
