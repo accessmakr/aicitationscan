@@ -47,6 +47,10 @@ window.siteRegistry = [
                 "url": "/seo-tools/robots-txt-generator"
             },
             {
+                "name": "Schema Generator For Ecommerce",
+                "url": "/seo-tools/schema-generator-for-ecommerce"
+            },
+            {
                 "name": "Schema Generator For Local Business",
                 "url": "/seo-tools/schema-generator-for-local-business"
             },
@@ -225,6 +229,11 @@ window.seoRegistry = {
         "url": "/seo-tools/robots-txt-generator",
         "title": "Robots.txt Generator: Advanced Crawler Control | AI Citation Scan",
         "desc": "Generate properly structured robots.txt files. Control search engine crawlers, manage crawl budgets, and optimize technical SEO with our enterprise robots.txt generator."
+    },
+    "schema-generator-for-ecommerce.html": {
+        "url": "/seo-tools/schema-generator-for-ecommerce",
+        "title": "Schema Generator for Ecommerce",
+        "desc": "Generate Product, Offer, and Review schema for ecommerce product pages. Covers required properties for Google Shopping rich results, price display, and review stars. Free, no sign-up."
     },
     "schema-generator-for-local-business.html": {
         "url": "/seo-tools/schema-generator-for-local-business",
