@@ -72,6 +72,12 @@
     "k": "guides"
   },
   {
+    "t": "Find Website Builder — Identify Which Builder Made Any Site | AI Citation Scan",
+    "d": "Identify which website builder a site was made with — Wix, Squarespace, Webflow, Carrd, Framer, and more. Free website builder identifier, instant results from any URL.",
+    "u": "/programmatic/find-website-builder",
+    "k": "programmatic"
+  },
+  {
     "t": "How to Identify Website Technology — 3 Detection Methods Explained | AI Citation Scan",
     "d": "Three methods for identifying the technology stack behind any website: HTTP header analysis, HTML source inspection, and DNS record analysis. Which signals reveal what, and how to read them.",
     "u": "/programmatic/how-to-identify-website-technology",

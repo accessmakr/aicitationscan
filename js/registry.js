@@ -71,6 +71,10 @@ window.siteRegistry = [
         "priority": 14,
         "pages": [
             {
+                "name": "Find Website Builder",
+                "url": "/programmatic/find-website-builder"
+            },
+            {
                 "name": "How To Identify Website Technology",
                 "url": "/programmatic/how-to-identify-website-technology"
             },
@@ -198,6 +202,11 @@ window.seoRegistry = {
         "url": "/guides/how-to-find-out-who-built-a-website",
         "title": "How to Find Out Who Built, Designed, or Created a Website",
         "desc": "Want to know who built, designed, created or developed a website? 5 proven methods including a free tech stack checker that reveals the builder, CMS, and framework in seconds."
+    },
+    "find-website-builder.html": {
+        "url": "/programmatic/find-website-builder",
+        "title": "Find Website Builder",
+        "desc": "Identify which website builder a site was made with — Wix, Squarespace, Webflow, Carrd, Framer, and more. Free website builder identifier, instant results from any URL."
     },
     "how-to-identify-website-technology.html": {
         "url": "/programmatic/how-to-identify-website-technology",
