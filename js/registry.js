@@ -83,6 +83,10 @@ window.siteRegistry = [
                 "url": "/programmatic/how-to-identify-website-technology"
             },
             {
+                "name": "Wappalyzer Alternative",
+                "url": "/programmatic/wappalyzer-alternative"
+            },
+            {
                 "name": "Website Tech Stack Checker For Shopify",
                 "url": "/programmatic/website-tech-stack-checker-for-shopify"
             },
@@ -225,6 +229,11 @@ window.seoRegistry = {
         "url": "/programmatic/how-to-identify-website-technology",
         "title": "How to Identify Website Technology",
         "desc": "Three methods for identifying the technology stack behind any website: HTTP header analysis, HTML source inspection, and DNS record analysis. Which signals reveal what, and how to read them."
+    },
+    "wappalyzer-alternative.html": {
+        "url": "/programmatic/wappalyzer-alternative",
+        "title": "Wappalyzer Alternative",
+        "desc": "Looking for a Wappalyzer alternative that works without a browser extension? Paste any URL for instant tech stack detection. Free, no install, no account."
     },
     "website-tech-stack-checker-for-shopify.html": {
         "url": "/programmatic/website-tech-stack-checker-for-shopify",
