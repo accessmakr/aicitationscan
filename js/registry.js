@@ -75,6 +75,10 @@ window.siteRegistry = [
                 "url": "/programmatic/builtwith-alternative"
             },
             {
+                "name": "Competitor Tech Stack Checker",
+                "url": "/programmatic/competitor-tech-stack-checker"
+            },
+            {
                 "name": "Find Website Builder",
                 "url": "/programmatic/find-website-builder"
             },
@@ -219,6 +223,11 @@ window.seoRegistry = {
         "url": "/programmatic/builtwith-alternative",
         "title": "BuiltWith Alternative",
         "desc": "Looking for a BuiltWith alternative? Compare detection coverage, pricing, and lookup limits. Free unlimited tech stack lookups, no account, no per-lookup paywall."
+    },
+    "competitor-tech-stack-checker.html": {
+        "url": "/programmatic/competitor-tech-stack-checker",
+        "title": "Competitor Tech Stack Checker",
+        "desc": "Check a competitor's tech stack and learn what it actually signals — platform investment, app spend, checkout tech, and where they're putting budget. Free, instant, no sign-up."
     },
     "find-website-builder.html": {
         "url": "/programmatic/find-website-builder",
