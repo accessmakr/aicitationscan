@@ -72,6 +72,12 @@
     "k": "guides"
   },
   {
+    "t": "How to Identify Website Technology — 3 Detection Methods Explained | AI Citation Scan",
+    "d": "Three methods for identifying the technology stack behind any website: HTTP header analysis, HTML source inspection, and DNS record analysis. Which signals reveal what, and how to read them.",
+    "u": "/programmatic/how-to-identify-website-technology",
+    "k": "programmatic"
+  },
+  {
     "t": "Website Tech Stack Checker for Shopify — Detect Theme, Apps & CDN | AI Citation Scan",
     "d": "",
     "u": "/programmatic/website-tech-stack-checker-for-shopify",

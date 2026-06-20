@@ -63,6 +63,10 @@ window.siteRegistry = [
         "priority": 14,
         "pages": [
             {
+                "name": "How To Identify Website Technology",
+                "url": "/programmatic/how-to-identify-website-technology"
+            },
+            {
                 "name": "Website Tech Stack Checker For Shopify",
                 "url": "/programmatic/website-tech-stack-checker-for-shopify"
             },
@@ -182,6 +186,11 @@ window.seoRegistry = {
         "url": "/guides/how-to-find-out-who-built-a-website",
         "title": "How to Find Out Who Built, Designed, or Created a Website",
         "desc": "Want to know who built, designed, created or developed a website? 5 proven methods including a free tech stack checker that reveals the builder, CMS, and framework in seconds."
+    },
+    "how-to-identify-website-technology.html": {
+        "url": "/programmatic/how-to-identify-website-technology",
+        "title": "How to Identify Website Technology",
+        "desc": "Three methods for identifying the technology stack behind any website: HTTP header analysis, HTML source inspection, and DNS record analysis. Which signals reveal what, and how to read them."
     },
     "website-tech-stack-checker-for-shopify.html": {
         "url": "/programmatic/website-tech-stack-checker-for-shopify",
