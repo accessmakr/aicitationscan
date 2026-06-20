@@ -177,6 +177,10 @@ window.siteRegistry = [
             {
                 "name": "How To Find Website Technology",
                 "url": "/guides/how-to-find-website-technology"
+            },
+            {
+                "name": "What Is Citation Hallucination",
+                "url": "/guides/what-is-citation-hallucination"
             }
         ]
     }
@@ -262,6 +266,11 @@ window.seoRegistry = {
         "url": "/guides/how-to-find-website-technology",
         "title": "How to Find Website Technology",
         "desc": "Quick answer: how to find out what technology any website uses in under 10 seconds. For the full technical breakdown of how detection works, see our detailed guide."
+    },
+    "what-is-citation-hallucination.html": {
+        "url": "/guides/what-is-citation-hallucination",
+        "title": "What Is Citation Hallucination?",
+        "desc": "Citation hallucination is when an AI model generates a structurally complete reference to a source that doesn't exist. Exact mechanism, severity categories, and how it's detected."
     },
     "builtwith-alternative.html": {
         "url": "/programmatic/builtwith-alternative",
