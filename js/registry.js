@@ -63,6 +63,10 @@ window.siteRegistry = [
         "priority": 14,
         "pages": [
             {
+                "name": "Website Tech Stack Checker For Shopify",
+                "url": "/programmatic/website-tech-stack-checker-for-shopify"
+            },
+            {
                 "name": "Website Tech Stack Checker For Wordpress",
                 "url": "/programmatic/website-tech-stack-checker-for-wordpress"
             },
@@ -178,6 +182,11 @@ window.seoRegistry = {
         "url": "/guides/how-to-find-out-who-built-a-website",
         "title": "How to Find Out Who Built, Designed, or Created a Website",
         "desc": "Want to know who built, designed, created or developed a website? 5 proven methods including a free tech stack checker that reveals the builder, CMS, and framework in seconds."
+    },
+    "website-tech-stack-checker-for-shopify.html": {
+        "url": "/programmatic/website-tech-stack-checker-for-shopify",
+        "title": "Website Tech Stack Checker for Shopify",
+        "desc": ""
     },
     "website-tech-stack-checker-for-wordpress.html": {
         "url": "/programmatic/website-tech-stack-checker-for-wordpress",
