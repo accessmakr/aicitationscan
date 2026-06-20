@@ -175,6 +175,10 @@ window.siteRegistry = [
                 "url": "/guides/chatgpt-citation-hallucination-explained"
             },
             {
+                "name": "How To Cite Chatgpt In Mla Format",
+                "url": "/guides/how-to-cite-chatgpt-in-mla-format"
+            },
+            {
                 "name": "How To Find Out Who Built A Website",
                 "url": "/guides/how-to-find-out-who-built-a-website"
             },
@@ -265,6 +269,11 @@ window.seoRegistry = {
         "url": "/guides/chatgpt-citation-hallucination-explained",
         "title": "ChatGPT Citation Hallucination Explained",
         "desc": "Why ChatGPT specifically generates fabricated citations, how its training process produces this pattern, and what makes it structurally invisible to proofreading."
+    },
+    "how-to-cite-chatgpt-in-mla-format.html": {
+        "url": "/guides/how-to-cite-chatgpt-in-mla-format",
+        "title": "How to Cite ChatGPT in MLA Format",
+        "desc": "How to properly cite ChatGPT and other AI tools in MLA format, based on MLA's official guidance on citing generative AI. Template, worked examples, and when citation is required."
     },
     "how-to-find-out-who-built-a-website.html": {
         "url": "/guides/how-to-find-out-who-built-a-website",
