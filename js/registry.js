@@ -71,6 +71,10 @@ window.siteRegistry = [
         "priority": 14,
         "pages": [
             {
+                "name": "Builtwith Alternative",
+                "url": "/programmatic/builtwith-alternative"
+            },
+            {
                 "name": "Find Website Builder",
                 "url": "/programmatic/find-website-builder"
             },
@@ -206,6 +210,11 @@ window.seoRegistry = {
         "url": "/guides/how-to-find-out-who-built-a-website",
         "title": "How to Find Out Who Built, Designed, or Created a Website",
         "desc": "Want to know who built, designed, created or developed a website? 5 proven methods including a free tech stack checker that reveals the builder, CMS, and framework in seconds."
+    },
+    "builtwith-alternative.html": {
+        "url": "/programmatic/builtwith-alternative",
+        "title": "BuiltWith Alternative",
+        "desc": "Looking for a BuiltWith alternative? Compare detection coverage, pricing, and lookup limits. Free unlimited tech stack lookups, no account, no per-lookup paywall."
     },
     "find-website-builder.html": {
         "url": "/programmatic/find-website-builder",
