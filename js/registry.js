@@ -33,6 +33,10 @@ window.siteRegistry = [
             {
                 "name": "Chatgpt Citation Checker",
                 "url": "/ai-tools/chatgpt-citation-checker"
+            },
+            {
+                "name": "Reference And Bibliography Checker",
+                "url": "/ai-tools/reference-and-bibliography-checker"
             }
         ]
     },
@@ -234,6 +238,11 @@ window.seoRegistry = {
         "url": "/ai-tools/chatgpt-citation-checker",
         "title": "ChatGPT Citation Checker",
         "desc": "ChatGPT produces plausible-looking references that often lack working DOIs or URLs. Run a structural check on any ChatGPT-generated reference list in seconds. Free, no sign-up."
+    },
+    "reference-and-bibliography-checker.html": {
+        "url": "/ai-tools/reference-and-bibliography-checker",
+        "title": "Reference and Bibliography Checker",
+        "desc": "Check any reference list or bibliography for structural completeness — author, year, title, source, identifier. Works on manually researched and AI-assisted citations alike. Free, no sign-up."
     },
     "how-to-find-out-who-built-a-website.html": {
         "url": "/guides/how-to-find-out-who-built-a-website",
