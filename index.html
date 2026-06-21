@@ -4236,6 +4236,19 @@ function renderResults(data) {
   const scoreEl = document.getElementById('overall-score');
   const tierEl = document.getElementById('tier-badge');
   const score = data.overallScore || 0;
+
+  // CRITICAL FIX: use the backend's already-correct tier/tierClass as
+  // the single source of truth (scorer.js classifyTier() is authoritative
+  // and was recalibrated to 80/65/45/25 thresholds). The frontend was
+  // silently still computing its own tier from a STALE local copy of the
+  // old 91/76/51/26 thresholds, which is why WELL-KNOWN brands like
+  // PayPal (88) and BBC (90) were showing as "KNOWN" instead of
+  // "WELL KNOWN" — the backend fix never reached the frontend.
+  // Local fallback below matches scorer.js exactly, only used if data.tier
+  // is ever absent from the API response.
+  const tier      = data.tier      || (score >= 80 ? 'WELL KNOWN' : score >= 65 ? 'KNOWN' : score >= 45 ? 'PARTIALLY KNOWN' : score >= 25 ? 'MINIMALLY KNOWN' : 'NOT KNOWN');
+  const tierClass = data.tierClass || (score >= 80 ? 'tier-well-known' : score >= 65 ? 'tier-known' : score >= 25 ? 'tier-partial' : 'tier-unknown');
+
   if (scoreEl) {
     scoreEl.style.color = score >= 75 ? 'var(--green)' : score >= 50 ? 'var(--amber)' : 'var(--red)';
     scoreEl.textContent = '0';
@@ -4250,11 +4263,6 @@ function renderResults(data) {
     }
   }
   if (tierEl) {
-    const tier = score >= 91 ? 'WELL KNOWN' :
-                 score >= 76 ? 'KNOWN' :
-                 score >= 26 ? 'PARTIALLY KNOWN' : 'NOT KNOWN';
-    const tierClass = score >= 76 ? 'tier-well-known' :
-                      score >= 26 ? 'tier-partial' : 'tier-unknown';
     tierEl.textContent = tier;
     tierEl.className = tierClass;
 
@@ -4303,8 +4311,9 @@ function renderResults(data) {
   // Gaps
   renderNarrativeGaps(data.narrativeGaps || []);
 
-  // Recommendations
-  renderRecommendations(data.recommendations || []);
+  // Recommendations — tier passed through so WELL KNOWN/KNOWN
+  // brands get a clean confirmation instead of generic advice
+  renderRecommendations(data.recommendations || [], tier);
 
   // Animate bars after a tick
   setTimeout(() => {
@@ -4596,9 +4605,25 @@ function renderNarrativeGaps(gaps) {
     </div>`).join('');
 }
 
-function renderRecommendations(recs) {
+function renderRecommendations(recs, tier) {
   const container = document.getElementById('recs-container');
   if (!container) return;
+
+  // CRITICAL FIX: there is nothing meaningful to advise a brand that
+  // already has strong AI awareness — this was agreed early on but
+  // never actually implemented before the Track A batches began.
+  const titleEl = document.getElementById('recs-title');
+  if (tier === 'WELL KNOWN' || tier === 'KNOWN') {
+    if (titleEl) titleEl.textContent = 'AI Awareness Status';
+    container.innerHTML = `
+      <div style="display:flex;align-items:center;gap:10px;padding:14px 16px;background:var(--green-dim);border:1px solid rgba(16,185,129,0.25);border-radius:10px;">
+        <span style="font-size:18px;" aria-hidden="true">✓</span>
+        <span style="font-family:'DM Sans',sans-serif;font-size:13px;color:var(--text-primary);line-height:1.5;">This brand already has strong AI awareness. No urgent action needed — re-scan quarterly to catch any future signal decay.</span>
+      </div>`;
+    return;
+  }
+  if (titleEl) titleEl.textContent = 'Top Actions to Improve AI Awareness';
+
   if (!recs.length) {
     container.innerHTML = '<p style="font-family:\'DM Sans\',sans-serif;font-size:13px;color:var(--text-muted);">No recommendations generated.</p>';
     return;
