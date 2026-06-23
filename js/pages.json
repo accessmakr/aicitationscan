@@ -84,6 +84,12 @@
     "k": "ai-tools"
   },
   {
+    "t": "AI Visibility Score Explained — What the Four Dimensions Actually Measure | AI Citation Scan",
+    "d": "What is an AI visibility score and how is it measured? A direct breakdown of Recognition, Depth, Accuracy, and Confidence — plus the Consistency Score across engines.",
+    "u": "/guides/ai-visibility-score-explained",
+    "k": "guides"
+  },
+  {
     "t": "ChatGPT Citation Hallucination Explained — The Technical Mechanism | AI Citation Scan",
     "d": "Why ChatGPT specifically generates fabricated citations, how its training process produces this pattern, and what makes it structurally invisible to proofreading.",
     "u": "/guides/chatgpt-citation-hallucination-explained",

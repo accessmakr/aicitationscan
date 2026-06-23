@@ -171,6 +171,10 @@ window.siteRegistry = [
         "priority": 0,
         "pages": [
             {
+                "name": "Ai Visibility Score Explained",
+                "url": "/guides/ai-visibility-score-explained"
+            },
+            {
                 "name": "Chatgpt Citation Hallucination Explained",
                 "url": "/guides/chatgpt-citation-hallucination-explained"
             },
@@ -264,6 +268,11 @@ window.seoRegistry = {
         "url": "/ai-tools/reference-and-bibliography-checker",
         "title": "Reference and Bibliography Checker",
         "desc": "Check any reference list or bibliography for structural completeness — author, year, title, source, identifier. Works on manually researched and AI-assisted citations alike. Free, no sign-up."
+    },
+    "ai-visibility-score-explained.html": {
+        "url": "/guides/ai-visibility-score-explained",
+        "title": "AI Visibility Score Explained",
+        "desc": "What is an AI visibility score and how is it measured? A direct breakdown of Recognition, Depth, Accuracy, and Confidence — plus the Consistency Score across engines."
     },
     "chatgpt-citation-hallucination-explained.html": {
         "url": "/guides/chatgpt-citation-hallucination-explained",
