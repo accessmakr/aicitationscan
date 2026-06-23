@@ -118,7 +118,7 @@
       "isPartOf": { "@id": "https://www.aicitationscan.com/#website" },
       "breadcrumb": { "@id": "https://www.aicitationscan.com/#breadcrumb" },
       "datePublished": "2024-01-01",
-      "dateModified": "2025-05-19"
+      "dateModified": "2026-06-21"
     },
     {
       "@type": "SoftwareApplication",
@@ -3638,21 +3638,19 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // ─── 22C. SCHEMA DATE MODIFIED ───────────────────────────
   const now = new Date();
-  if (now.getDay() === 1) {
-    try {
-      const schemaEl = document.getElementById('main-schema');
-      if (schemaEl) {
-        const schema = JSON.parse(schemaEl.textContent);
-        const graph = schema['@graph'] || [];
-        graph.forEach(node => {
-          if (node['@type'] === 'WebPage') {
-            node.dateModified = now.toISOString().slice(0, 10);
-          }
-        });
-        schemaEl.textContent = JSON.stringify(schema, null, 2);
-      }
-    } catch(e) { /* graceful degradation */ }
-  }
+  try {
+    const schemaEl = document.getElementById('main-schema');
+    if (schemaEl) {
+      const schema = JSON.parse(schemaEl.textContent);
+      const graph = schema['@graph'] || [];
+      graph.forEach(node => {
+        if (node['@type'] === 'WebPage') {
+          node.dateModified = now.toISOString().slice(0, 10);
+        }
+      });
+      schemaEl.textContent = JSON.stringify(schema, null, 2);
+    }
+  } catch(e) { /* graceful degradation */ }
 
   // ─── 22D. FRESHNESS BADGE ────────────────────────────────
   const today = new Date();
@@ -3764,7 +3762,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (open) {
           loadSavedKeysIntoInputs();
           setTimeout(() => {
-            const panelTop = panel.getBoundingClientRect().top + window.scrollY - 72;
+            const panelTop = panel.getBoundingClientRect().top + window.scrollY - 80;
             window.scrollTo({ top: Math.max(0, panelTop), behavior: 'smooth' });
           }, 50);
         }
@@ -3915,6 +3913,7 @@ function toggleEngine(badge) {
   const isActive = badge.classList.contains('active');
   badge.classList.toggle('active', !isActive);
   badge.setAttribute('aria-pressed', !isActive);
+  updateTickerEngineCount();
 }
 
 function toggleExtendedEngine(badge) {
@@ -3928,26 +3927,11 @@ function toggleExtendedEngine(badge) {
     const providerName = engine === 'chatgpt' ? 'OpenAI' : 'Anthropic';
     showToast('Add your ' + providerName + ' key in Settings to enable ' + engineName + ' scanning', 'info');
 
-    // Animate the clicked badge
     badge.classList.add('badge-ping');
     setTimeout(() => badge.classList.remove('badge-ping'), 700);
 
-    // Open and scroll to settings panel
-    openSettingsPanel();
-    const settingsPanel = document.getElementById('settings-panel');
-    if (settingsPanel) {
-      setTimeout(() => {
-        settingsPanel.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        // Highlight the matching key input
-        const inputId = engine === 'chatgpt' ? 'key-openai' : 'key-anthropic';
-        const keyInput = document.getElementById(inputId);
-        if (keyInput) {
-          keyInput.classList.add('key-highlight');
-          setTimeout(() => keyInput.classList.remove('key-highlight'), 1400);
-          setTimeout(() => keyInput.focus(), 500);
-        }
-      }, 200);
-    }
+    const inputId = engine === 'chatgpt' ? 'key-openai' : 'key-anthropic';
+    openSettingsPanel(inputId);
   } else {
     const isActive = badge.classList.contains('active');
     badge.classList.toggle('active', !isActive);
@@ -3956,28 +3940,40 @@ function toggleExtendedEngine(badge) {
 }
 
 // ─── 22K. SETTINGS PANEL FUNCTIONS ──────────────────────────
-function openSettingsPanel() {
+function openSettingsPanel(targetInputId) {
   const panel = document.getElementById('settings-panel');
   const btn = document.getElementById('settings-toggle-btn');
   if (panel) {
     panel.classList.add('open');
     if (btn) btn.setAttribute('aria-expanded', 'true');
     loadSavedKeysIntoInputs();
+    setTimeout(() => {
+      const target = targetInputId ? document.getElementById(targetInputId) : panel;
+      if (target) {
+        const top = target.getBoundingClientRect().top + window.scrollY - 80;
+        window.scrollTo({ top: Math.max(0, top), behavior: 'smooth' });
+        if (targetInputId) {
+          setTimeout(() => {
+            target.classList.add('key-highlight');
+            target.focus();
+            setTimeout(() => target.classList.remove('key-highlight'), 1400);
+          }, 400);
+        }
+      }
+    }, 100);
   }
 }
 
 function loadSavedKeysIntoInputs() {
   const keys = Storage.getKeys();
-  const openaiInput = document.getElementById('key-openai');
-  const anthropicInput = document.getElementById('key-anthropic');
-  if (openaiInput && keys.openai) {
-    openaiInput.value = '••••••••••••••••';
-    openaiInput.classList.add('saved');
-  }
-  if (anthropicInput && keys.anthropic) {
-    anthropicInput.value = '••••••••••••••••';
-    anthropicInput.classList.add('saved');
-  }
+  const inputMap = { openai: 'key-openai', anthropic: 'key-anthropic', gemini: 'key-gemini', groq: 'key-groq' };
+  Object.keys(inputMap).forEach(engine => {
+    const input = document.getElementById(inputMap[engine]);
+    if (input && keys[engine]) {
+      input.value = '••••••••••••••••';
+      input.classList.add('saved');
+    }
+  });
   updateSettingsDot();
   updateExtendedBadgesFromKeys(keys);
 }
@@ -3985,7 +3981,7 @@ function loadSavedKeysIntoInputs() {
 function updateSettingsDot() {
   const keys = Storage.getKeys();
   const dot = document.getElementById('settings-dot');
-  if (dot) dot.classList.toggle('active', !!(keys.openai || keys.anthropic));
+  if (dot) dot.classList.toggle('active', !!(keys.openai || keys.anthropic || keys.gemini || keys.groq));
 }
 
 function updateExtendedBadgesFromKeys(keys) {
@@ -4011,7 +4007,11 @@ function saveKey(engine, inputId) {
   Storage.saveKey(engine, val);
   input.value = '••••••••••••••••';
   input.classList.add('saved');
-  showToast('Key saved for ' + (engine === 'openai' ? 'ChatGPT' : 'Claude'), 'success');
+  const nameMap = {
+    openai: 'ChatGPT', anthropic: 'Claude',
+    gemini: 'Google AI (your Gemini key)', groq: 'Groq (Meta AI, Mistral, Gemma)'
+  };
+  showToast('Key saved for ' + (nameMap[engine] || engine), 'success');
   updateSettingsDot();
   updateExtendedBadgesFromKeys(Storage.getKeys());
 }
@@ -4019,10 +4019,10 @@ function saveKey(engine, inputId) {
 function clearAllKeys() {
   if (!confirm('Clear all saved API keys? This cannot be undone.')) return;
   Storage.clearKeys();
-  const openaiInput = document.getElementById('key-openai');
-  const anthropicInput = document.getElementById('key-anthropic');
-  if (openaiInput) { openaiInput.value = ''; openaiInput.classList.remove('saved'); }
-  if (anthropicInput) { anthropicInput.value = ''; anthropicInput.classList.remove('saved'); }
+  ['key-openai', 'key-anthropic', 'key-gemini', 'key-groq'].forEach(id => {
+    const input = document.getElementById(id);
+    if (input) { input.value = ''; input.classList.remove('saved'); }
+  });
   document.querySelectorAll('.engine-badge.extended').forEach(b => {
     b.classList.remove('active');
     b.setAttribute('aria-pressed', 'false');
@@ -4091,6 +4091,13 @@ async function startScan() {
   btn.setAttribute('aria-label', 'Cancel scan');
 
   showScanningState();
+  updateTickerScanState(true);
+
+  document.querySelectorAll('.btn-report').forEach(btn => {
+    btn.disabled = true;
+    btn.style.opacity = '0.4';
+    btn.style.cursor = 'not-allowed';
+  });
 
   const activeEngines = [...document.querySelectorAll('.engine-badge.active')].map(b => b.dataset.engine);
   const keys = Storage.getKeys();
@@ -4165,7 +4172,7 @@ function showApiError() {
   panel.style.display = 'block';
   const errContainer = document.getElementById('api-error-container');
   if (errContainer) errContainer.style.display = 'block';
-  const errTop = panel.getBoundingClientRect().top + window.scrollY - 72;
+  const errTop = panel.getBoundingClientRect().top + window.scrollY - 80;
   window.scrollTo({ top: Math.max(0, errTop), behavior: 'smooth' });
 }
 
@@ -4323,7 +4330,13 @@ function renderResults(data) {
     });
   }, 150);
 
-  const panelTop = panel.getBoundingClientRect().top + window.scrollY - 72;
+  document.querySelectorAll('.btn-report').forEach(btn => {
+    btn.disabled = false;
+    btn.style.opacity = '';
+    btn.style.cursor = '';
+  });
+
+  const panelTop = panel.getBoundingClientRect().top + window.scrollY - 80;
   window.scrollTo({ top: Math.max(0, panelTop), behavior: 'smooth' });
 }
 
@@ -4392,7 +4405,7 @@ function showSkeletonCards(engineKeys, domain) {
   const announcer = document.getElementById('results-announcer');
   if (announcer) announcer.textContent = 'Scanning ' + (domain || 'domain') + '. Please wait.';
 
-  const panelTop = panel.getBoundingClientRect().top + window.scrollY - 72;
+  const panelTop = panel.getBoundingClientRect().top + window.scrollY - 80;
   window.scrollTo({ top: Math.max(0, panelTop), behavior: 'smooth' });
 }
 
@@ -4683,7 +4696,8 @@ function buildTelemetryTicker() {
   const track = document.getElementById('ticker-track');
   if (!track) return;
   const items = [
-    { dot: 'green', text: '3 AI Engines Active' },
+    { dot: 'green', text: '3 AI Engines Active', cls: 'ticker-engine-count' },
+    { dot: 'cyan',  text: 'Ready to Scan',        cls: 'ticker-scan-state' },
     { dot: '', text: '━━━' },
     { dot: 'green', text: 'Meta AI — Ready' },
     { dot: 'green', text: 'Google AI — Ready' },
@@ -4711,10 +4725,24 @@ function buildTelemetryTicker() {
   // Duplicate items for seamless loop
   const allItems = [...items, ...items];
   track.innerHTML = allItems.map(item =>
-    `<span class="ticker-item">` +
+    `<span class="ticker-item${item.cls ? ' ' + item.cls : ''}">` +
     (item.dot && item.dot !== '' ? `<span class="ticker-dot ticker-dot-${item.dot}" aria-hidden="true"></span>` : '') +
     `${item.text}</span>`
   ).join('');
+}
+
+function updateTickerEngineCount() {
+  const count = document.querySelectorAll('.engine-badge.active').length;
+  document.querySelectorAll('.ticker-engine-count').forEach(el => {
+    el.textContent = count + ' AI Engine' + (count === 1 ? '' : 's') + ' Active';
+  });
+}
+
+function updateTickerScanState(scanning) {
+  document.querySelectorAll('.ticker-scan-state').forEach(el => {
+    el.textContent = scanning ? 'Scan Running...' : 'Ready to Scan';
+    el.style.color = scanning ? 'rgba(245,158,11,0.85)' : 'rgba(255,255,255,0.45)';
+  });
 }
 
 // ─── 22P. SHARE PILLS ────────────────────────────────────────
@@ -5001,6 +5029,37 @@ function handleContactForm(e) {
 }
 
 // ─── SEARCH MODAL ─────────────────────────────────────────────
+function scrollToContactForm() {
+  const contactSection = document.getElementById('contact-heading');
+  if (!contactSection) return;
+
+  const sectionTop = contactSection.getBoundingClientRect().top + window.scrollY - 80;
+  window.scrollTo({ top: Math.max(0, sectionTop), behavior: 'smooth' });
+
+  setTimeout(() => {
+    const formCard = document.querySelector('.contact-form-card');
+    if (formCard) {
+      formCard.classList.remove('waitlist-highlight');
+      void formCard.offsetWidth;
+      formCard.classList.add('waitlist-highlight');
+      setTimeout(() => formCard.classList.remove('waitlist-highlight'), 1500);
+    }
+
+    const messageField = document.getElementById('contact-message');
+    if (messageField && messageField.value.trim() === '') {
+      messageField.value =
+        'I am interested in the full AI Citation Scan platform — '
+        + 'citation probability, entity knowledge graph, and retrieval '
+        + 'simulation. Please notify me when it launches.';
+    }
+
+    const nameField = document.getElementById('contact-name');
+    if (nameField && nameField.value.trim() === '') {
+      nameField.focus();
+    }
+  }, 700);
+}
+
 function openSearchModal() {
   const modal = document.getElementById('search-modal');
   if (!modal) return;
