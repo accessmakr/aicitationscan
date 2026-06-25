@@ -191,6 +191,10 @@ window.siteRegistry = [
                 "url": "/guides/how-to-find-website-technology"
             },
             {
+                "name": "What Is Ai Visibility",
+                "url": "/guides/what-is-ai-visibility"
+            },
+            {
                 "name": "What Is Citation Hallucination",
                 "url": "/guides/what-is-citation-hallucination"
             }
@@ -293,6 +297,11 @@ window.seoRegistry = {
         "url": "/guides/how-to-find-website-technology",
         "title": "How to Find Website Technology",
         "desc": "Quick answer: how to find out what technology any website uses in under 10 seconds. For the full technical breakdown of how detection works, see our detailed guide."
+    },
+    "what-is-ai-visibility.html": {
+        "url": "/guides/what-is-ai-visibility",
+        "title": "What Is AI Visibility?",
+        "desc": "Want to know who built, designed, created or developed a website? 5 proven methods including a free tech stack checker that reveals the builder, CMS, and framework in seconds."
     },
     "what-is-citation-hallucination.html": {
         "url": "/guides/what-is-citation-hallucination",
