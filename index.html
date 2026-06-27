@@ -4239,8 +4239,11 @@ const ENGINE_DEFS = [
   { frontendKey: 'claude',   name: 'Claude',    model: 'Claude 3.5 Sonnet' }
 ];
 
+let _lastScanData = null;
+
 function renderResults(data) {
   const panel = document.getElementById('scan-results');
+  _lastScanData = data;
 
   hideApiError();
   panel.style.display = 'block';
@@ -4872,36 +4875,118 @@ function flashCopied(btn) {
 }
 
 // ─── REPORT ACTION FUNCTIONS ─────────────────────────────────
-function getReportText() {
-  const domain = (document.getElementById('results-domain-display') || {}).textContent || 'Unknown domain';
-  const score = (document.getElementById('overall-score') || {}).textContent || '—';
-  const tier = (document.getElementById('tier-badge') || {}).textContent || '—';
-  const ts = (document.getElementById('results-ts') || {}).textContent || '';
+function pdfScoreColor(score) {
+  if (score >= 75) return [16, 185, 129];
+  if (score >= 50) return [245, 158, 11];
+  return [239, 68, 68];
+}
+
+function tierStatusLine(tier) {
+  if (tier === 'WELL KNOWN' || tier === 'KNOWN') {
+    return 'This brand already has strong AI awareness. No urgent action needed — re-scan quarterly to catch any future signal decay.';
+  }
+  const map = {
+    'PARTIALLY KNOWN': 'Present but limited AI awareness. Targeted content and signal-building work is recommended.',
+    'MINIMALLY KNOWN': 'Fragile AI awareness. Foundational brand signal work is needed.',
+    'NOT KNOWN': 'No meaningful AI awareness detected in the engines tested.'
+  };
+  return map[tier] || '';
+}
+
+function stripMarkdownForReport(text) {
+  if (!text) return '';
+  return text.replace(/\*\*([^*]+)\*\*/g, '$1').replace(/\*([^*]+)\*/g, '$1');
+}
+
+function getDomainFromDOM() {
+  return (document.getElementById('results-domain-display') || {}).textContent || 'domain';
+}
+
+function getRichReportText() {
+  const data = _lastScanData;
+  const domain = getDomainFromDOM();
+  if (!data) {
+    return 'AI AWARENESS SCAN REPORT\n========================\nNo scan data available. Run a scan first.\n';
+  }
+  const score = data.overallScore || 0;
+  const tier = data.tier || 'NOT KNOWN';
+
   let text = 'AI AWARENESS SCAN REPORT\n';
   text += '========================\n';
   text += 'Domain: ' + domain + '\n';
-  text += ts + '\n\n';
-  text += 'OVERALL AWARENESS SCORE: ' + score + '/100\n';
-  text += 'TIER: ' + tier + '\n\n';
-  const engineCards = document.querySelectorAll('.engine-card');
-  if (engineCards.length) {
-    text += 'ENGINE BREAKDOWN\n----------------\n';
-    engineCards.forEach(card => {
-      const name = (card.querySelector('.engine-card-name') || {}).textContent || '';
-      const model = (card.querySelector('.engine-card-sub') || {}).textContent || '';
-      const s = (card.querySelector('.engine-card-score') || {}).textContent || '';
-      text += name + ' (' + model + '): ' + s + '/100\n';
-    });
+  text += 'Generated: ' + new Date().toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' }) + '\n\n';
+  text += 'OVERALL SCORE: ' + score + '/100 — ' + tier + '\n';
+  text += tierStatusLine(tier) + '\n\n';
+
+  text += 'ENGINE BREAKDOWN\n----------------\n';
+  ENGINE_DEFS.forEach(eng => {
+    const d = data[eng.frontendKey];
+    if (!d) return;
+    if (d.failed) {
+      text += eng.name + ' (' + eng.model + '): Unavailable\n';
+    } else {
+      text += eng.name + ' (' + eng.model + '): ' + (d.score || 0) + '/100 — Recognition ' +
+        (d.recognition || 0) + '% · Depth ' + (d.depth || 0) + '% · Accuracy ' +
+        (d.accuracy || 0) + '% · Confidence ' + (d.confidence || 0) + '%\n';
+    }
+  });
+  text += '\n';
+
+  text += 'NARRATIVE EXTRACTS\n------------------\n';
+  ENGINE_DEFS.forEach(eng => {
+    const d = data[eng.frontendKey];
+    if (!d || !d.narrative) return;
+    text += eng.name + ' — ' + (d.accuracy || 0) + '% accurate';
+    if (d.sentiment) text += ' — Sentiment: ' + d.sentiment;
+    text += '\n"' + stripMarkdownForReport(d.narrative) + '"\n';
+    text += (d.accurateClaims || 0) + ' accurate · ' + (d.conflictingClaims || 0) +
+      ' conflicting · ' + (d.unverifiableClaims || 0) + ' unverifiable\n';
+    if ((d.topicsKnown || []).length) text += 'Knows: ' + d.topicsKnown.join(', ') + '\n';
+    if ((d.topicsUnknown || []).length) text += 'Gaps: ' + d.topicsUnknown.join(', ') + '\n';
     text += '\n';
+  });
+
+  const c = data.consistency || {};
+  text += 'CONSISTENCY ANALYSIS\n---------------------\n';
+  text += 'Score: ' + (c.score || 0) + ' — ' + (c.label || '') + '\n';
+  text += 'Agreed: ' + ((c.agreed || []).join(', ') || '—') + '\n';
+  text += 'Conflicted: ' + ((c.conflicted || []).join(', ') || '—') + '\n';
+  const exclusiveStrs = (c.exclusive || []).map(it => typeof it === 'string' ? it : ((it.engine ? it.engine + ': ' : '') + (it.topic || '')));
+  text += 'Engine-Exclusive: ' + (exclusiveStrs.join(', ') || '—') + '\n\n';
+
+  const gaps = data.narrativeGaps || [];
+  text += 'NARRATIVE GAPS\n--------------\n';
+  if (!gaps.length) {
+    text += 'No significant gaps detected.\n\n';
+  } else {
+    gaps.forEach(gap => {
+      text += '[' + (gap.severity || 'minor').toUpperCase() + '] ' + (gap.gapType || '') + '\n';
+      text += 'Brand communicates: ' + (gap.brandCommunicates || '—') + '\n';
+      text += 'AI produces instead: ' + (gap.aiProduces || '—') + '\n\n';
+    });
   }
+
+  if (tier !== 'WELL KNOWN' && tier !== 'KNOWN') {
+    const recs = data.recommendations || [];
+    if (recs.length) {
+      text += 'TOP ACTIONS\n-----------\n';
+      recs.forEach(rec => {
+        text += '[' + (rec.severity || 'medium').toUpperCase() + ', Effort: ' + (rec.effort || 'medium') + ']\n';
+        text += 'Problem: ' + (rec.problem || '—') + '\n';
+        text += 'Action: ' + (rec.action || '—') + '\n';
+        text += 'Result: ' + (rec.result || '—') + '\n\n';
+      });
+    }
+  }
+
   text += 'Generated by AI Citation Scan — https://www.aicitationscan.com/\n';
   return text;
 }
 
 function copyReport() {
-  const text = getReportText();
+  const text = getRichReportText();
   navigator.clipboard.writeText(text).then(() => {
-    showToast('Report copied to clipboard', 'success');
+    showToast('Full report copied to clipboard', 'success');
     const btn = document.getElementById('btn-copy-report');
     if (btn) {
       btn.classList.add('copied');
@@ -4912,34 +4997,386 @@ function copyReport() {
 }
 
 function emailReport() {
-  const domain = (document.getElementById('results-domain-display') || {}).textContent || 'domain';
-  const score = (document.getElementById('overall-score') || {}).textContent || '—';
-  const tier = (document.getElementById('tier-badge') || {}).textContent || '—';
+  const data = _lastScanData;
+  const domain = getDomainFromDOM();
   const subject = encodeURIComponent('AI Awareness Report — ' + domain);
-  const body = encodeURIComponent(
-    'AI Awareness Scan Results for ' + domain + '\n\n' +
-    'Overall Score: ' + score + '/100\nTier: ' + tier + '\n\n' +
-    'Full report: ' + window.location.href + '\n\n' +
-    'Generated by AI Citation Scan'
-  );
-  window.location.href = 'mailto:?subject=' + subject + '&body=' + body;
+
+  if (!data) {
+    const body = encodeURIComponent('Run a scan first to generate a report.\n\n' + window.location.href);
+    window.location.href = 'mailto:?subject=' + subject + '&body=' + body;
+    return;
+  }
+
+  const score = data.overallScore || 0;
+  const tier = data.tier || 'NOT KNOWN';
+
+  let lines = 'AI Awareness Scan Results for ' + domain + '\n\n';
+  lines += 'Overall Score: ' + score + '/100 — ' + tier + '\n';
+  lines += tierStatusLine(tier) + '\n\n';
+
+  const engineSummary = ENGINE_DEFS
+    .map(eng => {
+      const d = data[eng.frontendKey];
+      if (!d) return null;
+      return eng.name + ': ' + (d.failed ? 'Unavailable' : (d.score || 0) + '/100');
+    })
+    .filter(Boolean)
+    .join('  |  ');
+  if (engineSummary) lines += 'ENGINE SCORES\n' + engineSummary + '\n\n';
+
+  const c = data.consistency || {};
+  if (c.score) {
+    lines += 'CONSISTENCY: ' + c.score + ' — ' + (c.label || '') + '\n';
+    if ((c.agreed || []).length) {
+      lines += 'Agreed topics: ' + c.agreed.slice(0, 5).join(', ') + '\n';
+    }
+    lines += '\n';
+  }
+
+  lines += 'Full interactive report: ' + window.location.href + '\n\n';
+  lines += 'Generated by AI Citation Scan';
+
+  if (encodeURIComponent(lines).length > 1800) {
+    lines = 'AI Awareness Scan Results for ' + domain + '\n\n' +
+      'Overall Score: ' + score + '/100 — ' + tier + '\n\n' +
+      'Full interactive report: ' + window.location.href + '\n\n' +
+      'Generated by AI Citation Scan';
+  }
+
+  window.location.href = 'mailto:?subject=' + subject + '&body=' + encodeURIComponent(lines);
 }
 
 function printReport() {
   window.print();
 }
 
+function generatePDFReport(data, domain) {
+  const { jsPDF } = window.jspdf;
+  const doc = new jsPDF({ unit: 'mm', format: 'a4' });
+  const pageW = 210, pageH = 297, marginL = 18, marginR = 18;
+  const contentW = pageW - marginL - marginR;
+  const navy = [26, 37, 64], gray = [110, 118, 138], lightGray = [240, 242, 247];
+
+  function sectionHeader(title, y) {
+    doc.setFont('helvetica', 'bold');
+    doc.setFontSize(14);
+    doc.setTextColor(navy[0], navy[1], navy[2]);
+    doc.text(title, marginL, y);
+    doc.setDrawColor(navy[0], navy[1], navy[2]);
+    doc.setLineWidth(0.6);
+    doc.line(marginL, y + 2, pageW - marginR, y + 2);
+    return y + 10;
+  }
+
+  function checkBreak(y, needed) {
+    if (y + needed > pageH - 25) { doc.addPage(); return 20; }
+    return y;
+  }
+
+  const score = data.overallScore || 0;
+  const tier = data.tier || 'NOT KNOWN';
+  const color = pdfScoreColor(score);
+
+  doc.setFont('helvetica', 'bold');
+  doc.setFontSize(10);
+  doc.setTextColor(gray[0], gray[1], gray[2]);
+  doc.text('AI CITATION SCAN', marginL, 22);
+
+  doc.setFontSize(22);
+  doc.setTextColor(navy[0], navy[1], navy[2]);
+  doc.text('AI Awareness Intelligence Report', marginL, 38);
+
+  doc.setFont('helvetica', 'normal');
+  doc.setFontSize(11);
+  doc.setTextColor(gray[0], gray[1], gray[2]);
+  const today = new Date().toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
+  doc.text('Generated ' + today, marginL, 47);
+
+  doc.setFont('helvetica', 'bold');
+  doc.setFontSize(16);
+  doc.setTextColor(navy[0], navy[1], navy[2]);
+  doc.text(domain, marginL, 64);
+
+  doc.setFontSize(56);
+  doc.setTextColor(color[0], color[1], color[2]);
+  doc.text(String(score), marginL, 102);
+  doc.setFontSize(14);
+  doc.setTextColor(gray[0], gray[1], gray[2]);
+  doc.text('/ 100', marginL + 40, 102);
+
+  doc.setFontSize(13);
+  doc.setTextColor(color[0], color[1], color[2]);
+  doc.text(tier, marginL, 113);
+
+  doc.setFont('helvetica', 'normal');
+  doc.setFontSize(10.5);
+  doc.setTextColor(60, 66, 80);
+  const descLines = doc.splitTextToSize(data.tierDescription || tierStatusLine(tier), contentW);
+  doc.text(descLines, marginL, 125);
+
+  doc.setDrawColor(lightGray[0], lightGray[1], lightGray[2]);
+  doc.setLineWidth(0.4);
+  doc.line(marginL, 150, pageW - marginR, 150);
+
+  doc.setFontSize(9);
+  doc.setTextColor(gray[0], gray[1], gray[2]);
+  doc.text(
+    'This report measures what AI language models already know about this brand from training data, not live web search results. Scores reflect recognition, depth, accuracy, and confidence across each engine tested.',
+    marginL, 160, { maxWidth: contentW }
+  );
+
+  doc.addPage();
+  let y = sectionHeader('Engine Awareness Breakdown', 20);
+
+  const engineRows = [];
+  ENGINE_DEFS.forEach(eng => {
+    const d = data[eng.frontendKey];
+    if (!d) return;
+    if (d.failed) {
+      engineRows.push([eng.name, eng.model, 'Unavailable', '—', '—', '—', '—']);
+    } else {
+      engineRows.push([
+        eng.name, eng.model, String(d.score || 0),
+        (d.recognition || 0) + '%', (d.depth || 0) + '%',
+        (d.accuracy || 0) + '%', (d.confidence || 0) + '%'
+      ]);
+    }
+  });
+
+  doc.autoTable({
+    startY: y,
+    head: [['Engine', 'Model', 'Score', 'Recognition', 'Depth', 'Accuracy', 'Confidence']],
+    body: engineRows,
+    theme: 'grid',
+    margin: { left: marginL, right: marginR },
+    headStyles: { fillColor: navy, textColor: [255, 255, 255], fontStyle: 'bold', fontSize: 9 },
+    bodyStyles: { fontSize: 9, textColor: [40, 44, 55] },
+    alternateRowStyles: { fillColor: lightGray },
+    didParseCell: function (hookData) {
+      if (hookData.section === 'body' && hookData.column.index === 2) {
+        const val = hookData.cell.raw;
+        hookData.cell.styles.fontStyle = 'bold';
+        hookData.cell.styles.textColor = (val === 'Unavailable') ? [150, 150, 150] : pdfScoreColor(parseInt(val, 10) || 0);
+      }
+    }
+  });
+
+  doc.addPage();
+  y = sectionHeader('AI Narrative Extracts', 20);
+
+  ENGINE_DEFS.forEach(eng => {
+    const d = data[eng.frontendKey];
+    if (!d || !d.narrative) return;
+
+    y = checkBreak(y, 40);
+
+    doc.setFont('helvetica', 'bold');
+    doc.setFontSize(11);
+    doc.setTextColor(navy[0], navy[1], navy[2]);
+    doc.text(eng.name, marginL, y);
+
+    const acc = d.accuracy || 0;
+    const accColor = pdfScoreColor(acc);
+    doc.setFontSize(9);
+    doc.setTextColor(accColor[0], accColor[1], accColor[2]);
+    doc.text(acc + '% accurate', marginL + 45, y);
+
+    if (d.sentiment) {
+      doc.setTextColor(gray[0], gray[1], gray[2]);
+      doc.text('Sentiment: ' + d.sentiment, marginL + 90, y);
+    }
+    y += 6;
+
+    doc.setFont('helvetica', 'normal');
+    doc.setFontSize(9.5);
+    doc.setTextColor(50, 55, 68);
+    const lines = doc.splitTextToSize(stripMarkdownForReport(d.narrative), contentW);
+    lines.forEach(line => {
+      y = checkBreak(y, 6);
+      doc.text(line, marginL, y);
+      y += 4.6;
+    });
+    y += 2;
+
+    doc.setFontSize(8.5);
+    doc.setTextColor(gray[0], gray[1], gray[2]);
+    doc.text(
+      (d.accurateClaims || 0) + ' accurate · ' + (d.conflictingClaims || 0) + ' conflicting · ' + (d.unverifiableClaims || 0) + ' unverifiable',
+      marginL, y
+    );
+    y += 5;
+
+    if ((d.topicsKnown || []).length) {
+      y = checkBreak(y, 5);
+      doc.setTextColor(16, 140, 100);
+      const knownLine = doc.splitTextToSize('Knows: ' + d.topicsKnown.join(', '), contentW);
+      doc.text(knownLine, marginL, y);
+      y += knownLine.length * 4.2 + 1;
+    }
+    if ((d.topicsUnknown || []).length) {
+      y = checkBreak(y, 5);
+      doc.setTextColor(gray[0], gray[1], gray[2]);
+      const unkLine = doc.splitTextToSize('Gaps: ' + d.topicsUnknown.join(', '), contentW);
+      doc.text(unkLine, marginL, y);
+      y += unkLine.length * 4.2 + 1;
+    }
+    y += 6;
+  });
+
+  doc.addPage();
+  y = sectionHeader('Consistency Analysis', 20);
+
+  const c = data.consistency || {};
+  const cScore = c.score || 0;
+  const cColor = pdfScoreColor(cScore);
+  doc.setFont('helvetica', 'bold');
+  doc.setFontSize(32);
+  doc.setTextColor(cColor[0], cColor[1], cColor[2]);
+  doc.text(String(cScore), marginL, y + 14);
+  doc.setFontSize(11);
+  doc.setTextColor(gray[0], gray[1], gray[2]);
+  doc.text(c.label || '', marginL + 28, y + 14);
+  y += 26;
+
+  function bulletList(title, items, itemColor) {
+    y = checkBreak(y, 14);
+    doc.setFont('helvetica', 'bold');
+    doc.setFontSize(10.5);
+    doc.setTextColor(navy[0], navy[1], navy[2]);
+    doc.text(title, marginL, y);
+    y += 6;
+    doc.setFont('helvetica', 'normal');
+    doc.setFontSize(9.5);
+    if (!items || !items.length) {
+      doc.setTextColor(gray[0], gray[1], gray[2]);
+      doc.text('—', marginL, y);
+      y += 6;
+    } else {
+      items.forEach(item => {
+        y = checkBreak(y, 6);
+        doc.setTextColor(itemColor[0], itemColor[1], itemColor[2]);
+        const txt = typeof item === 'string' ? item : ((item.engine ? item.engine + ': ' : '') + (item.topic || ''));
+        const wrapped = doc.splitTextToSize('•  ' + txt, contentW - 4);
+        doc.text(wrapped, marginL, y);
+        y += wrapped.length * 4.6;
+      });
+    }
+    y += 4;
+  }
+
+  bulletList('Agreed Topics', c.agreed, [16, 140, 100]);
+  bulletList('Conflicted', c.conflicted, [200, 120, 10]);
+  bulletList('Engine-Exclusive', c.exclusive, [110, 118, 138]);
+
+  doc.addPage();
+  y = sectionHeader('Narrative Gaps Identified', 20);
+
+  const gaps = data.narrativeGaps || [];
+  if (!gaps.length) {
+    doc.setFont('helvetica', 'normal');
+    doc.setFontSize(10);
+    doc.setTextColor(gray[0], gray[1], gray[2]);
+    doc.text('No significant gaps detected.', marginL, y);
+    y += 10;
+  } else {
+    gaps.forEach(gap => {
+      y = checkBreak(y, 22);
+      const sevColor = gap.severity === 'critical' ? [200, 40, 40] : gap.severity === 'high' ? [200, 120, 10] : [110, 118, 138];
+      doc.setFont('helvetica', 'bold');
+      doc.setFontSize(9);
+      doc.setTextColor(sevColor[0], sevColor[1], sevColor[2]);
+      doc.text((gap.severity || 'minor').toUpperCase(), marginL, y);
+      y += 5;
+      doc.setFont('helvetica', 'normal');
+      doc.setFontSize(9);
+      doc.setTextColor(50, 55, 68);
+      ['Brand communicates: ' + (gap.brandCommunicates || '—'),
+       'AI produces instead: ' + (gap.aiProduces || '—'),
+       'Gap type: ' + (gap.gapType || '—')].forEach(line => {
+        const wrapped = doc.splitTextToSize(line, contentW);
+        y = checkBreak(y, wrapped.length * 4.6);
+        doc.text(wrapped, marginL, y);
+        y += wrapped.length * 4.6 + 1;
+      });
+      y += 4;
+    });
+  }
+
+  y += 6;
+  y = checkBreak(y, 20);
+  if (tier === 'WELL KNOWN' || tier === 'KNOWN') {
+    y = sectionHeader('AI Awareness Status', y);
+    doc.setFont('helvetica', 'normal');
+    doc.setFontSize(10);
+    doc.setTextColor(16, 140, 100);
+    const msg = doc.splitTextToSize(tierStatusLine(tier), contentW);
+    doc.text(msg, marginL, y);
+  } else {
+    y = sectionHeader('Top Actions to Improve AI Awareness', y);
+    (data.recommendations || []).forEach(rec => {
+      y = checkBreak(y, 26);
+      const sevColor = rec.severity === 'critical' ? [200, 40, 40] : rec.severity === 'high' ? [200, 120, 10] : [60, 90, 180];
+      doc.setFont('helvetica', 'bold');
+      doc.setFontSize(9);
+      doc.setTextColor(sevColor[0], sevColor[1], sevColor[2]);
+      doc.text((rec.severity || 'medium').toUpperCase() + '  ·  Effort: ' + (rec.effort || 'medium'), marginL, y);
+      y += 5;
+      doc.setFont('helvetica', 'normal');
+      doc.setFontSize(9);
+      doc.setTextColor(50, 55, 68);
+      ['Problem: ' + (rec.problem || '—'),
+       'Action: ' + (rec.action || '—'),
+       'Result: ' + (rec.result || '—')].forEach(line => {
+        const wrapped = doc.splitTextToSize(line, contentW);
+        y = checkBreak(y, wrapped.length * 4.6);
+        doc.text(wrapped, marginL, y);
+        y += wrapped.length * 4.6 + 1;
+      });
+      y += 4;
+    });
+  }
+
+  const pageCount = doc.internal.getNumberOfPages();
+  for (let i = 1; i <= pageCount; i++) {
+    doc.setPage(i);
+    doc.setFont('helvetica', 'normal');
+    doc.setFontSize(8);
+    doc.setTextColor(gray[0], gray[1], gray[2]);
+    doc.text('aicitationscan.com', marginL, pageH - 12);
+    doc.text('Page ' + i + ' of ' + pageCount, pageW - marginR, pageH - 12, { align: 'right' });
+  }
+
+  return doc;
+}
+
 function downloadReport() {
-  const domain = (document.getElementById('results-domain-display') || {}).textContent || 'scan';
-  const text = getReportText();
-  const blob = new Blob([text], { type: 'text/plain' });
-  const url = URL.createObjectURL(blob);
-  const a = document.createElement('a');
-  a.href = url;
-  a.download = 'ai-awareness-report-' + domain.replace(/[^a-z0-9]/gi, '-') + '-' + new Date().toISOString().slice(0, 10) + '.txt';
-  a.click();
-  URL.revokeObjectURL(url);
-  showToast('Report downloaded', 'success');
+  const domain = getDomainFromDOM();
+  const filenameBase = 'ai-awareness-report-' + domain.replace(/[^a-z0-9]/gi, '-') + '-' + new Date().toISOString().slice(0, 10);
+
+  if (!_lastScanData) {
+    showToast('Run a scan first', 'warn');
+    return;
+  }
+
+  try {
+    if (!window.jspdf || !window.jspdf.jsPDF) {
+      throw new Error('jsPDF not loaded');
+    }
+    const doc = generatePDFReport(_lastScanData, domain);
+    doc.save(filenameBase + '.pdf');
+    showToast('PDF report downloaded', 'success');
+  } catch (err) {
+    console.warn('PDF generation failed, falling back to plain text:', err);
+    const text = getRichReportText();
+    const blob = new Blob([text], { type: 'text/plain;charset=utf-8' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = filenameBase + '.txt';
+    a.click();
+    URL.revokeObjectURL(url);
+    showToast('PDF unavailable — downloaded as text instead', 'info');
+  }
 }
 
 function whatsappReport() {
@@ -5076,6 +5513,12 @@ function closeSearchModal() {
   document.body.style.overflow = '';
 }
 </script>
+
+<!-- A6: PDF report generation — loaded eagerly (not deferred) so
+     window.jspdf is guaranteed available before Download Report
+     can possibly be clicked. -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/3.0.3/jspdf.umd.min.js" onerror="console.warn('jsPDF failed to load — Download Report will fall back to plain text')"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/5.0.2/jspdf.plugin.autotable.min.js" onerror="console.warn('jspdf-autotable failed to load')"></script>
 
 <!-- Global shared scripts (deferred, graceful degradation if unavailable) -->
 <script defer src="../js/registry.js" onerror="void 0"></script>
