@@ -191,6 +191,10 @@ window.siteRegistry = [
                 "url": "/guides/how-to-find-website-technology"
             },
             {
+                "name": "How To Improve Brand Visibility In Ai Search Engines",
+                "url": "/guides/how-to-improve-brand-visibility-in-ai-search-engines"
+            },
+            {
                 "name": "What Is Ai Visibility",
                 "url": "/guides/what-is-ai-visibility"
             },
@@ -298,10 +302,15 @@ window.seoRegistry = {
         "title": "How to Find Website Technology",
         "desc": "Quick answer: how to find out what technology any website uses in under 10 seconds. For the full technical breakdown of how detection works, see our detailed guide."
     },
+    "how-to-improve-brand-visibility-in-ai-search-engines.html": {
+        "url": "/guides/how-to-improve-brand-visibility-in-ai-search-engines",
+        "title": "How to Improve Brand Visibility in AI Search Engines",
+        "desc": "Concrete strategies to improve brand visibility in AI search engines — what actually moves Recognition, Depth, Accuracy, and Confidence scores across ChatGPT, Gemini, Meta AI, and Mistral."
+    },
     "what-is-ai-visibility.html": {
         "url": "/guides/what-is-ai-visibility",
         "title": "What Is AI Visibility?",
-        "desc": "Want to know who built, designed, created or developed a website? 5 proven methods including a free tech stack checker that reveals the builder, CMS, and framework in seconds."
+        "desc": "What is AI visibility, and what does an AI visibility tool or platform actually do? A plain-language definition plus how free AI brand visibility tools work."
     },
     "what-is-citation-hallucination.html": {
         "url": "/guides/what-is-citation-hallucination",
