@@ -1,17 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-4MW26XL58G"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-4MW26XL58G');
-</script>
-  
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -5044,9 +5033,46 @@ function printReport() {
     if (!window.jspdf || !window.jspdf.jsPDF) throw new Error('jsPDF not loaded');
     const domain = getDomainFromDOM();
     const doc = generatePDFReport(_lastScanData, domain);
-    doc.autoPrint();
+    doc.autoPrint(); // kept as a belt-and-suspenders measure for PDF
+                      // viewers that do honor it (e.g. some non-Chrome
+                      // setups) — harmless where it's ignored
     const blobUrl = doc.output('bloburl');
-    window.open(blobUrl, '_blank');
+
+    // FIX: Chrome's PDFium viewer does not execute embedded PDF
+    // JavaScript, so autoPrint()'s OpenAction silently does nothing
+    // there — confirmed by live testing. A hidden iframe + the
+    // browser's own contentWindow.print() call is a different
+    // mechanism (browser print API, not PDF-internal JS) and is
+    // reliably honored instead.
+    const iframe = document.createElement('iframe');
+    iframe.style.position = 'fixed';
+    iframe.style.right = '0';
+    iframe.style.bottom = '0';
+    iframe.style.width = '0';
+    iframe.style.height = '0';
+    iframe.style.border = '0';
+    iframe.src = blobUrl;
+    document.body.appendChild(iframe);
+
+    iframe.onload = () => {
+      // Small delay — the PDF viewer inside the iframe can still be
+      // initializing right when the load event fires
+      setTimeout(() => {
+        try {
+          iframe.contentWindow.focus();
+          iframe.contentWindow.print();
+        } catch (printErr) {
+          console.warn('Iframe print failed, opening PDF in new tab instead:', printErr);
+          window.open(blobUrl, '_blank');
+        }
+        // Clean up well after the print dialog has had time to be
+        // used — removing the iframe too early can cancel the job
+        setTimeout(() => {
+          if (iframe.parentNode) document.body.removeChild(iframe);
+          URL.revokeObjectURL(blobUrl);
+        }, 60000);
+      }, 250);
+    };
   } catch (err) {
     console.warn('PDF print failed, falling back to browser print:', err);
     window.print();
@@ -5345,7 +5371,7 @@ function generatePDFReport(data, domain) {
     doc.setFont('helvetica', 'normal');
     doc.setFontSize(8);
     doc.setTextColor(gray[0], gray[1], gray[2]);
-    doc.textWithLink('aicitationscan.com', marginL, pageH - 12, { url: 'https://aicitationscan.com' });
+    doc.textWithLink('https://aicitationscan.com', marginL, pageH - 12, { url: 'https://aicitationscan.com' });
     doc.text('Page ' + i + ' of ' + pageCount, pageW - marginR, pageH - 12, { align: 'right' });
   }
 
