@@ -172,7 +172,7 @@
           "name": "Which AI systems are tested in the free version?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "The free scan tests four AI model families: Meta AI (powered by Llama 3.3 70B via Groq), Google AI (powered by Gemini 2.0 Flash), Mistral (powered by Llama 3.1 8B via Groq), and Gemma (powered by Gemma 2 9B via Groq). ChatGPT (GPT-4o) and Claude (3.5 Sonnet) require adding your own API keys in Settings."
+            "text": "The free scan tests four AI model families: Meta AI (powered by Llama 3.3 70B via Groq), Google AI (powered by Gemini 2.0 Flash), Mistral (powered by Llama 3.1 8B via Groq), and Cerebras (powered by Llama 3.3 70B on independent Cerebras infrastructure). ChatGPT (GPT-4o) and Claude (3.5 Sonnet) require adding your own API keys in Settings."
           }
         },
         {
@@ -204,7 +204,7 @@
           "name": "Why are GPT-4 and Claude not free to test?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "OpenAI and Anthropic do not offer free API access. The four free engines (Meta AI, Google AI, Mistral, and Gemma) run at no cost using current production models. To include ChatGPT and Claude in your scan, add your own OpenAI and Anthropic API keys in the Settings panel. Your keys are stored only in your browser and used only for your scans."
+            "text": "OpenAI and Anthropic do not offer free API access. The four free engines (Meta AI, Google AI, Mistral, and Cerebras) run at no cost. To include ChatGPT and Claude in your scan, add your own OpenAI and Anthropic API keys in the Settings panel. Your keys are stored only in your browser and used only for your scans."
           }
         },
         {
@@ -2751,10 +2751,10 @@
             </span>
           </div>
           <div class="engine-status-row">
-            <span class="engine-status-name">Gemma</span>
-            <span class="engine-status-val" id="status-gemma">
-              <span class="status-dot-small" id="dot-gemma" aria-hidden="true"></span>
-              <span id="val-gemma">Ready</span>
+            <span class="engine-status-name">Cerebras</span>
+            <span class="engine-status-val" id="status-cerebras">
+              <span class="status-dot-small" id="dot-cerebras" aria-hidden="true"></span>
+              <span id="val-cerebras">Ready</span>
             </span>
           </div>
 
@@ -2840,13 +2840,13 @@
               onclick="toggleEngine(this)"
             >Mistral</button>
             <button
-              class="engine-badge"
-              data-engine="gemma"
+              class="engine-badge active"
+              data-engine="cerebras"
               type="button"
-              aria-pressed="false"
-              aria-label="Toggle Gemma engine (smaller model — optional)"
+              aria-pressed="true"
+              aria-label="Toggle Cerebras engine"
               onclick="toggleEngine(this)"
-            >Gemma</button>
+            >Cerebras</button>
             <span class="engine-divider" aria-hidden="true"></span>
             <button
               class="engine-badge extended"
@@ -2916,9 +2916,9 @@
             <div class="free-engine-item">
               <span aria-hidden="true" style="color:var(--green);font-size:14px;">✅</span>
               <div class="free-engine-info">
-                <div class="free-engine-name">Gemma</div>
-                <div class="free-engine-sub">Powered by Gemma 2 9B</div>
-                <div class="free-engine-sub" style="margin-top:2px;">Covers: Google open model ecosystem</div>
+                <div class="free-engine-name">Cerebras</div>
+                <div class="free-engine-sub">Powered by Llama 3.3 70B</div>
+                <div class="free-engine-sub" style="margin-top:2px;">Covers: Cerebras wafer-scale inference — independent quota from Groq</div>
               </div>
             </div>
           </div>
@@ -2976,7 +2976,7 @@
             <div class="ext-engine-header">
               <div>
                 <div class="ext-engine-name">Groq</div>
-                <div class="ext-engine-sub">Powers Meta AI, Mistral, and Gemma. The shared server key has limited capacity — add your own key for reliable, unlimited access at your own usage cost.</div>
+                <div class="ext-engine-sub">Powers Meta AI and Mistral. The shared server key has limited capacity — add your own key for reliable, unlimited access at your own usage cost.</div>
               </div>
               <a href="https://console.groq.com/keys" target="_blank" rel="noopener noreferrer" class="get-key-link">Get key →</a>
             </div>
@@ -3098,7 +3098,7 @@
               <div class="coverage-gap-icon" aria-hidden="true">ℹ</div>
               <div>
                 <div class="coverage-gap-title">Coverage Gap — ChatGPT and Claude Not Tested</div>
-                <div class="coverage-gap-body">This scan tested Meta AI, Google AI, Mistral, and Gemma. ChatGPT (GPT-4o) and Claude (3.5 Sonnet) were not included. These cover a significant portion of AI user queries. Add your API keys in Settings to include them in your next scan.</div>
+                <div class="coverage-gap-body">This scan tested Meta AI, Google AI, Mistral, and Cerebras. ChatGPT (GPT-4o) and Claude (3.5 Sonnet) were not included. These cover a significant portion of AI user queries. Add your API keys in Settings to include them in your next scan.</div>
                 <button type="button" class="btn-primary btn-blue" onclick="openSettingsPanel('key-openai')" style="font-size:12px;padding:8px 14px;">Add API Keys →</button>
               </div>
             </div>
@@ -3270,7 +3270,7 @@
             <span class="faq-chevron" aria-hidden="true">▾</span>
           </div>
           <div class="faq-a" id="faq-a-2" role="region">
-            <div class="faq-a-inner">The free scan tests four AI model families: Meta AI (powered by Llama 3.3 70B via Groq), Google AI (powered by Gemini 2.0 Flash), Mistral (powered by Llama 3.1 8B via Groq), and Gemma (powered by Gemma 2 9B via Groq). ChatGPT (GPT-4o) and Claude (3.5 Sonnet) require adding your own API keys in Settings. Models are auto-detected and updated automatically when providers change them.</div>
+            <div class="faq-a-inner">The free scan tests four AI model families: Meta AI (powered by Llama 3.3 70B via Groq), Google AI (powered by Gemini 2.0 Flash), Mistral (powered by Llama 3.1 8B via Groq), and Cerebras (powered by Llama 3.3 70B on independent Cerebras infrastructure). ChatGPT (GPT-4o) and Claude (3.5 Sonnet) require adding your own API keys in Settings. Models are auto-detected and updated automatically when providers change them.</div>
           </div>
         </div>
 
@@ -3310,7 +3310,7 @@
             <span class="faq-chevron" aria-hidden="true">▾</span>
           </div>
           <div class="faq-a" id="faq-a-6" role="region">
-            <div class="faq-a-inner">OpenAI and Anthropic do not offer free API access. The four free engines (Meta AI via Llama 3.3 70B, Google AI via Gemini 2.0 Flash, Mistral via Llama 3.1 8B, and Gemma via Gemma 2 9B) run at no cost. To include ChatGPT and Claude in your scan, add your own OpenAI and Anthropic API keys in the Settings panel. Your keys are stored only in your browser and used only for your scans.</div>
+            <div class="faq-a-inner">OpenAI and Anthropic do not offer free API access. The four free engines (Meta AI, Google AI, Mistral, and Cerebras) run at no cost across two independent infrastructure providers. To include ChatGPT and Claude in your scan, add your own OpenAI and Anthropic API keys in the Settings panel. Your keys are stored only in your browser and used only for your scans.</div>
           </div>
         </div>
 
@@ -3858,11 +3858,16 @@ function updateEngineStatus(engine, status) {
 }
 
 function showScanningState() {
-  ['meta', 'google', 'mistral'].forEach(e => updateEngineStatus(e, 'scanning'));
+  // FIX: was hardcoded to only 3 engines — active chatgpt/claude/cerebras
+  // badges never showed a scanning state even while actively querying
+  const activeEngines = [...document.querySelectorAll('.engine-badge.active')].map(b => b.dataset.engine);
+  activeEngines.forEach(e => updateEngineStatus(e, 'scanning'));
 }
 
 function resetEngineStatusDots() {
-  ['meta', 'google', 'mistral'].forEach(e => updateEngineStatus(e, 'ready'));
+  // FIX: was hardcoded to only 3 engines — chatgpt/claude/cerebras
+  // status dots never reset to ready after a scan involving them
+  ['meta', 'google', 'mistral', 'cerebras', 'chatgpt', 'claude'].forEach(e => updateEngineStatus(e, 'ready'));
 }
 
 // ─── A2. LIVE ENGINE HEALTH CHECK ────────────────────────────
@@ -3877,7 +3882,7 @@ async function fetchEngineHealth(force) {
     if (!response.ok) throw new Error('Health check failed: ' + response.status);
     const data = await response.json();
     const engines = data.engines || {};
-    ['meta', 'mistral', 'gemma', 'google'].forEach(key => {
+    ['meta', 'mistral', 'cerebras', 'google'].forEach(key => {
       const engineData = engines[key];
       if (!engineData) return;
       updateEngineStatus(key, engineData.status === 'ready' ? 'ready' : 'unavailable');
@@ -4009,7 +4014,7 @@ function saveKey(engine, inputId) {
   input.classList.add('saved');
   const nameMap = {
     openai: 'ChatGPT', anthropic: 'Claude',
-    gemini: 'Google AI (your Gemini key)', groq: 'Groq (Meta AI, Mistral, Gemma)'
+    gemini: 'Google AI (your Gemini key)', groq: 'Groq (Meta AI, Mistral)'
   };
   showToast('Key saved for ' + (nameMap[engine] || engine), 'success');
   updateSettingsDot();
@@ -4234,7 +4239,7 @@ const ENGINE_DEFS = [
   { frontendKey: 'metaAI',   name: 'Meta AI',   model: 'Llama 3.3 70B' },
   { frontendKey: 'googleAI', name: 'Google AI', model: 'Gemini 2.0 Flash' },
   { frontendKey: 'mistral',  name: 'Mistral',   model: 'Llama 3.1 8B' },
-  { frontendKey: 'gemma',    name: 'Gemma',     model: 'Gemma 2 9B' },
+  { frontendKey: 'cerebras', name: 'Cerebras',  model: 'Llama 3.3 70B' },
   { frontendKey: 'chatgpt',  name: 'ChatGPT',   model: 'GPT-4o' },
   { frontendKey: 'claude',   name: 'Claude',    model: 'Claude 3.5 Sonnet' }
 ];
@@ -4699,12 +4704,13 @@ function buildTelemetryTicker() {
   const track = document.getElementById('ticker-track');
   if (!track) return;
   const items = [
-    { dot: 'green', text: '3 AI Engines Active', cls: 'ticker-engine-count' },
+    { dot: 'green', text: '4 AI Engines Active', cls: 'ticker-engine-count' },
     { dot: 'cyan',  text: 'Ready to Scan',        cls: 'ticker-scan-state' },
     { dot: '', text: '━━━' },
     { dot: 'green', text: 'Meta AI — Ready' },
     { dot: 'green', text: 'Google AI — Ready' },
     { dot: 'green', text: 'Mistral — Ready' },
+    { dot: 'green', text: 'Cerebras — Ready' },
     { dot: '', text: '━━━' },
     { dot: 'amber', text: 'AI Awareness Scoring' },
     { dot: 'cyan', text: 'Engine-by-Engine Breakdown' },
