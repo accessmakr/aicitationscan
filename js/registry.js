@@ -195,6 +195,10 @@ window.siteRegistry = [
                 "url": "/guides/how-to-improve-brand-visibility-in-ai-search-engines"
             },
             {
+                "name": "How To Improve Visibility In Google Ai Overviews",
+                "url": "/guides/how-to-improve-visibility-in-google-ai-overviews"
+            },
+            {
                 "name": "What Is Ai Visibility",
                 "url": "/guides/what-is-ai-visibility"
             },
@@ -306,6 +310,11 @@ window.seoRegistry = {
         "url": "/guides/how-to-improve-brand-visibility-in-ai-search-engines",
         "title": "How to Improve Brand Visibility in AI Search Engines",
         "desc": "Concrete strategies to improve brand visibility in AI search engines — what actually moves Recognition, Depth, Accuracy, and Confidence scores across ChatGPT, Gemini, Meta AI, and Mistral."
+    },
+    "how-to-improve-visibility-in-google-ai-overviews.html": {
+        "url": "/guides/how-to-improve-visibility-in-google-ai-overviews",
+        "title": "How to Improve Visibility in Google AI Overviews",
+        "desc": "How to improve visibility in Google AI Overviews: the retrieval mechanism, what content gets cited, structured data that helps, and how AIO differs from other AI engines."
     },
     "what-is-ai-visibility.html": {
         "url": "/guides/what-is-ai-visibility",
