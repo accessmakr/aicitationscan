@@ -187,6 +187,10 @@ window.siteRegistry = [
                 "url": "/guides/does-ai-content-optimization-improve-visibility"
             },
             {
+                "name": "How Agencies Can Improve Client Ai Visibility",
+                "url": "/guides/how-agencies-can-improve-client-ai-visibility"
+            },
+            {
                 "name": "How To Cite Chatgpt In Mla Format",
                 "url": "/guides/how-to-cite-chatgpt-in-mla-format"
             },
@@ -308,6 +312,11 @@ window.seoRegistry = {
         "url": "/guides/does-ai-content-optimization-improve-visibility",
         "title": "Does AI Content Optimization Improve Search Visibility?",
         "desc": "Does AI content optimization actually improve search visibility? An evidence-based look at what's demonstrated, what's plausible but unproven, and what's overhyped."
+    },
+    "how-agencies-can-improve-client-ai-visibility.html": {
+        "url": "/guides/how-agencies-can-improve-client-ai-visibility",
+        "title": "How Agencies Can Improve Client AI Visibility",
+        "desc": "A repeatable workflow for agencies managing AI visibility across multiple client brands — baseline scanning, competitive analysis, prioritization, and client reporting."
     },
     "how-to-cite-chatgpt-in-mla-format.html": {
         "url": "/guides/how-to-cite-chatgpt-in-mla-format",
