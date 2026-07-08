@@ -175,6 +175,10 @@ window.siteRegistry = [
                 "url": "/guides/ai-visibility-score-explained"
             },
             {
+                "name": "Best Ai Visibility Tools",
+                "url": "/guides/best-ai-visibility-tools"
+            },
+            {
                 "name": "Chatgpt Citation Hallucination Explained",
                 "url": "/guides/chatgpt-citation-hallucination-explained"
             },
@@ -285,6 +289,11 @@ window.seoRegistry = {
         "url": "/guides/ai-visibility-score-explained",
         "title": "AI Visibility Score Explained",
         "desc": "What is an AI visibility score and how is it measured? A direct breakdown of Recognition, Depth, Accuracy, and Confidence — plus the Consistency Score across engines."
+    },
+    "best-ai-visibility-tools.html": {
+        "url": "/guides/best-ai-visibility-tools",
+        "title": "Best AI Visibility Tools",
+        "desc": "What actually makes an AI visibility tool worth using: multi-engine coverage, dimension-based scoring, and free vs. paid tiers. Includes a free tool that meets every criterion."
     },
     "chatgpt-citation-hallucination-explained.html": {
         "url": "/guides/chatgpt-citation-hallucination-explained",
