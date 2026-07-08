@@ -183,6 +183,10 @@ window.siteRegistry = [
                 "url": "/guides/chatgpt-citation-hallucination-explained"
             },
             {
+                "name": "Does Ai Content Optimization Improve Visibility",
+                "url": "/guides/does-ai-content-optimization-improve-visibility"
+            },
+            {
                 "name": "How To Cite Chatgpt In Mla Format",
                 "url": "/guides/how-to-cite-chatgpt-in-mla-format"
             },
@@ -299,6 +303,11 @@ window.seoRegistry = {
         "url": "/guides/chatgpt-citation-hallucination-explained",
         "title": "ChatGPT Citation Hallucination Explained",
         "desc": "Why ChatGPT specifically generates fabricated citations, how its training process produces this pattern, and what makes it structurally invisible to proofreading."
+    },
+    "does-ai-content-optimization-improve-visibility.html": {
+        "url": "/guides/does-ai-content-optimization-improve-visibility",
+        "title": "Does AI Content Optimization Improve Search Visibility?",
+        "desc": "Does AI content optimization actually improve search visibility? An evidence-based look at what's demonstrated, what's plausible but unproven, and what's overhyped."
     },
     "how-to-cite-chatgpt-in-mla-format.html": {
         "url": "/guides/how-to-cite-chatgpt-in-mla-format",
