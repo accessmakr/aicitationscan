@@ -235,8 +235,8 @@ window.seoRegistry = {
     },
     "cookies-policy.html": {
         "url": "/cookies-policy",
-        "title": "Cookies Policy — AI Citation Scan | No Tracking Cookies, Plausible Only",
-        "desc": "AI Citation Scan uses zero marketing or tracking cookies. Our Cookies Policy explains Plausible's cookieless analytics, what browser storage we use, and your full control over preferences."
+        "title": "Cookies Policy — AI Citation Scan | Cookieless Analytics, Advertising Disclosed",
+        "desc": "AI Citation Scan uses zero first-party tracking cookies and cookieless Plausible Analytics. Our Cookies Policy explains our sole analytics layer, Google AdSense advertising cookies, and your full opt-out controls."
     },
     "privacy-policy.html": {
         "url": "/privacy-policy",
